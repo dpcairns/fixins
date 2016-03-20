@@ -17,7 +17,7 @@ export default class GenresForm extends React.Component{
 		e.preventDefault();
 		var newGenreObject = {}
 		newGenreObject.name = this.state.name
-		FixinActions.createGenre(newGenreObject)
+		FixinsActions.createGenre(newGenreObject)
 		this.setState({name: ""})
 	}
 

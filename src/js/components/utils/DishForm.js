@@ -47,7 +47,7 @@ export default class SpotForm extends React.Component{
 		newDishObject.calories = this.state.calories
 		newDishObject.price = this.state.price
 		newDishObject.spot = this.state.spot
-		FixinActions.createDish(newDishObject)
+		FixinsActions.createDish(newDishObject)
 		this.setState({name: "", spot: "", calories: "", price: "", blurb: '', genres: ''})
 	}
 

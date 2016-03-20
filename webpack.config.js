@@ -5,28 +5,27 @@ module.exports = {
     './src/index.js'
   ],
   module: {
-    preLoaders: [
-      {test:/\.jsx?$/, 
-      loader: "eslint-loader", 
-      exclude:/node_modules/}
-      ],
     loaders: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel'
-    }]
+    }],
+      query: {
+          presets: ['react', 'es2015', 'stage-0'],
+          plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
+        }
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
     root: [path.resolve('./src')]
   },
   output: {
-    path: './dist',
+    path: './src',
     publicPath: '/',
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './dist'
+    contentBase: './src'
   },
   eslint: {configFile: '.eslintrc'}
     

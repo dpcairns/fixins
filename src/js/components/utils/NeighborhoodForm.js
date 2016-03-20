@@ -17,7 +17,7 @@ export default class NeighborhoodForm extends React.Component{
 		e.preventDefault();
 		var newNeighborhoodObject = {}
 		newNeighborhoodObject.name = this.state.name
-		FixinActions.createNeighborhood(newNeighborhoodObject)
+		FixinsActions.createNeighborhood(newNeighborhoodObject)
 		this.setState({name: ""})
 	}
 

@@ -1,4 +1,6 @@
 var User = require('../src/js/models/UserModel') 
+var express = require('express');
+var router = express.Router()
 
 module.exports = function(){
 
@@ -23,7 +25,7 @@ module.exports = function(){
 						})
 				})
 
-	router.route('/Users/:UserId')
+router.route('/Users/:UserId')
 	.get(function (req, res) {
 		console.log("finding a given User in fixins")
 		var id = req.params.UserId 

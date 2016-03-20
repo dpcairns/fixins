@@ -25,7 +25,7 @@ export default class UserForm extends React.Component{
 		newUserObject.username = this.state.username
 		newUserObject.password = this.state.password
 		newUserObject.neighborhood = this.state.neighborhood
-		FixinActions.createUser(newUserObject)
+		FixinsActions.createUser(newUserObject)
 		this.setState({username: "", password: "", neighborhood: ""})
 	
 	}

@@ -263,6 +263,3 @@ export function initializeCheckIns(){
 			}.bind(this)
 		});
 	}
-
-
-

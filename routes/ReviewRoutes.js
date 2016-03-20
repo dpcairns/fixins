@@ -1,4 +1,6 @@
 var Review = require('../src/js/models/ReviewModel') 
+var express = require('express');
+var router = express.Router()
 
 module.exports = function(){
 
@@ -25,7 +27,7 @@ module.exports = function(){
 						})
 				})
 
-	router.route('/Reviews/:ReviewId')
+router.route('/Reviews/:ReviewId')
 	.get(function (req, res) {
 		console.log("finding a given Review in fixins")
 		var id = req.params.ReviewId 

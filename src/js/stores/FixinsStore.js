@@ -1,5 +1,5 @@
 import { EventEmitter } from "events";
-import * as PatternActions from "../actions/PatternActions"
+import * as FixinsActions from "../actions/FixinsActions"
 
 import dispatcher from "../../dispatcher"
 

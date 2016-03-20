@@ -1,4 +1,6 @@
 var Spot = require('../src/js/models/SpotModel')
+var express = require('express');
+var router = express.Router()
 
 module.exports = function(){
 

@@ -36,7 +36,7 @@ export default class ReviewForm extends React.Component{
 		newReviewObject.words = this.state.words
 		newReviewObject.stars = this.state.stars
 		newReviewObject.item_type = this.state.item_type
-		FixinActions.createReview(newReviewObject)
+		FixinsActions.createReview(newReviewObject)
 		this.setState({item_name: "", item_type: "", stars: "", words: ""})
 	}
 
@@ -54,11 +54,27 @@ export default class ReviewForm extends React.Component{
 		  <input type="number" min="0" max="5" value={this.state.stars} onChange={this.handleStarsChange.bind(this)} class="form-control" />
 		</div>
 
-		<select value={this.state.item_type} onChange={this.handleTypeChange.bind(this)}>
-			<option value="" selected disabled>Pick one</option>
-			<option key={item.key} value={item.{this.props.nameName}} selected disabled>{item.{this.props.nameName}}</option>
-		</select>
+		///missing
+	
+
 		
+		}
+
+	<input class="button btn-danger align-right" type="submit" value="Post"/>
+	</form>
+</div>
+
+		)
+
+	}
+
+}
+
+
+
+
+/*
+	
 
 		{
 		 if(this.state.item_type==="spot"){
@@ -79,16 +95,4 @@ export default class ReviewForm extends React.Component{
 
 				)
 						}
-
-		
-		}
-
-	<input class="button btn-danger align-right" type="submit" value="Post"/>
-	</form>
-</div>
-
-		)
-
-	}
-
-}
+*/

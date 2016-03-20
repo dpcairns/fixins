@@ -29,7 +29,7 @@ export default class CheckInForm extends React.Component{
 		newCheckInObject.blurb = this.state.blurb
 		newCheckInObject.dish = this.state.dish
 		newCheckInObject.spot = this.state.spot
-		FixinActions.createCheckIn(newCheckInObject)
+		FixinsActions.createCheckIn(newCheckInObject)
 		this.setState({blurb: '', dish: ''})
 	}
 

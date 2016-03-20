@@ -23,21 +23,27 @@ var UserSchema = new Schema({
 		type: Array,
 		default: []
 	},
-	user_checkIns: {
-		type: Array,
-		default: []
-	},
-	user_reviews: {
-		type: Array,
-		default: []
-	},
-	user_favorites: {
-		type: Array,
-		default: []
-	},
+	user_checkIns:[
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'CheckIn'
+			}
+		],
+	user_reviews: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'Review'
+			}
+		],
+	user_favorites: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'Dish'
+			}
+		],
 	user_neighborhood: {
-		type: Schema.Types.ObjectId,
-		ref: 'Neighborhood'
+				type: Schema.Types.ObjectId,
+				ref: 'Neighborhood'
 	}
 
 });

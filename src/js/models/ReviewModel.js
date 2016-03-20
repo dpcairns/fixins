@@ -11,12 +11,12 @@ var ReviewSchema = new Schema({
 		type: String,
 		required: true
 	},
-	review_user: {
+	review_user: 
 			{
 				type: Schema.Types.ObjectId,
 				ref: 'User'
 			}
-	},
+	,
 	review_date: {
 		type: Date,
 		default: Date.now

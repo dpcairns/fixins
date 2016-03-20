@@ -5,10 +5,10 @@ export default class CheckInList extends React.Component{
 		let checkInNodes = this.props.allCheckIns.map(function(checkIn){
 			return(
 				<li>
-					<li>Spot: {checkIn.spot}</i>
-					<li>Dish: {checkIn.dish}</i>
-					<li>Name: {checkIn.blurb}</i>
-					<li>User: {checkIn.user}</i>
+					<li>Spot: {checkIn.spot}</li>
+					<li>Dish: {checkIn.dish}</li>
+					<li>Name: {checkIn.blurb}</li>
+					<li>User: {checkIn.user}</li>
 
 
 				</li>

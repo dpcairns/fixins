@@ -7,22 +7,22 @@ var CheckInSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	checkIn_dish: {
+	checkIn_dish: 
 			{
 				type: Schema.Types.ObjectId,
 				ref: 'User'
 			}
-	},
-	checkIn_spot: {
+	,
+	checkIn_spot: 
 			{
 				type: Schema.Types.ObjectId,
 				ref: 'Spot'
 			}
-	},
+	,
 	checkIn_user: {
 				type: Schema.Types.ObjectId,
 				ref: 'User'
-			}
+			},
 	checkIn_blurb: {
 		type: String,
 		default: "default check-in blurb"

@@ -4,7 +4,7 @@ export default class CustomDropdown extends React.Component{
 	render(){
 		var optionNodes = this.props.data.map(function(item){
 			return(
-			 <option key={item.key} value={item.{this.props.nameName}} selected disabled>{item.{this.props.nameName}}</option>
+			 <option key={item.key} value={item[this.props.nameName]} selected disabled>{item[this.props.nameName]}</option>
 			 	)
 		})
 

@@ -5,10 +5,10 @@ export default class ReviewList extends React.Component{
 		let reviewNodes = this.props.allReviews.map(function(review){
 			return(
 				<li>
-					<li>Name: {review.reviewed_item_name}</i>
-					<li>Type: {review.reviewed_item_type}</i>
-					<li>Stars: {review.stars}</i>
-					<li>Words: {review.words}</i>
+					<li>Name: {review.reviewed_item_name}</li>
+					<li>Type: {review.reviewed_item_type}</li>
+					<li>Stars: {review.stars}</li>
+					<li>Words: {review.words}</li>
 				</li>
 				)
 		})

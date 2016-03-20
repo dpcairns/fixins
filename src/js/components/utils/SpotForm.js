@@ -47,7 +47,7 @@ export default class SpotForm extends React.Component{
 		newSpotObject.neighborhood = this.state.neighborhood
 		newSpotObject.subNeighborhood = this.state.subNeighborhood
 		newSpotObject.genres = this.state.genres
-		FixinActions.createSpot(newSpotObject)
+		FixinsActions.createSpot(newSpotObject)
 		this.setState({username: "", blurb: "", genres: "", coordinates: "", neighborhood: '', subNeighborhood: ''})
 	}
 
@@ -58,11 +58,11 @@ export default class SpotForm extends React.Component{
 
 		<div class="input-group">
 			Spot name:
-		  <input type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} class="form-control" placeholder="spot name">
+		  <input type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} class="form-control" placeholder="spot name" />
 		</div>
 		<div class="input-group">
 			Blurb:
-		  <input type="text" value={this.state.blurb} onChange={this.handleBlurbChange.bind(this)} class="form-control" placeholder="spot blurb">
+		  <input type="text" value={this.state.blurb} onChange={this.handleBlurbChange.bind(this)} class="form-control" placeholder="spot blurb" />
 		</div>
 		<div class="input-group">
 			Genres:

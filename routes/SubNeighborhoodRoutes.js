@@ -1,4 +1,6 @@
-var Subneighborhood = require('../src/js/models/SubneighborhoodModel') 
+var Subneighborhood = require('../src/js/models/SubNeighborhoodModel') 
+var express = require('express');
+var router = express.Router()
 
 module.exports = function(){
 

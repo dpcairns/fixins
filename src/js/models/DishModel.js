@@ -7,14 +7,12 @@ var DishSchema = new Schema({
 		type: String,
 		required: true
 	},
-	dish_spot: {
-		[
+	dish_spot: 
 			{
 				type: Schema.Types.ObjectId,
 				ref: 'Spot'
 			}
-		]
-	},
+	,
 	dish_price: {
 		type: Number,
 		required: true
@@ -24,22 +22,21 @@ var DishSchema = new Schema({
 		required: true
 	},
 	dish_blurb: String,
-	dish_reviews: {
+	dish_reviews:
 		[
 			{
 				type: Schema.Types.ObjectId,
 				ref: 'Review'
 			}
 		]
-	},
-	dish_genres: {
+	,
+	dish_genres:
 		[
 			{
 				type: Schema.Types.ObjectId,
 				ref: 'Genre'
 			}
 		]
-	},
 })
 
 module.exports = mongoose.model('Dish', DishSchema)
