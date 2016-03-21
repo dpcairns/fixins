@@ -1,4 +1,5 @@
 import React from "react"
+import RemoveButton from "./RemoveButton"
 
 export default class ReviewList extends React.Component{
 	render(){
@@ -10,6 +11,8 @@ export default class ReviewList extends React.Component{
 						<li>Type: {review.reviewed_item_type}</li>
 						<li>Stars: {review.stars}</li>
 						<li>Words: {review.words}</li>
+						<li> <RemoveButton id={review._id}/></li>
+
 					</ul>
 				</li>
 				)

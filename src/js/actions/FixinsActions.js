@@ -292,3 +292,39 @@ export function initializeCheckIns(data){
 			}.bind(this)
 		});
 	}
+
+
+	export function removeNeighborhood(ID){
+		$.ajax({
+			url: "http://localhost:4444/api/Dishes/" + ID,
+			type: 'DELETE',
+			success: function(postedUser){
+				console.log("neighborhood probably deleted")
+						dispatcher.dispatch({
+								type: "REMOVE_USER",
+								postedUser
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+
+	export function removeDish(ID){
+		$.ajax({
+			url: "http://localhost:4444/api/Dishes/" + ID,
+			type: 'DELETE',
+			success: function(postedUser){
+				console.log("dish probably deleted")
+						dispatcher.dispatch({
+								type: "REMOVE_USER",
+								postedUser
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}

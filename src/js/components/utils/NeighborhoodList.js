@@ -1,4 +1,5 @@
 import React from "react"
+import RemoveButton from "./RemoveButton"
 
 export default class NeighborhoodList extends React.Component{
 	render(){
@@ -6,6 +7,8 @@ export default class NeighborhoodList extends React.Component{
 			return(
 				<li key={neighborhood._id}>
 					Name: {neighborhood.neighborhood_name}
+
+					<RemoveButton type="Neighborhood" id={neighborhood._id}/>
 				</li>
 				)
 		})

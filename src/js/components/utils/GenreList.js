@@ -1,4 +1,5 @@
 import React from "react"
+import RemoveButton from "./RemoveButton"
 
 export default class GenresList extends React.Component{
 	render(){
@@ -6,6 +7,8 @@ export default class GenresList extends React.Component{
 			return(
 				<li key={genre._id}>
 					Name: {genre.genre_name}
+					<RemoveButton id={genre._id}/>
+
 				</li>
 				)
 		})

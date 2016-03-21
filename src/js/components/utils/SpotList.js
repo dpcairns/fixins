@@ -1,4 +1,5 @@
 import React from "react"
+import RemoveButton from "./RemoveButton"
 
 export default class SpotList extends React.Component{
 	render(){
@@ -13,6 +14,8 @@ export default class SpotList extends React.Component{
 						<li> Spot SubNeighborhood: {spot.spot_subNeighborhood}</li>
 						<li> Spot Genre: {spot.spot_genres}</li>
 						<li> Spot Coordinates: {spot.spot_coordinates}</li>
+						<li> <RemoveButton id={spot._id}/></li>
+
 					</ul>
 				</li>
 				)

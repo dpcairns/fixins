@@ -1,4 +1,5 @@
 import React from "react"
+import RemoveButton from "./RemoveButton"
 
 export default class CheckInList extends React.Component{
 	render(){

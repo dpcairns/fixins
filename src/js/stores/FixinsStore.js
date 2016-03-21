@@ -195,7 +195,6 @@ class FixinsStore extends EventEmitter {
 				break;
 				
 			case "FETCH_DISHES":
-				console.log("FETCH_DISHES")
 				this.setDishesInStore(action.allDishes)
 				break;
 				

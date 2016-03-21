@@ -102,7 +102,7 @@ export default class Admin extends React.Component{
 				allUsers: FixinsStore.getUsersFromStore(),
 				allSpots: FixinsStore.getSpotsFromStore(),
 		//		allCheckins: FixinsStore.getCheckInsFromStore(),
-		//		allDishes: FixinsStore.getDishesFromStore(),
+				allDishes: FixinsStore.getDishesFromStore(),
 				allSubNeighborhoods: FixinsStore.getSubNeighborhoodsFromStore(),
 				allNeighborhoods: FixinsStore.getNeighborhoodsFromStore(),
 		//		allReviews: FixinsStore.getReviewsFromStore(),
