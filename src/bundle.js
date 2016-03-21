@@ -25134,10 +25134,11 @@
 		$.ajax({
 			url: "http://localhost:4444/api/Users",
 			type: 'GET',
-			success: function () {
+			dataType: "json",
+			success: function (data) {
 				_dispatcher2.default.dispatch({
 					type: "FETCH_USERS",
-					allUsers: allUsers
+					allUsers: data
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25150,10 +25151,13 @@
 		$.ajax({
 			url: "http://localhost:4444/api/Spots",
 			type: 'GET',
-			success: function () {
+			dataType: "json",
+			success: function (data) {
+				console.log("ajax call on spots:");
+				console.log(data);
 				_dispatcher2.default.dispatch({
 					type: "FETCH_SPOTS",
-					allSpots: allSpots
+					allSpots: data
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25166,10 +25170,10 @@
 		$.ajax({
 			url: "http://localhost:4444/api/Dishes",
 			type: 'GET',
-			success: function () {
+			success: function (data) {
 				_dispatcher2.default.dispatch({
 					type: "FETCH_DISHES",
-					allDishes: allDishes
+					allDishes: data
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25182,10 +25186,10 @@
 		$.ajax({
 			url: "http://localhost:4444/api/Reviews",
 			type: 'GET',
-			success: function () {
+			success: function (data) {
 				_dispatcher2.default.dispatch({
 					type: "FETCH_REVIEWS",
-					allReviews: allReviews
+					allReviews: data
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25197,10 +25201,10 @@
 		$.ajax({
 			url: "http://localhost:4444/api/Neighborhoods",
 			type: 'GET',
-			success: function () {
+			success: function (data) {
 				_dispatcher2.default.dispatch({
 					type: "FETCH_NEIGHBORHOODS",
-					allNeighborhoods: allNeighborhoods
+					allNeighborhoods: data
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25213,10 +25217,10 @@
 		$.ajax({
 			url: "http://localhost:4444/api/SubNeighborhoods",
 			type: 'GET',
-			success: function () {
+			success: function (data) {
 				_dispatcher2.default.dispatch({
 					type: "FETCH_SUBNEIGHBORHOODS",
-					allSubNeighborhoods: allSubNeighborhoods
+					allSubNeighborhoods: data
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25225,14 +25229,14 @@
 		});
 	}
 
-	function initializeGenres() {
+	function initializeGenres(data) {
 		$.ajax({
 			url: "http://localhost:4444/api/Genres",
 			type: 'GET',
-			success: function () {
+			success: function (data) {
 				_dispatcher2.default.dispatch({
 					type: "FETCH_GENRES",
-					allGenres: allGenres
+					allGenres: data
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25241,14 +25245,14 @@
 		});
 	}
 
-	function initializeCheckIns() {
+	function initializeCheckIns(data) {
 		$.ajax({
 			url: "http://localhost:4444/api/CheckIns",
 			type: 'GET',
 			success: function () {
 				_dispatcher2.default.dispatch({
 					type: "FETCH_CHECKINS",
-					allCheckIns: allCheckIns
+					allCheckIns: data
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25616,9 +25620,14 @@
 			key: "render",
 			value: function render() {
 				return _react2.default.createElement(
-					"h2",
+					"div",
 					null,
-					"this is the layout page!"
+					_react2.default.createElement(
+						"h2",
+						null,
+						"this is the layout page!"
+					),
+					this.props.children
 				);
 			}
 		}]);
@@ -25684,25 +25693,39 @@
 
 	var _CheckInList2 = _interopRequireDefault(_CheckInList);
 
-	var _NeighborhoodForm = __webpack_require__(238);
+	var _GenreForm = __webpack_require__(238);
+
+	var _GenreForm2 = _interopRequireDefault(_GenreForm);
+
+	var _GenreList = __webpack_require__(239);
+
+	var _GenreList2 = _interopRequireDefault(_GenreList);
+
+	var _NeighborhoodForm = __webpack_require__(240);
 
 	var _NeighborhoodForm2 = _interopRequireDefault(_NeighborhoodForm);
 
-	var _NeighborhoodList = __webpack_require__(239);
+	var _NeighborhoodList = __webpack_require__(241);
 
 	var _NeighborhoodList2 = _interopRequireDefault(_NeighborhoodList);
 
-	var _SubNeighborhoodForm = __webpack_require__(240);
+	var _SubNeighborhoodForm = __webpack_require__(242);
 
 	var _SubNeighborhoodForm2 = _interopRequireDefault(_SubNeighborhoodForm);
 
-	var _SubNeighborhoodList = __webpack_require__(241);
+	var _SubNeighborhoodList = __webpack_require__(243);
 
 	var _SubNeighborhoodList2 = _interopRequireDefault(_SubNeighborhoodList);
 
 	var _FixinsActions = __webpack_require__(220);
 
-	var _FixinsActions2 = _interopRequireDefault(_FixinsActions);
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	var _FixinsStore = __webpack_require__(244);
+
+	var _FixinsStore2 = _interopRequireDefault(_FixinsStore);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25721,13 +25744,14 @@
 			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Admin).call(this));
 
 			_this.state = {
-				allUsers: _this.goFindUsers().bind(_this),
-				allNeighborhoods: _this.goFindNeighborhoods().bind(_this),
-				allSubNeighborhoods: _this.goFindSubNeighborhoods().bind(_this),
-				allGenres: _this.goFindGenres().bind(_this),
-				allDishes: _this.goFindDishes().bind(_this),
-				allSpots: _this.goFindSpots().bind(_this),
-				allCheckIns: _this.goFindCheckins().bind(_this)
+				allUsers: [],
+				allNeighborhoods: [],
+				allSubNeighborhoods: [],
+				allReviews: [],
+				allGenres: [],
+				allDishes: [],
+				allSpots: [],
+				allCheckIns: []
 			};
 			return _this;
 		}
@@ -25736,196 +25760,322 @@
 			key: "goFindNeighborhoods",
 			value: function goFindNeighborhoods() {
 				this.setState({
-					allNeighborhoods: _FixinsActions2.default.getNeighborhoodsFromStore()
+					allNeighborhoods: _FixinsStore2.default.getNeighborhoodsFromStore()
 				});
 			}
 		}, {
 			key: "goFindSubNeighborhoods",
 			value: function goFindSubNeighborhoods() {
 				this.setState({
-					allSubNeighborhoods: _FixinsActions2.default.getSubNeighborhoodsFromStore()
+					allSubNeighborhoods: _FixinsStore2.default.getSubNeighborhoodsFromStore()
 				});
 			}
 		}, {
 			key: "goFindGenres",
 			value: function goFindGenres() {
 				this.setState({
-					allGenres: _FixinsActions2.default.getGenresFromStore()
+					allGenres: _FixinsStore2.default.getGenresFromStore()
 				});
 			}
 		}, {
 			key: "goFindDishes",
 			value: function goFindDishes() {
 				this.setState({
-					allDishes: _FixinsActions2.default.getDishesFromStore()
+					allDishes: _FixinsStore2.default.getDishesFromStore()
 				});
 			}
 		}, {
 			key: "goFindSpots",
 			value: function goFindSpots() {
+				console.log("*********************goFindSpots was called********************");
 				this.setState({
-					allSpots: _FixinsActions2.default.getSpotsFromStore()
+					allSpots: _FixinsStore2.default.getSpotsFromStore()
+				});
+				console.log("=================Admin.goFindSpots.this.state.allSpots==================");
+				console.log(this.state.allSpots);
+			}
+		}, {
+			key: "goFindCheckIns",
+			value: function goFindCheckIns() {
+				this.setState({
+					allCheckins: _FixinsStore2.default.getCheckInsFromStore()
 				});
 			}
 		}, {
-			key: "goFindCheckins",
-			value: function goFindCheckins() {
+			key: "goFindUsers",
+			value: function goFindUsers() {
 				this.setState({
-					allCheckins: _FixinsActions2.default.getCheckInsFromStore()
+					allUsers: _FixinsStore2.default.getUsersFromStore()
 				});
+				console.log("=================Admin.goFindUsers.this.state.allUsers==================");
+				console.log(this.state.allUsers);
 			}
 		}, {
 			key: "goFindReviews",
 			value: function goFindReviews() {
 				this.setState({
-					allReviews: _FixinsActions2.default.getReviewsFromStore()
+					allReviews: _FixinsStore2.default.getReviewsFromStore()
 				});
+			}
+		}, {
+			key: "goFindEverything",
+			value: function goFindEverything() {
+				this.setState({
+					allUsers: _FixinsStore2.default.getUsersFromStore(),
+
+					allGenres: _FixinsStore2.default.getGenresFromStore(),
+
+					allDishes: _FixinsStore2.default.getDishesFromStore(),
+
+					allSpots: _FixinsStore2.default.getSpotsFromStore(),
+
+					allNeighborhoods: _FixinsStore2.default.getNeighborhoodsFromStore(),
+
+					allSubNeighborhoods: _FixinsStore2.default.getSubNeighborhoodsFromStore(),
+
+					allCheckIns: _FixinsStore2.default.getCheckInsFromStore(),
+
+					allReviews: _FixinsStore2.default.getReviewsFromStore()
+				});
+				console.log("okay everything is set______________________");
+				console.log(this.state);
+			}
+		}, {
+			key: "componentDidMount",
+			value: function componentDidMount() {
+				this.goFindEverything().bind(this);
 			}
 		}, {
 			key: "componentWillMount",
 			value: function componentWillMount() {
-				FixinsStore.on("changedReviews", this.goFindReviews.bind(this));
-				FixinsStore.on("changedUsers", this.goFindUsers.bind(this));
-				FixinsStore.on("changedSubNeighborhoods", this.goFindSubNeighborhoods.bind(this));
-				FixinsStore.on("changedNeighborhoods", this.goFindNeighborhoods.bind(this));
-				FixinsStore.on("changedDishes", this.goFindDishes.bind(this));
-				FixinsStore.on("changedSpots", this.goFindSpots.bind(this));
-				FixinsStore.on("changedCheckins", this.goFindCheckIns.bind(this));
+				_FixinsStore2.default.on("changedReviews", this.goFindReviews.bind(this));
+				_FixinsStore2.default.on("changedUsers", this.goFindUsers.bind(this));
+				_FixinsStore2.default.on("changedSubNeighborhoods", this.goFindSubNeighborhoods.bind(this));
+				_FixinsStore2.default.on("changedNeighborhoods", this.goFindNeighborhoods.bind(this));
+				_FixinsStore2.default.on("changedDishes", this.goFindDishes.bind(this));
+				_FixinsStore2.default.on("changedSpots", this.goFindSpots.bind(this));
+				_FixinsStore2.default.on("changedCheckins", this.goFindCheckIns.bind(this));
 			}
 		}, {
 			key: "componentWillUnmount",
 			value: function componentWillUnmount() {
-				FixinsStore.removeListener("changedReviews", this.goFindReviews.bind(this));
-				FixinsStore.removeListener("changedUsers", this.goFindUsers.bind(this));
-				FixinsStore.removeListener("changedSubNeighborhoods", this.goFindSubNeighborhoods.bind(this));
-				FixinsStore.removeListener("changedNeighborhoods", this.goFindNeighborhoods.bind(this));
-				FixinsStore.removeListener("changedDishes", this.goFindDishes.bind(this));
-				FixinsStore.removeListener("changedSpots", this.goFindSpots.bind(this));
-				FixinsStore.removeListener("changedCheckins", this.goFindCheckIns.bind(this));
+				_FixinsStore2.default.removeListener("changedReviews", this.goFindReviews.bind(this));
+				_FixinsStore2.default.removeListener("changedUsers", this.goFindUsers.bind(this));
+				_FixinsStore2.default.removeListener("changedSubNeighborhoods", this.goFindSubNeighborhoods.bind(this));
+				_FixinsStore2.default.removeListener("changedNeighborhoods", this.goFindNeighborhoods.bind(this));
+				_FixinsStore2.default.removeListener("changedDishes", this.goFindDishes.bind(this));
+				_FixinsStore2.default.removeListener("changedSpots", this.goFindSpots.bind(this));
+				_FixinsStore2.default.removeListener("changedCheckins", this.goFindCheckIns.bind(this));
 			}
 		}, {
 			key: "render",
 			value: function render() {
-
 				return _react2.default.createElement(
 					"div",
 					null,
 					_react2.default.createElement(
 						"div",
-						{ "class": "container" },
+						{ className: "container" },
 						_react2.default.createElement(
 							"div",
-							{ "class": "admin-user-box row" },
+							{ className: "admin-user-box row" },
 							_react2.default.createElement(
 								"div",
-								{ "class": "admin-user-input col-md-6" },
+								{ className: "admin-user-input col-md-6" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"New User"
+								),
 								_react2.default.createElement(_UserForm2.default, { allNeighborhoods: this.state.allNeighborhoods })
 							),
 							_react2.default.createElement(
 								"div",
-								{ "class": "admin-user-output col-md-6" },
+								{ className: "admin-user-output col-md-6" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"All Users"
+								),
 								_react2.default.createElement(_UserList2.default, { allUsers: this.state.allUsers })
 							)
 						),
+						_react2.default.createElement("hr", null),
 						_react2.default.createElement(
 							"div",
-							{ "class": "admin-spot-box row" },
+							{ className: "admin-spot-box row" },
 							_react2.default.createElement(
 								"div",
-								{ "class": "admin-spot-input col-md-6" },
+								{ className: "admin-spot-input col-md-6" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"New Spot"
+								),
 								_react2.default.createElement(_SpotForm2.default, { allGenres: this.state.allGenres,
 									allNeighborhoods: this.state.allNeighborhoods,
 									allSubNeighborhoods: this.state.allSubNeighborhoods })
 							),
 							_react2.default.createElement(
 								"div",
-								{ "class": "admin-spot-output col-md-6" },
+								{ className: "admin-spot-output col-md-6" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"All Spots"
+								),
 								_react2.default.createElement(_SpotList2.default, { allSpots: this.state.allSpots })
 							)
 						),
+						_react2.default.createElement("hr", null),
 						_react2.default.createElement(
 							"div",
-							{ "class": "admin-dish-box row" },
+							{ className: "admin-dish-box row" },
 							_react2.default.createElement(
 								"div",
-								{ "class": "admin-dish-input col-md-6" },
+								{ className: "admin-dish-input col-md-6" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"New Dish"
+								),
 								_react2.default.createElement(_DishForm2.default, { allSpots: this.state.allSpots,
 									allGenres: this.state.allGenres })
 							),
 							_react2.default.createElement(
 								"div",
-								{ "class": "admin-dish-output col-md-6" },
+								{ className: "admin-dish-output col-md-6" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"All Dishes"
+								),
 								_react2.default.createElement(_DishList2.default, { allDishes: this.state.allDishes })
 							)
 						),
+						_react2.default.createElement("hr", null),
 						_react2.default.createElement(
 							"div",
-							{ "class": "admin-genres-box row" },
+							{ className: "admin-genre-box row" },
 							_react2.default.createElement(
 								"div",
-								{ "class": "admin-genres-input col-md-6" },
-								_react2.default.createElement(GenresForm, null)
+								{ className: "admin-genre-input col-md-6" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"New Genre"
+								),
+								_react2.default.createElement(_GenreForm2.default, null)
 							),
 							_react2.default.createElement(
 								"div",
-								{ "class": "admin-genres-output col-md-6" },
-								_react2.default.createElement(GenresList, { allGenres: this.state.allGenres })
+								{ className: "admin-genre-output col-md-6" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"All Genres"
+								),
+								_react2.default.createElement(_GenreList2.default, { allGenres: this.state.allGenres })
 							)
 						),
+						_react2.default.createElement("hr", null),
 						_react2.default.createElement(
 							"div",
-							{ "class": "admin-review-box row" },
+							{ className: "admin-review-box row" },
 							_react2.default.createElement(
 								"div",
-								{ "class": "admin-review-input col-md-6" },
+								{ className: "admin-review-input col-md-6" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"New Review"
+								),
 								_react2.default.createElement(_ReviewForm2.default, { allDishes: this.state.allDishes,
 									allSpots: this.state.allSpots })
 							),
 							_react2.default.createElement(
 								"div",
-								{ "class": "admin-review-output col-md-6" },
+								{ className: "admin-review-output col-md-6" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"All Reviews"
+								),
 								_react2.default.createElement(_ReviewList2.default, { allReviews: this.state.allReviews })
 							)
 						),
+						_react2.default.createElement("hr", null),
 						_react2.default.createElement(
 							"div",
-							{ "class": "admin-checkIn-box row" },
+							{ className: "admin-checkIn-box row" },
 							_react2.default.createElement(
 								"div",
-								{ "class": "admin-checkIn-input col-md-6" },
+								{ className: "admin-checkIn-input col-md-6" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"New CheckIn"
+								),
 								_react2.default.createElement(_CheckInForm2.default, { allSpots: this.state.allSpots, allDishes: this.state.allDishes })
 							),
 							_react2.default.createElement(
 								"div",
-								{ "class": "admin-checkIn-output col-md-6" },
+								{ className: "admin-checkIn-output col-md-6" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"All CheckIns"
+								),
 								_react2.default.createElement(_CheckInList2.default, { allCheckIns: this.state.allCheckIns })
 							)
 						),
+						_react2.default.createElement("hr", null),
 						_react2.default.createElement(
 							"div",
-							{ "class": "admin-neighborhood-box row" },
+							{ className: "admin-neighborhood-box row" },
 							_react2.default.createElement(
 								"div",
-								{ "class": "admin-neighborhood-input col-md-6" },
+								{ className: "admin-neighborhood-input col-md-6" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"New Neighborhood"
+								),
 								_react2.default.createElement(_NeighborhoodForm2.default, null)
 							),
 							_react2.default.createElement(
 								"div",
-								{ "class": "admin-neighborhood-output col-md-6" },
+								{ className: "admin-neighborhood-output col-md-6" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"All Neighborhoods"
+								),
 								_react2.default.createElement(_NeighborhoodList2.default, { allNeighborhoods: this.state.allNeighborhoods })
 							)
 						),
+						_react2.default.createElement("hr", null),
 						_react2.default.createElement(
 							"div",
-							{ "class": "admin-subNeighborhood-box row" },
+							{ className: "admin-subNeighborhood-box row" },
 							_react2.default.createElement(
 								"div",
-								{ "class": "admin-subNeighborhood-input col-md-6" },
+								{ className: "admin-subNeighborhood-input col-md-6" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"New Sub-Neighborhood"
+								),
 								_react2.default.createElement(_SubNeighborhoodForm2.default, null)
 							),
 							_react2.default.createElement(
 								"div",
-								{ "class": "admin-subNeighborhood-output col-md-6" },
+								{ className: "admin-subNeighborhood-output col-md-6" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"All Sub-Neighborhoods"
+								),
 								_react2.default.createElement(_SubNeighborhoodList2.default, { allSubNeighborhoods: this.state.allSubNeighborhoods })
 							)
 						)
@@ -25959,6 +26109,12 @@
 
 	var _CustomDropdown2 = _interopRequireDefault(_CustomDropdown);
 
+	var _FixinsActions = __webpack_require__(220);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25990,12 +26146,12 @@
 			}
 		}, {
 			key: "handlePasswordChange",
-			value: function handlePasswordChange() {
+			value: function handlePasswordChange(e) {
 				this.setState({ password: e.target.value });
 			}
 		}, {
 			key: "handleSubmit",
-			value: function handleSubmit() {
+			value: function handleSubmit(e) {
 				e.preventDefault();
 				var newUserObject = {};
 				newUserObject.username = this.state.username;
@@ -26015,23 +26171,23 @@
 						{ onSubmit: this.handleSubmit.bind(this) },
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Username:",
-							_react2.default.createElement("input", { type: "text", value: this.state.username, onChange: this.handleUsernameChange.bind(this), "class": "form-control", placeholder: "username" })
+							_react2.default.createElement("input", { type: "text", value: this.state.username, onChange: this.handleUsernameChange.bind(this), className: "form-control", placeholder: "username" })
 						),
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Password:",
-							_react2.default.createElement("input", { type: "password", value: this.state.password, onChange: this.handlePasswordChange.bind(this), "class": "form-control", placeholder: "password" })
+							_react2.default.createElement("input", { type: "password", value: this.state.password, onChange: this.handlePasswordChange.bind(this), className: "form-control", placeholder: "password" })
 						),
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Neighborhood:",
 							_react2.default.createElement(_CustomDropdown2.default, { data: this.props.allNeighborhoods, nameName: "neighborhood_name" })
 						),
-						_react2.default.createElement("input", { "class": "button btn-danger align-right", type: "submit", value: "Post" })
+						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Post" })
 					)
 				);
 			}
@@ -26078,20 +26234,22 @@
 		_createClass(CustomDropdown, [{
 			key: "render",
 			value: function render() {
+				console.log("here are the props for CustomDropdown");
+				console.log(this.props);
 				var optionNodes = this.props.data.map(function (item) {
 					return _react2.default.createElement(
 						"option",
-						{ key: item.key, value: item[this.props.nameName], selected: true, disabled: true },
+						{ key: item.key, value: item[this.props.nameName], defaultValue: item[this.props.nameName], selected: true, disabled: true },
 						item[this.props.nameName]
 					);
 				});
 
 				return _react2.default.createElement(
 					"select",
-					{ value: this.props.setValueTo, "class": "form-control" },
+					{ value: this.props.setValueTo, className: "form-control" },
 					_react2.default.createElement(
 						"option",
-						{ value: "", selected: true, disabled: true },
+						{ value: "", disabled: true },
 						"Pick one"
 					),
 					optionNodes
@@ -26145,22 +26303,26 @@
 						"li",
 						null,
 						_react2.default.createElement(
-							"li",
+							"ul",
 							null,
-							"Name: ",
-							user.name
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							" Password: ",
-							user.password
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							" Neighborhood: ",
-							user.neighborhood
+							_react2.default.createElement(
+								"li",
+								null,
+								"Name: ",
+								user.username
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" Password: ",
+								user.password
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" Neighborhood: ",
+								user.user_sub_neighborhood
+							)
 						)
 					);
 				});
@@ -26201,6 +26363,12 @@
 
 	var _CustomDropdown2 = _interopRequireDefault(_CustomDropdown);
 
+	var _FixinsActions = __webpack_require__(220);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26235,32 +26403,32 @@
 			}
 		}, {
 			key: "handleBlurbChange",
-			value: function handleBlurbChange() {
+			value: function handleBlurbChange(e) {
 				this.setState({ blurb: e.target.value });
 			}
 		}, {
 			key: "handleGenresChange",
-			value: function handleGenresChange() {
+			value: function handleGenresChange(e) {
 				this.setState({ genres: e.target.value });
 			}
 		}, {
 			key: "handleCoordinatesChange",
-			value: function handleCoordinatesChange() {
+			value: function handleCoordinatesChange(e) {
 				this.setState({ coordinates: e.target.value });
 			}
 		}, {
 			key: "handleNeighborhoodChange",
-			value: function handleNeighborhoodChange() {
+			value: function handleNeighborhoodChange(e) {
 				this.setState({ neighborhood: e.target.value });
 			}
 		}, {
 			key: "handleSubNeighborhoodChange",
-			value: function handleSubNeighborhoodChange() {
+			value: function handleSubNeighborhoodChange(e) {
 				this.setState({ subNeighborhood: e.target.value });
 			}
 		}, {
 			key: "handleSubmit",
-			value: function handleSubmit() {
+			value: function handleSubmit(e) {
 				e.preventDefault();
 				var newSpotObject = {};
 				newSpotObject.name = this.state.name;
@@ -26283,35 +26451,35 @@
 						{ onSubmit: this.handleSubmit.bind(this) },
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Spot name:",
-							_react2.default.createElement("input", { type: "text", value: this.state.name, onChange: this.handleNameChange.bind(this), "class": "form-control", placeholder: "spot name" })
+							_react2.default.createElement("input", { type: "text", value: this.state.name, onChange: this.handleNameChange.bind(this), className: "form-control", placeholder: "spot name" })
 						),
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Blurb:",
-							_react2.default.createElement("input", { type: "text", value: this.state.blurb, onChange: this.handleBlurbChange.bind(this), "class": "form-control", placeholder: "spot blurb" })
+							_react2.default.createElement("input", { type: "text", value: this.state.blurb, onChange: this.handleBlurbChange.bind(this), className: "form-control", placeholder: "spot blurb" })
 						),
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Genres:",
 							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.genres, onChange: this.handleGenresChange.bind(this), data: this.props.allGenres, nameName: "genre_name" })
 						),
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Neighborhood:",
 							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.neighborhood, onChange: this.handleNeighborhoodChange.bind(this), data: this.props.allNeighborhoods, nameName: "neighborhood_name" })
 						),
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"subNeighborhood:",
 							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.subNeighborhood, onChange: this.handleSubNeighborhoodChange.bind(this), data: this.props.allSubNeighborhoods, nameName: "subNeighborhood_name" })
 						),
-						_react2.default.createElement("input", { "class": "button btn-danger align-right", type: "submit", value: "Post" })
+						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Post" })
 					)
 				);
 			}
@@ -26358,45 +26526,52 @@
 		_createClass(SpotList, [{
 			key: "render",
 			value: function render() {
+				console.log("SpotList.this.props");
+				console.log(this.props);
+
 				var spotNodes = this.props.allSpots.map(function (spot) {
 					return _react2.default.createElement(
 						"li",
 						null,
 						_react2.default.createElement(
-							"li",
+							"ul",
 							null,
-							"Spot Name: ",
-							spot.spot_name
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							" Spot Blurb ",
-							spot.spot_blurb
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							" Spot Neighborhood: ",
-							spot.spot_neighborhood
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							" Spot SubNeighborhood: ",
-							spot.spot_subNeighborhood
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							" Spot Genre: ",
-							spot.spot_genres
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							" Spot Coordinates: ",
-							spot.spot_coordinates
+							_react2.default.createElement(
+								"li",
+								null,
+								"Spot Name: ",
+								spot.spot_name
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" Spot Blurb ",
+								spot.spot_blurb
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" Spot Neighborhood: ",
+								spot.spot_neighborhood
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" Spot SubNeighborhood: ",
+								spot.spot_subNeighborhood
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" Spot Genre: ",
+								spot.spot_genres
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" Spot Coordinates: ",
+								spot.spot_coordinates
+							)
 						)
 					);
 				});
@@ -26437,6 +26612,12 @@
 
 	var _CustomDropdown2 = _interopRequireDefault(_CustomDropdown);
 
+	var _FixinsActions = __webpack_require__(220);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26471,32 +26652,32 @@
 			}
 		}, {
 			key: "handleBlurbChange",
-			value: function handleBlurbChange() {
+			value: function handleBlurbChange(e) {
 				this.setState({ blurb: e.target.value });
 			}
 		}, {
 			key: "handleGenresChange",
-			value: function handleGenresChange() {
+			value: function handleGenresChange(e) {
 				this.setState({ genres: e.target.value });
 			}
 		}, {
 			key: "handleCaloriesChange",
-			value: function handleCaloriesChange() {
+			value: function handleCaloriesChange(e) {
 				this.setState({ calories: e.target.value });
 			}
 		}, {
 			key: "handlePriceChange",
-			value: function handlePriceChange() {
+			value: function handlePriceChange(e) {
 				this.setState({ price: e.target.value });
 			}
 		}, {
 			key: "handleSpotChange",
-			value: function handleSpotChange() {
+			value: function handleSpotChange(e) {
 				this.setState({ spot: e.target.value });
 			}
 		}, {
 			key: "handleSubmit",
-			value: function handleSubmit() {
+			value: function handleSubmit(e) {
 				e.preventDefault();
 				var newDishObject = {};
 				newDishObject.name = this.state.name;
@@ -26519,41 +26700,41 @@
 						{ onSubmit: this.handleSubmit.bind(this) },
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Dish name:",
-							_react2.default.createElement("input", { type: "text", value: this.state.name, onChange: this.handleNameChange.bind(this), "class": "form-control", placeholder: "dish name" })
+							_react2.default.createElement("input", { type: "text", value: this.state.name, onChange: this.handleNameChange.bind(this), className: "form-control", placeholder: "dish name" })
 						),
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Blurb:",
-							_react2.default.createElement("input", { type: "text", value: this.state.blurb, onChange: this.handleBlurbChange.bind(this), "class": "form-control", placeholder: "dish blurb" })
+							_react2.default.createElement("input", { type: "text", value: this.state.blurb, onChange: this.handleBlurbChange.bind(this), className: "form-control", placeholder: "dish blurb" })
 						),
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Calories:",
-							_react2.default.createElement("input", { type: "text", value: this.state.calories, onChange: this.handleCaloriesChange.bind(this), "class": "form-control", placeholder: "dish calories" })
+							_react2.default.createElement("input", { type: "text", value: this.state.calories, onChange: this.handleCaloriesChange.bind(this), className: "form-control", placeholder: "dish calories" })
 						),
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Price:",
-							_react2.default.createElement("input", { type: "text", value: this.state.price, onChange: this.handlePriceChange.bind(this), "class": "form-control", placeholder: "dish price" })
+							_react2.default.createElement("input", { type: "text", value: this.state.price, onChange: this.handlePriceChange.bind(this), className: "form-control", placeholder: "dish price" })
 						),
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Genres:",
 							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.genres, onChange: this.handleGenresChange.bind(this), data: this.props.allGenres, nameName: "genre_name" })
 						),
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Spot:",
 							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.spot, onChange: this.handleSpotChange.bind(this), data: this.props.allSpots, nameName: "spot_name" })
 						),
-						_react2.default.createElement("input", { "class": "button btn-danger align-right", type: "submit", value: "Post" })
+						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Post" })
 					)
 				);
 			}
@@ -26605,40 +26786,44 @@
 						"li",
 						null,
 						_react2.default.createElement(
-							"li",
+							"ul",
 							null,
-							"Dish Name: ",
-							dish.dish_name
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							" Dish Blurb ",
-							dish.dish_blurb
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							" Dish Genre: ",
-							dish.dish_genres
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							" Dish Price: ",
-							dish.dish_price
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							" Dish Calories: ",
-							dish.dish_calories
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							" Dish Spot: ",
-							dish.dish_spot
+							_react2.default.createElement(
+								"li",
+								null,
+								"Dish Name: ",
+								dish.dish_name
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" Dish Blurb ",
+								dish.dish_blurb
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" Dish Genre: ",
+								dish.dish_genres
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" Dish Price: ",
+								dish.dish_price
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" Dish Calories: ",
+								dish.dish_calories
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" Dish Spot: ",
+								dish.dish_spot
+							)
 						)
 					);
 				});
@@ -26679,6 +26864,12 @@
 
 	var _CustomDropdown2 = _interopRequireDefault(_CustomDropdown);
 
+	var _FixinsActions = __webpack_require__(220);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26711,22 +26902,22 @@
 			}
 		}, {
 			key: "handleWordsChange",
-			value: function handleWordsChange() {
+			value: function handleWordsChange(e) {
 				this.setState({ words: e.target.value });
 			}
 		}, {
 			key: "handleTypeChange",
-			value: function handleTypeChange() {
+			value: function handleTypeChange(e) {
 				this.setState({ item_type: e.target.value });
 			}
 		}, {
 			key: "handleStarsChange",
-			value: function handleStarsChange() {
+			value: function handleStarsChange(e) {
 				this.setState({ calories: e.target.value });
 			}
 		}, {
 			key: "handleSubmit",
-			value: function handleSubmit() {
+			value: function handleSubmit(e) {
 				e.preventDefault();
 				var newReviewObject = {};
 				newReviewObject.item_reviewed = this.state.item_name;
@@ -26747,18 +26938,18 @@
 						{ onSubmit: this.handleSubmit.bind(this) },
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Words:",
-							_react2.default.createElement("input", { type: "text", value: this.state.words, onChange: this.handleWordsChange.bind(this), "class": "form-control", placeholder: "words of review" })
+							_react2.default.createElement("input", { type: "text", value: this.state.words, onChange: this.handleWordsChange.bind(this), className: "form-control", placeholder: "words of review" })
 						),
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Number of stars:",
-							_react2.default.createElement("input", { type: "number", min: "0", max: "5", value: this.state.stars, onChange: this.handleStarsChange.bind(this), "class": "form-control" })
+							_react2.default.createElement("input", { type: "number", min: "0", max: "5", value: this.state.stars, onChange: this.handleStarsChange.bind(this), className: "form-control" })
 						),
 						"///missing }",
-						_react2.default.createElement("input", { "class": "button btn-danger align-right", type: "submit", value: "Post" })
+						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Post" })
 					)
 				);
 			}
@@ -26773,7 +26964,7 @@
 			{
 			 if(this.state.item_type==="spot"){
 			 	return(
-					<div class="input-group">
+					<div className="input-group">
 						Spot reviewed:
 						<CustomDropdown setValueTo={this.state.spot} onChange={this.handleNameChange.bind(this)} data={this.props.allSpots} nameName="spot_name" />
 					</div>
@@ -26782,7 +26973,7 @@
 							}
 			 else{
 				return(
-					<div class="input-group">
+					<div className="input-group">
 						Dish reviewed:
 						<CustomDropdown setValueTo={this.state.dish} onChange={this.handleNameChange.bind(this)} data={this.props.allDishes} nameName="dish_name" />
 					</div>
@@ -26835,28 +27026,32 @@
 						"li",
 						null,
 						_react2.default.createElement(
-							"li",
+							"ul",
 							null,
-							"Name: ",
-							review.reviewed_item_name
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							"Type: ",
-							review.reviewed_item_type
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							"Stars: ",
-							review.stars
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							"Words: ",
-							review.words
+							_react2.default.createElement(
+								"li",
+								null,
+								"Name: ",
+								review.reviewed_item_name
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								"Type: ",
+								review.reviewed_item_type
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								"Stars: ",
+								review.stars
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								"Words: ",
+								review.words
+							)
 						)
 					);
 				});
@@ -26897,6 +27092,12 @@
 
 	var _CustomDropdown2 = _interopRequireDefault(_CustomDropdown);
 
+	var _FixinsActions = __webpack_require__(220);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26928,17 +27129,17 @@
 			}
 		}, {
 			key: "handleBlurbChange",
-			value: function handleBlurbChange() {
+			value: function handleBlurbChange(e) {
 				this.setState({ blurb: e.target.value });
 			}
 		}, {
 			key: "handleDishChange",
-			value: function handleDishChange() {
+			value: function handleDishChange(e) {
 				this.setState({ blurb: e.target.value });
 			}
 		}, {
 			key: "handleSubmit",
-			value: function handleSubmit() {
+			value: function handleSubmit(e) {
 				e.preventDefault();
 				var newCheckInObject = {};
 				newCheckInObject.blurb = this.state.blurb;
@@ -26958,23 +27159,23 @@
 						{ onSubmit: this.handleSubmit.bind(this) },
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Blurb:",
-							_react2.default.createElement("input", { type: "text", value: this.state.blurb, onChange: this.handleBlurbChange.bind(this), "class": "form-control", placeholder: "dish blurb" })
+							_react2.default.createElement("input", { type: "text", value: this.state.blurb, onChange: this.handleBlurbChange.bind(this), className: "form-control", placeholder: "dish blurb" })
 						),
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Dish:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.dish, onChange: this.handleDishChange.bind(this), data: this.props.allGenres, nameName: "genre_name" })
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.dish, onChange: this.handleDishChange.bind(this), data: this.props.allDishes, nameName: "genre_name" })
 						),
 						_react2.default.createElement(
 							"div",
-							{ "class": "input-group" },
+							{ className: "input-group" },
 							"Spot:",
 							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.spot, onChange: this.handleSpotChange.bind(this), data: this.props.allSpots, nameName: "spot_name" })
 						),
-						_react2.default.createElement("input", { "class": "button btn-danger align-right", type: "submit", value: "Post" })
+						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Post" })
 					)
 				);
 			}
@@ -27026,28 +27227,32 @@
 						"li",
 						null,
 						_react2.default.createElement(
-							"li",
+							"ul",
 							null,
-							"Spot: ",
-							checkIn.spot
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							"Dish: ",
-							checkIn.dish
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							"Name: ",
-							checkIn.blurb
-						),
-						_react2.default.createElement(
-							"li",
-							null,
-							"User: ",
-							checkIn.user
+							_react2.default.createElement(
+								"li",
+								null,
+								"Spot: ",
+								checkIn.spot
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								"Dish: ",
+								checkIn.dish
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								"Name: ",
+								checkIn.blurb
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								"User: ",
+								checkIn.user
+							)
 						)
 					);
 				});
@@ -27088,6 +27293,157 @@
 
 	var _CustomDropdown2 = _interopRequireDefault(_CustomDropdown);
 
+	var _FixinsActions = __webpack_require__(220);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var GenreForm = function (_React$Component) {
+		_inherits(GenreForm, _React$Component);
+
+		function GenreForm() {
+			_classCallCheck(this, GenreForm);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(GenreForm).call(this));
+
+			_this.state = {
+				name: ''
+			};
+			return _this;
+		}
+
+		_createClass(GenreForm, [{
+			key: "handleNameChange",
+			value: function handleNameChange(e) {
+				this.setState({ name: e.target.value });
+			}
+		}, {
+			key: "handleSubmit",
+			value: function handleSubmit(e) {
+				e.preventDefault();
+				var newGenreObject = {};
+				newGenreObject.name = this.state.name;
+				FixinsActions.createGenre(newGenreObject);
+				this.setState({ name: "" });
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"form",
+					{ onSubmit: this.handleSubmit.bind(this) },
+					_react2.default.createElement(
+						"div",
+						{ className: "input-group" },
+						"Genre name:",
+						_react2.default.createElement("input", { type: "text", value: this.state.name, onChange: this.handleNameChange.bind(this), className: "form-control", placeholder: "genre name" })
+					),
+					_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Post" })
+				);
+			}
+		}]);
+
+		return GenreForm;
+	}(_react2.default.Component);
+
+	exports.default = GenreForm;
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var GenresList = function (_React$Component) {
+		_inherits(GenresList, _React$Component);
+
+		function GenresList() {
+			_classCallCheck(this, GenresList);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(GenresList).apply(this, arguments));
+		}
+
+		_createClass(GenresList, [{
+			key: "render",
+			value: function render() {
+				var genresNodes = this.props.allGenres.map(function (genre) {
+					return _react2.default.createElement(
+						"li",
+						null,
+						"Name: ",
+						genre.genre_name
+					);
+				});
+				return _react2.default.createElement(
+					"div",
+					null,
+					_react2.default.createElement(
+						"ol",
+						null,
+						genresNodes
+					)
+				);
+			}
+		}]);
+
+		return GenresList;
+	}(_react2.default.Component);
+
+	exports.default = GenresList;
+
+/***/ },
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _CustomDropdown = __webpack_require__(228);
+
+	var _CustomDropdown2 = _interopRequireDefault(_CustomDropdown);
+
+	var _FixinsActions = __webpack_require__(220);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27117,8 +27473,8 @@
 			}
 		}, {
 			key: "handleSubmit",
-			value: function handleSubmit() {
-				e.preventDefault();
+			value: function handleSubmit(e) {
+				e.preventDefault(e);
 				var newNeighborhoodObject = {};
 				newNeighborhoodObject.name = this.state.name;
 				FixinsActions.createNeighborhood(newNeighborhoodObject);
@@ -27132,11 +27488,11 @@
 					{ onSubmit: this.handleSubmit.bind(this) },
 					_react2.default.createElement(
 						"div",
-						{ "class": "input-group" },
+						{ className: "input-group" },
 						"Neighborhood name:",
-						_react2.default.createElement("input", { type: "text", value: this.state.name, onChange: this.handleNameChange.bind(this), "class": "form-control", placeholder: "neighborhood name" })
+						_react2.default.createElement("input", { type: "text", value: this.state.name, onChange: this.handleNameChange.bind(this), className: "form-control", placeholder: "neighborhood name" })
 					),
-					_react2.default.createElement("input", { "class": "button btn-danger align-right", type: "submit", value: "Post" })
+					_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Post" })
 				);
 			}
 		}]);
@@ -27147,7 +27503,7 @@
 	exports.default = NeighborhoodForm;
 
 /***/ },
-/* 239 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27208,7 +27564,7 @@
 	exports.default = NeighborhoodList;
 
 /***/ },
-/* 240 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27226,6 +27582,12 @@
 	var _CustomDropdown = __webpack_require__(228);
 
 	var _CustomDropdown2 = _interopRequireDefault(_CustomDropdown);
+
+	var _FixinsActions = __webpack_require__(220);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27257,7 +27619,7 @@
 		}, {
 			key: "handleSubmit",
 			value: function handleSubmit() {
-				e.preventDefault();
+				e.preventDefault(e);
 				var newSubNeighborhoodObject = {};
 				newSubNeighborhoodObject.name = this.state.name;
 				FixinsActions.createSubNeighbodrhood(newSubNeighborhoodObject);
@@ -27271,11 +27633,11 @@
 					{ onSubmit: this.handleSubmit.bind(this) },
 					_react2.default.createElement(
 						"div",
-						{ "class": "input-group" },
+						{ className: "input-group" },
 						"Sub-Neighborhood name:",
-						_react2.default.createElement("input", { type: "text", value: this.state.name, onChange: this.handleNameChange.bind(this), "class": "form-control", placeholder: "sub-neighborhood name" })
+						_react2.default.createElement("input", { type: "text", value: this.state.name, onChange: this.handleNameChange.bind(this), className: "form-control", placeholder: "sub-neighborhood name" })
 					),
-					_react2.default.createElement("input", { "class": "button btn-danger align-right", type: "submit", value: "Post" })
+					_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Post" })
 				);
 			}
 		}]);
@@ -27286,7 +27648,7 @@
 	exports.default = SubNeighborhoodForm;
 
 /***/ },
-/* 241 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27345,6 +27707,600 @@
 	}(_react2.default.Component);
 
 	exports.default = SubNeighborhoodList;
+
+/***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _events = __webpack_require__(245);
+
+	var _FixinsActions = __webpack_require__(220);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	var _dispatcher = __webpack_require__(221);
+
+	var _dispatcher2 = _interopRequireDefault(_dispatcher);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FixinsStore = function (_EventEmitter) {
+		_inherits(FixinsStore, _EventEmitter);
+
+		function FixinsStore() {
+			_classCallCheck(this, FixinsStore);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(FixinsStore).call(this));
+
+			_this.reviews = [];
+			_this.spots = [];
+			_this.dishes = [];
+			_this.checkIns = [];
+			_this.neighborhoods = [];
+			_this.subNeighborhoods = [];
+			_this.genres = [];
+			_this.checkIns = [];
+			return _this;
+		}
+
+		_createClass(FixinsStore, [{
+			key: "getCheckInsFromStore",
+			value: function getCheckInsFromStore() {
+				return this.checkIns;
+			}
+		}, {
+			key: "getDishesFromStore",
+			value: function getDishesFromStore() {
+				return this.dishes;
+			}
+		}, {
+			key: "getGenresFromStore",
+			value: function getGenresFromStore() {
+				return this.genres;
+			}
+		}, {
+			key: "getNeighborhoodsFromStore",
+			value: function getNeighborhoodsFromStore() {
+				return this.neighborhoods;
+			}
+		}, {
+			key: "getReviewsFromStore",
+			value: function getReviewsFromStore() {
+				return this.reviews;
+			}
+		}, {
+			key: "getSpotsFromStore",
+			value: function getSpotsFromStore() {
+				console.log("getSpotsFromStore.this.spots");
+				console.log(this.spots);
+
+				return this.spots;
+			}
+		}, {
+			key: "getSubNeighborhoodsFromStore",
+			value: function getSubNeighborhoodsFromStore() {
+				return this.subNeighborhoods;
+			}
+		}, {
+			key: "getUsersFromStore",
+			value: function getUsersFromStore() {
+				return this.users;
+			}
+		}, {
+			key: "setUsersInStore",
+			value: function setUsersInStore(allUsers) {
+				this.users = allUsers;
+				this.emit("changedUsers");
+			}
+		}, {
+			key: "setSubNeighborhoodsInStore",
+			value: function setSubNeighborhoodsInStore(allSubNeighborhoods) {
+				this.subNeighborhoods = allSubNeighborhoods;
+				this.emit("changedSubNeighborhoods");
+			}
+		}, {
+			key: "setSpotsInStore",
+			value: function setSpotsInStore(allSpots) {
+				console.log("setSpotsInStore.allSpots");
+				console.log(allSpots);
+				this.spots = allSpots;
+				console.log("setSpotsInStore.this.spots");
+				console.log(this.spots);
+				this.emit("changedSpots");
+			}
+		}, {
+			key: "setReviewsInStore",
+			value: function setReviewsInStore(allReviews) {
+				this.reviews = allReviews;
+				this.emit("changedReviews");
+			}
+		}, {
+			key: "setNeighborhoodsInStore",
+			value: function setNeighborhoodsInStore(allNeighborhoods) {
+				this.neighborhoods = allNeighborhoods;
+				this.emit("changedNeighborhoods");
+			}
+		}, {
+			key: "setGenresInStore",
+			value: function setGenresInStore(allGenres) {
+				this.Genres = allGenres;
+				this.emit("changedGenres");
+			}
+		}, {
+			key: "setDishesInStore",
+			value: function setDishesInStore(allDishes) {
+				this.dishes = allDishes;
+				this.emit("changedDishes");
+			}
+		}, {
+			key: "setCheckInsInStore",
+			value: function setCheckInsInStore(allCheckIns) {
+				this.checkIns = allCheckIns;
+				this.emit("changedCheckIns");
+			}
+		}, {
+			key: "addNeighborhoodToStore",
+			value: function addNeighborhoodToStore(neighborhood) {
+				this.neighborhoods.push(neighborhood);
+				this.emit("changedNeighborhoods");
+			}
+		}, {
+			key: "addSubNeighborhoodToStore",
+			value: function addSubNeighborhoodToStore(subNeighborhood) {
+				this.subNeighborhoods.push(subNeighborhood);
+				this.emit("changedSubNeighborhoods");
+			}
+		}, {
+			key: "addUserToStore",
+			value: function addUserToStore(user) {
+				this.users.push(user);
+				this.emit("changedUsers");
+			}
+		}, {
+			key: "addReviewToStore",
+			value: function addReviewToStore(review) {
+				this.reviews.push(review);
+				this.emit("changedReviews");
+			}
+		}, {
+			key: "addSpotToStore",
+			value: function addSpotToStore(spot) {
+				this.spots.push(spot);
+				this.emit("changedSpots");
+			}
+		}, {
+			key: "addDishToStore",
+			value: function addDishToStore(dish) {
+				this.dishes.push(dish);
+				this.emit("changedDishes");
+			}
+		}, {
+			key: "addCheckInToStore",
+			value: function addCheckInToStore(checkIn) {
+				this.checkIns.push(checkIn);
+				this.emit("changedCheckIns");
+			}
+		}, {
+			key: "addGenreToStore",
+			value: function addGenreToStore(genre) {
+				this.genres.push(genre);
+				this.emit("changedGenres");
+			}
+		}, {
+			key: "handleActions",
+			value: function handleActions(action) {
+				switch (action.type) {
+					case "CREATE_USER":
+						console.log("CREATE_USER");
+						this.addUserToStore(action.newUser);
+						break;
+
+					case "CREATE_SPOT":
+						console.log("CREATE_SPOT");
+						this.addSpotToStore(action.newSpot);
+						break;
+
+					case "CREATE_DISH":
+						console.log("CREATE_DISH");
+						this.addDishToStore(action.newDish);
+						break;
+
+					case "CREATE_REVIEW":
+						console.log("CREATE_REVIEW");
+						this.addReviewToStore(action.newReview);
+						break;
+
+					case "CREATE_CHECKIN":
+						console.log("CREATE_CHECKIN");
+						this.addCheckInToStore(action.newCheckin);
+						break;
+
+					case "CREATE_GENRE":
+						console.log("CREATE_GENRE");
+						this.addGenreToStore(action.newGenre);
+						break;
+
+					case "CREATE_NEIGHBORHOOD":
+						console.log("CREATE_NEIGHBORHOOD");
+						this.addNeighborhoodToStore(action.newNeighborhood);
+						break;
+
+					case "CREATE_SUBNEIGHBORHOOD":
+						console.log("CREATE_SUBNEIGHBORHOOD");
+						this.addSubNeighborhood(action.newSubNeighborhood);
+						break;
+
+					case "FETCH_USERS":
+						console.log("FETCH_USERS");
+						this.setUsersInStore(action.allUsers);
+						break;
+
+					case "FETCH_CHECKINS":
+						console.log("FETCH_CHECKINS");
+						this.setCheckInsInStore(action.allCheckIns);
+						break;
+
+					case "FETCH_DISHES":
+						console.log("FETCH_DISHES");
+						this.setDishesInStore(action.allDishes);
+						break;
+
+					case "FETCH_GENRES":
+						this.setGenresInStore(action.allGenres);
+						break;
+
+					case "FETCH_NEIGHBORHOODS":
+						console.log("FETCH_NEIGHBORHOODS");
+						this.setNeighborhoodsInStore(action.allNeighborhoods);
+						break;
+
+					case "FETCH_SUBNEIGHBORHOODS":
+						console.log("FETCH_SUBNEIGHBORHOODS");
+						this.setSubNeighborhoodsInStore(action.allSubNeighborhoods);
+						break;
+
+					case "FETCH_REVIEWS":
+						console.log("FETCH_REVIEWS");
+						this.setReviewsInStore(action.allReviews);
+						break;
+
+					case "FETCH_SPOTS":
+						console.log("=============FETCH_SPOTS=================");
+						console.log(action);
+
+						this.setSpotsInStore(action.allSpots);
+						break;
+
+				}
+			}
+		}]);
+
+		return FixinsStore;
+	}(_events.EventEmitter);
+
+	var fixinsStore = new FixinsStore();
+	_dispatcher2.default.register(fixinsStore.handleActions.bind(fixinsStore));
+	exports.default = fixinsStore;
+
+/***/ },
+/* 245 */
+/***/ function(module, exports) {
+
+	// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	function EventEmitter() {
+	  this._events = this._events || {};
+	  this._maxListeners = this._maxListeners || undefined;
+	}
+	module.exports = EventEmitter;
+
+	// Backwards-compat with node 0.10.x
+	EventEmitter.EventEmitter = EventEmitter;
+
+	EventEmitter.prototype._events = undefined;
+	EventEmitter.prototype._maxListeners = undefined;
+
+	// By default EventEmitters will print a warning if more than 10 listeners are
+	// added to it. This is a useful default which helps finding memory leaks.
+	EventEmitter.defaultMaxListeners = 10;
+
+	// Obviously not all Emitters should be limited to 10. This function allows
+	// that to be increased. Set to zero for unlimited.
+	EventEmitter.prototype.setMaxListeners = function(n) {
+	  if (!isNumber(n) || n < 0 || isNaN(n))
+	    throw TypeError('n must be a positive number');
+	  this._maxListeners = n;
+	  return this;
+	};
+
+	EventEmitter.prototype.emit = function(type) {
+	  var er, handler, len, args, i, listeners;
+
+	  if (!this._events)
+	    this._events = {};
+
+	  // If there is no 'error' event listener then throw.
+	  if (type === 'error') {
+	    if (!this._events.error ||
+	        (isObject(this._events.error) && !this._events.error.length)) {
+	      er = arguments[1];
+	      if (er instanceof Error) {
+	        throw er; // Unhandled 'error' event
+	      }
+	      throw TypeError('Uncaught, unspecified "error" event.');
+	    }
+	  }
+
+	  handler = this._events[type];
+
+	  if (isUndefined(handler))
+	    return false;
+
+	  if (isFunction(handler)) {
+	    switch (arguments.length) {
+	      // fast cases
+	      case 1:
+	        handler.call(this);
+	        break;
+	      case 2:
+	        handler.call(this, arguments[1]);
+	        break;
+	      case 3:
+	        handler.call(this, arguments[1], arguments[2]);
+	        break;
+	      // slower
+	      default:
+	        args = Array.prototype.slice.call(arguments, 1);
+	        handler.apply(this, args);
+	    }
+	  } else if (isObject(handler)) {
+	    args = Array.prototype.slice.call(arguments, 1);
+	    listeners = handler.slice();
+	    len = listeners.length;
+	    for (i = 0; i < len; i++)
+	      listeners[i].apply(this, args);
+	  }
+
+	  return true;
+	};
+
+	EventEmitter.prototype.addListener = function(type, listener) {
+	  var m;
+
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  if (!this._events)
+	    this._events = {};
+
+	  // To avoid recursion in the case that type === "newListener"! Before
+	  // adding it to the listeners, first emit "newListener".
+	  if (this._events.newListener)
+	    this.emit('newListener', type,
+	              isFunction(listener.listener) ?
+	              listener.listener : listener);
+
+	  if (!this._events[type])
+	    // Optimize the case of one listener. Don't need the extra array object.
+	    this._events[type] = listener;
+	  else if (isObject(this._events[type]))
+	    // If we've already got an array, just append.
+	    this._events[type].push(listener);
+	  else
+	    // Adding the second element, need to change to array.
+	    this._events[type] = [this._events[type], listener];
+
+	  // Check for listener leak
+	  if (isObject(this._events[type]) && !this._events[type].warned) {
+	    if (!isUndefined(this._maxListeners)) {
+	      m = this._maxListeners;
+	    } else {
+	      m = EventEmitter.defaultMaxListeners;
+	    }
+
+	    if (m && m > 0 && this._events[type].length > m) {
+	      this._events[type].warned = true;
+	      console.error('(node) warning: possible EventEmitter memory ' +
+	                    'leak detected. %d listeners added. ' +
+	                    'Use emitter.setMaxListeners() to increase limit.',
+	                    this._events[type].length);
+	      if (typeof console.trace === 'function') {
+	        // not supported in IE 10
+	        console.trace();
+	      }
+	    }
+	  }
+
+	  return this;
+	};
+
+	EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+	EventEmitter.prototype.once = function(type, listener) {
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  var fired = false;
+
+	  function g() {
+	    this.removeListener(type, g);
+
+	    if (!fired) {
+	      fired = true;
+	      listener.apply(this, arguments);
+	    }
+	  }
+
+	  g.listener = listener;
+	  this.on(type, g);
+
+	  return this;
+	};
+
+	// emits a 'removeListener' event iff the listener was removed
+	EventEmitter.prototype.removeListener = function(type, listener) {
+	  var list, position, length, i;
+
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  if (!this._events || !this._events[type])
+	    return this;
+
+	  list = this._events[type];
+	  length = list.length;
+	  position = -1;
+
+	  if (list === listener ||
+	      (isFunction(list.listener) && list.listener === listener)) {
+	    delete this._events[type];
+	    if (this._events.removeListener)
+	      this.emit('removeListener', type, listener);
+
+	  } else if (isObject(list)) {
+	    for (i = length; i-- > 0;) {
+	      if (list[i] === listener ||
+	          (list[i].listener && list[i].listener === listener)) {
+	        position = i;
+	        break;
+	      }
+	    }
+
+	    if (position < 0)
+	      return this;
+
+	    if (list.length === 1) {
+	      list.length = 0;
+	      delete this._events[type];
+	    } else {
+	      list.splice(position, 1);
+	    }
+
+	    if (this._events.removeListener)
+	      this.emit('removeListener', type, listener);
+	  }
+
+	  return this;
+	};
+
+	EventEmitter.prototype.removeAllListeners = function(type) {
+	  var key, listeners;
+
+	  if (!this._events)
+	    return this;
+
+	  // not listening for removeListener, no need to emit
+	  if (!this._events.removeListener) {
+	    if (arguments.length === 0)
+	      this._events = {};
+	    else if (this._events[type])
+	      delete this._events[type];
+	    return this;
+	  }
+
+	  // emit removeListener for all listeners on all events
+	  if (arguments.length === 0) {
+	    for (key in this._events) {
+	      if (key === 'removeListener') continue;
+	      this.removeAllListeners(key);
+	    }
+	    this.removeAllListeners('removeListener');
+	    this._events = {};
+	    return this;
+	  }
+
+	  listeners = this._events[type];
+
+	  if (isFunction(listeners)) {
+	    this.removeListener(type, listeners);
+	  } else if (listeners) {
+	    // LIFO order
+	    while (listeners.length)
+	      this.removeListener(type, listeners[listeners.length - 1]);
+	  }
+	  delete this._events[type];
+
+	  return this;
+	};
+
+	EventEmitter.prototype.listeners = function(type) {
+	  var ret;
+	  if (!this._events || !this._events[type])
+	    ret = [];
+	  else if (isFunction(this._events[type]))
+	    ret = [this._events[type]];
+	  else
+	    ret = this._events[type].slice();
+	  return ret;
+	};
+
+	EventEmitter.prototype.listenerCount = function(type) {
+	  if (this._events) {
+	    var evlistener = this._events[type];
+
+	    if (isFunction(evlistener))
+	      return 1;
+	    else if (evlistener)
+	      return evlistener.length;
+	  }
+	  return 0;
+	};
+
+	EventEmitter.listenerCount = function(emitter, type) {
+	  return emitter.listenerCount(type);
+	};
+
+	function isFunction(arg) {
+	  return typeof arg === 'function';
+	}
+
+	function isNumber(arg) {
+	  return typeof arg === 'number';
+	}
+
+	function isObject(arg) {
+	  return typeof arg === 'object' && arg !== null;
+	}
+
+	function isUndefined(arg) {
+	  return arg === void 0;
+	}
+
 
 /***/ }
 /******/ ]);

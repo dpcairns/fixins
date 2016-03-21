@@ -1,5 +1,6 @@
 import React from "react"
 import CustomDropdown from "./CustomDropdown"
+import * as FixinsActions from "../../actions/FixinsActions"
 
 export default class CheckInForm extends React.Component{
 	constructor(){
@@ -15,15 +16,15 @@ export default class CheckInForm extends React.Component{
 		this.setState({name: e.target.value})
 	}
 
-	handleBlurbChange(){
+	handleBlurbChange(e){
 		this.setState({blurb: e.target.value})
 	}
 
-	handleDishChange(){
+	handleDishChange(e){
 		this.setState({blurb: e.target.value})
 	}
 
-	handleSubmit(){
+	handleSubmit(e){
 		e.preventDefault();
 		var newCheckInObject = {}
 		newCheckInObject.blurb = this.state.blurb
@@ -37,19 +38,19 @@ export default class CheckInForm extends React.Component{
 	return(
 		<div>
 	<form onSubmit={this.handleSubmit.bind(this)}>
-		<div class="input-group">
+		<div className="input-group">
 			Blurb:
-		  <input type="text" value={this.state.blurb} onChange={this.handleBlurbChange.bind(this)} class="form-control" placeholder="dish blurb" />
+		  <input type="text" value={this.state.blurb} onChange={this.handleBlurbChange.bind(this)} className="form-control" placeholder="dish blurb" />
 		</div>
-		<div class="input-group">
+		<div className="input-group">
 			Dish:
-			<CustomDropdown setValueTo={this.state.dish} onChange={this.handleDishChange.bind(this)} data={this.props.allGenres} nameName="genre_name" />
+			<CustomDropdown setValueTo={this.state.dish} onChange={this.handleDishChange.bind(this)} data={this.props.allDishes} nameName="genre_name" />
 		</div>
-		<div class="input-group">
+		<div className="input-group">
 			Spot:
 			<CustomDropdown setValueTo={this.state.spot} onChange={this.handleSpotChange.bind(this)} data={this.props.allSpots} nameName="spot_name" />
 		</div>
-	<input class="button btn-danger align-right" type="submit" value="Post"/>
+	<input className="button btn-danger align-right" type="submit" value="Post"/>
 	</form>
 </div>
 

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var randNum = Math.random
 
 var SpotSchema = new Schema({
 	spot_name: {
@@ -19,7 +20,7 @@ var SpotSchema = new Schema({
 		],
 	spot_coordinates:{
 		type: Array,
-		default: []
+		default: [(45.1200, + randNum), (-122.1819 - randNum)]
 	},
 	addDate: {
 		type: Date,
@@ -47,11 +48,6 @@ var SpotSchema = new Schema({
 			}
 		]
 	,
-	spot_neighborhood: 
-			{
-				type: Schema.Types.ObjectId,
-				ref: 'Neighborhood'
-			},
 	spot_subNeighborhood:
 			{
 				type: Schema.Types.ObjectId,

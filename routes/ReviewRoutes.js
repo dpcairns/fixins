@@ -1,8 +1,6 @@
 var Review = require('../src/js/models/ReviewModel') 
-var express = require('express');
-var router = express.Router()
 
-module.exports = function(){
+module.exports = function(router){
 
 	router.route('/Reviews')
 	.get(function (req, res) { 

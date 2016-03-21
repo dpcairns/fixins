@@ -3,10 +3,25 @@ var bodyParser = require('body-parser');
 var app = express();
 var mongoose = require('mongoose');
 var router = express.Router()
+var Neighborhood = require('./src/js/models/NeighborhoodModel')  
+var Subneighborhood = require('./src/js/models/SubNeighborhoodModel') 
+var User = require('./src/js/models/UserModel') 
+var CheckIn = require('./src/js/models/GenreModel') 
+var Genre = require('./src/js/models/GenreModel') 
+var Review = require('./src/js/models/ReviewModel') 
 var Dish = require('./src/js/models/DishModel') 
+var Spot = require('./src/js/models/SpotModel') 
 var db ='mongodb://localhost/test'
-
 mongoose.connect(db)
+
+require('./routes/UserRoutes')(router)
+require('./routes/SpotRoutes')(router)
+require('./routes/DishRoutes')(router)
+require('./routes/GenreRoutes')(router)
+require('./routes/ReviewRoutes')(router)
+require('./routes/CheckInRoutes')(router)
+require('./routes/NeighborhoodRoutes')(router)
+require('./routes/SubNeighborhoodRoutes')(router)
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -23,69 +38,6 @@ router.use(function(req,res,next){
 router.get('/', function(req,res){
 	res.send('hello and welcome to the api')
 })
-
-require('./routes/UserRoutes')
-require('./routes/SpotRoutes')
-require('./routes/DishRoutes')
-require('./routes/GenreRoutes')
-require('./routes/ReviewRoutes')
-require('./routes/CheckInRoutes')
-require('./routes/NeighborhoodRoutes')
-require('./routes/SubNeighborhoodRoutes')
-
-router.route('/Dishes')
-	.get(function (req, res) { 
-		console.log('finding all Dishes in fixins')
-		Dish.find({}).exec(function(err, Dishes){
-			if(err){
-				console.log('Couldn\'t find Dishes')
-			} else {
-				res.json(Dishes);
-			}
-		})
-	})
-	.post(function (req, res) {
-			var newDish = new Dish()
-						newDish.dish_name = req.body.name
-						newDish.dish_spot = req.body.spot
-						newDish.dish_calories = req.body.calories
-						newDish.dish_price = req.body.price
-						newDish.dish_blurb = req.body.blurb
-						newDish.dish_genres = req.body.genres
-						newDish.dish_reviews = req.body.reviews
-
-						newDish.save(function(err) {
-							if(err){console.log("couldn't save dish")}
-							res.json(newDish)
-						})
-				})
-
-router.route('/Dishes/:DishId')
-	.get(function (req, res) {
-		console.log("finding a given Dishes in fixins")
-		var id = req.params.DishId 
-		Dish.findOne({_id: id}).exec(function(err, Dish){
-			if(err){
-				console.log("couldn\t find this Dishes")
-			}
-			else{
-				res.json(Dish)
-			}
-		})
-	})
-	.delete(function (req, res) {
-		console.log("deleting a given Dishes in fixins")
-		var id = req.params.DishId 
-		Dish.findOne({_id: id}).remove().exec(function(err, Dish){
-			if(err){
-				console.log("couldn\t delete this Dish")
-			}
-			else{
-				res.json(Dish)
-			}
-		})
-	})
-
 
 app.use('/api', router)
 

@@ -1,8 +1,6 @@
 var Neighborhood = require('../src/js/models/NeighborhoodModel') 
-var express = require('express');
-var router = express.Router()
 
-module.exports = function(){
+module.exports = function(router){
 	
 	router.route('/Neighborhoods')
 	.get(function (req, res) { 

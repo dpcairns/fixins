@@ -1,8 +1,6 @@
 var CheckIn = require('../src/js/models/CheckInModel')
-var express = require('express');
-var router = express.Router()
 
-module.exports = function(){
+module.exports = function(router){
 
 	router.route('/CheckIns')
 	.get(function (req, res) { 

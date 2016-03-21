@@ -1,0 +1,72 @@
+[
+  {
+    "_id": "56ef0655b43c052419146342",
+    "genre_name": "mexican",
+    "__v": 0
+  },
+  {
+    "_id": "56ef065cb43c052419146343",
+    "genre_name": "italian",
+    "__v": 0
+  },
+  {
+    "_id": "56ef0660b43c052419146344",
+    "genre_name": "carribean",
+    "__v": 0
+  },
+  {
+    "_id": "56ef0666b43c052419146345",
+    "genre_name": "ethiopian",
+    "__v": 0
+  },
+  {
+    "_id": "56ef066eb43c052419146346",
+    "genre_name": "medditerranean",
+    "__v": 0
+  },
+  {
+    "_id": "56ef0673b43c052419146347",
+    "genre_name": "chinese",
+    "__v": 0
+  },
+  {
+    "_id": "56ef0677b43c052419146348",
+    "genre_name": "japanese",
+    "__v": 0
+  },
+  {
+    "_id": "56ef067ab43c052419146349",
+    "genre_name": "korean",
+    "__v": 0
+  },
+  {
+    "_id": "56ef067eb43c05241914634a",
+    "genre_name": "junk food",
+    "__v": 0
+  },
+  {
+    "_id": "56ef0685b43c05241914634b",
+    "genre_name": "vegan",
+    "__v": 0
+  },
+  {
+    "_id": "56ef069ab43c05241914634c",
+    "genre_name": "indian",
+    "__v": 0
+  },
+  {
+    "_id": "56ef06a8b43c05241914634d",
+    "genre_name": "south american",
+    "__v": 0
+  },
+  {
+    "_id": "56ef06aeb43c05241914634e",
+    "genre_name": "senegalese",
+    "__v": 0
+  },
+  {
+    "_id": "56ef06b2b43c05241914634f",
+    "genre_name": "thai",
+    "__v": 0
+  }
+]

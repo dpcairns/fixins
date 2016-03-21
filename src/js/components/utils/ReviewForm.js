@@ -1,5 +1,6 @@
 import React from "react"
 import CustomDropdown from "./CustomDropdown"
+import * as FixinsActions from "../../actions/FixinsActions"
 
 export default class ReviewForm extends React.Component{
 	constructor(){
@@ -16,20 +17,20 @@ export default class ReviewForm extends React.Component{
 		this.setState({item_name: e.target.value})
 	}
 
-	handleWordsChange(){
+	handleWordsChange(e){
 		this.setState({words: e.target.value})
 	}
 
-	handleTypeChange(){
+	handleTypeChange(e){
 		this.setState({item_type: e.target.value})
 	}	
 
-	handleStarsChange(){
+	handleStarsChange(e){
 		this.setState({calories: e.target.value})
 	}	
 
 
-	handleSubmit(){
+	handleSubmit(e){
 		e.preventDefault();
 		var newReviewObject = {}
 		newReviewObject.item_reviewed = this.state.item_name
@@ -44,14 +45,14 @@ export default class ReviewForm extends React.Component{
 	return(
 		<div>
 	<form onSubmit={this.handleSubmit.bind(this)}>
-		<div class="input-group">
+		<div className="input-group">
 			Words:
-		  <input type="text" value={this.state.words} onChange={this.handleWordsChange.bind(this)} class="form-control" placeholder="words of review"/>
+		  <input type="text" value={this.state.words} onChange={this.handleWordsChange.bind(this)} className="form-control" placeholder="words of review"/>
 		</div>
 
-		<div class="input-group">
+		<div className="input-group">
 			Number of stars:
-		  <input type="number" min="0" max="5" value={this.state.stars} onChange={this.handleStarsChange.bind(this)} class="form-control" />
+		  <input type="number" min="0" max="5" value={this.state.stars} onChange={this.handleStarsChange.bind(this)} className="form-control" />
 		</div>
 
 		///missing
@@ -60,7 +61,7 @@ export default class ReviewForm extends React.Component{
 		
 		}
 
-	<input class="button btn-danger align-right" type="submit" value="Post"/>
+	<input className="button btn-danger align-right" type="submit" value="Post"/>
 	</form>
 </div>
 
@@ -79,7 +80,7 @@ export default class ReviewForm extends React.Component{
 		{
 		 if(this.state.item_type==="spot"){
 		 	return(
-				<div class="input-group">
+				<div className="input-group">
 					Spot reviewed:
 					<CustomDropdown setValueTo={this.state.spot} onChange={this.handleNameChange.bind(this)} data={this.props.allSpots} nameName="spot_name" />
 				</div>
@@ -88,7 +89,7 @@ export default class ReviewForm extends React.Component{
 						}
 		 else{
 			return(
-				<div class="input-group">
+				<div className="input-group">
 					Dish reviewed:
 					<CustomDropdown setValueTo={this.state.dish} onChange={this.handleNameChange.bind(this)} data={this.props.allDishes} nameName="dish_name" />
 				</div>

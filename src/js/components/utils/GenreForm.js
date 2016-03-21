@@ -1,7 +1,8 @@
 import React from "react"
 import CustomDropdown from "./CustomDropdown"
+import * as FixinsActions from "../../actions/FixinsActions"
 
-export default class GenresForm extends React.Component{
+export default class GenreForm extends React.Component{
 	constructor(){
 		super();
 		this.state = {
@@ -13,7 +14,7 @@ export default class GenresForm extends React.Component{
 		this.setState({name: e.target.value})
 	}
 
-	handleSubmit(){
+	handleSubmit(e){
 		e.preventDefault();
 		var newGenreObject = {}
 		newGenreObject.name = this.state.name
@@ -24,11 +25,11 @@ export default class GenresForm extends React.Component{
 	render(){
 	return(
 	<form onSubmit={this.handleSubmit.bind(this)}>
-		<div class="input-group">
+		<div className="input-group">
 			Genre name:
-		  <input type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} class="form-control" placeholder="genre name" />
+		  <input type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} className="form-control" placeholder="genre name" />
 		</div>
-	<input class="button btn-danger align-right" type="submit" value="Post"/>
+	<input className="button btn-danger align-right" type="submit" value="Post"/>
 	</form>
 
 		)

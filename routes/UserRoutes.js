@@ -1,8 +1,6 @@
 var User = require('../src/js/models/UserModel') 
-var express = require('express');
-var router = express.Router()
 
-module.exports = function(){
+module.exports = function(router){
 
 	router.route('/Users')
 	.get(function (req, res) { 
@@ -19,7 +17,7 @@ module.exports = function(){
 			var newUser = new User()
 						newUser.username = req.body.name
 						newUser.password = req.body.password
-						newUser.neighborhood = req.body.neighborhood
+						newUser.user_sub_neighborhood = req.body.sub_neighborhood
 						newUser.save(function() {
 							res.json(newUser)
 						})

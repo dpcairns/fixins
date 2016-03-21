@@ -5,9 +5,11 @@ export default class UserList extends React.Component{
 		let userNodes = this.props.allUsers.map(function(user){
 			return(
 				<li>
-					<li>Name: {user.name}</li>
-					<li> Password: {user.password}</li>
-					<li> Neighborhood: {user.neighborhood}</li>
+					<ul>
+						<li>Name: {user.username}</li>
+						<li> Password: {user.password}</li>
+						<li> Neighborhood: {user.user_sub_neighborhood}</li>
+					</ul>
 				</li>
 				)
 		})

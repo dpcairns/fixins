@@ -9,76 +9,121 @@ import ReviewForm from "./ReviewForm"
 import ReviewList from "./ReviewList"
 import CheckInForm from "./CheckInForm"
 import CheckInList from "./CheckInList"
+import GenreForm from "./GenreForm"
+import GenreList from "./GenreList"
 import NeighborhoodForm from "./NeighborhoodForm"
 import NeighborhoodList from "./NeighborhoodList"
 import SubNeighborhoodForm from "./SubNeighborhoodForm"
 import SubNeighborhoodList from "./SubNeighborhoodList"
-import FixinsActions from "../../actions/FixinsActions"
-
+import * as FixinsActions from "../../actions/FixinsActions"
+import FixinsStore from "../../stores/FixinsStore"
 
 export default class Admin extends React.Component{
 	constructor(){
 		super()
 		this.state={
-			allUsers: this.goFindUsers().bind(this),
-			allNeighborhoods: this.goFindNeighborhoods().bind(this),
-			allSubNeighborhoods: this.goFindSubNeighborhoods().bind(this),
-			allGenres: this.goFindGenres().bind(this),
-			allDishes: this.goFindDishes().bind(this),
-			allSpots: this.goFindSpots().bind(this),
-			allCheckIns: this.goFindCheckins().bind(this)
+			allUsers: [],
+			allNeighborhoods: [],
+			allSubNeighborhoods: [],
+			allReviews: [],
+			allGenres: [],
+			allDishes: [],
+			allSpots: [],
+			allCheckIns: []
 		}
 	}
 	goFindNeighborhoods(){
 		this.setState(
 			{
-				allNeighborhoods: FixinsActions.getNeighborhoodsFromStore()
+				allNeighborhoods: FixinsStore.getNeighborhoodsFromStore()
 			})
 		}
 
 	goFindSubNeighborhoods(){
 		this.setState(
 			{
-				allSubNeighborhoods: FixinsActions.getSubNeighborhoodsFromStore()
+				allSubNeighborhoods: FixinsStore.getSubNeighborhoodsFromStore()
 			})
 		}
 
 	goFindGenres(){
 		this.setState(
 			{
-				allGenres: FixinsActions.getGenresFromStore()
+				allGenres: FixinsStore.getGenresFromStore()
 			})
 		}
 
 	goFindDishes(){
 		this.setState(
 			{
-				allDishes: FixinsActions.getDishesFromStore()
+				allDishes: FixinsStore.getDishesFromStore()
 			})
 		}
 
 
 	goFindSpots(){
+		console.log("*********************goFindSpots was called********************")
 		this.setState(
 			{
-				allSpots: FixinsActions.getSpotsFromStore()
+				allSpots: FixinsStore.getSpotsFromStore()
+			})
+		console.log("=================Admin.goFindSpots.this.state.allSpots==================")
+				console.log(this.state.allSpots)
+
+		}
+
+	goFindCheckIns(){
+		this.setState(
+			{
+				allCheckins: FixinsStore.getCheckInsFromStore()
 			})
 		}
 
-	goFindCheckins(){
+
+	goFindUsers(){
 		this.setState(
 			{
-				allCheckins: FixinsActions.getCheckInsFromStore()
+				allUsers: FixinsStore.getUsersFromStore()
 			})
+				console.log("=================Admin.goFindUsers.this.state.allUsers==================")
+				console.log(this.state.allUsers)
 		}
+
 
 
 	goFindReviews(){
 		this.setState(
 			{
-				allReviews: FixinsActions.getReviewsFromStore()
+				allReviews: FixinsStore.getReviewsFromStore()
 			})
 		}
+
+	goFindEverything(){
+		this.setState(
+			{
+				allUsers: FixinsStore.getUsersFromStore(),
+
+				allGenres: FixinsStore.getGenresFromStore(),
+
+				allDishes: FixinsStore.getDishesFromStore(),
+
+				allSpots: FixinsStore.getSpotsFromStore(),
+	
+				allNeighborhoods: FixinsStore.getNeighborhoodsFromStore(),
+
+				allSubNeighborhoods: FixinsStore.getSubNeighborhoodsFromStore(),
+
+				allCheckIns: FixinsStore.getCheckInsFromStore(),
+
+				allReviews: FixinsStore.getReviewsFromStore()
+			})
+		console.log("okay everything is set______________________")
+		console.log(this.state)
+		}
+
+	componentDidMount(){
+		this.goFindEverything().bind(this)
+	}
 
 	componentWillMount(){
 		FixinsStore.on("changedReviews", this.goFindReviews.bind(this))
@@ -101,87 +146,131 @@ export default class Admin extends React.Component{
 	}
 
 	render(){
-
 	return(
 		<div>
-			<div class="container">
-				<div class="admin-user-box row">
-					<div class="admin-user-input col-md-6">
+			<div className="container">
+				<div className="admin-user-box row">
+					<div className="admin-user-input col-md-6">
+									<h2>New User</h2>
+
 						<UserForm allNeighborhoods={this.state.allNeighborhoods} />
 					</div>
-					<div class="admin-user-output col-md-6">
+					<div className="admin-user-output col-md-6">
+								<h2>All Users</h2>
+
 						<UserList allUsers={this.state.allUsers}/>
 					</div>
 				</div>
+			
+			<hr />
 
-				<div class="admin-spot-box row">
-					<div class="admin-spot-input col-md-6">
+				<div className="admin-spot-box row">
+					<div className="admin-spot-input col-md-6">
+									<h2>New Spot</h2>
+
 						<SpotForm allGenres={this.state.allGenres} 
 								allNeighborhoods={this.state.allNeighborhoods} 
 								allSubNeighborhoods={this.state.allSubNeighborhoods} />
 					</div>
-					<div class="admin-spot-output col-md-6">
+					<div className="admin-spot-output col-md-6">
+								<h2>All Spots</h2>
+
 						<SpotList allSpots={this.state.allSpots} />
 					</div>
 				</div>
 			
-				<div class="admin-dish-box row">
+			<hr />
 
-					<div class="admin-dish-input col-md-6">
+				<div className="admin-dish-box row">
+
+					<div className="admin-dish-input col-md-6">
+									<h2>New Dish</h2>
+
 						<DishForm allSpots={this.state.allSpots} 
 									allGenres={this.state.allGenres} />
 					</div>
-					<div class="admin-dish-output col-md-6">
+					<div className="admin-dish-output col-md-6">
+									<h2>All Dishes</h2>
+
 						<DishList allDishes={this.state.allDishes} />
 					</div>
 
 				</div>
 
-				<div class="admin-genres-box row">
-					<div class="admin-genres-input col-md-6">
-						<GenresForm />
+			<hr />
+
+				<div className="admin-genre-box row">
+					<div className="admin-genre-input col-md-6">
+									<h2>New Genre</h2>
+
+						<GenreForm />
 					</div>
 
-					<div class="admin-genres-output col-md-6">
-						<GenresList allGenres={this.state.allGenres} />
+					<div className="admin-genre-output col-md-6">
+							<h2>All Genres</h2>
+
+						<GenreList allGenres={this.state.allGenres} />
 					</div>
 				</div>
 				
-				<div class="admin-review-box row">
-					<div class="admin-review-input col-md-6">
+			<hr />
+
+				<div className="admin-review-box row">
+					<div className="admin-review-input col-md-6">
+									<h2>New Review</h2>
+
 						<ReviewForm allDishes={this.state.allDishes} 
 						allSpots={this.state.allSpots}/>
 					</div>
-					<div class="admin-review-output col-md-6">
+					<div className="admin-review-output col-md-6">
+							<h2>All Reviews</h2>
+
 						<ReviewList allReviews={this.state.allReviews} />
 					</div>
 				</div>
-				
-				<div class="admin-checkIn-box row">
-					<div class="admin-checkIn-input col-md-6">
+
+			<hr />
+
+				<div className="admin-checkIn-box row">
+					<div className="admin-checkIn-input col-md-6">
+									<h2>New CheckIn</h2>
+
 						<CheckInForm allSpots={this.state.allSpots} allDishes={this.state.allDishes}/>
 					</div>
-					<div class="admin-checkIn-output col-md-6">
+					<div className="admin-checkIn-output col-md-6">
+									<h2>All CheckIns</h2>
+
 						<CheckInList allCheckIns={this.state.allCheckIns}/>
 					</div>
 				</div>
+
+			<hr />
 				
-				<div class="admin-neighborhood-box row">
-					<div class="admin-neighborhood-input col-md-6">
+				<div className="admin-neighborhood-box row">
+					<div className="admin-neighborhood-input col-md-6">
+									<h2>New Neighborhood</h2>
+
 						<NeighborhoodForm />
 					</div>
 
-					<div class="admin-neighborhood-output col-md-6">
+					<div className="admin-neighborhood-output col-md-6">
+									<h2>All Neighborhoods</h2>
+
 						<NeighborhoodList allNeighborhoods={this.state.allNeighborhoods} />
 					</div>
 				</div>
 
-				<div class="admin-subNeighborhood-box row">
-					<div class="admin-subNeighborhood-input col-md-6">
+			<hr />
+
+				<div className="admin-subNeighborhood-box row">
+					<div className="admin-subNeighborhood-input col-md-6">
+									<h2>New Sub-Neighborhood</h2>
+
 						<SubNeighborhoodForm />
 					</div>
 
-					<div class="admin-subNeighborhood-output col-md-6">
+					<div className="admin-subNeighborhood-output col-md-6">
+									<h2>All Sub-Neighborhoods</h2>					
 						<SubNeighborhoodList allSubNeighborhoods={this.state.allSubNeighborhoods} />
 					</div>
 				</div>

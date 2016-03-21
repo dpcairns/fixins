@@ -1,9 +1,6 @@
 var Genre = require('../src/js/models/GenreModel')
-var express = require('express');
-var router = express.Router()
 
-
-module.exports = function(){
+module.exports = function(router){
 
 	router.route('/Genres')
 	.get(function (req, res) { 
@@ -18,7 +15,7 @@ module.exports = function(){
 	})
 	.post(function (req, res) { 
 			var newGenre = new Genre()
-						newGenre.Genre_name = req.body.name
+						newGenre.genre_name = req.body.name
 						newGenre.save(function() {
 							res.json(newGenre)
 						})

@@ -1,9 +1,7 @@
 var Dish = require('../src/js/models/DishModel') 
-var express = require('express');
-var router = express.Router()
 
 
-module.exports = function(){
+module.exports = function(router){
 router.route('/Dishes')
 	.get(function (req, res) { 
 		console.log('finding all Dishes in fixins')
@@ -17,16 +15,16 @@ router.route('/Dishes')
 	})
 	.post(function (req, res) {
 			var newDish = new Dish()
-						newDish.Dish_name = req.body.name
-						newDish.Dish_spot = req.body.spot
-						newDish.Dish_calories = req.body.calories
-						newDish.Dish_price = req.body.price
-						newDish.Dish_blurb = req.body.blurb
-						
-						newDish.save(function(err) {
-							newDish.Dish_genres = someGenre._id
-							newDish.Dish_spot = someSpot._id
+						newDish.dish_name = req.body.name
+						newDish.dish_spot = req.body.spot
+						newDish.dish_calories = req.body.calories
+						newDish.dish_price = req.body.price
+						newDish.dish_blurb = req.body.blurb
+						newDish.dish_genres = req.body.genres
+						newDish.dish_reviews = req.body.reviews
 
+						newDish.save(function(err) {
+							if(err){console.log("couldn't save dish")}
 							res.json(newDish)
 						})
 				})

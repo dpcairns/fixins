@@ -1,8 +1,6 @@
 var Spot = require('../src/js/models/SpotModel')
-var express = require('express');
-var router = express.Router()
 
-module.exports = function(){
+module.exports = function(router){
 
 	router.route('/Spots')
 	.get(function (req, res) { 
@@ -21,9 +19,7 @@ module.exports = function(){
 						newSpot.spot_blurb = req.body.blurb
 						newSpot.spot_genres = req.body.genres
 						newSpot.spot_coordinates = req.body.coordinates
-						newSpot.spot_neighborhood = req.body.neighborhood
-						newSpot.spot_subNeighborhood = req.body.subNeighborhood
-					
+						newSpot.spot_subNeighborhood = req.body.sub_neighborhood
 						newSpot.save(function() {
 							res.json(newSpot)
 						})

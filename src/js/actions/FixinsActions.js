@@ -140,10 +140,11 @@ export function initializeUsers(){
 		$.ajax({
 			url: "http://localhost:4444/api/Users",
 			type: 'GET',
-			success: function(){
+			dataType: "json",
+			success: function(data){
 						dispatcher.dispatch({
 								type: "FETCH_USERS",
-								allUsers
+								allUsers: data
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -152,14 +153,19 @@ export function initializeUsers(){
 		});
 	}
 
+
+
 export function initializeSpots(){
 		$.ajax({
 			url: "http://localhost:4444/api/Spots",
 			type: 'GET',
-			success: function(){
+			dataType: "json",
+			success: function(data){
+				console.log("ajax call on spots:")
+				console.log(data)
 						dispatcher.dispatch({
 								type: "FETCH_SPOTS",
-								allSpots
+								allSpots: data
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -172,10 +178,10 @@ export function initializeDishes(){
 		$.ajax({
 			url: "http://localhost:4444/api/Dishes",
 			type: 'GET',
-			success: function(){
+			success: function(data){
 						dispatcher.dispatch({
 								type: "FETCH_DISHES",
-								allDishes
+								allDishes: data
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -188,10 +194,10 @@ export function initializeReviews(){
 		$.ajax({
 			url: "http://localhost:4444/api/Reviews",
 			type: 'GET',
-			success: function(){
+			success: function(data){
 						dispatcher.dispatch({
 								type: "FETCH_REVIEWS",
-								allReviews
+								allReviews: data
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -203,10 +209,10 @@ export function initializeNeighborhoods(){
 		$.ajax({
 			url: "http://localhost:4444/api/Neighborhoods",
 			type: 'GET',
-			success: function(){
+			success: function(data){
 						dispatcher.dispatch({
 								type: "FETCH_NEIGHBORHOODS",
-								allNeighborhoods
+								allNeighborhoods: data
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -219,10 +225,10 @@ export function initializeSubNeighborhoods(){
 		$.ajax({
 			url: "http://localhost:4444/api/SubNeighborhoods",
 			type: 'GET',
-			success: function(){
+			success: function(data){
 						dispatcher.dispatch({
 								type: "FETCH_SUBNEIGHBORHOODS",
-								allSubNeighborhoods
+								allSubNeighborhoods: data
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -231,14 +237,14 @@ export function initializeSubNeighborhoods(){
 		});
 	}
 
-export function initializeGenres(){
+export function initializeGenres(data){
 		$.ajax({
 			url: "http://localhost:4444/api/Genres",
 			type: 'GET',
-			success: function(){
+			success: function(data){
 						dispatcher.dispatch({
 								type: "FETCH_GENRES",
-								allGenres
+								allGenres: data
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -248,14 +254,14 @@ export function initializeGenres(){
 	}
 
 
-export function initializeCheckIns(){
+export function initializeCheckIns(data){
 		$.ajax({
 			url: "http://localhost:4444/api/CheckIns",
 			type: 'GET',
 			success: function(){
 						dispatcher.dispatch({
 								type: "FETCH_CHECKINS",
-								allCheckIns
+								allCheckIns: data
 											});
 			}.bind(this),
 			error: function(xhr, status, err){

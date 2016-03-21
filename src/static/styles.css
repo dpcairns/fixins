@@ -1,0 +1,39 @@
+.admin-user-output{
+	height: 300px;
+	overflow-y: scroll;
+}
+
+.admin-dish-output{
+	height: 300px;
+	overflow-y: scroll;
+}
+
+.admin-spot-output{
+	height: 300px;
+	overflow-y: scroll;
+}
+
+.admin-subNeighborhood-output{
+	height: 300px;
+	overflow-y: scroll;
+}
+
+.admin-neighborhood-output{
+	height: 300px;
+	overflow-y: scroll;
+}
+
+.admin-genre-output{
+	height: 300px;
+	overflow-y: scroll;
+}
+
+.admin-review-output{
+	height: 300px;
+	overflow-y: scroll;
+}
+
+.admin-checkIn-output{
+	height: 300px;
+	overflow-y: scroll;	
+}

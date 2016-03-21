@@ -5,12 +5,14 @@ export default class DishList extends React.Component{
 		let dishNodes = this.props.allDishes.map(function(dish){
 			return(
 				<li>
-					<li>Dish Name: {dish.dish_name}</li>
-					<li> Dish Blurb {dish.dish_blurb}</li>
-					<li> Dish Genre: {dish.dish_genres}</li>
-					<li> Dish Price: {dish.dish_price}</li>
-					<li> Dish Calories: {dish.dish_calories}</li>
-					<li> Dish Spot: {dish.dish_spot}</li>
+					<ul>
+						<li>Dish Name: {dish.dish_name}</li>
+						<li> Dish Blurb {dish.dish_blurb}</li>
+						<li> Dish Genre: {dish.dish_genres}</li>
+						<li> Dish Price: {dish.dish_price}</li>
+						<li> Dish Calories: {dish.dish_calories}</li>
+						<li> Dish Spot: {dish.dish_spot}</li>
+					</ul>
 				</li>
 				)
 		})

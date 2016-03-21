@@ -41,9 +41,9 @@ var UserSchema = new Schema({
 				ref: 'Dish'
 			}
 		],
-	user_neighborhood: {
+	user_sub_neighborhood: {
 				type: Schema.Types.ObjectId,
-				ref: 'Neighborhood'
+				ref: 'SubNeighborhood'
 	}
 
 });

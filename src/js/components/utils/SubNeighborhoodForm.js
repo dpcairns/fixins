@@ -1,5 +1,6 @@
 import React from "react"
 import CustomDropdown from "./CustomDropdown"
+import * as FixinsActions from "../../actions/FixinsActions"
 
 export default class SubNeighborhoodForm extends React.Component{
 	constructor(){
@@ -14,7 +15,7 @@ export default class SubNeighborhoodForm extends React.Component{
 	}
 
 	handleSubmit(){
-		e.preventDefault();
+		e.preventDefault(e);
 		var newSubNeighborhoodObject = {}
 		newSubNeighborhoodObject.name = this.state.name
 		FixinsActions.createSubNeighbodrhood(newSubNeighborhoodObject)
@@ -24,11 +25,11 @@ export default class SubNeighborhoodForm extends React.Component{
 	render(){
 	return(
 	<form onSubmit={this.handleSubmit.bind(this)}>
-		<div class="input-group">
+		<div className="input-group">
 			Sub-Neighborhood name:
-		  <input type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} class="form-control" placeholder="sub-neighborhood name" />
+		  <input type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} className="form-control" placeholder="sub-neighborhood name" />
 		</div>
-	<input class="button btn-danger align-right" type="submit" value="Post"/>
+	<input className="button btn-danger align-right" type="submit" value="Post"/>
 	</form>
 
 		)

@@ -1,5 +1,6 @@
 import React from "react"
 import CustomDropdown from "./CustomDropdown"
+import * as FixinsActions from "../../actions/FixinsActions"
 
 export default class UserForm extends React.Component{
 	constructor(){
@@ -15,11 +16,11 @@ export default class UserForm extends React.Component{
 	this.setState({username: e.target.value})
 	}
 
-	handlePasswordChange(){
+	handlePasswordChange(e){
 	this.setState({password: e.target.value})
 	}
 
-	handleSubmit(){
+	handleSubmit(e){
 		e.preventDefault();
 		var newUserObject = {}
 		newUserObject.username = this.state.username
@@ -35,19 +36,19 @@ export default class UserForm extends React.Component{
 		<div>
 				<form onSubmit={this.handleSubmit.bind(this)}>
 
-		<div class="input-group">
+		<div className="input-group">
 			Username:
-		  <input type="text" value={this.state.username} onChange={this.handleUsernameChange.bind(this)} class="form-control" placeholder="username"/>
+		  <input type="text" value={this.state.username} onChange={this.handleUsernameChange.bind(this)} className="form-control" placeholder="username"/>
 		</div>
-		<div class="input-group">
+		<div className="input-group">
 			Password:
-		  <input type="password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)} class="form-control" placeholder="password"/>
+		  <input type="password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)} className="form-control" placeholder="password"/>
 		</div>
-		<div class="input-group">
+		<div className="input-group">
 			Neighborhood:
 			<CustomDropdown data={this.props.allNeighborhoods} nameName="neighborhood_name" />
 		</div>
-	<input class="button btn-danger align-right" type="submit" value="Post"/>
+	<input className="button btn-danger align-right" type="submit" value="Post"/>
 	</form>
 </div>
 

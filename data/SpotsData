@@ -1,0 +1,254 @@
+[
+  {
+    "_id": "56ef0777b43c052419146350",
+    "spot_subNeighborhood": "56eef04d979172801559c456",
+    "spot_name": "Lents Mexican Food",
+    "__v": 0,
+    "spot_checkIns": [],
+    "spot_reviews": [],
+    "spot_dishes": [],
+    "addDate": "2016-03-20T20:26:31.885Z",
+    "spot_coordinates": [
+      null,
+      null
+    ],
+    "spot_genres": [
+      "56ef0655b43c052419146342"
+    ],
+    "spot_blurb": "default spot blurb"
+  },
+  {
+    "_id": "56ef079bb43c052419146351",
+    "spot_subNeighborhood": "56eef3b2979172801559c481",
+    "spot_name": "East Columbia Italian Food",
+    "__v": 0,
+    "spot_checkIns": [],
+    "spot_reviews": [],
+    "spot_dishes": [],
+    "addDate": "2016-03-20T20:27:07.350Z",
+    "spot_coordinates": [
+      null,
+      null
+    ],
+    "spot_genres": [
+      "56ef065cb43c052419146343"
+    ],
+    "spot_blurb": "default spot blurb"
+  },
+  {
+    "_id": "56ef07b0b43c052419146352",
+    "spot_subNeighborhood": "56eef3d4979172801559c488",
+    "spot_name": "Sullivan's Gulch Carribian Food",
+    "__v": 0,
+    "spot_checkIns": [],
+    "spot_reviews": [],
+    "spot_dishes": [],
+    "addDate": "2016-03-20T20:27:28.044Z",
+    "spot_coordinates": [
+      null,
+      null
+    ],
+    "spot_genres": [
+      "56ef0660b43c052419146344"
+    ],
+    "spot_blurb": "default spot blurb"
+  },
+  {
+    "_id": "56ef07c5b43c052419146353",
+    "spot_subNeighborhood": "56eef0c7979172801559c460",
+    "spot_name": "Glenfair Ethipoian Food",
+    "__v": 0,
+    "spot_checkIns": [],
+    "spot_reviews": [],
+    "spot_dishes": [],
+    "addDate": "2016-03-20T20:27:49.070Z",
+    "spot_coordinates": [
+      null,
+      null
+    ],
+    "spot_genres": [
+      "56ef0666b43c052419146345"
+    ],
+    "spot_blurb": "default spot blurb"
+  },
+  {
+    "_id": "56ef07dab43c052419146354",
+    "spot_subNeighborhood": "56eef398979172801559c47d",
+    "spot_name": "Roseway Mediterranean Food",
+    "__v": 0,
+    "spot_checkIns": [],
+    "spot_reviews": [],
+    "spot_dishes": [],
+    "addDate": "2016-03-20T20:28:10.914Z",
+    "spot_coordinates": [
+      null,
+      null
+    ],
+    "spot_genres": [
+      "56ef066eb43c052419146346"
+    ],
+    "spot_blurb": "default spot blurb"
+  },
+  {
+    "_id": "56ef07fbb43c052419146355",
+    "spot_subNeighborhood": "56eef445979172801559c498",
+    "spot_name": "St. Johns Chinese Food",
+    "__v": 0,
+    "spot_checkIns": [],
+    "spot_reviews": [],
+    "spot_dishes": [],
+    "addDate": "2016-03-20T20:28:43.978Z",
+    "spot_coordinates": [
+      null,
+      null
+    ],
+    "spot_genres": [
+      "56ef0673b43c052419146347"
+    ],
+    "spot_blurb": "default spot blurb"
+  },
+  {
+    "_id": "56ef0815b43c052419146356",
+    "spot_subNeighborhood": "56eef508979172801559c4a6",
+    "spot_name": "Healy Heights Japanese Food",
+    "__v": 0,
+    "spot_checkIns": [],
+    "spot_reviews": [],
+    "spot_dishes": [],
+    "addDate": "2016-03-20T20:29:09.828Z",
+    "spot_coordinates": [
+      null,
+      null
+    ],
+    "spot_genres": [
+      "56ef0677b43c052419146348"
+    ],
+    "spot_blurb": "default spot blurb"
+  },
+  {
+    "_id": "56ef082db43c052419146357",
+    "spot_subNeighborhood": "56eef573979172801559c4b1",
+    "spot_name": "West Portland Park Korean Food",
+    "__v": 0,
+    "spot_checkIns": [],
+    "spot_reviews": [],
+    "spot_dishes": [],
+    "addDate": "2016-03-20T20:29:33.419Z",
+    "spot_coordinates": [
+      null,
+      null
+    ],
+    "spot_genres": [
+      "56ef067ab43c052419146349"
+    ],
+    "spot_blurb": "default spot blurb"
+  },
+  {
+    "_id": "56ef0844b43c052419146358",
+    "spot_subNeighborhood": "56eef5d7979172801559c4be",
+    "spot_name": "Richmond Junk Food",
+    "__v": 0,
+    "spot_checkIns": [],
+    "spot_reviews": [],
+    "spot_dishes": [],
+    "addDate": "2016-03-20T20:29:56.622Z",
+    "spot_coordinates": [
+      null,
+      null
+    ],
+    "spot_genres": [
+      "56ef067eb43c05241914634a"
+    ],
+    "spot_blurb": "default spot blurb"
+  },
+  {
+    "_id": "56ef0872b43c052419146359",
+    "spot_subNeighborhood": "56eef5e2979172801559c4bf",
+    "spot_name": "Foster Powell South American Food",
+    "__v": 0,
+    "spot_checkIns": [],
+    "spot_reviews": [],
+    "spot_dishes": [],
+    "addDate": "2016-03-20T20:30:42.311Z",
+    "spot_coordinates": [
+      null,
+      null
+    ],
+    "spot_genres": [
+      "56ef06a8b43c05241914634d"
+    ],
+    "spot_blurb": "default spot blurb"
+  },
+  {
+    "_id": "56ef0889b43c05241914635a",
+    "spot_subNeighborhood": "56eef4f1979172801559c4a3",
+    "spot_name": "Downtown Thai Food",
+    "__v": 0,
+    "spot_checkIns": [],
+    "spot_reviews": [],
+    "spot_dishes": [],
+    "addDate": "2016-03-20T20:31:05.533Z",
+    "spot_coordinates": [
+      null,
+      null
+    ],
+    "spot_genres": [
+      "56ef06b2b43c05241914634f"
+    ],
+    "spot_blurb": "default spot blurb"
+  },
+  {
+    "_id": "56ef08a0b43c05241914635b",
+    "spot_subNeighborhood": "56eef456979172801559c49b",
+    "spot_name": "Overlook Senegalese Food",
+    "__v": 0,
+    "spot_checkIns": [],
+    "spot_reviews": [],
+    "spot_dishes": [],
+    "addDate": "2016-03-20T20:31:28.834Z",
+    "spot_coordinates": [
+      null,
+      null
+    ],
+    "spot_genres": [
+      "56ef06aeb43c05241914634e"
+    ],
+    "spot_blurb": "default spot blurb"
+  },
+  {
+    "_id": "56ef08b5b43c05241914635c",
+    "spot_subNeighborhood": "56eef3fe979172801559c490",
+    "spot_name": "Vernon Vegan Food",
+    "__v": 0,
+    "spot_checkIns": [],
+    "spot_reviews": [],
+    "spot_dishes": [],
+    "addDate": "2016-03-20T20:31:49.470Z",
+    "spot_coordinates": [
+      null,
+      null
+    ],
+    "spot_genres": [
+      "56ef0685b43c05241914634b"
+    ],
+    "spot_blurb": "default spot blurb"
+  },
+  {
+    "_id": "56ef08cdb43c05241914635d",
+    "spot_subNeighborhood": "56eef3cf979172801559c487",
+    "spot_name": "Lloyd District Indian Food",
+    "__v": 0,
+    "spot_checkIns": [],
+    "spot_reviews": [],
+    "spot_dishes": [],
+    "addDate": "2016-03-20T20:32:13.607Z",
+    "spot_coordinates": [
+      null,
+      null
+    ],
+    "spot_genres": [
+      "56ef069ab43c05241914634c"
+    ],
+    "spot_blurb": "default spot blurb"
+  }
+]
