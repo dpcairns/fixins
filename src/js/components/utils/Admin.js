@@ -62,13 +62,12 @@ export default class Admin extends React.Component{
 
 
 	goFindSpots(){
-		console.log("*********************goFindSpots was called********************")
 		this.setState(
 			{
 				allSpots: FixinsStore.getSpotsFromStore()
-			})
-		console.log("=================Admin.goFindSpots.this.state.allSpots==================")
-				console.log(this.state.allSpots)
+			}
+
+			)
 
 		}
 
@@ -84,9 +83,8 @@ export default class Admin extends React.Component{
 		this.setState(
 			{
 				allUsers: FixinsStore.getUsersFromStore()
-			})
-				console.log("=================Admin.goFindUsers.this.state.allUsers==================")
-				console.log(this.state.allUsers)
+			}
+			)
 		}
 
 
@@ -102,27 +100,20 @@ export default class Admin extends React.Component{
 		this.setState(
 			{
 				allUsers: FixinsStore.getUsersFromStore(),
-
-				allGenres: FixinsStore.getGenresFromStore(),
-
-				allDishes: FixinsStore.getDishesFromStore(),
-
 				allSpots: FixinsStore.getSpotsFromStore(),
-	
-				allNeighborhoods: FixinsStore.getNeighborhoodsFromStore(),
-
+		//		allCheckins: FixinsStore.getCheckInsFromStore(),
+		//		allDishes: FixinsStore.getDishesFromStore(),
 				allSubNeighborhoods: FixinsStore.getSubNeighborhoodsFromStore(),
+				allNeighborhoods: FixinsStore.getNeighborhoodsFromStore(),
+		//		allReviews: FixinsStore.getReviewsFromStore(),
+				allGenres: FixinsStore.getGenresFromStore()
+			}
 
-				allCheckIns: FixinsStore.getCheckInsFromStore(),
-
-				allReviews: FixinsStore.getReviewsFromStore()
-			})
-		console.log("okay everything is set______________________")
-		console.log(this.state)
-		}
+		)
+	}
 
 	componentDidMount(){
-		this.goFindEverything().bind(this)
+		this.goFindEverything()
 	}
 
 	componentWillMount(){
@@ -153,12 +144,14 @@ export default class Admin extends React.Component{
 					<div className="admin-user-input col-md-6">
 									<h2>New User</h2>
 
-						<UserForm allNeighborhoods={this.state.allNeighborhoods} />
+						<UserForm 
+						allSubNeighborhoods={this.state.allSubNeighborhoods} />
 					</div>
 					<div className="admin-user-output col-md-6">
 								<h2>All Users</h2>
 
-						<UserList allUsers={this.state.allUsers}/>
+						<UserList 
+						allUsers={this.state.allUsers}/>
 					</div>
 				</div>
 			
@@ -168,14 +161,16 @@ export default class Admin extends React.Component{
 					<div className="admin-spot-input col-md-6">
 									<h2>New Spot</h2>
 
-						<SpotForm allGenres={this.state.allGenres} 
+						<SpotForm 
+						allGenres={this.state.allGenres} 
 								allNeighborhoods={this.state.allNeighborhoods} 
 								allSubNeighborhoods={this.state.allSubNeighborhoods} />
 					</div>
 					<div className="admin-spot-output col-md-6">
 								<h2>All Spots</h2>
 
-						<SpotList allSpots={this.state.allSpots} />
+						<SpotList 
+						allSpots={this.state.allSpots} />
 					</div>
 				</div>
 			
@@ -186,13 +181,15 @@ export default class Admin extends React.Component{
 					<div className="admin-dish-input col-md-6">
 									<h2>New Dish</h2>
 
-						<DishForm allSpots={this.state.allSpots} 
+						<DishForm 
+						allSpots={this.state.allSpots} 
 									allGenres={this.state.allGenres} />
 					</div>
 					<div className="admin-dish-output col-md-6">
 									<h2>All Dishes</h2>
 
-						<DishList allDishes={this.state.allDishes} />
+						<DishList 
+						allDishes={this.state.allDishes} />
 					</div>
 
 				</div>
@@ -209,7 +206,8 @@ export default class Admin extends React.Component{
 					<div className="admin-genre-output col-md-6">
 							<h2>All Genres</h2>
 
-						<GenreList allGenres={this.state.allGenres} />
+						<GenreList 
+						allGenres={this.state.allGenres} />
 					</div>
 				</div>
 				
@@ -219,13 +217,15 @@ export default class Admin extends React.Component{
 					<div className="admin-review-input col-md-6">
 									<h2>New Review</h2>
 
-						<ReviewForm allDishes={this.state.allDishes} 
+						<ReviewForm 
+						allDishes={this.state.allDishes} 
 						allSpots={this.state.allSpots}/>
 					</div>
 					<div className="admin-review-output col-md-6">
 							<h2>All Reviews</h2>
 
-						<ReviewList allReviews={this.state.allReviews} />
+						<ReviewList 
+						allReviews={this.state.allReviews} />
 					</div>
 				</div>
 
@@ -235,12 +235,15 @@ export default class Admin extends React.Component{
 					<div className="admin-checkIn-input col-md-6">
 									<h2>New CheckIn</h2>
 
-						<CheckInForm allSpots={this.state.allSpots} allDishes={this.state.allDishes}/>
+						<CheckInForm
+						 allSpots={this.state.allSpots} 
+						allDishes={this.state.allDishes}/>
 					</div>
 					<div className="admin-checkIn-output col-md-6">
 									<h2>All CheckIns</h2>
 
-						<CheckInList allCheckIns={this.state.allCheckIns}/>
+						<CheckInList 
+						allCheckIns={this.state.allCheckIns}/>
 					</div>
 				</div>
 
@@ -256,7 +259,8 @@ export default class Admin extends React.Component{
 					<div className="admin-neighborhood-output col-md-6">
 									<h2>All Neighborhoods</h2>
 
-						<NeighborhoodList allNeighborhoods={this.state.allNeighborhoods} />
+						<NeighborhoodList 
+						allNeighborhoods={this.state.allNeighborhoods} />
 					</div>
 				</div>
 
@@ -266,12 +270,14 @@ export default class Admin extends React.Component{
 					<div className="admin-subNeighborhood-input col-md-6">
 									<h2>New Sub-Neighborhood</h2>
 
-						<SubNeighborhoodForm />
+						<SubNeighborhoodForm 
+						allNeighborhoods={this.state.allNeighborhoods}/>
 					</div>
 
 					<div className="admin-subNeighborhood-output col-md-6">
 									<h2>All Sub-Neighborhoods</h2>					
-						<SubNeighborhoodList allSubNeighborhoods={this.state.allSubNeighborhoods} />
+						<SubNeighborhoodList
+						 allSubNeighborhoods={this.state.allSubNeighborhoods} />
 					</div>
 				</div>
 			</div>

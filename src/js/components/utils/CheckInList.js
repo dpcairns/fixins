@@ -4,7 +4,7 @@ export default class CheckInList extends React.Component{
 	render(){
 		let checkInNodes = this.props.allCheckIns.map(function(checkIn){
 			return(
-				<li>
+				<li key={checkIn._id}>
 					<ul>
 						<li>Spot: {checkIn.spot}</li>
 						<li>Dish: {checkIn.dish}</li>

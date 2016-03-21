@@ -16,9 +16,7 @@ module.exports = function(router){
 	.post(function (req, res) {
 			var newSpot = new Spot()
 						newSpot.spot_name = req.body.name
-						newSpot.spot_blurb = req.body.blurb
 						newSpot.spot_genres = req.body.genres
-						newSpot.spot_coordinates = req.body.coordinates
 						newSpot.spot_subNeighborhood = req.body.sub_neighborhood
 						newSpot.save(function() {
 							res.json(newSpot)

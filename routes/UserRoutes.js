@@ -17,7 +17,7 @@ module.exports = function(router){
 			var newUser = new User()
 						newUser.username = req.body.name
 						newUser.password = req.body.password
-						newUser.user_sub_neighborhood = req.body.sub_neighborhood
+						newUser.user_sub_neighborhood = req.body.user_sub_neighborhood
 						newUser.save(function() {
 							res.json(newUser)
 						})

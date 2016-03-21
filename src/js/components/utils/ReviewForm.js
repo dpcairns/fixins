@@ -26,7 +26,7 @@ export default class ReviewForm extends React.Component{
 	}	
 
 	handleStarsChange(e){
-		this.setState({calories: e.target.value})
+		this.setState({stars: e.target.value})
 	}	
 
 
@@ -47,18 +47,22 @@ export default class ReviewForm extends React.Component{
 	<form onSubmit={this.handleSubmit.bind(this)}>
 		<div className="input-group">
 			Words:
-		  <input type="text" value={this.state.words} onChange={this.handleWordsChange.bind(this)} className="form-control" placeholder="words of review"/>
+		  <input 
+		  type="text" 
+		  value={this.state.words} 
+		  onChange={this.handleWordsChange.bind(this)} 
+		  className="form-control" 
+		  placeholder="words of review"/>
 		</div>
 
 		<div className="input-group">
 			Number of stars:
-		  <input type="number" min="0" max="5" value={this.state.stars} onChange={this.handleStarsChange.bind(this)} className="form-control" />
+		  <input type="number" min="0" max="5" 
+		  	value={this.state.stars} 
+		  	onChange={this.handleStarsChange.bind(this)} 
+		  	className="form-control" />
 		</div>
 
-		///missing
-	
-
-		
 		}
 
 	<input className="button btn-danger align-right" type="submit" value="Post"/>

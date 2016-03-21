@@ -21,7 +21,10 @@ var DishSchema = new Schema({
 		type: Number,
 		required: true
 	},
-	dish_blurb: String,
+	dish_blurb: {
+		type:String,
+		defualt: "a really yummy, really dense dish for cheap"
+	},
 	dish_reviews:
 		[
 			{

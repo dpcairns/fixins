@@ -4,7 +4,9 @@ export default class GenresList extends React.Component{
 	render(){
 		let genresNodes = this.props.allGenres.map(function(genre){
 			return(
-				<li>Name: {genre.genre_name}</li>
+				<li key={genre._id}>
+					Name: {genre.genre_name}
+				</li>
 				)
 		})
 	return(

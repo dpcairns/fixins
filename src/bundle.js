@@ -24988,6 +24988,7 @@
 	exports.initializeSubNeighborhoods = initializeSubNeighborhoods;
 	exports.initializeGenres = initializeGenres;
 	exports.initializeCheckIns = initializeCheckIns;
+	exports.removeUser = removeUser;
 
 	var _dispatcher = __webpack_require__(221);
 
@@ -25000,10 +25001,12 @@
 			url: "http://localhost:4444/api/Users",
 			type: 'POST',
 			data: newUser,
-			success: function () {
+			success: function (postedUser) {
+				console.log("trying to make a user");
+				console.log(postedUser);
 				_dispatcher2.default.dispatch({
 					type: "CREATE_USER",
-					newUser: newUser
+					postedUser: postedUser
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25017,10 +25020,10 @@
 			url: "http://localhost:4444/api/Spots",
 			type: 'POST',
 			data: newSpot,
-			success: function () {
+			success: function (postedSpot) {
 				_dispatcher2.default.dispatch({
 					type: "CREATE_SPOT",
-					newSpot: newSpot
+					postedSpot: postedSpot
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25034,10 +25037,10 @@
 			url: "http://localhost:4444/api/Dishes",
 			type: 'POST',
 			data: newDish,
-			success: function () {
+			success: function (postedDish) {
 				_dispatcher2.default.dispatch({
 					type: "CREATE_DISH",
-					newDish: newDish
+					postedDish: postedDish
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25051,10 +25054,10 @@
 			url: "http://localhost:4444/api/Reviews",
 			type: 'POST',
 			data: newReview,
-			success: function () {
+			success: function (postedReview) {
 				_dispatcher2.default.dispatch({
 					type: "CREATE_REVIEW",
-					newReview: newReview
+					postedReview: postedReview
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25067,10 +25070,10 @@
 			url: "http://localhost:4444/api/Neighborhoods",
 			type: 'POST',
 			data: newNeighborhood,
-			success: function () {
+			success: function (postedNeighborhood) {
 				_dispatcher2.default.dispatch({
 					type: "CREATE_NEIGHBORHOOD",
-					newNeighborhood: newNeighborhood
+					postedNeighborhood: postedNeighborhood
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25084,10 +25087,10 @@
 			url: "http://localhost:4444/api/SubNeighborhoods",
 			type: 'POST',
 			data: newSubNeighborhood,
-			success: function () {
+			success: function (postedSubNeighborhood) {
 				_dispatcher2.default.dispatch({
 					type: "CREATE_SUBNEIGHBORHOOD",
-					newSubNeighborhood: newSubNeighborhood
+					postedSubNeighborhood: postedSubNeighborhood
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25101,10 +25104,10 @@
 			url: "http://localhost:4444/api/Genres",
 			type: 'POST',
 			data: newGenre,
-			success: function () {
+			success: function (postedGenre) {
 				_dispatcher2.default.dispatch({
 					type: "CREATE_GENRE",
-					newGenre: newGenre
+					postedGenre: postedGenre
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25118,10 +25121,10 @@
 			url: "http://localhost:4444/api/CheckIns",
 			type: 'POST',
 			data: newCheckIn,
-			success: function () {
+			success: function (postedCheckIn) {
 				_dispatcher2.default.dispatch({
 					type: "CREATE_CHECKIN",
-					newCheckIn: newCheckIn
+					postedCheckIn: postedCheckIn
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25153,8 +25156,6 @@
 			type: 'GET',
 			dataType: "json",
 			success: function (data) {
-				console.log("ajax call on spots:");
-				console.log(data);
 				_dispatcher2.default.dispatch({
 					type: "FETCH_SPOTS",
 					allSpots: data
@@ -25170,6 +25171,7 @@
 		$.ajax({
 			url: "http://localhost:4444/api/Dishes",
 			type: 'GET',
+			dataType: "json",
 			success: function (data) {
 				_dispatcher2.default.dispatch({
 					type: "FETCH_DISHES",
@@ -25186,6 +25188,7 @@
 		$.ajax({
 			url: "http://localhost:4444/api/Reviews",
 			type: 'GET',
+			dataType: "json",
 			success: function (data) {
 				_dispatcher2.default.dispatch({
 					type: "FETCH_REVIEWS",
@@ -25201,6 +25204,7 @@
 		$.ajax({
 			url: "http://localhost:4444/api/Neighborhoods",
 			type: 'GET',
+			dataType: "json",
 			success: function (data) {
 				_dispatcher2.default.dispatch({
 					type: "FETCH_NEIGHBORHOODS",
@@ -25217,6 +25221,7 @@
 		$.ajax({
 			url: "http://localhost:4444/api/SubNeighborhoods",
 			type: 'GET',
+			dataType: "json",
 			success: function (data) {
 				_dispatcher2.default.dispatch({
 					type: "FETCH_SUBNEIGHBORHOODS",
@@ -25233,6 +25238,7 @@
 		$.ajax({
 			url: "http://localhost:4444/api/Genres",
 			type: 'GET',
+			dataType: "json",
 			success: function (data) {
 				_dispatcher2.default.dispatch({
 					type: "FETCH_GENRES",
@@ -25249,6 +25255,7 @@
 		$.ajax({
 			url: "http://localhost:4444/api/CheckIns",
 			type: 'GET',
+			dataType: "json",
 			success: function () {
 				_dispatcher2.default.dispatch({
 					type: "FETCH_CHECKINS",
@@ -25257,6 +25264,23 @@
 			}.bind(this),
 			error: function (xhr, status, err) {
 				console.error('./CheckIns', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+	function removeUser(userID) {
+		$.ajax({
+			url: "http://localhost:4444/api/Users/" + userID,
+			type: 'DELETE',
+			success: function (postedUser) {
+				console.log("user probably deleted");
+				_dispatcher2.default.dispatch({
+					type: "REMOVE_USER",
+					postedUser: postedUser
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./Users', status, err.toString());
 			}.bind(this)
 		});
 	}
@@ -25787,12 +25811,9 @@
 		}, {
 			key: "goFindSpots",
 			value: function goFindSpots() {
-				console.log("*********************goFindSpots was called********************");
 				this.setState({
 					allSpots: _FixinsStore2.default.getSpotsFromStore()
 				});
-				console.log("=================Admin.goFindSpots.this.state.allSpots==================");
-				console.log(this.state.allSpots);
 			}
 		}, {
 			key: "goFindCheckIns",
@@ -25807,8 +25828,6 @@
 				this.setState({
 					allUsers: _FixinsStore2.default.getUsersFromStore()
 				});
-				console.log("=================Admin.goFindUsers.this.state.allUsers==================");
-				console.log(this.state.allUsers);
 			}
 		}, {
 			key: "goFindReviews",
@@ -25822,28 +25841,19 @@
 			value: function goFindEverything() {
 				this.setState({
 					allUsers: _FixinsStore2.default.getUsersFromStore(),
-
-					allGenres: _FixinsStore2.default.getGenresFromStore(),
-
-					allDishes: _FixinsStore2.default.getDishesFromStore(),
-
 					allSpots: _FixinsStore2.default.getSpotsFromStore(),
-
-					allNeighborhoods: _FixinsStore2.default.getNeighborhoodsFromStore(),
-
+					//		allCheckins: FixinsStore.getCheckInsFromStore(),
+					//		allDishes: FixinsStore.getDishesFromStore(),
 					allSubNeighborhoods: _FixinsStore2.default.getSubNeighborhoodsFromStore(),
-
-					allCheckIns: _FixinsStore2.default.getCheckInsFromStore(),
-
-					allReviews: _FixinsStore2.default.getReviewsFromStore()
+					allNeighborhoods: _FixinsStore2.default.getNeighborhoodsFromStore(),
+					//		allReviews: FixinsStore.getReviewsFromStore(),
+					allGenres: _FixinsStore2.default.getGenresFromStore()
 				});
-				console.log("okay everything is set______________________");
-				console.log(this.state);
 			}
 		}, {
 			key: "componentDidMount",
 			value: function componentDidMount() {
-				this.goFindEverything().bind(this);
+				this.goFindEverything();
 			}
 		}, {
 			key: "componentWillMount",
@@ -25887,7 +25897,8 @@
 									null,
 									"New User"
 								),
-								_react2.default.createElement(_UserForm2.default, { allNeighborhoods: this.state.allNeighborhoods })
+								_react2.default.createElement(_UserForm2.default, {
+									allSubNeighborhoods: this.state.allSubNeighborhoods })
 							),
 							_react2.default.createElement(
 								"div",
@@ -25897,7 +25908,8 @@
 									null,
 									"All Users"
 								),
-								_react2.default.createElement(_UserList2.default, { allUsers: this.state.allUsers })
+								_react2.default.createElement(_UserList2.default, {
+									allUsers: this.state.allUsers })
 							)
 						),
 						_react2.default.createElement("hr", null),
@@ -25912,7 +25924,8 @@
 									null,
 									"New Spot"
 								),
-								_react2.default.createElement(_SpotForm2.default, { allGenres: this.state.allGenres,
+								_react2.default.createElement(_SpotForm2.default, {
+									allGenres: this.state.allGenres,
 									allNeighborhoods: this.state.allNeighborhoods,
 									allSubNeighborhoods: this.state.allSubNeighborhoods })
 							),
@@ -25924,7 +25937,8 @@
 									null,
 									"All Spots"
 								),
-								_react2.default.createElement(_SpotList2.default, { allSpots: this.state.allSpots })
+								_react2.default.createElement(_SpotList2.default, {
+									allSpots: this.state.allSpots })
 							)
 						),
 						_react2.default.createElement("hr", null),
@@ -25939,7 +25953,8 @@
 									null,
 									"New Dish"
 								),
-								_react2.default.createElement(_DishForm2.default, { allSpots: this.state.allSpots,
+								_react2.default.createElement(_DishForm2.default, {
+									allSpots: this.state.allSpots,
 									allGenres: this.state.allGenres })
 							),
 							_react2.default.createElement(
@@ -25950,7 +25965,8 @@
 									null,
 									"All Dishes"
 								),
-								_react2.default.createElement(_DishList2.default, { allDishes: this.state.allDishes })
+								_react2.default.createElement(_DishList2.default, {
+									allDishes: this.state.allDishes })
 							)
 						),
 						_react2.default.createElement("hr", null),
@@ -25975,7 +25991,8 @@
 									null,
 									"All Genres"
 								),
-								_react2.default.createElement(_GenreList2.default, { allGenres: this.state.allGenres })
+								_react2.default.createElement(_GenreList2.default, {
+									allGenres: this.state.allGenres })
 							)
 						),
 						_react2.default.createElement("hr", null),
@@ -25990,7 +26007,8 @@
 									null,
 									"New Review"
 								),
-								_react2.default.createElement(_ReviewForm2.default, { allDishes: this.state.allDishes,
+								_react2.default.createElement(_ReviewForm2.default, {
+									allDishes: this.state.allDishes,
 									allSpots: this.state.allSpots })
 							),
 							_react2.default.createElement(
@@ -26001,7 +26019,8 @@
 									null,
 									"All Reviews"
 								),
-								_react2.default.createElement(_ReviewList2.default, { allReviews: this.state.allReviews })
+								_react2.default.createElement(_ReviewList2.default, {
+									allReviews: this.state.allReviews })
 							)
 						),
 						_react2.default.createElement("hr", null),
@@ -26016,7 +26035,9 @@
 									null,
 									"New CheckIn"
 								),
-								_react2.default.createElement(_CheckInForm2.default, { allSpots: this.state.allSpots, allDishes: this.state.allDishes })
+								_react2.default.createElement(_CheckInForm2.default, {
+									allSpots: this.state.allSpots,
+									allDishes: this.state.allDishes })
 							),
 							_react2.default.createElement(
 								"div",
@@ -26026,7 +26047,8 @@
 									null,
 									"All CheckIns"
 								),
-								_react2.default.createElement(_CheckInList2.default, { allCheckIns: this.state.allCheckIns })
+								_react2.default.createElement(_CheckInList2.default, {
+									allCheckIns: this.state.allCheckIns })
 							)
 						),
 						_react2.default.createElement("hr", null),
@@ -26051,7 +26073,8 @@
 									null,
 									"All Neighborhoods"
 								),
-								_react2.default.createElement(_NeighborhoodList2.default, { allNeighborhoods: this.state.allNeighborhoods })
+								_react2.default.createElement(_NeighborhoodList2.default, {
+									allNeighborhoods: this.state.allNeighborhoods })
 							)
 						),
 						_react2.default.createElement("hr", null),
@@ -26066,7 +26089,8 @@
 									null,
 									"New Sub-Neighborhood"
 								),
-								_react2.default.createElement(_SubNeighborhoodForm2.default, null)
+								_react2.default.createElement(_SubNeighborhoodForm2.default, {
+									allNeighborhoods: this.state.allNeighborhoods })
 							),
 							_react2.default.createElement(
 								"div",
@@ -26076,7 +26100,8 @@
 									null,
 									"All Sub-Neighborhoods"
 								),
-								_react2.default.createElement(_SubNeighborhoodList2.default, { allSubNeighborhoods: this.state.allSubNeighborhoods })
+								_react2.default.createElement(_SubNeighborhoodList2.default, {
+									allSubNeighborhoods: this.state.allSubNeighborhoods })
 							)
 						)
 					)
@@ -26134,7 +26159,7 @@
 			_this.state = {
 				username: '',
 				password: '',
-				neighborhood: ''
+				user_sub_neighborhood: ''
 			};
 			return _this;
 		}
@@ -26142,6 +26167,8 @@
 		_createClass(UserForm, [{
 			key: "handleUsernameChange",
 			value: function handleUsernameChange(e) {
+				console.log(this.state.username);
+
 				this.setState({ username: e.target.value });
 			}
 		}, {
@@ -26150,15 +26177,21 @@
 				this.setState({ password: e.target.value });
 			}
 		}, {
+			key: "handleSubNeighborhoodChange",
+			value: function handleSubNeighborhoodChange(e) {
+				this.setState({ user_sub_neighborhood: e.target.value });
+				console.log(this.state.user_sub_neighborhood);
+			}
+		}, {
 			key: "handleSubmit",
 			value: function handleSubmit(e) {
 				e.preventDefault();
-				var newUserObject = {};
-				newUserObject.username = this.state.username;
-				newUserObject.password = this.state.password;
-				newUserObject.neighborhood = this.state.neighborhood;
-				FixinsActions.createUser(newUserObject);
-				this.setState({ username: "", password: "", neighborhood: "" });
+				var newUser = {};
+				newUser.name = this.state.username;
+				newUser.password = this.state.password;
+				newUser.user_sub_neighborhood = this.state.user_sub_neighborhood;
+				FixinsActions.createUser(newUser);
+				this.setState({ username: "", password: "", user_sub_neighborhood: "" });
 			}
 		}, {
 			key: "render",
@@ -26184,8 +26217,11 @@
 						_react2.default.createElement(
 							"div",
 							{ className: "input-group" },
-							"Neighborhood:",
-							_react2.default.createElement(_CustomDropdown2.default, { data: this.props.allNeighborhoods, nameName: "neighborhood_name" })
+							"Sub-Neighborhood:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.user_sub_neighborhood,
+								onchange2: this.handleSubNeighborhoodChange.bind(this),
+								data: this.props.allSubNeighborhoods,
+								nameName: "subNeighborhood_name" })
 						),
 						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Post" })
 					)
@@ -26234,24 +26270,18 @@
 		_createClass(CustomDropdown, [{
 			key: "render",
 			value: function render() {
-				console.log("here are the props for CustomDropdown");
-				console.log(this.props);
+				var nameName = this.props.nameName;
 				var optionNodes = this.props.data.map(function (item) {
 					return _react2.default.createElement(
 						"option",
-						{ key: item.key, value: item[this.props.nameName], defaultValue: item[this.props.nameName], selected: true, disabled: true },
-						item[this.props.nameName]
+						{ key: item._id, value: item._id },
+						item[nameName]
 					);
 				});
 
 				return _react2.default.createElement(
 					"select",
-					{ value: this.props.setValueTo, className: "form-control" },
-					_react2.default.createElement(
-						"option",
-						{ value: "", disabled: true },
-						"Pick one"
-					),
+					{ onChange: this.props.onchange2, defaultValue: "choose one", className: "form-control" },
 					optionNodes
 				);
 			}
@@ -26259,6 +26289,16 @@
 
 		return CustomDropdown;
 	}(_react2.default.Component);
+	/*
+		<div className="input-group">
+				Neighborhood:
+				<CustomDropdown setValueTo={this.state.neighborhood} 
+				onChange={this.handleNeighborhoodChange.bind(this)} 
+				data={this.props.allNeighborhoods} 
+				nameName="neighborhood_name" />
+			</div>
+	*/
+
 
 	exports.default = CustomDropdown;
 
@@ -26278,6 +26318,12 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _FixinsActions = __webpack_require__(220);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26296,12 +26342,19 @@
 		}
 
 		_createClass(UserList, [{
+			key: "removeUser",
+			value: function removeUser(UserId) {
+				FixinsActions.removeUser(UserId);
+			}
+		}, {
 			key: "render",
 			value: function render() {
+
+				var removeUser = this.removeUser;
 				var userNodes = this.props.allUsers.map(function (user) {
 					return _react2.default.createElement(
 						"li",
-						null,
+						{ key: user._id },
 						_react2.default.createElement(
 							"ul",
 							null,
@@ -26465,13 +26518,7 @@
 							"div",
 							{ className: "input-group" },
 							"Genres:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.genres, onChange: this.handleGenresChange.bind(this), data: this.props.allGenres, nameName: "genre_name" })
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Neighborhood:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.neighborhood, onChange: this.handleNeighborhoodChange.bind(this), data: this.props.allNeighborhoods, nameName: "neighborhood_name" })
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.genres, onchange2: this.handleGenresChange.bind(this), data: this.props.allGenres, nameName: "genre_name" })
 						),
 						_react2.default.createElement(
 							"div",
@@ -26526,13 +26573,11 @@
 		_createClass(SpotList, [{
 			key: "render",
 			value: function render() {
-				console.log("SpotList.this.props");
-				console.log(this.props);
 
 				var spotNodes = this.props.allSpots.map(function (spot) {
 					return _react2.default.createElement(
 						"li",
-						null,
+						{ key: spot._id },
 						_react2.default.createElement(
 							"ul",
 							null,
@@ -26626,13 +26671,13 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var SpotForm = function (_React$Component) {
-		_inherits(SpotForm, _React$Component);
+	var DishForm = function (_React$Component) {
+		_inherits(DishForm, _React$Component);
 
-		function SpotForm() {
-			_classCallCheck(this, SpotForm);
+		function DishForm() {
+			_classCallCheck(this, DishForm);
 
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SpotForm).call(this));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DishForm).call(this));
 
 			_this.state = {
 				name: '',
@@ -26645,7 +26690,7 @@
 			return _this;
 		}
 
-		_createClass(SpotForm, [{
+		_createClass(DishForm, [{
 			key: "handleNameChange",
 			value: function handleNameChange(e) {
 				this.setState({ name: e.target.value });
@@ -26726,13 +26771,13 @@
 							"div",
 							{ className: "input-group" },
 							"Genres:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.genres, onChange: this.handleGenresChange.bind(this), data: this.props.allGenres, nameName: "genre_name" })
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.genres, onchange2: this.handleGenresChange.bind(this), data: this.props.allGenres, nameName: "genre_name" })
 						),
 						_react2.default.createElement(
 							"div",
 							{ className: "input-group" },
 							"Spot:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.spot, onChange: this.handleSpotChange.bind(this), data: this.props.allSpots, nameName: "spot_name" })
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.spot, onchange2: this.handleSpotChange.bind(this), data: this.props.allSpots, nameName: "spot_name" })
 						),
 						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Post" })
 					)
@@ -26740,10 +26785,10 @@
 			}
 		}]);
 
-		return SpotForm;
+		return DishForm;
 	}(_react2.default.Component);
 
-	exports.default = SpotForm;
+	exports.default = DishForm;
 
 /***/ },
 /* 233 */
@@ -26784,7 +26829,7 @@
 				var dishNodes = this.props.allDishes.map(function (dish) {
 					return _react2.default.createElement(
 						"li",
-						null,
+						{ key: dish._id },
 						_react2.default.createElement(
 							"ul",
 							null,
@@ -27024,7 +27069,7 @@
 				var reviewNodes = this.props.allReviews.map(function (review) {
 					return _react2.default.createElement(
 						"li",
-						null,
+						{ key: review._id },
 						_react2.default.createElement(
 							"ul",
 							null,
@@ -27225,7 +27270,7 @@
 				var checkInNodes = this.props.allCheckIns.map(function (checkIn) {
 					return _react2.default.createElement(
 						"li",
-						null,
+						{ key: checkIn._id },
 						_react2.default.createElement(
 							"ul",
 							null,
@@ -27396,7 +27441,7 @@
 				var genresNodes = this.props.allGenres.map(function (genre) {
 					return _react2.default.createElement(
 						"li",
-						null,
+						{ key: genre._id },
 						"Name: ",
 						genre.genre_name
 					);
@@ -27541,7 +27586,7 @@
 				var neighborhoodNodes = this.props.allNeighborhoods.map(function (neighborhood) {
 					return _react2.default.createElement(
 						"li",
-						null,
+						{ key: neighborhood._id },
 						"Name: ",
 						neighborhood.neighborhood_name
 					);
@@ -27606,7 +27651,8 @@
 			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SubNeighborhoodForm).call(this));
 
 			_this.state = {
-				name: ''
+				name: '',
+				sub_neighborhood_neighborhood: ''
 			};
 			return _this;
 		}
@@ -27617,11 +27663,18 @@
 				this.setState({ name: e.target.value });
 			}
 		}, {
+			key: "handleSubNeighborhoodChange",
+			value: function handleSubNeighborhoodChange(e) {
+				this.setState({ sub_neighborhood_neighborhood: e.target.value });
+			}
+		}, {
 			key: "handleSubmit",
 			value: function handleSubmit() {
 				e.preventDefault(e);
 				var newSubNeighborhoodObject = {};
 				newSubNeighborhoodObject.name = this.state.name;
+				newSubNeighborhoodObject.neighborhood = this.state.sub_neighborhood_neighborhood;
+
 				FixinsActions.createSubNeighbodrhood(newSubNeighborhoodObject);
 				this.setState({ name: "" });
 			}
@@ -27637,6 +27690,7 @@
 						"Sub-Neighborhood name:",
 						_react2.default.createElement("input", { type: "text", value: this.state.name, onChange: this.handleNameChange.bind(this), className: "form-control", placeholder: "sub-neighborhood name" })
 					),
+					_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.sub_neighborhood_neighborhood, onchange2: this.handleSubNeighborhoodChange.bind(this), data: this.props.allNeighborhoods, nameName: "neighborhood_name" }),
 					_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Post" })
 				);
 			}
@@ -27686,7 +27740,7 @@
 				var subNeighborhoodNodes = this.props.allSubNeighborhoods.map(function (subNeighborhood) {
 					return _react2.default.createElement(
 						"li",
-						null,
+						{ key: subNeighborhood._id },
 						"Name: ",
 						subNeighborhood.subNeighborhood_name
 					);
@@ -27787,9 +27841,6 @@
 		}, {
 			key: "getSpotsFromStore",
 			value: function getSpotsFromStore() {
-				console.log("getSpotsFromStore.this.spots");
-				console.log(this.spots);
-
 				return this.spots;
 			}
 		}, {
@@ -27817,11 +27868,7 @@
 		}, {
 			key: "setSpotsInStore",
 			value: function setSpotsInStore(allSpots) {
-				console.log("setSpotsInStore.allSpots");
-				console.log(allSpots);
 				this.spots = allSpots;
-				console.log("setSpotsInStore.this.spots");
-				console.log(this.spots);
 				this.emit("changedSpots");
 			}
 		}, {
@@ -27839,7 +27886,7 @@
 		}, {
 			key: "setGenresInStore",
 			value: function setGenresInStore(allGenres) {
-				this.Genres = allGenres;
+				this.genres = allGenres;
 				this.emit("changedGenres");
 			}
 		}, {
@@ -27908,42 +27955,42 @@
 				switch (action.type) {
 					case "CREATE_USER":
 						console.log("CREATE_USER");
-						this.addUserToStore(action.newUser);
+						this.addUserToStore(action.postedUser);
 						break;
 
 					case "CREATE_SPOT":
 						console.log("CREATE_SPOT");
-						this.addSpotToStore(action.newSpot);
+						this.addSpotToStore(action.postedSpot);
 						break;
 
 					case "CREATE_DISH":
 						console.log("CREATE_DISH");
-						this.addDishToStore(action.newDish);
+						this.addDishToStore(action.postedDish);
 						break;
 
 					case "CREATE_REVIEW":
 						console.log("CREATE_REVIEW");
-						this.addReviewToStore(action.newReview);
+						this.addReviewToStore(action.postedReview);
 						break;
 
 					case "CREATE_CHECKIN":
 						console.log("CREATE_CHECKIN");
-						this.addCheckInToStore(action.newCheckin);
+						this.addCheckInToStore(action.postedCheckin);
 						break;
 
 					case "CREATE_GENRE":
 						console.log("CREATE_GENRE");
-						this.addGenreToStore(action.newGenre);
+						this.addGenreToStore(action.postedGenre);
 						break;
 
 					case "CREATE_NEIGHBORHOOD":
 						console.log("CREATE_NEIGHBORHOOD");
-						this.addNeighborhoodToStore(action.newNeighborhood);
+						this.addNeighborhoodToStore(action.postedNeighborhood);
 						break;
 
 					case "CREATE_SUBNEIGHBORHOOD":
 						console.log("CREATE_SUBNEIGHBORHOOD");
-						this.addSubNeighborhood(action.newSubNeighborhood);
+						this.addSubNeighborhood(action.postedSubNeighborhood);
 						break;
 
 					case "FETCH_USERS":
@@ -27981,9 +28028,6 @@
 						break;
 
 					case "FETCH_SPOTS":
-						console.log("=============FETCH_SPOTS=================");
-						console.log(action);
-
 						this.setSpotsInStore(action.allSpots);
 						break;
 

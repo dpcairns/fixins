@@ -6,7 +6,8 @@ export default class SubNeighborhoodForm extends React.Component{
 	constructor(){
 		super();
 		this.state = {
-			name: ''
+			name: '',
+			sub_neighborhood_neighborhood: ''
 		}
 	}
 
@@ -14,10 +15,17 @@ export default class SubNeighborhoodForm extends React.Component{
 		this.setState({name: e.target.value})
 	}
 
+
+	handleSubNeighborhoodChange(e){
+		this.setState({sub_neighborhood_neighborhood: e.target.value})
+	}
+
 	handleSubmit(){
 		e.preventDefault(e);
 		var newSubNeighborhoodObject = {}
 		newSubNeighborhoodObject.name = this.state.name
+		newSubNeighborhoodObject.neighborhood = this.state.sub_neighborhood_neighborhood
+
 		FixinsActions.createSubNeighbodrhood(newSubNeighborhoodObject)
 		this.setState({name: ""})
 	}
@@ -27,8 +35,15 @@ export default class SubNeighborhoodForm extends React.Component{
 	<form onSubmit={this.handleSubmit.bind(this)}>
 		<div className="input-group">
 			Sub-Neighborhood name:
-		  <input type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} className="form-control" placeholder="sub-neighborhood name" />
+		  <input type="text" value={this.state.name} 
+		  	onChange={this.handleNameChange.bind(this)} 
+		  	className="form-control" 
+		  	placeholder="sub-neighborhood name" />
 		</div>
+		<CustomDropdown setValueTo={this.state.sub_neighborhood_neighborhood} 
+			onchange2={this.handleSubNeighborhoodChange.bind(this)} 
+			data={this.props.allNeighborhoods} 
+			nameName="neighborhood_name" />
 	<input className="button btn-danger align-right" type="submit" value="Post"/>
 	</form>
 

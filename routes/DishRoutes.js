@@ -19,9 +19,7 @@ router.route('/Dishes')
 						newDish.dish_spot = req.body.spot
 						newDish.dish_calories = req.body.calories
 						newDish.dish_price = req.body.price
-						newDish.dish_blurb = req.body.blurb
 						newDish.dish_genres = req.body.genres
-						newDish.dish_reviews = req.body.reviews
 
 						newDish.save(function(err) {
 							if(err){console.log("couldn't save dish")}

@@ -37,9 +37,6 @@ class FixinsStore extends EventEmitter {
 	}
 	
 	getSpotsFromStore() {
-		console.log("getSpotsFromStore.this.spots")
-		console.log(this.spots)
-
 		return this.spots;
 	}
 	
@@ -65,11 +62,7 @@ class FixinsStore extends EventEmitter {
 
 
 	setSpotsInStore(allSpots){
-		console.log("setSpotsInStore.allSpots")
-		console.log(allSpots)
 		this.spots = allSpots
-		console.log("setSpotsInStore.this.spots")
-		console.log(this.spots)
 		this.emit("changedSpots")
 	}
 
@@ -87,7 +80,7 @@ class FixinsStore extends EventEmitter {
 
 
 	setGenresInStore(allGenres){
-		this.Genres = allGenres		
+		this.genres = allGenres		
 		this.emit("changedGenres")
 	}
 
@@ -153,42 +146,42 @@ class FixinsStore extends EventEmitter {
 		switch(action.type){
 			case "CREATE_USER":
 				console.log("CREATE_USER")
-				this.addUserToStore(action.newUser)
+				this.addUserToStore(action.postedUser)
 				break;
 			
 			case "CREATE_SPOT":
 				console.log("CREATE_SPOT")
-				this.addSpotToStore(action.newSpot)
+				this.addSpotToStore(action.postedSpot)
 				break;
 			
 			case "CREATE_DISH":
 				console.log("CREATE_DISH")
-				this.addDishToStore(action.newDish)
+				this.addDishToStore(action.postedDish)
 				break;
 			
 			case "CREATE_REVIEW":
 				console.log("CREATE_REVIEW")
-				this.addReviewToStore(action.newReview)
+				this.addReviewToStore(action.postedReview)
 				break;
 			
 			case "CREATE_CHECKIN":
 				console.log("CREATE_CHECKIN")
-				this.addCheckInToStore(action.newCheckin)
+				this.addCheckInToStore(action.postedCheckin)
 				break;
 			
 			case "CREATE_GENRE":
 				console.log("CREATE_GENRE")
-				this.addGenreToStore(action.newGenre)
+				this.addGenreToStore(action.postedGenre)
 				break;
 			
 			case "CREATE_NEIGHBORHOOD":
 				console.log("CREATE_NEIGHBORHOOD")
-				this.addNeighborhoodToStore(action.newNeighborhood)
+				this.addNeighborhoodToStore(action.postedNeighborhood)
 				break;
 				
 			case "CREATE_SUBNEIGHBORHOOD":
 				console.log("CREATE_SUBNEIGHBORHOOD")
-				this.addSubNeighborhood(action.newSubNeighborhood)
+				this.addSubNeighborhood(action.postedSubNeighborhood)
 				break;
 				
 			case "FETCH_USERS":
@@ -226,9 +219,6 @@ class FixinsStore extends EventEmitter {
 				break;
 			
 			case "FETCH_SPOTS":
-				console.log("=============FETCH_SPOTS=================")
-				console.log(action)
-
 				this.setSpotsInStore(action.allSpots)
 				break;
 			

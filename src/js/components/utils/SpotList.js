@@ -2,12 +2,10 @@ import React from "react"
 
 export default class SpotList extends React.Component{
 	render(){
-	console.log("SpotList.this.props")
-	console.log(this.props)
 
 		let spotNodes = this.props.allSpots.map(function(spot){
 			return(
-				<li>
+				<li key={spot._id}>
 					<ul>
 						<li>Spot Name: {spot.spot_name}</li>
 						<li> Spot Blurb {spot.spot_blurb}</li>

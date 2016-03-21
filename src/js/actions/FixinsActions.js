@@ -5,10 +5,12 @@ export function createUser(newUser){
 			url: "http://localhost:4444/api/Users",
 			type: 'POST',
 			data: newUser,
-			success: function(){
+			success: function(postedUser){
+				console.log("trying to make a user")
+				console.log(postedUser)
 						dispatcher.dispatch({
 								type: "CREATE_USER",
-								newUser
+								postedUser
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -22,10 +24,10 @@ export function createSpot(newSpot){
 			url: "http://localhost:4444/api/Spots",
 			type: 'POST',
 			data: newSpot,
-			success: function(){
+			success: function(postedSpot){
 						dispatcher.dispatch({
 								type: "CREATE_SPOT",
-								newSpot
+								postedSpot
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -39,10 +41,10 @@ export function createDish(newDish){
 			url: "http://localhost:4444/api/Dishes",
 			type: 'POST',
 			data: newDish,
-			success: function(){
+			success: function(postedDish){
 						dispatcher.dispatch({
 								type: "CREATE_DISH",
-								newDish
+								postedDish
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -56,10 +58,10 @@ export function createReview(newReview){
 			url: "http://localhost:4444/api/Reviews",
 			type: 'POST',
 			data: newReview,
-			success: function(){
+			success: function(postedReview){
 						dispatcher.dispatch({
 								type: "CREATE_REVIEW",
-								newReview
+								postedReview
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -72,10 +74,10 @@ export function createNeighborhood(newNeighborhood){
 			url: "http://localhost:4444/api/Neighborhoods",
 			type: 'POST',
 			data: newNeighborhood,
-			success: function(){
+			success: function(postedNeighborhood){
 						dispatcher.dispatch({
 								type: "CREATE_NEIGHBORHOOD",
-								newNeighborhood
+								postedNeighborhood
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -89,10 +91,10 @@ export function createSubNeighborhood(newSubNeighborhood){
 			url: "http://localhost:4444/api/SubNeighborhoods",
 			type: 'POST',
 			data: newSubNeighborhood,
-			success: function(){
+			success: function(postedSubNeighborhood){
 						dispatcher.dispatch({
 								type: "CREATE_SUBNEIGHBORHOOD",
-								newSubNeighborhood
+								postedSubNeighborhood
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -106,10 +108,10 @@ export function createGenre(newGenre){
 			url: "http://localhost:4444/api/Genres",
 			type: 'POST',
 			data: newGenre,
-			success: function(){
+			success: function(postedGenre){
 						dispatcher.dispatch({
 								type: "CREATE_GENRE",
-								newGenre
+								postedGenre
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -124,10 +126,10 @@ export function createCheckIn(newCheckIn){
 			url: "http://localhost:4444/api/CheckIns",
 			type: 'POST',
 			data: newCheckIn,
-			success: function(){
+			success: function(postedCheckIn){
 						dispatcher.dispatch({
 								type: "CREATE_CHECKIN",
-								newCheckIn
+								postedCheckIn
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -161,8 +163,6 @@ export function initializeSpots(){
 			type: 'GET',
 			dataType: "json",
 			success: function(data){
-				console.log("ajax call on spots:")
-				console.log(data)
 						dispatcher.dispatch({
 								type: "FETCH_SPOTS",
 								allSpots: data
@@ -178,6 +178,7 @@ export function initializeDishes(){
 		$.ajax({
 			url: "http://localhost:4444/api/Dishes",
 			type: 'GET',
+			dataType: "json",
 			success: function(data){
 						dispatcher.dispatch({
 								type: "FETCH_DISHES",
@@ -194,6 +195,7 @@ export function initializeReviews(){
 		$.ajax({
 			url: "http://localhost:4444/api/Reviews",
 			type: 'GET',
+			dataType: "json",
 			success: function(data){
 						dispatcher.dispatch({
 								type: "FETCH_REVIEWS",
@@ -209,6 +211,7 @@ export function initializeNeighborhoods(){
 		$.ajax({
 			url: "http://localhost:4444/api/Neighborhoods",
 			type: 'GET',
+			dataType: "json",
 			success: function(data){
 						dispatcher.dispatch({
 								type: "FETCH_NEIGHBORHOODS",
@@ -225,6 +228,7 @@ export function initializeSubNeighborhoods(){
 		$.ajax({
 			url: "http://localhost:4444/api/SubNeighborhoods",
 			type: 'GET',
+			dataType: "json",
 			success: function(data){
 						dispatcher.dispatch({
 								type: "FETCH_SUBNEIGHBORHOODS",
@@ -241,6 +245,7 @@ export function initializeGenres(data){
 		$.ajax({
 			url: "http://localhost:4444/api/Genres",
 			type: 'GET',
+			dataType: "json",
 			success: function(data){
 						dispatcher.dispatch({
 								type: "FETCH_GENRES",
@@ -258,6 +263,7 @@ export function initializeCheckIns(data){
 		$.ajax({
 			url: "http://localhost:4444/api/CheckIns",
 			type: 'GET',
+			dataType: "json",
 			success: function(){
 						dispatcher.dispatch({
 								type: "FETCH_CHECKINS",
@@ -266,6 +272,23 @@ export function initializeCheckIns(data){
 			}.bind(this),
 			error: function(xhr, status, err){
 				console.error('./CheckIns', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+	export function removeUser(userID){
+		$.ajax({
+			url: "http://localhost:4444/api/Users/" + userID,
+			type: 'DELETE',
+			success: function(postedUser){
+				console.log("user probably deleted")
+						dispatcher.dispatch({
+								type: "REMOVE_USER",
+								postedUser
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Users', status, err.toString());
 			}.bind(this)
 		});
 	}

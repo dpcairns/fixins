@@ -4,7 +4,7 @@ export default class SubNeighborhoodList extends React.Component{
 	render(){
 		let subNeighborhoodNodes = this.props.allSubNeighborhoods.map(function(subNeighborhood){
 			return(
-				<li>Name: {subNeighborhood.subNeighborhood_name}</li>
+				<li key={subNeighborhood._id}>Name: {subNeighborhood.subNeighborhood_name}</li>
 				)
 		})
 	return(

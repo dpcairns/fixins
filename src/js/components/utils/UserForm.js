@@ -8,11 +8,13 @@ export default class UserForm extends React.Component{
 		this.state = {
 			username: '',
 			password: '',
-			neighborhood: ''
+			user_sub_neighborhood: ''
 		}
 	}
 
 	handleUsernameChange(e){
+	console.log(this.state.username)
+
 	this.setState({username: e.target.value})
 	}
 
@@ -20,14 +22,19 @@ export default class UserForm extends React.Component{
 	this.setState({password: e.target.value})
 	}
 
+	handleSubNeighborhoodChange(e){
+	this.setState({user_sub_neighborhood: e.target.value})
+	console.log(this.state.user_sub_neighborhood)
+	}
+
 	handleSubmit(e){
 		e.preventDefault();
-		var newUserObject = {}
-		newUserObject.username = this.state.username
-		newUserObject.password = this.state.password
-		newUserObject.neighborhood = this.state.neighborhood
-		FixinsActions.createUser(newUserObject)
-		this.setState({username: "", password: "", neighborhood: ""})
+		var newUser = {}
+		newUser.name = this.state.username
+		newUser.password = this.state.password
+		newUser.user_sub_neighborhood = this.state.user_sub_neighborhood
+		FixinsActions.createUser(newUser)
+		this.setState({username: "", password: "", user_sub_neighborhood: ""})
 	
 	}
 
@@ -45,8 +52,11 @@ export default class UserForm extends React.Component{
 		  <input type="password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)} className="form-control" placeholder="password"/>
 		</div>
 		<div className="input-group">
-			Neighborhood:
-			<CustomDropdown data={this.props.allNeighborhoods} nameName="neighborhood_name" />
+			Sub-Neighborhood:
+			<CustomDropdown setValueTo={this.state.user_sub_neighborhood} 
+					onchange2={this.handleSubNeighborhoodChange.bind(this)} 
+					data={this.props.allSubNeighborhoods} 
+					nameName="subNeighborhood_name" />
 		</div>
 	<input className="button btn-danger align-right" type="submit" value="Post"/>
 	</form>
