@@ -26414,7 +26414,7 @@
 								"li",
 								null,
 								" ",
-								_react2.default.createElement(_RemoveButton2.default, { id: user._id })
+								_react2.default.createElement(_RemoveButton2.default, { type: "User", id: user._id })
 							)
 						)
 					);
@@ -26750,7 +26750,7 @@
 								"li",
 								null,
 								" ",
-								_react2.default.createElement(_RemoveButton2.default, { id: spot._id })
+								_react2.default.createElement(_RemoveButton2.default, { type: "Spot", id: spot._id })
 							)
 						)
 					);
@@ -27282,7 +27282,7 @@
 								"li",
 								null,
 								" ",
-								_react2.default.createElement(_RemoveButton2.default, { id: review._id })
+								_react2.default.createElement(_RemoveButton2.default, { type: "Review", id: review._id })
 							)
 						)
 					);
@@ -27488,6 +27488,12 @@
 								null,
 								"User: ",
 								checkIn.user
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" ",
+								_react2.default.createElement(_RemoveButton2.default, { type: "CheckIn", id: dish._id })
 							)
 						)
 					);
@@ -27639,7 +27645,7 @@
 						{ key: genre._id },
 						"Name: ",
 						genre.genre_name,
-						_react2.default.createElement(_RemoveButton2.default, { id: genre._id })
+						_react2.default.createElement(_RemoveButton2.default, { type: "Genre", id: genre._id })
 					);
 				});
 				return _react2.default.createElement(
@@ -27958,7 +27964,7 @@
 						{ key: subNeighborhood._id },
 						"Name: ",
 						subNeighborhood.subNeighborhood_name,
-						_react2.default.createElement(_RemoveButton2.default, { id: subNeighborhood._id })
+						_react2.default.createElement(_RemoveButton2.default, { type: "SubNeighborhood", id: subNeighborhood._id })
 					);
 				});
 				return _react2.default.createElement(

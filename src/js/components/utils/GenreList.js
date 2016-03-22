@@ -7,7 +7,7 @@ export default class GenresList extends React.Component{
 			return(
 				<li key={genre._id}>
 					Name: {genre.genre_name}
-					<RemoveButton id={genre._id}/>
+					<RemoveButton type="Genre" id={genre._id}/>
 
 				</li>
 				)

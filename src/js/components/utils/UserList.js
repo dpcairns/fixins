@@ -13,7 +13,7 @@ export default class UserList extends React.Component{
 						<li>Name: {user.username}</li>
 						<li> Password: {user.password}</li>
 						<li> Neighborhood: {user.user_sub_neighborhood}</li>
-						<li> <RemoveButton id={user._id}/></li>
+						<li> <RemoveButton type="User" id={user._id}/></li>
 					</ul>
 				</li>
 				)

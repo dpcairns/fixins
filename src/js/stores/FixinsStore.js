@@ -142,6 +142,46 @@ class FixinsStore extends EventEmitter {
 		this.emit("changedGenres")
 	}
 
+	findAndRemoveCheckIn(ID){
+		console.log("findAndRemoveCheckIn")
+	}
+
+	findAndRemoveDish(ID){
+		console.log("findAndRemoveDish")
+
+	}
+
+	findAndRemoveReview(ID){
+		console.log("findAndRemoveReview")
+
+	}
+
+	findAndRemoveSpot(ID){
+		console.log("findAndRemoveSpot")
+
+	}
+
+	findAndRemoveSubNeighborhood(ID){
+		console.log("findAndRemoveSubNeighborhood")
+
+	}
+
+	findAndRemoveNeighborhood(ID){
+		console.log("findAndRemoveNeighborhood")
+
+	}
+
+	findAndRemoveGenre(ID){
+		console.log("findAndRemoveGenre")
+
+	}
+
+	findAndRemoveUser(ID){
+		console.log("findAndRemoveUser")
+
+	}
+
+
 	handleActions(action){
 		switch(action.type){
 			case "CREATE_USER":
@@ -221,8 +261,53 @@ class FixinsStore extends EventEmitter {
 				this.setSpotsInStore(action.allSpots)
 				break;
 			
+		
+			case "FETCH_USERS":
+				console.log("FETCH_USERS")
+				this.setUsersInStore(action.allUsers)
+				break;
+				
+			case "REMOVE_CHECKIN":
+				console.log("REMOVE_CHECKIN")
+				this.findAndRemoveCheckIn(action.checkIn)
+				break;
+				
+			case "REMOVE_DISH":
+					console.log("REMOVE_DISH")
+				this.findAndRemoveDish(action.dish)
+				break;
+				
+			case "REMOVE_GENRE":
+					console.log("REMOVE_GENRE")
 
-					
+				this.findAndRemoveGenre(action.genre)
+				break;
+				
+			case "REMOVE_NEIGHBORHOOD":
+				console.log("REMOVE_NEIGHBORHOOD")
+				this.findAndRemoveNeighborhood(action.neighborhood)
+				break;
+				
+			case "REMOVE_SUBNEIGHBORHOOD":
+				console.log("REMOVE_SUBNEIGHBORHOOD")
+				this.findAndRemoveSubNeighborhood(action.subNeighborhood)
+							break;
+
+			case "REMOVE_REVIEW":
+				console.log("REMOVE_REVIEW")
+				this.findAndRemoveReview(action.review)
+				break;
+			
+			case "REMOVE_SPOT":
+					console.log("REMOVE_SPOT")
+				this.findAndRemoveSpot(action.spot)
+				break;
+			
+
+			case "REMOVE_USER":
+					console.log("REMOVE_USER")
+				this.findAndRemoveUser(action.user)
+				break;		
 		}
 	}
 }

@@ -11,6 +11,8 @@ export default class CheckInList extends React.Component{
 						<li>Dish: {checkIn.dish}</li>
 						<li>Name: {checkIn.blurb}</li>
 						<li>User: {checkIn.user}</li>
+						<li> <RemoveButton type="CheckIn" id={dish._id}/></li>
+
 					</ul>
 				</li>
 				)

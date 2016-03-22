@@ -276,15 +276,15 @@ export function initializeCheckIns(data){
 		});
 	}
 
-	export function removeUser(userID){
+	export function removeUser(ID){
 		$.ajax({
-			url: "http://localhost:4444/api/Users/" + userID,
+			url: "http://localhost:4444/api/Users/" + ID,
 			type: 'DELETE',
 			success: function(postedUser){
 				console.log("user probably deleted")
 						dispatcher.dispatch({
 								type: "REMOVE_USER",
-								postedUser
+								user: ID
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -296,13 +296,13 @@ export function initializeCheckIns(data){
 
 	export function removeNeighborhood(ID){
 		$.ajax({
-			url: "http://localhost:4444/api/Dishes/" + ID,
+			url: "http://localhost:4444/api/Neighborhoods/" + ID,
 			type: 'DELETE',
 			success: function(postedUser){
 				console.log("neighborhood probably deleted")
 						dispatcher.dispatch({
-								type: "REMOVE_USER",
-								postedUser
+								type: "REMOVE_NEIGHBORHOOD",
+								neighborhood: ID
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -319,8 +319,89 @@ export function initializeCheckIns(data){
 			success: function(postedUser){
 				console.log("dish probably deleted")
 						dispatcher.dispatch({
-								type: "REMOVE_USER",
-								postedUser
+								type: "REMOVE_DISH",
+								dish: ID
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+	export function removeSubNeighborhood(ID){
+		$.ajax({
+			url: "http://localhost:4444/api/SubNeighborhoods/" + ID,
+			type: 'DELETE',
+			success: function(){
+				console.log("subNeighborhood probably deleted")
+						dispatcher.dispatch({
+								type: "REMOVE_SUBNEIGHBORHOOD",
+								subNeighborhoods: ID
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+	export function removeGenre(ID){
+		$.ajax({
+			url: "http://localhost:4444/api/Genres/" + ID,
+			type: 'DELETE',
+			success: function(){
+				console.log("genre probably deleted")
+						dispatcher.dispatch({
+								type: "REMOVE_GENRE",
+								genre: ID
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+	export function removeReview(ID){
+		$.ajax({
+			url: "http://localhost:4444/api/Reviews/" + ID,
+			type: 'DELETE',
+			success: function(postedUser){
+				console.log("review probably deleted")
+						dispatcher.dispatch({
+								type: "REMOVE_REVIEW",
+								review: ID
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+	export function removeCheckIn(ID){
+		$.ajax({
+			url: "http://localhost:4444/api/CheckIns/" + ID,
+			type: 'DELETE',
+			success: function(){
+				console.log("checkIn probably deleted")
+						dispatcher.dispatch({
+								type: "REMOVE_CHECKIN",
+								checkIn: ID
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+	export function removeSpot(ID){
+		$.ajax({
+			url: "http://localhost:4444/api/Spots/" + ID,
+			type: 'DELETE',
+			success: function(){
+				console.log("spot probably deleted")
+						dispatcher.dispatch({
+								type: "REMOVE_SPOT",
+								spot: ID
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
