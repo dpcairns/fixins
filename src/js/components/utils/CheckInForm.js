@@ -8,12 +8,8 @@ export default class CheckInForm extends React.Component{
 		this.state = {
 			blurb: '',
 			dish: '',
-			spot: ''
+			user: '',
 		}
-	}
-
-	handleSpotChange(e){
-		this.setState({name: e.target.value})
 	}
 
 	handleBlurbChange(e){
@@ -24,14 +20,19 @@ export default class CheckInForm extends React.Component{
 		this.setState({blurb: e.target.value})
 	}
 
+	handleUserChange(e){
+		this.setState({user: e.target.value})
+	}
+
 	handleSubmit(e){
 		e.preventDefault();
 		var newCheckInObject = {}
 		newCheckInObject.blurb = this.state.blurb
 		newCheckInObject.dish = this.state.dish
-		newCheckInObject.spot = this.state.spot
+		newCheckInObject.user = this.state.user
+
 		FixinsActions.createCheckIn(newCheckInObject)
-		this.setState({blurb: '', dish: ''})
+		this.setState({blurb: '', dish: '', user: ''})
 	}
 
 	render(){
@@ -48,8 +49,8 @@ export default class CheckInForm extends React.Component{
 			data={this.props.allDishes} nameName="dish_name" />
 		</div>
 		<div className="input-group">
-			Spot:
-			<CustomDropdown setValueTo={this.state.spot} onChange={this.handleSpotChange.bind(this)} data={this.props.allSpots} nameName="spot_name" />
+			User:
+			<CustomDropdown setValueTo={this.state.user} onChange={this.handleUserChange.bind(this)} data={this.props.allUsers} nameName="username" />
 		</div>
 	<input className="button btn-danger align-right" type="submit" value="Post"/>
 	</form>

@@ -23,10 +23,6 @@ export default class DishForm extends React.Component{
 		this.setState({blurb: e.target.value})
 	}
 
-	handleGenresChange(e){
-		this.setState({genres: e.target.value})
-	}	
-
 	handleCaloriesChange(e){
 		this.setState({calories: e.target.value})
 	}	
@@ -43,7 +39,6 @@ export default class DishForm extends React.Component{
 		e.preventDefault();
 		var newDishObject = {}
 		newDishObject.name = this.state.name
-		newDishObject.genres = this.state.genres
 		newDishObject.calories = this.state.calories
 		newDishObject.price = this.state.price
 		newDishObject.spot = this.state.spot
@@ -86,14 +81,6 @@ export default class DishForm extends React.Component{
 		  	onChange={this.handlePriceChange.bind(this)} 
 		  	className="form-control" 	
 		  	placeholder="dish price"/>
-		</div>
-		<div className="input-group">
-			Genres:
-			<CustomDropdown 
-				setValueTo={this.state.genres} 
-				onchange2={this.handleGenresChange.bind(this)} 
-				data={this.props.allGenres} 
-				nameName="genre_name" />
 		</div>
 		<div className="input-group">
 			Spot:

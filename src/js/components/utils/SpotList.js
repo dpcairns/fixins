@@ -25,9 +25,6 @@ export default class SpotList extends React.Component{
 							<SpotEditForm 
 								spotID={spot._id}
 								allUsers={allUsers}
-								allCheckIns={allCheckIns}
-								allDishes={allDishes}
-								allReviews={allReviews}
 								allGenres={allGenres}
 								allSubNeighborhoods={allSubNeighborhoods}/>
 						</li>

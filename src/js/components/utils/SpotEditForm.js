@@ -51,19 +51,16 @@ export default class SpotEditForm extends React.Component{
 		newSpotInfo.newName = this.state.newName
 		newSpotInfo.newSubNeighborhood = this.state.newSubNeighborhood
 		newSpotInfo.newGenre = this.state.newGenre
-		newSpotInfo.newDish = this.state.newDish
 		newSpotInfo.newBlurb = this.state.newBlurb
 		newSpotInfo.newCoordinates = this.state.newCoordinates
-		newSpotInfo.newReview = this.state.newReview
 		console.log("trying to handleSubmit...")
 		FixinsActions.findAndChangeSpot(newSpotInfo)
 		this.setState({		newName: "", 
 							newSubNeighborhood: "",
 							newGenre: "",
-							newDish:"",
 							newBlurb:"",
-							newCoordinates:"",
-							newReview:""})
+							newCoordinates:""
+							})
 		}
 
 	render(){
@@ -80,7 +77,7 @@ export default class SpotEditForm extends React.Component{
 		  <input type="text" value={this.state.newBlurb} onChange={this.handleBlurbChange.bind(this)} className="form-control" placeholder="spot blurb"/>
 		</div>
 		<div className="input-group">
-			Update Cooredinates:
+			Update Coordinates:
 		  <input type="password" value={this.state.newCoordinates} onChange={this.handleCoordinatesChange.bind(this)} className="form-control" placeholder="spot coordinates"/>
 		</div>
 		<div className="input-group">
@@ -89,20 +86,6 @@ export default class SpotEditForm extends React.Component{
 					onchange2={this.handleSubNeighborhoodChange.bind(this)} 
 					data={this.props.allSubNeighborhoods} 
 					nameName="subNeighborhood_name" />
-		</div>
-		<div className="input-group">
-			Add a new Review:
-			<CustomDropdown setValueTo={this.state.newReview} 
-					onchange2={this.handleReviewChange.bind(this)} 
-					data={this.props.allReviews} 
-					nameName="username" />
-		</div>
-		<div className="input-group">
-			Add a new Dish:
-			<CustomDropdown setValueTo={this.state.newDish} 
-					onchange2={this.handleDishChange.bind(this)} 
-					data={this.props.allDishes} 
-					nameName="_id" />
 		</div>
 		<div className="input-group">
 			Add a new Genre:

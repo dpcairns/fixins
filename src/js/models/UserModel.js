@@ -15,18 +15,6 @@ var UserSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	user_checkIns:[
-			{
-				type: Schema.Types.ObjectId,
-				ref: 'CheckIn'
-			}
-		],
-	user_reviews: [
-			{
-				type: Schema.Types.ObjectId,
-				ref: 'Review'
-			}
-		],
 	user_favorites: [
 			{
 				type: Schema.Types.ObjectId,

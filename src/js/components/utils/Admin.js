@@ -169,7 +169,7 @@ export default class Admin extends React.Component{
 
 						<SpotForm 
 						allGenres={this.state.allGenres} 
-								allSubNeighborhoods={this.state.allSubNeighborhoods} />
+						allSubNeighborhoods={this.state.allSubNeighborhoods} />
 					</div>
 					<div className="admin-spot-output col-md-6">
 								<h2>All Spots</h2>
@@ -179,10 +179,8 @@ export default class Admin extends React.Component{
 						allSubNeighborhoods={this.state.allSubNeighborhoods}
 						allReviews={this.state.allReviews}
 						allGenres={this.state.allGenres}
-						allDishes={this.state.allDishes}
-						/>
+						allDishes={this.state.allDishes}/>
 
-						 />
 					</div>
 				</div>
 			
@@ -231,7 +229,7 @@ export default class Admin extends React.Component{
 
 						<ReviewForm 
 						allDishes={this.state.allDishes} 
-						allSpots={this.state.allSpots}/>
+						allUsers={this.state.allUsers}/>
 					</div>
 					<div className="admin-review-output col-md-6">
 							<h2>All Reviews</h2>
@@ -248,7 +246,7 @@ export default class Admin extends React.Component{
 									<h2>New CheckIn</h2>
 
 						<CheckInForm
-						 allSpots={this.state.allSpots} 
+						 allUsers={this.state.allUsers} 
 						allDishes={this.state.allDishes}/>
 					</div>
 					<div className="admin-checkIn-output col-md-6">

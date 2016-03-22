@@ -7,12 +7,6 @@ var DishSchema = new Schema({
 		type: String,
 		required: true
 	},
-	dish_spot: 
-			{
-				type: Schema.Types.ObjectId,
-				ref: 'Spot'
-			}
-	,
 	dish_price: {
 		type: Number,
 		required: true
@@ -25,21 +19,12 @@ var DishSchema = new Schema({
 		type:String,
 		defualt: "a really yummy, really dense dish for cheap"
 	},
-	dish_reviews:
-		[
+	dish_spot: 
 			{
 				type: Schema.Types.ObjectId,
-				ref: 'Review'
+				ref: 'Spot'
 			}
-		]
 	,
-	dish_genres:
-		[
-			{
-				type: Schema.Types.ObjectId,
-				ref: 'Genre'
-			}
-		]
 })
 
 module.exports = mongoose.model('Dish', DishSchema)

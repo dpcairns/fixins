@@ -12,12 +12,7 @@ var SpotSchema = new Schema({
 		type: String,
 		default: "default spot blurb"
 	},
-	spot_genres: [
-			{
-				type: Schema.Types.ObjectId,
-				ref: 'Genre'
-			}
-		],
+
 	spot_coordinates:{
 		type: Array,
 		default: [(45.1200, + randNum), (-122.1819 - randNum)]
@@ -26,26 +21,17 @@ var SpotSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	spot_dishes: [
+	spot_genres: [
 			{
 				type: Schema.Types.ObjectId,
-				ref: 'Dish'
+				ref: 'Genre'
 			}
 		],
-	spot_reviews: 
-		[
-			{
-				type: Schema.Types.ObjectId,
-				ref: 'Review'
-			}
-		]
-	,
 	spot_subNeighborhood:
 			{
 				type: Schema.Types.ObjectId,
 				ref: 'SubNeighborhood'
 			}
-
 });
 
 

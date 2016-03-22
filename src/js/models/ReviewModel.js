@@ -3,14 +3,10 @@ var Schema = mongoose.Schema;
 
 
 var ReviewSchema = new Schema({
-	reviewed_item_name: {
-		type: String,
-		required: true
-	},
-	reviewed_item_type: {
-		type: String,
-		required: true
-	},
+	reviewed_dish: {
+				type: Schema.Types.ObjectId,
+				ref: 'Dish'
+			},
 	review_user: 
 			{
 				type: Schema.Types.ObjectId,

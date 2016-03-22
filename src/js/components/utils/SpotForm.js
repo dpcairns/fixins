@@ -10,7 +10,6 @@ export default class SpotForm extends React.Component{
 			blurb: '',
 			genres: '',
 			coordinates: '',
-			neighborhood: '',
 			subNeighborhood: '',
 		}
 	}
@@ -29,10 +28,6 @@ export default class SpotForm extends React.Component{
 
 	handleCoordinatesChange(e){
 		this.setState({coordinates: e.target.value})
-	}	
-
-	handleNeighborhoodChange(e){
-		this.setState({neighborhood: e.target.value})
 	}	
 
 	handleSubNeighborhoodChange(e){
@@ -79,7 +74,7 @@ export default class SpotForm extends React.Component{
 			subNeighborhood:
 			<CustomDropdown 
 				setValueTo={this.state.subNeighborhood} 
-				onChange={this.handleSubNeighborhoodChange.bind(this)} 
+				onchange2={this.handleSubNeighborhoodChange.bind(this)} 
 				data={this.props.allSubNeighborhoods} 
 				nameName="subNeighborhood_name" />
 		</div>

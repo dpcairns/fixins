@@ -26203,9 +26203,7 @@
 									allSubNeighborhoods: this.state.allSubNeighborhoods,
 									allReviews: this.state.allReviews,
 									allGenres: this.state.allGenres,
-									allDishes: this.state.allDishes
-								}),
-								"/>"
+									allDishes: this.state.allDishes })
 							)
 						),
 						_react2.default.createElement("hr", null),
@@ -26276,7 +26274,7 @@
 								),
 								_react2.default.createElement(_ReviewForm2.default, {
 									allDishes: this.state.allDishes,
-									allSpots: this.state.allSpots })
+									allUsers: this.state.allUsers })
 							),
 							_react2.default.createElement(
 								"div",
@@ -26303,7 +26301,7 @@
 									"New CheckIn"
 								),
 								_react2.default.createElement(_CheckInForm2.default, {
-									allSpots: this.state.allSpots,
+									allUsers: this.state.allUsers,
 									allDishes: this.state.allDishes })
 							),
 							_react2.default.createElement(
@@ -26847,9 +26845,7 @@
 				newUsername: "",
 				newPassword: "",
 				newSubNeighborhood: "",
-				newReview: "",
 				newFriend: "",
-				newCheckIn: "",
 				newFavorite: ""
 			};
 			return _this;
@@ -26876,19 +26872,9 @@
 				this.setState({ newFriend: e.target.value });
 			}
 		}, {
-			key: "handleCheckInChange",
-			value: function handleCheckInChange(e) {
-				this.setState({ newCheckIn: e.target.value });
-			}
-		}, {
 			key: "handleFavoriteChange",
 			value: function handleFavoriteChange(e) {
 				this.setState({ newFavorite: e.target.value });
-			}
-		}, {
-			key: "handleReviewChange",
-			value: function handleReviewChange(e) {
-				this.setState({ newReview: e.target.value });
 			}
 		}, {
 			key: "handleSubmit",
@@ -26899,17 +26885,13 @@
 				newUserInfo.newUsername = this.state.newUsername;
 				newUserInfo.newPassword = this.state.newPassword;
 				newUserInfo.newSubNeighborhood = this.state.newSubNeighborhood;
-				newUserInfo.newReview = this.state.newReview;
 				newUserInfo.newFriend = this.state.newFriend;
-				newUserInfo.newCheckIn = this.state.newCheckIn;
 				newUserInfo.newFavorite = this.state.newFavorite;
 				FixinsActions.findAndChangeUser(newUserInfo);
 				this.setState({ newUsername: "",
 					newPassword: "",
 					newSubNeighborhood: "",
-					newReview: "",
 					newFriend: "",
-					newCheckIn: "",
 					newFavorite: "" });
 			}
 		}, {
@@ -26950,24 +26932,6 @@
 								onchange2: this.handleFriendChange.bind(this),
 								data: this.props.allUsers,
 								nameName: "username" })
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Add a new CheckIn:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newCheckIn,
-								onchange2: this.handleCheckInChange.bind(this),
-								data: this.props.allCheckIns,
-								nameName: "_id" })
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Add a new Review:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newReview,
-								onchange2: this.handleReviewChange.bind(this),
-								data: this.props.allReviews,
-								nameName: "_id" })
 						),
 						_react2.default.createElement(
 							"div",
@@ -27036,7 +27000,6 @@
 				blurb: '',
 				genres: '',
 				coordinates: '',
-				neighborhood: '',
 				subNeighborhood: ''
 			};
 			return _this;
@@ -27061,11 +27024,6 @@
 			key: "handleCoordinatesChange",
 			value: function handleCoordinatesChange(e) {
 				this.setState({ coordinates: e.target.value });
-			}
-		}, {
-			key: "handleNeighborhoodChange",
-			value: function handleNeighborhoodChange(e) {
-				this.setState({ neighborhood: e.target.value });
 			}
 		}, {
 			key: "handleSubNeighborhoodChange",
@@ -27124,7 +27082,7 @@
 							"subNeighborhood:",
 							_react2.default.createElement(_CustomDropdown2.default, {
 								setValueTo: this.state.subNeighborhood,
-								onChange: this.handleSubNeighborhoodChange.bind(this),
+								onchange2: this.handleSubNeighborhoodChange.bind(this),
 								data: this.props.allSubNeighborhoods,
 								nameName: "subNeighborhood_name" })
 						),
@@ -27241,9 +27199,6 @@
 									_react2.default.createElement(_SpotEditForm2.default, {
 										spotID: spot._id,
 										allUsers: allUsers,
-										allCheckIns: allCheckIns,
-										allDishes: allDishes,
-										allReviews: allReviews,
 										allGenres: allGenres,
 										allSubNeighborhoods: allSubNeighborhoods })
 								)
@@ -27366,19 +27321,16 @@
 				newSpotInfo.newName = this.state.newName;
 				newSpotInfo.newSubNeighborhood = this.state.newSubNeighborhood;
 				newSpotInfo.newGenre = this.state.newGenre;
-				newSpotInfo.newDish = this.state.newDish;
 				newSpotInfo.newBlurb = this.state.newBlurb;
 				newSpotInfo.newCoordinates = this.state.newCoordinates;
-				newSpotInfo.newReview = this.state.newReview;
 				console.log("trying to handleSubmit...");
 				FixinsActions.findAndChangeSpot(newSpotInfo);
 				this.setState({ newName: "",
 					newSubNeighborhood: "",
 					newGenre: "",
-					newDish: "",
 					newBlurb: "",
-					newCoordinates: "",
-					newReview: "" });
+					newCoordinates: ""
+				});
 			}
 		}, {
 			key: "render",
@@ -27404,7 +27356,7 @@
 						_react2.default.createElement(
 							"div",
 							{ className: "input-group" },
-							"Update Cooredinates:",
+							"Update Coordinates:",
 							_react2.default.createElement("input", { type: "password", value: this.state.newCoordinates, onChange: this.handleCoordinatesChange.bind(this), className: "form-control", placeholder: "spot coordinates" })
 						),
 						_react2.default.createElement(
@@ -27415,24 +27367,6 @@
 								onchange2: this.handleSubNeighborhoodChange.bind(this),
 								data: this.props.allSubNeighborhoods,
 								nameName: "subNeighborhood_name" })
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Add a new Review:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newReview,
-								onchange2: this.handleReviewChange.bind(this),
-								data: this.props.allReviews,
-								nameName: "username" })
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Add a new Dish:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newDish,
-								onchange2: this.handleDishChange.bind(this),
-								data: this.props.allDishes,
-								nameName: "_id" })
 						),
 						_react2.default.createElement(
 							"div",
@@ -27518,11 +27452,6 @@
 				this.setState({ blurb: e.target.value });
 			}
 		}, {
-			key: "handleGenresChange",
-			value: function handleGenresChange(e) {
-				this.setState({ genres: e.target.value });
-			}
-		}, {
 			key: "handleCaloriesChange",
 			value: function handleCaloriesChange(e) {
 				this.setState({ calories: e.target.value });
@@ -27543,7 +27472,6 @@
 				e.preventDefault();
 				var newDishObject = {};
 				newDishObject.name = this.state.name;
-				newDishObject.genres = this.state.genres;
 				newDishObject.calories = this.state.calories;
 				newDishObject.price = this.state.price;
 				newDishObject.spot = this.state.spot;
@@ -27598,16 +27526,6 @@
 								onChange: this.handlePriceChange.bind(this),
 								className: "form-control",
 								placeholder: "dish price" })
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Genres:",
-							_react2.default.createElement(_CustomDropdown2.default, {
-								setValueTo: this.state.genres,
-								onchange2: this.handleGenresChange.bind(this),
-								data: this.props.allGenres,
-								nameName: "genre_name" })
 						),
 						_react2.default.createElement(
 							"div",
@@ -27688,12 +27606,6 @@
 								null,
 								" Dish Blurb: ",
 								dish.dish_blurb
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" Dish Genre: ",
-								dish.dish_genres
 							),
 							_react2.default.createElement(
 								"li",
@@ -27782,8 +27694,8 @@
 			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ReviewForm).call(this));
 
 			_this.state = {
-				item_type: '',
-				item_name: '',
+				reviewed_dish: '',
+				review_user: '',
 				stars: '',
 				words: ''
 			};
@@ -27791,9 +27703,9 @@
 		}
 
 		_createClass(ReviewForm, [{
-			key: "handleNameChange",
-			value: function handleNameChange(e) {
-				this.setState({ item_name: e.target.value });
+			key: "handleDishChange",
+			value: function handleDishChange(e) {
+				this.setState({ reviewed_dish: e.target.value });
 			}
 		}, {
 			key: "handleWordsChange",
@@ -27801,9 +27713,9 @@
 				this.setState({ words: e.target.value });
 			}
 		}, {
-			key: "handleTypeChange",
-			value: function handleTypeChange(e) {
-				this.setState({ item_type: e.target.value });
+			key: "handleUserChange",
+			value: function handleUserChange(e) {
+				this.setState({ review_user: e.target.value });
 			}
 		}, {
 			key: "handleStarsChange",
@@ -27815,12 +27727,15 @@
 			value: function handleSubmit(e) {
 				e.preventDefault();
 				var newReviewObject = {};
-				newReviewObject.item_reviewed = this.state.item_name;
+				newReviewObject.reviewed_dish = this.state.reviewed_dish;
 				newReviewObject.words = this.state.words;
 				newReviewObject.stars = this.state.stars;
-				newReviewObject.item_type = this.state.item_type;
+				newReviewObject.review_user = this.state.review_user;
 				FixinsActions.createReview(newReviewObject);
-				this.setState({ item_name: "", item_type: "", stars: "", words: "" });
+				this.setState({ reviewed_dish: '',
+					review_user: '',
+					stars: '',
+					words: '' });
 			}
 		}, {
 			key: "render",
@@ -27851,7 +27766,26 @@
 								onChange: this.handleStarsChange.bind(this),
 								className: "form-control" })
 						),
-						"}",
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Dish reviewed:",
+							_react2.default.createElement(_CustomDropdown2.default, {
+								setValueTo: this.state.reviewed_dish,
+								onChange: this.handleDishChange.bind(this),
+								data: this.props.allDishes,
+								nameName: "dish_name" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"User who wrote it:",
+							_react2.default.createElement(_CustomDropdown2.default, {
+								setValueTo: this.state.review_user,
+								onChange: this.handleUserChange.bind(this),
+								data: this.props.allUsers,
+								nameName: "dish_name" })
+						),
 						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Post" })
 					)
 				);
@@ -27860,31 +27794,6 @@
 
 		return ReviewForm;
 	}(_react2.default.Component);
-
-	/*
-		
-
-			{
-			 if(this.state.item_type==="spot"){
-			 	return(
-					<div className="input-group">
-						Spot reviewed:
-						<CustomDropdown setValueTo={this.state.spot} onChange={this.handleNameChange.bind(this)} data={this.props.allSpots} nameName="spot_name" />
-					</div>
-				 		)
-
-							}
-			 else{
-				return(
-					<div className="input-group">
-						Dish reviewed:
-						<CustomDropdown setValueTo={this.state.dish} onChange={this.handleNameChange.bind(this)} data={this.props.allDishes} nameName="dish_name" />
-					</div>
-
-					)
-							}
-	*/
-
 
 	exports.default = ReviewForm;
 
@@ -28030,17 +27939,12 @@
 			_this.state = {
 				blurb: '',
 				dish: '',
-				spot: ''
+				user: ''
 			};
 			return _this;
 		}
 
 		_createClass(CheckInForm, [{
-			key: "handleSpotChange",
-			value: function handleSpotChange(e) {
-				this.setState({ name: e.target.value });
-			}
-		}, {
 			key: "handleBlurbChange",
 			value: function handleBlurbChange(e) {
 				this.setState({ blurb: e.target.value });
@@ -28051,15 +27955,21 @@
 				this.setState({ blurb: e.target.value });
 			}
 		}, {
+			key: "handleUserChange",
+			value: function handleUserChange(e) {
+				this.setState({ user: e.target.value });
+			}
+		}, {
 			key: "handleSubmit",
 			value: function handleSubmit(e) {
 				e.preventDefault();
 				var newCheckInObject = {};
 				newCheckInObject.blurb = this.state.blurb;
 				newCheckInObject.dish = this.state.dish;
-				newCheckInObject.spot = this.state.spot;
+				newCheckInObject.user = this.state.user;
+
 				FixinsActions.createCheckIn(newCheckInObject);
-				this.setState({ blurb: '', dish: '' });
+				this.setState({ blurb: '', dish: '', user: '' });
 			}
 		}, {
 			key: "render",
@@ -28086,8 +27996,8 @@
 						_react2.default.createElement(
 							"div",
 							{ className: "input-group" },
-							"Spot:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.spot, onChange: this.handleSpotChange.bind(this), data: this.props.allSpots, nameName: "spot_name" })
+							"User:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.user, onChange: this.handleUserChange.bind(this), data: this.props.allUsers, nameName: "username" })
 						),
 						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Post" })
 					)

@@ -9,9 +9,7 @@ export default class UserEditForm extends React.Component{
 				newUsername: "", 
 				newPassword: "", 
 				newSubNeighborhood: "",
-				newReview: "", 
 				newFriend: "", 
-				newCheckIn: "", 
 				newFavorite: ""
 		}
 	}
@@ -32,17 +30,8 @@ export default class UserEditForm extends React.Component{
 		this.setState({newFriend: e.target.value})
 	}
 
-	handleCheckInChange(e){
-		this.setState({newCheckIn: e.target.value})
-	}
-
 	handleFavoriteChange(e){
 		this.setState({newFavorite: e.target.value})
-	}
-
-
-	handleReviewChange(e){
-		this.setState({newReview: e.target.value})
 	}
 
 	handleSubmit(e){
@@ -52,17 +41,13 @@ export default class UserEditForm extends React.Component{
 		newUserInfo.newUsername = this.state.newUsername
 		newUserInfo.newPassword = this.state.newPassword
 		newUserInfo.newSubNeighborhood = this.state.newSubNeighborhood
-		newUserInfo.newReview = this.state.newReview
 		newUserInfo.newFriend = this.state.newFriend
-		newUserInfo.newCheckIn = this.state.newCheckIn
 		newUserInfo.newFavorite = this.state.newFavorite
 		FixinsActions.findAndChangeUser(newUserInfo)
 		this.setState({newUsername: "", 
 						newPassword: "", 
 						newSubNeighborhood: "",
-						newReview: "", 
 						newFriend: "", 
-						newCheckIn: "", 
 						newFavorite: ""})
 		}
 
@@ -92,20 +77,6 @@ export default class UserEditForm extends React.Component{
 					onchange2={this.handleFriendChange.bind(this)} 
 					data={this.props.allUsers} 
 					nameName="username" />
-		</div>
-		<div className="input-group">
-			Add a new CheckIn:
-			<CustomDropdown setValueTo={this.state.newCheckIn} 
-					onchange2={this.handleCheckInChange.bind(this)} 
-					data={this.props.allCheckIns} 
-					nameName="_id" />
-		</div>
-		<div className="input-group">
-			Add a new Review:
-			<CustomDropdown setValueTo={this.state.newReview} 
-					onchange2={this.handleReviewChange.bind(this)} 
-					data={this.props.allReviews} 
-					nameName="_id" />
 		</div>
 		<div className="input-group">
 			Add a new Favorite:
