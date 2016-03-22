@@ -154,7 +154,11 @@ export default class Admin extends React.Component{
 								<h2>All Users</h2>
 
 						<UserList 
-						allUsers={this.state.allUsers}/>
+						allUsers={this.state.allUsers}
+						allCheckIns={this.state.allCheckIns}
+						allReviews={this.state.allReviews}
+						allDishes={this.state.allDishes}
+						allSubNeighborhoods={this.state.allSubNeighborhoods}						/>
 					</div>
 				</div>
 			

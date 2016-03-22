@@ -409,9 +409,9 @@ export function initializeCheckIns(data){
 		});
 	}
 
-		export function findAndChangeUser(ID){
+		export function findAndChangeUser(userToChange){
 		$.ajax({
-			url: "http://localhost:4444/api/Users/" + ID,
+			url: "http://localhost:4444/api/Users/" + userToChange._id,
 			type: 'PUT',
 			success: function(changedUser){
 				console.log("user probably changed to:")

@@ -53,6 +53,7 @@ export default class UserEditForm extends React.Component{
 	handleSubmit(e){
 		e.preventDefault();
 		var changedUser = {}
+		changedUser._id = this.props.userID
 		changedUser.newUsername = this.state.newUsername
 		changedUser.newPassword = this.state.newPassword
 		changedUser.newSubNeighborhood = this.state.newSubNeighborhood
@@ -114,8 +115,8 @@ export default class UserEditForm extends React.Component{
 		<div className="input-group">
 			Add a new Favorite:
 			<CustomDropdown setValueTo={this.state.newFavorite} 
+					data = {this.props.allDishes}
 					onchange2={this.handleFavoriteChange.bind(this)} 
-					data={this.props.allDishes} 
 					nameName="dish_name" />
 		</div>
 	<input className="button btn-danger align-right" type="submit" value="Update"/>

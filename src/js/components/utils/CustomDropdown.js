@@ -2,8 +2,11 @@ import React from "react"
 
 export default class CustomDropdown extends React.Component{
 	render(){
+		console.log("here are props for custome dropdown====================")
+		console.log(this.props)
 		let nameName = this.props.nameName
-		let optionNodes = this.props.data.map(function(item){
+		let data = this.props.data
+		let optionNodes = data.map(function(item){
 			return(
 			 <option key={item._id} value={item._id}>{item[nameName]}</option>
 			 	)

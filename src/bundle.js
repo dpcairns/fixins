@@ -25413,9 +25413,9 @@
 		});
 	}
 
-	function findAndChangeUser(ID) {
+	function findAndChangeUser(userToChange) {
 		$.ajax({
-			url: "http://localhost:4444/api/Users/" + ID,
+			url: "http://localhost:4444/api/Users/" + userToChange._id,
 			type: 'PUT',
 			success: function (changedUser) {
 				console.log("user probably changed to:");
@@ -25953,59 +25953,59 @@
 
 	var _UserList2 = _interopRequireDefault(_UserList);
 
-	var _SpotForm = __webpack_require__(231);
+	var _SpotForm = __webpack_require__(232);
 
 	var _SpotForm2 = _interopRequireDefault(_SpotForm);
 
-	var _SpotList = __webpack_require__(232);
+	var _SpotList = __webpack_require__(233);
 
 	var _SpotList2 = _interopRequireDefault(_SpotList);
 
-	var _DishForm = __webpack_require__(233);
+	var _DishForm = __webpack_require__(234);
 
 	var _DishForm2 = _interopRequireDefault(_DishForm);
 
-	var _DishList = __webpack_require__(234);
+	var _DishList = __webpack_require__(235);
 
 	var _DishList2 = _interopRequireDefault(_DishList);
 
-	var _ReviewForm = __webpack_require__(235);
+	var _ReviewForm = __webpack_require__(236);
 
 	var _ReviewForm2 = _interopRequireDefault(_ReviewForm);
 
-	var _ReviewList = __webpack_require__(236);
+	var _ReviewList = __webpack_require__(237);
 
 	var _ReviewList2 = _interopRequireDefault(_ReviewList);
 
-	var _CheckInForm = __webpack_require__(237);
+	var _CheckInForm = __webpack_require__(238);
 
 	var _CheckInForm2 = _interopRequireDefault(_CheckInForm);
 
-	var _CheckInList = __webpack_require__(238);
+	var _CheckInList = __webpack_require__(239);
 
 	var _CheckInList2 = _interopRequireDefault(_CheckInList);
 
-	var _GenreForm = __webpack_require__(239);
+	var _GenreForm = __webpack_require__(240);
 
 	var _GenreForm2 = _interopRequireDefault(_GenreForm);
 
-	var _GenreList = __webpack_require__(240);
+	var _GenreList = __webpack_require__(241);
 
 	var _GenreList2 = _interopRequireDefault(_GenreList);
 
-	var _NeighborhoodForm = __webpack_require__(241);
+	var _NeighborhoodForm = __webpack_require__(242);
 
 	var _NeighborhoodForm2 = _interopRequireDefault(_NeighborhoodForm);
 
-	var _NeighborhoodList = __webpack_require__(242);
+	var _NeighborhoodList = __webpack_require__(243);
 
 	var _NeighborhoodList2 = _interopRequireDefault(_NeighborhoodList);
 
-	var _SubNeighborhoodForm = __webpack_require__(243);
+	var _SubNeighborhoodForm = __webpack_require__(244);
 
 	var _SubNeighborhoodForm2 = _interopRequireDefault(_SubNeighborhoodForm);
 
-	var _SubNeighborhoodList = __webpack_require__(244);
+	var _SubNeighborhoodList = __webpack_require__(245);
 
 	var _SubNeighborhoodList2 = _interopRequireDefault(_SubNeighborhoodList);
 
@@ -26013,7 +26013,7 @@
 
 	var FixinsActions = _interopRequireWildcard(_FixinsActions);
 
-	var _FixinsStore = __webpack_require__(245);
+	var _FixinsStore = __webpack_require__(246);
 
 	var _FixinsStore2 = _interopRequireDefault(_FixinsStore);
 
@@ -26179,7 +26179,11 @@
 									"All Users"
 								),
 								_react2.default.createElement(_UserList2.default, {
-									allUsers: this.state.allUsers })
+									allUsers: this.state.allUsers,
+									allCheckIns: this.state.allCheckIns,
+									allReviews: this.state.allReviews,
+									allDishes: this.state.allDishes,
+									allSubNeighborhoods: this.state.allSubNeighborhoods })
 							)
 						),
 						_react2.default.createElement("hr", null),
@@ -26540,8 +26544,11 @@
 		_createClass(CustomDropdown, [{
 			key: "render",
 			value: function render() {
+				console.log("here are props for custome dropdown====================");
+				console.log(this.props);
 				var nameName = this.props.nameName;
-				var optionNodes = this.props.data.map(function (item) {
+				var data = this.props.data;
+				var optionNodes = data.map(function (item) {
 					return _react2.default.createElement(
 						"option",
 						{ key: item._id, value: item._id },
@@ -26596,6 +26603,10 @@
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
+	var _UserEditForm = __webpack_require__(231);
+
+	var _UserEditForm2 = _interopRequireDefault(_UserEditForm);
+
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -26612,43 +26623,94 @@
 		function UserList() {
 			_classCallCheck(this, UserList);
 
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(UserList).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UserList).call(this));
+
+			_this.state = {
+				showEditOptions: false,
+				editStyles: { display: "none" }
+			};
+			return _this;
 		}
 
 		_createClass(UserList, [{
+			key: "toggleEdit",
+			value: function toggleEdit() {
+				if (!this.state.showEditOptions) {
+					this.setState({
+						editStyles: {
+							display: "block",
+							background: "rgba(86, 0, 65, .6)",
+							position: 'fixed',
+							zIndex: "2",
+							width: "100%",
+							height: "100%",
+							top: "0",
+							bottom: "0",
+							left: "0",
+							right: "0"
+
+						} });
+					this.setState({ showEditOptions: true });
+				} else if (this.state.showEditOptions === true) {
+					this.setState({ editStyles: {
+							display: "none"
+						} });
+					this.setState({ showEditOptions: false });
+				}
+			}
+		}, {
 			key: "render",
 			value: function render() {
-
-				var userNodes = this.props.allUsers.map(function (user) {
+				var allReviews = this.props.allReviews;
+				var allSubNeighborhoods = this.props.allSubNeighborhoods;
+				var allUsers = this.props.allUsers;
+				var allDishes = this.props.allDishes;
+				var allCheckIns = this.props.allCheckIns;
+				var userNodes = allUsers.map(function (user) {
 					return _react2.default.createElement(
-						"li",
+						"div",
 						{ key: user._id },
 						_react2.default.createElement(
-							"ul",
+							"li",
 							null,
 							_react2.default.createElement(
-								"li",
+								"ul",
 								null,
-								"Name: ",
-								user.username
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" Password: ",
-								user.password
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" Neighborhood: ",
-								user.user_sub_neighborhood
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" ",
-								_react2.default.createElement(_RemoveButton2.default, { type: "User", id: user._id })
+								_react2.default.createElement(
+									"li",
+									null,
+									"Name: ",
+									user.username
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									" Password: ",
+									user.password
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									" Neighborhood: ",
+									user.user_sub_neighborhood
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									" ",
+									_react2.default.createElement(_RemoveButton2.default, { type: "User", id: user._id })
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									_react2.default.createElement(_UserEditForm2.default, {
+										userID: user._id,
+										allUsers: allUsers,
+										allCheckIns: allCheckIns,
+										allDishes: allDishes,
+										allReviews: allReviews,
+										allSubNeighborhoods: allSubNeighborhoods })
+								)
 							)
 						)
 					);
@@ -26750,6 +26812,199 @@
 
 /***/ },
 /* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _CustomDropdown = __webpack_require__(228);
+
+	var _CustomDropdown2 = _interopRequireDefault(_CustomDropdown);
+
+	var _FixinsActions = __webpack_require__(220);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var UserEditForm = function (_React$Component) {
+		_inherits(UserEditForm, _React$Component);
+
+		function UserEditForm() {
+			_classCallCheck(this, UserEditForm);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UserEditForm).call(this));
+
+			_this.state = {
+				newUsername: "",
+				newPassword: "",
+				newSubNeighborhood: "",
+				newReview: "",
+				newFriend: "",
+				newCheckIn: "",
+				newFavorite: ""
+			};
+			return _this;
+		}
+
+		_createClass(UserEditForm, [{
+			key: "handleUsernameChange",
+			value: function handleUsernameChange(e) {
+				this.setState({ newUsername: e.target.value });
+			}
+		}, {
+			key: "handlePasswordChange",
+			value: function handlePasswordChange(e) {
+				this.setState({ newPassword: e.target.value });
+			}
+		}, {
+			key: "handleSubNeighborhoodChange",
+			value: function handleSubNeighborhoodChange(e) {
+				this.setState({ newSubNeighborhood: e.target.value });
+				console.log(this.state.newSubNeighborhood);
+			}
+		}, {
+			key: "handleFriendChange",
+			value: function handleFriendChange(e) {
+				this.setState({ newFriend: e.target.value });
+				console.log(this.state.newFriend);
+			}
+		}, {
+			key: "handleCheckInChange",
+			value: function handleCheckInChange(e) {
+				this.setState({ newCheckIn: e.target.value });
+				console.log(this.state.newCheckIn);
+			}
+		}, {
+			key: "handleFavoriteChange",
+			value: function handleFavoriteChange(e) {
+				this.setState({ newFavorite: e.target.value });
+				console.log(this.state.newFavorite);
+			}
+		}, {
+			key: "handleReviewChange",
+			value: function handleReviewChange(e) {
+				this.setState({ newReview: e.target.value });
+				console.log(this.state.newReview);
+			}
+		}, {
+			key: "handleSubmit",
+			value: function handleSubmit(e) {
+				e.preventDefault();
+				var changedUser = {};
+				changedUser._id = this.props.userID;
+				changedUser.newUsername = this.state.newUsername;
+				changedUser.newPassword = this.state.newPassword;
+				changedUser.newSubNeighborhood = this.state.newSubNeighborhood;
+				changedUser.newReview = this.state.newReview;
+				changedUser.newFriend = this.state.newFriend;
+				changedUser.newCheckIn = this.state.newCheckIn;
+				changedUser.newFavorite = this.state.newFavorite;
+				FixinsActions.findAndChangeUser(changedUser);
+				this.setState({ newUsername: "",
+					newPassword: "",
+					newSubNeighborhood: "",
+					newReview: "",
+					newFriend: "",
+					newCheckIn: "",
+					newFavorite: "" });
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"div",
+					null,
+					_react2.default.createElement(
+						"form",
+						{ onSubmit: this.handleSubmit.bind(this) },
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Update Username:",
+							_react2.default.createElement("input", { type: "text", value: this.state.newUsername, onChange: this.handleUsernameChange.bind(this), className: "form-control", placeholder: "username" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Update Password:",
+							_react2.default.createElement("input", { type: "password", value: this.state.newPassword, onChange: this.handlePasswordChange.bind(this), className: "form-control", placeholder: "password" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Update Sub-Neighborhood:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newSubNeighborhood,
+								onchange2: this.handleSubNeighborhoodChange.bind(this),
+								data: this.props.allSubNeighborhoods,
+								nameName: "subNeighborhood_name" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Add a new Friend:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newFriend,
+								onchange2: this.handleFriendChange.bind(this),
+								data: this.props.allUsers,
+								nameName: "username" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Add a new CheckIn:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newCheckIn,
+								onchange2: this.handleCheckInChange.bind(this),
+								data: this.props.allCheckIns,
+								nameName: "_id" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Add a new Review:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newReview,
+								onchange2: this.handleReviewChange.bind(this),
+								data: this.props.allReviews,
+								nameName: "_id" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Add a new Favorite:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newFavorite,
+								data: this.props.allDishes,
+								onchange2: this.handleFavoriteChange.bind(this),
+								nameName: "dish_name" })
+						),
+						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Update" })
+					)
+				);
+			}
+		}]);
+
+		return UserEditForm;
+	}(_react2.default.Component);
+
+	exports.default = UserEditForm;
+
+/***/ },
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26899,7 +27154,7 @@
 	exports.default = SpotForm;
 
 /***/ },
-/* 232 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27009,7 +27264,7 @@
 	exports.default = SpotList;
 
 /***/ },
-/* 233 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27185,7 +27440,7 @@
 	exports.default = DishForm;
 
 /***/ },
-/* 234 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27295,7 +27550,7 @@
 	exports.default = DishList;
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27444,7 +27699,7 @@
 	exports.default = ReviewForm;
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27541,7 +27796,7 @@
 	exports.default = ReviewList;
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27655,7 +27910,7 @@
 	exports.default = CheckInForm;
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27752,7 +28007,7 @@
 	exports.default = CheckInList;
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27836,7 +28091,7 @@
 	exports.default = GenreForm;
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27902,7 +28157,7 @@
 	exports.default = GenresList;
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27990,7 +28245,7 @@
 	exports.default = NeighborhoodForm;
 
 /***/ },
-/* 242 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28056,7 +28311,7 @@
 	exports.default = NeighborhoodList;
 
 /***/ },
-/* 243 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28155,7 +28410,7 @@
 	exports.default = SubNeighborhoodForm;
 
 /***/ },
-/* 244 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28221,7 +28476,7 @@
 	exports.default = SubNeighborhoodList;
 
 /***/ },
-/* 245 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28232,7 +28487,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _events = __webpack_require__(246);
+	var _events = __webpack_require__(247);
 
 	var _FixinsActions = __webpack_require__(220);
 
@@ -28759,7 +29014,7 @@
 	exports.default = fixinsStore;
 
 /***/ },
-/* 246 */
+/* 247 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.

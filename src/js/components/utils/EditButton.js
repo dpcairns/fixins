@@ -5,7 +5,7 @@ export default class RemoveButton extends React.Component {
 
 	edit(){
 		if (this.props.type==="User"){
-		FixinsActions.findAndChangeUser(changedUser)
+			
 	}
 		else if	(this.props.type==="Neighborhood"){
 		FixinsActions.findAndChangeNeighborhood(changedNeighborhood)
