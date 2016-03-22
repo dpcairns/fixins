@@ -15,14 +15,6 @@ var UserSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	calories_log: {
-		type: Array,
-		default: []
-	},
-	dollars_log: {
-		type: Array,
-		default: []
-	},
 	user_checkIns:[
 			{
 				type: Schema.Types.ObjectId,
@@ -39,6 +31,12 @@ var UserSchema = new Schema({
 			{
 				type: Schema.Types.ObjectId,
 				ref: 'Dish'
+			}
+		],
+	user_friends: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'User'
 			}
 		],
 	user_sub_neighborhood: {

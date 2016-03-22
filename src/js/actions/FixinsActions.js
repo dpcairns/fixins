@@ -6,7 +6,6 @@ export function createUser(newUser){
 			type: 'POST',
 			data: newUser,
 			success: function(postedUser){
-				console.log("trying to make a user")
 				console.log(postedUser)
 						dispatcher.dispatch({
 								type: "CREATE_USER",
@@ -402,6 +401,148 @@ export function initializeCheckIns(data){
 						dispatcher.dispatch({
 								type: "REMOVE_SPOT",
 								spot: ID
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+		export function findAndChangeUser(ID){
+		$.ajax({
+			url: "http://localhost:4444/api/Users/" + ID,
+			type: 'PUT',
+			success: function(changedUser){
+				console.log("user probably changed to:")
+				console.log(changedUser)
+						dispatcher.dispatch({
+								type: "CHANGED_USER",
+								user: changedUser
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+
+	export function findAndChangeNeighborhood(ID){
+		$.ajax({
+			url: "http://localhost:4444/api/Neighborhoods/" + ID,
+			type: 'PUT',
+		success: function(changedNeighborhood){
+				console.log("user probably changed to:")
+				console.log(changedNeighborhood)
+						dispatcher.dispatch({
+								type: "CHANGED_NEIGHBORHOOD",
+								user: changedNeighborhood
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+
+	export function findAndChangeDish(ID){
+		$.ajax({
+			url: "http://localhost:4444/api/Dishes/" + ID,
+			type: 'PUT',
+		success: function(changedDish){
+				console.log("dish probably changed to:")
+				console.log(changedDish)
+						dispatcher.dispatch({
+								type: "CHANGED_DISH",
+								user: changedDish
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+	export function findAndChangeSubNeighborhood(ID){
+		$.ajax({
+			url: "http://localhost:4444/api/SubNeighborhoods/" + ID,
+			type: 'PUT',
+		success: function(changedSubNeighborhood){
+				console.log("subNeighborhood probably changed to:")
+				console.log(changedSubNeighborhood)
+						dispatcher.dispatch({
+								type: "CHANGED_SUBNEIGHBORHOOD",
+								user: changedSubNeighborhood
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+	export function findAndChangeGenre(ID){
+		$.ajax({
+			url: "http://localhost:4444/api/Genres/" + ID,
+			type: 'PUT',
+		success: function(changedGenre){
+				console.log("genre probably changed to:")
+				console.log(changedGenre)
+						dispatcher.dispatch({
+								type: "CHANGED_GENRE",
+								user: changedGenre
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+	export function findAndChangeReview(ID){
+		$.ajax({
+			url: "http://localhost:4444/api/Reviews/" + ID,
+			type: 'PUT',
+		success: function(changedReview){
+				console.log("review probably changed to:")
+				console.log(changedReview)
+						dispatcher.dispatch({
+								type: "CHANGED_REVIEW",
+								user: changedReview
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+	export function findAndChangeCheckIn(ID){
+		$.ajax({
+			url: "http://localhost:4444/api/CheckIns/" + ID,
+			type: 'PUT',
+		success: function(changedCheckIn){
+				console.log("checkIn probably changed to:")
+				console.log(changedCheckIn)
+						dispatcher.dispatch({
+								type: "CHANGED_CHECKIN",
+								user: changedCheckIn
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+	export function findAndChangeSpot(ID){
+		$.ajax({
+			url: "http://localhost:4444/api/Spots/" + ID,
+			type: 'PUT',
+			success: function(changedSpot){
+				console.log("spot probably changed to:")
+				console.log(changedSpot)
+						dispatcher.dispatch({
+								type: "CHANGED_SPOT",
+								user: changedSpot
 											});
 			}.bind(this),
 			error: function(xhr, status, err){

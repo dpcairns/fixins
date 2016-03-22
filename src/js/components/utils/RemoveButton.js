@@ -25,6 +25,9 @@ export default class RemoveButton extends React.Component {
 		else if	(this.props.type==="SubNeighborhood"){
 		FixinsActions.removeSubNeighborhood(this.props.id)
 	}
+		else if	(this.props.type==="Genre"){
+		FixinsActions.removeGenre(this.props.id)
+	}
 		else {
 			console.log("no type specified to delete")
 		}

@@ -5,7 +5,6 @@ import * as FixinsActions from "../actions/FixinsActions"
 export default class Splash extends React.Component{
 
 	componentDidMount(){
-		console.log("Splash.componentWillMount() says")
 		FixinsActions.initializeUsers();
 		FixinsActions.initializeDishes();
 		FixinsActions.initializeGenres();
@@ -14,7 +13,7 @@ export default class Splash extends React.Component{
 		FixinsActions.initializeReviews();
 		FixinsActions.initializeSpots();
 		FixinsActions.initializeCheckIns();
-		console.log("1) Splash page tried to initialize the data")
+		console.log("<Splash> tried to initialize all data")
 	}
 
 		render(){

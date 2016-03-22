@@ -143,41 +143,177 @@ class FixinsStore extends EventEmitter {
 	}
 
 	findAndRemoveCheckIn(ID){
-		console.log("findAndRemoveCheckIn")
+		for(let i = 0; i < this.users.checkIns; i++){
+			if(this.checkIns[i]._id === ID){
+				this.checkIns.splice(i, 1);
+				break;
+			}
+		}
+		this.emit("changedCheckIns")
+
 	}
 
 	findAndRemoveDish(ID){
-		console.log("findAndRemoveDish")
+		for(let i = 0; i < this.dishes.length; i++){
+			if(this.dishes[i]._id === ID){
+				this.dishes.splice(i, 1);
+				break;
+			}
+		}
+		this.emit("changedDishes")
 
 	}
 
 	findAndRemoveReview(ID){
-		console.log("findAndRemoveReview")
+		for(let i = 0; i < this.reviews.length; i++){
+			if(this.reviews[i]._id === ID){
+				this.reviews.splice(i, 1);
+				break;
+			}
+		}
+		this.emit("changedReviews")
 
 	}
 
 	findAndRemoveSpot(ID){
-		console.log("findAndRemoveSpot")
+		for(let i = 0; i < this.spots.length; i++){
+			if(this.spots[i]._id === ID){
+				this.spots.splice(i, 1);
+				break;
+			}
+		}
+		this.emit("changedSpots")
 
 	}
 
 	findAndRemoveSubNeighborhood(ID){
-		console.log("findAndRemoveSubNeighborhood")
+		for(let i = 0; i < this.subNeighborhoods.length; i++){
+			if(this.subNeighborhoods[i]._id === ID){
+				this.subNeighborhoods.splice(i, 1);
+				break;
+			}
+		}
+		this.emit("changedSubNeighborhoods")
 
 	}
 
 	findAndRemoveNeighborhood(ID){
-		console.log("findAndRemoveNeighborhood")
+		for(let i = 0; i < this.neighborhoods.length; i++){
+			if(this.neighborhoods[i]._id === ID){
+				this.neighborhoods.splice(i, 1);
+				break;
+			}
+		}
+		this.emit("changedNeighborhoods")
 
 	}
 
 	findAndRemoveGenre(ID){
-		console.log("findAndRemoveGenre")
+			for(let i = 0; i < this.genres.length; i++){
+			if(this.genres[i]._id === ID){
+				this.genres.splice(i, 1);
+				break;
+			}
+		}
+		this.emit("changedGenres")
 
 	}
 
 	findAndRemoveUser(ID){
-		console.log("findAndRemoveUser")
+		for(let i = 0; i < this.users.length; i++){
+			if(this.users[i]._id === ID){
+				this.users.splice(i, 1);
+				break;
+			}
+		}
+		this.emit("changedUsers")
+
+	}
+
+
+//////
+
+		modifyStoreCheckIn(changedCheckIn){
+		for(let i = 0; i < this.users.checkIns; i++){
+			if(this.checkIns[i]._id === ID){
+				this.checkIns.splice(i, 1);
+				break;
+			}
+		}
+		this.emit("changedCheckIns")
+
+	}
+
+	modifyStoreDish(changedDish){
+		for(let i = 0; i < this.dishes.length; i++){
+			if(this.dishes[i]._id === ID){
+				this.dishes.splice(i, 1);
+				break;
+			}
+		}
+		this.emit("changedDishes")
+
+	}
+
+	modifyStoreReview(changedReview){
+		for(let i = 0; i < this.reviews.length; i++){
+			if(this.reviews[i]._id === ID){
+				this.reviews.splice(i, 1);
+				break;
+			}
+		}
+		this.emit("changedReviews")
+
+	}
+
+	modifyStoreSpot(changedSpot){
+		for(let i = 0; i < this.spots.length; i++){
+			if(this.spots[i]._id === ID){
+				this.spots.splice(i, 1);
+				break;
+			}
+		}
+		this.emit("changedSpots")
+
+	}
+
+	modifyStoreSubNeighborhood(changedSubNeighborhood){
+		for(let i = 0; i < this.subNeighborhoods.length; i++){
+			if(this.subNeighborhoods[i]._id === ID){
+				this.subNeighborhoods.splice(i, 1);
+				break;
+			}
+		}
+		this.emit("changedSubNeighborhoods")
+
+	}
+
+	modifyStoreNeighborhood(changedNeighborhood){
+		for(let i = 0; i < this.neighborhoods.length; i++){
+			if(this.neighborhoods[i]._id === ID){
+				this.neighborhoods.splice(i, 1);
+				break;
+			}
+		}
+		this.emit("changedNeighborhoods")
+
+	}
+
+	modifyStoreGenre(changedGenre){
+			for(let i = 0; i < this.genres.length; i++){
+			if(this.genres[i]._id === ID){
+				this.genres.splice(i, 1);
+				break;
+			}
+		}
+		this.emit("changedGenres")
+
+	}
+
+	modifyStoreUser(changedUser){
+		var i = this.users.indexOf(user._id === changedUser._id)
+		this.users[i] = changedUser
+		this.emit("changedUsers")
 
 	}
 
@@ -250,7 +386,7 @@ class FixinsStore extends EventEmitter {
 			case "FETCH_SUBNEIGHBORHOODS":
 				console.log("FETCH_SUBNEIGHBORHOODS")
 				this.setSubNeighborhoodsInStore(action.allSubNeighborhoods)
-							break;
+				break;
 
 			case "FETCH_REVIEWS":
 				console.log("FETCH_REVIEWS")
@@ -273,13 +409,12 @@ class FixinsStore extends EventEmitter {
 				break;
 				
 			case "REMOVE_DISH":
-					console.log("REMOVE_DISH")
+				console.log("REMOVE_DISH")
 				this.findAndRemoveDish(action.dish)
 				break;
 				
 			case "REMOVE_GENRE":
-					console.log("REMOVE_GENRE")
-
+				console.log("REMOVE_GENRE")
 				this.findAndRemoveGenre(action.genre)
 				break;
 				
@@ -291,7 +426,7 @@ class FixinsStore extends EventEmitter {
 			case "REMOVE_SUBNEIGHBORHOOD":
 				console.log("REMOVE_SUBNEIGHBORHOOD")
 				this.findAndRemoveSubNeighborhood(action.subNeighborhood)
-							break;
+				break;
 
 			case "REMOVE_REVIEW":
 				console.log("REMOVE_REVIEW")
@@ -302,12 +437,52 @@ class FixinsStore extends EventEmitter {
 					console.log("REMOVE_SPOT")
 				this.findAndRemoveSpot(action.spot)
 				break;
-			
-
+		
 			case "REMOVE_USER":
 					console.log("REMOVE_USER")
 				this.findAndRemoveUser(action.user)
-				break;		
+				break;
+
+
+			case "CHANGED_CHECKIN":
+				console.log("CHANGED_CHECKIN")
+				this.modifyStoreCheckIn(action.changedCheckIn)
+				break;
+				
+			case "CHANGED_DISH":
+				console.log("CHANGED_DISH")
+				this.modifyStoreDish(action.changedDish)
+				break;
+				
+			case "CHANGED_GENRE":
+				console.log("CHANGED_GENRE")
+				this.modifyStoreGenre(action.changedGenre)
+				break;
+				
+			case "CHANGED_NEIGHBORHOOD":
+				console.log("CHANGED_NEIGHBORHOOD")
+				this.modifyStoreNeighborhood(action.changedNeighborhood)
+				break;
+				
+			case "CHANGED_SUBNEIGHBORHOOD":
+				console.log("CHANGED_SUBNEIGHBORHOOD")
+				this.modifyStoreSubNeighborhood(action.changedSubNeighborhood)
+				break;
+
+			case "CHANGED_REVIEW":
+				console.log("CHANGED_REVIEW")
+				this.modifyStoreReview(action.changedReview)
+				break;
+			
+			case "CHANGED_SPOT":
+					console.log("CHANGED_SPOT")
+				this.modifyStoreSpot(action.changedSpot)
+				break;
+		
+			case "CHANGED_USER":
+					console.log("CHANGED_USER")
+				this.modifyStoreUser(action.changedUser)
+				break;			
 		}
 	}
 }

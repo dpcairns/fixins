@@ -24923,7 +24923,6 @@
 		_createClass(Splash, [{
 			key: "componentDidMount",
 			value: function componentDidMount() {
-				console.log("Splash.componentWillMount() says");
 				FixinsActions.initializeUsers();
 				FixinsActions.initializeDishes();
 				FixinsActions.initializeGenres();
@@ -24932,7 +24931,7 @@
 				FixinsActions.initializeReviews();
 				FixinsActions.initializeSpots();
 				FixinsActions.initializeCheckIns();
-				console.log("1) Splash page tried to initialize the data");
+				console.log("<Splash> tried to initialize all data");
 			}
 		}, {
 			key: "render",
@@ -24991,6 +24990,19 @@
 	exports.removeUser = removeUser;
 	exports.removeNeighborhood = removeNeighborhood;
 	exports.removeDish = removeDish;
+	exports.removeSubNeighborhood = removeSubNeighborhood;
+	exports.removeGenre = removeGenre;
+	exports.removeReview = removeReview;
+	exports.removeCheckIn = removeCheckIn;
+	exports.removeSpot = removeSpot;
+	exports.findAndChangeUser = findAndChangeUser;
+	exports.findAndChangeNeighborhood = findAndChangeNeighborhood;
+	exports.findAndChangeDish = findAndChangeDish;
+	exports.findAndChangeSubNeighborhood = findAndChangeSubNeighborhood;
+	exports.findAndChangeGenre = findAndChangeGenre;
+	exports.findAndChangeReview = findAndChangeReview;
+	exports.findAndChangeCheckIn = findAndChangeCheckIn;
+	exports.findAndChangeSpot = findAndChangeSpot;
 
 	var _dispatcher = __webpack_require__(221);
 
@@ -25004,7 +25016,6 @@
 			type: 'POST',
 			data: newUser,
 			success: function (postedUser) {
-				console.log("trying to make a user");
 				console.log(postedUser);
 				_dispatcher2.default.dispatch({
 					type: "CREATE_USER",
@@ -25270,15 +25281,15 @@
 		});
 	}
 
-	function removeUser(userID) {
+	function removeUser(ID) {
 		$.ajax({
-			url: "http://localhost:4444/api/Users/" + userID,
+			url: "http://localhost:4444/api/Users/" + ID,
 			type: 'DELETE',
 			success: function (postedUser) {
 				console.log("user probably deleted");
 				_dispatcher2.default.dispatch({
 					type: "REMOVE_USER",
-					postedUser: postedUser
+					user: ID
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25289,13 +25300,13 @@
 
 	function removeNeighborhood(ID) {
 		$.ajax({
-			url: "http://localhost:4444/api/Dishes/" + ID,
+			url: "http://localhost:4444/api/Neighborhoods/" + ID,
 			type: 'DELETE',
 			success: function (postedUser) {
 				console.log("neighborhood probably deleted");
 				_dispatcher2.default.dispatch({
-					type: "REMOVE_USER",
-					postedUser: postedUser
+					type: "REMOVE_NEIGHBORHOOD",
+					neighborhood: ID
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25311,8 +25322,229 @@
 			success: function (postedUser) {
 				console.log("dish probably deleted");
 				_dispatcher2.default.dispatch({
-					type: "REMOVE_USER",
-					postedUser: postedUser
+					type: "REMOVE_DISH",
+					dish: ID
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+	function removeSubNeighborhood(ID) {
+		$.ajax({
+			url: "http://localhost:4444/api/SubNeighborhoods/" + ID,
+			type: 'DELETE',
+			success: function () {
+				console.log("subNeighborhood probably deleted");
+				_dispatcher2.default.dispatch({
+					type: "REMOVE_SUBNEIGHBORHOOD",
+					subNeighborhoods: ID
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+	function removeGenre(ID) {
+		$.ajax({
+			url: "http://localhost:4444/api/Genres/" + ID,
+			type: 'DELETE',
+			success: function () {
+				console.log("genre probably deleted");
+				_dispatcher2.default.dispatch({
+					type: "REMOVE_GENRE",
+					genre: ID
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+	function removeReview(ID) {
+		$.ajax({
+			url: "http://localhost:4444/api/Reviews/" + ID,
+			type: 'DELETE',
+			success: function (postedUser) {
+				console.log("review probably deleted");
+				_dispatcher2.default.dispatch({
+					type: "REMOVE_REVIEW",
+					review: ID
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+	function removeCheckIn(ID) {
+		$.ajax({
+			url: "http://localhost:4444/api/CheckIns/" + ID,
+			type: 'DELETE',
+			success: function () {
+				console.log("checkIn probably deleted");
+				_dispatcher2.default.dispatch({
+					type: "REMOVE_CHECKIN",
+					checkIn: ID
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+	function removeSpot(ID) {
+		$.ajax({
+			url: "http://localhost:4444/api/Spots/" + ID,
+			type: 'DELETE',
+			success: function () {
+				console.log("spot probably deleted");
+				_dispatcher2.default.dispatch({
+					type: "REMOVE_SPOT",
+					spot: ID
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+	function findAndChangeUser(ID) {
+		$.ajax({
+			url: "http://localhost:4444/api/Users/" + ID,
+			type: 'PUT',
+			success: function (changedUser) {
+				console.log("user probably changed to:");
+				console.log(changedUser);
+				_dispatcher2.default.dispatch({
+					type: "CHANGED_USER",
+					user: changedUser
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+	function findAndChangeNeighborhood(ID) {
+		$.ajax({
+			url: "http://localhost:4444/api/Neighborhoods/" + ID,
+			type: 'PUT',
+			success: function (changedNeighborhood) {
+				console.log("user probably changed to:");
+				console.log(changedNeighborhood);
+				_dispatcher2.default.dispatch({
+					type: "CHANGED_NEIGHBORHOOD",
+					user: changedNeighborhood
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+	function findAndChangeDish(ID) {
+		$.ajax({
+			url: "http://localhost:4444/api/Dishes/" + ID,
+			type: 'PUT',
+			success: function (changedDish) {
+				console.log("dish probably changed to:");
+				console.log(changedDish);
+				_dispatcher2.default.dispatch({
+					type: "CHANGED_DISH",
+					user: changedDish
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+	function findAndChangeSubNeighborhood(ID) {
+		$.ajax({
+			url: "http://localhost:4444/api/SubNeighborhoods/" + ID,
+			type: 'PUT',
+			success: function (changedSubNeighborhood) {
+				console.log("subNeighborhood probably changed to:");
+				console.log(changedSubNeighborhood);
+				_dispatcher2.default.dispatch({
+					type: "CHANGED_SUBNEIGHBORHOOD",
+					user: changedSubNeighborhood
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+	function findAndChangeGenre(ID) {
+		$.ajax({
+			url: "http://localhost:4444/api/Genres/" + ID,
+			type: 'PUT',
+			success: function (changedGenre) {
+				console.log("genre probably changed to:");
+				console.log(changedGenre);
+				_dispatcher2.default.dispatch({
+					type: "CHANGED_GENRE",
+					user: changedGenre
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+	function findAndChangeReview(ID) {
+		$.ajax({
+			url: "http://localhost:4444/api/Reviews/" + ID,
+			type: 'PUT',
+			success: function (changedReview) {
+				console.log("review probably changed to:");
+				console.log(changedReview);
+				_dispatcher2.default.dispatch({
+					type: "CHANGED_REVIEW",
+					user: changedReview
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+	function findAndChangeCheckIn(ID) {
+		$.ajax({
+			url: "http://localhost:4444/api/CheckIns/" + ID,
+			type: 'PUT',
+			success: function (changedCheckIn) {
+				console.log("checkIn probably changed to:");
+				console.log(changedCheckIn);
+				_dispatcher2.default.dispatch({
+					type: "CHANGED_CHECKIN",
+					user: changedCheckIn
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./Users', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+	function findAndChangeSpot(ID) {
+		$.ajax({
+			url: "http://localhost:4444/api/Spots/" + ID,
+			type: 'PUT',
+			success: function (changedSpot) {
+				console.log("spot probably changed to:");
+				console.log(changedSpot);
+				_dispatcher2.default.dispatch({
+					type: "CHANGED_SPOT",
+					user: changedSpot
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25878,11 +26110,11 @@
 				this.setState({
 					allUsers: _FixinsStore2.default.getUsersFromStore(),
 					allSpots: _FixinsStore2.default.getSpotsFromStore(),
-					//		allCheckins: FixinsStore.getCheckInsFromStore(),
+					allCheckins: _FixinsStore2.default.getCheckInsFromStore(),
 					allDishes: _FixinsStore2.default.getDishesFromStore(),
 					allSubNeighborhoods: _FixinsStore2.default.getSubNeighborhoodsFromStore(),
 					allNeighborhoods: _FixinsStore2.default.getNeighborhoodsFromStore(),
-					//		allReviews: FixinsStore.getReviewsFromStore(),
+					allReviews: _FixinsStore2.default.getReviewsFromStore(),
 					allGenres: _FixinsStore2.default.getGenresFromStore()
 				});
 			}
@@ -25901,6 +26133,7 @@
 				_FixinsStore2.default.on("changedDishes", this.goFindDishes.bind(this));
 				_FixinsStore2.default.on("changedSpots", this.goFindSpots.bind(this));
 				_FixinsStore2.default.on("changedCheckins", this.goFindCheckIns.bind(this));
+				_FixinsStore2.default.on("changedGenres", this.goFindGenres.bind(this));
 			}
 		}, {
 			key: "componentWillUnmount",
@@ -25912,6 +26145,7 @@
 				_FixinsStore2.default.removeListener("changedDishes", this.goFindDishes.bind(this));
 				_FixinsStore2.default.removeListener("changedSpots", this.goFindSpots.bind(this));
 				_FixinsStore2.default.removeListener("changedCheckins", this.goFindCheckIns.bind(this));
+				_FixinsStore2.default.removeListener("changedGenres", this.goFindGenres.bind(this));
 			}
 		}, {
 			key: "render",
@@ -26492,6 +26726,8 @@
 					FixinsActions.removeCheckIn(this.props.id);
 				} else if (this.props.type === "SubNeighborhood") {
 					FixinsActions.removeSubNeighborhood(this.props.id);
+				} else if (this.props.type === "Genre") {
+					FixinsActions.removeGenre(this.props.id);
 				} else {
 					console.log("no type specified to delete");
 				}
@@ -28172,6 +28408,181 @@
 				this.emit("changedGenres");
 			}
 		}, {
+			key: "findAndRemoveCheckIn",
+			value: function findAndRemoveCheckIn(ID) {
+				for (var i = 0; i < this.users.checkIns; i++) {
+					if (this.checkIns[i]._id === ID) {
+						this.checkIns.splice(i, 1);
+						break;
+					}
+				}
+				this.emit("changedCheckIns");
+			}
+		}, {
+			key: "findAndRemoveDish",
+			value: function findAndRemoveDish(ID) {
+				for (var i = 0; i < this.dishes.length; i++) {
+					if (this.dishes[i]._id === ID) {
+						this.dishes.splice(i, 1);
+						break;
+					}
+				}
+				this.emit("changedDishes");
+			}
+		}, {
+			key: "findAndRemoveReview",
+			value: function findAndRemoveReview(ID) {
+				for (var i = 0; i < this.reviews.length; i++) {
+					if (this.reviews[i]._id === ID) {
+						this.reviews.splice(i, 1);
+						break;
+					}
+				}
+				this.emit("changedReviews");
+			}
+		}, {
+			key: "findAndRemoveSpot",
+			value: function findAndRemoveSpot(ID) {
+				for (var i = 0; i < this.spots.length; i++) {
+					if (this.spots[i]._id === ID) {
+						this.spots.splice(i, 1);
+						break;
+					}
+				}
+				this.emit("changedSpots");
+			}
+		}, {
+			key: "findAndRemoveSubNeighborhood",
+			value: function findAndRemoveSubNeighborhood(ID) {
+				for (var i = 0; i < this.subNeighborhoods.length; i++) {
+					if (this.subNeighborhoods[i]._id === ID) {
+						this.subNeighborhoods.splice(i, 1);
+						break;
+					}
+				}
+				this.emit("changedSubNeighborhoods");
+			}
+		}, {
+			key: "findAndRemoveNeighborhood",
+			value: function findAndRemoveNeighborhood(ID) {
+				for (var i = 0; i < this.neighborhoods.length; i++) {
+					if (this.neighborhoods[i]._id === ID) {
+						this.neighborhoods.splice(i, 1);
+						break;
+					}
+				}
+				this.emit("changedNeighborhoods");
+			}
+		}, {
+			key: "findAndRemoveGenre",
+			value: function findAndRemoveGenre(ID) {
+				for (var i = 0; i < this.genres.length; i++) {
+					if (this.genres[i]._id === ID) {
+						this.genres.splice(i, 1);
+						break;
+					}
+				}
+				this.emit("changedGenres");
+			}
+		}, {
+			key: "findAndRemoveUser",
+			value: function findAndRemoveUser(ID) {
+				for (var i = 0; i < this.users.length; i++) {
+					if (this.users[i]._id === ID) {
+						this.users.splice(i, 1);
+						break;
+					}
+				}
+				this.emit("changedUsers");
+			}
+
+			//////
+
+		}, {
+			key: "modifyStoreCheckIn",
+			value: function modifyStoreCheckIn(changedCheckIn) {
+				for (var i = 0; i < this.users.checkIns; i++) {
+					if (this.checkIns[i]._id === ID) {
+						this.checkIns.splice(i, 1);
+						break;
+					}
+				}
+				this.emit("changedCheckIns");
+			}
+		}, {
+			key: "modifyStoreDish",
+			value: function modifyStoreDish(changedDish) {
+				for (var i = 0; i < this.dishes.length; i++) {
+					if (this.dishes[i]._id === ID) {
+						this.dishes.splice(i, 1);
+						break;
+					}
+				}
+				this.emit("changedDishes");
+			}
+		}, {
+			key: "modifyStoreReview",
+			value: function modifyStoreReview(changedReview) {
+				for (var i = 0; i < this.reviews.length; i++) {
+					if (this.reviews[i]._id === ID) {
+						this.reviews.splice(i, 1);
+						break;
+					}
+				}
+				this.emit("changedReviews");
+			}
+		}, {
+			key: "modifyStoreSpot",
+			value: function modifyStoreSpot(changedSpot) {
+				for (var i = 0; i < this.spots.length; i++) {
+					if (this.spots[i]._id === ID) {
+						this.spots.splice(i, 1);
+						break;
+					}
+				}
+				this.emit("changedSpots");
+			}
+		}, {
+			key: "modifyStoreSubNeighborhood",
+			value: function modifyStoreSubNeighborhood(changedSubNeighborhood) {
+				for (var i = 0; i < this.subNeighborhoods.length; i++) {
+					if (this.subNeighborhoods[i]._id === ID) {
+						this.subNeighborhoods.splice(i, 1);
+						break;
+					}
+				}
+				this.emit("changedSubNeighborhoods");
+			}
+		}, {
+			key: "modifyStoreNeighborhood",
+			value: function modifyStoreNeighborhood(changedNeighborhood) {
+				for (var i = 0; i < this.neighborhoods.length; i++) {
+					if (this.neighborhoods[i]._id === ID) {
+						this.neighborhoods.splice(i, 1);
+						break;
+					}
+				}
+				this.emit("changedNeighborhoods");
+			}
+		}, {
+			key: "modifyStoreGenre",
+			value: function modifyStoreGenre(changedGenre) {
+				for (var i = 0; i < this.genres.length; i++) {
+					if (this.genres[i]._id === ID) {
+						this.genres.splice(i, 1);
+						break;
+					}
+				}
+				this.emit("changedGenres");
+			}
+		}, {
+			key: "modifyStoreUser",
+			value: function modifyStoreUser(changedUser) {
+				var i = this.users.indexOf(user._id === changedUser._id);
+				this.users[i] = changedUser;
+				this.emit("changedUsers");
+			}
+		}, {
 			key: "handleActions",
 			value: function handleActions(action) {
 				switch (action.type) {
@@ -28252,6 +28663,90 @@
 						this.setSpotsInStore(action.allSpots);
 						break;
 
+					case "FETCH_USERS":
+						console.log("FETCH_USERS");
+						this.setUsersInStore(action.allUsers);
+						break;
+
+					case "REMOVE_CHECKIN":
+						console.log("REMOVE_CHECKIN");
+						this.findAndRemoveCheckIn(action.checkIn);
+						break;
+
+					case "REMOVE_DISH":
+						console.log("REMOVE_DISH");
+						this.findAndRemoveDish(action.dish);
+						break;
+
+					case "REMOVE_GENRE":
+						console.log("REMOVE_GENRE");
+						this.findAndRemoveGenre(action.genre);
+						break;
+
+					case "REMOVE_NEIGHBORHOOD":
+						console.log("REMOVE_NEIGHBORHOOD");
+						this.findAndRemoveNeighborhood(action.neighborhood);
+						break;
+
+					case "REMOVE_SUBNEIGHBORHOOD":
+						console.log("REMOVE_SUBNEIGHBORHOOD");
+						this.findAndRemoveSubNeighborhood(action.subNeighborhood);
+						break;
+
+					case "REMOVE_REVIEW":
+						console.log("REMOVE_REVIEW");
+						this.findAndRemoveReview(action.review);
+						break;
+
+					case "REMOVE_SPOT":
+						console.log("REMOVE_SPOT");
+						this.findAndRemoveSpot(action.spot);
+						break;
+
+					case "REMOVE_USER":
+						console.log("REMOVE_USER");
+						this.findAndRemoveUser(action.user);
+						break;
+
+					case "CHANGED_CHECKIN":
+						console.log("CHANGED_CHECKIN");
+						this.modifyStoreCheckIn(action.changedCheckIn);
+						break;
+
+					case "CHANGED_DISH":
+						console.log("CHANGED_DISH");
+						this.modifyStoreDish(action.changedDish);
+						break;
+
+					case "CHANGED_GENRE":
+						console.log("CHANGED_GENRE");
+						this.modifyStoreGenre(action.changedGenre);
+						break;
+
+					case "CHANGED_NEIGHBORHOOD":
+						console.log("CHANGED_NEIGHBORHOOD");
+						this.modifyStoreNeighborhood(action.changedNeighborhood);
+						break;
+
+					case "CHANGED_SUBNEIGHBORHOOD":
+						console.log("CHANGED_SUBNEIGHBORHOOD");
+						this.modifyStoreSubNeighborhood(action.changedSubNeighborhood);
+						break;
+
+					case "CHANGED_REVIEW":
+						console.log("CHANGED_REVIEW");
+						this.modifyStoreReview(action.changedReview);
+						break;
+
+					case "CHANGED_SPOT":
+						console.log("CHANGED_SPOT");
+						this.modifyStoreSpot(action.changedSpot);
+						break;
+
+					case "CHANGED_USER":
+						console.log("CHANGED_USER");
+						this.modifyStoreUser(action.changedUser);
+						break;
 				}
 			}
 		}]);

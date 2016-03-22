@@ -101,11 +101,11 @@ export default class Admin extends React.Component{
 			{
 				allUsers: FixinsStore.getUsersFromStore(),
 				allSpots: FixinsStore.getSpotsFromStore(),
-		//		allCheckins: FixinsStore.getCheckInsFromStore(),
+				allCheckins: FixinsStore.getCheckInsFromStore(),
 				allDishes: FixinsStore.getDishesFromStore(),
 				allSubNeighborhoods: FixinsStore.getSubNeighborhoodsFromStore(),
 				allNeighborhoods: FixinsStore.getNeighborhoodsFromStore(),
-		//		allReviews: FixinsStore.getReviewsFromStore(),
+				allReviews: FixinsStore.getReviewsFromStore(),
 				allGenres: FixinsStore.getGenresFromStore()
 			}
 
@@ -124,6 +124,8 @@ export default class Admin extends React.Component{
 		FixinsStore.on("changedDishes", this.goFindDishes.bind(this))
 		FixinsStore.on("changedSpots", this.goFindSpots.bind(this))
 		FixinsStore.on("changedCheckins", this.goFindCheckIns.bind(this))
+		FixinsStore.on("changedGenres", this.goFindGenres.bind(this))
+
 	}
 
 	componentWillUnmount(){
@@ -134,6 +136,7 @@ export default class Admin extends React.Component{
 		FixinsStore.removeListener("changedDishes", this.goFindDishes.bind(this))
 		FixinsStore.removeListener("changedSpots", this.goFindSpots.bind(this))
 		FixinsStore.removeListener("changedCheckins", this.goFindCheckIns.bind(this))
+		FixinsStore.removeListener("changedGenres", this.goFindGenres.bind(this))
 	}
 
 	render(){
