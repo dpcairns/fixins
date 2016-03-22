@@ -280,7 +280,6 @@ export function initializeCheckIns(data){
 			url: "http://localhost:4444/api/Users/" + ID,
 			type: 'DELETE',
 			success: function(postedUser){
-				console.log("user probably deleted")
 						dispatcher.dispatch({
 								type: "REMOVE_USER",
 								user: ID
@@ -298,7 +297,6 @@ export function initializeCheckIns(data){
 			url: "http://localhost:4444/api/Neighborhoods/" + ID,
 			type: 'DELETE',
 			success: function(postedUser){
-				console.log("neighborhood probably deleted")
 						dispatcher.dispatch({
 								type: "REMOVE_NEIGHBORHOOD",
 								neighborhood: ID
@@ -316,7 +314,6 @@ export function initializeCheckIns(data){
 			url: "http://localhost:4444/api/Dishes/" + ID,
 			type: 'DELETE',
 			success: function(postedUser){
-				console.log("dish probably deleted")
 						dispatcher.dispatch({
 								type: "REMOVE_DISH",
 								dish: ID
@@ -332,7 +329,6 @@ export function initializeCheckIns(data){
 			url: "http://localhost:4444/api/SubNeighborhoods/" + ID,
 			type: 'DELETE',
 			success: function(){
-				console.log("subNeighborhood probably deleted")
 						dispatcher.dispatch({
 								type: "REMOVE_SUBNEIGHBORHOOD",
 								subNeighborhoods: ID
@@ -348,7 +344,6 @@ export function initializeCheckIns(data){
 			url: "http://localhost:4444/api/Genres/" + ID,
 			type: 'DELETE',
 			success: function(){
-				console.log("genre probably deleted")
 						dispatcher.dispatch({
 								type: "REMOVE_GENRE",
 								genre: ID
@@ -364,7 +359,6 @@ export function initializeCheckIns(data){
 			url: "http://localhost:4444/api/Reviews/" + ID,
 			type: 'DELETE',
 			success: function(postedUser){
-				console.log("review probably deleted")
 						dispatcher.dispatch({
 								type: "REMOVE_REVIEW",
 								review: ID
@@ -380,7 +374,6 @@ export function initializeCheckIns(data){
 			url: "http://localhost:4444/api/CheckIns/" + ID,
 			type: 'DELETE',
 			success: function(){
-				console.log("checkIn probably deleted")
 						dispatcher.dispatch({
 								type: "REMOVE_CHECKIN",
 								checkIn: ID
@@ -397,7 +390,6 @@ export function initializeCheckIns(data){
 			url: "http://localhost:4444/api/Spots/" + ID,
 			type: 'DELETE',
 			success: function(){
-				console.log("spot probably deleted")
 						dispatcher.dispatch({
 								type: "REMOVE_SPOT",
 								spot: ID
@@ -409,16 +401,15 @@ export function initializeCheckIns(data){
 		});
 	}
 
-		export function findAndChangeUser(userToChange){
+		export function findAndChangeUser(newUserInfo){
 		$.ajax({
-			url: "http://localhost:4444/api/Users/" + userToChange._id,
+			url: "http://localhost:4444/api/Users/" + newUserInfo._id,
 			type: 'PUT',
+			data: newUserInfo,
 			success: function(changedUser){
-				console.log("user probably changed to:")
-				console.log(changedUser)
 						dispatcher.dispatch({
 								type: "CHANGED_USER",
-								user: changedUser
+								changedUser: changedUser
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -428,125 +419,123 @@ export function initializeCheckIns(data){
 	}
 
 
-	export function findAndChangeNeighborhood(ID){
+	export function findAndChangeNeighborhood(newNeighborhoodInfo){
 		$.ajax({
-			url: "http://localhost:4444/api/Neighborhoods/" + ID,
+			url: "http://localhost:4444/api/Neighborhoods/" + newNeighborhoodInfo._id,
 			type: 'PUT',
-		success: function(changedNeighborhood){
-				console.log("user probably changed to:")
-				console.log(changedNeighborhood)
+			data: newNeighborhoodInfo,
+			success: function(changedNeighborhood){
 						dispatcher.dispatch({
 								type: "CHANGED_NEIGHBORHOOD",
-								user: changedNeighborhood
+								changedNeighborhood: changedNeighborhood
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
-				console.error('./Users', status, err.toString());
+				console.error('./Neighborhoods', status, err.toString());
 			}.bind(this)
 		});
 	}
 
-
-	export function findAndChangeDish(ID){
+	export function findAndChangeDish(newDishInfo){
 		$.ajax({
-			url: "http://localhost:4444/api/Dishes/" + ID,
+			url: "http://localhost:4444/api/Dishes/" + newDishInfo._id,
 			type: 'PUT',
-		success: function(changedDish){
-				console.log("dish probably changed to:")
-				console.log(changedDish)
+			data: newDishInfo,
+			success: function(changedDish){
 						dispatcher.dispatch({
 								type: "CHANGED_DISH",
-								user: changedDish
+								changedDish: changedDish
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
-				console.error('./Users', status, err.toString());
-			}.bind(this)
-		});
-	}
-	export function findAndChangeSubNeighborhood(ID){
-		$.ajax({
-			url: "http://localhost:4444/api/SubNeighborhoods/" + ID,
-			type: 'PUT',
-		success: function(changedSubNeighborhood){
-				console.log("subNeighborhood probably changed to:")
-				console.log(changedSubNeighborhood)
-						dispatcher.dispatch({
-								type: "CHANGED_SUBNEIGHBORHOOD",
-								user: changedSubNeighborhood
-											});
-			}.bind(this),
-			error: function(xhr, status, err){
-				console.error('./Users', status, err.toString());
-			}.bind(this)
-		});
-	}
-	export function findAndChangeGenre(ID){
-		$.ajax({
-			url: "http://localhost:4444/api/Genres/" + ID,
-			type: 'PUT',
-		success: function(changedGenre){
-				console.log("genre probably changed to:")
-				console.log(changedGenre)
-						dispatcher.dispatch({
-								type: "CHANGED_GENRE",
-								user: changedGenre
-											});
-			}.bind(this),
-			error: function(xhr, status, err){
-				console.error('./Users', status, err.toString());
-			}.bind(this)
-		});
-	}
-	export function findAndChangeReview(ID){
-		$.ajax({
-			url: "http://localhost:4444/api/Reviews/" + ID,
-			type: 'PUT',
-		success: function(changedReview){
-				console.log("review probably changed to:")
-				console.log(changedReview)
-						dispatcher.dispatch({
-								type: "CHANGED_REVIEW",
-								user: changedReview
-											});
-			}.bind(this),
-			error: function(xhr, status, err){
-				console.error('./Users', status, err.toString());
-			}.bind(this)
-		});
-	}
-	export function findAndChangeCheckIn(ID){
-		$.ajax({
-			url: "http://localhost:4444/api/CheckIns/" + ID,
-			type: 'PUT',
-		success: function(changedCheckIn){
-				console.log("checkIn probably changed to:")
-				console.log(changedCheckIn)
-						dispatcher.dispatch({
-								type: "CHANGED_CHECKIN",
-								user: changedCheckIn
-											});
-			}.bind(this),
-			error: function(xhr, status, err){
-				console.error('./Users', status, err.toString());
+				console.error('./Dishes', status, err.toString());
 			}.bind(this)
 		});
 	}
 
-	export function findAndChangeSpot(ID){
+		export function findAndChangeSubNeighborhood(newSubNeighborhoodInfo){
 		$.ajax({
-			url: "http://localhost:4444/api/Spots/" + ID,
+			url: "http://localhost:4444/api/SubNeighborhoods/" + newSubNeighborhoodInfo._id,
 			type: 'PUT',
-			success: function(changedSpot){
-				console.log("spot probably changed to:")
-				console.log(changedSpot)
+			data: newSubNeighborhoodInfo,
+			success: function(changedSubNeighborhood){
 						dispatcher.dispatch({
-								type: "CHANGED_SPOT",
-								user: changedSpot
+								type: "CHANGED_SUBNEIGHBORHOOD",
+								changedSubNeighborhood: changedSubNeighborhood
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
-				console.error('./Users', status, err.toString());
+				console.error('./SubNeighborhoods', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+
+	export function findAndChangeGenre(newGenreInfo){
+		$.ajax({
+			url: "http://localhost:4444/api/Genres/" + newGenreInfo._id,
+			type: 'PUT',
+			data: newGenreInfo,
+			success: function(changedGenre){
+						dispatcher.dispatch({
+								type: "CHANGED_GENRE",
+								changedGenre: changedGenre
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Genres', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+	export function findAndChangeReview(newReviewInfo){
+		$.ajax({
+			url: "http://localhost:4444/api/Reviews/" + newReviewInfo._id,
+			type: 'PUT',
+			data: newReviewInfo,
+			success: function(changedReview){
+						dispatcher.dispatch({
+								type: "CHANGED_REVIEW",
+								changedReview: changedReview
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Reviews', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+		export function findAndChangeCheckIn(newCheckInInfo){
+		$.ajax({
+			url: "http://localhost:4444/api/CheckIns/" + newCheckInInfo._id,
+			type: 'PUT',
+			data: newCheckInInfo,
+			success: function(changedCheckIn){
+						dispatcher.dispatch({
+								type: "CHANGED_CHECKIN",
+								changedCheckIn: changedCheckIn
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./CheckIns', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+
+		export function findAndChangeSpot(newSpotInfo){
+		$.ajax({
+			url: "http://localhost:4444/api/Spots/" + newSpotInfo._id,
+			type: 'PUT',
+			data: newSpotInfo,
+			success: function(changedSpot){
+						dispatcher.dispatch({
+								type: "CHANGED_SPOT",
+								changedSpot: changedSpot
+											});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error('./Spots', status, err.toString());
 			}.bind(this)
 		});
 	}

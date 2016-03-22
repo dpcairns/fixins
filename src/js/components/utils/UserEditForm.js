@@ -26,42 +26,37 @@ export default class UserEditForm extends React.Component{
 
 	handleSubNeighborhoodChange(e){
 		this.setState({newSubNeighborhood: e.target.value})
-		console.log(this.state.newSubNeighborhood)
 	}
 
 	handleFriendChange(e){
 		this.setState({newFriend: e.target.value})
-		console.log(this.state.newFriend)
 	}
 
 	handleCheckInChange(e){
 		this.setState({newCheckIn: e.target.value})
-		console.log(this.state.newCheckIn)
 	}
 
 	handleFavoriteChange(e){
 		this.setState({newFavorite: e.target.value})
-		console.log(this.state.newFavorite)
 	}
 
 
 	handleReviewChange(e){
 		this.setState({newReview: e.target.value})
-		console.log(this.state.newReview)
 	}
 
 	handleSubmit(e){
 		e.preventDefault();
-		var changedUser = {}
-		changedUser._id = this.props.userID
-		changedUser.newUsername = this.state.newUsername
-		changedUser.newPassword = this.state.newPassword
-		changedUser.newSubNeighborhood = this.state.newSubNeighborhood
-		changedUser.newReview = this.state.newReview
-		changedUser.newFriend = this.state.newFriend
-		changedUser.newCheckIn = this.state.newCheckIn
-		changedUser.newFavorite = this.state.newFavorite
-		FixinsActions.findAndChangeUser(changedUser)
+		var newUserInfo = {}
+		newUserInfo._id = this.props.userID
+		newUserInfo.newUsername = this.state.newUsername
+		newUserInfo.newPassword = this.state.newPassword
+		newUserInfo.newSubNeighborhood = this.state.newSubNeighborhood
+		newUserInfo.newReview = this.state.newReview
+		newUserInfo.newFriend = this.state.newFriend
+		newUserInfo.newCheckIn = this.state.newCheckIn
+		newUserInfo.newFavorite = this.state.newFavorite
+		FixinsActions.findAndChangeUser(newUserInfo)
 		this.setState({newUsername: "", 
 						newPassword: "", 
 						newSubNeighborhood: "",

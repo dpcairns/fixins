@@ -234,9 +234,9 @@ class FixinsStore extends EventEmitter {
 //////
 
 		modifyStoreCheckIn(changedCheckIn){
-		for(let i = 0; i < this.users.checkIns; i++){
-			if(this.checkIns[i]._id === ID){
-				this.checkIns.splice(i, 1);
+		for (let i in this.checkIns){
+			if (this.checkIns[i]._id = changedCheckIn._id){
+				this.checkIns[i] = changedCheckIn
 				break;
 			}
 		}
@@ -245,9 +245,9 @@ class FixinsStore extends EventEmitter {
 	}
 
 	modifyStoreDish(changedDish){
-		for(let i = 0; i < this.dishes.length; i++){
-			if(this.dishes[i]._id === ID){
-				this.dishes.splice(i, 1);
+			for (let i in this.dishes){
+			if (this.dishes[i]._id = changedDish._id){
+				this.dishes[i] = changedDish
 				break;
 			}
 		}
@@ -256,9 +256,9 @@ class FixinsStore extends EventEmitter {
 	}
 
 	modifyStoreReview(changedReview){
-		for(let i = 0; i < this.reviews.length; i++){
-			if(this.reviews[i]._id === ID){
-				this.reviews.splice(i, 1);
+		for (let i in this.review){
+			if (this.reviews[i]._id = changedReview._id){
+				this.reviews[i] = changedReview
 				break;
 			}
 		}
@@ -267,9 +267,9 @@ class FixinsStore extends EventEmitter {
 	}
 
 	modifyStoreSpot(changedSpot){
-		for(let i = 0; i < this.spots.length; i++){
-			if(this.spots[i]._id === ID){
-				this.spots.splice(i, 1);
+			for (let i in this.spots){
+			if (this.spots[i]._id = changedSpot._id){
+				this.spots[i] = changedSpot
 				break;
 			}
 		}
@@ -278,9 +278,9 @@ class FixinsStore extends EventEmitter {
 	}
 
 	modifyStoreSubNeighborhood(changedSubNeighborhood){
-		for(let i = 0; i < this.subNeighborhoods.length; i++){
-			if(this.subNeighborhoods[i]._id === ID){
-				this.subNeighborhoods.splice(i, 1);
+		for (let i in this.subNeighborhoods){
+			if (this.subNeighborhoods[i]._id = changedSubNeighborhood._id){
+				this.subNeighborhoods[i] = changedSubNeighborhood
 				break;
 			}
 		}
@@ -289,9 +289,9 @@ class FixinsStore extends EventEmitter {
 	}
 
 	modifyStoreNeighborhood(changedNeighborhood){
-		for(let i = 0; i < this.neighborhoods.length; i++){
-			if(this.neighborhoods[i]._id === ID){
-				this.neighborhoods.splice(i, 1);
+		for (let i in this.neighborhoods){
+			if (this.neighborhoods[i]._id = changedNeighborhood._id){
+				this.neighborhoods[i] = changedNeighborhood
 				break;
 			}
 		}
@@ -300,9 +300,9 @@ class FixinsStore extends EventEmitter {
 	}
 
 	modifyStoreGenre(changedGenre){
-			for(let i = 0; i < this.genres.length; i++){
-			if(this.genres[i]._id === ID){
-				this.genres.splice(i, 1);
+		for (let i in this.genres){
+			if (this.genres[i]._id = changedGenre._id){
+				this.genres[i] = changedGenre
 				break;
 			}
 		}
@@ -311,8 +311,12 @@ class FixinsStore extends EventEmitter {
 	}
 
 	modifyStoreUser(changedUser){
-		var i = this.users.indexOf(user._id === changedUser._id)
-		this.users[i] = changedUser
+		for (let i in this.users){
+			if (this.users[i]._id = changedUser._id){
+				this.users[i] = changedUser
+				break;
+			}
+		}
 		this.emit("changedUsers")
 
 	}
@@ -475,12 +479,13 @@ class FixinsStore extends EventEmitter {
 				break;
 			
 			case "CHANGED_SPOT":
-					console.log("CHANGED_SPOT")
+				console.log("CHANGED_SPOT")
 				this.modifyStoreSpot(action.changedSpot)
 				break;
 		
 			case "CHANGED_USER":
 					console.log("CHANGED_USER")
+					console.log(action.changedUser)
 				this.modifyStoreUser(action.changedUser)
 				break;			
 		}

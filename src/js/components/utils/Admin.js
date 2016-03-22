@@ -146,7 +146,6 @@ export default class Admin extends React.Component{
 				<div className="admin-user-box row">
 					<div className="admin-user-input col-md-6">
 									<h2>New User</h2>
-
 						<UserForm 
 						allSubNeighborhoods={this.state.allSubNeighborhoods} />
 					</div>
@@ -170,14 +169,20 @@ export default class Admin extends React.Component{
 
 						<SpotForm 
 						allGenres={this.state.allGenres} 
-								allNeighborhoods={this.state.allNeighborhoods} 
 								allSubNeighborhoods={this.state.allSubNeighborhoods} />
 					</div>
 					<div className="admin-spot-output col-md-6">
 								<h2>All Spots</h2>
 
 						<SpotList 
-						allSpots={this.state.allSpots} />
+						allSpots={this.state.allSpots}
+						allSubNeighborhoods={this.state.allSubNeighborhoods}
+						allReviews={this.state.allReviews}
+						allGenres={this.state.allGenres}
+						allDishes={this.state.allDishes}
+						/>
+
+						 />
 					</div>
 				</div>
 			

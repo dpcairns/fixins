@@ -38,14 +38,18 @@ router.route('/Users/:UserId')
 	})
 	.put(function (req, res) {
 		console.log("changing a given User in fixins")
-		var id = req.params.UserId 
+		var id = req.body._id 
 		User.findOne({_id: id}).exec(function(err, User){
+			console.log('here is the User in routes')
+			console.log(User)
+			console.log('here are the items to be changed in routes')
+			console.log(req.body)
 			if(err){
 				console.log("couldn\t find this User")
 			}
 			else{
-				if (req.body.newName){
-					User.username = req.body.newName
+				if (req.body.newUsername){
+					User.username = req.body.newUsername
 			}
 				if (req.body.newPassword){
 					User.password = req.body.newPassword
@@ -67,6 +71,7 @@ router.route('/Users/:UserId')
 			}	
 
 				User.save()	
+				res.json(User)
 		}
 
 		})

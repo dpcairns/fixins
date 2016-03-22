@@ -25286,7 +25286,6 @@
 			url: "http://localhost:4444/api/Users/" + ID,
 			type: 'DELETE',
 			success: function (postedUser) {
-				console.log("user probably deleted");
 				_dispatcher2.default.dispatch({
 					type: "REMOVE_USER",
 					user: ID
@@ -25303,7 +25302,6 @@
 			url: "http://localhost:4444/api/Neighborhoods/" + ID,
 			type: 'DELETE',
 			success: function (postedUser) {
-				console.log("neighborhood probably deleted");
 				_dispatcher2.default.dispatch({
 					type: "REMOVE_NEIGHBORHOOD",
 					neighborhood: ID
@@ -25320,7 +25318,6 @@
 			url: "http://localhost:4444/api/Dishes/" + ID,
 			type: 'DELETE',
 			success: function (postedUser) {
-				console.log("dish probably deleted");
 				_dispatcher2.default.dispatch({
 					type: "REMOVE_DISH",
 					dish: ID
@@ -25336,7 +25333,6 @@
 			url: "http://localhost:4444/api/SubNeighborhoods/" + ID,
 			type: 'DELETE',
 			success: function () {
-				console.log("subNeighborhood probably deleted");
 				_dispatcher2.default.dispatch({
 					type: "REMOVE_SUBNEIGHBORHOOD",
 					subNeighborhoods: ID
@@ -25352,7 +25348,6 @@
 			url: "http://localhost:4444/api/Genres/" + ID,
 			type: 'DELETE',
 			success: function () {
-				console.log("genre probably deleted");
 				_dispatcher2.default.dispatch({
 					type: "REMOVE_GENRE",
 					genre: ID
@@ -25368,7 +25363,6 @@
 			url: "http://localhost:4444/api/Reviews/" + ID,
 			type: 'DELETE',
 			success: function (postedUser) {
-				console.log("review probably deleted");
 				_dispatcher2.default.dispatch({
 					type: "REMOVE_REVIEW",
 					review: ID
@@ -25384,7 +25378,6 @@
 			url: "http://localhost:4444/api/CheckIns/" + ID,
 			type: 'DELETE',
 			success: function () {
-				console.log("checkIn probably deleted");
 				_dispatcher2.default.dispatch({
 					type: "REMOVE_CHECKIN",
 					checkIn: ID
@@ -25401,7 +25394,6 @@
 			url: "http://localhost:4444/api/Spots/" + ID,
 			type: 'DELETE',
 			success: function () {
-				console.log("spot probably deleted");
 				_dispatcher2.default.dispatch({
 					type: "REMOVE_SPOT",
 					spot: ID
@@ -25413,16 +25405,15 @@
 		});
 	}
 
-	function findAndChangeUser(userToChange) {
+	function findAndChangeUser(newUserInfo) {
 		$.ajax({
-			url: "http://localhost:4444/api/Users/" + userToChange._id,
+			url: "http://localhost:4444/api/Users/" + newUserInfo._id,
 			type: 'PUT',
+			data: newUserInfo,
 			success: function (changedUser) {
-				console.log("user probably changed to:");
-				console.log(changedUser);
 				_dispatcher2.default.dispatch({
 					type: "CHANGED_USER",
-					user: changedUser
+					changedUser: changedUser
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -25431,124 +25422,121 @@
 		});
 	}
 
-	function findAndChangeNeighborhood(ID) {
+	function findAndChangeNeighborhood(newNeighborhoodInfo) {
 		$.ajax({
-			url: "http://localhost:4444/api/Neighborhoods/" + ID,
+			url: "http://localhost:4444/api/Neighborhoods/" + newNeighborhoodInfo._id,
 			type: 'PUT',
+			data: newNeighborhoodInfo,
 			success: function (changedNeighborhood) {
-				console.log("user probably changed to:");
-				console.log(changedNeighborhood);
 				_dispatcher2.default.dispatch({
 					type: "CHANGED_NEIGHBORHOOD",
-					user: changedNeighborhood
+					changedNeighborhood: changedNeighborhood
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
-				console.error('./Users', status, err.toString());
+				console.error('./Neighborhoods', status, err.toString());
 			}.bind(this)
 		});
 	}
 
-	function findAndChangeDish(ID) {
+	function findAndChangeDish(newDishInfo) {
 		$.ajax({
-			url: "http://localhost:4444/api/Dishes/" + ID,
+			url: "http://localhost:4444/api/Dishes/" + newDishInfo._id,
 			type: 'PUT',
+			data: newDishInfo,
 			success: function (changedDish) {
-				console.log("dish probably changed to:");
-				console.log(changedDish);
 				_dispatcher2.default.dispatch({
 					type: "CHANGED_DISH",
-					user: changedDish
+					changedDish: changedDish
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
-				console.error('./Users', status, err.toString());
-			}.bind(this)
-		});
-	}
-	function findAndChangeSubNeighborhood(ID) {
-		$.ajax({
-			url: "http://localhost:4444/api/SubNeighborhoods/" + ID,
-			type: 'PUT',
-			success: function (changedSubNeighborhood) {
-				console.log("subNeighborhood probably changed to:");
-				console.log(changedSubNeighborhood);
-				_dispatcher2.default.dispatch({
-					type: "CHANGED_SUBNEIGHBORHOOD",
-					user: changedSubNeighborhood
-				});
-			}.bind(this),
-			error: function (xhr, status, err) {
-				console.error('./Users', status, err.toString());
-			}.bind(this)
-		});
-	}
-	function findAndChangeGenre(ID) {
-		$.ajax({
-			url: "http://localhost:4444/api/Genres/" + ID,
-			type: 'PUT',
-			success: function (changedGenre) {
-				console.log("genre probably changed to:");
-				console.log(changedGenre);
-				_dispatcher2.default.dispatch({
-					type: "CHANGED_GENRE",
-					user: changedGenre
-				});
-			}.bind(this),
-			error: function (xhr, status, err) {
-				console.error('./Users', status, err.toString());
-			}.bind(this)
-		});
-	}
-	function findAndChangeReview(ID) {
-		$.ajax({
-			url: "http://localhost:4444/api/Reviews/" + ID,
-			type: 'PUT',
-			success: function (changedReview) {
-				console.log("review probably changed to:");
-				console.log(changedReview);
-				_dispatcher2.default.dispatch({
-					type: "CHANGED_REVIEW",
-					user: changedReview
-				});
-			}.bind(this),
-			error: function (xhr, status, err) {
-				console.error('./Users', status, err.toString());
-			}.bind(this)
-		});
-	}
-	function findAndChangeCheckIn(ID) {
-		$.ajax({
-			url: "http://localhost:4444/api/CheckIns/" + ID,
-			type: 'PUT',
-			success: function (changedCheckIn) {
-				console.log("checkIn probably changed to:");
-				console.log(changedCheckIn);
-				_dispatcher2.default.dispatch({
-					type: "CHANGED_CHECKIN",
-					user: changedCheckIn
-				});
-			}.bind(this),
-			error: function (xhr, status, err) {
-				console.error('./Users', status, err.toString());
+				console.error('./Dishes', status, err.toString());
 			}.bind(this)
 		});
 	}
 
-	function findAndChangeSpot(ID) {
+	function findAndChangeSubNeighborhood(newSubNeighborhoodInfo) {
 		$.ajax({
-			url: "http://localhost:4444/api/Spots/" + ID,
+			url: "http://localhost:4444/api/SubNeighborhoods/" + newSubNeighborhoodInfo._id,
 			type: 'PUT',
-			success: function (changedSpot) {
-				console.log("spot probably changed to:");
-				console.log(changedSpot);
+			data: newSubNeighborhoodInfo,
+			success: function (changedSubNeighborhood) {
 				_dispatcher2.default.dispatch({
-					type: "CHANGED_SPOT",
-					user: changedSpot
+					type: "CHANGED_SUBNEIGHBORHOOD",
+					changedSubNeighborhood: changedSubNeighborhood
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
-				console.error('./Users', status, err.toString());
+				console.error('./SubNeighborhoods', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+	function findAndChangeGenre(newGenreInfo) {
+		$.ajax({
+			url: "http://localhost:4444/api/Genres/" + newGenreInfo._id,
+			type: 'PUT',
+			data: newGenreInfo,
+			success: function (changedGenre) {
+				_dispatcher2.default.dispatch({
+					type: "CHANGED_GENRE",
+					changedGenre: changedGenre
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./Genres', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+	function findAndChangeReview(newReviewInfo) {
+		$.ajax({
+			url: "http://localhost:4444/api/Reviews/" + newReviewInfo._id,
+			type: 'PUT',
+			data: newReviewInfo,
+			success: function (changedReview) {
+				_dispatcher2.default.dispatch({
+					type: "CHANGED_REVIEW",
+					changedReview: changedReview
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./Reviews', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+	function findAndChangeCheckIn(newCheckInInfo) {
+		$.ajax({
+			url: "http://localhost:4444/api/CheckIns/" + newCheckInInfo._id,
+			type: 'PUT',
+			data: newCheckInInfo,
+			success: function (changedCheckIn) {
+				_dispatcher2.default.dispatch({
+					type: "CHANGED_CHECKIN",
+					changedCheckIn: changedCheckIn
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./CheckIns', status, err.toString());
+			}.bind(this)
+		});
+	}
+
+	function findAndChangeSpot(newSpotInfo) {
+		$.ajax({
+			url: "http://localhost:4444/api/Spots/" + newSpotInfo._id,
+			type: 'PUT',
+			data: newSpotInfo,
+			success: function (changedSpot) {
+				_dispatcher2.default.dispatch({
+					type: "CHANGED_SPOT",
+					changedSpot: changedSpot
+				});
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error('./Spots', status, err.toString());
 			}.bind(this)
 		});
 	}
@@ -25961,51 +25949,51 @@
 
 	var _SpotList2 = _interopRequireDefault(_SpotList);
 
-	var _DishForm = __webpack_require__(234);
+	var _DishForm = __webpack_require__(235);
 
 	var _DishForm2 = _interopRequireDefault(_DishForm);
 
-	var _DishList = __webpack_require__(235);
+	var _DishList = __webpack_require__(236);
 
 	var _DishList2 = _interopRequireDefault(_DishList);
 
-	var _ReviewForm = __webpack_require__(236);
+	var _ReviewForm = __webpack_require__(237);
 
 	var _ReviewForm2 = _interopRequireDefault(_ReviewForm);
 
-	var _ReviewList = __webpack_require__(237);
+	var _ReviewList = __webpack_require__(238);
 
 	var _ReviewList2 = _interopRequireDefault(_ReviewList);
 
-	var _CheckInForm = __webpack_require__(238);
+	var _CheckInForm = __webpack_require__(239);
 
 	var _CheckInForm2 = _interopRequireDefault(_CheckInForm);
 
-	var _CheckInList = __webpack_require__(239);
+	var _CheckInList = __webpack_require__(240);
 
 	var _CheckInList2 = _interopRequireDefault(_CheckInList);
 
-	var _GenreForm = __webpack_require__(240);
+	var _GenreForm = __webpack_require__(241);
 
 	var _GenreForm2 = _interopRequireDefault(_GenreForm);
 
-	var _GenreList = __webpack_require__(241);
+	var _GenreList = __webpack_require__(242);
 
 	var _GenreList2 = _interopRequireDefault(_GenreList);
 
-	var _NeighborhoodForm = __webpack_require__(242);
+	var _NeighborhoodForm = __webpack_require__(243);
 
 	var _NeighborhoodForm2 = _interopRequireDefault(_NeighborhoodForm);
 
-	var _NeighborhoodList = __webpack_require__(243);
+	var _NeighborhoodList = __webpack_require__(244);
 
 	var _NeighborhoodList2 = _interopRequireDefault(_NeighborhoodList);
 
-	var _SubNeighborhoodForm = __webpack_require__(244);
+	var _SubNeighborhoodForm = __webpack_require__(245);
 
 	var _SubNeighborhoodForm2 = _interopRequireDefault(_SubNeighborhoodForm);
 
-	var _SubNeighborhoodList = __webpack_require__(245);
+	var _SubNeighborhoodList = __webpack_require__(246);
 
 	var _SubNeighborhoodList2 = _interopRequireDefault(_SubNeighborhoodList);
 
@@ -26013,7 +26001,7 @@
 
 	var FixinsActions = _interopRequireWildcard(_FixinsActions);
 
-	var _FixinsStore = __webpack_require__(246);
+	var _FixinsStore = __webpack_require__(247);
 
 	var _FixinsStore2 = _interopRequireDefault(_FixinsStore);
 
@@ -26200,7 +26188,6 @@
 								),
 								_react2.default.createElement(_SpotForm2.default, {
 									allGenres: this.state.allGenres,
-									allNeighborhoods: this.state.allNeighborhoods,
 									allSubNeighborhoods: this.state.allSubNeighborhoods })
 							),
 							_react2.default.createElement(
@@ -26212,7 +26199,13 @@
 									"All Spots"
 								),
 								_react2.default.createElement(_SpotList2.default, {
-									allSpots: this.state.allSpots })
+									allSpots: this.state.allSpots,
+									allSubNeighborhoods: this.state.allSubNeighborhoods,
+									allReviews: this.state.allReviews,
+									allGenres: this.state.allGenres,
+									allDishes: this.state.allDishes
+								}),
+								"/>"
 							)
 						),
 						_react2.default.createElement("hr", null),
@@ -26544,8 +26537,6 @@
 		_createClass(CustomDropdown, [{
 			key: "render",
 			value: function render() {
-				console.log("here are props for custome dropdown====================");
-				console.log(this.props);
 				var nameName = this.props.nameName;
 				var data = this.props.data;
 				var optionNodes = data.map(function (item) {
@@ -26878,46 +26869,41 @@
 			key: "handleSubNeighborhoodChange",
 			value: function handleSubNeighborhoodChange(e) {
 				this.setState({ newSubNeighborhood: e.target.value });
-				console.log(this.state.newSubNeighborhood);
 			}
 		}, {
 			key: "handleFriendChange",
 			value: function handleFriendChange(e) {
 				this.setState({ newFriend: e.target.value });
-				console.log(this.state.newFriend);
 			}
 		}, {
 			key: "handleCheckInChange",
 			value: function handleCheckInChange(e) {
 				this.setState({ newCheckIn: e.target.value });
-				console.log(this.state.newCheckIn);
 			}
 		}, {
 			key: "handleFavoriteChange",
 			value: function handleFavoriteChange(e) {
 				this.setState({ newFavorite: e.target.value });
-				console.log(this.state.newFavorite);
 			}
 		}, {
 			key: "handleReviewChange",
 			value: function handleReviewChange(e) {
 				this.setState({ newReview: e.target.value });
-				console.log(this.state.newReview);
 			}
 		}, {
 			key: "handleSubmit",
 			value: function handleSubmit(e) {
 				e.preventDefault();
-				var changedUser = {};
-				changedUser._id = this.props.userID;
-				changedUser.newUsername = this.state.newUsername;
-				changedUser.newPassword = this.state.newPassword;
-				changedUser.newSubNeighborhood = this.state.newSubNeighborhood;
-				changedUser.newReview = this.state.newReview;
-				changedUser.newFriend = this.state.newFriend;
-				changedUser.newCheckIn = this.state.newCheckIn;
-				changedUser.newFavorite = this.state.newFavorite;
-				FixinsActions.findAndChangeUser(changedUser);
+				var newUserInfo = {};
+				newUserInfo._id = this.props.userID;
+				newUserInfo.newUsername = this.state.newUsername;
+				newUserInfo.newPassword = this.state.newPassword;
+				newUserInfo.newSubNeighborhood = this.state.newSubNeighborhood;
+				newUserInfo.newReview = this.state.newReview;
+				newUserInfo.newFriend = this.state.newFriend;
+				newUserInfo.newCheckIn = this.state.newCheckIn;
+				newUserInfo.newFavorite = this.state.newFavorite;
+				FixinsActions.findAndChangeUser(newUserInfo);
 				this.setState({ newUsername: "",
 					newPassword: "",
 					newSubNeighborhood: "",
@@ -27173,6 +27159,10 @@
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
+	var _SpotEditForm = __webpack_require__(234);
+
+	var _SpotEditForm2 = _interopRequireDefault(_SpotEditForm);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27193,55 +27183,70 @@
 		_createClass(SpotList, [{
 			key: "render",
 			value: function render() {
-
+				var allUsers = this.props.allUsers;
+				var allCheckIns = this.props.allCheckIns;
+				var allDishes = this.props.allDishes;
+				var allReviews = this.props.allReviews;
+				var allGenres = this.props.allGenres;
+				var allSubNeighborhoods = this.props.allSubNeighborhoods;
 				var spotNodes = this.props.allSpots.map(function (spot) {
 					return _react2.default.createElement(
-						"li",
+						"div",
 						{ key: spot._id },
 						_react2.default.createElement(
-							"ul",
+							"li",
 							null,
 							_react2.default.createElement(
-								"li",
+								"ul",
 								null,
-								"Spot Name: ",
-								spot.spot_name
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" Spot Blurb ",
-								spot.spot_blurb
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" Spot Neighborhood: ",
-								spot.spot_neighborhood
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" Spot SubNeighborhood: ",
-								spot.spot_subNeighborhood
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" Spot Genre: ",
-								spot.spot_genres
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" Spot Coordinates: ",
-								spot.spot_coordinates
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" ",
-								_react2.default.createElement(_RemoveButton2.default, { type: "Spot", id: spot._id })
+								_react2.default.createElement(
+									"li",
+									null,
+									"Spot Name: ",
+									spot.spot_name
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									" Spot Blurb ",
+									spot.spot_blurb
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									" Spot SubNeighborhood: ",
+									spot.spot_subNeighborhood
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									" Spot Genre: ",
+									spot.spot_genres
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									" Spot Coordinates: ",
+									spot.spot_coordinates
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									" ",
+									_react2.default.createElement(_RemoveButton2.default, { type: "Spot", id: spot._id })
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									_react2.default.createElement(_SpotEditForm2.default, {
+										spotID: spot._id,
+										allUsers: allUsers,
+										allCheckIns: allCheckIns,
+										allDishes: allDishes,
+										allReviews: allReviews,
+										allGenres: allGenres,
+										allSubNeighborhoods: allSubNeighborhoods })
+								)
 							)
 						)
 					);
@@ -27265,6 +27270,192 @@
 
 /***/ },
 /* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _CustomDropdown = __webpack_require__(228);
+
+	var _CustomDropdown2 = _interopRequireDefault(_CustomDropdown);
+
+	var _FixinsActions = __webpack_require__(220);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SpotEditForm = function (_React$Component) {
+		_inherits(SpotEditForm, _React$Component);
+
+		function SpotEditForm() {
+			_classCallCheck(this, SpotEditForm);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SpotEditForm).call(this));
+
+			_this.state = {
+				newName: "",
+				newSubNeighborhood: "",
+				newGenre: "",
+				newDish: "",
+				newBlurb: "",
+				newCoordinates: "",
+				newReview: ""
+			};
+			return _this;
+		}
+
+		_createClass(SpotEditForm, [{
+			key: "handleNameChange",
+			value: function handleNameChange(e) {
+				this.setState({ newName: e.target.value });
+			}
+		}, {
+			key: "handleBlurbChange",
+			value: function handleBlurbChange(e) {
+				this.setState({ newBlurb: e.target.value });
+			}
+		}, {
+			key: "handleSubNeighborhoodChange",
+			value: function handleSubNeighborhoodChange(e) {
+				this.setState({ newSubNeighborhood: e.target.value });
+			}
+		}, {
+			key: "handleReviewChange",
+			value: function handleReviewChange(e) {
+				this.setState({ newReview: e.target.value });
+			}
+		}, {
+			key: "handleGenreChange",
+			value: function handleGenreChange(e) {
+				this.setState({ newGenre: e.target.value });
+			}
+		}, {
+			key: "handleDishChange",
+			value: function handleDishChange(e) {
+				this.setState({ newDish: e.target.value });
+			}
+		}, {
+			key: "handleCoordinatesChange",
+			value: function handleCoordinatesChange(e) {
+				this.setState({ newCoordinates: e.target.value });
+			}
+		}, {
+			key: "handleSubmit",
+			value: function handleSubmit(e) {
+				e.preventDefault();
+				var newSpotInfo = {};
+				newSpotInfo._id = this.props.spotID;
+				newSpotInfo.newName = this.state.newName;
+				newSpotInfo.newSubNeighborhood = this.state.newSubNeighborhood;
+				newSpotInfo.newGenre = this.state.newGenre;
+				newSpotInfo.newDish = this.state.newDish;
+				newSpotInfo.newBlurb = this.state.newBlurb;
+				newSpotInfo.newCoordinates = this.state.newCoordinates;
+				newSpotInfo.newReview = this.state.newReview;
+				console.log("trying to handleSubmit...");
+				FixinsActions.findAndChangeSpot(newSpotInfo);
+				this.setState({ newName: "",
+					newSubNeighborhood: "",
+					newGenre: "",
+					newDish: "",
+					newBlurb: "",
+					newCoordinates: "",
+					newReview: "" });
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"div",
+					null,
+					_react2.default.createElement(
+						"form",
+						{ onSubmit: this.handleSubmit.bind(this) },
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Update Spot Name:",
+							_react2.default.createElement("input", { type: "text", value: this.state.newName, onChange: this.handleNameChange.bind(this), className: "form-control", placeholder: "spot name" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Update Blurb:",
+							_react2.default.createElement("input", { type: "text", value: this.state.newBlurb, onChange: this.handleBlurbChange.bind(this), className: "form-control", placeholder: "spot blurb" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Update Cooredinates:",
+							_react2.default.createElement("input", { type: "password", value: this.state.newCoordinates, onChange: this.handleCoordinatesChange.bind(this), className: "form-control", placeholder: "spot coordinates" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Update Sub-Neighborhood:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newSubNeighborhood,
+								onchange2: this.handleSubNeighborhoodChange.bind(this),
+								data: this.props.allSubNeighborhoods,
+								nameName: "subNeighborhood_name" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Add a new Review:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newReview,
+								onchange2: this.handleReviewChange.bind(this),
+								data: this.props.allReviews,
+								nameName: "username" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Add a new Dish:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newDish,
+								onchange2: this.handleDishChange.bind(this),
+								data: this.props.allDishes,
+								nameName: "_id" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Add a new Genre:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newGenre,
+								onchange2: this.handleGenreChange.bind(this),
+								data: this.props.allGenres,
+								nameName: "_id" })
+						),
+						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Update" })
+					)
+				);
+			}
+		}]);
+
+		return SpotEditForm;
+	}(_react2.default.Component);
+
+	exports.default = SpotEditForm;
+
+/***/ },
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27440,7 +27631,7 @@
 	exports.default = DishForm;
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27479,7 +27670,6 @@
 		_createClass(DishList, [{
 			key: "render",
 			value: function render() {
-				console.log(this.props.allDishes);
 				var dishNodes = this.props.allDishes.map(function (dish) {
 					return _react2.default.createElement(
 						"li",
@@ -27550,7 +27740,7 @@
 	exports.default = DishList;
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27699,7 +27889,7 @@
 	exports.default = ReviewForm;
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27796,7 +27986,7 @@
 	exports.default = ReviewList;
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27890,7 +28080,8 @@
 							"div",
 							{ className: "input-group" },
 							"Dish:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.dish, onChange: this.handleDishChange.bind(this), data: this.props.allDishes, nameName: "genre_name" })
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.dish, onChange: this.handleDishChange.bind(this),
+								data: this.props.allDishes, nameName: "dish_name" })
 						),
 						_react2.default.createElement(
 							"div",
@@ -27910,7 +28101,7 @@
 	exports.default = CheckInForm;
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28007,7 +28198,7 @@
 	exports.default = CheckInList;
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28091,7 +28282,7 @@
 	exports.default = GenreForm;
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28157,7 +28348,7 @@
 	exports.default = GenresList;
 
 /***/ },
-/* 242 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28245,7 +28436,7 @@
 	exports.default = NeighborhoodForm;
 
 /***/ },
-/* 243 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28311,7 +28502,7 @@
 	exports.default = NeighborhoodList;
 
 /***/ },
-/* 244 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28410,7 +28601,7 @@
 	exports.default = SubNeighborhoodForm;
 
 /***/ },
-/* 245 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28476,7 +28667,7 @@
 	exports.default = SubNeighborhoodList;
 
 /***/ },
-/* 246 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28487,7 +28678,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _events = __webpack_require__(247);
+	var _events = __webpack_require__(248);
 
 	var _FixinsActions = __webpack_require__(220);
 
@@ -28756,9 +28947,9 @@
 		}, {
 			key: "modifyStoreCheckIn",
 			value: function modifyStoreCheckIn(changedCheckIn) {
-				for (var i = 0; i < this.users.checkIns; i++) {
-					if (this.checkIns[i]._id === ID) {
-						this.checkIns.splice(i, 1);
+				for (var i in this.checkIns) {
+					if (this.checkIns[i]._id = changedCheckIn._id) {
+						this.checkIns[i] = changedCheckIn;
 						break;
 					}
 				}
@@ -28767,9 +28958,9 @@
 		}, {
 			key: "modifyStoreDish",
 			value: function modifyStoreDish(changedDish) {
-				for (var i = 0; i < this.dishes.length; i++) {
-					if (this.dishes[i]._id === ID) {
-						this.dishes.splice(i, 1);
+				for (var i in this.dishes) {
+					if (this.dishes[i]._id = changedDish._id) {
+						this.dishes[i] = changedDish;
 						break;
 					}
 				}
@@ -28778,9 +28969,9 @@
 		}, {
 			key: "modifyStoreReview",
 			value: function modifyStoreReview(changedReview) {
-				for (var i = 0; i < this.reviews.length; i++) {
-					if (this.reviews[i]._id === ID) {
-						this.reviews.splice(i, 1);
+				for (var i in this.review) {
+					if (this.reviews[i]._id = changedReview._id) {
+						this.reviews[i] = changedReview;
 						break;
 					}
 				}
@@ -28789,9 +28980,9 @@
 		}, {
 			key: "modifyStoreSpot",
 			value: function modifyStoreSpot(changedSpot) {
-				for (var i = 0; i < this.spots.length; i++) {
-					if (this.spots[i]._id === ID) {
-						this.spots.splice(i, 1);
+				for (var i in this.spots) {
+					if (this.spots[i]._id = changedSpot._id) {
+						this.spots[i] = changedSpot;
 						break;
 					}
 				}
@@ -28800,9 +28991,9 @@
 		}, {
 			key: "modifyStoreSubNeighborhood",
 			value: function modifyStoreSubNeighborhood(changedSubNeighborhood) {
-				for (var i = 0; i < this.subNeighborhoods.length; i++) {
-					if (this.subNeighborhoods[i]._id === ID) {
-						this.subNeighborhoods.splice(i, 1);
+				for (var i in this.subNeighborhoods) {
+					if (this.subNeighborhoods[i]._id = changedSubNeighborhood._id) {
+						this.subNeighborhoods[i] = changedSubNeighborhood;
 						break;
 					}
 				}
@@ -28811,9 +29002,9 @@
 		}, {
 			key: "modifyStoreNeighborhood",
 			value: function modifyStoreNeighborhood(changedNeighborhood) {
-				for (var i = 0; i < this.neighborhoods.length; i++) {
-					if (this.neighborhoods[i]._id === ID) {
-						this.neighborhoods.splice(i, 1);
+				for (var i in this.neighborhoods) {
+					if (this.neighborhoods[i]._id = changedNeighborhood._id) {
+						this.neighborhoods[i] = changedNeighborhood;
 						break;
 					}
 				}
@@ -28822,9 +29013,9 @@
 		}, {
 			key: "modifyStoreGenre",
 			value: function modifyStoreGenre(changedGenre) {
-				for (var i = 0; i < this.genres.length; i++) {
-					if (this.genres[i]._id === ID) {
-						this.genres.splice(i, 1);
+				for (var i in this.genres) {
+					if (this.genres[i]._id = changedGenre._id) {
+						this.genres[i] = changedGenre;
 						break;
 					}
 				}
@@ -28833,8 +29024,12 @@
 		}, {
 			key: "modifyStoreUser",
 			value: function modifyStoreUser(changedUser) {
-				var i = this.users.indexOf(user._id === changedUser._id);
-				this.users[i] = changedUser;
+				for (var i in this.users) {
+					if (this.users[i]._id = changedUser._id) {
+						this.users[i] = changedUser;
+						break;
+					}
+				}
 				this.emit("changedUsers");
 			}
 		}, {
@@ -29000,6 +29195,7 @@
 
 					case "CHANGED_USER":
 						console.log("CHANGED_USER");
+						console.log(action.changedUser);
 						this.modifyStoreUser(action.changedUser);
 						break;
 				}
@@ -29014,7 +29210,7 @@
 	exports.default = fixinsStore;
 
 /***/ },
-/* 247 */
+/* 248 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.

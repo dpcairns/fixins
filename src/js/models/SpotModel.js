@@ -40,14 +40,6 @@ var SpotSchema = new Schema({
 			}
 		]
 	,
-	spot_checkIns:
-		[
-			{
-				type: Schema.Types.ObjectId,
-				ref: 'CheckIn'
-			}
-		]
-	,
 	spot_subNeighborhood:
 			{
 				type: Schema.Types.ObjectId,

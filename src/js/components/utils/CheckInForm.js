@@ -44,7 +44,8 @@ export default class CheckInForm extends React.Component{
 		</div>
 		<div className="input-group">
 			Dish:
-			<CustomDropdown setValueTo={this.state.dish} onChange={this.handleDishChange.bind(this)} data={this.props.allDishes} nameName="genre_name" />
+			<CustomDropdown setValueTo={this.state.dish} onChange={this.handleDishChange.bind(this)} 
+			data={this.props.allDishes} nameName="dish_name" />
 		</div>
 		<div className="input-group">
 			Spot:

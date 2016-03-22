@@ -3,7 +3,6 @@ import RemoveButton from "./RemoveButton"
 
 export default class DishList extends React.Component{
 	render(){
-		console.log(this.props.allDishes)
 		let dishNodes = this.props.allDishes.map(function(dish){
 			return(
 				<li key={dish._id}>

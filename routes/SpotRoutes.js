@@ -24,9 +24,53 @@ module.exports = function(router){
 				})
 
 	router.route('/Spots/:SpotId')
+	.put(function (req, res) {
+		console.log("finding a given Spot in fixins")
+		var id = req.body._id 
+		Spot.findOne({_id: id}).exec(function(err, Spot){
+			console.log('here is the Spot in routes')
+			console.log(Spot)
+			console.log('here are the items to be changed in routes')
+			console.log(req.body)
+			if(err){
+				console.log("couldn\t find this Spot")
+			}
+
+
+			else{
+				if (req.body.newName){
+					Spot.spot_name = req.body.newName
+			}
+				if (req.body.newSubNeighborhood){
+					Spot.spot_subNeighborhood = req.body.newSubNeighborhood
+			}
+				if (req.body.newGenre){
+					Spot.spot_genres.push(req.body.newGenre)
+			}
+				if (req.body.newDish){
+					Spot.spot_dishes.push(req.body.newDish)
+			}
+				if (req.body.newBlurb){
+					Spot.spot_blurb = req.body.newBlurb
+			}
+				if (req.body.newCoordinates){
+					Spot.spot_coordinates = req.body.newCoordinates
+			}
+				if (req.body.newReview){
+					Spot.spot_reviews.push(req.body.newReview)
+			}
+
+				Spot.save()	
+				res.json(Spot)
+		}
+
+		})
+	})
+
+	router.route('/Spots/:SpotId')
 	.get(function (req, res) {
 		console.log("finding a given Spot in fixins")
-		var id = req.params.SpotId 
+		var id = req.body.id 
 		Spot.findOne({_id: id}).exec(function(err, Spot){
 			if(err){
 				console.log("couldn\t find this Spot")
@@ -36,6 +80,10 @@ module.exports = function(router){
 			}
 		})
 	})
+
+
+
+
 	.delete(function (req, res) {
 		console.log("deleting a given Spot in fixins")
 		var id = req.params.SpotId 
