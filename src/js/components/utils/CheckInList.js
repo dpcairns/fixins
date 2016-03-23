@@ -5,23 +5,22 @@ export default class CheckInList extends React.Component{
 	render(){
 		let checkInNodes = this.props.allCheckIns.map(function(checkIn){
 			return(
-				<li key={checkIn._id}>
-					<ul>
-						<li>Spot: {checkIn.spot}</li>
-						<li>Dish: {checkIn.dish}</li>
-						<li>Name: {checkIn.blurb}</li>
-						<li>User: {checkIn.user}</li>
-						<li> <RemoveButton type="CheckIn" id={dish._id}/></li>
-
-					</ul>
-				</li>
+				<tr key={checkIn._id}>
+						<td>Dish: {checkIn.checkIn_dish.dish_name}</td>
+						<td>User: {checkIn.checkIn_user.username}</td>
+						<td>Blurb: {checkIn.checkIn_blurb}</td>
+						<td>When: {checkIn.checkIn_date}</td>
+						<td> <RemoveButton type="CheckIn" id={checkIn._id}/></td>
+				</tr>
 				)
 		})
 	return(
 		<div>
-			<ol>
-			{checkInNodes}
-			</ol>
+			<table className="table table-condensed table-bordered table-hover">
+			<tbody>
+					{checkInNodes}
+			</tbody>
+			</table>
 		</div>
 
 		)

@@ -5,7 +5,9 @@ module.exports = function(router){
 	router.route('/Users')
 	.get(function (req, res) { 
 		console.log('finding all Users in fixins')
-		User.find({}).exec(function(err, Users){
+		User.find({})
+		.populate('user_sub_neighborhood')
+		.exec(function(err, Users){
 			if(err){
 				console.log('Couldn\'t find Users')
 			} else {

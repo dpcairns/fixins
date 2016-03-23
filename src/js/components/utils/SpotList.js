@@ -12,33 +12,31 @@ export default class SpotList extends React.Component{
 		let allSubNeighborhoods= this.props.allSubNeighborhoods
 		let spotNodes = this.props.allSpots.map(function(spot){
 			return(
-				<div key={spot._id}>
-				<li>
+			<div key={spot._id}>
+				<div className="col-md-6">
 					<ul>
-						<li>Spot Name: {spot.spot_name}</li>
+						<li><h2>{spot.spot_name}</h2></li>
 						<li> Spot Blurb {spot.spot_blurb}</li>
-						<li> Spot SubNeighborhood: {spot.spot_subNeighborhood}</li>
-						<li> Spot Genre: {spot.spot_genres}</li>
+						<li> Spot SubNeighborhood: {spot.spot_subNeighborhood.subNeighborhood_name}</li>
+						<li> Spot Genre: {spot.spot_genres[0].genre_name}</li>
 						<li> Spot Coordinates: {spot.spot_coordinates}</li>
-						<li> <RemoveButton type="Spot" id={spot._id}/></li>
-						<li>
-							<SpotEditForm 
-								spotID={spot._id}
-								allUsers={allUsers}
-								allGenres={allGenres}
-								allSubNeighborhoods={allSubNeighborhoods}/>
-						</li>
+						<li> <RemoveButton type="Spot" id={spot._id}/></li>						
 
 					</ul>
-				</li>
+				</div>
+				<div className="col-md-6">
+					<SpotEditForm 
+							spotID={spot._id}
+							allUsers={allUsers}
+							allGenres={allGenres}
+							allSubNeighborhoods={allSubNeighborhoods}/>
+				</div>
 			</div>
 				)
 		})
 	return(
 		<div>
-			<ol>
 			{spotNodes}
-			</ol>
 		</div>
 
 		)

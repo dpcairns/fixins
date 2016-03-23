@@ -5,7 +5,9 @@ module.exports = function(router){
 	router.route('/CheckIns')
 	.get(function (req, res) { 
 		console.log('finding all CheckIns in fixins')
-		CheckIn.find({}).exec(function(err, CheckIns){
+		CheckIn.find({})
+			.populate('checkIn_dish').populate('checkIn_user')
+			.exec(function(err, CheckIns){
 			if(err){
 				console.log('Couldn\'t find CheckIns')
 			} else {
@@ -16,8 +18,7 @@ module.exports = function(router){
 	.post(function (req, res) { 
 			var newCheckIn = new CheckIn()
 						newCheckIn.checkIn_dish = req.body.dish
-						newCheckIn.checkIn_spot = req.body.spot
-						newCheckIn.chekIn_user = req.body.user
+						newCheckIn.checkIn_user = req.body.user
 						newCheckIn.checkIn_blurb = req.body.blurb
 						newCheckIn.save(function() {
 							res.json(newCheckIn)

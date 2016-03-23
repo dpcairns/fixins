@@ -5,7 +5,10 @@ module.exports = function(router){
 	router.route('/Reviews')
 	.get(function (req, res) { 
 		console.log('finding all Reviews in fixins')
-		Review.find({}).exec(function(err, Reviews){
+		Review.find({})
+		.populate('reviewed_dish')
+		.populate('review_user')
+		.exec(function(err, Reviews){
 			if(err){
 				console.log('Couldn\'t find Reviews')
 			} else {
@@ -15,9 +18,8 @@ module.exports = function(router){
 	})
 	.post(function (req, res) { 
 			var newReview = new Review()
-						newReview.reviewed_item_name = req.body.item_reviewed
-						newReview.reviewed_item_type = req.body.type_of_item
-						newReview.review_user = req.body.user
+						newReview.reviewed_dish = req.body.reviewed_dish
+						newReview.review_user = req.body.review_user
 						newReview.review_stars = req.body.stars
 						newReview.review_words = req.body.words
 						newReview.save(function() {

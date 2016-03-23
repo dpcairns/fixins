@@ -13,8 +13,6 @@ export default class UserForm extends React.Component{
 	}
 
 	handleUsernameChange(e){
-	console.log(this.state.username)
-
 	this.setState({username: e.target.value})
 	}
 
@@ -24,7 +22,6 @@ export default class UserForm extends React.Component{
 
 	handleSubNeighborhoodChange(e){
 	this.setState({user_sub_neighborhood: e.target.value})
-	console.log(this.state.user_sub_neighborhood)
 	}
 
 	handleSubmit(e){

@@ -126,6 +126,7 @@ export function createCheckIn(newCheckIn){
 			type: 'POST',
 			data: newCheckIn,
 			success: function(postedCheckIn){
+						console.log(postedCheckIn)
 						dispatcher.dispatch({
 								type: "CREATE_CHECKIN",
 								postedCheckIn
@@ -263,7 +264,7 @@ export function initializeCheckIns(data){
 			url: "http://localhost:4444/api/CheckIns",
 			type: 'GET',
 			dataType: "json",
-			success: function(){
+			success: function(data){
 						dispatcher.dispatch({
 								type: "FETCH_CHECKINS",
 								allCheckIns: data

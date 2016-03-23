@@ -5,18 +5,20 @@ export default class NeighborhoodList extends React.Component{
 	render(){
 		let neighborhoodNodes = this.props.allNeighborhoods.map(function(neighborhood){
 			return(
-				<li key={neighborhood._id}>
-					Name: {neighborhood.neighborhood_name}
+				<tr key={neighborhood._id}>
+					<td>Name: {neighborhood.neighborhood_name}</td>
 
-					<RemoveButton type="Neighborhood" id={neighborhood._id}/>
-				</li>
+					<td><RemoveButton type="Neighborhood" id={neighborhood._id}/></td>
+				</tr>
 				)
 		})
 	return(
 		<div>
-			<ol>
+		<table className="table table-condensed table-bordered table-hover">
+			<tbody>
 			{neighborhoodNodes}
-			</ol>
+			</tbody>
+		</table>
 		</div>
 
 		)

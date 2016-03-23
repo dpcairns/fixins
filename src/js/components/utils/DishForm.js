@@ -42,6 +42,8 @@ export default class DishForm extends React.Component{
 		newDishObject.calories = this.state.calories
 		newDishObject.price = this.state.price
 		newDishObject.spot = this.state.spot
+		newDishObject.blurb = this.state.blurb
+
 		FixinsActions.createDish(newDishObject)
 		this.setState({name: "", spot: "", calories: "", price: "", blurb: '', genres: ''})
 	}

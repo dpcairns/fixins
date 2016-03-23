@@ -10,13 +10,7 @@ var CheckInSchema = new Schema({
 	checkIn_dish: 
 			{
 				type: Schema.Types.ObjectId,
-				ref: 'User'
-			}
-	,
-	checkIn_spot: 
-			{
-				type: Schema.Types.ObjectId,
-				ref: 'Spot'
+				ref: 'Dish'
 			}
 	,
 	checkIn_user: {

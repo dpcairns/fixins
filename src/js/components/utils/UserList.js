@@ -46,23 +46,23 @@ toggleEdit(){
 		let userNodes = allUsers.map(function(user){
 			return(
 			<div key={user._id}>
-				<li>
+				<div className="col-md-6">
 					<ul>
-						<li>Name: {user.username}</li>
+						<li><h2>{user.username}</h2></li>
 						<li> Password: {user.password}</li>
-						<li> Neighborhood: {user.user_sub_neighborhood}</li>
+						<li> SubNeighborhood: {user.user_sub_neighborhood.subNeighborhood_name}</li>
 						<li> <RemoveButton type="User" id={user._id}/></li>
-						<li> 
-							<UserEditForm 
+					</ul>
+				</div>
+				<div className="col-md-6">
+											<UserEditForm 
 								userID={user._id}
 								allUsers={allUsers}
 								allCheckIns={allCheckIns}
 								allDishes={allDishes}
 								allReviews={allReviews}
 								allSubNeighborhoods={allSubNeighborhoods}/>
-						</li>
-					</ul>
-				</li>
+				</div>
 			</div>
 
 					
@@ -70,9 +70,7 @@ toggleEdit(){
 		})
 	return(
 		<div>
-			<ol>
 			{userNodes}
-			</ol>
 		</div>
 
 		)

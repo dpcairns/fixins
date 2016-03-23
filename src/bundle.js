@@ -25135,6 +25135,7 @@
 			type: 'POST',
 			data: newCheckIn,
 			success: function (postedCheckIn) {
+				console.log(postedCheckIn);
 				_dispatcher2.default.dispatch({
 					type: "CREATE_CHECKIN",
 					postedCheckIn: postedCheckIn
@@ -25269,7 +25270,7 @@
 			url: "http://localhost:4444/api/CheckIns",
 			type: 'GET',
 			dataType: "json",
-			success: function () {
+			success: function (data) {
 				_dispatcher2.default.dispatch({
 					type: "FETCH_CHECKINS",
 					allCheckIns: data
@@ -26075,7 +26076,7 @@
 			key: "goFindCheckIns",
 			value: function goFindCheckIns() {
 				this.setState({
-					allCheckins: _FixinsStore2.default.getCheckInsFromStore()
+					allCheckIns: _FixinsStore2.default.getCheckInsFromStore()
 				});
 			}
 		}, {
@@ -26098,7 +26099,7 @@
 				this.setState({
 					allUsers: _FixinsStore2.default.getUsersFromStore(),
 					allSpots: _FixinsStore2.default.getSpotsFromStore(),
-					allCheckins: _FixinsStore2.default.getCheckInsFromStore(),
+					allCheckIns: _FixinsStore2.default.getCheckInsFromStore(),
 					allDishes: _FixinsStore2.default.getDishesFromStore(),
 					allSubNeighborhoods: _FixinsStore2.default.getSubNeighborhoodsFromStore(),
 					allNeighborhoods: _FixinsStore2.default.getNeighborhoodsFromStore(),
@@ -26120,7 +26121,7 @@
 				_FixinsStore2.default.on("changedNeighborhoods", this.goFindNeighborhoods.bind(this));
 				_FixinsStore2.default.on("changedDishes", this.goFindDishes.bind(this));
 				_FixinsStore2.default.on("changedSpots", this.goFindSpots.bind(this));
-				_FixinsStore2.default.on("changedCheckins", this.goFindCheckIns.bind(this));
+				_FixinsStore2.default.on("changedCheckIns", this.goFindCheckIns.bind(this));
 				_FixinsStore2.default.on("changedGenres", this.goFindGenres.bind(this));
 			}
 		}, {
@@ -26132,7 +26133,7 @@
 				_FixinsStore2.default.removeListener("changedNeighborhoods", this.goFindNeighborhoods.bind(this));
 				_FixinsStore2.default.removeListener("changedDishes", this.goFindDishes.bind(this));
 				_FixinsStore2.default.removeListener("changedSpots", this.goFindSpots.bind(this));
-				_FixinsStore2.default.removeListener("changedCheckins", this.goFindCheckIns.bind(this));
+				_FixinsStore2.default.removeListener("changedCheckIns", this.goFindCheckIns.bind(this));
 				_FixinsStore2.default.removeListener("changedGenres", this.goFindGenres.bind(this));
 			}
 		}, {
@@ -26146,10 +26147,38 @@
 						{ className: "container" },
 						_react2.default.createElement(
 							"div",
+							{ className: "admin-dish-box row" },
+							_react2.default.createElement(
+								"div",
+								{ className: "admin-dish-input col-md-4" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"New Dish"
+								),
+								_react2.default.createElement(_DishForm2.default, {
+									allSpots: this.state.allSpots,
+									allGenres: this.state.allGenres })
+							),
+							_react2.default.createElement(
+								"div",
+								{ className: "admin-dish-output col-md-8" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"All Dishes"
+								),
+								_react2.default.createElement(_DishList2.default, {
+									allDishes: this.state.allDishes })
+							)
+						),
+						_react2.default.createElement("hr", null),
+						_react2.default.createElement(
+							"div",
 							{ className: "admin-user-box row" },
 							_react2.default.createElement(
 								"div",
-								{ className: "admin-user-input col-md-6" },
+								{ className: "admin-user-input col-md-4" },
 								_react2.default.createElement(
 									"h2",
 									null,
@@ -26160,7 +26189,7 @@
 							),
 							_react2.default.createElement(
 								"div",
-								{ className: "admin-user-output col-md-6" },
+								{ className: "admin-user-output col-md-8" },
 								_react2.default.createElement(
 									"h2",
 									null,
@@ -26180,7 +26209,7 @@
 							{ className: "admin-spot-box row" },
 							_react2.default.createElement(
 								"div",
-								{ className: "admin-spot-input col-md-6" },
+								{ className: "admin-spot-input col-md-4" },
 								_react2.default.createElement(
 									"h2",
 									null,
@@ -26192,7 +26221,7 @@
 							),
 							_react2.default.createElement(
 								"div",
-								{ className: "admin-spot-output col-md-6" },
+								{ className: "admin-spot-output col-md-8" },
 								_react2.default.createElement(
 									"h2",
 									null,
@@ -26209,38 +26238,10 @@
 						_react2.default.createElement("hr", null),
 						_react2.default.createElement(
 							"div",
-							{ className: "admin-dish-box row" },
-							_react2.default.createElement(
-								"div",
-								{ className: "admin-dish-input col-md-6" },
-								_react2.default.createElement(
-									"h2",
-									null,
-									"New Dish"
-								),
-								_react2.default.createElement(_DishForm2.default, {
-									allSpots: this.state.allSpots,
-									allGenres: this.state.allGenres })
-							),
-							_react2.default.createElement(
-								"div",
-								{ className: "admin-dish-output col-md-6" },
-								_react2.default.createElement(
-									"h2",
-									null,
-									"All Dishes"
-								),
-								_react2.default.createElement(_DishList2.default, {
-									allDishes: this.state.allDishes })
-							)
-						),
-						_react2.default.createElement("hr", null),
-						_react2.default.createElement(
-							"div",
 							{ className: "admin-genre-box row" },
 							_react2.default.createElement(
 								"div",
-								{ className: "admin-genre-input col-md-6" },
+								{ className: "admin-genre-input col-md-4" },
 								_react2.default.createElement(
 									"h2",
 									null,
@@ -26250,7 +26251,7 @@
 							),
 							_react2.default.createElement(
 								"div",
-								{ className: "admin-genre-output col-md-6" },
+								{ className: "admin-genre-output col-md-8" },
 								_react2.default.createElement(
 									"h2",
 									null,
@@ -26266,7 +26267,7 @@
 							{ className: "admin-review-box row" },
 							_react2.default.createElement(
 								"div",
-								{ className: "admin-review-input col-md-6" },
+								{ className: "admin-review-input col-md-4" },
 								_react2.default.createElement(
 									"h2",
 									null,
@@ -26278,7 +26279,7 @@
 							),
 							_react2.default.createElement(
 								"div",
-								{ className: "admin-review-output col-md-6" },
+								{ className: "admin-review-output col-md-8" },
 								_react2.default.createElement(
 									"h2",
 									null,
@@ -26294,7 +26295,7 @@
 							{ className: "admin-checkIn-box row" },
 							_react2.default.createElement(
 								"div",
-								{ className: "admin-checkIn-input col-md-6" },
+								{ className: "admin-checkIn-input col-md-4" },
 								_react2.default.createElement(
 									"h2",
 									null,
@@ -26306,7 +26307,7 @@
 							),
 							_react2.default.createElement(
 								"div",
-								{ className: "admin-checkIn-output col-md-6" },
+								{ className: "admin-checkIn-output col-md-8" },
 								_react2.default.createElement(
 									"h2",
 									null,
@@ -26322,7 +26323,7 @@
 							{ className: "admin-neighborhood-box row" },
 							_react2.default.createElement(
 								"div",
-								{ className: "admin-neighborhood-input col-md-6" },
+								{ className: "admin-neighborhood-input col-md-4" },
 								_react2.default.createElement(
 									"h2",
 									null,
@@ -26332,7 +26333,7 @@
 							),
 							_react2.default.createElement(
 								"div",
-								{ className: "admin-neighborhood-output col-md-6" },
+								{ className: "admin-neighborhood-output col-md-8" },
 								_react2.default.createElement(
 									"h2",
 									null,
@@ -26348,7 +26349,7 @@
 							{ className: "admin-subNeighborhood-box row" },
 							_react2.default.createElement(
 								"div",
-								{ className: "admin-subNeighborhood-input col-md-6" },
+								{ className: "admin-subNeighborhood-input col-md-4" },
 								_react2.default.createElement(
 									"h2",
 									null,
@@ -26359,7 +26360,7 @@
 							),
 							_react2.default.createElement(
 								"div",
-								{ className: "admin-subNeighborhood-output col-md-6" },
+								{ className: "admin-subNeighborhood-output col-md-8" },
 								_react2.default.createElement(
 									"h2",
 									null,
@@ -26432,8 +26433,6 @@
 		_createClass(UserForm, [{
 			key: "handleUsernameChange",
 			value: function handleUsernameChange(e) {
-				console.log(this.state.username);
-
 				this.setState({ username: e.target.value });
 			}
 		}, {
@@ -26445,7 +26444,6 @@
 			key: "handleSubNeighborhoodChange",
 			value: function handleSubNeighborhoodChange(e) {
 				this.setState({ user_sub_neighborhood: e.target.value });
-				console.log(this.state.user_sub_neighborhood);
 			}
 		}, {
 			key: "handleSubmit",
@@ -26547,7 +26545,7 @@
 
 				return _react2.default.createElement(
 					"select",
-					{ onChange: this.props.onchange2, defaultValue: "choose one", className: "form-control" },
+					{ onChange: this.props.onchange2, className: "form-control" },
 					optionNodes
 				);
 			}
@@ -26660,16 +26658,19 @@
 						"div",
 						{ key: user._id },
 						_react2.default.createElement(
-							"li",
-							null,
+							"div",
+							{ className: "col-md-6" },
 							_react2.default.createElement(
 								"ul",
 								null,
 								_react2.default.createElement(
 									"li",
 									null,
-									"Name: ",
-									user.username
+									_react2.default.createElement(
+										"h2",
+										null,
+										user.username
+									)
 								),
 								_react2.default.createElement(
 									"li",
@@ -26680,38 +26681,34 @@
 								_react2.default.createElement(
 									"li",
 									null,
-									" Neighborhood: ",
-									user.user_sub_neighborhood
+									" SubNeighborhood: ",
+									user.user_sub_neighborhood.subNeighborhood_name
 								),
 								_react2.default.createElement(
 									"li",
 									null,
 									" ",
 									_react2.default.createElement(_RemoveButton2.default, { type: "User", id: user._id })
-								),
-								_react2.default.createElement(
-									"li",
-									null,
-									_react2.default.createElement(_UserEditForm2.default, {
-										userID: user._id,
-										allUsers: allUsers,
-										allCheckIns: allCheckIns,
-										allDishes: allDishes,
-										allReviews: allReviews,
-										allSubNeighborhoods: allSubNeighborhoods })
 								)
 							)
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "col-md-6" },
+							_react2.default.createElement(_UserEditForm2.default, {
+								userID: user._id,
+								allUsers: allUsers,
+								allCheckIns: allCheckIns,
+								allDishes: allDishes,
+								allReviews: allReviews,
+								allSubNeighborhoods: allSubNeighborhoods })
 						)
 					);
 				});
 				return _react2.default.createElement(
 					"div",
 					null,
-					_react2.default.createElement(
-						"ol",
-						null,
-						userNodes
-					)
+					userNodes
 				);
 			}
 		}]);
@@ -27038,6 +27035,8 @@
 				newSpotObject.name = this.state.name;
 				newSpotObject.subNeighborhood = this.state.subNeighborhood;
 				newSpotObject.genres = this.state.genres;
+				newSpotObject.blurb = this.state.blurb;
+
 				FixinsActions.createSpot(newSpotObject);
 				this.setState({ username: "", blurb: "", genres: "", coordinates: "", neighborhood: '', subNeighborhood: '' });
 			}
@@ -27152,16 +27151,19 @@
 						"div",
 						{ key: spot._id },
 						_react2.default.createElement(
-							"li",
-							null,
+							"div",
+							{ className: "col-md-6" },
 							_react2.default.createElement(
 								"ul",
 								null,
 								_react2.default.createElement(
 									"li",
 									null,
-									"Spot Name: ",
-									spot.spot_name
+									_react2.default.createElement(
+										"h2",
+										null,
+										spot.spot_name
+									)
 								),
 								_react2.default.createElement(
 									"li",
@@ -27173,13 +27175,13 @@
 									"li",
 									null,
 									" Spot SubNeighborhood: ",
-									spot.spot_subNeighborhood
+									spot.spot_subNeighborhood.subNeighborhood_name
 								),
 								_react2.default.createElement(
 									"li",
 									null,
 									" Spot Genre: ",
-									spot.spot_genres
+									spot.spot_genres[0].genre_name
 								),
 								_react2.default.createElement(
 									"li",
@@ -27192,28 +27194,24 @@
 									null,
 									" ",
 									_react2.default.createElement(_RemoveButton2.default, { type: "Spot", id: spot._id })
-								),
-								_react2.default.createElement(
-									"li",
-									null,
-									_react2.default.createElement(_SpotEditForm2.default, {
-										spotID: spot._id,
-										allUsers: allUsers,
-										allGenres: allGenres,
-										allSubNeighborhoods: allSubNeighborhoods })
 								)
 							)
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "col-md-6" },
+							_react2.default.createElement(_SpotEditForm2.default, {
+								spotID: spot._id,
+								allUsers: allUsers,
+								allGenres: allGenres,
+								allSubNeighborhoods: allSubNeighborhoods })
 						)
 					);
 				});
 				return _react2.default.createElement(
 					"div",
 					null,
-					_react2.default.createElement(
-						"ol",
-						null,
-						spotNodes
-					)
+					spotNodes
 				);
 			}
 		}]);
@@ -27475,6 +27473,8 @@
 				newDishObject.calories = this.state.calories;
 				newDishObject.price = this.state.price;
 				newDishObject.spot = this.state.spot;
+				newDishObject.blurb = this.state.blurb;
+
 				FixinsActions.createDish(newDishObject);
 				this.setState({ name: "", spot: "", calories: "", price: "", blurb: '', genres: '' });
 			}
@@ -27590,47 +27590,46 @@
 			value: function render() {
 				var dishNodes = this.props.allDishes.map(function (dish) {
 					return _react2.default.createElement(
-						"li",
+						"tr",
 						{ key: dish._id },
 						_react2.default.createElement(
-							"ul",
+							"td",
 							null,
 							_react2.default.createElement(
-								"li",
+								"h2",
 								null,
-								"Dish Name: ",
 								dish.dish_name
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" Dish Blurb: ",
-								dish.dish_blurb
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" Dish Price: ",
-								dish.dish_price
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" Dish Calories: ",
-								dish.dish_calories
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" Dish Spot: ",
-								dish.dish_spot
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" ",
-								_react2.default.createElement(_RemoveButton2.default, { type: "Dish", id: dish._id })
 							)
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							" Dish Blurb: ",
+							dish.dish_blurb
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							" Dish Price: ",
+							dish.dish_price
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							" Dish Calories: ",
+							dish.dish_calories
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							" Dish Spot: ",
+							dish.dish_spot.spot_name
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							" ",
+							_react2.default.createElement(_RemoveButton2.default, { type: "Dish", id: dish._id })
 						)
 					);
 				});
@@ -27638,9 +27637,13 @@
 					"div",
 					null,
 					_react2.default.createElement(
-						"ol",
-						null,
-						dishNodes
+						"table",
+						{ className: "table table-condensed table-bordered table-hover" },
+						_react2.default.createElement(
+							"tbody",
+							null,
+							dishNodes
+						)
 					)
 				);
 			}
@@ -27772,7 +27775,7 @@
 							"Dish reviewed:",
 							_react2.default.createElement(_CustomDropdown2.default, {
 								setValueTo: this.state.reviewed_dish,
-								onChange: this.handleDishChange.bind(this),
+								onchange2: this.handleDishChange.bind(this),
 								data: this.props.allDishes,
 								nameName: "dish_name" })
 						),
@@ -27782,9 +27785,9 @@
 							"User who wrote it:",
 							_react2.default.createElement(_CustomDropdown2.default, {
 								setValueTo: this.state.review_user,
-								onChange: this.handleUserChange.bind(this),
+								onchange2: this.handleUserChange.bind(this),
 								data: this.props.allUsers,
-								nameName: "dish_name" })
+								nameName: "username" })
 						),
 						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Post" })
 					)
@@ -27825,55 +27828,51 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var ReviewList = function (_React$Component) {
-		_inherits(ReviewList, _React$Component);
+	var Reviewtdst = function (_React$Component) {
+		_inherits(Reviewtdst, _React$Component);
 
-		function ReviewList() {
-			_classCallCheck(this, ReviewList);
+		function Reviewtdst() {
+			_classCallCheck(this, Reviewtdst);
 
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(ReviewList).apply(this, arguments));
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Reviewtdst).apply(this, arguments));
 		}
 
-		_createClass(ReviewList, [{
+		_createClass(Reviewtdst, [{
 			key: "render",
 			value: function render() {
 				var reviewNodes = this.props.allReviews.map(function (review) {
 					return _react2.default.createElement(
-						"li",
+						"tr",
 						{ key: review._id },
 						_react2.default.createElement(
-							"ul",
+							"td",
 							null,
-							_react2.default.createElement(
-								"li",
-								null,
-								"Name: ",
-								review.reviewed_item_name
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								"Type: ",
-								review.reviewed_item_type
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								"Stars: ",
-								review.stars
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								"Words: ",
-								review.words
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" ",
-								_react2.default.createElement(_RemoveButton2.default, { type: "Review", id: review._id })
-							)
+							"Name of Dish: ",
+							review.reviewed_dish.dish_name
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							"Author: ",
+							review.review_user.username
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							"Stars: ",
+							review.review_stars
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							"Words: ",
+							review.review_words
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							" ",
+							_react2.default.createElement(_RemoveButton2.default, { type: "Review", id: review._id })
 						)
 					);
 				});
@@ -27881,18 +27880,22 @@
 					"div",
 					null,
 					_react2.default.createElement(
-						"ol",
-						null,
-						reviewNodes
+						"table",
+						{ className: "table table-condensed table-bordered table-hover" },
+						_react2.default.createElement(
+							"tbody",
+							null,
+							reviewNodes
+						)
 					)
 				);
 			}
 		}]);
 
-		return ReviewList;
+		return Reviewtdst;
 	}(_react2.default.Component);
 
-	exports.default = ReviewList;
+	exports.default = Reviewtdst;
 
 /***/ },
 /* 239 */
@@ -27952,7 +27955,7 @@
 		}, {
 			key: "handleDishChange",
 			value: function handleDishChange(e) {
-				this.setState({ blurb: e.target.value });
+				this.setState({ dish: e.target.value });
 			}
 		}, {
 			key: "handleUserChange",
@@ -27990,14 +27993,17 @@
 							"div",
 							{ className: "input-group" },
 							"Dish:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.dish, onChange: this.handleDishChange.bind(this),
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.dish, onchange2: this.handleDishChange.bind(this),
 								data: this.props.allDishes, nameName: "dish_name" })
 						),
 						_react2.default.createElement(
 							"div",
 							{ className: "input-group" },
 							"User:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.user, onChange: this.handleUserChange.bind(this), data: this.props.allUsers, nameName: "username" })
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.user,
+								onchange2: this.handleUserChange.bind(this),
+								data: this.props.allUsers,
+								nameName: "username" })
 						),
 						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Post" })
 					)
@@ -28052,41 +28058,37 @@
 			value: function render() {
 				var checkInNodes = this.props.allCheckIns.map(function (checkIn) {
 					return _react2.default.createElement(
-						"li",
+						"tr",
 						{ key: checkIn._id },
 						_react2.default.createElement(
-							"ul",
+							"td",
 							null,
-							_react2.default.createElement(
-								"li",
-								null,
-								"Spot: ",
-								checkIn.spot
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								"Dish: ",
-								checkIn.dish
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								"Name: ",
-								checkIn.blurb
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								"User: ",
-								checkIn.user
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" ",
-								_react2.default.createElement(_RemoveButton2.default, { type: "CheckIn", id: dish._id })
-							)
+							"Dish: ",
+							checkIn.checkIn_dish.dish_name
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							"User: ",
+							checkIn.checkIn_user.username
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							"Blurb: ",
+							checkIn.checkIn_blurb
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							"When: ",
+							checkIn.checkIn_date
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							" ",
+							_react2.default.createElement(_RemoveButton2.default, { type: "CheckIn", id: checkIn._id })
 						)
 					);
 				});
@@ -28094,9 +28096,13 @@
 					"div",
 					null,
 					_react2.default.createElement(
-						"ol",
-						null,
-						checkInNodes
+						"table",
+						{ className: "table table-condensed table-bordered table-hover" },
+						_react2.default.createElement(
+							"tbody",
+							null,
+							checkInNodes
+						)
 					)
 				);
 			}
@@ -28233,20 +28239,32 @@
 			value: function render() {
 				var genresNodes = this.props.allGenres.map(function (genre) {
 					return _react2.default.createElement(
-						"li",
+						"tr",
 						{ key: genre._id },
-						"Name: ",
-						genre.genre_name,
-						_react2.default.createElement(_RemoveButton2.default, { type: "Genre", id: genre._id })
+						_react2.default.createElement(
+							"td",
+							null,
+							"Name: ",
+							genre.genre_name
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							_react2.default.createElement(_RemoveButton2.default, { type: "Genre", id: genre._id })
+						)
 					);
 				});
 				return _react2.default.createElement(
 					"div",
 					null,
 					_react2.default.createElement(
-						"ol",
-						null,
-						genresNodes
+						"table",
+						{ className: "table table-condensed table-bordered table-hover" },
+						_react2.default.createElement(
+							"tbody",
+							null,
+							genresNodes
+						)
 					)
 				);
 			}
@@ -28387,20 +28405,32 @@
 			value: function render() {
 				var neighborhoodNodes = this.props.allNeighborhoods.map(function (neighborhood) {
 					return _react2.default.createElement(
-						"li",
+						"tr",
 						{ key: neighborhood._id },
-						"Name: ",
-						neighborhood.neighborhood_name,
-						_react2.default.createElement(_RemoveButton2.default, { type: "Neighborhood", id: neighborhood._id })
+						_react2.default.createElement(
+							"td",
+							null,
+							"Name: ",
+							neighborhood.neighborhood_name
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							_react2.default.createElement(_RemoveButton2.default, { type: "Neighborhood", id: neighborhood._id })
+						)
 					);
 				});
 				return _react2.default.createElement(
 					"div",
 					null,
 					_react2.default.createElement(
-						"ol",
-						null,
-						neighborhoodNodes
+						"table",
+						{ className: "table table-condensed table-bordered table-hover" },
+						_react2.default.createElement(
+							"tbody",
+							null,
+							neighborhoodNodes
+						)
 					)
 				);
 			}
@@ -28552,18 +28582,31 @@
 			value: function render() {
 				var subNeighborhoodNodes = this.props.allSubNeighborhoods.map(function (subNeighborhood) {
 					return _react2.default.createElement(
-						"li",
+						"tr",
 						{ key: subNeighborhood._id },
-						"Name: ",
-						subNeighborhood.subNeighborhood_name,
-						_react2.default.createElement(_RemoveButton2.default, { type: "SubNeighborhood", id: subNeighborhood._id })
+						_react2.default.createElement(
+							"td",
+							null,
+							"Name: ",
+							subNeighborhood.subNeighborhood_name
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							subNeighborhood.sub_neighborhood_neighborhood.neighborhood_name
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							_react2.default.createElement(_RemoveButton2.default, { type: "SubNeighborhood", id: subNeighborhood._id })
+						)
 					);
 				});
 				return _react2.default.createElement(
-					"div",
-					null,
+					"table",
+					{ className: "table table-condensed table-bordered table-hover" },
 					_react2.default.createElement(
-						"ol",
+						"tbody",
 						null,
 						subNeighborhoodNodes
 					)
@@ -28623,7 +28666,6 @@
 			_this.neighborhoods = [];
 			_this.subNeighborhoods = [];
 			_this.genres = [];
-			_this.checkIns = [];
 			return _this;
 		}
 
@@ -28754,6 +28796,7 @@
 		}, {
 			key: "addCheckInToStore",
 			value: function addCheckInToStore(checkIn) {
+				console.log(checkIn);
 				this.checkIns.push(checkIn);
 				this.emit("changedCheckIns");
 			}
@@ -28766,7 +28809,7 @@
 		}, {
 			key: "findAndRemoveCheckIn",
 			value: function findAndRemoveCheckIn(ID) {
-				for (var i = 0; i < this.users.checkIns; i++) {
+				for (var i = 0; i < this.checkIns.length; i++) {
 					if (this.checkIns[i]._id === ID) {
 						this.checkIns.splice(i, 1);
 						break;
@@ -28968,7 +29011,8 @@
 
 					case "CREATE_CHECKIN":
 						console.log("CREATE_CHECKIN");
-						this.addCheckInToStore(action.postedCheckin);
+						console.log(action.postedCheckIn);
+						this.addCheckInToStore(action.postedCheckIn);
 						break;
 
 					case "CREATE_GENRE":

@@ -13,7 +13,6 @@ class FixinsStore extends EventEmitter {
 		this.neighborhoods = []
 		this.subNeighborhoods = []
 		this.genres = []
-		this.checkIns = []
 	}
 
 	getCheckInsFromStore() {
@@ -133,6 +132,7 @@ class FixinsStore extends EventEmitter {
 	}
 	
 	addCheckInToStore(checkIn){
+		console.log(checkIn)
 		this.checkIns.push(checkIn)
 		this.emit("changedCheckIns")
 	}
@@ -143,7 +143,7 @@ class FixinsStore extends EventEmitter {
 	}
 
 	findAndRemoveCheckIn(ID){
-		for(let i = 0; i < this.users.checkIns; i++){
+		for(let i = 0; i < this.checkIns.length; i++){
 			if(this.checkIns[i]._id === ID){
 				this.checkIns.splice(i, 1);
 				break;
@@ -346,7 +346,8 @@ class FixinsStore extends EventEmitter {
 			
 			case "CREATE_CHECKIN":
 				console.log("CREATE_CHECKIN")
-				this.addCheckInToStore(action.postedCheckin)
+				console.log(action.postedCheckIn)
+				this.addCheckInToStore(action.postedCheckIn)
 				break;
 			
 			case "CREATE_GENRE":

@@ -5,7 +5,10 @@ module.exports = function(router){
 	router.route('/Spots')
 	.get(function (req, res) { 
 		console.log('finding all Spots in fixins')
-		Spot.find({}).exec(function(err, Spots){
+		Spot.find({})
+		.populate('spot_genres')
+		.populate('spot_subNeighborhood')
+		.exec(function(err, Spots){
 			if(err){
 				console.log('Couldn\'t find Spots')
 			} else {
@@ -17,7 +20,8 @@ module.exports = function(router){
 			var newSpot = new Spot()
 						newSpot.spot_name = req.body.name
 						newSpot.spot_genres = req.body.genres
-						newSpot.spot_subNeighborhood = req.body.sub_neighborhood
+						newSpot.spot_blurb = req.body.blurb
+						newSpot.spot_subNeighborhood = req.body.subNeighborhood
 						newSpot.save(function() {
 							res.json(newSpot)
 						})

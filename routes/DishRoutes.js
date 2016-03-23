@@ -5,7 +5,10 @@ module.exports = function(router){
 router.route('/Dishes')
 	.get(function (req, res) { 
 		console.log('finding all Dishes in fixins')
-		Dish.find({}).exec(function(err, Dishes){
+		Dish.find({})
+		.populate('dish_spot')
+		.populate('dish_genres')
+		.exec(function(err, Dishes){
 			if(err){
 				console.log('Couldn\'t find Dishes')
 			} else {
@@ -17,6 +20,7 @@ router.route('/Dishes')
 			var newDish = new Dish()
 						newDish.dish_name = req.body.name
 						newDish.dish_spot = req.body.spot
+						newDish.dish_blurb = req.body.blurb
 						newDish.dish_calories = req.body.calories
 						newDish.dish_price = req.body.price
 						newDish.dish_genres = req.body.genres

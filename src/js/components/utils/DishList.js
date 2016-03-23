@@ -5,24 +5,26 @@ export default class DishList extends React.Component{
 	render(){
 		let dishNodes = this.props.allDishes.map(function(dish){
 			return(
-				<li key={dish._id}>
-					<ul>
-						<li>Dish Name: {dish.dish_name}</li>
-						<li> Dish Blurb: {dish.dish_blurb}</li>
-						<li> Dish Price: {dish.dish_price}</li>
-						<li> Dish Calories: {dish.dish_calories}</li>
-						<li> Dish Spot: {dish.dish_spot}</li>
-						<li> <RemoveButton type="Dish" id={dish._id}/></li>
+					<tr key={dish._id}>
+						<td><h2>{dish.dish_name}</h2></td>
+						<td> Dish Blurb: {dish.dish_blurb}</td>
+						<td> Dish Price: {dish.dish_price}</td>
+						<td> Dish Calories: {dish.dish_calories}</td>
+						<td> Dish Spot: {dish.dish_spot.spot_name}</td>
+						<td> <RemoveButton type="Dish" id={dish._id}/></td>
 
-					</ul>
-				</li>
+					</tr>
+		
 				)
 		})
 	return(
 		<div>
-			<ol>
+
+			<table className="table table-condensed table-bordered table-hover">
+			<tbody>
 			{dishNodes}
-			</ol>
+			</tbody>
+			</table>
 		</div>
 
 		)

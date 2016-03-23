@@ -5,18 +5,21 @@ export default class SubNeighborhoodList extends React.Component{
 	render(){
 		let subNeighborhoodNodes = this.props.allSubNeighborhoods.map(function(subNeighborhood){
 			return(
-				<li key={subNeighborhood._id}>Name: {subNeighborhood.subNeighborhood_name}
-				<RemoveButton type="SubNeighborhood" id={subNeighborhood._id}/>
+				<tr key={subNeighborhood._id}>
+				<td>Name: {subNeighborhood.subNeighborhood_name}</td>
+				<td>{subNeighborhood.sub_neighborhood_neighborhood.neighborhood_name}</td>
 
-				</li>
+				<td><RemoveButton type="SubNeighborhood" id={subNeighborhood._id}/></td>
+
+				</tr>
 				)
 		})
 	return(
-		<div>
-			<ol>
+		<table className="table table-condensed table-bordered table-hover">
+			<tbody>
 			{subNeighborhoodNodes}
-			</ol>
-		</div>
+			</tbody>
+		</table>
 
 		)
 

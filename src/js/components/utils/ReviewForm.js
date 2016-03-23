@@ -69,7 +69,7 @@ export default class ReviewForm extends React.Component{
 					Dish reviewed:
 					<CustomDropdown 
 					setValueTo={this.state.reviewed_dish} 
-					onChange={this.handleDishChange.bind(this)} 
+					onchange2={this.handleDishChange.bind(this)} 
 					data={this.props.allDishes} 
 					nameName="dish_name" />
 				</div>
@@ -77,9 +77,9 @@ export default class ReviewForm extends React.Component{
 					User who wrote it:
 					<CustomDropdown 
 					setValueTo={this.state.review_user} 
-					onChange={this.handleUserChange.bind(this)} 
+					onchange2={this.handleUserChange.bind(this)} 
 					data={this.props.allUsers} 
-					nameName="dish_name" />
+					nameName="username" />
 				</div>
 
 		

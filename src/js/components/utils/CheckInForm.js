@@ -17,7 +17,7 @@ export default class CheckInForm extends React.Component{
 	}
 
 	handleDishChange(e){
-		this.setState({blurb: e.target.value})
+		this.setState({dish: e.target.value})
 	}
 
 	handleUserChange(e){
@@ -45,12 +45,15 @@ export default class CheckInForm extends React.Component{
 		</div>
 		<div className="input-group">
 			Dish:
-			<CustomDropdown setValueTo={this.state.dish} onChange={this.handleDishChange.bind(this)} 
+			<CustomDropdown setValueTo={this.state.dish} onchange2={this.handleDishChange.bind(this)} 
 			data={this.props.allDishes} nameName="dish_name" />
 		</div>
 		<div className="input-group">
 			User:
-			<CustomDropdown setValueTo={this.state.user} onChange={this.handleUserChange.bind(this)} data={this.props.allUsers} nameName="username" />
+			<CustomDropdown setValueTo={this.state.user} 
+			onchange2={this.handleUserChange.bind(this)} 
+			data={this.props.allUsers} 
+			nameName="username" />
 		</div>
 	<input className="button btn-danger align-right" type="submit" value="Post"/>
 	</form>

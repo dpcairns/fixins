@@ -1,27 +1,27 @@
 import React from "react"
 import RemoveButton from "./RemoveButton"
 
-export default class ReviewList extends React.Component{
+export default class Reviewtdst extends React.Component{
 	render(){
 		let reviewNodes = this.props.allReviews.map(function(review){
 			return(
-				<li key={review._id}>
-					<ul>
-						<li>Name: {review.reviewed_item_name}</li>
-						<li>Type: {review.reviewed_item_type}</li>
-						<li>Stars: {review.stars}</li>
-						<li>Words: {review.words}</li>
-						<li> <RemoveButton type="Review" id={review._id}/></li>
+				<tr key={review._id}>
+						<td>Name of Dish: {review.reviewed_dish.dish_name}</td>
+						<td>Author: {review.review_user.username}</td>
+						<td>Stars: {review.review_stars}</td>
+						<td>Words: {review.review_words}</td>
+						<td> <RemoveButton type="Review" id={review._id}/></td>
 
-					</ul>
-				</li>
+				</tr>
 				)
 		})
 	return(
 		<div>
-			<ol>
+		<table className="table table-condensed table-bordered table-hover">
+			<tbody>
 			{reviewNodes}
-			</ol>
+			</tbody>
+		</table>
 		</div>
 
 		)
