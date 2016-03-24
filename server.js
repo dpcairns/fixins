@@ -41,7 +41,5 @@ router.get('/', function(req,res){
 
 app.use('/api', router)
 
-
-
 app.listen(4444)
 console.log("fixin to load on port 4444")

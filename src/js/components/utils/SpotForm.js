@@ -1,6 +1,7 @@
 import React from "react"
 import CustomDropdown from "./CustomDropdown"
 import * as FixinsActions from "../../actions/FixinsActions"
+import SimpleMap from "./SimpleMap"
 
 export default class SpotForm extends React.Component{
 	constructor(){
@@ -11,11 +12,22 @@ export default class SpotForm extends React.Component{
 			genres: '',
 			coordinates: '',
 			subNeighborhood: '',
+			hasLocation: false,
 		}
 	}
 
+
 	handleNameChange(e){
 	this.setState({name: e.target.value})
+	}
+
+	handleSubNeighborhoodChange(e){
+		this.setState({subNeighborhood: e.target.value})
+	}
+
+	handleCoordinatesChange(e){
+		this.setState({coordinates: e.target.value})
+		console.log(this.state.coordinates)
 	}
 
 	handleBlurbChange(e){
@@ -26,22 +38,28 @@ export default class SpotForm extends React.Component{
 		this.setState({genres: e.target.value})
 	}	
 
-	handleCoordinatesChange(e){
-		this.setState({coordinates: e.target.value})
-	}	
 
-	handleSubNeighborhoodChange(e){
-		this.setState({subNeighborhood: e.target.value})
+
+	handleMapClick(e){
+		    this.setState({
+		      hasLocation: true,
+		      clickPosition: e.latlng,
+		      coordinates: e.latlng
+		    })
+		console.log("here is this.state")
+		console.log(this.state)
 	}
 
 	handleSubmit(e){
 		e.preventDefault();
-		var newSpotObject = {}
+		let newSpotObject = {}
 		newSpotObject.name = this.state.name
 		newSpotObject.subNeighborhood = this.state.subNeighborhood
+		newSpotObject.coordinates = this.state.coordinates
 		newSpotObject.genres = this.state.genres
 		newSpotObject.blurb = this.state.blurb
-
+		console.log("here is the now spot object,before save")
+		console.log(newSpotObject)
 		FixinsActions.createSpot(newSpotObject)
 		this.setState({username: "", blurb: "", genres: "", coordinates: "", neighborhood: '', subNeighborhood: ''})
 	}
@@ -79,6 +97,13 @@ export default class SpotForm extends React.Component{
 				onchange2={this.handleSubNeighborhoodChange.bind(this)} 
 				data={this.props.allSubNeighborhoods} 
 				nameName="subNeighborhood_name" />
+		</div>
+		<div className="map-input-box">
+		<h2>Show us the spot on the map:</h2>
+		<SimpleMap 
+			clickPosition={this.state.coordinates} 
+			onchange2={this.handleCoordinatesChange}
+			handleMapClick={this.handleMapClick}/>
 		</div>
 	<input className="button btn-danger align-right" type="submit" value="Post"/>
 	</form>

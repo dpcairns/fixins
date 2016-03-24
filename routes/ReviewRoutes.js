@@ -22,8 +22,16 @@ module.exports = function(router){
 						newReview.review_user = req.body.review_user
 						newReview.review_stars = req.body.stars
 						newReview.review_words = req.body.words
-						newReview.save(function() {
-							res.json(newReview)
+						newReview.save()
+						Review.findOne({review_words: newReview.review_words})
+							.populate('reviewed_dish')
+							.populate('review_user')
+							.exec(function(err, Review){
+								if(err){
+									console.log('Couldn\'t find Review')
+								} else {
+									res.json(Review);
+								}
 						})
 				})
 

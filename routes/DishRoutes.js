@@ -24,12 +24,19 @@ router.route('/Dishes')
 						newDish.dish_calories = req.body.calories
 						newDish.dish_price = req.body.price
 						newDish.dish_genres = req.body.genres
-
-						newDish.save(function(err) {
-							if(err){console.log("couldn't save dish")}
-							res.json(newDish)
+						newDish.save()
+						Dish.findOne({dish_name: newDish.dish_name})
+							.populate('dish_spot')
+							.populate('dish_genres')
+							.exec(function(err, Dish){
+								if(err){
+									console.log('Couldn\'t find Dish')
+								} else {
+									res.json(Dish);
+								}
+							})
 						})
-				})
+		
 
 router.route('/Dishes/:DishId')
 	.get(function (req, res) {

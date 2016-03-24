@@ -145,7 +145,7 @@ export default class Admin extends React.Component{
 			<div className="container">
 
 
-				<div className="admin-dish-box row">
+				<div className="admin-dish-box bg-info row">
 
 					<div className="admin-dish-input col-md-4">
 									<h2>New Dish</h2>
@@ -164,7 +164,7 @@ export default class Admin extends React.Component{
 				</div>
 
 			<hr />
-				<div className="admin-user-box row">
+				<div className="admin-user-box bg-success row">
 					<div className="admin-user-input col-md-4">
 									<h2>New User</h2>
 						<UserForm 
@@ -184,7 +184,7 @@ export default class Admin extends React.Component{
 			
 			<hr />
 
-				<div className="admin-spot-box row">
+				<div className="admin-spot-box row bg-info">
 					<div className="admin-spot-input col-md-4">
 									<h2>New Spot</h2>
 
@@ -207,7 +207,7 @@ export default class Admin extends React.Component{
 			
 			<hr />
 
-				<div className="admin-genre-box row">
+				<div className="admin-genre-box row bg-success">
 					<div className="admin-genre-input col-md-4">
 									<h2>New Genre</h2>
 
@@ -224,7 +224,7 @@ export default class Admin extends React.Component{
 				
 			<hr />
 
-				<div className="admin-review-box row">
+				<div className="admin-review-box bg-info row">
 					<div className="admin-review-input col-md-4">
 									<h2>New Review</h2>
 
@@ -242,7 +242,7 @@ export default class Admin extends React.Component{
 
 			<hr />
 
-				<div className="admin-checkIn-box row">
+				<div className="admin-checkIn-box bg-success row">
 					<div className="admin-checkIn-input col-md-4">
 									<h2>New CheckIn</h2>
 
@@ -260,7 +260,7 @@ export default class Admin extends React.Component{
 
 			<hr />
 				
-				<div className="admin-neighborhood-box row">
+				<div className="admin-neighborhood-box bg-info row">
 					<div className="admin-neighborhood-input col-md-4">
 									<h2>New Neighborhood</h2>
 
@@ -277,7 +277,7 @@ export default class Admin extends React.Component{
 
 			<hr />
 
-				<div className="admin-subNeighborhood-box row">
+				<div className="admin-subNeighborhood-box bg-success row">
 					<div className="admin-subNeighborhood-input col-md-4">
 									<h2>New Sub-Neighborhood</h2>
 

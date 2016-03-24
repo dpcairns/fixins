@@ -20,8 +20,15 @@ module.exports = function(router){
 						newCheckIn.checkIn_dish = req.body.dish
 						newCheckIn.checkIn_user = req.body.user
 						newCheckIn.checkIn_blurb = req.body.blurb
-						newCheckIn.save(function() {
-							res.json(newCheckIn)
+						newCheckIn.save()
+						CheckIn.findOne({checkIn_blurb: newCheckIn.checkIn_blurb})
+							.populate('checkIn_dish').populate('checkIn_user')
+							.exec(function(err, CheckIn){
+							if(err){
+								console.log('Couldn\'t find CheckIns')
+							} else {
+								res.json(CheckIn);
+							}
 						})
 				})
 

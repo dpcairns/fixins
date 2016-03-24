@@ -20,9 +20,16 @@ module.exports = function(router){
 						newUser.username = req.body.name
 						newUser.password = req.body.password
 						newUser.user_sub_neighborhood = req.body.user_sub_neighborhood
-						newUser.save(function() {
-							res.json(newUser)
-						})
+						newUser.save()
+							User.findOne({username: newUser.username})
+							.populate('user_sub_neighborhood')
+							.exec(function(err, User){
+								if(err){
+									console.log('Couldn\'t find Users')
+								} else {
+									res.json(User);
+								}
+							})
 				})
 
 router.route('/Users/:UserId')

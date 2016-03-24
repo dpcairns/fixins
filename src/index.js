@@ -1,11 +1,9 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { Router, Route, IndexRoute, hashHistory } from "react-router"
-
 import Splash from "./js/components/Splash"
 import Layout from "./js/components/Layout"
 import Admin from "./js/components/utils/Admin"
-
 
 const app = document.getElementById('app');
 

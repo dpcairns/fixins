@@ -19,9 +19,17 @@ module.exports = function(router){
 			var newSubneighborhood = new Subneighborhood()
 						newSubneighborhood.subNeighborhood_name = req.body.name
 						newSubneighborhood.sub_neighborhood_neighborhood = req.body.neighborhood
-						newSubneighborhood.save(function() {
-							res.json(newSubneighborhood)
-						})
+						newSubneighborhood.save()
+						console.log('finding all Subneighborhoods in fixins')
+								Subneighborhood.findOne({subNeighborhood_name: newSubneighborhood.subNeighborhood_name})
+								.populate('sub_neighborhood_neighborhood')
+								.exec(function(err, Subneighborhood){
+									if(err){
+										console.log('Couldn\'t find Subneighborhoods')
+									} else {
+										res.json(Subneighborhood);
+									}
+								})
 				})
 
 	router.route('/Subneighborhoods/:SubneighborhoodId')

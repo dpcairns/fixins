@@ -21,11 +21,23 @@ module.exports = function(router){
 						newSpot.spot_name = req.body.name
 						newSpot.spot_genres = req.body.genres
 						newSpot.spot_blurb = req.body.blurb
+						newSpot.spot_coordinates = req.body.coordinates
 						newSpot.spot_subNeighborhood = req.body.subNeighborhood
-						newSpot.save(function() {
-							res.json(newSpot)
-						})
+						newSpot.save()
+						Spot.findOne({spot_name: newSpot.spot_name})
+							.populate('spot_genres')
+							.populate('spot_subNeighborhood')
+							.exec(function(err, Spot){
+								if(err){
+									console.log('Couldn\'t find Spots')
+								} else {
+									res.json(Spot);
+								}
+		})
+
 				})
+
+
 
 	router.route('/Spots/:SpotId')
 	.put(function (req, res) {

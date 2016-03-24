@@ -92,7 +92,7 @@ export default class SpotEditForm extends React.Component{
 			<CustomDropdown setValueTo={this.state.newGenre} 
 					onchange2={this.handleGenreChange.bind(this)} 
 					data={this.props.allGenres} 
-					nameName="_id" />
+					nameName="genre_name" />
 		</div>
 
 	<input className="button btn-danger align-right" type="submit" value="Update"/>

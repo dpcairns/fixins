@@ -12,11 +12,12 @@ var SpotSchema = new Schema({
 		type: String,
 		default: "default spot blurb"
 	},
-
-	spot_coordinates:{
-		type: Array,
-		default: [45.1200, -122.1819]
+	spot_coordinates: 
+	{
+		type: {},
+		default: {lat: 4, lng: 10}
 	},
+
 	addDate: {
 		type: Date,
 		default: Date.now
