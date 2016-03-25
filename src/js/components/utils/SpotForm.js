@@ -1,7 +1,9 @@
+
 import React from "react"
 import CustomDropdown from "./CustomDropdown"
 import * as FixinsActions from "../../actions/FixinsActions"
-import SimpleMap from "./SimpleMap"
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+
 
 export default class SpotForm extends React.Component{
 	constructor(){
@@ -11,53 +13,70 @@ export default class SpotForm extends React.Component{
 			blurb: '',
 			genres: '',
 			coordinates: '',
+			clickPosition: '',
 			subNeighborhood: '',
 			hasLocation: false,
+	        defaultLatlng: {lat: 45.53,
+            lng: -122.67},
+            zoom: 13,
+    };
 		}
-	}
 
 
 	handleNameChange(e){
 	this.setState({name: e.target.value})
+		console.log("1A.1")
+		console.log(this.state)
 	}
 
 	handleSubNeighborhoodChange(e){
 		this.setState({subNeighborhood: e.target.value})
+		console.log("1A.2")
+		console.log(this.state)
 	}
 
-	handleCoordinatesChange(e){
-		this.setState({coordinates: e.target.value})
-		console.log(this.state.coordinates)
-	}
 
 	handleBlurbChange(e){
 		this.setState({blurb: e.target.value})
+		console.log("1B")
+		console.log(this.state)
 	}
 
 	handleGenresChange(e){
 		this.setState({genres: e.target.value})
+		console.log("1C")
+		console.log(this.state)
 	}	
 
 
-
 	handleMapClick(e){
-		    this.setState({
+		this.setState({
 		      hasLocation: true,
 		      clickPosition: e.latlng,
 		      coordinates: e.latlng
 		    })
-		console.log("here is this.state")
+		console.log("1D")
 		console.log(this.state)
 	}
 
 	handleSubmit(e){
+		console.log("2")
+		console.log(this.state)
 		e.preventDefault();
+		console.log("3")
+		console.log(this.state)
 		let newSpotObject = {}
 		newSpotObject.name = this.state.name
 		newSpotObject.subNeighborhood = this.state.subNeighborhood
-		newSpotObject.coordinates = this.state.coordinates
+		newSpotObject.coordinates = []
+		console.log(this.state.coordinates.lat)
+		newSpotObject.coordinates.push(this.state.coordinates.lat)
+		newSpotObject.coordinates.push(this.state.coordinates.lng)
 		newSpotObject.genres = this.state.genres
 		newSpotObject.blurb = this.state.blurb
+				console.log("4")
+		console.log(this.state)
+
 		console.log("here is the now spot object,before save")
 		console.log(newSpotObject)
 		FixinsActions.createSpot(newSpotObject)
@@ -65,10 +84,23 @@ export default class SpotForm extends React.Component{
 	}
 
 	render(){
+
+		    const marker = this.state.hasLocation ?
+         <Marker position={this.state.clickPosition}>
+          <Popup>
+            <span>Add a spot here?</span>
+          </Popup>
+        </Marker>
+        : null;
+
+    const minZoom = 11
+    const southWest = L.latLng(45.47672003479257,  -122.72280953111476)
+    const northEast = L.latLng(45.63610301220829, -122.44197151841945)
+    const metroLimits = L.latLngBounds(southWest, northEast);
+    const position = [this.state.defaultLatlng.lat, this.state.defaultLatlng.lng];
+
 	return(
 		<div>
-		<form onSubmit={this.handleSubmit.bind(this)}>
-
 		<div className="input-group">
 			Spot name:
 		  <input type="text" value={this.state.name} 
@@ -100,13 +132,25 @@ export default class SpotForm extends React.Component{
 		</div>
 		<div className="map-input-box">
 		<h2>Show us the spot on the map:</h2>
-		<SimpleMap 
-			clickPosition={this.state.coordinates} 
-			onchange2={this.handleCoordinatesChange}
-			handleMapClick={this.handleMapClick}/>
+	
+
+      <Map onLeafletClick={this.handleMapClick.bind(this)} center={position} zoom={this.state.zoom} minZoom={minZoom}>
+        <TileLayer
+          id="dpcairns.pee063cb"
+          ref='map'
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          accessToken='pk.eyJ1IjoiZHBjYWlybnMiLCJhIjoiY2lsd3JtZnp2MDJib3Rpa3Jzazc5OWd2dCJ9.2QcVQqSKUQQuVVC-D472OQ'
+          url='https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}'/>
+       
+        {marker}
+
+      </Map>
+
+
+
+
 		</div>
-	<input className="button btn-danger align-right" type="submit" value="Post"/>
-	</form>
+	<div className="btn btn-danger" onClick={this.handleSubmit.bind(this)}>Post</div>
 </div>
 
 

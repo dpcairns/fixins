@@ -14,8 +14,8 @@ var SpotSchema = new Schema({
 	},
 	spot_coordinates: 
 	{
-		type: {},
-		default: {lat: 4, lng: 10}
+		type: Array,
+		default: [45.53, -122.67]
 	},
 
 	addDate: {

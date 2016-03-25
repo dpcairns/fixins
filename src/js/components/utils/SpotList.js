@@ -19,7 +19,7 @@ export default class SpotList extends React.Component{
 						<li> Spot Blurb {spot.spot_blurb}</li>
 						<li> Spot SubNeighborhood: {spot.spot_subNeighborhood.subNeighborhood_name}</li>
 						<li> Spot Genre: {spot.spot_genres[0].genre_name}</li>
-						<li> Spot Coordinates: {spot.spot_coordinates}</li>
+						<li> Spot Coordinates: {spot.spot_coordinates[0]} {spot.spot_coordinates[1]}</li>
 						<li> <RemoveButton type="Spot" id={spot._id}/></li>						
 
 					</ul>

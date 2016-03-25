@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import * as FixinsActions from "../../actions/FixinsActions"
@@ -28,7 +29,7 @@ export default class SimpleMap extends React.Component {
     const metroLimits = L.latLngBounds(southWest, northEast);
     const position = [this.state.latlng.lat, this.state.latlng.lng];
     return (
-      <Map onLeafletClick={this.props.handleMapClick.bind(this)} onChange={this.props.onchange2.bind(this)} center={position} zoom={this.state.zoom} minZoom={minZoom}>
+      <Map onLeafletClick={this.handleMapClick.bind(this)} center={position} zoom={this.state.zoom} minZoom={minZoom}>
         <TileLayer
           id="dpcairns.pee063cb"
           ref='map'
@@ -42,7 +43,3 @@ export default class SimpleMap extends React.Component {
     );
   }
 }
-
-
-
-

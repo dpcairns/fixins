@@ -78,7 +78,7 @@ export default class SpotEditForm extends React.Component{
 		</div>
 		<div className="input-group">
 			Update Coordinates:
-		  <input type="password" value={this.state.newCoordinates} onChange={this.handleCoordinatesChange.bind(this)} className="form-control" placeholder="spot coordinates"/>
+		  <input type="text" value={this.state.newCoordinates} onChange={this.handleCoordinatesChange.bind(this)} className="form-control" placeholder="spot coordinates"/>
 		</div>
 		<div className="input-group">
 			Update Sub-Neighborhood:
