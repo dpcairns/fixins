@@ -78,3 +78,7 @@ toggleEdit(){
 	}
 
 }
+
+
+						//<li> Latest review: {user.user_reviews[-1].reviewed_dish.dish_name}</li>
+						//<li> Latest checkIn: {user.user_checkIns[-1].checkIn_spot.spot_name}</li>

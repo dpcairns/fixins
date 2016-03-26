@@ -29,6 +29,7 @@ export default class SpotList extends React.Component{
 							spotID={spot._id}
 							allUsers={allUsers}
 							allGenres={allGenres}
+							allDishes={allDishes}
 							allSubNeighborhoods={allSubNeighborhoods}/>
 				</div>
 			</div>

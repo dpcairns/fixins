@@ -19,7 +19,15 @@ export default class MapItself extends React.Component {
         return (
                   <Marker position={spot_coordinates} key={spot._id}>
                     <Popup>
-                      <span>Here is the spot: {spot.spot_name}</span>
+                      <span>Here is the spot: {spot.spot_name} <br/>
+                            Here is a dish: {spot.spot_dishes[0].dish_name}<br/>
+                            It has this many calories: {spot.spot_dishes[0].dish_calories}<br/>
+                            It costs this many dollars: {spot.spot_dishes[0].dish_price}<br/>
+                            Here is the blurb: {spot.spot_dishes[0].dish_blurb}
+
+
+
+                      </span>
                     </Popup>
                   </Marker>
               )

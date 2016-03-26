@@ -7,6 +7,11 @@ module.exports = function(router){
 		console.log('finding all Users in fixins')
 		User.find({})
 		.populate('user_sub_neighborhood')
+		.populate('user_review')
+		.populate('user_checkIns')
+		.populate('user_favorites')
+		.populate('user_friends')
+
 		.exec(function(err, Users){
 			if(err){
 				console.log('Couldn\'t find Users')

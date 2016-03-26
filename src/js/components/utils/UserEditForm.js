@@ -10,7 +10,9 @@ export default class UserEditForm extends React.Component{
 				newPassword: "", 
 				newSubNeighborhood: "",
 				newFriend: "", 
-				newFavorite: ""
+				newFavorite: "",
+				newCheckIn: "", 
+				newReview: ""
 		}
 	}
 
@@ -34,6 +36,14 @@ export default class UserEditForm extends React.Component{
 		this.setState({newFavorite: e.target.value})
 	}
 
+	handleReviewChange(e){
+		this.setState({newReview: e.target.value})
+	}
+
+	handleCheckInChange(e){
+		this.setState({newCheckIn: e.target.value})
+	}
+
 	handleSubmit(e){
 		e.preventDefault();
 		var newUserInfo = {}
@@ -43,6 +53,8 @@ export default class UserEditForm extends React.Component{
 		newUserInfo.newSubNeighborhood = this.state.newSubNeighborhood
 		newUserInfo.newFriend = this.state.newFriend
 		newUserInfo.newFavorite = this.state.newFavorite
+		newUserInfo.newReview = this.state.newReview
+		newUserInfo.newCheckIn = this.state.newCheckIn
 		FixinsActions.findAndChangeUser(newUserInfo)
 		this.setState({newUsername: "", 
 						newPassword: "", 
@@ -84,6 +96,20 @@ export default class UserEditForm extends React.Component{
 					data = {this.props.allDishes}
 					onchange2={this.handleFavoriteChange.bind(this)} 
 					nameName="dish_name" />
+		</div>
+		<div className="input-group">
+			Add a new CheckIn:
+			<CustomDropdown setValueTo={this.state.newcheckIn} 
+					data = {this.props.allCheckIns}
+					onchange2={this.handleCheckInChange.bind(this)} 
+					nameName="checkIn_blurb" />
+		</div>
+		<div className="input-group">
+			Add a new Review:
+			<CustomDropdown setValueTo={this.state.newReview} 
+					data = {this.props.allReviews}
+					onchange2={this.handleReviewChange.bind(this)} 
+					nameName="review_words" />
 		</div>
 	<input className="button btn-danger align-right" type="submit" value="Update"/>
 	</form>

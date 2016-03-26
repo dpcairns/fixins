@@ -271,7 +271,8 @@ export default class Admin extends React.Component{
 									<h2>All Neighborhoods</h2>
 
 						<NeighborhoodList 
-						allNeighborhoods={this.state.allNeighborhoods} />
+						allNeighborhoods={this.state.allNeighborhoods}
+						allSubNeighborhoods={this.state.allSubNeighborhoods} />
 					</div>
 				</div>
 

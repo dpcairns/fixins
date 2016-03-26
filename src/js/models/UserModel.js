@@ -27,6 +27,18 @@ var UserSchema = new Schema({
 				ref: 'User'
 			}
 		],
+	user_checkIns: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'CheckIn'
+			}
+		],
+	user_reviews: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'Review'
+			}
+		],
 	user_sub_neighborhood: {
 				type: Schema.Types.ObjectId,
 				ref: 'SubNeighborhood'

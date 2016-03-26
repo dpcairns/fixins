@@ -50,6 +50,7 @@ export default class SpotEditForm extends React.Component{
 		newSpotInfo._id = this.props.spotID
 		newSpotInfo.newName = this.state.newName
 		newSpotInfo.newSubNeighborhood = this.state.newSubNeighborhood
+		newSpotInfo.newDish = this.state.newDish
 		newSpotInfo.newGenre = this.state.newGenre
 		newSpotInfo.newBlurb = this.state.newBlurb
 		newSpotInfo.newCoordinates = this.state.newCoordinates
@@ -79,6 +80,13 @@ export default class SpotEditForm extends React.Component{
 		<div className="input-group">
 			Update Coordinates:
 		  <input type="text" value={this.state.newCoordinates} onChange={this.handleCoordinatesChange.bind(this)} className="form-control" placeholder="spot coordinates"/>
+		</div>
+		<div className="input-group">
+			Add a new Dish:
+			<CustomDropdown setValueTo={this.state.newDish} 
+					onchange2={this.handleDishChange.bind(this)} 
+					data={this.props.allDishes} 
+					nameName="dish_name" />
 		</div>
 		<div className="input-group">
 			Update Sub-Neighborhood:

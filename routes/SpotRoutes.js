@@ -8,6 +8,7 @@ module.exports = function(router){
 		Spot.find({})
 		.populate('spot_genres')
 		.populate('spot_subNeighborhood')
+		.populate('spot_dishes')
 		.exec(function(err, Spots){
 			if(err){
 				console.log('Couldn\'t find Spots')

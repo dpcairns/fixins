@@ -22,6 +22,13 @@ var SpotSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+	spot_dishes: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'Dish'
+			}
+
+	],
 	spot_genres: [
 			{
 				type: Schema.Types.ObjectId,

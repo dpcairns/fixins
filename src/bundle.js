@@ -26354,7 +26354,8 @@
 									"All Neighborhoods"
 								),
 								_react2.default.createElement(_NeighborhoodList2.default, {
-									allNeighborhoods: this.state.allNeighborhoods })
+									allNeighborhoods: this.state.allNeighborhoods,
+									allSubNeighborhoods: this.state.allSubNeighborhoods })
 							)
 						),
 						_react2.default.createElement("hr", null),
@@ -26735,6 +26736,10 @@
 		return UserList;
 	}(_react2.default.Component);
 
+	//<li> Latest review: {user.user_reviews[-1].reviewed_dish.dish_name}</li>
+	//<li> Latest checkIn: {user.user_checkIns[-1].checkIn_spot.spot_name}</li>
+
+
 	exports.default = UserList;
 
 /***/ },
@@ -26862,7 +26867,9 @@
 				newPassword: "",
 				newSubNeighborhood: "",
 				newFriend: "",
-				newFavorite: ""
+				newFavorite: "",
+				newCheckIn: "",
+				newReview: ""
 			};
 			return _this;
 		}
@@ -26893,6 +26900,16 @@
 				this.setState({ newFavorite: e.target.value });
 			}
 		}, {
+			key: "handleReviewChange",
+			value: function handleReviewChange(e) {
+				this.setState({ newReview: e.target.value });
+			}
+		}, {
+			key: "handleCheckInChange",
+			value: function handleCheckInChange(e) {
+				this.setState({ newCheckIn: e.target.value });
+			}
+		}, {
 			key: "handleSubmit",
 			value: function handleSubmit(e) {
 				e.preventDefault();
@@ -26903,6 +26920,8 @@
 				newUserInfo.newSubNeighborhood = this.state.newSubNeighborhood;
 				newUserInfo.newFriend = this.state.newFriend;
 				newUserInfo.newFavorite = this.state.newFavorite;
+				newUserInfo.newReview = this.state.newReview;
+				newUserInfo.newCheckIn = this.state.newCheckIn;
 				FixinsActions.findAndChangeUser(newUserInfo);
 				this.setState({ newUsername: "",
 					newPassword: "",
@@ -26957,6 +26976,24 @@
 								data: this.props.allDishes,
 								onchange2: this.handleFavoriteChange.bind(this),
 								nameName: "dish_name" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Add a new CheckIn:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newcheckIn,
+								data: this.props.allCheckIns,
+								onchange2: this.handleCheckInChange.bind(this),
+								nameName: "checkIn_blurb" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Add a new Review:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newReview,
+								data: this.props.allReviews,
+								onchange2: this.handleReviewChange.bind(this),
+								nameName: "review_words" })
 						),
 						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Update" })
 					)
@@ -43542,6 +43579,7 @@
 								spotID: spot._id,
 								allUsers: allUsers,
 								allGenres: allGenres,
+								allDishes: allDishes,
 								allSubNeighborhoods: allSubNeighborhoods })
 						)
 					);
@@ -43656,6 +43694,7 @@
 				newSpotInfo._id = this.props.spotID;
 				newSpotInfo.newName = this.state.newName;
 				newSpotInfo.newSubNeighborhood = this.state.newSubNeighborhood;
+				newSpotInfo.newDish = this.state.newDish;
 				newSpotInfo.newGenre = this.state.newGenre;
 				newSpotInfo.newBlurb = this.state.newBlurb;
 				newSpotInfo.newCoordinates = this.state.newCoordinates;
@@ -43694,6 +43733,15 @@
 							{ className: "input-group" },
 							"Update Coordinates:",
 							_react2.default.createElement("input", { type: "text", value: this.state.newCoordinates, onChange: this.handleCoordinatesChange.bind(this), className: "form-control", placeholder: "spot coordinates" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Add a new Dish:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newDish,
+								onchange2: this.handleDishChange.bind(this),
+								data: this.props.allDishes,
+								nameName: "dish_name" })
 						),
 						_react2.default.createElement(
 							"div",
@@ -44721,6 +44769,10 @@
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
+	var _NeighborhoodEditForm = __webpack_require__(422);
+
+	var _NeighborhoodEditForm2 = _interopRequireDefault(_NeighborhoodEditForm);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -44741,7 +44793,12 @@
 		_createClass(NeighborhoodList, [{
 			key: "render",
 			value: function render() {
+				var allSubNeighborhoods = this.props.allSubNeighborhoods;
 				var neighborhoodNodes = this.props.allNeighborhoods.map(function (neighborhood) {
+					var subNeighborhoodNodes = neighborhood.neighborhood_subNeighborhoods.map(function (subNeighborhood) {
+						return { subNeighborhood_name: subNeighborhood_name };
+					});
+
 					return _react2.default.createElement(
 						"tr",
 						{ key: neighborhood._id },
@@ -44754,7 +44811,21 @@
 						_react2.default.createElement(
 							"td",
 							null,
+							"SubNeighborhoods: ",
+							subNeighborhoodNodes
+						),
+						_react2.default.createElement(
+							"td",
+							null,
 							_react2.default.createElement(_RemoveButton2.default, { type: "Neighborhood", id: neighborhood._id })
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							"Edit Neighborhood:",
+							_react2.default.createElement(_NeighborhoodEditForm2.default, {
+								neighborhoodID: neighborhood._id,
+								allSubNeighborhoods: allSubNeighborhoods })
 						)
 					);
 				});
@@ -45962,7 +46033,20 @@
 	              'span',
 	              null,
 	              'Here is the spot: ',
-	              spot.spot_name
+	              spot.spot_name,
+	              ' ',
+	              _react2.default.createElement('br', null),
+	              'Here is a dish: ',
+	              spot.spot_dishes[0].dish_name,
+	              _react2.default.createElement('br', null),
+	              'It has this many calories: ',
+	              spot.spot_dishes[0].dish_calories,
+	              _react2.default.createElement('br', null),
+	              'It costs this many dollars: ',
+	              spot.spot_dishes[0].dish_price,
+	              _react2.default.createElement('br', null),
+	              'Here is the blurb: ',
+	              spot.spot_dishes[0].dish_blurb
 	            )
 	          )
 	        );
@@ -45990,6 +46074,105 @@
 	}(_react2.default.Component);
 
 	exports.default = MapItself;
+
+/***/ },
+/* 422 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _CustomDropdown = __webpack_require__(228);
+
+	var _CustomDropdown2 = _interopRequireDefault(_CustomDropdown);
+
+	var _FixinsActions = __webpack_require__(220);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NeighborhoodEditForm = function (_React$Component) {
+		_inherits(NeighborhoodEditForm, _React$Component);
+
+		function NeighborhoodEditForm() {
+			_classCallCheck(this, NeighborhoodEditForm);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NeighborhoodEditForm).call(this));
+
+			_this.state = {
+				newSubNeighborhood: ""
+			};
+			return _this;
+		}
+
+		_createClass(NeighborhoodEditForm, [{
+			key: "handleSubNeighborhoodChange",
+			value: function handleSubNeighborhoodChange(e) {
+				this.setState({ newSubNeighborhood: e.target.value });
+			}
+		}, {
+			key: "handleUserChange",
+			value: function handleUserChange(e) {
+				this.setState({ newUser: e.target.value });
+			}
+		}, {
+			key: "handleSubmit",
+			value: function handleSubmit(e) {
+				e.preventDefault();
+				var NewNeighborhoodInfo = {};
+				NewNeighborhoodInfo._id = this.props.neighborhoodID;
+				NewNeighborhoodInfo.newSubNeighborhood = this.state.newSubNeighborhood;
+				FixinsActions.findAndChangeNeighborhood(NewNeighborhoodInfo);
+				this.setState({
+					newSubNeighborhood: ""
+				});
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"div",
+					null,
+					_react2.default.createElement(
+						"form",
+						{ onSubmit: this.handleSubmit.bind(this) },
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Add Sub-Neighborhood:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newSubNeighborhood,
+								onchange2: this.handleSubNeighborhoodChange.bind(this),
+								data: this.props.allSubNeighborhoods,
+								nameName: "subNeighborhood_name" })
+						),
+						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Update" })
+					)
+				);
+			}
+		}]);
+
+		return NeighborhoodEditForm;
+	}(_react2.default.Component);
+
+	exports.default = NeighborhoodEditForm;
 
 /***/ }
 /******/ ]);
