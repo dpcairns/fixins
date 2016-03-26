@@ -152,12 +152,14 @@ export default class Admin extends React.Component{
 
 						<DishForm 
 						allSpots={this.state.allSpots} 
-									allGenres={this.state.allGenres} />
+						allGenres={this.state.allGenres} />
 					</div>
 					<div className="admin-dish-output col-md-8">
 									<h2>All Dishes</h2>
 
 						<DishList 
+						allReviews={this.state.allReviews} 
+						allCheckIns={this.state.allCheckIns}
 						allDishes={this.state.allDishes} />
 					</div>
 

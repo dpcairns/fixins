@@ -14,11 +14,6 @@ export default class NeighborhoodEditForm extends React.Component{
 		this.setState({newSubNeighborhood: e.target.value})
 	}
 
-	handleUserChange(e){
-		this.setState({newUser: e.target.value})
-	}
-
-
 	handleSubmit(e){
 		e.preventDefault();
 		var NewNeighborhoodInfo = {}
@@ -31,6 +26,7 @@ export default class NeighborhoodEditForm extends React.Component{
 		}
 
 	render(){
+		let neighborhoodID = this.props.neighborhoodID
 	return(
 		<div>
 		<form onSubmit={this.handleSubmit.bind(this)}>
@@ -38,7 +34,7 @@ export default class NeighborhoodEditForm extends React.Component{
 			Add Sub-Neighborhood:
 			<CustomDropdown setValueTo={this.state.newSubNeighborhood} 
 					onchange2={this.handleSubNeighborhoodChange.bind(this)} 
-					data={this.props.allSubNeighborhoods} 
+					data={this.props.allSubneighborhoods} 
 					nameName="subNeighborhood_name" />
 		</div>
 

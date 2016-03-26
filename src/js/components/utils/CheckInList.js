@@ -4,13 +4,15 @@ import RemoveButton from "./RemoveButton"
 export default class CheckInList extends React.Component{
 	render(){
 		let checkInNodes = this.props.allCheckIns.map(function(checkIn){
+			console.log(checkIn)
 			return(
 				<tr key={checkIn._id}>
 						<td>Dish: {checkIn.checkIn_dish.dish_name}</td>
 						<td>User: {checkIn.checkIn_user.username}</td>
 						<td>Blurb: {checkIn.checkIn_blurb}</td>
 						<td>When: {checkIn.checkIn_date}</td>
-						<td> <RemoveButton type="CheckIn" id={checkIn._id}/></td>
+						<td>Spot: {checkIn.checkIn_dish.dish_spot.spot_name}</td>
+							<td> <RemoveButton type="CheckIn" id={checkIn._id}/></td>
 				</tr>
 				)
 		})

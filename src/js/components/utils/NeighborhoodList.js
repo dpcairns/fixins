@@ -6,20 +6,22 @@ export default class NeighborhoodList extends React.Component{
 	render(){
 		let allSubNeighborhoods = this.props.allSubNeighborhoods
 		let neighborhoodNodes = this.props.allNeighborhoods.map(function(neighborhood){
-		let subNeighborhoodNodes = neighborhood.neighborhood_subNeighborhoods.map(function(subNeighborhood){
-						return({subNeighborhood_name})
+					function findSubNeighborhoodsFilter(subNeighborhood){
+									return (subNeighborhood.sub_neighborhood_neighborhood._id === neighborhood._id || subNeighborhood.sub_neighborhood_neighborhood === neighborhood._id)
+						}
+					let subNeighborhoodNodes = allSubNeighborhoods.filter(findSubNeighborhoodsFilter).map(function(subNeighborhood){
+									return (
+										<div key={subNeighborhood._id}>
+											{subNeighborhood.subNeighborhood_name}
+										</div>
+
+										)
 					})
-				
 			return(
 				<tr key={neighborhood._id}>
-					<td>Name: {neighborhood.neighborhood_name}</td>
-					<td>SubNeighborhoods: {subNeighborhoodNodes}</td>
+					<td><h3>{neighborhood.neighborhood_name}</h3></td>
+					<td><b>SubNeighborhoods:</b> {subNeighborhoodNodes}</td>
 					<td><RemoveButton type="Neighborhood" id={neighborhood._id}/></td>
-					<td>Edit Neighborhood:
-						<NeighborhoodEditForm 
-								neighborhoodID={neighborhood._id}
-								allSubNeighborhoods={allSubNeighborhoods}/>
-					</td>
 				</tr>
 				)
 		})

@@ -6,7 +6,7 @@ module.exports = function(router){
 	.get(function (req, res) { 
 		console.log('finding all Neighborhoods in fixins')
 		Neighborhood.find({})
-		.populate('neighborhood_subNeighborhoods')
+		.populate('neighborhood_sub_neighborhoods')
 		.exec(function(err, Neighborhoods){
 			if(err){
 				console.log('Couldn\'t find Neighborhoods')

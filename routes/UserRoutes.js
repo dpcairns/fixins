@@ -11,7 +11,6 @@ module.exports = function(router){
 		.populate('user_checkIns')
 		.populate('user_favorites')
 		.populate('user_friends')
-
 		.exec(function(err, Users){
 			if(err){
 				console.log('Couldn\'t find Users')

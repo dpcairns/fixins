@@ -75,7 +75,7 @@
 
 	var _Admin2 = _interopRequireDefault(_Admin);
 
-	var _MapPage = __webpack_require__(420);
+	var _MapPage = __webpack_require__(421);
 
 	var _MapPage2 = _interopRequireDefault(_MapPage);
 
@@ -26004,11 +26004,11 @@
 
 	var _NeighborhoodList2 = _interopRequireDefault(_NeighborhoodList);
 
-	var _SubNeighborhoodForm = __webpack_require__(416);
+	var _SubNeighborhoodForm = __webpack_require__(417);
 
 	var _SubNeighborhoodForm2 = _interopRequireDefault(_SubNeighborhoodForm);
 
-	var _SubNeighborhoodList = __webpack_require__(417);
+	var _SubNeighborhoodList = __webpack_require__(418);
 
 	var _SubNeighborhoodList2 = _interopRequireDefault(_SubNeighborhoodList);
 
@@ -26016,7 +26016,7 @@
 
 	var FixinsActions = _interopRequireWildcard(_FixinsActions);
 
-	var _FixinsStore = __webpack_require__(418);
+	var _FixinsStore = __webpack_require__(419);
 
 	var _FixinsStore2 = _interopRequireDefault(_FixinsStore);
 
@@ -26183,6 +26183,8 @@
 									"All Dishes"
 								),
 								_react2.default.createElement(_DishList2.default, {
+									allReviews: this.state.allReviews,
+									allCheckIns: this.state.allCheckIns,
 									allDishes: this.state.allDishes })
 							)
 						),
@@ -26674,6 +26676,103 @@
 				var allDishes = this.props.allDishes;
 				var allCheckIns = this.props.allCheckIns;
 				var userNodes = allUsers.map(function (user) {
+
+					function findCheckInsFilter(checkIn) {
+						return checkIn.checkIn_user._id === user._id || checkIn.checkIn_user === user._id;
+					}
+					var checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function (checkIn) {
+						return _react2.default.createElement(
+							"div",
+							{ key: checkIn._id },
+							_react2.default.createElement(
+								"ul",
+								null,
+								_react2.default.createElement(
+									"li",
+									null,
+									_react2.default.createElement(
+										"b",
+										null,
+										checkIn.checkIn_dish.dish_name
+									)
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									checkIn.checkIn_dish.dish_calories,
+									" calories"
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									checkIn.checkIn_dish.dish_price,
+									" dollars"
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									checkIn.checkIn_blurb
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									checkIn.checkIn_dish.dish_spot.spot_name
+								)
+							)
+						);
+					});
+
+					function findReviewsFilter(review) {
+						return review.review_user._id === user._id || review.review_user === user._id;
+					}
+					var reviewNodes = allReviews.filter(findReviewsFilter).map(function (review) {
+						return _react2.default.createElement(
+							"div",
+							{ key: review._id },
+							_react2.default.createElement(
+								"ul",
+								null,
+								_react2.default.createElement(
+									"li",
+									null,
+									_react2.default.createElement(
+										"b",
+										null,
+										review.reviewed_dish.dish_name
+									)
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									review.reviewed_dish.dish_calories,
+									"  calories"
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									review.reviewed_dish.dish_price,
+									" dollars"
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									review.review_words
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									review.review_stars,
+									" stars"
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									review.review_date
+								)
+							)
+						);
+					});
+
 					return _react2.default.createElement(
 						"div",
 						{ key: user._id },
@@ -26703,6 +26802,18 @@
 									null,
 									" SubNeighborhood: ",
 									user.user_sub_neighborhood.subNeighborhood_name
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									" CheckIns: ",
+									checkInNodes
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									" Reviews: ",
+									reviewNodes
 								),
 								_react2.default.createElement(
 									"li",
@@ -43541,7 +43652,7 @@
 								_react2.default.createElement(
 									"li",
 									null,
-									" Spot Blurb ",
+									" Spot Blurb: ",
 									spot.spot_blurb
 								),
 								_react2.default.createElement(
@@ -43974,7 +44085,101 @@
 		_createClass(DishList, [{
 			key: "render",
 			value: function render() {
+				var allCheckIns = this.props.allCheckIns;
+				var allReviews = this.props.allReviews;
 				var dishNodes = this.props.allDishes.map(function (dish) {
+
+					function findCheckInsFilter(checkIn) {
+						return checkIn.checkIn_dish._id === dish._id || checkIn.checkIn_dish === dish._id;
+					}
+					var checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function (checkIn) {
+						return _react2.default.createElement(
+							"div",
+							{ key: checkIn._id },
+							_react2.default.createElement(
+								"ul",
+								null,
+								_react2.default.createElement(
+									"li",
+									null,
+									_react2.default.createElement(
+										"b",
+										null,
+										checkIn.checkIn_dish.dish_name
+									)
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									checkIn.checkIn_dish.dish_calories,
+									" calories"
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									checkIn.checkIn_dish.dish_price,
+									" dollars"
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									checkIn.checkIn_blurb
+								)
+							)
+						);
+					});
+
+					function findReviewsFilter(review) {
+						return review.reviewed_dish._id === dish._id || review.reviewed_dish === dish._id;
+					}
+					var reviewNodes = allReviews.filter(findReviewsFilter).map(function (review) {
+						return _react2.default.createElement(
+							"div",
+							{ key: review._id },
+							_react2.default.createElement(
+								"ul",
+								null,
+								_react2.default.createElement(
+									"li",
+									null,
+									_react2.default.createElement(
+										"b",
+										null,
+										review.reviewed_dish.dish_name
+									)
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									review.reviewed_dish.dish_calories,
+									" calories"
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									review.reviewed_dish.dish_price,
+									" dollars"
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									review.review_words
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									review.review_stars,
+									" stars"
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									review.review_date
+								)
+							)
+						);
+					});
+
 					return _react2.default.createElement(
 						"tr",
 						{ key: dish._id },
@@ -44010,6 +44215,19 @@
 							null,
 							" Dish Spot: ",
 							dish.dish_spot.spot_name
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							"Dish reviews: ",
+							reviewNodes,
+							" "
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							"Dish check-ins: ",
+							checkInNodes
 						),
 						_react2.default.createElement(
 							"td",
@@ -44443,6 +44661,7 @@
 			key: "render",
 			value: function render() {
 				var checkInNodes = this.props.allCheckIns.map(function (checkIn) {
+					console.log(checkIn);
 					return _react2.default.createElement(
 						"tr",
 						{ key: checkIn._id },
@@ -44469,6 +44688,12 @@
 							null,
 							"When: ",
 							checkIn.checkIn_date
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							"Spot: ",
+							checkIn.checkIn_dish.dish_spot.spot_name
 						),
 						_react2.default.createElement(
 							"td",
@@ -44769,7 +44994,7 @@
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
-	var _NeighborhoodEditForm = __webpack_require__(422);
+	var _NeighborhoodEditForm = __webpack_require__(416);
 
 	var _NeighborhoodEditForm2 = _interopRequireDefault(_NeighborhoodEditForm);
 
@@ -44795,37 +45020,43 @@
 			value: function render() {
 				var allSubNeighborhoods = this.props.allSubNeighborhoods;
 				var neighborhoodNodes = this.props.allNeighborhoods.map(function (neighborhood) {
-					var subNeighborhoodNodes = neighborhood.neighborhood_subNeighborhoods.map(function (subNeighborhood) {
-						return { subNeighborhood_name: subNeighborhood_name };
+					function findSubNeighborhoodsFilter(subNeighborhood) {
+						return subNeighborhood.sub_neighborhood_neighborhood._id === neighborhood._id || subNeighborhood.sub_neighborhood_neighborhood === neighborhood._id;
+					}
+					var subNeighborhoodNodes = allSubNeighborhoods.filter(findSubNeighborhoodsFilter).map(function (subNeighborhood) {
+						return _react2.default.createElement(
+							"div",
+							{ key: subNeighborhood._id },
+							subNeighborhood.subNeighborhood_name
+						);
 					});
-
 					return _react2.default.createElement(
 						"tr",
 						{ key: neighborhood._id },
 						_react2.default.createElement(
 							"td",
 							null,
-							"Name: ",
-							neighborhood.neighborhood_name
+							_react2.default.createElement(
+								"h3",
+								null,
+								neighborhood.neighborhood_name
+							)
 						),
 						_react2.default.createElement(
 							"td",
 							null,
-							"SubNeighborhoods: ",
+							_react2.default.createElement(
+								"b",
+								null,
+								"SubNeighborhoods:"
+							),
+							" ",
 							subNeighborhoodNodes
 						),
 						_react2.default.createElement(
 							"td",
 							null,
 							_react2.default.createElement(_RemoveButton2.default, { type: "Neighborhood", id: neighborhood._id })
-						),
-						_react2.default.createElement(
-							"td",
-							null,
-							"Edit Neighborhood:",
-							_react2.default.createElement(_NeighborhoodEditForm2.default, {
-								neighborhoodID: neighborhood._id,
-								allSubNeighborhoods: allSubNeighborhoods })
 						)
 					);
 				});
@@ -44852,6 +45083,101 @@
 
 /***/ },
 /* 416 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _CustomDropdown = __webpack_require__(228);
+
+	var _CustomDropdown2 = _interopRequireDefault(_CustomDropdown);
+
+	var _FixinsActions = __webpack_require__(220);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NeighborhoodEditForm = function (_React$Component) {
+		_inherits(NeighborhoodEditForm, _React$Component);
+
+		function NeighborhoodEditForm() {
+			_classCallCheck(this, NeighborhoodEditForm);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NeighborhoodEditForm).call(this));
+
+			_this.state = {
+				newSubNeighborhood: ""
+			};
+			return _this;
+		}
+
+		_createClass(NeighborhoodEditForm, [{
+			key: "handleSubNeighborhoodChange",
+			value: function handleSubNeighborhoodChange(e) {
+				this.setState({ newSubNeighborhood: e.target.value });
+			}
+		}, {
+			key: "handleSubmit",
+			value: function handleSubmit(e) {
+				e.preventDefault();
+				var NewNeighborhoodInfo = {};
+				NewNeighborhoodInfo._id = this.props.neighborhoodID;
+				NewNeighborhoodInfo.newSubNeighborhood = this.state.newSubNeighborhood;
+				FixinsActions.findAndChangeNeighborhood(NewNeighborhoodInfo);
+				this.setState({
+					newSubNeighborhood: ""
+				});
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				var neighborhoodID = this.props.neighborhoodID;
+				return _react2.default.createElement(
+					"div",
+					null,
+					_react2.default.createElement(
+						"form",
+						{ onSubmit: this.handleSubmit.bind(this) },
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Add Sub-Neighborhood:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newSubNeighborhood,
+								onchange2: this.handleSubNeighborhoodChange.bind(this),
+								data: this.props.allSubneighborhoods,
+								nameName: "subNeighborhood_name" })
+						),
+						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Update" })
+					)
+				);
+			}
+		}]);
+
+		return NeighborhoodEditForm;
+	}(_react2.default.Component);
+
+	exports.default = NeighborhoodEditForm;
+
+/***/ },
+/* 417 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -44950,7 +45276,7 @@
 	exports.default = SubNeighborhoodForm;
 
 /***/ },
-/* 417 */
+/* 418 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -45029,7 +45355,7 @@
 	exports.default = SubNeighborhoodList;
 
 /***/ },
-/* 418 */
+/* 419 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -45040,7 +45366,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _events = __webpack_require__(419);
+	var _events = __webpack_require__(420);
 
 	var _FixinsActions = __webpack_require__(220);
 
@@ -45573,7 +45899,7 @@
 	exports.default = fixinsStore;
 
 /***/ },
-/* 419 */
+/* 420 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -45877,7 +46203,7 @@
 
 
 /***/ },
-/* 420 */
+/* 421 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -45896,11 +46222,11 @@
 
 	var FixinsActions = _interopRequireWildcard(_FixinsActions);
 
-	var _FixinsStore = __webpack_require__(418);
+	var _FixinsStore = __webpack_require__(419);
 
 	var _FixinsStore2 = _interopRequireDefault(_FixinsStore);
 
-	var _MapItself = __webpack_require__(421);
+	var _MapItself = __webpack_require__(422);
 
 	var _MapItself2 = _interopRequireDefault(_MapItself);
 
@@ -45965,7 +46291,7 @@
 	exports.default = MapPage;
 
 /***/ },
-/* 421 */
+/* 422 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45986,7 +46312,7 @@
 
 	var FixinsActions = _interopRequireWildcard(_FixinsActions);
 
-	var _FixinsStore = __webpack_require__(418);
+	var _FixinsStore = __webpack_require__(419);
 
 	var _FixinsStore2 = _interopRequireDefault(_FixinsStore);
 
@@ -46074,105 +46400,6 @@
 	}(_react2.default.Component);
 
 	exports.default = MapItself;
-
-/***/ },
-/* 422 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _CustomDropdown = __webpack_require__(228);
-
-	var _CustomDropdown2 = _interopRequireDefault(_CustomDropdown);
-
-	var _FixinsActions = __webpack_require__(220);
-
-	var FixinsActions = _interopRequireWildcard(_FixinsActions);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var NeighborhoodEditForm = function (_React$Component) {
-		_inherits(NeighborhoodEditForm, _React$Component);
-
-		function NeighborhoodEditForm() {
-			_classCallCheck(this, NeighborhoodEditForm);
-
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NeighborhoodEditForm).call(this));
-
-			_this.state = {
-				newSubNeighborhood: ""
-			};
-			return _this;
-		}
-
-		_createClass(NeighborhoodEditForm, [{
-			key: "handleSubNeighborhoodChange",
-			value: function handleSubNeighborhoodChange(e) {
-				this.setState({ newSubNeighborhood: e.target.value });
-			}
-		}, {
-			key: "handleUserChange",
-			value: function handleUserChange(e) {
-				this.setState({ newUser: e.target.value });
-			}
-		}, {
-			key: "handleSubmit",
-			value: function handleSubmit(e) {
-				e.preventDefault();
-				var NewNeighborhoodInfo = {};
-				NewNeighborhoodInfo._id = this.props.neighborhoodID;
-				NewNeighborhoodInfo.newSubNeighborhood = this.state.newSubNeighborhood;
-				FixinsActions.findAndChangeNeighborhood(NewNeighborhoodInfo);
-				this.setState({
-					newSubNeighborhood: ""
-				});
-			}
-		}, {
-			key: "render",
-			value: function render() {
-				return _react2.default.createElement(
-					"div",
-					null,
-					_react2.default.createElement(
-						"form",
-						{ onSubmit: this.handleSubmit.bind(this) },
-						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Add Sub-Neighborhood:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newSubNeighborhood,
-								onchange2: this.handleSubNeighborhoodChange.bind(this),
-								data: this.props.allSubNeighborhoods,
-								nameName: "subNeighborhood_name" })
-						),
-						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Update" })
-					)
-				);
-			}
-		}]);
-
-		return NeighborhoodEditForm;
-	}(_react2.default.Component);
-
-	exports.default = NeighborhoodEditForm;
 
 /***/ }
 /******/ ]);

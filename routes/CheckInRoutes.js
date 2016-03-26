@@ -6,7 +6,8 @@ module.exports = function(router){
 	.get(function (req, res) { 
 		console.log('finding all CheckIns in fixins')
 		CheckIn.find({})
-			.populate('checkIn_dish').populate('checkIn_user')
+			.populate('checkIn_dish')
+			.populate('checkIn_user')
 			.exec(function(err, CheckIns){
 			if(err){
 				console.log('Couldn\'t find CheckIns')

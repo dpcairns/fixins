@@ -16,7 +16,7 @@ export default class SpotList extends React.Component{
 				<div className="col-md-6">
 					<ul>
 						<li><h2>{spot.spot_name}</h2></li>
-						<li> Spot Blurb {spot.spot_blurb}</li>
+						<li> Spot Blurb: {spot.spot_blurb}</li>
 						<li> Spot SubNeighborhood: {spot.spot_subNeighborhood.subNeighborhood_name}</li>
 						<li> Spot Genre: {spot.spot_genres[0].genre_name}</li>
 						<li> Spot Coordinates: {spot.spot_coordinates[0]} {spot.spot_coordinates[1]}</li>
