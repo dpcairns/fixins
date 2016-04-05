@@ -34558,7 +34558,7 @@
 			success: function (postedUser) {
 				dispatch({
 					type: "REMOVE_USER",
-					user: ID
+					_id: ID
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -55825,11 +55825,12 @@
 
 	  switch (action.type) {
 	    case 'CREATE_USER':
+	      console.log(action);
 	      return {
 	        _id: action._id,
 	        username: action.username,
 	        password: action.password,
-	        user_subNeighborhood: action.user_subNeighborhood,
+	        user_sub_neighborhood: action.user_sub_neighborhood,
 	        user_friends: action.user_friends,
 	        user_favorites: action.user_favorites,
 	        user_checkIns: action.user_checkIns,
@@ -55854,7 +55855,9 @@
 	        return state;
 	      }
 	    case 'REMOVE_USER':
+	      console.log(action._id);
 	      return state.map(function (x) {
+	        console.log(x);
 	        if (x._id !== action._id) {
 	          return x;
 	        }

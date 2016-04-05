@@ -318,7 +318,7 @@ export function initializeCheckIns(dispatch){
 			success: function(postedUser){
 						dispatch({
 								type: "REMOVE_USER",
-								user: ID
+								_id: ID
 											});
 			}.bind(this),
 			error: function(xhr, status, err){

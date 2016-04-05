@@ -15,7 +15,7 @@ export default class MapItself extends React.Component {
           console.log(center)
     let markerNodes = this.props.allSpots.map(function(spot){
       let spot_coordinates = [parseFloat(spot.spot_coordinates[0]), parseFloat(spot.spot_coordinates[1])]
-      
+
         return (
                   <Marker position={spot_coordinates} key={spot._id}>
                     <Popup>
@@ -32,7 +32,7 @@ export default class MapItself extends React.Component {
                   </Marker>
               )
           })
-      
+
       return (
         <div>
         <Map center={center} zoom={zoom} minZoom={minZoom}>
@@ -42,7 +42,7 @@ export default class MapItself extends React.Component {
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             accessToken='pk.eyJ1IjoiZHBjYWlybnMiLCJhIjoiY2lsd3JtZnp2MDJib3Rpa3Jzazc5OWd2dCJ9.2QcVQqSKUQQuVVC-D472OQ'
             url='https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}'/>
-         
+
           {markerNodes}
 
         </Map>

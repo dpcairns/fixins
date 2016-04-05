@@ -24,7 +24,8 @@ module.exports = function(router){
 						newUser.username = req.body.name
 						newUser.password = req.body.password
 						newUser.user_sub_neighborhood = req.body.user_sub_neighborhood
-						newUser.save()
+						newUser.save(
+							function(){
 							User.findOne({username: newUser.username})
 							.populate('user_sub_neighborhood')
 							.exec(function(err, User){
@@ -35,6 +36,7 @@ module.exports = function(router){
 								}
 							})
 				})
+			})
 
 router.route('/Users/:UserId')
 	.get(function (req, res) {
