@@ -35,7 +35,11 @@
     "react-router": "~2.0.1"
   },
   "dependencies": {
+    "babel-polyfill": "^6.7.4",
     "leaflet": "~0.7.7",
-    "react-leaflet": "~0.10.2"
+    "react-leaflet": "~0.10.2",
+    "react-redux": "^4.4.1",
+    "redux": "^3.3.1",
+    "redux-thunk": "^2.0.1"
   }
 }

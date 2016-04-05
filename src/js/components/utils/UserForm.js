@@ -1,7 +1,5 @@
 import React from "react"
 import CustomDropdown from "./CustomDropdown"
-import * as FixinsActions from "../../actions/FixinsActions"
-
 export default class UserForm extends React.Component{
 	constructor(){
 		super();
@@ -30,9 +28,9 @@ export default class UserForm extends React.Component{
 		newUser.name = this.state.username
 		newUser.password = this.state.password
 		newUser.user_sub_neighborhood = this.state.user_sub_neighborhood
-		FixinsActions.createUser(newUser)
+		this.props.createUser(newUser)
 		this.setState({username: "", password: "", user_sub_neighborhood: ""})
-	
+
 	}
 
 	render(){
@@ -50,9 +48,9 @@ export default class UserForm extends React.Component{
 		</div>
 		<div className="input-group">
 			Sub-Neighborhood:
-			<CustomDropdown setValueTo={this.state.user_sub_neighborhood} 
-					onchange2={this.handleSubNeighborhoodChange.bind(this)} 
-					data={this.props.allSubNeighborhoods} 
+			<CustomDropdown setValueTo={this.state.user_sub_neighborhood}
+					onchange2={this.handleSubNeighborhoodChange.bind(this)}
+					data={this.props.allSubNeighborhoods}
 					nameName="subNeighborhood_name" />
 		</div>
 	<input className="button btn-danger align-right" type="submit" value="Post"/>

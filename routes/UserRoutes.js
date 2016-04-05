@@ -1,9 +1,9 @@
-var User = require('../src/js/models/UserModel') 
+var User = require('../src/js/models/UserModel')
 
 module.exports = function(router){
 
 	router.route('/Users')
-	.get(function (req, res) { 
+	.get(function (req, res) {
 		console.log('finding all Users in fixins')
 		User.find({})
 		.populate('user_sub_neighborhood')
@@ -15,11 +15,12 @@ module.exports = function(router){
 			if(err){
 				console.log('Couldn\'t find Users')
 			} else {
+				console.log(Users)
 				res.json(Users);
 			}
 		})
 	})
-	.post(function (req, res) { //server behavior connected to $scope.addContact()..but how?
+	.post(function (req, res) {
 			var newUser = new User()
 						newUser.username = req.body.name
 						newUser.password = req.body.password
@@ -39,7 +40,7 @@ module.exports = function(router){
 router.route('/Users/:UserId')
 	.get(function (req, res) {
 		console.log("finding a given User in fixins")
-		var id = req.params.UserId 
+		var id = req.params.UserId
 		User.findOne({_id: id}).exec(function(err, User){
 			if(err){
 				console.log("couldn\t find this User")
@@ -51,7 +52,7 @@ router.route('/Users/:UserId')
 	})
 	.put(function (req, res) {
 		console.log("changing a given User in fixins")
-		var id = req.body._id 
+		var id = req.body._id
 		User.findOne({_id: id}).exec(function(err, User){
 			console.log('here is the User in routes')
 			console.log(User)
@@ -81,9 +82,9 @@ router.route('/Users/:UserId')
 			}
 				if (req.body.newFavorite){
 					User.user_favorites.push(req.body.newFavorite)
-			}	
+			}
 
-				User.save()	
+				User.save()
 				res.json(User)
 		}
 
@@ -91,7 +92,7 @@ router.route('/Users/:UserId')
 	})
 	.delete(function (req, res) {
 		console.log("deleting a given User in fixins")
-		var id = req.params.UserId 
+		var id = req.params.UserId
 		User.findOne({_id: id}).remove().exec(function(err, User){
 			if(err){
 				console.log("couldn\t delete this User")

@@ -15,152 +15,35 @@ import NeighborhoodForm from "./NeighborhoodForm"
 import NeighborhoodList from "./NeighborhoodList"
 import SubNeighborhoodForm from "./SubNeighborhoodForm"
 import SubNeighborhoodList from "./SubNeighborhoodList"
+import Links from "./Links"
 import * as FixinsActions from "../../actions/FixinsActions"
 import FixinsStore from "../../stores/FixinsStore"
+import { connect } from 'react-redux'
 
 export default class Admin extends React.Component{
-	constructor(){
-		super()
-		this.state={
-			allUsers: [],
-			allNeighborhoods: [],
-			allSubNeighborhoods: [],
-			allReviews: [],
-			allGenres: [],
-			allDishes: [],
-			allSpots: [],
-			allCheckIns: []
-		}
-	}
-	goFindNeighborhoods(){
-		this.setState(
-			{
-				allNeighborhoods: FixinsStore.getNeighborhoodsFromStore()
-			})
-		}
-
-	goFindSubNeighborhoods(){
-		this.setState(
-			{
-				allSubNeighborhoods: FixinsStore.getSubNeighborhoodsFromStore()
-			})
-		}
-
-	goFindGenres(){
-		this.setState(
-			{
-				allGenres: FixinsStore.getGenresFromStore()
-			})
-		}
-
-	goFindDishes(){
-		this.setState(
-			{
-				allDishes: FixinsStore.getDishesFromStore()
-			})
-		}
-
-
-	goFindSpots(){
-		this.setState(
-			{
-				allSpots: FixinsStore.getSpotsFromStore()
-			}
-
-			)
-
-		}
-
-	goFindCheckIns(){
-		this.setState(
-			{
-				allCheckIns: FixinsStore.getCheckInsFromStore()
-			})
-		}
-
-
-	goFindUsers(){
-		this.setState(
-			{
-				allUsers: FixinsStore.getUsersFromStore()
-			}
-			)
-		}
-
-
-
-	goFindReviews(){
-		this.setState(
-			{
-				allReviews: FixinsStore.getReviewsFromStore()
-			})
-		}
-
-	goFindEverything(){
-		this.setState(
-			{
-				allUsers: FixinsStore.getUsersFromStore(),
-				allSpots: FixinsStore.getSpotsFromStore(),
-				allCheckIns: FixinsStore.getCheckInsFromStore(),
-				allDishes: FixinsStore.getDishesFromStore(),
-				allSubNeighborhoods: FixinsStore.getSubNeighborhoodsFromStore(),
-				allNeighborhoods: FixinsStore.getNeighborhoodsFromStore(),
-				allReviews: FixinsStore.getReviewsFromStore(),
-				allGenres: FixinsStore.getGenresFromStore()
-			}
-
-		)
-	}
-
-	componentDidMount(){
-		this.goFindEverything()
-	}
-
-	componentWillMount(){
-		FixinsStore.on("changedReviews", this.goFindReviews.bind(this))
-		FixinsStore.on("changedUsers", this.goFindUsers.bind(this))
-		FixinsStore.on("changedSubNeighborhoods", this.goFindSubNeighborhoods.bind(this))
-		FixinsStore.on("changedNeighborhoods", this.goFindNeighborhoods.bind(this))
-		FixinsStore.on("changedDishes", this.goFindDishes.bind(this))
-		FixinsStore.on("changedSpots", this.goFindSpots.bind(this))
-		FixinsStore.on("changedCheckIns", this.goFindCheckIns.bind(this))
-		FixinsStore.on("changedGenres", this.goFindGenres.bind(this))
-
-	}
-
-	componentWillUnmount(){
-		FixinsStore.removeListener("changedReviews", this.goFindReviews.bind(this))
-		FixinsStore.removeListener("changedUsers", this.goFindUsers.bind(this))
-		FixinsStore.removeListener("changedSubNeighborhoods", this.goFindSubNeighborhoods.bind(this))
-		FixinsStore.removeListener("changedNeighborhoods", this.goFindNeighborhoods.bind(this))
-		FixinsStore.removeListener("changedDishes", this.goFindDishes.bind(this))
-		FixinsStore.removeListener("changedSpots", this.goFindSpots.bind(this))
-		FixinsStore.removeListener("changedCheckIns", this.goFindCheckIns.bind(this))
-		FixinsStore.removeListener("changedGenres", this.goFindGenres.bind(this))
-	}
-
 	render(){
 	return(
 		<div>
 			<div className="container">
-
+			<Links />
 
 				<div className="admin-dish-box bg-info row">
 
 					<div className="admin-dish-input col-md-4">
 									<h2>New Dish</h2>
 
-						<DishForm 
-						allSpots={this.state.allSpots} 
-						allGenres={this.state.allGenres} />
+						<DishForm
+						allSpots={this.props.allSpots}
+						allGenres={this.props.allGenres}
+						createDish={this.props.createDish} />
 					</div>
 					<div className="admin-dish-output col-md-8">
 									<h2>All Dishes</h2>
 
-						<DishList 
-						allReviews={this.state.allReviews} 
-						allCheckIns={this.state.allCheckIns}
-						allDishes={this.state.allDishes} />
+						<DishList
+						allReviews={this.props.allReviews}
+						allCheckIns={this.props.allCheckIns}
+						allDishes={this.props.allDishes} />
 					</div>
 
 				</div>
@@ -169,76 +52,82 @@ export default class Admin extends React.Component{
 				<div className="admin-user-box bg-success row">
 					<div className="admin-user-input col-md-4">
 									<h2>New User</h2>
-						<UserForm 
-						allSubNeighborhoods={this.state.allSubNeighborhoods} />
+						<UserForm
+						allSubNeighborhoods={this.props.allSubNeighborhoods}
+						createSubNeighborhood={this.props.createSubNeighborhood} />
 					</div>
 					<div className="admin-user-output col-md-8">
 								<h2>All Users</h2>
 
-						<UserList 
-						allUsers={this.state.allUsers}
-						allCheckIns={this.state.allCheckIns}
-						allReviews={this.state.allReviews}
-						allDishes={this.state.allDishes}
-						allSubNeighborhoods={this.state.allSubNeighborhoods}						/>
+						<UserList
+						allUsers={this.props.allUsers}
+						allCheckIns={this.props.allCheckIns}
+						allReviews={this.props.allReviews}
+						allDishes={this.props.allDishes}
+						allSubNeighborhoods={this.props.allSubNeighborhoods}						/>
 					</div>
 				</div>
-			
+
 			<hr />
 
 				<div className="admin-spot-box row bg-info">
 					<div className="admin-spot-input col-md-4">
 									<h2>New Spot</h2>
 
-						<SpotForm 
-						allGenres={this.state.allGenres} 
-						allSubNeighborhoods={this.state.allSubNeighborhoods} />
+						<SpotForm
+						allGenres={this.props.allGenres}
+						allSubNeighborhoods={this.props.allSubNeighborhoods}
+						createSpot={this.props.createSpot}/>
 					</div>
 					<div className="admin-spot-output col-md-8">
 								<h2>All Spots</h2>
 
-						<SpotList 
-						allSpots={this.state.allSpots}
-						allSubNeighborhoods={this.state.allSubNeighborhoods}
-						allReviews={this.state.allReviews}
-						allGenres={this.state.allGenres}
-						allDishes={this.state.allDishes}/>
+						<SpotList
+						allSpots={this.props.allSpots}
+						allSubNeighborhoods={this.props.allSubNeighborhoods}
+						allReviews={this.props.allReviews}
+						allGenres={this.props.allGenres}
+						allDishes={this.props.allDishes}/>
 
 					</div>
 				</div>
-			
+
 			<hr />
 
 				<div className="admin-genre-box row bg-success">
 					<div className="admin-genre-input col-md-4">
 									<h2>New Genre</h2>
 
-						<GenreForm />
+						<GenreForm
+						createGenre={this.props.createGenre}
+						/>
 					</div>
 
 					<div className="admin-genre-output col-md-8">
 							<h2>All Genres</h2>
 
-						<GenreList 
-						allGenres={this.state.allGenres} />
+						<GenreList
+						allGenres={this.props.allGenres} />
 					</div>
 				</div>
-				
+
 			<hr />
 
 				<div className="admin-review-box bg-info row">
 					<div className="admin-review-input col-md-4">
 									<h2>New Review</h2>
 
-						<ReviewForm 
-						allDishes={this.state.allDishes} 
-						allUsers={this.state.allUsers}/>
+						<ReviewForm
+						allDishes={this.props.allDishes}
+						allUsers={this.props.allUsers}
+						createReview={this.props.createReview}
+						/>
 					</div>
 					<div className="admin-review-output col-md-8">
 							<h2>All Reviews</h2>
 
-						<ReviewList 
-						allReviews={this.state.allReviews} />
+						<ReviewList
+						allReviews={this.props.allReviews} />
 					</div>
 				</div>
 
@@ -249,32 +138,36 @@ export default class Admin extends React.Component{
 									<h2>New CheckIn</h2>
 
 						<CheckInForm
-						 allUsers={this.state.allUsers} 
-						allDishes={this.state.allDishes}/>
+						 allUsers={this.props.allUsers}
+						allDishes={this.props.allDishes}
+						createCheckIn={this.props.createCheckIn}
+						/>
 					</div>
 					<div className="admin-checkIn-output col-md-8">
 									<h2>All CheckIns</h2>
 
-						<CheckInList 
-						allCheckIns={this.state.allCheckIns}/>
+						<CheckInList
+						allCheckIns={this.props.allCheckIns}/>
 					</div>
 				</div>
 
 			<hr />
-				
+
 				<div className="admin-neighborhood-box bg-info row">
 					<div className="admin-neighborhood-input col-md-4">
 									<h2>New Neighborhood</h2>
 
-						<NeighborhoodForm />
+						<NeighborhoodForm
+						createNeighborhood={this.props.createNeighborhood}
+						/>
 					</div>
 
 					<div className="admin-neighborhood-output col-md-8">
 									<h2>All Neighborhoods</h2>
 
-						<NeighborhoodList 
-						allNeighborhoods={this.state.allNeighborhoods}
-						allSubNeighborhoods={this.state.allSubNeighborhoods} />
+						<NeighborhoodList
+						allNeighborhoods={this.props.allNeighborhoods}
+						allSubNeighborhoods={this.props.allSubNeighborhoods} />
 					</div>
 				</div>
 
@@ -284,19 +177,21 @@ export default class Admin extends React.Component{
 					<div className="admin-subNeighborhood-input col-md-4">
 									<h2>New Sub-Neighborhood</h2>
 
-						<SubNeighborhoodForm 
-						allNeighborhoods={this.state.allNeighborhoods}/>
+						<SubNeighborhoodForm
+						allNeighborhoods={this.props.allNeighborhoods}
+						createSubNeighborhood={this.props.createSubNeighborhood}
+						/>
 					</div>
 
 					<div className="admin-subNeighborhood-output col-md-8">
-									<h2>All Sub-Neighborhoods</h2>					
+									<h2>All Sub-Neighborhoods</h2>
 						<SubNeighborhoodList
-						 allSubNeighborhoods={this.state.allSubNeighborhoods} />
+						 allSubNeighborhoods={this.props.allSubNeighborhoods} />
 					</div>
 				</div>
 			</div>
 		</div>
-			
+
 		)
 	}
 }

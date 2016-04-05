@@ -1,6 +1,5 @@
 import React from "react"
 import CustomDropdown from "./CustomDropdown"
-import * as FixinsActions from "../../actions/FixinsActions"
 
 export default class GenreForm extends React.Component{
 	constructor(){
@@ -18,7 +17,7 @@ export default class GenreForm extends React.Component{
 		e.preventDefault();
 		var newGenreObject = {}
 		newGenreObject.name = this.state.name
-		FixinsActions.createGenre(newGenreObject)
+		this.props.createGenre(newGenreObject)
 		this.setState({name: ""})
 	}
 

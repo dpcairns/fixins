@@ -1,6 +1,5 @@
 import React from "react"
 import CustomDropdown from "./CustomDropdown"
-import * as FixinsActions from "../../actions/FixinsActions"
 
 export default class CheckInForm extends React.Component{
 	constructor(){
@@ -31,7 +30,7 @@ export default class CheckInForm extends React.Component{
 		newCheckInObject.dish = this.state.dish
 		newCheckInObject.user = this.state.user
 
-		FixinsActions.createCheckIn(newCheckInObject)
+		this.props.createCheckIn(newCheckInObject)
 		this.setState({blurb: '', dish: '', user: ''})
 	}
 
@@ -45,14 +44,14 @@ export default class CheckInForm extends React.Component{
 		</div>
 		<div className="input-group">
 			Dish:
-			<CustomDropdown setValueTo={this.state.dish} onchange2={this.handleDishChange.bind(this)} 
+			<CustomDropdown setValueTo={this.state.dish} onchange2={this.handleDishChange.bind(this)}
 			data={this.props.allDishes} nameName="dish_name" />
 		</div>
 		<div className="input-group">
 			User:
-			<CustomDropdown setValueTo={this.state.user} 
-			onchange2={this.handleUserChange.bind(this)} 
-			data={this.props.allUsers} 
+			<CustomDropdown setValueTo={this.state.user}
+			onchange2={this.handleUserChange.bind(this)}
+			data={this.props.allUsers}
 			nameName="username" />
 		</div>
 	<input className="button btn-danger align-right" type="submit" value="Post"/>

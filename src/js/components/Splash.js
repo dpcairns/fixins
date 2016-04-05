@@ -1,19 +1,17 @@
 import React from "react"
 import { Link } from "react-router"
-import * as FixinsActions from "../actions/FixinsActions"
 
 export default class Splash extends React.Component{
 
 	componentDidMount(){
-		FixinsActions.initializeUsers();
-		FixinsActions.initializeDishes();
-		FixinsActions.initializeGenres();
-		FixinsActions.initializeSubNeighborhoods();
-		FixinsActions.initializeNeighborhoods();
-		FixinsActions.initializeReviews();
-		FixinsActions.initializeSpots();
-		FixinsActions.initializeCheckIns();
-		console.log("<Splash> tried to initialize all data")
+		this.props.initializeUsers();
+		this.props.initializeDishes();
+		this.props.initializeGenres();
+		this.props.initializeSubNeighborhoods();
+		this.props.initializeNeighborhoods();
+		this.props.initializeReviews();
+		this.props.initializeSpots();
+		this.props.initializeCheckIns();
 	}
 
 		render(){
@@ -22,7 +20,6 @@ export default class Splash extends React.Component{
 			<h2>Hello and welcome to fixins!</h2>
 			<h2><Link to="index">for now, just click here to go to the admin page</Link></h2>
 			<h2><Link to="index/mapPage">or click here to see all the data on a map</Link></h2>
-
 		</div>
 		)
 		}

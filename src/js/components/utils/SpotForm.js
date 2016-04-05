@@ -1,7 +1,6 @@
 
 import React from "react"
 import CustomDropdown from "./CustomDropdown"
-import * as FixinsActions from "../../actions/FixinsActions"
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 
 
@@ -46,7 +45,7 @@ export default class SpotForm extends React.Component{
 		this.setState({genres: e.target.value})
 		console.log("1C")
 		console.log(this.state)
-	}	
+	}
 
 
 	handleMapClick(e){
@@ -79,7 +78,7 @@ export default class SpotForm extends React.Component{
 
 		console.log("here is the now spot object,before save")
 		console.log(newSpotObject)
-		FixinsActions.createSpot(newSpotObject)
+		this.props.createSpot(newSpotObject)
 		this.setState({username: "", blurb: "", genres: "", coordinates: "", neighborhood: '', subNeighborhood: ''})
 	}
 
@@ -103,20 +102,20 @@ export default class SpotForm extends React.Component{
 		<div>
 		<div className="input-group">
 			Spot name:
-		  <input type="text" value={this.state.name} 
-			  onChange={this.handleNameChange.bind(this)} 
-			  className="form-control" 
+		  <input type="text" value={this.state.name}
+			  onChange={this.handleNameChange.bind(this)}
+			  className="form-control"
 			  placeholder="spot name" />
 		</div>
 		<div className="input-group">
 			Blurb:
-		  <input type="text" value={this.state.blurb} 
-			  onChange={this.handleBlurbChange.bind(this)} 
+		  <input type="text" value={this.state.blurb}
+			  onChange={this.handleBlurbChange.bind(this)}
 			  className="form-control" placeholder="spot blurb" />
 		</div>
 		<div className="input-group">
 			Genres:
-			<CustomDropdown setValueTo={this.state.genres} 
+			<CustomDropdown setValueTo={this.state.genres}
 				onchange2={this.handleGenresChange.bind(this)}
 				 data={this.props.allGenres}
 				  nameName="genre_name" />
@@ -124,15 +123,15 @@ export default class SpotForm extends React.Component{
 
 		<div className="input-group">
 			subNeighborhood:
-			<CustomDropdown 
-				setValueTo={this.state.subNeighborhood} 
-				onchange2={this.handleSubNeighborhoodChange.bind(this)} 
-				data={this.props.allSubNeighborhoods} 
+			<CustomDropdown
+				setValueTo={this.state.subNeighborhood}
+				onchange2={this.handleSubNeighborhoodChange.bind(this)}
+				data={this.props.allSubNeighborhoods}
 				nameName="subNeighborhood_name" />
 		</div>
 		<div className="map-input-box">
 		<h2>Show us the spot on the map:</h2>
-	
+
 
       <Map onLeafletClick={this.handleMapClick.bind(this)} center={position} zoom={this.state.zoom} minZoom={minZoom}>
         <TileLayer
@@ -141,7 +140,7 @@ export default class SpotForm extends React.Component{
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           accessToken='pk.eyJ1IjoiZHBjYWlybnMiLCJhIjoiY2lsd3JtZnp2MDJib3Rpa3Jzazc5OWd2dCJ9.2QcVQqSKUQQuVVC-D472OQ'
           url='https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}'/>
-       
+
         {marker}
 
       </Map>
