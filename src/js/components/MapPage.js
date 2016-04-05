@@ -5,34 +5,13 @@ import MapItself from "./utils/MapItself"
 import Links from "./utils/Links"
 
 export default class MapPage extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      allSpots: []
-    }
-  }
 
-  goFindSpots(){
-       this.setState({ allSpots: FixinsStore.getSpotsFromStore() })
-  }
-
-  componentDidMount(){
-    this.goFindSpots()
-  }
-
-  componentWillMount(){
-    FixinsStore.on("changedSpots", this.goFindSpots.bind(this))
-  }
-
-  componentWillUnmount(){
-    FixinsStore.removeListener("changedSpots", this.goFindSpots.bind(this))
-  }
 
   render() {
     return(
     <div>
         <Links />
-       <MapItself allSpots={this.state.allSpots} />
+       <MapItself allSpots={this.props.allSpots} />
     </div>
     )
   }

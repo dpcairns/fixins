@@ -1,4 +1,4 @@
-export function createUser(newUser){
+export function createUser(newUser, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Users",
 			type: 'POST',
@@ -21,7 +21,7 @@ export function createUser(newUser){
 		});
 	}
 
-export function createSpot(newSpot){
+export function createSpot(newSpot, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Spots",
 			type: 'POST',
@@ -43,7 +43,7 @@ export function createSpot(newSpot){
 		});
 	}
 
-export function createDish(newDish){
+export function createDish(newDish, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Dishes",
 			type: 'POST',
@@ -65,7 +65,7 @@ export function createDish(newDish){
 		});
 	}
 
-export function createReview(newReview){
+export function createReview(newReview, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Reviews",
 			type: 'POST',
@@ -86,7 +86,7 @@ export function createReview(newReview){
 			}.bind(this)
 		});
 	}
-export function createNeighborhood(newNeighborhood){
+export function createNeighborhood(newNeighborhood, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Neighborhoods",
 			type: 'POST',
@@ -108,7 +108,7 @@ export function createNeighborhood(newNeighborhood){
 		});
 	}
 
-export function createSubNeighborhood(newSubNeighborhood){
+export function createSubNeighborhood(newSubNeighborhood, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/SubNeighborhoods",
 			type: 'POST',
@@ -130,7 +130,7 @@ export function createSubNeighborhood(newSubNeighborhood){
 		});
 	}
 
-export function createGenre(newGenre){
+export function createGenre(newGenre, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Genres",
 			type: 'POST',
@@ -153,7 +153,7 @@ export function createGenre(newGenre){
 	}
 
 
-export function createCheckIn(newCheckIn){
+export function createCheckIn(newCheckIn, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/CheckIns",
 			type: 'POST',
@@ -311,7 +311,7 @@ export function initializeCheckIns(dispatch){
 		});
 	}
 
-	export function removeUser(ID){
+	export function removeUser(ID, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Users/" + ID,
 			type: 'DELETE',
@@ -328,7 +328,7 @@ export function initializeCheckIns(dispatch){
 	}
 
 
-	export function removeNeighborhood(ID){
+	export function removeNeighborhood(ID, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Neighborhoods/" + ID,
 			type: 'DELETE',
@@ -345,7 +345,7 @@ export function initializeCheckIns(dispatch){
 	}
 
 
-	export function removeDish(ID){
+	export function removeDish(ID, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Dishes/" + ID,
 			type: 'DELETE',
@@ -360,7 +360,7 @@ export function initializeCheckIns(dispatch){
 			}.bind(this)
 		});
 	}
-	export function removeSubNeighborhood(ID){
+	export function removeSubNeighborhood(ID, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/SubNeighborhoods/" + ID,
 			type: 'DELETE',
@@ -375,7 +375,7 @@ export function initializeCheckIns(dispatch){
 			}.bind(this)
 		});
 	}
-	export function removeGenre(ID){
+	export function removeGenre(ID, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Genres/" + ID,
 			type: 'DELETE',
@@ -390,7 +390,7 @@ export function initializeCheckIns(dispatch){
 			}.bind(this)
 		});
 	}
-	export function removeReview(ID){
+	export function removeReview(ID, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Reviews/" + ID,
 			type: 'DELETE',
@@ -405,7 +405,7 @@ export function initializeCheckIns(dispatch){
 			}.bind(this)
 		});
 	}
-	export function removeCheckIn(ID){
+	export function removeCheckIn(ID, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/CheckIns/" + ID,
 			type: 'DELETE',
@@ -421,7 +421,7 @@ export function initializeCheckIns(dispatch){
 		});
 	}
 
-	export function removeSpot(ID){
+	export function removeSpot(ID, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Spots/" + ID,
 			type: 'DELETE',
@@ -437,7 +437,7 @@ export function initializeCheckIns(dispatch){
 		});
 	}
 
-		export function findAndChangeUser(newUserInfo){
+		export function findAndChangeUser(newUserInfo, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Users/" + newUserInfo._id,
 			type: 'PUT',
@@ -455,7 +455,7 @@ export function initializeCheckIns(dispatch){
 	}
 
 
-	export function findAndChangeNeighborhood(newNeighborhoodInfo){
+	export function findAndChangeNeighborhood(newNeighborhoodInfo, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Neighborhoods/" + newNeighborhoodInfo._id,
 			type: 'PUT',
@@ -472,7 +472,7 @@ export function initializeCheckIns(dispatch){
 		});
 	}
 
-	export function findAndChangeDish(newDishInfo){
+	export function findAndChangeDish(newDishInfo, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Dishes/" + newDishInfo._id,
 			type: 'PUT',
@@ -489,7 +489,7 @@ export function initializeCheckIns(dispatch){
 		});
 	}
 
-		export function findAndChangeSubNeighborhood(newSubNeighborhoodInfo){
+		export function findAndChangeSubNeighborhood(newSubNeighborhoodInfo, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/SubNeighborhoods/" + newSubNeighborhoodInfo._id,
 			type: 'PUT',
@@ -507,7 +507,7 @@ export function initializeCheckIns(dispatch){
 	}
 
 
-	export function findAndChangeGenre(newGenreInfo){
+	export function findAndChangeGenre(newGenreInfo, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Genres/" + newGenreInfo._id,
 			type: 'PUT',
@@ -524,7 +524,7 @@ export function initializeCheckIns(dispatch){
 		});
 	}
 
-	export function findAndChangeReview(newReviewInfo){
+	export function findAndChangeReview(newReviewInfo, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Reviews/" + newReviewInfo._id,
 			type: 'PUT',
@@ -541,7 +541,7 @@ export function initializeCheckIns(dispatch){
 		});
 	}
 
-		export function findAndChangeCheckIn(newCheckInInfo){
+		export function findAndChangeCheckIn(newCheckInInfo, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/CheckIns/" + newCheckInInfo._id,
 			type: 'PUT',
@@ -559,7 +559,7 @@ export function initializeCheckIns(dispatch){
 	}
 
 
-		export function findAndChangeSpot(newSpotInfo){
+		export function findAndChangeSpot(newSpotInfo, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Spots/" + newSpotInfo._id,
 			type: 'PUT',

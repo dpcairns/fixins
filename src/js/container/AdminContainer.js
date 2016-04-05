@@ -1,48 +1,49 @@
 import { connect } from 'react-redux'
 import Admin from '../components/utils/Admin'
+import * as FixinsActions from "../actions/FixinsActions"
 
 const mapStateToProps = (state) => {
   return {
-    allGenres: state.allGenres,
-    allSpots: state.allSpots,
-    allDishes: state.allDishes,
-    allUsers: state.allUsers,
-    allNeighborhoods: state.allNeighborhoods,
-    allSubNeighborhoods: state.allSubNeighborhoods,
-    allReviews: state.allReviews,
-    allCheckIns: state.allCheckIns
+    allGenres: state.genres,
+    allSpots: state.spots,
+    allDishes: state.dishes,
+    allUsers: state.users,
+    allNeighborhoods: state.neighborhoods,
+    allSubNeighborhoods: state.subNeighborhoods,
+    allReviews: state.reviews,
+    allCheckIns: state.checkIns
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
 
-          createSubNeighborhood: () => FixinsActions.createSubNeighborhood(dispatch),
-          createNeighborhood: () => FixinsActions.createNeighborhood(dispatch),
-          createGenre: () => FixinsActions.createGenre(dispatch),
-          createUser: () => FixinsActions.createUser(dispatch),
-          createSpot: () => FixinsActions.createSpot(dispatch),
-          createDish: () => FixinsActions.createDish(dispatch),
-          createReview: () => FixinsActions.createReview(dispatch),
-          createCheckIn: () => FixinsActions.createCheckIn(dispatch),
+          createSubNeighborhood: (newSubNeighborhood) => FixinsActions.createSubNeighborhood(newSubNeighborhood, dispatch),
+          createNeighborhood: (newNeighborhood) => FixinsActions.createNeighborhood(newNeighborhood, dispatch),
+          createGenre: (newGenre) => FixinsActions.createGenre(newGenre, dispatch),
+          createUser: (newUser) => FixinsActions.createUser(newUser, dispatch),
+          createSpot: (newSpot) => FixinsActions.createSpot(newSpot, dispatch),
+          createDish: (newDish) => FixinsActions.createDish(newDish, dispatch),
+          createReview: (newReview) => FixinsActions.createReview(newReview, dispatch),
+          createCheckIn: (newCheckIn) => FixinsActions.createCheckIn(newCheckIn, dispatch),
 
-                removeSubNeighborhood: (id) => FixinsActions.removeSubNeighborhood(id, dispatch),
-                removeNeighborhood: (id) => FixinsActions.removeNeighborhood(id, dispatch),
-                removeGenre: (id) => FixinsActions.removeGenre(id, dispatch),
-                removeUser: (id) => FixinsActions.removeUser(id, dispatch),
-                removeSpot: (id) => FixinsActions.removeSpot(id, dispatch),
-                removeDish: (id) => FixinsActions.removeDish(id, dispatch),
-                removeReview: (id) => FixinsActions.removeReview(id, dispatch),
-                removeCheckIn: (id) => FixinsActions.removeCheckIn(id, dispatch),
+          removeSubNeighborhood: (id) => FixinsActions.removeSubNeighborhood(id, dispatch),
+          removeNeighborhood: (id) => FixinsActions.removeNeighborhood(id, dispatch),
+          removeGenre: (id) => FixinsActions.removeGenre(id, dispatch),
+          removeUser: (id) => FixinsActions.removeUser(id, dispatch),
+          removeSpot: (id) => FixinsActions.removeSpot(id, dispatch),
+          removeDish: (id) => FixinsActions.removeDish(id, dispatch),
+          removeReview: (id) => FixinsActions.removeReview(id, dispatch),
+          removeCheckIn: (id) => FixinsActions.removeCheckIn(id, dispatch),
 
-    findAndChangeSubNeighborhood: (id) => FixinsActions.findAndChangeSubNeighborhood(id, dispatch),
-    findAndChangeNeighborhood: (id) => FixinsActions.findAndChangeNeighborhood(id, dispatch),
-    findAndChangeGenre: (id) => FixinsActions.findAndChangeGenre(id, dispatch),
-    findAndChangeUser: (id) => FixinsActions.findAndChangeUser(id, dispatch),
-    findAndChangeSpot: (id) => FixinsActions.findAndChangeSpot(id, dispatch),
-    findAndChangeDish: (id) => FixinsActions.findAndChangeDish(id, dispatch),
-    findAndChangeReview: (id) => FixinsActions.findAndChangeReview(id, dispatch),
-    findAndChangeCheckIn: (id) => FixinsActions.findAndChangeCheckIn(id, dispatch)
+          findAndChangeSubNeighborhood: (id) => FixinsActions.findAndChangeSubNeighborhood(id, dispatch),
+          findAndChangeNeighborhood: (id) => FixinsActions.findAndChangeNeighborhood(id, dispatch),
+          findAndChangeGenre: (id) => FixinsActions.findAndChangeGenre(id, dispatch),
+          findAndChangeUser: (id) => FixinsActions.findAndChangeUser(id, dispatch),
+          findAndChangeSpot: (id) => FixinsActions.findAndChangeSpot(id, dispatch),
+          findAndChangeDish: (id) => FixinsActions.findAndChangeDish(id, dispatch),
+          findAndChangeReview: (id) => FixinsActions.findAndChangeReview(id, dispatch),
+          findAndChangeCheckIn: (id) => FixinsActions.findAndChangeCheckIn(id, dispatch)
 
   }
 }

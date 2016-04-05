@@ -10,6 +10,8 @@ export default class SpotList extends React.Component{
 		let allReviews=this.props.allReviews
 		let allGenres=this.props.allGenres
 		let allSubNeighborhoods= this.props.allSubNeighborhoods
+		let removeSpot = this.props.removeSpot
+		let findAndChangeSpot = this.props.findAndChangeSpot
 		let spotNodes = this.props.allSpots.map(function(spot){
 			return(
 			<div key={spot._id}>
@@ -17,20 +19,20 @@ export default class SpotList extends React.Component{
 					<ul>
 						<li><h2>{spot.spot_name}</h2></li>
 						<li> Spot Blurb: {spot.spot_blurb}</li>
-						<li> Spot SubNeighborhood: {spot.spot_subNeighborhood.subNeighborhood_name}</li>
 						<li> Spot Genre: {spot.spot_genres[0].genre_name}</li>
 						<li> Spot Coordinates: {spot.spot_coordinates[0]} {spot.spot_coordinates[1]}</li>
-						<li> <RemoveButton type="Spot" id={spot._id}/></li>						
+						<li> <RemoveButton removeSpot={removeSpot} type="Spot" id={spot._id}/></li>
 
 					</ul>
 				</div>
 				<div className="col-md-6">
-					<SpotEditForm 
+					<SpotEditForm
 							spotID={spot._id}
 							allUsers={allUsers}
 							allGenres={allGenres}
 							allDishes={allDishes}
-							allSubNeighborhoods={allSubNeighborhoods}/>
+							allSubNeighborhoods={allSubNeighborhoods}
+							findAndChangeSpot={findAndChangeSpot}/>
 				</div>
 			</div>
 				)

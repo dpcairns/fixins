@@ -27,6 +27,11 @@ module.exports = {
   devServer: {
     contentBase: './src'
   },
-  eslint: {configFile: '.eslintrc'}
-    
+  eslint: {configFile: '.eslintrc'},
+  proxy: {
+  '/api/*': {
+   target: 'http://localhost:444/api/',
+    secure: false,  
+	}
+     }    
   };

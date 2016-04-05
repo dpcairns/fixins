@@ -5,9 +5,10 @@ export default class DishList extends React.Component{
 	render(){
 		let allCheckIns = this.props.allCheckIns
 		let allReviews = this.props.allReviews
-		let dishNodes = this.props.allDishes.map(function(dish){
+		let removeDish = this.props.removeDish
+		let findAndChangeDish = this.props.findAndChangeDish
 
-		
+		let dishNodes = this.props.allDishes.map(function(dish){
 			function findCheckInsFilter(checkIn){
 									return (checkIn.checkIn_dish._id === dish._id || checkIn.checkIn_dish === dish._id)
 						}
@@ -23,7 +24,6 @@ export default class DishList extends React.Component{
 
 										)
 				})
-
 
 			function findReviewsFilter(review){
 									return (review.reviewed_dish._id === dish._id || review.reviewed_dish === dish._id)
@@ -57,10 +57,10 @@ export default class DishList extends React.Component{
 						<td> Dish Spot: {dish.dish_spot.spot_name}</td>
 						<td>Dish reviews: {reviewNodes} </td>
 						<td>Dish check-ins: {checkInNodes}</td>
-						<td> <RemoveButton type="Dish" id={dish._id}/></td>
+						<td> <RemoveButton removeDish={removeDish} type="Dish" id={dish._id}/></td>
 
 					</tr>
-		
+
 				)
 		})
 	return(

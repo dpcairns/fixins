@@ -1,32 +1,31 @@
 import React from "react"
-import * as FixinsActions from "../../actions/FixinsActions"
 
 export default class RemoveButton extends React.Component {
 
 	remove(){
 		if (this.props.type==="User"){
-		FixinsActions.removeUser(this.props.id)
+		this.props.removeUser(this.props.id)
 	}
 		else if	(this.props.type==="Neighborhood"){
-		FixinsActions.removeNeighborhood(this.props.id)
+		this.props.removeNeighborhood(this.props.id)
 	}
 		else if	(this.props.type==="Dish"){
-		FixinsActions.removeDish(this.props.id)
+		this.props.removeDish(this.props.id)
 	}
 		else if (this.props.type==="Spot"){
-		FixinsActions.removeSpot(this.props.id)
+		this.props.removeSpot(this.props.id)
 	}
 		else if	(this.props.type==="Review"){
-		FixinsActions.removeReview(this.props.id)
+		this.props.removeReview(this.props.id)
 	}
 		else if	(this.props.type==="CheckIn"){
-		FixinsActions.removeCheckIn(this.props.id)
+		this.props.removeCheckIn(this.props.id)
 	}
 		else if	(this.props.type==="SubNeighborhood"){
-		FixinsActions.removeSubNeighborhood(this.props.id)
+		this.props.removeSubNeighborhood(this.props.id)
 	}
 		else if	(this.props.type==="Genre"){
-		FixinsActions.removeGenre(this.props.id)
+		this.props.removeGenre(this.props.id)
 	}
 		else {
 			console.log("no type specified to delete")

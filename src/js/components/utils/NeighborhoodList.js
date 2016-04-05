@@ -4,6 +4,8 @@ import NeighborhoodEditForm from "./NeighborhoodEditForm"
 
 export default class NeighborhoodList extends React.Component{
 	render(){
+		let removeNeighborhood = this.props.removeNeighborhood
+		let findAndChangeNeighborhood = this.props.findAndChangeNeighborhood
 		let allSubNeighborhoods = this.props.allSubNeighborhoods
 		let neighborhoodNodes = this.props.allNeighborhoods.map(function(neighborhood){
 					function findSubNeighborhoodsFilter(subNeighborhood){
@@ -21,7 +23,7 @@ export default class NeighborhoodList extends React.Component{
 				<tr key={neighborhood._id}>
 					<td><h3>{neighborhood.neighborhood_name}</h3></td>
 					<td><b>SubNeighborhoods:</b> {subNeighborhoodNodes}</td>
-					<td><RemoveButton type="Neighborhood" id={neighborhood._id}/></td>
+					<td><RemoveButton removeNeighborhood={removeNeighborhood} type="Neighborhood" id={neighborhood._id}/></td>
 				</tr>
 				)
 		})

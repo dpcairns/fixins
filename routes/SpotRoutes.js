@@ -3,7 +3,7 @@ var Spot = require('../src/js/models/SpotModel')
 module.exports = function(router){
 
 	router.route('/Spots')
-	.get(function (req, res) { 
+	.get(function (req, res) {
 		console.log('finding all Spots in fixins')
 		Spot.find({})
 		.populate('spot_genres')
@@ -24,18 +24,14 @@ module.exports = function(router){
 						newSpot.spot_blurb = req.body.blurb
 						newSpot.spot_coordinates = req.body.coordinates
 						newSpot.spot_subNeighborhood = req.body.subNeighborhood
-						newSpot.save()
-						Spot.findOne({spot_name: newSpot.spot_name})
+						newSpot.save(function(){
+							Spot.findOne({spot_name: newSpot.spot_name})
 							.populate('spot_genres')
 							.populate('spot_subNeighborhood')
 							.exec(function(err, Spot){
-								if(err){
-									console.log('Couldn\'t find Spots')
-								} else {
-									res.json(Spot);
-								}
-		})
-
+								res.json(Spot);
+									})
+							})
 				})
 
 
@@ -43,7 +39,7 @@ module.exports = function(router){
 	router.route('/Spots/:SpotId')
 	.put(function (req, res) {
 		console.log("finding a given Spot in fixins")
-		var id = req.body._id 
+		var id = req.body._id
 		Spot.findOne({_id: id}).exec(function(err, Spot){
 			console.log('here is the Spot in routes')
 			console.log(Spot)
@@ -77,7 +73,7 @@ module.exports = function(router){
 					Spot.spot_reviews.push(req.body.newReview)
 			}
 
-				Spot.save()	
+				Spot.save()
 				res.json(Spot)
 		}
 
@@ -87,7 +83,7 @@ module.exports = function(router){
 	router.route('/Spots/:SpotId')
 	.get(function (req, res) {
 		console.log("finding a given Spot in fixins")
-		var id = req.body.id 
+		var id = req.body.id
 		Spot.findOne({_id: id}).exec(function(err, Spot){
 			if(err){
 				console.log("couldn\t find this Spot")
@@ -103,7 +99,7 @@ module.exports = function(router){
 
 	.delete(function (req, res) {
 		console.log("deleting a given Spot in fixins")
-		var id = req.params.SpotId 
+		var id = req.params.SpotId
 		Spot.findOne({_id: id}).remove().exec(function(err, Spot){
 			if(err){
 				console.log("couldn\t delete this Spot")

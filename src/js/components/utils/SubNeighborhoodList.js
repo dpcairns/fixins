@@ -3,13 +3,15 @@ import RemoveButton from "./RemoveButton"
 
 export default class SubNeighborhoodList extends React.Component{
 	render(){
+			let removeSubNeighborhood = this.props.removeSubNeighborhood
+			let findAndChangeSubNeighborhood = this.props.findAndChangeSubNeighborhood
 		let subNeighborhoodNodes = this.props.allSubNeighborhoods.map(function(subNeighborhood){
 			return(
 				<tr key={subNeighborhood._id}>
 				<td>Name: {subNeighborhood.subNeighborhood_name}</td>
 				<td>{subNeighborhood.sub_neighborhood_neighborhood.neighborhood_name}</td>
 
-				<td><RemoveButton type="SubNeighborhood" id={subNeighborhood._id}/></td>
+				<td><RemoveButton removeSubNeighborhood={removeSubNeighborhood} type="SubNeighborhood" id={subNeighborhood._id}/></td>
 
 				</tr>
 				)

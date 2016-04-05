@@ -1,17 +1,16 @@
 import React from "react"
 import CustomDropdown from "./CustomDropdown"
-import * as FixinsActions from "../../actions/FixinsActions"
 
 export default class UserEditForm extends React.Component{
 	constructor(){
 		super();
 		this.state = {
-				newUsername: "", 
-				newPassword: "", 
+				newUsername: "",
+				newPassword: "",
 				newSubNeighborhood: "",
-				newFriend: "", 
+				newFriend: "",
 				newFavorite: "",
-				newCheckIn: "", 
+				newCheckIn: "",
 				newReview: ""
 		}
 	}
@@ -55,11 +54,11 @@ export default class UserEditForm extends React.Component{
 		newUserInfo.newFavorite = this.state.newFavorite
 		newUserInfo.newReview = this.state.newReview
 		newUserInfo.newCheckIn = this.state.newCheckIn
-		FixinsActions.findAndChangeUser(newUserInfo)
-		this.setState({newUsername: "", 
-						newPassword: "", 
+		this.props.findAndChangeUser(newUserInfo)
+		this.setState({newUsername: "",
+						newPassword: "",
 						newSubNeighborhood: "",
-						newFriend: "", 
+						newFriend: "",
 						newFavorite: ""})
 		}
 
@@ -78,37 +77,37 @@ export default class UserEditForm extends React.Component{
 		</div>
 		<div className="input-group">
 			Update Sub-Neighborhood:
-			<CustomDropdown setValueTo={this.state.newSubNeighborhood} 
-					onchange2={this.handleSubNeighborhoodChange.bind(this)} 
-					data={this.props.allSubNeighborhoods} 
+			<CustomDropdown setValueTo={this.state.newSubNeighborhood}
+					onchange2={this.handleSubNeighborhoodChange.bind(this)}
+					data={this.props.allSubNeighborhoods}
 					nameName="subNeighborhood_name" />
 		</div>
 		<div className="input-group">
 			Add a new Friend:
-			<CustomDropdown setValueTo={this.state.newFriend} 
-					onchange2={this.handleFriendChange.bind(this)} 
-					data={this.props.allUsers} 
+			<CustomDropdown setValueTo={this.state.newFriend}
+					onchange2={this.handleFriendChange.bind(this)}
+					data={this.props.allUsers}
 					nameName="username" />
 		</div>
 		<div className="input-group">
 			Add a new Favorite:
-			<CustomDropdown setValueTo={this.state.newFavorite} 
+			<CustomDropdown setValueTo={this.state.newFavorite}
 					data = {this.props.allDishes}
-					onchange2={this.handleFavoriteChange.bind(this)} 
+					onchange2={this.handleFavoriteChange.bind(this)}
 					nameName="dish_name" />
 		</div>
 		<div className="input-group">
 			Add a new CheckIn:
-			<CustomDropdown setValueTo={this.state.newcheckIn} 
+			<CustomDropdown setValueTo={this.state.newcheckIn}
 					data = {this.props.allCheckIns}
-					onchange2={this.handleCheckInChange.bind(this)} 
+					onchange2={this.handleCheckInChange.bind(this)}
 					nameName="checkIn_blurb" />
 		</div>
 		<div className="input-group">
 			Add a new Review:
-			<CustomDropdown setValueTo={this.state.newReview} 
+			<CustomDropdown setValueTo={this.state.newReview}
 					data = {this.props.allReviews}
-					onchange2={this.handleReviewChange.bind(this)} 
+					onchange2={this.handleReviewChange.bind(this)}
 					nameName="review_words" />
 		</div>
 	<input className="button btn-danger align-right" type="submit" value="Update"/>

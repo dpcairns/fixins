@@ -43,7 +43,10 @@ export default class Admin extends React.Component{
 						<DishList
 						allReviews={this.props.allReviews}
 						allCheckIns={this.props.allCheckIns}
-						allDishes={this.props.allDishes} />
+						allDishes={this.props.allDishes}
+						removeDish={this.props.removeDish}
+						findAndChangeDish={this.props.findAndChangeDish}
+ 							/>
 					</div>
 
 				</div>
@@ -54,7 +57,7 @@ export default class Admin extends React.Component{
 									<h2>New User</h2>
 						<UserForm
 						allSubNeighborhoods={this.props.allSubNeighborhoods}
-						createSubNeighborhood={this.props.createSubNeighborhood} />
+						createUser={this.props.createUser} />
 					</div>
 					<div className="admin-user-output col-md-8">
 								<h2>All Users</h2>
@@ -64,7 +67,11 @@ export default class Admin extends React.Component{
 						allCheckIns={this.props.allCheckIns}
 						allReviews={this.props.allReviews}
 						allDishes={this.props.allDishes}
-						allSubNeighborhoods={this.props.allSubNeighborhoods}						/>
+						allSubNeighborhoods={this.props.allSubNeighborhoods}
+						removeUser={this.props.removeUser}
+						findAndChangeUser={this.props.findAndChangeUser}
+
+						/>
 					</div>
 				</div>
 
@@ -87,7 +94,11 @@ export default class Admin extends React.Component{
 						allSubNeighborhoods={this.props.allSubNeighborhoods}
 						allReviews={this.props.allReviews}
 						allGenres={this.props.allGenres}
-						allDishes={this.props.allDishes}/>
+						allDishes={this.props.allDishes}
+						removeSpot={this.props.removeSpot}
+						findAndChangeSpot={this.props.findAndChangeSpot}
+
+						/>
 
 					</div>
 				</div>
@@ -107,7 +118,11 @@ export default class Admin extends React.Component{
 							<h2>All Genres</h2>
 
 						<GenreList
-						allGenres={this.props.allGenres} />
+						allGenres={this.props.allGenres}
+						removeGenre={this.props.removeGenre}
+						findAndChangeGenre={this.props.findAndChangeGenre}
+
+ />
 					</div>
 				</div>
 
@@ -127,7 +142,11 @@ export default class Admin extends React.Component{
 							<h2>All Reviews</h2>
 
 						<ReviewList
-						allReviews={this.props.allReviews} />
+						allReviews={this.props.allReviews}
+						removeReview={this.props.removeReview}
+						findAndChangeReview={this.props.findAndChangeReview}
+
+ />
 					</div>
 				</div>
 
@@ -147,7 +166,11 @@ export default class Admin extends React.Component{
 									<h2>All CheckIns</h2>
 
 						<CheckInList
-						allCheckIns={this.props.allCheckIns}/>
+						allCheckIns={this.props.allCheckIns}
+						removeCheckIn={this.props.removeCheckIn}
+						findAndChangeCheckIn={this.props.findAndChangeCheckIn}
+
+/>
 					</div>
 				</div>
 
@@ -167,7 +190,11 @@ export default class Admin extends React.Component{
 
 						<NeighborhoodList
 						allNeighborhoods={this.props.allNeighborhoods}
-						allSubNeighborhoods={this.props.allSubNeighborhoods} />
+						allSubNeighborhoods={this.props.allSubNeighborhoods}
+						removeNeighborhood={this.props.removeNeighborhood}
+						findAndChangeNeighborhood={this.props.findAndChangeNeighborhood}
+
+ />
 					</div>
 				</div>
 
@@ -186,7 +213,11 @@ export default class Admin extends React.Component{
 					<div className="admin-subNeighborhood-output col-md-8">
 									<h2>All Sub-Neighborhoods</h2>
 						<SubNeighborhoodList
-						 allSubNeighborhoods={this.props.allSubNeighborhoods} />
+						 allSubNeighborhoods={this.props.allSubNeighborhoods}
+						 removeSubNeighborhood={this.props.removeSubNeighborhood}
+						 findAndChangeSubNeighborhood={this.props.findAndChangeSubNeighborhood}
+
+ />
 					</div>
 				</div>
 			</div>

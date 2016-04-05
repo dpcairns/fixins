@@ -20,9 +20,14 @@ const neighborhoods = (state = [], action) => {
         ...state, neighborhood(undefined, action)
       ]
     case 'FETCH_NEIGHBORHOODS':
+      if(state.length === 0){
       return [
-        ...state, action.allNeighborhoods
+        ...state, ...action.allNeighborhoods
       ]
+    }
+      else{
+        return state
+      }
     default:
       return state
   }
@@ -49,9 +54,14 @@ const reviews = (state = [], action) => {
         ...state, review(undefined, action)
       ]
     case 'FETCH_REVIEWS':
+    if(state.length === 0){
     return [
-      ...state, action.allReviews
+      ...state, ...action.allReviews
     ]
+  }
+    else{
+      return state
+    }
       case 'REMOVE_REVIEW':
           return state.filter(x =>
             {
@@ -84,12 +94,17 @@ const checkIns = (state = [], action) => {
   switch (action.type) {
     case 'CREATE_CHECKIN':
       return [
-        ...state, neighborhood(undefined, action)
+        ...state, checkIn(undefined, action)
       ]
-    case 'FETCH_CHECKIN':
-      return [
-        ...state, action.allCheckIns
-      ]
+    case 'FETCH_CHECKINS':
+    if(state.length === 0){
+        return [
+          ...state, ...action.allCheckIns
+        ]
+      }
+        else{
+          return state
+    }
       case 'REMOVE_CHECKIN':
           return state.map(x =>{
            if (x._id !== action._id){
@@ -123,16 +138,19 @@ const user = (state = "", action) => {
 
 const users = (state = [], action) => {
   switch (action.type) {
-    case 'CREATE_USERS':
+    case 'CREATE_USER':
       return [
-        ...state, neighborhood(undefined, action)
+        ...state, user(undefined, action)
       ]
     case 'FETCH_USERS':
-    console.log("FETCH_USERS says here's the action")
-    console.log(action)
-      return [
-        ...state, ...action.allUsers
-      ]
+    if(state.length === 0){
+        return [
+          ...state, ...action.allUsers
+        ]
+      }
+        else{
+          return state
+    }
       case 'REMOVE_USER':
           return state.map(x =>{
            if (x._id !== action._id){
@@ -151,8 +169,13 @@ const spot = (state = "", action) => {
     case 'CREATE_SPOT':
       return {
         _id: action._id,
+        spot_name: action.spot_name,
+        spot_genres: action.spot_genres,
+        spot_dish: action.spot_dishes,
+        spot_blurb: action.spot_blurb,
         spot_subNeighborhood: action.spot_subNeighborhood,
         spot_coordinates: action.spot_coordinates,
+        addDate: action.addDate
       }
     default:
       return state
@@ -162,32 +185,24 @@ const spot = (state = "", action) => {
 const spots = (state = [], action) => {
   switch (action.type) {
     case 'CREATE_SPOT':
-      return [
-        ...state, neighborhood(undefined, action)
-      ]
+    return [
+      ...state, spot(undefined, action)
+    ]
     case 'FETCH_SPOTS':
+      if(state.length === 0){
       return [
-        ...state, action.allSpots
+        ...state, ...action.allSpots
       ]
+    }
+      else{
+        return state
+    }
       case 'REMOVE_SPOT':
           return state.map(x =>{
            if (x._id !== action._id){
               return x
            }
-         }
-        )
-    /*case 'CHANGED_SPOT':
-          return
-
-          ...state.map(x => {
-           if (x._id !== action._id){
-              return x
-           } else {
-             return action.changedSpot
-           }  ///okay so here, return state up to THISPOT, add THIS SPOT, return state after THISSPOT
-        ).concat(state.slice(//take the slce from THISSPOT forward))
-      }
-      */
+         })
     default:
       return state
   }
@@ -215,7 +230,7 @@ const dishes = (state = [], action) => {
   switch (action.type) {
     case 'CREATE_DISH':
       return [
-        ...state, neighborhood(undefined, action)
+        ...state, dish(undefined, action)
       ]
     case 'REMOVE_DISH':
         return state.map(x =>{
@@ -232,9 +247,14 @@ const dishes = (state = [], action) => {
       ]
       */
     case 'FETCH_DISHES':
-      return [
-        ...state, action.allDishes
-      ]
+        if(state.length === 0){
+        return [
+          ...state, ...action.allDishes
+        ]
+      }
+        else{
+          return state
+        }
     default:
       return state
   }
@@ -258,12 +278,17 @@ const subNeighborhoods = (state = [], action) => {
   switch (action.type) {
     case 'CREATE_SUBNEIGHBORHOOD':
       return [
-        ...state, subneighborhood(undefined, action)
+        ...state, subNeighborhood(undefined, action)
       ]
-    case 'FETCH_NEIGHBORHOODS':
-      return [
-        ...state, action.allSubNeighborhoods
-      ]
+    case 'FETCH_SUBNEIGHBORHOODS':
+        if(state.length === 0){
+        return [
+          ...state, ...action.allSubNeighborhoods
+        ]
+      }
+        else{
+          return state
+        }
 
     default:
       return state
@@ -297,10 +322,14 @@ const genres = (state = [], action) => {
          }
         )
     case 'FETCH_GENRES':
-      return [
-        ...state, action.allGenres
-      ]
-
+        if(state.length === 0){
+        return [
+          ...state, ...action.allGenres
+        ]
+      }
+        else{
+          return state
+    }
     default:
       return state
   }

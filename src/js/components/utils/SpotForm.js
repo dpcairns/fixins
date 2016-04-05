@@ -24,27 +24,22 @@ export default class SpotForm extends React.Component{
 
 	handleNameChange(e){
 	this.setState({name: e.target.value})
-		console.log("1A.1")
-		console.log(this.state)
+
 	}
 
 	handleSubNeighborhoodChange(e){
 		this.setState({subNeighborhood: e.target.value})
-		console.log("1A.2")
-		console.log(this.state)
+
 	}
 
 
 	handleBlurbChange(e){
 		this.setState({blurb: e.target.value})
-		console.log("1B")
-		console.log(this.state)
+
 	}
 
 	handleGenresChange(e){
 		this.setState({genres: e.target.value})
-		console.log("1C")
-		console.log(this.state)
 	}
 
 
@@ -54,30 +49,19 @@ export default class SpotForm extends React.Component{
 		      clickPosition: e.latlng,
 		      coordinates: e.latlng
 		    })
-		console.log("1D")
-		console.log(this.state)
 	}
 
 	handleSubmit(e){
-		console.log("2")
-		console.log(this.state)
 		e.preventDefault();
-		console.log("3")
-		console.log(this.state)
 		let newSpotObject = {}
 		newSpotObject.name = this.state.name
 		newSpotObject.subNeighborhood = this.state.subNeighborhood
 		newSpotObject.coordinates = []
-		console.log(this.state.coordinates.lat)
 		newSpotObject.coordinates.push(this.state.coordinates.lat)
 		newSpotObject.coordinates.push(this.state.coordinates.lng)
 		newSpotObject.genres = this.state.genres
 		newSpotObject.blurb = this.state.blurb
-				console.log("4")
 		console.log(this.state)
-
-		console.log("here is the now spot object,before save")
-		console.log(newSpotObject)
 		this.props.createSpot(newSpotObject)
 		this.setState({username: "", blurb: "", genres: "", coordinates: "", neighborhood: '', subNeighborhood: ''})
 	}

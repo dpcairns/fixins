@@ -1,32 +1,31 @@
 import React from "react"
-import * as FixinsActions from "../../actions/FixinsActions"
 
 export default class RemoveButton extends React.Component {
 
 	edit(){
 		if (this.props.type==="User"){
-			
+
 	}
 		else if	(this.props.type==="Neighborhood"){
-		FixinsActions.findAndChangeNeighborhood(changedNeighborhood)
+		this.props.findAndChangeNeighborhood(changedNeighborhood)
 	}
 		else if	(this.props.type==="Dish"){
-		FixinsActions.findAndChangeDish(changedDish)
+		this.props.findAndChangeDish(changedDish)
 	}
 		else if (this.props.type==="Spot"){
-		FixinsActions.findAndChangeSpot(changedSpot)
+		this.props.findAndChangeSpot(changedSpot)
 	}
 		else if	(this.props.type==="Review"){
-		FixinsActions.findAndChangeReview(changedReview)
+		this.props.findAndChangeReview(changedReview)
 	}
 		else if	(this.props.type==="CheckIn"){
-		FixinsActions.findAndChangeCheckIn(changedCheckIn)
+		this.props.findAndChangeCheckIn(changedCheckIn)
 	}
 		else if	(this.props.type==="SubNeighborhood"){
-		FixinsActions.findAndChangeSubNeighborhood(changedSubNeighborhood)
+		this.props.findAndChangeSubNeighborhood(changedSubNeighborhood)
 	}
 		else if	(this.props.type==="Genre"){
-		FixinsActions.findAnfChangeGenre(changedGenre)
+		this.props.findAnfChangeGenre(changedGenre)
 	}
 		else {
 			console.log("no type specified to modify")

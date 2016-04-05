@@ -15,7 +15,6 @@ module.exports = function(router){
 			if(err){
 				console.log('Couldn\'t find Users')
 			} else {
-				console.log(Users)
 				res.json(Users);
 			}
 		})

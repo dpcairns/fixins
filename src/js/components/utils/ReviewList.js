@@ -3,6 +3,8 @@ import RemoveButton from "./RemoveButton"
 
 export default class Reviewtdst extends React.Component{
 	render(){
+			let removeReview = this.props.removeReview
+			let findAndChangeReview = this.props.findAndChangeReview
 		let reviewNodes = this.props.allReviews.map(function(review){
 			return(
 				<tr key={review._id}>
@@ -10,7 +12,7 @@ export default class Reviewtdst extends React.Component{
 						<td>Author: {review.review_user.username}</td>
 						<td>Stars: {review.review_stars}</td>
 						<td>Words: {review.review_words}</td>
-						<td> <RemoveButton type="Review" id={review._id}/></td>
+						<td> <RemoveButton removeReview={removeReview} type="Review" id={review._id}/></td>
 
 				</tr>
 				)

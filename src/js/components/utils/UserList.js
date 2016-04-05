@@ -1,5 +1,4 @@
 import React from "react"
-import * as FixinsActions from "../../actions/FixinsActions"
 import RemoveButton from "./RemoveButton"
 import UserEditForm from "./UserEditForm"
 
@@ -14,7 +13,7 @@ export default class UserList extends React.Component{
 
 toggleEdit(){
 		if(!this.state.showEditOptions){
-			this.setState({  
+			this.setState({
 				editStyles: {
 					display: "block",
 					background: "rgba(86, 0, 65, .6)",
@@ -43,6 +42,8 @@ toggleEdit(){
 		let allUsers = this.props.allUsers
 		let allDishes = this.props.allDishes
 		let allCheckIns = this.props.allCheckIns
+			let removeUser = this.props.removeUser
+			let findAndChangeUser = this.props.findAndChangeUser
 		let userNodes = allUsers.map(function(user){
 
 			function findCheckInsFilter(checkIn){
@@ -93,11 +94,11 @@ toggleEdit(){
 						<li> CheckIns: {checkInNodes}</li>
 						<li> Reviews: {reviewNodes}</li>
 
-						<li> <RemoveButton type="User" id={user._id}/></li>
+						<li> <RemoveButton removeUser={removeUser} type="User" id={user._id}/></li>
 					</ul>
 				</div>
 				<div className="col-md-6">
-											<UserEditForm 
+											<UserEditForm
 								userID={user._id}
 								allUsers={allUsers}
 								allCheckIns={allCheckIns}
@@ -107,7 +108,7 @@ toggleEdit(){
 				</div>
 			</div>
 
-					
+
 				)
 		})
 	return(

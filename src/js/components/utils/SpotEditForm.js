@@ -1,12 +1,11 @@
 import React from "react"
 import CustomDropdown from "./CustomDropdown"
-import * as FixinsActions from "../../actions/FixinsActions"
 
 export default class SpotEditForm extends React.Component{
 	constructor(){
 		super();
 		this.state = {
-				newName: "", 
+				newName: "",
 				newSubNeighborhood: "",
 				newGenre: "",
 				newDish:"",
@@ -55,8 +54,8 @@ export default class SpotEditForm extends React.Component{
 		newSpotInfo.newBlurb = this.state.newBlurb
 		newSpotInfo.newCoordinates = this.state.newCoordinates
 		console.log("trying to handleSubmit...")
-		FixinsActions.findAndChangeSpot(newSpotInfo)
-		this.setState({		newName: "", 
+		this.props.findAndChangeSpot(newSpotInfo)
+		this.setState({		newName: "",
 							newSubNeighborhood: "",
 							newGenre: "",
 							newBlurb:"",
@@ -83,23 +82,23 @@ export default class SpotEditForm extends React.Component{
 		</div>
 		<div className="input-group">
 			Add a new Dish:
-			<CustomDropdown setValueTo={this.state.newDish} 
-					onchange2={this.handleDishChange.bind(this)} 
-					data={this.props.allDishes} 
+			<CustomDropdown setValueTo={this.state.newDish}
+					onchange2={this.handleDishChange.bind(this)}
+					data={this.props.allDishes}
 					nameName="dish_name" />
 		</div>
 		<div className="input-group">
 			Update Sub-Neighborhood:
-			<CustomDropdown setValueTo={this.state.newSubNeighborhood} 
-					onchange2={this.handleSubNeighborhoodChange.bind(this)} 
-					data={this.props.allSubNeighborhoods} 
+			<CustomDropdown setValueTo={this.state.newSubNeighborhood}
+					onchange2={this.handleSubNeighborhoodChange.bind(this)}
+					data={this.props.allSubNeighborhoods}
 					nameName="subNeighborhood_name" />
 		</div>
 		<div className="input-group">
 			Add a new Genre:
-			<CustomDropdown setValueTo={this.state.newGenre} 
-					onchange2={this.handleGenreChange.bind(this)} 
-					data={this.props.allGenres} 
+			<CustomDropdown setValueTo={this.state.newGenre}
+					onchange2={this.handleGenreChange.bind(this)}
+					data={this.props.allGenres}
 					nameName="genre_name" />
 		</div>
 
