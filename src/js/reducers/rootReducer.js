@@ -63,13 +63,10 @@ const reviews = (state = [], action) => {
       return state
     }
       case 'REMOVE_REVIEW':
-          return state.filter(x =>
-            {
-          if(x._id !== action._id){
-              return x
-           }
-         }
-        )
+      return state.filter(x =>{
+       return x._id !== action._id
+
+     })
 
     default:
       return state
@@ -94,7 +91,7 @@ const checkIns = (state = [], action) => {
   switch (action.type) {
     case 'CREATE_CHECKIN':
       return [
-        ...state, checkIn(undefined, action)
+        ...state, neighborhood(undefined, action)
       ]
     case 'FETCH_CHECKINS':
     if(state.length === 0){
@@ -106,12 +103,10 @@ const checkIns = (state = [], action) => {
           return state
     }
       case 'REMOVE_CHECKIN':
-          return state.map(x =>{
-           if (x._id !== action._id){
-              return x
-           }
-         }
-        )
+      return state.filter(x =>{
+       return x._id !== action._id
+
+     })
 
     default:
       return state
@@ -121,7 +116,6 @@ const checkIns = (state = [], action) => {
 const user = (state = "", action) => {
   switch (action.type) {
     case 'CREATE_USER':
-    console.log(action)
       return {
         _id: action._id,
         username: action.username,
@@ -153,14 +147,10 @@ const users = (state = [], action) => {
           return state
     }
       case 'REMOVE_USER':
-      console.log(action._id)
-          return state.map(x =>{
-            console.log(x)
-           if (x._id !== action._id){
-              return x
-            }
-           }
-        )
+      return state.filter(x =>{
+       return x._id !== action._id
+
+     })
 
     default:
       return state
@@ -188,9 +178,14 @@ const spot = (state = "", action) => {
 const spots = (state = [], action) => {
   switch (action.type) {
     case 'CREATE_SPOT':
-    return [
-      ...state, spot(undefined, action)
-    ]
+      if(state.length === 0){
+      return [
+        ...state, ...action.allSpots
+      ]
+    }
+      else{
+        return state
+    }
     case 'FETCH_SPOTS':
       if(state.length === 0){
       return [
@@ -201,11 +196,10 @@ const spots = (state = [], action) => {
         return state
     }
       case 'REMOVE_SPOT':
-          return state.map(x =>{
-           if (x._id !== action._id){
-              return x
-           }
-         })
+      return state.filter(x =>{
+       return x._id !== action._id
+
+     })
     default:
       return state
   }
@@ -216,8 +210,9 @@ const dish = (state = "", action) => {
     case 'CREATE_DISH':
       return {
         _id: action._id,
-        dish_name: action.neighborhood_name,
-        dish_subNeighborhood: action.neighborhood_subNeighborhoods,
+        dish_name: action.dish_name,
+        dish_blurb: action.dish_blurb,
+        dish_subNeighborhood: action.dish_subNeighborhood,
         dish_spot: action.dish_spot,
         dish_checkIns: action.dish_checkIns,
         dish_reviews: action.dish_reviews,
@@ -236,12 +231,12 @@ const dishes = (state = [], action) => {
         ...state, dish(undefined, action)
       ]
     case 'REMOVE_DISH':
-        return state.map(x =>{
-         if (x._id !== action._id){
-            return x
-         }
-       }
-      )
+        return state.filter(x =>{
+          console.log(x._id)
+          console.log(action._id)
+         return x._id !== action._id
+
+       })
     /*case 'CHANGED_DISH':
       return [
         state.map(x =>
@@ -281,7 +276,7 @@ const subNeighborhoods = (state = [], action) => {
   switch (action.type) {
     case 'CREATE_SUBNEIGHBORHOOD':
       return [
-        ...state, subNeighborhood(undefined, action)
+        ...state, subneighborhood(undefined, action)
       ]
     case 'FETCH_SUBNEIGHBORHOODS':
         if(state.length === 0){
@@ -318,12 +313,10 @@ const genres = (state = [], action) => {
         ...state, genre(undefined, action)
       ]
       case 'REMOVE_GENRE':
-          return state.map(x =>{
-           if (x._id !== action._id){
-              return x
-           }
-         }
-        )
+      return state.filter(x =>{
+       return x._id !== action._id
+
+     })
     case 'FETCH_GENRES':
         if(state.length === 0){
         return [

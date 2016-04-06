@@ -73,7 +73,7 @@
 
 	__webpack_require__(243);
 
-	var _Layout = __webpack_require__(535);
+	var _Layout = __webpack_require__(532);
 
 	var _Layout2 = _interopRequireDefault(_Layout);
 
@@ -85,11 +85,11 @@
 
 	var _AdminContainer2 = _interopRequireDefault(_AdminContainer);
 
-	var _MapContainer = __webpack_require__(740);
+	var _MapContainer = __webpack_require__(737);
 
 	var _MapContainer2 = _interopRequireDefault(_MapContainer);
 
-	var _rootReducer = __webpack_require__(739);
+	var _rootReducer = __webpack_require__(740);
 
 	var _rootReducer2 = _interopRequireDefault(_rootReducer);
 
@@ -34079,10 +34079,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _redux = __webpack_require__(167);
-
-	var _reactRouter = __webpack_require__(184);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34091,28 +34087,16 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Splash = function (_React$Component) {
-		_inherits(Splash, _React$Component);
+	var Layout = function (_React$Component) {
+		_inherits(Layout, _React$Component);
 
-		function Splash() {
-			_classCallCheck(this, Splash);
+		function Layout() {
+			_classCallCheck(this, Layout);
 
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(Splash).apply(this, arguments));
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Layout).apply(this, arguments));
 		}
 
-		_createClass(Splash, [{
-			key: "componentDidMount",
-			value: function componentDidMount() {
-				this.props.initializeUsers();
-				this.props.initializeDishes();
-				this.props.initializeGenres();
-				this.props.initializeSubNeighborhoods();
-				this.props.initializeNeighborhoods();
-				this.props.initializeReviews();
-				this.props.initializeSpots();
-				this.props.initializeCheckIns();
-			}
-		}, {
+		_createClass(Layout, [{
 			key: "render",
 			value: function render() {
 				return _react2.default.createElement(
@@ -34121,34 +34105,17 @@
 					_react2.default.createElement(
 						"h2",
 						null,
-						"Hello and welcome to fixins!"
+						"this is the layout page!"
 					),
-					_react2.default.createElement(
-						"h2",
-						null,
-						_react2.default.createElement(
-							_reactRouter.Link,
-							{ to: "index" },
-							"for now, just click here to go to the admin page"
-						)
-					),
-					_react2.default.createElement(
-						"h2",
-						null,
-						_react2.default.createElement(
-							_reactRouter.Link,
-							{ to: "index/mapPage" },
-							"or click here to see all the data on a map"
-						)
-					)
+					this.props.children
 				);
 			}
 		}]);
 
-		return Splash;
+		return Layout;
 	}(_react2.default.Component);
 
-	exports.default = Splash;
+	exports.default = Layout;
 
 /***/ },
 /* 533 */
@@ -34166,7 +34133,7 @@
 
 	var FixinsActions = _interopRequireWildcard(_FixinsActions);
 
-	var _Splash = __webpack_require__(532);
+	var _Splash = __webpack_require__(535);
 
 	var _Splash2 = _interopRequireDefault(_Splash);
 
@@ -34574,7 +34541,7 @@
 			success: function (postedUser) {
 				dispatch({
 					type: "REMOVE_NEIGHBORHOOD",
-					neighborhood: ID
+					_id: ID
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -34590,7 +34557,7 @@
 			success: function (postedUser) {
 				dispatch({
 					type: "REMOVE_DISH",
-					dish: ID
+					_id: ID
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -34605,7 +34572,7 @@
 			success: function () {
 				dispatch({
 					type: "REMOVE_SUBNEIGHBORHOOD",
-					subNeighborhoods: ID
+					_id: ID
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -34620,7 +34587,7 @@
 			success: function () {
 				dispatch({
 					type: "REMOVE_GENRE",
-					genre: ID
+					_id: ID
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -34635,7 +34602,7 @@
 			success: function (postedUser) {
 				dispatch({
 					type: "REMOVE_REVIEW",
-					review: ID
+					_id: ID
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -34650,7 +34617,7 @@
 			success: function () {
 				dispatch({
 					type: "REMOVE_CHECKIN",
-					checkIn: ID
+					_id: ID
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -34666,7 +34633,7 @@
 			success: function () {
 				dispatch({
 					type: "REMOVE_SPOT",
-					spot: ID
+					_id: ID
 				});
 			}.bind(this),
 			error: function (xhr, status, err) {
@@ -34827,6 +34794,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _redux = __webpack_require__(167);
+
+	var _reactRouter = __webpack_require__(184);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34835,16 +34806,28 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Layout = function (_React$Component) {
-		_inherits(Layout, _React$Component);
+	var Splash = function (_React$Component) {
+		_inherits(Splash, _React$Component);
 
-		function Layout() {
-			_classCallCheck(this, Layout);
+		function Splash() {
+			_classCallCheck(this, Splash);
 
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(Layout).apply(this, arguments));
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Splash).apply(this, arguments));
 		}
 
-		_createClass(Layout, [{
+		_createClass(Splash, [{
+			key: "componentDidMount",
+			value: function componentDidMount() {
+				this.props.initializeUsers();
+				this.props.initializeDishes();
+				this.props.initializeGenres();
+				this.props.initializeSubNeighborhoods();
+				this.props.initializeNeighborhoods();
+				this.props.initializeReviews();
+				this.props.initializeSpots();
+				this.props.initializeCheckIns();
+			}
+		}, {
 			key: "render",
 			value: function render() {
 				return _react2.default.createElement(
@@ -34853,17 +34836,34 @@
 					_react2.default.createElement(
 						"h2",
 						null,
-						"this is the layout page!"
+						"Hello and welcome to fixins!"
 					),
-					this.props.children
+					_react2.default.createElement(
+						"h2",
+						null,
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: "index" },
+							"for now, just click here to go to the admin page"
+						)
+					),
+					_react2.default.createElement(
+						"h2",
+						null,
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: "index/mapPage" },
+							"or click here to see all the data on a map"
+						)
+					)
 				);
 			}
 		}]);
 
-		return Layout;
+		return Splash;
 	}(_react2.default.Component);
 
-	exports.default = Layout;
+	exports.default = Splash;
 
 /***/ },
 /* 536 */
@@ -55512,6 +55512,36 @@
 /* 737 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reactRedux = __webpack_require__(161);
+
+	var _MapPage = __webpack_require__(738);
+
+	var _MapPage2 = _interopRequireDefault(_MapPage);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    allSpots: state.spots
+	  };
+	  console.log("here is state");
+	  console.log(state);
+	};
+
+	var MapContainer = (0, _reactRedux.connect)(mapStateToProps)(_MapPage2.default);
+
+	exports.default = MapContainer;
+
+/***/ },
+/* 738 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -55532,7 +55562,7 @@
 
 	var _FixinsStore2 = _interopRequireDefault(_FixinsStore);
 
-	var _MapItself = __webpack_require__(738);
+	var _MapItself = __webpack_require__(739);
 
 	var _MapItself2 = _interopRequireDefault(_MapItself);
 
@@ -55577,7 +55607,7 @@
 	exports.default = MapPage;
 
 /***/ },
-/* 738 */
+/* 739 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55649,16 +55679,17 @@
 	              ' ',
 	              _react2.default.createElement('br', null),
 	              'Here is a dish: ',
-	              spot.spot_dishes[0].dish_name,
+	              spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_name : "none yet",
+	              '}',
 	              _react2.default.createElement('br', null),
 	              'It has this many calories: ',
-	              spot.spot_dishes[0].dish_calories,
+	              spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_calories : "none yet",
 	              _react2.default.createElement('br', null),
 	              'It costs this many dollars: ',
-	              spot.spot_dishes[0].dish_price,
+	              spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_price : "none yet",
 	              _react2.default.createElement('br', null),
 	              'Here is the blurb: ',
-	              spot.spot_dishes[0].dish_blurb
+	              spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_blurb : "none yet"
 	            )
 	          )
 	        );
@@ -55688,7 +55719,7 @@
 	exports.default = MapItself;
 
 /***/ },
-/* 739 */
+/* 740 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55767,9 +55798,7 @@
 	      }
 	    case 'REMOVE_REVIEW':
 	      return state.filter(function (x) {
-	        if (x._id !== action._id) {
-	          return x;
-	        }
+	        return x._id !== action._id;
 	      });
 
 	    default:
@@ -55800,7 +55829,7 @@
 
 	  switch (action.type) {
 	    case 'CREATE_CHECKIN':
-	      return [].concat(_toConsumableArray(state), [checkIn(undefined, action)]);
+	      return [].concat(_toConsumableArray(state), [neighborhood(undefined, action)]);
 	    case 'FETCH_CHECKINS':
 	      if (state.length === 0) {
 	        return [].concat(_toConsumableArray(state), _toConsumableArray(action.allCheckIns));
@@ -55808,10 +55837,8 @@
 	        return state;
 	      }
 	    case 'REMOVE_CHECKIN':
-	      return state.map(function (x) {
-	        if (x._id !== action._id) {
-	          return x;
-	        }
+	      return state.filter(function (x) {
+	        return x._id !== action._id;
 	      });
 
 	    default:
@@ -55825,7 +55852,6 @@
 
 	  switch (action.type) {
 	    case 'CREATE_USER':
-	      console.log(action);
 	      return {
 	        _id: action._id,
 	        username: action.username,
@@ -55855,12 +55881,8 @@
 	        return state;
 	      }
 	    case 'REMOVE_USER':
-	      console.log(action._id);
-	      return state.map(function (x) {
-	        console.log(x);
-	        if (x._id !== action._id) {
-	          return x;
-	        }
+	      return state.filter(function (x) {
+	        return x._id !== action._id;
 	      });
 
 	    default:
@@ -55895,7 +55917,11 @@
 
 	  switch (action.type) {
 	    case 'CREATE_SPOT':
-	      return [].concat(_toConsumableArray(state), [spot(undefined, action)]);
+	      if (state.length === 0) {
+	        return [].concat(_toConsumableArray(state), _toConsumableArray(action.allSpots));
+	      } else {
+	        return state;
+	      }
 	    case 'FETCH_SPOTS':
 	      if (state.length === 0) {
 	        return [].concat(_toConsumableArray(state), _toConsumableArray(action.allSpots));
@@ -55903,10 +55929,8 @@
 	        return state;
 	      }
 	    case 'REMOVE_SPOT':
-	      return state.map(function (x) {
-	        if (x._id !== action._id) {
-	          return x;
-	        }
+	      return state.filter(function (x) {
+	        return x._id !== action._id;
 	      });
 	    default:
 	      return state;
@@ -55921,8 +55945,9 @@
 	    case 'CREATE_DISH':
 	      return {
 	        _id: action._id,
-	        dish_name: action.neighborhood_name,
-	        dish_subNeighborhood: action.neighborhood_subNeighborhoods,
+	        dish_name: action.dish_name,
+	        dish_blurb: action.dish_blurb,
+	        dish_subNeighborhood: action.dish_subNeighborhood,
 	        dish_spot: action.dish_spot,
 	        dish_checkIns: action.dish_checkIns,
 	        dish_reviews: action.dish_reviews,
@@ -55942,10 +55967,10 @@
 	    case 'CREATE_DISH':
 	      return [].concat(_toConsumableArray(state), [dish(undefined, action)]);
 	    case 'REMOVE_DISH':
-	      return state.map(function (x) {
-	        if (x._id !== action._id) {
-	          return x;
-	        }
+	      return state.filter(function (x) {
+	        console.log(x._id);
+	        console.log(action._id);
+	        return x._id !== action._id;
 	      });
 	    /*case 'CHANGED_DISH':
 	      return [
@@ -55988,7 +56013,7 @@
 
 	  switch (action.type) {
 	    case 'CREATE_SUBNEIGHBORHOOD':
-	      return [].concat(_toConsumableArray(state), [subNeighborhood(undefined, action)]);
+	      return [].concat(_toConsumableArray(state), [subneighborhood(undefined, action)]);
 	    case 'FETCH_SUBNEIGHBORHOODS':
 	      if (state.length === 0) {
 	        return [].concat(_toConsumableArray(state), _toConsumableArray(action.allSubNeighborhoods));
@@ -56024,10 +56049,8 @@
 	    case 'CREATE_GENRE':
 	      return [].concat(_toConsumableArray(state), [genre(undefined, action)]);
 	    case 'REMOVE_GENRE':
-	      return state.map(function (x) {
-	        if (x._id !== action._id) {
-	          return x;
-	        }
+	      return state.filter(function (x) {
+	        return x._id !== action._id;
 	      });
 	    case 'FETCH_GENRES':
 	      if (state.length === 0) {
@@ -56060,36 +56083,6 @@
 	});
 
 	exports.default = FixinsApp;
-
-/***/ },
-/* 740 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reactRedux = __webpack_require__(161);
-
-	var _MapPage = __webpack_require__(737);
-
-	var _MapPage2 = _interopRequireDefault(_MapPage);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    allSpots: state.spots
-	  };
-	  console.log("here is state");
-	  console.log(state);
-	};
-
-	var MapContainer = (0, _reactRedux.connect)(mapStateToProps)(_MapPage2.default);
-
-	exports.default = MapContainer;
 
 /***/ }
 /******/ ]);

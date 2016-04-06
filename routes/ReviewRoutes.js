@@ -1,9 +1,9 @@
-var Review = require('../src/js/models/ReviewModel') 
+var Review = require('../src/js/models/ReviewModel')
 
 module.exports = function(router){
 
 	router.route('/Reviews')
-	.get(function (req, res) { 
+	.get(function (req, res) {
 		console.log('finding all Reviews in fixins')
 		Review.find({})
 		.populate('reviewed_dish')
@@ -16,13 +16,13 @@ module.exports = function(router){
 			}
 		})
 	})
-	.post(function (req, res) { 
+	.post(function (req, res) {
 			var newReview = new Review()
 						newReview.reviewed_dish = req.body.reviewed_dish
 						newReview.review_user = req.body.review_user
 						newReview.review_stars = req.body.stars
 						newReview.review_words = req.body.words
-						newReview.save()
+						newReview.save(function(){
 						Review.findOne({review_words: newReview.review_words})
 							.populate('reviewed_dish')
 							.populate('review_user')
@@ -33,12 +33,13 @@ module.exports = function(router){
 									res.json(Review);
 								}
 						})
+					})
 				})
 
 router.route('/Reviews/:ReviewId')
 	.get(function (req, res) {
 		console.log("finding a given Review in fixins")
-		var id = req.params.ReviewId 
+		var id = req.params.ReviewId
 		Review.findOne({_id: id}).exec(function(err, Review){
 			if(err){
 				console.log("couldn\t find this Review")
@@ -50,7 +51,7 @@ router.route('/Reviews/:ReviewId')
 	})
 	.delete(function (req, res) {
 		console.log("deleting a given Review in fixins")
-		var id = req.params.ReviewId 
+		var id = req.params.ReviewId
 		Review.findOne({_id: id}).remove().exec(function(err, Review){
 			if(err){
 				console.log("couldn\t delete this Review")

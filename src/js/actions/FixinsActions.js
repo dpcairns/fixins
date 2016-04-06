@@ -335,7 +335,7 @@ export function initializeCheckIns(dispatch){
 			success: function(postedUser){
 						dispatch({
 								type: "REMOVE_NEIGHBORHOOD",
-								neighborhood: ID
+								_id: ID
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -352,7 +352,7 @@ export function initializeCheckIns(dispatch){
 			success: function(postedUser){
 						dispatch({
 								type: "REMOVE_DISH",
-								dish: ID
+								_id: ID
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -367,7 +367,7 @@ export function initializeCheckIns(dispatch){
 			success: function(){
 						dispatch({
 								type: "REMOVE_SUBNEIGHBORHOOD",
-								subNeighborhoods: ID
+								_id: ID
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -382,7 +382,7 @@ export function initializeCheckIns(dispatch){
 			success: function(){
 						dispatch({
 								type: "REMOVE_GENRE",
-								genre: ID
+								_id: ID
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -397,7 +397,7 @@ export function initializeCheckIns(dispatch){
 			success: function(postedUser){
 						dispatch({
 								type: "REMOVE_REVIEW",
-								review: ID
+								_id: ID
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -412,7 +412,7 @@ export function initializeCheckIns(dispatch){
 			success: function(){
 						dispatch({
 								type: "REMOVE_CHECKIN",
-								checkIn: ID
+								_id: ID
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -428,7 +428,7 @@ export function initializeCheckIns(dispatch){
 			success: function(){
 						dispatch({
 								type: "REMOVE_SPOT",
-								spot: ID
+								_id: ID
 											});
 			}.bind(this),
 			error: function(xhr, status, err){

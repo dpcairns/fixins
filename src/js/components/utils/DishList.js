@@ -45,9 +45,6 @@ export default class DishList extends React.Component{
 				})
 
 
-
-
-
 			return(
 					<tr key={dish._id}>
 						<td><h2>{dish.dish_name}</h2></td>

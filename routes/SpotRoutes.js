@@ -28,6 +28,7 @@ module.exports = function(router){
 							Spot.findOne({spot_name: newSpot.spot_name})
 							.populate('spot_genres')
 							.populate('spot_subNeighborhood')
+							.populate('spot_dishes')
 							.exec(function(err, Spot){
 								res.json(Spot);
 									})
