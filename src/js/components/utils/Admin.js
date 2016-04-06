@@ -26,32 +26,6 @@ export default class Admin extends React.Component{
 		<div>
 			<div className="container">
 			<Links />
-
-				<div className="admin-dish-box bg-info row">
-
-					<div className="admin-dish-input col-md-4">
-									<h2>New Dish</h2>
-
-						<DishForm
-						allSpots={this.props.allSpots}
-						allGenres={this.props.allGenres}
-						createDish={this.props.createDish} />
-					</div>
-					<div className="admin-dish-output col-md-8">
-									<h2>All Dishes</h2>
-
-						<DishList
-						allReviews={this.props.allReviews}
-						allCheckIns={this.props.allCheckIns}
-						allDishes={this.props.allDishes}
-						removeDish={this.props.removeDish}
-						findAndChangeDish={this.props.findAndChangeDish}
- 							/>
-					</div>
-
-				</div>
-
-			<hr />
 				<div className="admin-user-box bg-success row">
 					<div className="admin-user-input col-md-4">
 									<h2>New User</h2>
@@ -74,8 +48,7 @@ export default class Admin extends React.Component{
 						/>
 					</div>
 				</div>
-
-			<hr />
+				<hr />
 
 				<div className="admin-spot-box row bg-info">
 					<div className="admin-spot-input col-md-4">
@@ -105,31 +78,34 @@ export default class Admin extends React.Component{
 
 			<hr />
 
-				<div className="admin-genre-box row bg-success">
-					<div className="admin-genre-input col-md-4">
-									<h2>New Genre</h2>
 
-						<GenreForm
-						createGenre={this.props.createGenre}
-						/>
-					</div>
+							<div className="admin-dish-box bg-success row">
 
-					<div className="admin-genre-output col-md-8">
-							<h2>All Genres</h2>
+								<div className="admin-dish-input col-md-4">
+												<h2>New Dish</h2>
 
-						<GenreList
-						allGenres={this.props.allGenres}
-						allDishes={this.props.allDishes}
-						removeGenre={this.props.removeGenre}
-						findAndChangeGenre={this.props.findAndChangeGenre}
+									<DishForm
+									allSpots={this.props.allSpots}
+									allGenres={this.props.allGenres}
+									createDish={this.props.createDish} />
+								</div>
+								<div className="admin-dish-output col-md-8">
+												<h2>All Dishes</h2>
 
- />
-					</div>
-				</div>
+									<DishList
+									allReviews={this.props.allReviews}
+									allCheckIns={this.props.allCheckIns}
+									allDishes={this.props.allDishes}
+									removeDish={this.props.removeDish}
+									findAndChangeDish={this.props.findAndChangeDish}
+			 							/>
+								</div>
 
-			<hr />
+							</div>
 
-				<div className="admin-review-box bg-info row">
+						<hr />
+
+				<div className="admin-review-box bg-success row">
 					<div className="admin-review-input col-md-4">
 									<h2>New Review</h2>
 
@@ -153,7 +129,7 @@ export default class Admin extends React.Component{
 
 			<hr />
 
-				<div className="admin-checkIn-box bg-success row">
+				<div className="admin-checkIn-box bg-info row">
 					<div className="admin-checkIn-input col-md-4">
 									<h2>New CheckIn</h2>
 
@@ -177,7 +153,7 @@ export default class Admin extends React.Component{
 
 			<hr />
 
-				<div className="admin-neighborhood-box bg-info row">
+				<div className="admin-neighborhood-box bg-success row">
 					<div className="admin-neighborhood-input col-md-4">
 									<h2>New Neighborhood</h2>
 
@@ -201,7 +177,7 @@ export default class Admin extends React.Component{
 
 			<hr />
 
-				<div className="admin-subNeighborhood-box bg-success row">
+				<div className="admin-subNeighborhood-box bg-info row">
 					<div className="admin-subNeighborhood-input col-md-4">
 									<h2>New Sub-Neighborhood</h2>
 
@@ -221,6 +197,31 @@ export default class Admin extends React.Component{
  />
 					</div>
 				</div>
+
+				<hr/>
+				<div className="admin-genre-box row bg-success">
+					<div className="admin-genre-input col-md-4">
+									<h2>New Genre</h2>
+
+						<GenreForm
+						createGenre={this.props.createGenre}
+						/>
+					</div>
+
+					<div className="admin-genre-output col-md-8">
+							<h2>All Genres</h2>
+
+						<GenreList
+						allGenres={this.props.allGenres}
+						allDishes={this.props.allDishes}
+						removeGenre={this.props.removeGenre}
+						findAndChangeGenre={this.props.findAndChangeGenre}
+
+				/>
+					</div>
+				</div>
+
+
 			</div>
 		</div>
 

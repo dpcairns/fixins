@@ -8,7 +8,7 @@
     "start": "node server.js",
     "dev": "webpack-dev-server --inline --hot",
     "api": "node server"
- },
+  },
   "author": "danny cairns",
   "license": "BSD-2-Clause",
   "devDependencies": {
@@ -39,6 +39,8 @@
   "dependencies": {
     "babel-polyfill": "^6.7.4",
     "leaflet": "~0.7.7",
+    "rd3": "^0.5.3",
+    "react-d3": "^0.4.0",
     "react-leaflet": "~0.10.2",
     "react-redux": "^4.4.1",
     "redux": "^3.3.1",
