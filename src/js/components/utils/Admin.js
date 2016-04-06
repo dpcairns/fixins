@@ -119,6 +119,7 @@ export default class Admin extends React.Component{
 
 						<GenreList
 						allGenres={this.props.allGenres}
+						allDishes={this.props.allDishes}
 						removeGenre={this.props.removeGenre}
 						findAndChangeGenre={this.props.findAndChangeGenre}
 

@@ -11,8 +11,6 @@ export default class MapItself extends React.Component {
     const southWest = L.latLng(45.47672003479257,  -122.72280953111476)
     const northEast = L.latLng(45.63610301220829, -122.44197151841945)
     const metroLimits = L.latLngBounds(southWest, northEast);
-          console.log(this.props.allSpots[0])
-          console.log(center)
     let markerNodes = this.props.allSpots.map(function(spot){
       let spot_coordinates = [parseFloat(spot.spot_coordinates[0]), parseFloat(spot.spot_coordinates[1])]
 

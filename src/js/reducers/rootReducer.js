@@ -39,8 +39,9 @@ const review = (state = "", action) => {
       return {
         _id: action._id,
         reviewed_dish: action.reviewed_dish,
-        review_author: action.review_author,
+        review_user: action.review_user,
         review_date: action.review_date,
+        review_words: action.review_words
       }
     default:
       return state
@@ -79,6 +80,7 @@ const checkIn = (state = "", action) => {
       return {
         _id: action._id,
         checkIn_user: action.checkIn_user,
+        checkIn_blurb: action.checkIn_blurb,
         checkIn_dish: action.checkIn_dish,
         checkIn_date: action.checkIn_date
       }
@@ -91,7 +93,7 @@ const checkIns = (state = [], action) => {
   switch (action.type) {
     case 'CREATE_CHECKIN':
       return [
-        ...state, neighborhood(undefined, action)
+        ...state, checkIn(undefined, action)
       ]
     case 'FETCH_CHECKINS':
     if(state.length === 0){

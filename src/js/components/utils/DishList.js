@@ -10,7 +10,7 @@ export default class DishList extends React.Component{
 
 		let dishNodes = this.props.allDishes.map(function(dish){
 			function findCheckInsFilter(checkIn){
-									return (checkIn.checkIn_dish._id === dish._id || checkIn.checkIn_dish === dish._id)
+									return (checkIn.checkIn_dish._id === dish._id)
 						}
 				let checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function(checkIn){
 									return (

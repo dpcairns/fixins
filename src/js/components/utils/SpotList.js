@@ -21,6 +21,7 @@ export default class SpotList extends React.Component{
 						<li> Spot Blurb: {spot.spot_blurb}</li>
 						<li> Spot Genre: {spot.spot_genres[0].genre_name}</li>
 						<li> Spot Coordinates: {spot.spot_coordinates[0]} {spot.spot_coordinates[1]}</li>
+						<li> Featured dish: {spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_name : "none yet"}</li>
 						<li> <RemoveButton removeSpot={removeSpot} type="Spot" id={spot._id}/></li>
 
 					</ul>

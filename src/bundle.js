@@ -34239,7 +34239,6 @@
 			type: 'POST',
 			data: newUser,
 			success: function (postedUser) {
-				console.log(postedUser);
 				dispatch( //{
 				//type: "CREATE_USER",
 				//postedUser
@@ -34372,7 +34371,6 @@
 			type: 'POST',
 			data: newCheckIn,
 			success: function (postedCheckIn) {
-				console.log(postedCheckIn);
 				dispatch( //{
 				//type: "CREATE_USER",
 				//postedUser
@@ -35260,6 +35258,7 @@
 								),
 								_react2.default.createElement(_GenreList2.default, {
 									allGenres: this.props.allGenres,
+									allDishes: this.props.allDishes,
 									removeGenre: this.props.removeGenre,
 									findAndChangeGenre: this.props.findAndChangeGenre
 
@@ -35619,6 +35618,10 @@
 
 	var _UserEditForm2 = _interopRequireDefault(_UserEditForm);
 
+	var _CalorieDollarChart = __webpack_require__(741);
+
+	var _CalorieDollarChart2 = _interopRequireDefault(_CalorieDollarChart);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35683,6 +35686,9 @@
 					function findCheckInsFilter(checkIn) {
 						return checkIn.checkIn_user._id === user._id || checkIn.checkIn_user === user._id;
 					}
+					var userCheckIns = allCheckIns.filter(findCheckInsFilter).map(function (checkIn) {
+						return checkIn;
+					});
 					var checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function (checkIn) {
 						return _react2.default.createElement(
 							"div",
@@ -35778,7 +35784,7 @@
 
 					return _react2.default.createElement(
 						"div",
-						{ key: user._id },
+						{ className: "row user-boxes", key: user._id },
 						_react2.default.createElement(
 							"div",
 							{ className: "col-md-6" },
@@ -35835,8 +35841,12 @@
 								allCheckIns: allCheckIns,
 								allDishes: allDishes,
 								allReviews: allReviews,
-								allSubNeighborhoods: allSubNeighborhoods })
-						)
+								allSubNeighborhoods: allSubNeighborhoods }),
+							" ",
+							_react2.default.createElement("br", null),
+							_react2.default.createElement(_CalorieDollarChart2.default, { userCheckIns: userCheckIns })
+						),
+						_react2.default.createElement("br", null)
 					);
 				});
 				return _react2.default.createElement(
@@ -36078,24 +36088,6 @@
 								data: this.props.allDishes,
 								onchange2: this.handleFavoriteChange.bind(this),
 								nameName: "dish_name" })
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Add a new CheckIn:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newcheckIn,
-								data: this.props.allCheckIns,
-								onchange2: this.handleCheckInChange.bind(this),
-								nameName: "checkIn_blurb" })
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Add a new Review:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newReview,
-								data: this.props.allReviews,
-								onchange2: this.handleReviewChange.bind(this),
-								nameName: "review_words" })
 						),
 						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Update" })
 					)
@@ -52640,6 +52632,12 @@
 								_react2.default.createElement(
 									"li",
 									null,
+									" Featured dish: ",
+									spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_name : "none yet"
+								),
+								_react2.default.createElement(
+									"li",
+									null,
 									" ",
 									_react2.default.createElement(_RemoveButton2.default, { removeSpot: removeSpot, type: "Spot", id: spot._id })
 								)
@@ -53043,7 +53041,7 @@
 
 				var dishNodes = this.props.allDishes.map(function (dish) {
 					function findCheckInsFilter(checkIn) {
-						return checkIn.checkIn_dish._id === dish._id || checkIn.checkIn_dish === dish._id;
+						return checkIn.checkIn_dish._id === dish._id;
 					}
 					var checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function (checkIn) {
 						return _react2.default.createElement(
@@ -55660,8 +55658,6 @@
 	      var southWest = L.latLng(45.47672003479257, -122.72280953111476);
 	      var northEast = L.latLng(45.63610301220829, -122.44197151841945);
 	      var metroLimits = L.latLngBounds(southWest, northEast);
-	      console.log(this.props.allSpots[0]);
-	      console.log(center);
 	      var markerNodes = this.props.allSpots.map(function (spot) {
 	        var spot_coordinates = [parseFloat(spot.spot_coordinates[0]), parseFloat(spot.spot_coordinates[1])];
 
@@ -55775,8 +55771,9 @@
 	      return {
 	        _id: action._id,
 	        reviewed_dish: action.reviewed_dish,
-	        review_author: action.review_author,
-	        review_date: action.review_date
+	        review_user: action.review_user,
+	        review_date: action.review_date,
+	        review_words: action.review_words
 	      };
 	    default:
 	      return state;
@@ -55815,6 +55812,7 @@
 	      return {
 	        _id: action._id,
 	        checkIn_user: action.checkIn_user,
+	        checkIn_blurb: action.checkIn_blurb,
 	        checkIn_dish: action.checkIn_dish,
 	        checkIn_date: action.checkIn_date
 	      };
@@ -55829,7 +55827,7 @@
 
 	  switch (action.type) {
 	    case 'CREATE_CHECKIN':
-	      return [].concat(_toConsumableArray(state), [neighborhood(undefined, action)]);
+	      return [].concat(_toConsumableArray(state), [checkIn(undefined, action)]);
 	    case 'FETCH_CHECKINS':
 	      if (state.length === 0) {
 	        return [].concat(_toConsumableArray(state), _toConsumableArray(action.allCheckIns));
@@ -56083,6 +56081,99 @@
 	});
 
 	exports.default = FixinsApp;
+
+/***/ },
+/* 741 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CalorieDollarChart = function (_React$Component) {
+	  _inherits(CalorieDollarChart, _React$Component);
+
+	  function CalorieDollarChart() {
+	    _classCallCheck(this, CalorieDollarChart);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(CalorieDollarChart).apply(this, arguments));
+	  }
+
+	  _createClass(CalorieDollarChart, [{
+	    key: "render",
+	    value: function render() {
+	      var cumulativeArray = [];
+	      var calorieDollarNodes = this.props.userCheckIns.map(function (checkIn) {
+	        var calories = checkIn.checkIn_dish.dish_calories;
+	        var dollars = checkIn.checkIn_dish.dish_price;
+	        var calorieDollars = checkIn.checkIn_dish.dish_calories / checkIn.checkIn_dish.dish_price;
+	        cumulativeArray.push(calorieDollars);
+	        console.log(cumulativeArray);
+	        var cumulativeSum = cumulativeArray.reduce(function (prev, curr) {
+	          return prev + curr;
+	        });
+	        var calorieDollarAverage = cumulativeSum / cumulativeArray.length;
+	        console.log(calorieDollarAverage);
+	        return _react2.default.createElement(
+	          "li",
+	          { key: checkIn._id },
+	          "calories: ",
+	          calories,
+	          " ",
+	          _react2.default.createElement("br", null),
+	          "dollars: ",
+	          dollars,
+	          " ",
+	          _react2.default.createElement("br", null),
+	          "calorieDollars: ",
+	          calorieDollars,
+	          " ",
+	          _react2.default.createElement("br", null),
+	          "you average calorieDollars so far: ",
+	          calorieDollarAverage,
+	          _react2.default.createElement("hr", null)
+	        );
+	      });
+
+	      return _react2.default.createElement(
+	        "div",
+	        null,
+	        _react2.default.createElement(
+	          "h3",
+	          null,
+	          "insert d3 chart here"
+	        ),
+	        _react2.default.createElement(
+	          "ul",
+	          null,
+	          " ",
+	          calorieDollarNodes,
+	          " "
+	        )
+	      );
+	    }
+	  }]);
+
+	  return CalorieDollarChart;
+	}(_react2.default.Component);
+
+	exports.default = CalorieDollarChart;
 
 /***/ }
 /******/ ]);

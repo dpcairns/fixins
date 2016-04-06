@@ -2,6 +2,13 @@ table{
 	font-size: 1.3rem
 }
 
+.user-boxes:nth-child(odd) {
+    background: #eeffe6;
+}
+
+.user-boxes:nth-child(even){
+	background: #ddffcc;
+}
 .map-input-box{
 	margin-top: 50px;
 }

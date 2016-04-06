@@ -3,7 +3,7 @@ var Genre = require('../src/js/models/GenreModel')
 module.exports = function(router){
 
 	router.route('/Genres')
-	.get(function (req, res) { 
+	.get(function (req, res) {
 		console.log('finding all Genres in fixins')
 		Genre.find({}).exec(function(err, Genres){
 			if(err){
@@ -13,7 +13,7 @@ module.exports = function(router){
 			}
 		})
 	})
-	.post(function (req, res) { 
+	.post(function (req, res) {
 			var newGenre = new Genre()
 						newGenre.genre_name = req.body.name
 						newGenre.save(function() {
@@ -24,7 +24,7 @@ module.exports = function(router){
 	router.route('/Genres/:GenreId')
 	.get(function (req, res) {
 		console.log("finding a given Genre in fixins")
-		var id = req.params.GenreId 
+		var id = req.params.GenreId
 		Genre.findOne({_id: id}).exec(function(err, Genre){
 			if(err){
 				console.log("couldn\t find this Genre")
@@ -36,7 +36,7 @@ module.exports = function(router){
 	})
 	.delete(function (req, res) {
 		console.log("deleting a given Genre in fixins")
-		var id = req.params.GenreId 
+		var id = req.params.GenreId
 		Genre.findOne({_id: id}).remove().exec(function(err, Genre){
 			if(err){
 				console.log("couldn\t delete this Genre")

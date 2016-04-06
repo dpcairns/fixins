@@ -1,6 +1,7 @@
 import React from "react"
 import RemoveButton from "./RemoveButton"
 import UserEditForm from "./UserEditForm"
+import CalorieDollarChart from "./CalorieDollarChart"
 
 export default class UserList extends React.Component{
 	constructor(){
@@ -49,6 +50,9 @@ toggleEdit(){
 			function findCheckInsFilter(checkIn){
 									return (checkIn.checkIn_user._id === user._id || checkIn.checkIn_user === user._id)
 						}
+			 let userCheckIns = 	allCheckIns.filter(findCheckInsFilter).map(function(checkIn){
+								return checkIn
+						})
 				let checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function(checkIn){
 									return (
 										<div key={checkIn._id}>
@@ -85,7 +89,7 @@ toggleEdit(){
 
 
 			return(
-			<div key={user._id}>
+			<div className="row user-boxes" key={user._id}>
 				<div className="col-md-6">
 					<ul>
 						<li><h2>{user.username}</h2></li>
@@ -104,8 +108,10 @@ toggleEdit(){
 								allCheckIns={allCheckIns}
 								allDishes={allDishes}
 								allReviews={allReviews}
-								allSubNeighborhoods={allSubNeighborhoods}/>
+								allSubNeighborhoods={allSubNeighborhoods}/> <br/>
+								<CalorieDollarChart userCheckIns={userCheckIns} />
 				</div>
+				<br/>
 			</div>
 
 

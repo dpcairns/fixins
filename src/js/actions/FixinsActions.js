@@ -4,7 +4,6 @@ export function createUser(newUser, dispatch){
 			type: 'POST',
 			data: newUser,
 			success: function(postedUser){
-				console.log(postedUser)
 						dispatch(//{
 								//type: "CREATE_USER",
 								//postedUser
@@ -159,7 +158,6 @@ export function createCheckIn(newCheckIn, dispatch){
 			type: 'POST',
 			data: newCheckIn,
 			success: function(postedCheckIn){
-						console.log(postedCheckIn)
 						dispatch(//{
 								//type: "CREATE_USER",
 								//postedUser

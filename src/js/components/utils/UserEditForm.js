@@ -96,20 +96,6 @@ export default class UserEditForm extends React.Component{
 					onchange2={this.handleFavoriteChange.bind(this)}
 					nameName="dish_name" />
 		</div>
-		<div className="input-group">
-			Add a new CheckIn:
-			<CustomDropdown setValueTo={this.state.newcheckIn}
-					data = {this.props.allCheckIns}
-					onchange2={this.handleCheckInChange.bind(this)}
-					nameName="checkIn_blurb" />
-		</div>
-		<div className="input-group">
-			Add a new Review:
-			<CustomDropdown setValueTo={this.state.newReview}
-					data = {this.props.allReviews}
-					onchange2={this.handleReviewChange.bind(this)}
-					nameName="review_words" />
-		</div>
 	<input className="button btn-danger align-right" type="submit" value="Update"/>
 	</form>
 </div>

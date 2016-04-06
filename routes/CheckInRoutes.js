@@ -3,7 +3,7 @@ var CheckIn = require('../src/js/models/CheckInModel')
 module.exports = function(router){
 
 	router.route('/CheckIns')
-	.get(function (req, res) { 
+	.get(function (req, res) {
 		console.log('finding all CheckIns in fixins')
 		CheckIn.find({})
 			.populate('checkIn_dish')
@@ -16,12 +16,12 @@ module.exports = function(router){
 			}
 		})
 	})
-	.post(function (req, res) { 
+	.post(function (req, res) {
 			var newCheckIn = new CheckIn()
 						newCheckIn.checkIn_dish = req.body.dish
 						newCheckIn.checkIn_user = req.body.user
 						newCheckIn.checkIn_blurb = req.body.blurb
-						newCheckIn.save()
+						newCheckIn.save(function(){
 						CheckIn.findOne({checkIn_blurb: newCheckIn.checkIn_blurb})
 							.populate('checkIn_dish').populate('checkIn_user')
 							.exec(function(err, CheckIn){
@@ -31,12 +31,13 @@ module.exports = function(router){
 								res.json(CheckIn);
 							}
 						})
+						})
 				})
 
 	router.route('/CheckIns/:CheckInId')
 	.get(function (req, res) {
 		console.log("finding a given CheckIn in fixins")
-		var id = req.params.CheckInId 
+		var id = req.params.CheckInId
 		CheckIn.findOne({_id: id}).exec(function(err, CheckIn){
 			if(err){
 				console.log("couldn\t find this CheckIn")
@@ -48,7 +49,7 @@ module.exports = function(router){
 	})
 	.delete(function (req, res) {
 		console.log("deleting a given CheckIn in fixins")
-		var id = req.params.CheckInId 
+		var id = req.params.CheckInId
 		CheckIn.findOne({_id: id}).remove().exec(function(err, CheckIn){
 			if(err){
 				console.log("couldn\t delete this CheckIn")
