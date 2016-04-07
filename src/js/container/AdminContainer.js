@@ -15,9 +15,14 @@ const mapStateToProps = (state) => {
   }
 }
 
+function putOneUserInState(_id){
+  return {type: "PUT_ONE_USER_IN_STATE", _id:_id}
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
 
+          putOneUserInState: (_id) => dispatch(putOneUserInState(_id)),
           createSubNeighborhood: (newSubNeighborhood) => FixinsActions.createSubNeighborhood(newSubNeighborhood, dispatch),
           createNeighborhood: (newNeighborhood) => FixinsActions.createNeighborhood(newNeighborhood, dispatch),
           createGenre: (newGenre) => FixinsActions.createGenre(newGenre, dispatch),

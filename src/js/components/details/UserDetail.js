@@ -2,78 +2,118 @@ import React from "react"
 import { connect } from 'react-redux'
 import CalorieDollarChart from "../utils/CalorieDollarChart"
 import RemoveButton from "../utils/RemoveButton"
+import Links from "../utils/Links"
 class UserDetail extends React.Component{
+
+  //the problem is that i need to put the id in state beforeeee the wrapping happens...
+  //in order to make the id accessible to the wrapping
+  //which means i need the id to do the wrapping...
+  //
+
 	render(){
+    console.log("this.props.user")
+    console.log(this.props.user)
     let allReviews = this.props.allReviews
 		let allSubNeighborhoods = this.props.allSubNeighborhoods
 		let allUsers = this.props.allUsers
 		let allDishes = this.props.allDishes
 		let allCheckIns = this.props.allCheckIns
-			let removeUser = this.props.removeUser
-      let user = this.props.user
-			let findAndChangeUser = this.props.findAndChangeUser
+    let thisUser = this.props.user
+
 
 			function findCheckInsFilter(checkIn){
-									return (checkIn.checkIn_user._id === user._id || checkIn.checkIn_user === user._id)
+									return (checkIn.checkIn_user._id === thisUser._id || checkIn.checkIn_user === thisUser._id)
 						}
 			 let userCheckIns = 	allCheckIns.filter(findCheckInsFilter).map(function(checkIn){
 								return checkIn
 						})
 				let checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function(checkIn){
 									return (
-										<div key={checkIn._id}>
-											<ul><li><b>{checkIn.checkIn_dish.dish_name}</b></li>
-											<li>{checkIn.checkIn_dish.dish_calories} calories</li>
-											<li>{checkIn.checkIn_dish.dish_price} dollars</li>
-											<li>{checkIn.checkIn_blurb}</li>
-											<li>{checkIn.checkIn_dish.dish_spot.spot_name}</li>
-											</ul>
+                    <div>
+
+                      <tr key={checkIn._id}>
+                      <td><b>{checkIn.checkIn_dish.dish_name}</b></td>
+											<td>>{checkIn.checkIn_dish.dish_calories} calories</td>
+											<td>{checkIn.checkIn_dish.dish_price} dollars</td>
+											<td>{checkIn.checkIn_blurb}</td>
+											<td>{checkIn.checkIn_dish.dish_spot.spot_name}</td>
+                      </tr>
 										</div>
 										)
 				})
 			function findReviewsFilter(review){
-									return (review.review_user._id === user._id || review.review_user === user._id)
+									return (review.review_user._id === thisUser._id || review.review_user === thisUser._id)
 						}
 				let reviewNodes = allReviews.filter(findReviewsFilter).map(function(review){
 									return (
-										<div key={review._id}>
-											<ul><li><b>{review.reviewed_dish.dish_name}</b></li>
-											<li>{review.reviewed_dish.dish_calories}  calories</li>
-											<li>{review.reviewed_dish.dish_price} dollars</li>
-											<li>{review.review_words}</li>
-											<li>{review.review_stars} stars</li>
-											<li>{review.review_date}</li>
-											</ul>
+                    <div>
+                    <tr key={review._id}>
+											<td><b>{review.reviewed_dish.dish_name}</b></td>
+											<td>{review.reviewed_dish.dish_calories}  calories</td>
+											<td>{review.reviewed_dish.dish_price} dollars</td>
+											<td>{review.review_words}</td>
+											<td>{review.review_stars} stars</td>
+											<td>{review.review_date}</td>
+                    </tr>
 										</div>
 										)
 				})
+
+
     return (
-    <div>
-    <CalorieDollarChart username={this.props.user.username} userCheckIns={userCheckIns} />
+<div>
+<div>
+<div className="row">
+    <div className="col-md-6">
+    <Links/>
+    </div>
+    <div className="col-md-6">
+      <ul>
+        <li><h2>{this.props.user.username}</h2></li>
+        <li> Password: {this.props.user.password}</li>
+        <li> SubNeighborhood: {this.props.user.user_sub_neighborhood.subNeighborhood_name}</li>
+      </ul>
+    </div>
+</div>
+<CalorieDollarChart username={thisUser.username} userCheckIns={userCheckIns} />
 
+
+<div>
+    <div className="row">
       <div className="col-md-6">
-        <ul>
-          <li><h2>{this.props.user.username}</h2></li>
-          <li> Password: {this.props.user.password}</li>
-          <li> SubNeighborhood: {this.props.user.user_sub_neighborhood.subNeighborhood_name}</li>
-          <li> CheckIns: {checkInNodes}</li>
-          <li> Reviews: {reviewNodes}</li>
-
-          <li> <RemoveButton removeUser={removeUser} type="User" id={this.props.user._id}/></li>
-        </ul>
-      </div>    </div>
+          <h1>CheckIns</h1>
+              <table className="table">
+                <tbody>
+              {checkInNodes}
+              </tbody>
+              </table>
+      </div>
+      <div className="col-md-6">
+          <h1>Reviews</h1>
+          <table className="table">
+            <tbody>
+            {reviewNodes}
+            </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+</div>
+</div>
       )
   }
 }
+
 
 const mapStateToProps = (state) => {
       const selectUser = (users, id) => {
           const ridiculousArray = users.filter(x => x._id === id)
           return ridiculousArray[0]
         }
-        console.log(selectUser(state.users, "56f6e43b12ca8480147be476"))
+        console.log("mapStateToProps(selectUser...)")
       return {
-        user: selectUser(state.users, "56f6e43b12ca8480147be476"),
+        //so if this can get an id, everything works...
+        user: selectUser(state.users, state.user._id),
         allDishes: state.dishes,
         allReviews: state.reviews,
     		allSubNeighborhoods: state.subNeighborhoods,
@@ -83,12 +123,6 @@ const mapStateToProps = (state) => {
         }
 }
 
-/*
-const mapDispatchToProps = (dispatch) => {
-    removeUser:
-    findAndChangeUser:
-}
-*/
-
+//here is the contradiction...it needs this id before it does the weapping...
 const UserDetailContainer = connect(mapStateToProps)(UserDetail)
 export default UserDetailContainer

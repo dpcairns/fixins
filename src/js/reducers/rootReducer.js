@@ -121,7 +121,7 @@ const checkIns = (state = [], action) => {
   }
 }
 
-const user = (state = "", action) => {
+const user = (state = {}, action) => {
   switch (action.type) {
     case 'CREATE_USER':
       return {
@@ -134,6 +134,10 @@ const user = (state = "", action) => {
         user_checkIns: action.user_checkIns,
         user_reviews: action.user_reviews
       }
+      case 'PUT_ONE_USER_IN_STATE':
+      return Object.assign({}, {
+        _id: action._id
+    })
     default:
       return state
   }

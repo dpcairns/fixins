@@ -44,6 +44,7 @@ export default class Admin extends React.Component{
 						allSubNeighborhoods={this.props.allSubNeighborhoods}
 						removeUser={this.props.removeUser}
 						findAndChangeUser={this.props.findAndChangeUser}
+						putOneUserInState={this.props.putOneUserInState}
 
 						/>
 					</div>

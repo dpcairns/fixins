@@ -44,8 +44,9 @@ toggleEdit(){
 		let allUsers = this.props.allUsers
 		let allDishes = this.props.allDishes
 		let allCheckIns = this.props.allCheckIns
-			let removeUser = this.props.removeUser
-			let findAndChangeUser = this.props.findAndChangeUser
+		let removeUser = this.props.removeUser
+		let putOneUserInState = this.props.putOneUserInState
+		let findAndChangeUser = this.props.findAndChangeUser
 		let userNodes = allUsers.map(function(user){
 
 			function findCheckInsFilter(checkIn){
@@ -90,7 +91,7 @@ toggleEdit(){
 				let userId = user._id
 
 			return(
-			<div className="row user-boxes" key={userId}>
+			<div className="row user-boxes" onClick={putOneUserInState.bind(this, userId)} key={userId}>
 			<Link to={`/user/${userId}`}>
 			<CalorieDollarChart username={user.username} userCheckIns={userCheckIns} />
 

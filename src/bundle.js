@@ -110,7 +110,7 @@
 		spots: [],
 		dish: "",
 		dishes: [],
-		user: "",
+		user: {},
 		users: [],
 		review: "",
 		reviews: [],
@@ -137,7 +137,7 @@
 				{ path: "index", component: _Layout2.default },
 				_react2.default.createElement(_reactRouter.IndexRoute, { component: _AdminContainer2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "user", path: "/user/:id", component: _UserDetail2.default }),
-				_react2.default.createElement(_reactRouter.Route, { path: "mapPage", component: _MapContainer2.default })
+				_react2.default.createElement(_reactRouter.Route, { name: "mapPage", path: "mapPage", component: _MapContainer2.default })
 			)
 		)
 	), app);
@@ -34907,9 +34907,16 @@
 	  };
 	};
 
+	function _putOneUserInState(_id) {
+	  return { type: "PUT_ONE_USER_IN_STATE", _id: _id };
+	}
+
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
 
+	    putOneUserInState: function putOneUserInState(_id) {
+	      return dispatch(_putOneUserInState(_id));
+	    },
 	    createSubNeighborhood: function createSubNeighborhood(newSubNeighborhood) {
 	      return FixinsActions.createSubNeighborhood(newSubNeighborhood, dispatch);
 	    },
@@ -35163,7 +35170,8 @@
 									allDishes: this.props.allDishes,
 									allSubNeighborhoods: this.props.allSubNeighborhoods,
 									removeUser: this.props.removeUser,
-									findAndChangeUser: this.props.findAndChangeUser
+									findAndChangeUser: this.props.findAndChangeUser,
+									putOneUserInState: this.props.putOneUserInState
 
 								})
 							)
@@ -35689,6 +35697,7 @@
 				var allDishes = this.props.allDishes;
 				var allCheckIns = this.props.allCheckIns;
 				var removeUser = this.props.removeUser;
+				var putOneUserInState = this.props.putOneUserInState;
 				var findAndChangeUser = this.props.findAndChangeUser;
 				var userNodes = allUsers.map(function (user) {
 
@@ -35795,7 +35804,7 @@
 
 					return _react2.default.createElement(
 						"div",
-						{ className: "row user-boxes", key: userId },
+						{ className: "row user-boxes", onClick: putOneUserInState.bind(this, userId), key: userId },
 						_react2.default.createElement(
 							_reactRouter.Link,
 							{ to: "/user/" + userId },
@@ -68160,14 +68169,32 @@
 			value: function render() {
 				return _react2.default.createElement(
 					"div",
-					null,
+					{ className: "inline" },
 					_react2.default.createElement(
 						_reactRouter.Link,
 						{ to: "/" },
 						_react2.default.createElement(
-							"h1",
+							"h4",
 							null,
-							"Back to Layout Page"
+							"Home Page"
+						)
+					),
+					_react2.default.createElement(
+						_reactRouter.Link,
+						{ to: "index" },
+						_react2.default.createElement(
+							"h4",
+							null,
+							"Admin Page"
+						)
+					),
+					_react2.default.createElement(
+						_reactRouter.Link,
+						{ to: "index/mapPage" },
+						_react2.default.createElement(
+							"h4",
+							null,
+							"Big Map Page"
 						)
 					)
 				);
@@ -69691,7 +69718,7 @@
 	};
 
 	var user = function user() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	  var action = arguments[1];
 
 	  switch (action.type) {
@@ -69706,6 +69733,10 @@
 	        user_checkIns: action.user_checkIns,
 	        user_reviews: action.user_reviews
 	      };
+	    case 'PUT_ONE_USER_IN_STATE':
+	      return Object.assign({}, {
+	        _id: action._id
+	      });
 	    default:
 	      return state;
 	  }
@@ -69934,7 +69965,7 @@
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -69953,6 +69984,10 @@
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
+	var _Links = __webpack_require__(790);
+
+	var _Links2 = _interopRequireDefault(_Links);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -69964,208 +69999,250 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var UserDetail = function (_React$Component) {
-		_inherits(UserDetail, _React$Component);
+	  _inherits(UserDetail, _React$Component);
 
-		function UserDetail() {
-			_classCallCheck(this, UserDetail);
+	  function UserDetail() {
+	    _classCallCheck(this, UserDetail);
 
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(UserDetail).apply(this, arguments));
-		}
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(UserDetail).apply(this, arguments));
+	  }
 
-		_createClass(UserDetail, [{
-			key: "render",
-			value: function render() {
-				var allReviews = this.props.allReviews;
-				var allSubNeighborhoods = this.props.allSubNeighborhoods;
-				var allUsers = this.props.allUsers;
-				var allDishes = this.props.allDishes;
-				var allCheckIns = this.props.allCheckIns;
-				var removeUser = this.props.removeUser;
-				var user = this.props.user;
-				var findAndChangeUser = this.props.findAndChangeUser;
+	  _createClass(UserDetail, [{
+	    key: "render",
 
-				function findCheckInsFilter(checkIn) {
-					return checkIn.checkIn_user._id === user._id || checkIn.checkIn_user === user._id;
-				}
-				var userCheckIns = allCheckIns.filter(findCheckInsFilter).map(function (checkIn) {
-					return checkIn;
-				});
-				var checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function (checkIn) {
-					return _react2.default.createElement(
-						"div",
-						{ key: checkIn._id },
-						_react2.default.createElement(
-							"ul",
-							null,
-							_react2.default.createElement(
-								"li",
-								null,
-								_react2.default.createElement(
-									"b",
-									null,
-									checkIn.checkIn_dish.dish_name
-								)
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								checkIn.checkIn_dish.dish_calories,
-								" calories"
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								checkIn.checkIn_dish.dish_price,
-								" dollars"
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								checkIn.checkIn_blurb
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								checkIn.checkIn_dish.dish_spot.spot_name
-							)
-						)
-					);
-				});
-				function findReviewsFilter(review) {
-					return review.review_user._id === user._id || review.review_user === user._id;
-				}
-				var reviewNodes = allReviews.filter(findReviewsFilter).map(function (review) {
-					return _react2.default.createElement(
-						"div",
-						{ key: review._id },
-						_react2.default.createElement(
-							"ul",
-							null,
-							_react2.default.createElement(
-								"li",
-								null,
-								_react2.default.createElement(
-									"b",
-									null,
-									review.reviewed_dish.dish_name
-								)
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								review.reviewed_dish.dish_calories,
-								"  calories"
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								review.reviewed_dish.dish_price,
-								" dollars"
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								review.review_words
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								review.review_stars,
-								" stars"
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								review.review_date
-							)
-						)
-					);
-				});
-				return _react2.default.createElement(
-					"div",
-					null,
-					_react2.default.createElement(_CalorieDollarChart2.default, { username: this.props.user.username, userCheckIns: userCheckIns }),
-					_react2.default.createElement(
-						"div",
-						{ className: "col-md-6" },
-						_react2.default.createElement(
-							"ul",
-							null,
-							_react2.default.createElement(
-								"li",
-								null,
-								_react2.default.createElement(
-									"h2",
-									null,
-									this.props.user.username
-								)
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" Password: ",
-								this.props.user.password
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" SubNeighborhood: ",
-								this.props.user.user_sub_neighborhood.subNeighborhood_name
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" CheckIns: ",
-								checkInNodes
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" Reviews: ",
-								reviewNodes
-							),
-							_react2.default.createElement(
-								"li",
-								null,
-								" ",
-								_react2.default.createElement(_RemoveButton2.default, { removeUser: removeUser, type: "User", id: this.props.user._id })
-							)
-						)
-					),
-					"    "
-				);
-			}
-		}]);
 
-		return UserDetail;
+	    //the problem is that i need to put the id in state beforeeee the wrapping happens...
+	    //in order to make the id accessible to the wrapping
+	    //which means i need the id to do the wrapping...
+	    //
+
+	    value: function render() {
+	      console.log("this.props.user");
+	      console.log(this.props.user);
+	      var allReviews = this.props.allReviews;
+	      var allSubNeighborhoods = this.props.allSubNeighborhoods;
+	      var allUsers = this.props.allUsers;
+	      var allDishes = this.props.allDishes;
+	      var allCheckIns = this.props.allCheckIns;
+	      var thisUser = this.props.user;
+
+	      function findCheckInsFilter(checkIn) {
+	        return checkIn.checkIn_user._id === thisUser._id || checkIn.checkIn_user === thisUser._id;
+	      }
+	      var userCheckIns = allCheckIns.filter(findCheckInsFilter).map(function (checkIn) {
+	        return checkIn;
+	      });
+	      var checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function (checkIn) {
+	        return _react2.default.createElement(
+	          "div",
+	          null,
+	          _react2.default.createElement(
+	            "tr",
+	            { key: checkIn._id },
+	            _react2.default.createElement(
+	              "td",
+	              null,
+	              _react2.default.createElement(
+	                "b",
+	                null,
+	                checkIn.checkIn_dish.dish_name
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "td",
+	              null,
+	              ">",
+	              checkIn.checkIn_dish.dish_calories,
+	              " calories"
+	            ),
+	            _react2.default.createElement(
+	              "td",
+	              null,
+	              checkIn.checkIn_dish.dish_price,
+	              " dollars"
+	            ),
+	            _react2.default.createElement(
+	              "td",
+	              null,
+	              checkIn.checkIn_blurb
+	            ),
+	            _react2.default.createElement(
+	              "td",
+	              null,
+	              checkIn.checkIn_dish.dish_spot.spot_name
+	            )
+	          )
+	        );
+	      });
+	      function findReviewsFilter(review) {
+	        return review.review_user._id === thisUser._id || review.review_user === thisUser._id;
+	      }
+	      var reviewNodes = allReviews.filter(findReviewsFilter).map(function (review) {
+	        return _react2.default.createElement(
+	          "div",
+	          null,
+	          _react2.default.createElement(
+	            "tr",
+	            { key: review._id },
+	            _react2.default.createElement(
+	              "td",
+	              null,
+	              _react2.default.createElement(
+	                "b",
+	                null,
+	                review.reviewed_dish.dish_name
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "td",
+	              null,
+	              review.reviewed_dish.dish_calories,
+	              "  calories"
+	            ),
+	            _react2.default.createElement(
+	              "td",
+	              null,
+	              review.reviewed_dish.dish_price,
+	              " dollars"
+	            ),
+	            _react2.default.createElement(
+	              "td",
+	              null,
+	              review.review_words
+	            ),
+	            _react2.default.createElement(
+	              "td",
+	              null,
+	              review.review_stars,
+	              " stars"
+	            ),
+	            _react2.default.createElement(
+	              "td",
+	              null,
+	              review.review_date
+	            )
+	          )
+	        );
+	      });
+
+	      return _react2.default.createElement(
+	        "div",
+	        null,
+	        _react2.default.createElement(
+	          "div",
+	          null,
+	          _react2.default.createElement(
+	            "div",
+	            { className: "row" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "col-md-6" },
+	              _react2.default.createElement(_Links2.default, null)
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "col-md-6" },
+	              _react2.default.createElement(
+	                "ul",
+	                null,
+	                _react2.default.createElement(
+	                  "li",
+	                  null,
+	                  _react2.default.createElement(
+	                    "h2",
+	                    null,
+	                    this.props.user.username
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  "li",
+	                  null,
+	                  " Password: ",
+	                  this.props.user.password
+	                ),
+	                _react2.default.createElement(
+	                  "li",
+	                  null,
+	                  " SubNeighborhood: ",
+	                  this.props.user.user_sub_neighborhood.subNeighborhood_name
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(_CalorieDollarChart2.default, { username: thisUser.username, userCheckIns: userCheckIns }),
+	          _react2.default.createElement(
+	            "div",
+	            null,
+	            _react2.default.createElement(
+	              "div",
+	              { className: "row" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "col-md-6" },
+	                _react2.default.createElement(
+	                  "h1",
+	                  null,
+	                  "CheckIns"
+	                ),
+	                _react2.default.createElement(
+	                  "table",
+	                  { className: "table" },
+	                  _react2.default.createElement(
+	                    "tbody",
+	                    null,
+	                    checkInNodes
+	                  )
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "col-md-6" },
+	                _react2.default.createElement(
+	                  "h1",
+	                  null,
+	                  "Reviews"
+	                ),
+	                _react2.default.createElement(
+	                  "table",
+	                  { className: "table" },
+	                  _react2.default.createElement(
+	                    "tbody",
+	                    null,
+	                    reviewNodes
+	                  )
+	                )
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return UserDetail;
 	}(_react2.default.Component);
 
 	var mapStateToProps = function mapStateToProps(state) {
-		var _ref;
+	  var _ref;
 
-		var selectUser = function selectUser(users, id) {
-			var ridiculousArray = users.filter(function (x) {
-				return x._id === id;
-			});
-			return ridiculousArray[0];
-		};
-		console.log(selectUser(state.users, "56f6e43b12ca8480147be476"));
-		return _ref = {
-			user: selectUser(state.users, "56f6e43b12ca8480147be476"),
-			allDishes: state.dishes,
-			allReviews: state.reviews,
-			allSubNeighborhoods: state.subNeighborhoods,
-			allUsers: state.users
-		}, _defineProperty(_ref, "allDishes", state.dishes), _defineProperty(_ref, "allCheckIns", state.checkIns), _ref;
+	  var selectUser = function selectUser(users, id) {
+	    var ridiculousArray = users.filter(function (x) {
+	      return x._id === id;
+	    });
+	    return ridiculousArray[0];
+	  };
+	  console.log("mapStateToProps(selectUser...)");
+	  return _ref = {
+	    //so if this can get an id, everything works...
+	    user: selectUser(state.users, state.user._id),
+	    allDishes: state.dishes,
+	    allReviews: state.reviews,
+	    allSubNeighborhoods: state.subNeighborhoods,
+	    allUsers: state.users
+	  }, _defineProperty(_ref, "allDishes", state.dishes), _defineProperty(_ref, "allCheckIns", state.checkIns), _ref;
 	};
 
-	/*
-	const mapDispatchToProps = (dispatch) => {
-	    removeUser:
-	    findAndChangeUser:
-	}
-	*/
-
+	//here is the contradiction...it needs this id before it does the weapping...
 	var UserDetailContainer = (0, _reactRedux.connect)(mapStateToProps)(UserDetail);
 	exports.default = UserDetailContainer;
 

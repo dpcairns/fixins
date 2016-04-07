@@ -2,6 +2,9 @@ table{
 	font-size: 1.3rem
 }
 
+.inline{
+	display:inline;
+}
 .user-boxes:nth-child(odd) {
     background: #eeffe6;
 }

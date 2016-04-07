@@ -23,7 +23,7 @@ let initialState = {
 	spots: [],
 	dish: "",
 	dishes: [],
-	user: "",
+	user: {},
 	users: [],
 	review: "",
 	reviews: [],
@@ -47,7 +47,7 @@ ReactDOM.render(
 	<Route path="index" component={Layout}>
 		<IndexRoute component={AdminContainer}></IndexRoute>
 		<Route name="user" path="/user/:id" component={UserDetailContainer}></Route>
-		<Route path="mapPage" component={MapContainer}></Route>
+		<Route name= "mapPage" path="mapPage" component={MapContainer}></Route>
 	</Route>
 </Router>
 </Provider>, app);
