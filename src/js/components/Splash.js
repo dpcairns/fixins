@@ -17,7 +17,7 @@ export default class Splash extends React.Component{
 
 		render(){
 			return(
-		<div>
+		<div className="bg-success">
 			<h2>Hello and welcome to fixins!</h2>
 			<h2><Link to="index">for now, just click here to go to the admin page</Link></h2>
 			<h2><Link to="index/mapPage">or click here to see all the data on a map</Link></h2>

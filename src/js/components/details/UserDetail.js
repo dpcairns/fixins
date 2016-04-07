@@ -62,7 +62,7 @@ class UserDetail extends React.Component{
 
     return (
 <div>
-<div>
+<div className="container bg-warning">
 <div className="row">
     <div className="col-md-6">
     <Links/>
@@ -76,7 +76,6 @@ class UserDetail extends React.Component{
     </div>
 </div>
 <CalorieDollarChart username={thisUser.username} userCheckIns={userCheckIns} />
-
 
 <div>
     <div className="row">

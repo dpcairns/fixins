@@ -34106,7 +34106,7 @@
 			value: function render() {
 				return _react2.default.createElement(
 					"div",
-					null,
+					{ className: "bg-warning" },
 					_react2.default.createElement(
 						"h2",
 						null,
@@ -34837,7 +34837,7 @@
 			value: function render() {
 				return _react2.default.createElement(
 					"div",
-					null,
+					{ className: "bg-success" },
 					_react2.default.createElement(
 						"h2",
 						null,
@@ -70130,7 +70130,7 @@
 	        null,
 	        _react2.default.createElement(
 	          "div",
-	          null,
+	          { className: "container bg-warning" },
 	          _react2.default.createElement(
 	            "div",
 	            { className: "row" },
