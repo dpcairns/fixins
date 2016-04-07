@@ -50025,7 +50025,6 @@
 				newSpotObject.coordinates.push(this.state.coordinates.lng);
 				newSpotObject.genres = this.state.genres;
 				newSpotObject.blurb = this.state.blurb;
-				console.log(this.state);
 				this.props.createSpot(newSpotObject);
 				this.setState({ username: "", blurb: "", genres: "", coordinates: "", neighborhood: '', subNeighborhood: '' });
 			}
@@ -66969,7 +66968,7 @@
 							"td",
 							null,
 							_react2.default.createElement(
-								"h2",
+								"h3",
 								null,
 								dish.dish_name
 							)
@@ -69796,8 +69795,6 @@
 	      return [].concat(_toConsumableArray(state), [dish(undefined, action)]);
 	    case 'REMOVE_DISH':
 	      return state.filter(function (x) {
-	        console.log(x._id);
-	        console.log(action._id);
 	        return x._id !== action._id;
 	      });
 	    /*case 'CHANGED_DISH':
@@ -69824,7 +69821,6 @@
 
 	  switch (action.type) {
 	    case 'CREATE_SUBNEIGHBORHOOD':
-	      console.log(action);
 	      return {
 	        _id: action._id,
 	        subNeighborhood_name: action.subNeighborhood_name,

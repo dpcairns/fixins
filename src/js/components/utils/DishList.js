@@ -47,7 +47,7 @@ export default class DishList extends React.Component{
 
 			return(
 					<tr key={dish._id}>
-						<td><h2>{dish.dish_name}</h2></td>
+						<td><h3>{dish.dish_name}</h3></td>
 						<td> Dish Blurb: {dish.dish_blurb}</td>
 						<td> Dish Price: {dish.dish_price}</td>
 						<td> Dish Calories: {dish.dish_calories}</td>

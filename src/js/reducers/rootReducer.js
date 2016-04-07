@@ -234,8 +234,6 @@ const dishes = (state = [], action) => {
       ]
     case 'REMOVE_DISH':
         return state.filter(x =>{
-          console.log(x._id)
-          console.log(action._id)
          return x._id !== action._id
 
        })
@@ -263,7 +261,6 @@ const dishes = (state = [], action) => {
 const subNeighborhood = (state = "", action) => {
   switch (action.type) {
     case 'CREATE_SUBNEIGHBORHOOD':
-    console.log(action)
       return {
         _id: action._id,
         subNeighborhood_name: action.subNeighborhood_name,

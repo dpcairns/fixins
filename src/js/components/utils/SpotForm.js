@@ -61,7 +61,6 @@ export default class SpotForm extends React.Component{
 		newSpotObject.coordinates.push(this.state.coordinates.lng)
 		newSpotObject.genres = this.state.genres
 		newSpotObject.blurb = this.state.blurb
-		console.log(this.state)
 		this.props.createSpot(newSpotObject)
 		this.setState({username: "", blurb: "", genres: "", coordinates: "", neighborhood: '', subNeighborhood: ''})
 	}
