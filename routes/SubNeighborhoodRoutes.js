@@ -1,9 +1,9 @@
-var Subneighborhood = require('../src/js/models/SubNeighborhoodModel') 
+var Subneighborhood = require('../src/js/models/SubNeighborhoodModel')
 
 module.exports = function(router){
 
 	router.route('/Subneighborhoods')
-	.get(function (req, res) { 
+	.get(function (req, res) {
 		console.log('finding all Subneighborhoods in fixins')
 		Subneighborhood.find({})
 		.populate('sub_neighborhood_neighborhood')
@@ -15,11 +15,11 @@ module.exports = function(router){
 			}
 		})
 	})
-	.post(function (req, res) { 
+	.post(function (req, res) {
 			var newSubneighborhood = new Subneighborhood()
 						newSubneighborhood.subNeighborhood_name = req.body.name
 						newSubneighborhood.sub_neighborhood_neighborhood = req.body.neighborhood
-						newSubneighborhood.save()
+						newSubneighborhood.save(function(){
 						console.log('finding all Subneighborhoods in fixins')
 								Subneighborhood.findOne({subNeighborhood_name: newSubneighborhood.subNeighborhood_name})
 								.populate('sub_neighborhood_neighborhood')
@@ -30,12 +30,13 @@ module.exports = function(router){
 										res.json(Subneighborhood);
 									}
 								})
+								})
 				})
 
 	router.route('/Subneighborhoods/:SubneighborhoodId')
 	.get(function (req, res) {
 		console.log("finding a given Subneighborhood in fixins")
-		var id = req.params.SubneighborhoodId 
+		var id = req.params.SubneighborhoodId
 		Subneighborhood.findOne({_id: id}).exec(function(err, Subneighborhood){
 			if(err){
 				console.log("couldn\t find this Subneighborhood")
@@ -47,7 +48,7 @@ module.exports = function(router){
 	})
 	.delete(function (req, res) {
 		console.log("deleting a given Subneighborhood in fixins")
-		var id = req.params.SubneighborhoodId 
+		var id = req.params.SubneighborhoodId
 		Subneighborhood.findOne({_id: id}).remove().exec(function(err, Subneighborhood){
 			if(err){
 				console.log("couldn\t delete this Subneighborhood")

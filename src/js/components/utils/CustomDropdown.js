@@ -11,7 +11,7 @@ export default class CustomDropdown extends React.Component{
 		})
 
 	return(
-		<select onChange={this.props.onchange2} value="" className="form-control">
+		<select onChange={this.props.onchange2} defaultValue="" className="form-control">
 			<option value="" disabled>Pick one</option>
 
 			{optionNodes}

@@ -34333,9 +34333,11 @@
 			type: 'POST',
 			data: newSubNeighborhood,
 			success: function (postedSubNeighborhood) {
+				console.log(postedSubNeighborhood);
 				dispatch( //{
 				//type: "CREATE_USER",
 				//postedUser
+
 				_extends({
 					type: 'CREATE_SUBNEIGHBORHOOD'
 				}, postedSubNeighborhood));
@@ -35568,7 +35570,7 @@
 
 				return _react2.default.createElement(
 					"select",
-					{ onChange: this.props.onchange2, value: "", className: "form-control" },
+					{ onChange: this.props.onchange2, defaultValue: "", className: "form-control" },
 					_react2.default.createElement(
 						"option",
 						{ value: "", disabled: true },
@@ -67988,12 +67990,12 @@
 			}
 		}, {
 			key: "handleSubmit",
-			value: function handleSubmit() {
+			value: function handleSubmit(e) {
 				e.preventDefault(e);
 				var newSubNeighborhoodObject = {};
 				newSubNeighborhoodObject.name = this.state.name;
 				newSubNeighborhoodObject.neighborhood = this.state.sub_neighborhood_neighborhood;
-				this.props.createSubNeighbodrhood(newSubNeighborhoodObject);
+				this.props.createSubNeighborhood(newSubNeighborhoodObject);
 				this.setState({ name: "" });
 			}
 		}, {
@@ -69579,6 +69581,10 @@
 	  switch (action.type) {
 	    case 'CREATE_NEIGHBORHOOD':
 	      return [].concat(_toConsumableArray(state), [neighborhood(undefined, action)]);
+	    case 'REMOVE_NEIGHBORHOOD':
+	      return state.filter(function (x) {
+	        return x._id !== action._id;
+	      });
 	    case 'FETCH_NEIGHBORHOODS':
 	      if (state.length === 0) {
 	        return [].concat(_toConsumableArray(state), _toConsumableArray(action.allNeighborhoods));
@@ -69818,11 +69824,13 @@
 
 	  switch (action.type) {
 	    case 'CREATE_SUBNEIGHBORHOOD':
+	      console.log(action);
 	      return {
 	        _id: action._id,
 	        subNeighborhood_name: action.subNeighborhood_name,
-	        subNeighborhood_spots: action.neighborhood_subNeighborhoods,
-	        subNeighborhood_users: action.neighborhood_subNeighborhoods
+	        subNeighborhood_spots: action.subNeighborhood_spots,
+	        subNeighborhood_users: action.subNeighborhood_users,
+	        sub_neighborhood_neighborhood: action.sub_neighborhood_neighborhood
 	      };
 	    default:
 	      return state;
@@ -69835,7 +69843,11 @@
 
 	  switch (action.type) {
 	    case 'CREATE_SUBNEIGHBORHOOD':
-	      return [].concat(_toConsumableArray(state), [subneighborhood(undefined, action)]);
+	      return [].concat(_toConsumableArray(state), [subNeighborhood(undefined, action)]);
+	    case 'REMOVE_SUBNEIGHBORHOOD':
+	      return state.filter(function (x) {
+	        return x._id !== action._id;
+	      });
 	    case 'FETCH_SUBNEIGHBORHOODS':
 	      if (state.length === 0) {
 	        return [].concat(_toConsumableArray(state), _toConsumableArray(action.allSubNeighborhoods));

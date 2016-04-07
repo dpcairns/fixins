@@ -19,6 +19,11 @@ const neighborhoods = (state = [], action) => {
       return [
         ...state, neighborhood(undefined, action)
       ]
+      case 'REMOVE_NEIGHBORHOOD':
+      return state.filter(x =>{
+       return x._id !== action._id
+
+     })
     case 'FETCH_NEIGHBORHOODS':
       if(state.length === 0){
       return [
@@ -258,11 +263,13 @@ const dishes = (state = [], action) => {
 const subNeighborhood = (state = "", action) => {
   switch (action.type) {
     case 'CREATE_SUBNEIGHBORHOOD':
+    console.log(action)
       return {
         _id: action._id,
         subNeighborhood_name: action.subNeighborhood_name,
-        subNeighborhood_spots: action.neighborhood_subNeighborhoods,
-        subNeighborhood_users: action.neighborhood_subNeighborhoods
+        subNeighborhood_spots: action.subNeighborhood_spots,
+        subNeighborhood_users: action.subNeighborhood_users,
+        sub_neighborhood_neighborhood: action.sub_neighborhood_neighborhood
       }
     default:
       return state
@@ -273,8 +280,13 @@ const subNeighborhoods = (state = [], action) => {
   switch (action.type) {
     case 'CREATE_SUBNEIGHBORHOOD':
       return [
-        ...state, subneighborhood(undefined, action)
+        ...state, subNeighborhood(undefined, action)
       ]
+      case 'REMOVE_SUBNEIGHBORHOOD':
+      return state.filter(x =>{
+       return x._id !== action._id
+
+     })
     case 'FETCH_SUBNEIGHBORHOODS':
         if(state.length === 0){
         return [

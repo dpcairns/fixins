@@ -19,12 +19,12 @@ export default class SubNeighborhoodForm extends React.Component{
 		this.setState({sub_neighborhood_neighborhood: e.target.value})
 	}
 
-	handleSubmit(){
+	handleSubmit(e){
 		e.preventDefault(e);
 		var newSubNeighborhoodObject = {}
 		newSubNeighborhoodObject.name = this.state.name
 		newSubNeighborhoodObject.neighborhood = this.state.sub_neighborhood_neighborhood
-		this.props.createSubNeighbodrhood(newSubNeighborhoodObject)
+		this.props.createSubNeighborhood(newSubNeighborhoodObject)
 		this.setState({name: ""})
 	}
 
