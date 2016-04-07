@@ -11,7 +11,7 @@ export default class CustomDropdown extends React.Component{
 		})
 
 	return(
-		<select onChange={this.props.onchange2} className="form-control">
+		<select onChange={this.props.onchange2} value="" className="form-control">
 			<option value="" disabled>Pick one</option>
 
 			{optionNodes}
@@ -24,9 +24,9 @@ export default class CustomDropdown extends React.Component{
 /*
 	<div className="input-group">
 			Neighborhood:
-			<CustomDropdown setValueTo={this.state.neighborhood} 
-			onChange={this.handleNeighborhoodChange.bind(this)} 
-			data={this.props.allNeighborhoods} 
+			<CustomDropdown setValueTo={this.state.neighborhood}
+			onChange={this.handleNeighborhoodChange.bind(this)}
+			data={this.props.allNeighborhoods}
 			nameName="neighborhood_name" />
 		</div>
 */

@@ -166,7 +166,7 @@ const spot = (state = "", action) => {
         _id: action._id,
         spot_name: action.spot_name,
         spot_genres: action.spot_genres,
-        spot_dish: action.spot_dishes,
+        spot_dishes: action.spot_dishes,
         spot_blurb: action.spot_blurb,
         spot_subNeighborhood: action.spot_subNeighborhood,
         spot_coordinates: action.spot_coordinates,
@@ -180,14 +180,9 @@ const spot = (state = "", action) => {
 const spots = (state = [], action) => {
   switch (action.type) {
     case 'CREATE_SPOT':
-      if(state.length === 0){
       return [
-        ...state, ...action.allSpots
+        ...state, spot(undefined, action)
       ]
-    }
-      else{
-        return state
-    }
     case 'FETCH_SPOTS':
       if(state.length === 0){
       return [
