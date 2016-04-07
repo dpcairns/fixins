@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 
+
 const neighborhood = (state = "", action) => {
   switch (action.type) {
     case 'CREATE_NEIGHBORHOOD':

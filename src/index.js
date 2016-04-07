@@ -10,6 +10,7 @@ import SplashContainer from "./js/container/SplashContainer"
 import AdminContainer from "./js/container/AdminContainer"
 import MapContainer from "./js/container/MapContainer"
 import FixinsApp from './js/reducers/rootReducer'
+import UserDetailContainer from './js/components/details/UserDetail'
 const app = document.getElementById('app');
 
 
@@ -45,6 +46,7 @@ ReactDOM.render(
 	<Route path="/" component={SplashContainer}></Route>
 	<Route path="index" component={Layout}>
 		<IndexRoute component={AdminContainer}></IndexRoute>
+		<Route name="user" path="/user/:id" component={UserDetailContainer}></Route>
 		<Route path="mapPage" component={MapContainer}></Route>
 	</Route>
 </Router>

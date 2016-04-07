@@ -2,6 +2,7 @@ import React from "react"
 import RemoveButton from "./RemoveButton"
 import UserEditForm from "./UserEditForm"
 import CalorieDollarChart from "./CalorieDollarChart"
+import { Link } from 'react-router'
 
 export default class UserList extends React.Component{
 	constructor(){
@@ -86,10 +87,11 @@ toggleEdit(){
 										)
 				})
 
-
+				let userId = user._id
 
 			return(
-			<div className="row user-boxes" key={user._id}>
+			<div className="row user-boxes" key={userId}>
+			<Link to={`/user/${userId}`}>
 			<CalorieDollarChart username={user.username} userCheckIns={userCheckIns} />
 
 				<div className="col-md-6">
@@ -114,7 +116,7 @@ toggleEdit(){
 				</div>
 
 				<br/>
-
+				</Link>
 </div>
 
 				)

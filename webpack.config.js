@@ -31,7 +31,7 @@ module.exports = {
   proxy: {
   '/api/*': {
    target: 'http://localhost:444/api/',
-    secure: false,  
+    secure: false,
 	}
-     }    
+     }
   };

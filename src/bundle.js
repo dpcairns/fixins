@@ -93,6 +93,10 @@
 
 	var _rootReducer2 = _interopRequireDefault(_rootReducer);
 
+	var _UserDetail = __webpack_require__(801);
+
+	var _UserDetail2 = _interopRequireDefault(_UserDetail);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var app = document.getElementById('app');
@@ -132,6 +136,7 @@
 				_reactRouter.Route,
 				{ path: "index", component: _Layout2.default },
 				_react2.default.createElement(_reactRouter.IndexRoute, { component: _AdminContainer2.default }),
+				_react2.default.createElement(_reactRouter.Route, { name: "user", path: "/user/:id", component: _UserDetail2.default }),
 				_react2.default.createElement(_reactRouter.Route, { path: "mapPage", component: _MapContainer2.default })
 			)
 		)
@@ -35624,6 +35629,8 @@
 
 	var _CalorieDollarChart2 = _interopRequireDefault(_CalorieDollarChart);
 
+	var _reactRouter = __webpack_require__(184);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35784,71 +35791,77 @@
 						);
 					});
 
+					var userId = user._id;
+
 					return _react2.default.createElement(
 						"div",
-						{ className: "row user-boxes", key: user._id },
-						_react2.default.createElement(_CalorieDollarChart2.default, { username: user.username, userCheckIns: userCheckIns }),
+						{ className: "row user-boxes", key: userId },
 						_react2.default.createElement(
-							"div",
-							{ className: "col-md-6" },
+							_reactRouter.Link,
+							{ to: "/user/" + userId },
+							_react2.default.createElement(_CalorieDollarChart2.default, { username: user.username, userCheckIns: userCheckIns }),
 							_react2.default.createElement(
-								"ul",
-								null,
+								"div",
+								{ className: "col-md-6" },
 								_react2.default.createElement(
-									"li",
+									"ul",
 									null,
 									_react2.default.createElement(
-										"h2",
+										"li",
 										null,
-										user.username
+										_react2.default.createElement(
+											"h2",
+											null,
+											user.username
+										)
+									),
+									_react2.default.createElement(
+										"li",
+										null,
+										" Password: ",
+										user.password
+									),
+									_react2.default.createElement(
+										"li",
+										null,
+										" SubNeighborhood: ",
+										user.user_sub_neighborhood.subNeighborhood_name
+									),
+									_react2.default.createElement(
+										"li",
+										null,
+										" CheckIns: ",
+										checkInNodes
+									),
+									_react2.default.createElement(
+										"li",
+										null,
+										" Reviews: ",
+										reviewNodes
+									),
+									_react2.default.createElement(
+										"li",
+										null,
+										" ",
+										_react2.default.createElement(_RemoveButton2.default, { removeUser: removeUser, type: "User", id: user._id })
 									)
-								),
-								_react2.default.createElement(
-									"li",
-									null,
-									" Password: ",
-									user.password
-								),
-								_react2.default.createElement(
-									"li",
-									null,
-									" SubNeighborhood: ",
-									user.user_sub_neighborhood.subNeighborhood_name
-								),
-								_react2.default.createElement(
-									"li",
-									null,
-									" CheckIns: ",
-									checkInNodes
-								),
-								_react2.default.createElement(
-									"li",
-									null,
-									" Reviews: ",
-									reviewNodes
-								),
-								_react2.default.createElement(
-									"li",
-									null,
-									" ",
-									_react2.default.createElement(_RemoveButton2.default, { removeUser: removeUser, type: "User", id: user._id })
 								)
-							)
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "col-md-6" },
-							_react2.default.createElement(_UserEditForm2.default, {
-								userID: user._id,
-								allUsers: allUsers,
-								allCheckIns: allCheckIns,
-								allDishes: allDishes,
-								allReviews: allReviews,
-								allSubNeighborhoods: allSubNeighborhoods }),
-							" ",
+							),
+							_react2.default.createElement(
+								"div",
+								{ className: "col-md-6" },
+								_react2.default.createElement(_UserEditForm2.default, {
+									userID: user._id,
+									allUsers: allUsers,
+									allCheckIns: allCheckIns,
+									allDishes: allDishes,
+									allReviews: allReviews,
+									allSubNeighborhoods: allSubNeighborhoods }),
+								" ",
+								_react2.default.createElement("br", null)
+							),
 							_react2.default.createElement("br", null)
-						),
-						_react2.default.createElement("br", null)
+						)
 					);
 				});
 				return _react2.default.createElement(
@@ -69913,6 +69926,248 @@
 	});
 
 	exports.default = FixinsApp;
+
+/***/ },
+/* 801 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(161);
+
+	var _CalorieDollarChart = __webpack_require__(543);
+
+	var _CalorieDollarChart2 = _interopRequireDefault(_CalorieDollarChart);
+
+	var _RemoveButton = __webpack_require__(541);
+
+	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var UserDetail = function (_React$Component) {
+		_inherits(UserDetail, _React$Component);
+
+		function UserDetail() {
+			_classCallCheck(this, UserDetail);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(UserDetail).apply(this, arguments));
+		}
+
+		_createClass(UserDetail, [{
+			key: "render",
+			value: function render() {
+				var allReviews = this.props.allReviews;
+				var allSubNeighborhoods = this.props.allSubNeighborhoods;
+				var allUsers = this.props.allUsers;
+				var allDishes = this.props.allDishes;
+				var allCheckIns = this.props.allCheckIns;
+				var removeUser = this.props.removeUser;
+				var user = this.props.user;
+				var findAndChangeUser = this.props.findAndChangeUser;
+
+				function findCheckInsFilter(checkIn) {
+					return checkIn.checkIn_user._id === user._id || checkIn.checkIn_user === user._id;
+				}
+				var userCheckIns = allCheckIns.filter(findCheckInsFilter).map(function (checkIn) {
+					return checkIn;
+				});
+				var checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function (checkIn) {
+					return _react2.default.createElement(
+						"div",
+						{ key: checkIn._id },
+						_react2.default.createElement(
+							"ul",
+							null,
+							_react2.default.createElement(
+								"li",
+								null,
+								_react2.default.createElement(
+									"b",
+									null,
+									checkIn.checkIn_dish.dish_name
+								)
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								checkIn.checkIn_dish.dish_calories,
+								" calories"
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								checkIn.checkIn_dish.dish_price,
+								" dollars"
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								checkIn.checkIn_blurb
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								checkIn.checkIn_dish.dish_spot.spot_name
+							)
+						)
+					);
+				});
+				function findReviewsFilter(review) {
+					return review.review_user._id === user._id || review.review_user === user._id;
+				}
+				var reviewNodes = allReviews.filter(findReviewsFilter).map(function (review) {
+					return _react2.default.createElement(
+						"div",
+						{ key: review._id },
+						_react2.default.createElement(
+							"ul",
+							null,
+							_react2.default.createElement(
+								"li",
+								null,
+								_react2.default.createElement(
+									"b",
+									null,
+									review.reviewed_dish.dish_name
+								)
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								review.reviewed_dish.dish_calories,
+								"  calories"
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								review.reviewed_dish.dish_price,
+								" dollars"
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								review.review_words
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								review.review_stars,
+								" stars"
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								review.review_date
+							)
+						)
+					);
+				});
+				return _react2.default.createElement(
+					"div",
+					null,
+					_react2.default.createElement(_CalorieDollarChart2.default, { username: this.props.user.username, userCheckIns: userCheckIns }),
+					_react2.default.createElement(
+						"div",
+						{ className: "col-md-6" },
+						_react2.default.createElement(
+							"ul",
+							null,
+							_react2.default.createElement(
+								"li",
+								null,
+								_react2.default.createElement(
+									"h2",
+									null,
+									this.props.user.username
+								)
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" Password: ",
+								this.props.user.password
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" SubNeighborhood: ",
+								this.props.user.user_sub_neighborhood.subNeighborhood_name
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" CheckIns: ",
+								checkInNodes
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" Reviews: ",
+								reviewNodes
+							),
+							_react2.default.createElement(
+								"li",
+								null,
+								" ",
+								_react2.default.createElement(_RemoveButton2.default, { removeUser: removeUser, type: "User", id: this.props.user._id })
+							)
+						)
+					),
+					"    "
+				);
+			}
+		}]);
+
+		return UserDetail;
+	}(_react2.default.Component);
+
+	var mapStateToProps = function mapStateToProps(state) {
+		var _ref;
+
+		var selectUser = function selectUser(users, id) {
+			var ridiculousArray = users.filter(function (x) {
+				return x._id === id;
+			});
+			return ridiculousArray[0];
+		};
+		console.log(selectUser(state.users, "56f6e43b12ca8480147be476"));
+		return _ref = {
+			user: selectUser(state.users, "56f6e43b12ca8480147be476"),
+			allDishes: state.dishes,
+			allReviews: state.reviews,
+			allSubNeighborhoods: state.subNeighborhoods,
+			allUsers: state.users
+		}, _defineProperty(_ref, "allDishes", state.dishes), _defineProperty(_ref, "allCheckIns", state.checkIns), _ref;
+	};
+
+	/*
+	const mapDispatchToProps = (dispatch) => {
+	    removeUser:
+	    findAndChangeUser:
+	}
+	*/
+
+	var UserDetailContainer = (0, _reactRedux.connect)(mapStateToProps)(UserDetail);
+	exports.default = UserDetailContainer;
 
 /***/ }
 /******/ ]);
