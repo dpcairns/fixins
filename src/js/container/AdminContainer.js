@@ -15,14 +15,42 @@ const mapStateToProps = (state) => {
   }
 }
 
-function putOneUserInState(_id){
+function  putOneUserInState(_id){
   return {type: "PUT_ONE_USER_IN_STATE", _id:_id}
+}
+
+
+function putOneSpotInState(_id){
+  return {type: "PUT_ONE_SPOT_IN_STATE", _id:_id}
+}
+
+function putOneDishInState(_id){
+  return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
+}
+
+function putOneGenreInState(_id){
+  return {type: "PUT_ONE_GENRE_IN_STATE", _id:_id}
+}
+
+function putOneNeighborhoodInState(_id){
+  return {type: "PUT_ONE_NEIGHBORHOOD_IN_STATE", _id:_id}
+}
+
+function putOneSubNeighborhoodInState(_id){
+  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
 
           putOneUserInState: (_id) => dispatch(putOneUserInState(_id)),
+          putOneSpotInState: (_id) => dispatch(putOneSpotInState(_id)),
+          putOneGenreInState: (_id) => dispatch(putOneGenreInState(_id)),
+          putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
+          putOneDishInState: (_id) => dispatch(putOneDishInState(_id)),
+          putOneNeighborhoodInState: (_id) => dispatch(putOneNeighborhoodInState(_id)),
+
+
           createSubNeighborhood: (newSubNeighborhood) => FixinsActions.createSubNeighborhood(newSubNeighborhood, dispatch),
           createNeighborhood: (newNeighborhood) => FixinsActions.createNeighborhood(newNeighborhood, dispatch),
           createGenre: (newGenre) => FixinsActions.createGenre(newGenre, dispatch),

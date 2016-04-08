@@ -2,13 +2,10 @@ import React from "react"
 import { connect } from 'react-redux'
 import CalorieDollarChart from "../utils/CalorieDollarChart"
 import RemoveButton from "../utils/RemoveButton"
+import { Link } from 'react-router'
 import Links from "../utils/Links"
-class UserDetail extends React.Component{
 
-  //the problem is that i need to put the id in state beforeeee the wrapping happens...
-  //in order to make the id accessible to the wrapping
-  //which means i need the id to do the wrapping...
-  //
+class UserDetail extends React.Component{
 
 	render(){
     console.log("this.props.user")
@@ -19,7 +16,9 @@ class UserDetail extends React.Component{
 		let allDishes = this.props.allDishes
 		let allCheckIns = this.props.allCheckIns
     let thisUser = this.props.user
-
+		let putOneDishInState = this.props.putOneDishInState
+		let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
+		let subNeighborhoodId = thisUser.user_sub_neighborhood._id
 
 			function findCheckInsFilter(checkIn){
 									return (checkIn.checkIn_user._id === thisUser._id || checkIn.checkIn_user === thisUser._id)
@@ -28,27 +27,31 @@ class UserDetail extends React.Component{
 								return checkIn
 						})
 				let checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function(checkIn){
+					let dishId = checkIn.checkIn_dish._id
 									return (
-                    <div>
-
                       <tr key={checkIn._id}>
-                      <td><b>{checkIn.checkIn_dish.dish_name}</b></td>
+                      <td onClick={putOneDishInState.bind(this, dishId)}>
+
+											 <b><Link to={`/dish/${dishId}`}>{checkIn.checkIn_dish.dish_name}
+											 </Link></b></td>
 											<td>>{checkIn.checkIn_dish.dish_calories} calories</td>
 											<td>{checkIn.checkIn_dish.dish_price} dollars</td>
 											<td>{checkIn.checkIn_blurb}</td>
 											<td>{checkIn.checkIn_dish.dish_spot.spot_name}</td>
                       </tr>
-										</div>
+
 										)
 				})
 			function findReviewsFilter(review){
 									return (review.review_user._id === thisUser._id || review.review_user === thisUser._id)
 						}
 				let reviewNodes = allReviews.filter(findReviewsFilter).map(function(review){
+					let dishId = review.reviewed_dish._id
 									return (
                     <div>
                     <tr key={review._id}>
-											<td><b>{review.reviewed_dish.dish_name}</b></td>
+											<td onClick={putOneDishInState.bind(this, dishId)}>
+											 <b><Link to={`/dish/${dishId}`}>{review.reviewed_dish.dish_name}</Link></b></td>
 											<td>{review.reviewed_dish.dish_calories}  calories</td>
 											<td>{review.reviewed_dish.dish_price} dollars</td>
 											<td>{review.review_words}</td>
@@ -71,7 +74,11 @@ class UserDetail extends React.Component{
       <ul>
         <li><h2>{this.props.user.username}</h2></li>
         <li> Password: {this.props.user.password}</li>
-        <li> SubNeighborhood: {this.props.user.user_sub_neighborhood.subNeighborhood_name}</li>
+				<li onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)}>
+							<Link to={`/subNeighborhood/${subNeighborhoodId}`}>
+									{this.props.user.user_sub_neighborhood.subNeighborhood_name}
+							</Link>
+			</li>
       </ul>
     </div>
 </div>
@@ -103,15 +110,12 @@ class UserDetail extends React.Component{
   }
 }
 
-
 const mapStateToProps = (state) => {
-      const selectUser = (users, id) => {
+  const selectUser = (users, id) => {
           const ridiculousArray = users.filter(x => x._id === id)
           return ridiculousArray[0]
         }
-        console.log("mapStateToProps(selectUser...)")
-      return {
-        //so if this can get an id, everything works...
+	    return {
         user: selectUser(state.users, state.user._id),
         allDishes: state.dishes,
         allReviews: state.reviews,
@@ -121,7 +125,19 @@ const mapStateToProps = (state) => {
     		allCheckIns: state.checkIns
         }
 }
+function putOneSpotInState(_id){
+  return {type: "PUT_ONE_SPOT_IN_STATE", _id:_id}
+}
 
-//here is the contradiction...it needs this id before it does the weapping...
-const UserDetailContainer = connect(mapStateToProps)(UserDetail)
+function putOneSubNeighborhoodInState(_id){
+  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
+}
+const mapDispatchToProps = (dispatch) => {
+ return {putOneDishInState: (_id) => dispatch(putOneSpotInState(_id)),
+	 	putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id))
+
+ }
+}
+
+const UserDetailContainer = connect(mapStateToProps, mapDispatchToProps)(UserDetail)
 export default UserDetailContainer

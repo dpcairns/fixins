@@ -92,13 +92,15 @@ toggleEdit(){
 
 			return(
 			<div className="row user-boxes" onClick={putOneUserInState.bind(this, userId)} key={userId}>
-			<Link to={`/user/${userId}`}>
 			<CalorieDollarChart username={user.username} userCheckIns={userCheckIns} />
 
 				<div className="col-md-6">
 					<ul>
+					<Link to={`/user/${userId}`}>
+
 						<li><h2>{user.username}</h2></li>
 						<li> Password: {user.password}</li>
+						</Link>
 						<li> SubNeighborhood: {user.user_sub_neighborhood.subNeighborhood_name}</li>
 						<li> CheckIns: {checkInNodes}</li>
 						<li> Reviews: {reviewNodes}</li>
@@ -117,7 +119,6 @@ toggleEdit(){
 				</div>
 
 				<br/>
-				</Link>
 </div>
 
 				)

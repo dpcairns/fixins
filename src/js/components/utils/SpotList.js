@@ -1,6 +1,7 @@
 import React from "react"
 import RemoveButton from "./RemoveButton"
 import SpotEditForm from "./SpotEditForm"
+import { Link } from "react-router"
 
 export default class SpotList extends React.Component{
 	render(){
@@ -12,9 +13,12 @@ export default class SpotList extends React.Component{
 		let allSubNeighborhoods= this.props.allSubNeighborhoods
 		let removeSpot = this.props.removeSpot
 		let findAndChangeSpot = this.props.findAndChangeSpot
+		let putOneSpotInState = this.props.putOneSpotInState
 		let spotNodes = this.props.allSpots.map(function(spot){
+			let spotId=spot._id
 			return(
-			<div key={spot._id}>
+			<div className="row user-boxes" onClick={putOneSpotInState.bind(this, spotId)} key={spotId}>
+			<Link to={`/spot/${spotId}`}>
 				<div className="col-md-6">
 					<ul>
 						<li><h2>{spot.spot_name}</h2></li>
@@ -35,6 +39,7 @@ export default class SpotList extends React.Component{
 							allSubNeighborhoods={allSubNeighborhoods}
 							findAndChangeSpot={findAndChangeSpot}/>
 				</div>
+				</Link>
 			</div>
 				)
 		})

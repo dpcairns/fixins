@@ -71,6 +71,8 @@ export default class Admin extends React.Component{
 						allDishes={this.props.allDishes}
 						removeSpot={this.props.removeSpot}
 						findAndChangeSpot={this.props.findAndChangeSpot}
+						putOneSpotInState={this.props.putOneSpotInState}
+
 
 						/>
 
@@ -99,6 +101,8 @@ export default class Admin extends React.Component{
 									allDishes={this.props.allDishes}
 									removeDish={this.props.removeDish}
 									findAndChangeDish={this.props.findAndChangeDish}
+									putOneDishInState={this.props.putOneDishInState}
+
 			 							/>
 								</div>
 
@@ -172,6 +176,7 @@ export default class Admin extends React.Component{
 						removeNeighborhood={this.props.removeNeighborhood}
 						findAndChangeNeighborhood={this.props.findAndChangeNeighborhood}
 
+
  />
 					</div>
 				</div>
@@ -194,6 +199,8 @@ export default class Admin extends React.Component{
 						 allSubNeighborhoods={this.props.allSubNeighborhoods}
 						 removeSubNeighborhood={this.props.removeSubNeighborhood}
 						 findAndChangeSubNeighborhood={this.props.findAndChangeSubNeighborhood}
+						 putOneSubNeighborhoodInState={this.props.putOneSubNeighborhoodInState}
+
 
  />
 					</div>
@@ -216,6 +223,7 @@ export default class Admin extends React.Component{
 						allGenres={this.props.allGenres}
 						allDishes={this.props.allDishes}
 						removeGenre={this.props.removeGenre}
+						putOneGenreInState={this.props.putOneGenreInState}
 						findAndChangeGenre={this.props.findAndChangeGenre}
 
 				/>

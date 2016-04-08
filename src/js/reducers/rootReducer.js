@@ -9,6 +9,10 @@ const neighborhood = (state = "", action) => {
         neighborhood_name: action.neighborhood_name,
         neighborhood_subNeighborhoods: action.neighborhood_subNeighborhoods
       }
+    case 'PUT_ONE_NEIGHBORHOOD_IN_STATE':
+      return Object.assign({}, {
+      _id: action._id
+          })
     default:
       return state
   }
@@ -182,6 +186,10 @@ const spot = (state = "", action) => {
         spot_coordinates: action.spot_coordinates,
         addDate: action.addDate
       }
+    case 'PUT_ONE_SPOT_IN_STATE':
+      return Object.assign({}, {
+        _id: action._id
+    })
     default:
       return state
   }
@@ -226,6 +234,10 @@ const dish = (state = "", action) => {
         dish_calories: action.dish_calories,
         dish_price: action.dish_price
       }
+    case 'PUT_ONE_DISH_IN_STATE':
+      return Object.assign({}, {
+        _id: action._id
+    })
     default:
       return state
   }
@@ -273,6 +285,10 @@ const subNeighborhood = (state = "", action) => {
         subNeighborhood_users: action.subNeighborhood_users,
         sub_neighborhood_neighborhood: action.sub_neighborhood_neighborhood
       }
+    case 'PUT_ONE_SUBNEIGHBORHOOD_IN_STATE':
+      return Object.assign({}, {
+      _id: action._id
+          })
     default:
       return state
   }
@@ -312,6 +328,11 @@ const genre = (state = "", action) => {
         _id: action._id,
         genre_name: action.genre_name,
       }
+
+      case 'PUT_ONE_GENRE_IN_STATE':
+      return Object.assign({}, {
+        _id: action._id
+    })
     default:
       return state
   }

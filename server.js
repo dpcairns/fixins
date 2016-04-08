@@ -1,16 +1,16 @@
 var express = require('express');
-var bodyParser = require('body-parser'); 
+var bodyParser = require('body-parser');
 var app = express();
 var mongoose = require('mongoose');
 var router = express.Router()
-var Neighborhood = require('./src/js/models/NeighborhoodModel')  
-var Subneighborhood = require('./src/js/models/SubNeighborhoodModel') 
-var User = require('./src/js/models/UserModel') 
-var CheckIn = require('./src/js/models/GenreModel') 
-var Genre = require('./src/js/models/GenreModel') 
-var Review = require('./src/js/models/ReviewModel') 
-var Dish = require('./src/js/models/DishModel') 
-var Spot = require('./src/js/models/SpotModel') 
+var Neighborhood = require('./src/js/models/NeighborhoodModel')
+var Subneighborhood = require('./src/js/models/SubNeighborhoodModel')
+var User = require('./src/js/models/UserModel')
+var CheckIn = require('./src/js/models/GenreModel')
+var Genre = require('./src/js/models/GenreModel')
+var Review = require('./src/js/models/ReviewModel')
+var Dish = require('./src/js/models/DishModel')
+var Spot = require('./src/js/models/SpotModel')
 var db ='mongodb://localhost/test'
 mongoose.connect(db)
 
