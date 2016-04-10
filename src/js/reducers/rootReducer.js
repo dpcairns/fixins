@@ -1,5 +1,20 @@
 import { combineReducers } from 'redux'
 
+const currentUser = (state = {}, action) => {
+    switch(action.type) {
+      case 'LOG_IN':
+      console.log(action)
+      return Object.assign({}, {
+      user: action.user
+          })
+      case 'LOG_OUT':
+      return Object.assign({}, {
+        user: {}
+      })
+    default:
+      return state
+    }
+}
 
 const neighborhood = (state = "", action) => {
   switch (action.type) {
@@ -365,6 +380,7 @@ const genres = (state = [], action) => {
 
 
 const FixinsApp = combineReducers({
+  currentUser,
   review,
   reviews,
   user,

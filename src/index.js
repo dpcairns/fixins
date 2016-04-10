@@ -13,7 +13,7 @@ import FixinsApp from './js/reducers/rootReducer'
 import UserDetailContainer from './js/components/details/UserDetail'
 import GenreDetailContainer from './js/components/details/GenreDetail'
 import SpotDetailContainer from './js/components/details/SpotDetail'
-
+import LogInPage from './js/components/pages/LogInPage'
 import DishDetailContainer from './js/components/details/DishDetail'
 import SubNeighborhoodDetailContainer from './js/components/details/SubNeighborhoodDetail'
 
@@ -22,6 +22,7 @@ const app = document.getElementById('app');
 
 
 let initialState = {
+	currentUser: {},
 	genre: "",
 	genres: [],
 	neighborhood: "",
@@ -58,7 +59,7 @@ ReactDOM.render(
 		<Route name="spot" path="/spot/:id" component={SpotDetailContainer}></Route>
 		<Route name="dish" path="/dish/:id" component={DishDetailContainer}></Route>
 		<Route name="subNeighborhood" path="/subNeighborhood/:id" component={SubNeighborhoodDetailContainer}></Route>
-
+		<Route name="login" path="login" component={LogInPage}></Route>
 		<Route name= "mapPage" path="mapPage" component={MapContainer}></Route>
 	</Route>
 </Router>

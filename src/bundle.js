@@ -105,11 +105,15 @@
 
 	var _SpotDetail2 = _interopRequireDefault(_SpotDetail);
 
-	var _DishDetail = __webpack_require__(804);
+	var _LogInPage = __webpack_require__(804);
+
+	var _LogInPage2 = _interopRequireDefault(_LogInPage);
+
+	var _DishDetail = __webpack_require__(805);
 
 	var _DishDetail2 = _interopRequireDefault(_DishDetail);
 
-	var _SubNeighborhoodDetail = __webpack_require__(805);
+	var _SubNeighborhoodDetail = __webpack_require__(806);
 
 	var _SubNeighborhoodDetail2 = _interopRequireDefault(_SubNeighborhoodDetail);
 
@@ -118,6 +122,7 @@
 	var app = document.getElementById('app');
 
 	var initialState = {
+		currentUser: {},
 		genre: "",
 		genres: [],
 		neighborhood: "",
@@ -157,6 +162,7 @@
 				_react2.default.createElement(_reactRouter.Route, { name: "spot", path: "/spot/:id", component: _SpotDetail2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "dish", path: "/dish/:id", component: _DishDetail2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "subNeighborhood", path: "/subNeighborhood/:id", component: _SubNeighborhoodDetail2.default }),
+				_react2.default.createElement(_reactRouter.Route, { name: "login", path: "login", component: _LogInPage2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "mapPage", path: "mapPage", component: _MapContainer2.default })
 			)
 		)
@@ -34879,6 +34885,15 @@
 							_reactRouter.Link,
 							{ to: "index/mapPage" },
 							"or click here to see all the data on a map"
+						)
+					),
+					_react2.default.createElement(
+						"h2",
+						null,
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: "index/login" },
+							"or just like maybe ever click here to login"
 						)
 					)
 				);
@@ -69739,6 +69754,25 @@
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+	var currentUser = function currentUser() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case 'LOG_IN':
+	      console.log(action);
+	      return Object.assign({}, {
+	        user: action.user
+	      });
+	    case 'LOG_OUT':
+	      return Object.assign({}, {
+	        user: {}
+	      });
+	    default:
+	      return state;
+	  }
+	};
+
 	var neighborhood = function neighborhood() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
 	  var action = arguments[1];
@@ -70101,6 +70135,7 @@
 	};
 
 	var FixinsApp = (0, _redux.combineReducers)({
+	  currentUser: currentUser,
 	  review: review,
 	  reviews: reviews,
 	  user: user,
@@ -70775,6 +70810,138 @@
 
 	var _reactRouter = __webpack_require__(184);
 
+	var _Links = __webpack_require__(790);
+
+	var _Links2 = _interopRequireDefault(_Links);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LogInPage = function (_React$Component) {
+	  _inherits(LogInPage, _React$Component);
+
+	  function LogInPage() {
+	    _classCallCheck(this, LogInPage);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LogInPage).call(this));
+
+	    _this.state = {
+	      username: '',
+	      password: ''
+	    };
+	    return _this;
+	  }
+
+	  _createClass(LogInPage, [{
+	    key: 'handleUsernameChange',
+	    value: function handleUsernameChange(e) {
+	      this.setState({ username: e.target.value });
+	      console.log(this.state);
+	    }
+	  }, {
+	    key: 'handlePasswordChange',
+	    value: function handlePasswordChange(e) {
+	      this.setState({ password: e.target.value });
+	      console.log(this.state);
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      e.preventDefault(e);
+	      var username1 = this.state.username;
+	      var password1 = this.state.password;
+	      var thisUserFilter = function thisUserFilter(user) {
+	        return username1 === user.username && password1 === user.password;
+	      };
+	      var thisUser = this.props.users.filter(thisUserFilter);
+	      this.props.userLogin(thisUser);
+	      this.setState({ username: "", password: "" });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+
+	      return _react2.default.createElement(
+	        'form',
+	        { onSubmit: this.handleSubmit.bind(this) },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'input-group' },
+	          'Username:',
+	          _react2.default.createElement('input', { type: 'text',
+	            value: this.state.username,
+	            onChange: this.handleUsernameChange.bind(this),
+	            className: 'form-control',
+	            placeholder: 'username' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'input-group' },
+	          'Password:',
+	          _react2.default.createElement('input', { type: 'password',
+	            value: this.state.password,
+	            onChange: this.handlePasswordChange.bind(this),
+	            className: 'form-control',
+	            placeholder: 'password' })
+	        ),
+	        _react2.default.createElement('input', { className: 'button btn-danger align-right', type: 'submit', value: 'Log-in' })
+	      );
+	    }
+	  }]);
+
+	  return LogInPage;
+	}(_react2.default.Component);
+
+	var _userLogin = function _userLogin(thisUser) {
+	  console.log(thisUser);
+	  return {
+	    type: "LOG_IN",
+	    user: thisUser
+	  };
+	};
+
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    currentUser: state.currentUser,
+	    users: state.users
+	  };
+	};
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    userLogin: function userLogin(thisUser) {
+	      return dispatch(_userLogin(thisUser));
+	    }
+	  };
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LogInPage);
+
+/***/ },
+/* 805 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(161);
+
+	var _reactRouter = __webpack_require__(184);
+
 	var _RemoveButton = __webpack_require__(541);
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
@@ -71005,7 +71172,7 @@
 	exports.default = DishDetailContainer;
 
 /***/ },
-/* 805 */
+/* 806 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
