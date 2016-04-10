@@ -13,6 +13,8 @@ class DishDetail extends React.Component{
     let allSpots = this.props.allSpots
 		let allCheckIns = this.props.allCheckIns
 		let putOneSpotInState = this.props.putOneSpotInState
+		let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
+
     let dish = this.props.dish
 
 function findCheckInsFilter(checkIn){
@@ -61,9 +63,10 @@ function findReviewsFilter(review){
                   <ul>
 									<li onClick={putOneSpotInState.bind(this, spotId)}><h2>This is the spot where you can get this dish:
 									 <Link to={`/spot/${spotId}`}>
-{spot.spot_name}
-</Link></h2></li>
-									<li><Link to={`/subNeighborhood/${subNeighborhoodId}`}>{spot.spot_subNeighborhood.subNeighborhood_name}</Link></li>
+										{spot.spot_name}
+										</Link></h2></li>
+									<li  onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)}>
+									<Link to={`/subNeighborhood/${subNeighborhoodId}`}>{spot.spot_subNeighborhood.subNeighborhood_name}</Link></li>
                   <li>{spot.spot_genres[0].genre_name}</li>
                   <li>{spot.spot_blurb}</li>
                   </ul>
@@ -107,7 +110,7 @@ function putOneSpotInState(_id){
   return {type: "PUT_ONE_SPOT_IN_STATE", _id:_id}
 }
 
-function putOneSpotInState(_id){
+function putOneSubNeighborhoodInState(_id){
   return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
 }
 

@@ -29,8 +29,8 @@ class UserDetail extends React.Component{
 				let checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function(checkIn){
 					let dishId = checkIn.checkIn_dish._id
 									return (
-                      <tr key={checkIn._id}>
-                      <td onClick={putOneDishInState.bind(this, dishId)}>
+                      <tr key={checkIn._id}  onClick={putOneDishInState.bind(this, dishId)}>
+                      <td>
 
 											 <b><Link to={`/dish/${dishId}`}>{checkIn.checkIn_dish.dish_name}
 											 </Link></b></td>
@@ -125,17 +125,17 @@ const mapStateToProps = (state) => {
     		allCheckIns: state.checkIns
         }
 }
-function putOneSpotInState(_id){
-  return {type: "PUT_ONE_SPOT_IN_STATE", _id:_id}
+function putOneDishInState(_id){
+  return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
 }
 
 function putOneSubNeighborhoodInState(_id){
   return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
 }
 const mapDispatchToProps = (dispatch) => {
- return {putOneDishInState: (_id) => dispatch(putOneSpotInState(_id)),
-	 	putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id))
-
+ return {
+	 putOneDishInState: (_id) => dispatch(putOneDishInState(_id)),
+	 putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id))
  }
 }
 

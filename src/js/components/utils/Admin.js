@@ -45,6 +45,8 @@ export default class Admin extends React.Component{
 						removeUser={this.props.removeUser}
 						findAndChangeUser={this.props.findAndChangeUser}
 						putOneUserInState={this.props.putOneUserInState}
+						putOneDishInState={this.props.putOneDishInState}
+
 
 						/>
 					</div>
@@ -72,6 +74,8 @@ export default class Admin extends React.Component{
 						removeSpot={this.props.removeSpot}
 						findAndChangeSpot={this.props.findAndChangeSpot}
 						putOneSpotInState={this.props.putOneSpotInState}
+						putOneSubNeighborhoodInState={this.props.putOneSubNeighborhoodInState}
+
 
 
 						/>
