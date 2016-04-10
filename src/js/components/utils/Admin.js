@@ -46,7 +46,7 @@ export default class Admin extends React.Component{
 						findAndChangeUser={this.props.findAndChangeUser}
 						putOneUserInState={this.props.putOneUserInState}
 						putOneDishInState={this.props.putOneDishInState}
-
+						putOneSubNeighborhoodInState={this.props.putOneSubNeighborhoodInState}
 
 						/>
 					</div>
@@ -228,9 +228,10 @@ export default class Admin extends React.Component{
 						allDishes={this.props.allDishes}
 						removeGenre={this.props.removeGenre}
 						putOneGenreInState={this.props.putOneGenreInState}
+						putOneSpotInState={this.props.putOneSpotInState}
 						findAndChangeGenre={this.props.findAndChangeGenre}
-
 				/>
+
 					</div>
 				</div>
 

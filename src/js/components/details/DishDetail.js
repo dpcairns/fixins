@@ -57,7 +57,6 @@ function findReviewsFilter(review){
     let spotNode = allSpots.filter(findSpotFilter).map(function(spot){
 			let subNeighborhoodId = spot.spot_subNeighborhood._id
       let spotId = spot._id
-      console.log(spotId)
               return (
                 <div key={spotId}>
                   <ul>

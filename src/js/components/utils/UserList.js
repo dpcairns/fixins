@@ -46,6 +46,8 @@ toggleEdit(){
 		let allCheckIns = this.props.allCheckIns
 		let removeUser = this.props.removeUser
 		let putOneUserInState = this.props.putOneUserInState
+		let putOneDishInState = this.props.putOneDishInState
+		let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
 		let findAndChangeUser = this.props.findAndChangeUser
 		let userNodes = allUsers.map(function(user){
 
@@ -56,9 +58,14 @@ toggleEdit(){
 								return checkIn
 						})
 				let checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function(checkIn){
+					let dishId = checkIn.checkIn_dish._id
 									return (
 										<div key={checkIn._id}>
-											<ul><li><b>{checkIn.checkIn_dish.dish_name}</b></li>
+											<ul>
+											<Link to={`/dish/${dishId}`}>
+											<li onClick={putOneDishInState.bind(this, dishId)}>
+											<b>{checkIn.checkIn_dish.dish_name}</b></li>
+											</Link>
 											<li>{checkIn.checkIn_dish.dish_calories} calories</li>
 											<li>{checkIn.checkIn_dish.dish_price} dollars</li>
 											<li>{checkIn.checkIn_blurb}</li>
@@ -73,9 +80,14 @@ toggleEdit(){
 									return (review.review_user._id === user._id || review.review_user === user._id)
 						}
 				let reviewNodes = allReviews.filter(findReviewsFilter).map(function(review){
+					let dishId = review.reviewed_dish._id
 									return (
 										<div key={review._id}>
-											<ul><li><b>{review.reviewed_dish.dish_name}</b></li>
+										<ul>
+										<Link to={`/dish/${dishId}`}>
+											<li onClick={putOneDishInState.bind(this, dishId)}>
+											<b>{review.reviewed_dish.dish_name}</b></li>
+											</Link>
 											<li>{review.reviewed_dish.dish_calories}  calories</li>
 											<li>{review.reviewed_dish.dish_price} dollars</li>
 											<li>{review.review_words}</li>
@@ -89,6 +101,7 @@ toggleEdit(){
 				})
 
 				let userId = user._id
+				let subNeighborhoodId = user.user_sub_neighborhood._id
 
 			return(
 			<div className="row user-boxes" onClick={putOneUserInState.bind(this, userId)} key={userId}>
@@ -101,7 +114,11 @@ toggleEdit(){
 						<li><h2>{user.username}</h2></li>
 						<li> Password: {user.password}</li>
 						</Link>
-						<li> SubNeighborhood: {user.user_sub_neighborhood.subNeighborhood_name}</li>
+
+						<Link to={`/SubNeighborhood/${subNeighborhoodId}`}>
+						<li onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)}>
+						SubNeighborhood: {user.user_sub_neighborhood.subNeighborhood_name}</li>
+						</Link>
 						<li> CheckIns: {checkInNodes}</li>
 						<li> Reviews: {reviewNodes}</li>
 

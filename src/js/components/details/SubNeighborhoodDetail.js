@@ -18,11 +18,10 @@ class SubNeighborhoodDetail extends React.Component{
     						}
 
     				let spotNodes = allSpots.filter(findSpotsFilter).map(function(spot){
-							let dishId = spot.spot_dishes[0]._id
 							let spotId = spot._id
     									return (
-												<div>
-                          <ul key={spot._id}>
+												<div key={spot._id}>
+                          <ul>
 													<div>
 													<li onClick={putOneSpotInState.bind(this, spotId)}>
 														<div>
@@ -31,10 +30,7 @@ class SubNeighborhoodDetail extends React.Component{
 												</li>
 												</div>
 												<div>
-													<li onClick={putOneDishInState.bind(this, dishId)}>
-						{spot.spot_dishes.length>0 ? ( <Link to={`/dish/${dishId}`}>{spot.spot_dishes[0].dish_name} </Link> ): "none yet"}
 
-													</li>
 													</div>
 													</ul>
 												</div>
@@ -50,8 +46,8 @@ class SubNeighborhoodDetail extends React.Component{
             let userId = user._id
 
                     return (
-											<div>
-                      <ul key={userId} onClick={putOneUserInState.bind(this, userId)} >
+											<div  key={userId}>
+                      <ul onClick={putOneUserInState.bind(this, userId)} >
                         <li>Username:
                             <Link to={`/user/${userId}`}>
                             {user.username}</Link>
@@ -65,6 +61,7 @@ class SubNeighborhoodDetail extends React.Component{
     return(
       <div>
         <Links />
+				<h1>SubNeighborhoodDetail page</h1>
           <h1>{subNeighborhood.subNeighborhood_name}</h1>
           <h2>Spots in {subNeighborhood.subNeighborhood_name}</h2>
 					<div>
@@ -75,10 +72,25 @@ class SubNeighborhoodDetail extends React.Component{
 <div>
           {allUsers.filter(findUsersFilter).length> 0 ? userNodes: (<h1>no relevant users...yet!</h1>)}
       </div>
+			</div>
     )
 
   }
-}})
+}
+
+
+const mapStateToProps = (state) => {
+	const selectSubNeighborhood = (subNeighborhoods, id) => {
+          const ridiculousArray = subNeighborhoods.filter(x => x._id === id)
+          return ridiculousArray[0]
+        }
+	    return {
+        subNeighborhood: selectSubNeighborhood(state.subNeighborhoods, state.subNeighborhood._id),
+        allSpots: state.spots,
+        allUsers: state.users,
+        allCheckIns: state.checkIns
+        }
+}
 
 
 function  putOneUserInState(_id){
@@ -94,18 +106,7 @@ function  putOneSpotInState(_id){
   return {type: "PUT_ONE_SPOT_IN_STATE", _id:_id}
 }
 
-const mapStateToProps = (state) => {
-  const selectSubNeighborhood = (subNeighborhoods, id) => {
-          const ridiculousArray = subNeighborhoods.filter(x => x._id === id)
-          return ridiculousArray[0]
-        }
-	    return {
-        subNeighborhood: selectSubNeighborhood(state.subNeighborhoods, state.subNeighborhood._id),
-        allSpots: state.spots,
-        allUsers: state.users,
-        allCheckIns: state.checkIns
-        }
-}
+
 
 const mapDispatchToProps = (dispatch) => {
   return {

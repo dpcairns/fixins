@@ -6,15 +6,15 @@ import Links from "../utils/Links"
 
 class SpotDetail extends React.Component{
 	render(){
-    console.log("this.props.user")
-    console.log(this.props.user)
     let allReviews = this.props.allReviews
 		let allSubNeighborhoods = this.props.allSubNeighborhoods
 		let allUsers = this.props.allUsers
 		let allDishes = this.props.allDishes
 		let allCheckIns = this.props.allCheckIns
 		let putOneDishInState = this.props.putOneDishInState
+		let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
     let spot = this.props.spot
+		let subNeighorhoodId = spot.spot_subNeighborhood._id
 
 			function findDishesFilter(dish){
 									return (dish.dish_spot._id === spot._id)
@@ -43,7 +43,9 @@ class SpotDetail extends React.Component{
     <Links/>
       <ul>
         <li><h2>{spot.spot_name}</h2></li>
-        <li> SubNeighorhood: {spot.spot_subNeighborhood.subNeighborhood_name}</li>
+				<Link to={`/subNeighborhood/${subNeighorhoodId}`}>
+        <li onClick={putOneSubNeighborhoodInState.bind(this, subNeighorhoodId)}> SubNeighorhood: {spot.spot_subNeighborhood.subNeighborhood_name}</li>
+				</Link>
 				<li> Spot Dishes: {dishNodes} </li>
       </ul>
     </div>
@@ -72,8 +74,16 @@ function putOneDishInState(_id){
   return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
 }
 
+
+function putOneSubNeighborhoodInState(_id){
+  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
+}
+
 const mapDispatchToProps = (dispatch) => {
- return {putOneDishInState: (_id) => dispatch(putOneDishInState(_id))}
+ return {putOneDishInState: (_id) => dispatch(putOneDishInState(_id)),
+	 				putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id))
+
+ }
 }
 
 const SpotDetailContainer = connect(mapStateToProps, mapDispatchToProps)(SpotDetail)

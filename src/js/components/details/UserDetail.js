@@ -8,8 +8,6 @@ import Links from "../utils/Links"
 class UserDetail extends React.Component{
 
 	render(){
-    console.log("this.props.user")
-    console.log(this.props.user)
     let allReviews = this.props.allReviews
 		let allSubNeighborhoods = this.props.allSubNeighborhoods
 		let allUsers = this.props.allUsers
@@ -32,8 +30,8 @@ class UserDetail extends React.Component{
                       <tr key={checkIn._id}  onClick={putOneDishInState.bind(this, dishId)}>
                       <td>
 
-											 <b><Link to={`/dish/${dishId}`}>{checkIn.checkIn_dish.dish_name}
-											 </Link></b></td>
+											 <Link to={`/dish/${dishId}`}>{checkIn.checkIn_dish.dish_name}
+											 </Link></td>
 											<td>>{checkIn.checkIn_dish.dish_calories} calories</td>
 											<td>{checkIn.checkIn_dish.dish_price} dollars</td>
 											<td>{checkIn.checkIn_blurb}</td>
@@ -48,17 +46,16 @@ class UserDetail extends React.Component{
 				let reviewNodes = allReviews.filter(findReviewsFilter).map(function(review){
 					let dishId = review.reviewed_dish._id
 									return (
-                    <div>
-                    <tr key={review._id}>
+
+                    <tr  key={review._id}>
 											<td onClick={putOneDishInState.bind(this, dishId)}>
-											 <b><Link to={`/dish/${dishId}`}>{review.reviewed_dish.dish_name}</Link></b></td>
+											<Link to={`/dish/${dishId}`}>{review.reviewed_dish.dish_name}</Link></td>
 											<td>{review.reviewed_dish.dish_calories}  calories</td>
 											<td>{review.reviewed_dish.dish_price} dollars</td>
 											<td>{review.review_words}</td>
 											<td>{review.review_stars} stars</td>
 											<td>{review.review_date}</td>
                     </tr>
-										</div>
 										)
 				})
 
