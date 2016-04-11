@@ -21,7 +21,7 @@ export default class Splash extends React.Component{
 			<h2>Hello and welcome to fixins!</h2>
 			<h2><Link to="index">for now, just click here to go to the admin page</Link></h2>
 			<h2><Link to="index/mapPage">or click here to see all the data on a map</Link></h2>
-			<h2><Link to="index/login">or just like maybe ever click here to login</Link></h2>
+			<h2><Link to="index/myProfile">or just like click here to pretend to be a user</Link></h2>
 
 		</div>
 		)

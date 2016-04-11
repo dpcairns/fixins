@@ -121,6 +121,10 @@
 
 	var _LogInPage2 = _interopRequireDefault(_LogInPage);
 
+	var _myProfile = __webpack_require__(808);
+
+	var _myProfile2 = _interopRequireDefault(_myProfile);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var app = document.getElementById('app');
@@ -150,6 +154,14 @@
 		return f;
 	});
 
+	function requireAuth(nextState, replaceState) {
+		var state = store.getState();
+		console.log(state.currentUser._id);
+		if (!state.currentUser._id) {
+			window.locaton = '/login';
+		}
+	}
+
 	_reactDom2.default.render(_react2.default.createElement(
 		_reactRedux.Provider,
 		{ store: store },
@@ -168,6 +180,7 @@
 				_react2.default.createElement(_reactRouter.Route, { name: "subNeighborhood", path: "/subNeighborhood/:id", component: _SubNeighborhoodDetail2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "neighborhood", path: "/neighborhood/:id", component: _NeighborhoodDetail2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "login", path: "login", component: _LogInPage2.default }),
+				_react2.default.createElement(_reactRouter.Route, { name: "myProfile", path: "myProfile", onEnter: requireAuth, component: _myProfile2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "mapPage", path: "mapPage", component: _MapContainer2.default })
 			)
 		)
@@ -34897,8 +34910,8 @@
 						null,
 						_react2.default.createElement(
 							_reactRouter.Link,
-							{ to: "index/login" },
-							"or just like maybe ever click here to login"
+							{ to: "index/myProfile" },
+							"or just like click here to pretend to be a user"
 						)
 					)
 				);
@@ -71026,6 +71039,7 @@
 	      var putOneUserInState = this.props.putOneUserInState;
 	      var putOneSpotInState = this.props.putOneSpotInState;
 	      var putOneDishInState = this.props.putOneDishInState;
+	      var putOneNeighborhoodInState = this.props.putOneNeighborhoodInState;
 	      var subNeighborhood = this.props.subNeighborhood;
 	      function findSpotsFilter(spot) {
 	        return spot.spot_subNeighborhood._id === subNeighborhood._id;
@@ -71113,7 +71127,7 @@
 	          " is located in",
 	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { to: "/neighborhood/" + neighborhoodId, onClick: _putOneNeighborhoodInState.bind(this, neighborhoodId) },
+	            { to: "/neighborhood/" + neighborhoodId, onClick: putOneNeighborhoodInState.bind(this, neighborhoodId) },
 	            subNeighborhood.sub_neighborhood_neighborhood.neighborhood_name
 	          )
 	        ),
@@ -71528,6 +71542,7 @@
 	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
 	      var allSubNeighborhoods = this.props.allSubNeighborhoods;
 	      var neighborhood = this.props.neighborhood;
+
 	      function findSubNeighborhoodsFilter(subNeighorhood) {
 	        return subNeighorhood.sub_neighborhood_neighborhood._id === neighborhood._id;
 	      }
@@ -71554,6 +71569,7 @@
 	      return _react2.default.createElement(
 	        "div",
 	        null,
+	        _react2.default.createElement(_Links2.default, null),
 	        _react2.default.createElement(
 	          "h1",
 	          null,
@@ -71603,6 +71619,63 @@
 	};
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NeighborhoodDetail);
+
+/***/ },
+/* 808 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(161);
+
+	var _reactRouter = __webpack_require__(184);
+
+	var _Links = __webpack_require__(789);
+
+	var _Links2 = _interopRequireDefault(_Links);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var myProfile = function (_React$Component) {
+	  _inherits(myProfile, _React$Component);
+
+	  function myProfile() {
+	    _classCallCheck(this, myProfile);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(myProfile).apply(this, arguments));
+	  }
+
+	  _createClass(myProfile, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'h1',
+	        null,
+	        'welcome to profule'
+	      );
+	    }
+	  }]);
+
+	  return myProfile;
+	}(_react2.default.Component);
+
+	exports.default = myProfile;
 
 /***/ }
 /******/ ]);

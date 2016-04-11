@@ -12,6 +12,7 @@ class SubNeighborhoodDetail extends React.Component{
     let putOneUserInState = this.props.putOneUserInState
 		let putOneSpotInState = this.props.putOneSpotInState
 		let putOneDishInState = this.props.putOneDishInState
+		let putOneNeighborhoodInState = this.props.putOneNeighborhoodInState
     let subNeighborhood = this.props.subNeighborhood
     function findSpotsFilter(spot){
     									return (spot.spot_subNeighborhood._id === subNeighborhood._id)
@@ -63,8 +64,8 @@ class SubNeighborhoodDetail extends React.Component{
 				<h1>SubNeighborhoodDetail page</h1>
           <h1>{subNeighborhood.subNeighborhood_name}</h1>
 					<h3>{subNeighborhood.subNeighborhood_name} is located in
-					<Link to={`/neighborhood/${neighborhoodId}`} onClick={putOneNeighborhoodInState.bind(this, neighborhoodId)}>
-					{subNeighborhood.sub_neighborhood_neighborhood.neighborhood_name}
+<Link to={`/neighborhood/${neighborhoodId}`} onClick={putOneNeighborhoodInState.bind(this, neighborhoodId)}>
+					 {subNeighborhood.sub_neighborhood_neighborhood.neighborhood_name}
 					</Link>
 					 </h3>
           <h2>Spots in {subNeighborhood.subNeighborhood_name}</h2>

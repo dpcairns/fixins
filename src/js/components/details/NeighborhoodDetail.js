@@ -5,11 +5,13 @@ import Links from "../utils/Links"
 import { Link } from 'react-router'
 
 class NeighborhoodDetail extends React.Component{
+
 	render(){
 
-      let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
+    let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
     let allSubNeighborhoods = this.props.allSubNeighborhoods
     let neighborhood = this.props.neighborhood
+
     function findSubNeighborhoodsFilter(subNeighorhood){
                 return (subNeighorhood.sub_neighborhood_neighborhood._id === neighborhood._id)
           }
@@ -27,6 +29,7 @@ class NeighborhoodDetail extends React.Component{
       })
 return(
   <div>
+  <Links/>
     <h1>Neighborhood Detail Page for {neighborhood.neighborhood_name}</h1>
     <h2>here you go it is every subneighborhood in {neighborhood.neighborhood_name}</h2>
     {subNeighorhoodNodes}

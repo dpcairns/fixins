@@ -17,6 +17,7 @@ import DishDetailContainer from './js/components/details/DishDetail'
 import NeighborhoodDetail from './js/components/details/NeighborhoodDetail'
 import SubNeighborhoodDetailContainer from './js/components/details/SubNeighborhoodDetail'
 import LogInPage from './js/components/pages/LogInPage'
+import myProfile from './js/components/pages/myProfile'
 
 
 const app = document.getElementById('app');
@@ -49,6 +50,14 @@ let store = createStoreWithMiddleware(
 											window.devToolsExtension ? window.devToolsExtension() : f => f
 										)
 
+function requireAuth(nextState, replaceState) {
+	let state = store.getState()
+console.log(state.currentUser._id)
+	  if (!state.currentUser._id){
+		  window.locaton = '/login'
+										}
+						}
+
 ReactDOM.render(
 	<Provider store={store}>
 <Router history={hashHistory}>
@@ -62,7 +71,9 @@ ReactDOM.render(
 		<Route name="subNeighborhood" path="/subNeighborhood/:id" component={SubNeighborhoodDetailContainer}></Route>
 		<Route name="neighborhood" path="/neighborhood/:id" component={NeighborhoodDetail}></Route>
 		<Route name="login" path="login" component={LogInPage}></Route>
+		<Route name="myProfile" path="myProfile" onEnter={requireAuth} component={myProfile}></Route>
 		<Route name= "mapPage" path="mapPage" component={MapContainer}></Route>
+
 	</Route>
 </Router>
 </Provider>, app);
