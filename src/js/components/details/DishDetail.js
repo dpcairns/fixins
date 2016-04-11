@@ -24,14 +24,13 @@ function findCheckInsFilter(checkIn){
   let checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function(checkIn){
 		let userId = checkIn.checkIn_user._id
             return (
-              <ul key={checkIn._id}>
-							<li><b>here is a checkin for the dish</b></li>
-                <li>{checkIn.checkIn_blurb}</li>
-								<li> <Link onClick={putOneUserInState.bind(this, userId)} to={`/user/${userId}`}>
+              <tr key={checkIn._id}>
+                <td>{checkIn.checkIn_blurb}</td>
+								<td> <Link onClick={putOneUserInState.bind(this, userId)} to={`/user/${userId}`}>
 								{checkIn.checkIn_user.username}
-								</Link></li>
-								<li>{checkIn.checkIn_date}</li>
-                </ul>
+								</Link></td>
+								<td>{checkIn.checkIn_date}</td>
+                </tr>
 
               )
   })
@@ -42,15 +41,14 @@ function findReviewsFilter(review){
   let reviewNodes = allReviews.filter(findReviewsFilter).map(function(review){
 		let userId = review.review_user._id
             return (
-              <ul key={review._id}>
-							<li><b>here is a review for the dish</b></li>
-                <li>{review.review_words}</li>
-                <li>{review.review_stars} stars</li>
-                <li>{review.review_date}</li>
-								<li> <Link onClick={putOneUserInState.bind(this, userId)} to={`/user/${userId}`}>
+              <tr key={review._id}>
+                <td>{review.review_words}</td>
+                <td>{review.review_stars} stars</td>
+                <td>{review.review_date}</td>
+								<td> <Link onClick={putOneUserInState.bind(this, userId)} to={`/user/${userId}`}>
 								{review.review_user.username}
-								</Link></li>
-                </ul>
+								</Link></td>
+                </tr>
 
               )
   })
@@ -64,18 +62,18 @@ function findReviewsFilter(review){
 			let subNeighborhoodId = spot.spot_subNeighborhood._id
       let spotId = spot._id
               return (
-                <div key={spotId}>
-                  <ul>
-										<li><h2>This is the spot where you can get this dish:
+                <tbody key={spotId}>
+                  <tr>
+										<td><h3>{dish.dish_name} is available at
 										 <Link onClick={putOneSpotInState.bind(this, spotId)} to={`/spot/${spotId}`}>
 											{spot.spot_name}
-											</Link></h2></li>
-										<li>
-										<Link  onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)} to={`/subNeighborhood/${subNeighborhoodId}`}>{spot.spot_subNeighborhood.subNeighborhood_name}</Link></li>
-	                  <li>{spot.spot_genres[0].genre_name}</li>
-	                  <li>{spot.spot_blurb}</li>
-                  </ul>
-                </div>
+											</Link></h3></td>
+										<td>
+										<Link  onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)} to={`/subNeighborhood/${subNeighborhoodId}`}>{spot.spot_subNeighborhood.subNeighborhood_name}</Link></td>
+	                  <td>genre: {spot.spot_genres[0].genre_name}</td>
+	                  <td>blurb: {spot.spot_blurb}</td>
+                  </tr>
+                </tbody>
 
                 )
     })
@@ -84,11 +82,32 @@ function findReviewsFilter(review){
 <div className="bg-warning">
 <div>
 		<h1>Detail page for {dish.dish_name}</h1>
-		<h2><Link to="index/newCheckIn"> Click here to make a checkIn with this dish.</Link></h2>
+				<table className="table">
 						{spotNode}
-            {reviewNodes}
-            {checkInNodes}
+				</table>
+				<div className="row">
+				<div className="col-md-6">
+				<table className="table">
+				<caption>Reviews for {dish.dish_name}</caption>
+						<tbody>
+            {allReviews.filter(findReviewsFilter).length>0 ? reviewNodes : (<tr><td>no reviews for {dish.dish_name}...yet! <Link to="index/newReview">Click here to be the first!</Link> </td></tr>)}
+						</tbody>
+				</table>
+				</div>
+				<div className="col-md-6">
+				<table className="table">
+				<caption>CheckIns for {dish.dish_name}</caption>
+
+						<tbody>
+            {allCheckIns.filter(findCheckInsFilter).length>0 ? checkInNodes : (<tr><td>no checkIns for {dish.dish_name}...yet! <Link to="index/newCheckIn"> Click here to be the first!.</Link> </td></tr>)}
+						</tbody>
+				</table>
+				</div>
+				</div>
     </div>
+		<h2><Link to="index/newCheckIn"> Click here to make a checkIn with this dish.</Link></h2>
+		<h2><Link to="index/newReview"> Click here to review this dish.</Link></h2>
+
 </div>
       )
   }

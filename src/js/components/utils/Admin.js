@@ -115,13 +115,7 @@ export default class Admin extends React.Component{
 
 				<div className="admin-review-box bg-success row">
 					<div className="admin-review-input col-md-4">
-									<h2>New Review</h2>
-
-						<ReviewForm
-						allDishes={this.props.allDishes}
-						allUsers={this.props.allUsers}
-						createReview={this.props.createReview}
-						/>
+					
 					</div>
 					<div className="admin-review-output col-md-8">
 							<h2>All Reviews</h2>
@@ -139,7 +133,7 @@ export default class Admin extends React.Component{
 
 				<div className="admin-checkIn-box bg-info row">
 					<div className="admin-checkIn-input col-md-4">
-					
+
 					</div>
 					<div className="admin-checkIn-output col-md-8">
 									<h2>All CheckIns</h2>

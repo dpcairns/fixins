@@ -33,7 +33,7 @@ class UserDetail extends React.Component{
 											 <Link to={`/dish/${dishId}`} onClick={putOneDishInState.bind(this, dishId)}>
 											 {checkIn.checkIn_dish.dish_name}
 											 </Link></td>
-											<td>>{checkIn.checkIn_dish.dish_calories} calories</td>
+											<td>{checkIn.checkIn_dish.dish_calories} calories</td>
 											<td>{checkIn.checkIn_dish.dish_price} dollars</td>
 											<td>{checkIn.checkIn_blurb}</td>
 											<td>{checkIn.checkIn_dish.dish_spot.spot_name}</td>

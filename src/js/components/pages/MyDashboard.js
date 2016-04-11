@@ -34,7 +34,7 @@ render(){
                      <Link to={`/dish/${dishId}`} onClick={putOneDishInState.bind(this, dishId)}>
                      {checkIn.checkIn_dish.dish_name}
                      </Link></td>
-                    <td>>{checkIn.checkIn_dish.dish_calories} calories</td>
+                    <td>{checkIn.checkIn_dish.dish_calories} calories</td>
                     <td>{checkIn.checkIn_dish.dish_price} dollars</td>
                     <td>{checkIn.checkIn_blurb}</td>
                     <td>{checkIn.checkIn_dish.dish_spot.spot_name}</td>
@@ -66,19 +66,15 @@ render(){
 <div className="bg-warning">
 <div className="row">
   <div className="col-md-6">
-  <Links/>
+  <h1>welcome to your dashboard, {thisUser.username}</h1>
   </div>
   <div className="col-md-6">
-    <ul>
-      <li><h2>{thisUser.username}</h2></li>
-      <li> Password: {thisUser.password}</li>
-      <li>{
+      <h3>your are proud to call {
         thisUser.user_sub_neighborhood !== undefined ?
             <Link to={`/subNeighborhood/${thisUser.user_sub_neighborhood._id}`}
             onClick={putOneSubNeighborhoodInState.bind(this, thisUser.user_sub_neighborhood._id)}>
             {thisUser.user_sub_neighborhood.subNeighborhood_name} </Link>
-        : ("nothing")}</li>
-    </ul>
+        : ("nothing")} home</h3>
   </div>
 </div>
 <CalorieDollarChart username={thisUser.username} userCheckIns={userCheckIns} />
@@ -86,7 +82,7 @@ render(){
 <div>
   <div className="row">
     <div className="col-md-6">
-        <h1>CheckIns</h1>
+        <h1>Your CheckIns</h1>
             <table className="table">
               <tbody>
             {checkInNodes}
@@ -94,7 +90,7 @@ render(){
             </table>
     </div>
     <div className="col-md-6">
-        <h1>Reviews</h1>
+        <h1>Your Reviews</h1>
         <table className="table">
           <tbody>
           {reviewNodes}

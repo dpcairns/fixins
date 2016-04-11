@@ -20,20 +20,15 @@ class SubNeighborhoodDetail extends React.Component{
     				let spotNodes = allSpots.filter(findSpotsFilter).map(function(spot){
 							let spotId = spot._id
     									return (
-												<div key={spot._id}>
-                          <ul>
-													<div>
-													<li>
-														<div>
+												<tr key={spot._id}>
+													<td>
 														<Link onClick={putOneSpotInState.bind(this, spotId)} to={`/spot/${spotId}`}>{spot.spot_name}</Link>
-														</div>
-												</li>
-												</div>
-												<div>
+												</td>
+												<td>
+												{spot.spot_genres[0].genre_name}
+												</td>
 
-													</div>
-													</ul>
-												</div>
+												</tr>
 												)
     				})
 
@@ -46,36 +41,40 @@ class SubNeighborhoodDetail extends React.Component{
             let userId = user._id
 
                     return (
-											<div  key={userId}>
-                      <ul>
-                        <li>Username:
+											<tr  key={userId}>
+                        <td>Username:
                             <Link to={`/user/${userId}`} onClick={putOneUserInState.bind(this, userId)}>
                             {user.username}</Link>
-                        </li>
-                        <li>Password: {user.password}</li>
-                      </ul>
-											</div>
+                        </td>
+                        <td>Password: {user.password}</td>
+											</tr>
                     )
         })
 				let neighborhoodId = subNeighborhood.sub_neighborhood_neighborhood._id
     return(
       <div className="bg-warning">
-				<h1>SubNeighborhoodDetail page</h1>
           <h1>{subNeighborhood.subNeighborhood_name}</h1>
 					<h3>{subNeighborhood.subNeighborhood_name} is located in
 <Link to={`/neighborhood/${neighborhoodId}`} onClick={putOneNeighborhoodInState.bind(this, neighborhoodId)}>
 					 {subNeighborhood.sub_neighborhood_neighborhood.neighborhood_name}
 					</Link>
 					 </h3>
-          <h2>Spots in {subNeighborhood.subNeighborhood_name}</h2>
-					<div>
-
-          {allSpots.filter(findSpotsFilter).length> 0 ? spotNodes: (<h1>no relevant restaurants...yet!</h1>)}
+					 <div className="row">
+					 		<div className="col-md-6">
+							<br/><hr/>
+		          <h2>Spots in {subNeighborhood.subNeighborhood_name}</h2>
+							<div>
+		          {allSpots.filter(findSpotsFilter).length> 0 ? (<table className="table"><tbody> {spotNodes} </tbody></table> ): (<h4>no restaurants in  {subNeighborhood.subNeighborhood_name}...yet!</h4>)}
+							</div>
+							</div>
+							<div className="col-md-6">
+							<br/><hr/>
+		          <h2>Users in {subNeighborhood.subNeighborhood_name}</h2>
+							<div>
+		          {allUsers.filter(findUsersFilter).length> 0 ? (<table className="table"><tbody> {userNodes} </tbody></table>) : (<h4>no users in {subNeighborhood.subNeighborhood_name}...yet!</h4>)}
+		      		</div>
+							</div>
 					</div>
-          <h2>Users in {subNeighborhood.subNeighborhood_name}</h2>
-<div>
-          {allUsers.filter(findUsersFilter).length> 0 ? userNodes: (<h1>no relevant users...yet!</h1>)}
-      </div>
 			</div>
     )
 

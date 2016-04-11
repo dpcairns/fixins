@@ -24,15 +24,16 @@ class SpotDetail extends React.Component{
 									return (
 
 
-                      <ul key={dish._id}>
-                      <li>
+                      <tr key={dish._id}>
+                      <td>
 												<Link onClick={putOneDishInState.bind(this, dishId)} to={`/dish/${dishId}`}>
 														<b>{dish.dish_name}</b>
 												</Link>
-											</li>
-											<li>>{dish.dish_calories} calories</li>
-											<li>{dish.dish_price} dollars</li>
-                      </ul>
+											</td>
+											<td>{dish.dish_blurb} calories</td>
+											<td>{dish.dish_calories} calories</td>
+											<td>{dish.dish_price} dollars</td>
+                      </tr>
 										)
 				})
 
@@ -40,15 +41,18 @@ class SpotDetail extends React.Component{
     return (
 <div>
 <div className="bg-warning">
-      <ul>
-        <li><h2>{spot.spot_name}</h2></li>
-        <li>
+    		<h3>{spot.spot_name}</h3> located in
 				<Link to={`/subNeighborhood/${subNeighorhoodId}`} onClick={putOneSubNeighborhoodInState.bind(this, subNeighorhoodId)}>
 				SubNeighorhood: {spot.spot_subNeighborhood.subNeighborhood_name}
 				</Link>
-				</li>
-				<li> Spot Dishes: {dishNodes} </li>
-      </ul>
+				<table className="table">
+				<caption>dishes available at {spot.spot_name}</caption>
+					<tbody>
+
+					{allDishes.filter(findDishesFilter).length>0 ? dishNodes : (<tr><td>no dishes for {spot.spot_name}...yet! <Link to="index/newDish">Click here to be the first to add one!</Link> </td></tr>)}
+						{dishNodes}
+					</tbody>
+				</table>
     </div>
 </div>
       )
