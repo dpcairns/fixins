@@ -24,8 +24,7 @@ export default class Admin extends React.Component{
 	render(){
 	return(
 		<div>
-			<div className="container">
-			<Links />
+			<div>
 				<div className="admin-user-box bg-success row">
 					<div className="admin-user-input col-md-4">
 									<h2>New User</h2>
@@ -140,13 +139,7 @@ export default class Admin extends React.Component{
 
 				<div className="admin-checkIn-box bg-info row">
 					<div className="admin-checkIn-input col-md-4">
-									<h2>New CheckIn</h2>
-
-						<CheckInForm
-						 allUsers={this.props.allUsers}
-						allDishes={this.props.allDishes}
-						createCheckIn={this.props.createCheckIn}
-						/>
+					
 					</div>
 					<div className="admin-checkIn-output col-md-8">
 									<h2>All CheckIns</h2>

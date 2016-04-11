@@ -28,8 +28,7 @@ class NeighborhoodDetail extends React.Component{
                   )
       })
 return(
-  <div>
-  <Links/>
+  <div className="bg-warning">
     <h1>Neighborhood Detail Page for {neighborhood.neighborhood_name}</h1>
     <h2>here you go it is every subneighborhood in {neighborhood.neighborhood_name}</h2>
     {subNeighorhoodNodes}

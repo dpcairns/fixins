@@ -35,7 +35,7 @@ class LogInPage extends React.Component{
       width: '100%'
     }
   })
-  
+
 }
 
 	handleUsernameChange(e){
@@ -66,9 +66,13 @@ class LogInPage extends React.Component{
 
 render(){
 
-
+if(this.props.currentUser._id !== undefined){
+  this.context.router.push('index/myDashboard')
+}
 
   return(
+    <div>
+    <Link to="index/signup">Need an account? Sign up here.</Link>
     <form onSubmit={this.handleSubmit.bind(this)}>
       <div className="input-group">
         Username:
@@ -91,10 +95,15 @@ render(){
     <div style={this.state.loginSuccessStyles}><h2>Login success! Great work with that {this.props.currentUser ? this.props.currentUser.username : null}</h2>.</div>
 
     </form>
+    </div>
     )
   }
 }
 
+
+LogInPage.contextTypes = {
+  router: React.PropTypes.object.isRequired
+}
 
       const userLogin = (thisUser) => {
         console.log(thisUser)

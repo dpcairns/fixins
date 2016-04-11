@@ -28,8 +28,7 @@ class GenreDetail extends React.Component{
 
 
     return(
-      <div>
-        <Links />
+      <div className="bg-warning">
           <h1>{genre.genre_name}</h1>
           <table className="table">
           <th>

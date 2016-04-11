@@ -12,6 +12,7 @@ class DishDetail extends React.Component{
 		let allDishes = this.props.allDishes
     let allSpots = this.props.allSpots
 		let allCheckIns = this.props.allCheckIns
+		let putOneUserInState = this.props.putOneUserInState
 		let putOneSpotInState = this.props.putOneSpotInState
 		let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
 
@@ -21,11 +22,14 @@ function findCheckInsFilter(checkIn){
             return (checkIn.checkIn_dish._id === dish._id)
       }
   let checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function(checkIn){
+		let userId = checkIn.checkIn_user._id
             return (
               <ul key={checkIn._id}>
 							<li><b>here is a checkin for the dish</b></li>
                 <li>{checkIn.checkIn_blurb}</li>
-								<li>{checkIn.checkIn_user.username}</li>
+								<li> <Link onClick={putOneUserInState.bind(this, userId)} to={`/user/${userId}`}>
+								{checkIn.checkIn_user.username}
+								</Link></li>
 								<li>{checkIn.checkIn_date}</li>
                 </ul>
 
@@ -36,14 +40,16 @@ function findReviewsFilter(review){
             return (review.reviewed_dish._id === dish._id)
       }
   let reviewNodes = allReviews.filter(findReviewsFilter).map(function(review){
+		let userId = review.review_user._id
             return (
               <ul key={review._id}>
 							<li><b>here is a review for the dish</b></li>
                 <li>{review.review_words}</li>
                 <li>{review.review_stars} stars</li>
                 <li>{review.review_date}</li>
-								<li>{review.review_user.username}</li>
-
+								<li> <Link onClick={putOneUserInState.bind(this, userId)} to={`/user/${userId}`}>
+								{review.review_user.username}
+								</Link></li>
                 </ul>
 
               )
@@ -75,10 +81,10 @@ function findReviewsFilter(review){
     })
 
     return (
+<div className="bg-warning">
 <div>
-<div className="container">
-    <Links/>
 		<h1>Detail page for {dish.dish_name}</h1>
+		<h2><Link to="index/newCheckIn"> Click here to make a checkIn with this dish.</Link></h2>
 						{spotNode}
             {reviewNodes}
             {checkInNodes}
@@ -113,9 +119,16 @@ function putOneSubNeighborhoodInState(_id){
   return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
 }
 
+
+function putOneUserInState(_id){
+  return {type: "PUT_ONE_USER_IN_STATE", _id:_id}
+}
+
 const mapDispatchToProps = (dispatch) => {
  return {putOneSpotInState: (_id) => dispatch(putOneSpotInState(_id)),
-	 	putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id))
+	 	putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
+		putOneUserInState: (_id) => dispatch(putOneUserInState(_id))
+
 
  }
 }

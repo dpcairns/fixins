@@ -1,5 +1,6 @@
 import React from "react"
 import CustomDropdown from "./CustomDropdown"
+import { Link } from 'react-router'
 
 export default class CheckInForm extends React.Component{
 	constructor(){
@@ -8,28 +9,57 @@ export default class CheckInForm extends React.Component{
 			blurb: '',
 			dish: '',
 			user: '',
+			checkInFailureStyles: {display: "none"},
+			checkInSuccessStyles: {display: "none"}
 		}
-	}
+		}
+
+		showCheckInFailure(){
+			this.setState({
+				checkInSuccessStyles: {
+					display: "none"
+				},
+				checkInFailureStyles: {
+				display: "block",
+				background: '#FF6666',
+				height: '50px',
+				width: '100%'
+			}
+		})
+		}
+
+
+		showCheckInSuccess(){
+			this.setState({
+				checkInFailureStyles: {display: "none"},
+				checkInSuccessStyles: {
+				display: "block",
+				background: '#98FB98',
+				height: '50px',
+				width: '100%'
+			}
+		})
+
+		}
 
 	handleBlurbChange(e){
 		this.setState({blurb: e.target.value})
 	}
 
-	handleDishChange(e){
-		this.setState({dish: e.target.value})
-	}
-
-	handleUserChange(e){
-		this.setState({user: e.target.value})
-	}
 
 	handleSubmit(e){
 		e.preventDefault();
 		var newCheckInObject = {}
 		newCheckInObject.blurb = this.state.blurb
-		newCheckInObject.dish = this.state.dish
-		newCheckInObject.user = this.state.user
-
+		newCheckInObject.dish = this.props.thisDish
+		newCheckInObject.user = this.props.currentUser
+		if(newCheckInObject.blurb.length<1 || newCheckInObject.dish.length<1 || newCheckInObject.user.length<1){
+			this.showCheckInFailure();
+		}
+		else{
+		this.props.createCheckIn(newCheckInObject)
+		this.showCheckInSuccess();
+		}
 		this.props.createCheckIn(newCheckInObject)
 		this.setState({blurb: '', dish: '', user: ''})
 	}
@@ -42,20 +72,11 @@ export default class CheckInForm extends React.Component{
 			Blurb:
 		  <input type="text" value={this.state.blurb} onChange={this.handleBlurbChange.bind(this)} className="form-control" placeholder="dish blurb" />
 		</div>
-		<div className="input-group">
-			Dish:
-			<CustomDropdown setValueTo={this.state.dish} onchange2={this.handleDishChange.bind(this)}
-			data={this.props.allDishes} nameName="dish_name" />
-		</div>
-		<div className="input-group">
-			User:
-			<CustomDropdown setValueTo={this.state.user}
-			onchange2={this.handleUserChange.bind(this)}
-			data={this.props.allUsers}
-			nameName="username" />
-		</div>
 	<input className="button btn-danger align-right" type="submit" value="Post"/>
 	</form>
+	<div style={this.state.checkInFailureStyles}><h2>checkIn failed. Try again and do something different.</h2></div>
+	<div style={this.state.checkInSuccessStyles}><h2>checkIn success! Click here to <Link to="index/myDashboard">view your dashboard</Link>.</h2>.</div>
+
 </div>
 
 		)

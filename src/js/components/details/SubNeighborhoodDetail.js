@@ -59,8 +59,7 @@ class SubNeighborhoodDetail extends React.Component{
         })
 				let neighborhoodId = subNeighborhood.sub_neighborhood_neighborhood._id
     return(
-      <div>
-        <Links />
+      <div className="bg-warning">
 				<h1>SubNeighborhoodDetail page</h1>
           <h1>{subNeighborhood.subNeighborhood_name}</h1>
 					<h3>{subNeighborhood.subNeighborhood_name} is located in

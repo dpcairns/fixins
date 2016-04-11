@@ -63,10 +63,9 @@ class UserDetail extends React.Component{
 
     return (
 <div>
-<div className="container bg-warning">
+<div className="bg-warning">
 <div className="row">
     <div className="col-md-6">
-    <Links/>
     </div>
     <div className="col-md-6">
       <ul>

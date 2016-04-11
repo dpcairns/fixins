@@ -39,8 +39,7 @@ class SpotDetail extends React.Component{
 
     return (
 <div>
-<div className="container">
-    <Links/>
+<div className="bg-warning">
       <ul>
         <li><h2>{spot.spot_name}</h2></li>
         <li>
