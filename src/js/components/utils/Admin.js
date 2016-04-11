@@ -115,7 +115,7 @@ export default class Admin extends React.Component{
 
 				<div className="admin-review-box bg-success row">
 					<div className="admin-review-input col-md-4">
-					
+
 					</div>
 					<div className="admin-review-output col-md-8">
 							<h2>All Reviews</h2>
@@ -178,12 +178,7 @@ export default class Admin extends React.Component{
 
 				<div className="admin-subNeighborhood-box bg-info row">
 					<div className="admin-subNeighborhood-input col-md-4">
-									<h2>New Sub-Neighborhood</h2>
 
-						<SubNeighborhoodForm
-						allNeighborhoods={this.props.allNeighborhoods}
-						createSubNeighborhood={this.props.createSubNeighborhood}
-						/>
 					</div>
 
 					<div className="admin-subNeighborhood-output col-md-8">

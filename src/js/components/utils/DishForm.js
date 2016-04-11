@@ -70,7 +70,7 @@ export default class DishForm extends React.Component{
 		newDishObject.price = this.state.price
 		newDishObject.spot = this.props.thisSpot
 		newDishObject.blurb = this.state.blurb
-		if(newDishObject.blurb.length<1 || newDishObject.priuce<1 || newDishObject.calories<1 ){
+		if(newDishObject.blurb.length<1 || newDishObject.price<1 || newDishObject.calories<1 ){
 			this.showDishFailure();
 		}
 		else{

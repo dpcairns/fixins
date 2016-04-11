@@ -137,6 +137,10 @@
 
 	var _NewDishPage2 = _interopRequireDefault(_NewDishPage);
 
+	var _NewSpotPage = __webpack_require__(813);
+
+	var _NewSpotPage2 = _interopRequireDefault(_NewSpotPage);
+
 	var _MyDashboard = __webpack_require__(811);
 
 	var _MyDashboard2 = _interopRequireDefault(_MyDashboard);
@@ -201,6 +205,7 @@
 				_react2.default.createElement(_reactRouter.Route, { name: "newCheckIn", path: "newCheckIn", component: _NewCheckInPage2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "newReview", path: "newReview", component: _NewReviewPage2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "newDish", path: "newDish", component: _NewDishPage2.default }),
+				_react2.default.createElement(_reactRouter.Route, { name: "newSpot", path: "newSpot", component: _NewSpotPage2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "mapPage", path: "mapPage", component: _MapContainer2.default })
 			)
 		)
@@ -35598,19 +35603,7 @@
 						_react2.default.createElement(
 							"div",
 							{ className: "admin-subNeighborhood-box bg-info row" },
-							_react2.default.createElement(
-								"div",
-								{ className: "admin-subNeighborhood-input col-md-4" },
-								_react2.default.createElement(
-									"h2",
-									null,
-									"New Sub-Neighborhood"
-								),
-								_react2.default.createElement(_SubNeighborhoodForm2.default, {
-									allNeighborhoods: this.props.allNeighborhoods,
-									createSubNeighborhood: this.props.createSubNeighborhood
-								})
-							),
+							_react2.default.createElement("div", { className: "admin-subNeighborhood-input col-md-4" }),
 							_react2.default.createElement(
 								"div",
 								{ className: "admin-subNeighborhood-output col-md-8" },
@@ -50302,6 +50295,8 @@
 
 	var _reactLeaflet = __webpack_require__(605);
 
+	var _reactRouter = __webpack_require__(184);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -50324,24 +50319,48 @@
 				genres: '',
 				coordinates: '',
 				clickPosition: '',
-				subNeighborhood: '',
 				hasLocation: false,
 				defaultLatlng: { lat: 45.53,
 					lng: -122.67 },
-				zoom: 13
+				zoom: 13,
+				spotFailureStyles: { display: "none" },
+				spotSuccessStyles: { display: "none" }
 			};
 			return _this;
 		}
 
 		_createClass(SpotForm, [{
+			key: "showSpotFailure",
+			value: function showSpotFailure() {
+				this.setState({
+					spotSuccessStyles: {
+						display: "none"
+					},
+					spotFailureStyles: {
+						display: "block",
+						background: '#FF6666',
+						height: '50px',
+						width: '100%'
+					}
+				});
+			}
+		}, {
+			key: "showSpotSuccess",
+			value: function showSpotSuccess() {
+				this.setState({
+					spotFailureStyles: { display: "none" },
+					spotSuccessStyles: {
+						display: "block",
+						background: '#98FB98',
+						height: '50px',
+						width: '100%'
+					}
+				});
+			}
+		}, {
 			key: "handleNameChange",
 			value: function handleNameChange(e) {
 				this.setState({ name: e.target.value });
-			}
-		}, {
-			key: "handleSubNeighborhoodChange",
-			value: function handleSubNeighborhoodChange(e) {
-				this.setState({ subNeighborhood: e.target.value });
 			}
 		}, {
 			key: "handleBlurbChange",
@@ -50368,19 +50387,25 @@
 				e.preventDefault();
 				var newSpotObject = {};
 				newSpotObject.name = this.state.name;
-				newSpotObject.subNeighborhood = this.state.subNeighborhood;
+				newSpotObject.subNeighborhood = this.props.mySubNeighborhood._id;
 				newSpotObject.coordinates = [];
 				newSpotObject.coordinates.push(this.state.coordinates.lat);
 				newSpotObject.coordinates.push(this.state.coordinates.lng);
 				newSpotObject.genres = this.state.genres;
 				newSpotObject.blurb = this.state.blurb;
-				this.props.createSpot(newSpotObject);
-				this.setState({ username: "", blurb: "", genres: "", coordinates: "", neighborhood: '', subNeighborhood: '' });
+				if (newSpotObject.blurb.length < 1 || newSpotObject.coordinates.length < 1 || newSpotObject.name.length < 1) {
+					this.showSpotFailure();
+				} else {
+					this.props.createSpot(newSpotObject);
+					this.showSpotSuccess();
+				}
+				this.setState({ username: "", blurb: "", genres: "", coordinates: "", clickPosition: "" });
 			}
 		}, {
 			key: "render",
 			value: function render() {
-
+				var allGenres = this.props.allGenres;
+				var subNeighborhoodId = this.props.mySubNeighborhood._id;
 				var marker = this.state.hasLocation ? _react2.default.createElement(
 					_reactLeaflet.Marker,
 					{ position: this.state.clickPosition },
@@ -50405,6 +50430,12 @@
 					"div",
 					null,
 					_react2.default.createElement(
+						"h3",
+						null,
+						"Post a new spot in ",
+						this.props.mySubNeighborhood.subNeighborhood_name
+					),
+					_react2.default.createElement(
 						"div",
 						{ className: "input-group" },
 						"Spot name:",
@@ -50427,18 +50458,8 @@
 						"Genres:",
 						_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.genres,
 							onchange2: this.handleGenresChange.bind(this),
-							data: this.props.allGenres,
+							data: allGenres,
 							nameName: "genre_name" })
-					),
-					_react2.default.createElement(
-						"div",
-						{ className: "input-group" },
-						"subNeighborhood:",
-						_react2.default.createElement(_CustomDropdown2.default, {
-							setValueTo: this.state.subNeighborhood,
-							onchange2: this.handleSubNeighborhoodChange.bind(this),
-							data: this.props.allSubNeighborhoods,
-							nameName: "subNeighborhood_name" })
 					),
 					_react2.default.createElement(
 						"div",
@@ -50464,6 +50485,33 @@
 						"div",
 						{ className: "btn btn-danger", onClick: this.handleSubmit.bind(this) },
 						"Post"
+					),
+					_react2.default.createElement(
+						"div",
+						{ style: this.state.spotFailureStyles },
+						_react2.default.createElement(
+							"h2",
+							null,
+							"Spot failed. Try again and do something different."
+						)
+					),
+					_react2.default.createElement(
+						"div",
+						{ style: this.state.spotSuccessStyles },
+						_react2.default.createElement(
+							"h2",
+							null,
+							"Spot added! Click here to ",
+							_react2.default.createElement(
+								_reactRouter.Link,
+								{ to: "subNeighborhood/" + subNeighborhoodId },
+								" go to the page for the ",
+								this.props.mySubNeighborhood.subNeighborhood_name,
+								" subNeighborhood"
+							),
+							"."
+						),
+						"."
 					)
 				);
 			}
@@ -67133,7 +67181,7 @@
 				newDishObject.price = this.state.price;
 				newDishObject.spot = this.props.thisSpot;
 				newDishObject.blurb = this.state.blurb;
-				if (newDishObject.blurb.length < 1 || newDishObject.priuce < 1 || newDishObject.calories < 1) {
+				if (newDishObject.blurb.length < 1 || newDishObject.price < 1 || newDishObject.calories < 1) {
 					this.showDishFailure();
 				} else {
 					this.props.createDish(newDishObject);
@@ -71725,7 +71773,12 @@
 	                null,
 	                "no restaurants in  ",
 	                subNeighborhood.subNeighborhood_name,
-	                "...yet!"
+	                "...yet! ",
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: "index/newSpot" },
+	                  "Be the first to add one!"
+	                )
 	              )
 	            )
 	          ),
@@ -72719,6 +72772,116 @@
 	};
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewDishPage);
+
+/***/ },
+/* 813 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(161);
+
+	var _reactRouter = __webpack_require__(184);
+
+	var _RemoveButton = __webpack_require__(542);
+
+	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
+
+	var _SpotForm = __webpack_require__(604);
+
+	var _SpotForm2 = _interopRequireDefault(_SpotForm);
+
+	var _Links = __webpack_require__(533);
+
+	var _Links2 = _interopRequireDefault(_Links);
+
+	var _FixinsActions = __webpack_require__(535);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NewSpotPage = function (_React$Component) {
+	  _inherits(NewSpotPage, _React$Component);
+
+	  function NewSpotPage() {
+	    _classCallCheck(this, NewSpotPage);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NewSpotPage).apply(this, arguments));
+	  }
+
+	  _createClass(NewSpotPage, [{
+	    key: 'render',
+	    value: function render() {
+
+	      if (this.props.currentUser._id === undefined) {
+	        this.context.router.push('index/login');
+	      }
+
+	      var thisSubNeighborhood = this.props.thisSubNeighborhood;
+	      function findSubNeighborhoodFilter(subNeighborhood) {
+	        return subNeighborhood._id === thisSubNeighborhood._id;
+	      }
+	      var mySubNeighborhood = this.props.allSubNeighborhoods.filter(findSubNeighborhoodFilter);
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_SpotForm2.default, {
+	          createSpot: this.props.createSpot,
+	          thisSpot: this.props.thisSpot,
+	          mySubNeighborhood: mySubNeighborhood[0],
+	          allSpots: this.props.allSpots,
+	          allGenres: this.props.allGenres,
+	          currentUser: this.props.currentUser
+	        })
+	      );
+	    }
+	  }]);
+
+	  return NewSpotPage;
+	}(_react2.default.Component);
+
+	NewSpotPage.contextTypes = {
+	  router: _react2.default.PropTypes.object.isRequired
+	};
+
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    currentUser: state.currentUser,
+	    thisSubNeighborhood: state.subNeighborhood,
+	    allGenres: state.genres,
+	    allSubNeighborhoods: state.subNeighborhoods
+	  };
+	};
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    createSpot: function createSpot(newSpot) {
+	      return FixinsActions.createSpot(newSpot, dispatch);
+	    }
+	  };
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewSpotPage);
 
 /***/ }
 /******/ ]);

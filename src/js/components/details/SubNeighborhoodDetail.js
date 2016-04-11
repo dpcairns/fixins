@@ -64,7 +64,7 @@ class SubNeighborhoodDetail extends React.Component{
 							<br/><hr/>
 		          <h2>Spots in {subNeighborhood.subNeighborhood_name}</h2>
 							<div>
-		          {allSpots.filter(findSpotsFilter).length> 0 ? (<table className="table"><tbody> {spotNodes} </tbody></table> ): (<h4>no restaurants in  {subNeighborhood.subNeighborhood_name}...yet!</h4>)}
+		          {allSpots.filter(findSpotsFilter).length> 0 ? (<table className="table"><tbody> {spotNodes} </tbody></table> ): (<h4>no restaurants in  {subNeighborhood.subNeighborhood_name}...yet! <Link to="index/newSpot">Be the first to add one!</Link></h4>)}
 							</div>
 							</div>
 							<div className="col-md-6">

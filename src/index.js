@@ -21,6 +21,7 @@ import SignUpPage from './js/components/pages/SignUpPage'
 import NewCheckInPage from './js/components/pages/NewCheckInPage'
 import NewReviewPage from './js/components/pages/NewReviewPage'
 import NewDishPage from './js/components/pages/NewDishPage'
+import NewSpotPage from './js/components/pages/NewSpotPage'
 import MyDashboard from './js/components/pages/MyDashboard'
 
 
@@ -80,6 +81,7 @@ ReactDOM.render(
 		<Route name="newCheckIn" path="newCheckIn" component={NewCheckInPage}></Route>
 		<Route name="newReview" path="newReview" component={NewReviewPage}></Route>
 		<Route name="newDish" path="newDish" component={NewDishPage}></Route>
+		<Route name="newSpot" path="newSpot" component={NewSpotPage}></Route>
 		<Route name= "mapPage" path="mapPage" component={MapContainer}></Route>
 
 	</Route>
