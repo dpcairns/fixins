@@ -178,6 +178,8 @@ export default class Admin extends React.Component{
 						allNeighborhoods={this.props.allNeighborhoods}
 						allSubNeighborhoods={this.props.allSubNeighborhoods}
 						removeNeighborhood={this.props.removeNeighborhood}
+						putOneNeighborhoodInState={this.props.putOneNeighborhoodInState}
+						putOneSubNeighborhoodInState={this.props.putOneSubNeighborhoodInState}
 						findAndChangeNeighborhood={this.props.findAndChangeNeighborhood}
 
 

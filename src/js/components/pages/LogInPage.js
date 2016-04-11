@@ -8,19 +8,42 @@ class LogInPage extends React.Component{
 		super();
 		this.state = {
 			username: '',
-      password: ''
+      password: '',
+      loginFailureStyles: {display: "none"},
+      loginSuccessStyles: {display: "none"}
 		}
 	}
 
+  showLoginFailure(){
+    this.setState({loginFailureStyles: {
+      display: "block",
+      background: '#FF6666',
+      height: '50px',
+      width: '100%'
+    }
+  })
+}
+
+
+  showLoginSuccess(){
+    this.setState({
+      loginFailureStyles: {display: "none"},
+      loginSuccessStyles: {
+      display: "block",
+      background: '#98FB98',
+      height: '50px',
+      width: '100%'
+    }
+  })
+  
+}
 
 	handleUsernameChange(e){
 		this.setState({username: e.target.value})
-    console.log(this.state)
 	}
 
   	handlePasswordChange(e){
   		this.setState({password: e.target.value})
-      console.log(this.state)
   	}
 
 
@@ -34,6 +57,9 @@ class LogInPage extends React.Component{
             }
        let thisUser = this.props.users.filter(thisUserFilter)
 		this.props.userLogin(thisUser)
+    if(thisUser.length === 0){
+      this.showLoginFailure();
+    } else {this.showLoginSuccess();}
 		this.setState({username: "", password: ""})
 	}
 
@@ -61,6 +87,9 @@ render(){
            placeholder="password" />
       </div>
     <input className="button btn-danger align-right" type="submit" value="Log-in"/>
+    <div style={this.state.loginFailureStyles}><h2>Login failed. Try again and do something different.</h2></div>
+    <div style={this.state.loginSuccessStyles}><h2>Login success! Great work with that {this.props.currentUser ? this.props.currentUser.username : null}</h2>.</div>
+
     </form>
     )
   }
@@ -71,7 +100,7 @@ render(){
         console.log(thisUser)
               return {
                 type: "LOG_IN",
-                user: thisUser
+                user: thisUser[0]
               }
           }
 

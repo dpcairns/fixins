@@ -60,12 +60,12 @@ function findReviewsFilter(review){
               return (
                 <div key={spotId}>
                   <ul>
-										<li onClick={putOneSpotInState.bind(this, spotId)}><h2>This is the spot where you can get this dish:
-										 <Link to={`/spot/${spotId}`}>
+										<li><h2>This is the spot where you can get this dish:
+										 <Link onClick={putOneSpotInState.bind(this, spotId)} to={`/spot/${spotId}`}>
 											{spot.spot_name}
 											</Link></h2></li>
-										<li  onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)}>
-										<Link to={`/subNeighborhood/${subNeighborhoodId}`}>{spot.spot_subNeighborhood.subNeighborhood_name}</Link></li>
+										<li>
+										<Link  onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)} to={`/subNeighborhood/${subNeighborhoodId}`}>{spot.spot_subNeighborhood.subNeighborhood_name}</Link></li>
 	                  <li>{spot.spot_genres[0].genre_name}</li>
 	                  <li>{spot.spot_blurb}</li>
                   </ul>

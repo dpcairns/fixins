@@ -18,8 +18,8 @@ class GenreDetail extends React.Component{
               let spotId = spot._id
     									return (
 
-                          <tr key={spot._id} onClick={putOneSpotInState.bind(this, spotId)}>
-                          <td><Link to={`/spot/${spotId}`}>{spot.spot_name}</Link></td>
+                          <tr key={spot._id}>
+                          <td><Link to={`/spot/${spotId}`}  onClick={putOneSpotInState.bind(this, spotId)}>{spot.spot_name}</Link></td>
                           <td>{spot.spot_subNeighborhood.subNeighborhood_name}</td>
                           <td>{spot.spot_dishes.length>0 ? spot.spot_dishes[0].dish_name: "none yet"}</td>
                           </tr>

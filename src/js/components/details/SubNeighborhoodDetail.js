@@ -16,16 +16,15 @@ class SubNeighborhoodDetail extends React.Component{
     function findSpotsFilter(spot){
     									return (spot.spot_subNeighborhood._id === subNeighborhood._id)
     						}
-
     				let spotNodes = allSpots.filter(findSpotsFilter).map(function(spot){
 							let spotId = spot._id
     									return (
 												<div key={spot._id}>
                           <ul>
 													<div>
-													<li onClick={putOneSpotInState.bind(this, spotId)}>
+													<li>
 														<div>
-														<Link to={`/spot/${spotId}`}>{spot.spot_name}</Link>
+														<Link onClick={putOneSpotInState.bind(this, spotId)} to={`/spot/${spotId}`}>{spot.spot_name}</Link>
 														</div>
 												</li>
 												</div>
@@ -47,9 +46,9 @@ class SubNeighborhoodDetail extends React.Component{
 
                     return (
 											<div  key={userId}>
-                      <ul onClick={putOneUserInState.bind(this, userId)} >
+                      <ul>
                         <li>Username:
-                            <Link to={`/user/${userId}`}>
+                            <Link to={`/user/${userId}`} onClick={putOneUserInState.bind(this, userId)}>
                             {user.username}</Link>
                         </li>
                         <li>Password: {user.password}</li>
@@ -57,12 +56,17 @@ class SubNeighborhoodDetail extends React.Component{
 											</div>
                     )
         })
-
+				let neighborhoodId = subNeighborhood.sub_neighborhood_neighborhood._id
     return(
       <div>
         <Links />
 				<h1>SubNeighborhoodDetail page</h1>
           <h1>{subNeighborhood.subNeighborhood_name}</h1>
+					<h3>{subNeighborhood.subNeighborhood_name} is located in
+					<Link to={`/neighborhood/${neighborhoodId}`} onClick={putOneNeighborhoodInState.bind(this, neighborhoodId)}>
+					{subNeighborhood.sub_neighborhood_neighborhood.neighborhood_name}
+					</Link>
+					 </h3>
           <h2>Spots in {subNeighborhood.subNeighborhood_name}</h2>
 					<div>
 
@@ -106,13 +110,18 @@ function  putOneSpotInState(_id){
   return {type: "PUT_ONE_SPOT_IN_STATE", _id:_id}
 }
 
+function  putOneNeighborhoodInState(_id){
+  return {type: "PUT_ONE_NEIGHBORHOOD_IN_STATE", _id:_id}
+}
 
 
 const mapDispatchToProps = (dispatch) => {
   return {
   putOneUserInState: (_id) => dispatch(putOneUserInState(_id)),
 	putOneSpotInState: (_id) => dispatch(putOneSpotInState(_id)),
-	putOneDishInState: (_id) => dispatch(putOneDishInState(_id))
+	putOneDishInState: (_id) => dispatch(putOneDishInState(_id)),
+	putOneNeighborhoodInState: (_id) => dispatch(putOneNeighborhoodInState(_id))
+
   }
 }
 

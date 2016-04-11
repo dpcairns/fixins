@@ -27,10 +27,11 @@ class UserDetail extends React.Component{
 				let checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function(checkIn){
 					let dishId = checkIn.checkIn_dish._id
 									return (
-                      <tr key={checkIn._id}  onClick={putOneDishInState.bind(this, dishId)}>
+                      <tr key={checkIn._id}>
                       <td>
 
-											 <Link to={`/dish/${dishId}`}>{checkIn.checkIn_dish.dish_name}
+											 <Link to={`/dish/${dishId}`} onClick={putOneDishInState.bind(this, dishId)}>
+											 {checkIn.checkIn_dish.dish_name}
 											 </Link></td>
 											<td>>{checkIn.checkIn_dish.dish_calories} calories</td>
 											<td>{checkIn.checkIn_dish.dish_price} dollars</td>
@@ -48,8 +49,8 @@ class UserDetail extends React.Component{
 									return (
 
                     <tr  key={review._id}>
-											<td onClick={putOneDishInState.bind(this, dishId)}>
-											<Link to={`/dish/${dishId}`}>{review.reviewed_dish.dish_name}</Link></td>
+											<td>
+											<Link to={`/dish/${dishId}`} onClick={putOneDishInState.bind(this, dishId)}>{review.reviewed_dish.dish_name}</Link></td>
 											<td>{review.reviewed_dish.dish_calories}  calories</td>
 											<td>{review.reviewed_dish.dish_price} dollars</td>
 											<td>{review.review_words}</td>
@@ -71,8 +72,8 @@ class UserDetail extends React.Component{
       <ul>
         <li><h2>{this.props.user.username}</h2></li>
         <li> Password: {this.props.user.password}</li>
-				<li onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)}>
-							<Link to={`/subNeighborhood/${subNeighborhoodId}`}>
+				<li>
+							<Link to={`/subNeighborhood/${subNeighborhoodId}`} onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)}>
 									{this.props.user.user_sub_neighborhood.subNeighborhood_name}
 							</Link>
 			</li>

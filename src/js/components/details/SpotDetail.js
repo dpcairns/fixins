@@ -25,8 +25,8 @@ class SpotDetail extends React.Component{
 
 
                       <ul key={dish._id}>
-                      <li onClick={putOneDishInState.bind(this, dishId)}>
-												<Link to={`/dish/${dishId}`}>
+                      <li>
+												<Link onClick={putOneDishInState.bind(this, dishId)} to={`/dish/${dishId}`}>
 														<b>{dish.dish_name}</b>
 												</Link>
 											</li>
@@ -43,9 +43,11 @@ class SpotDetail extends React.Component{
     <Links/>
       <ul>
         <li><h2>{spot.spot_name}</h2></li>
-				<Link to={`/subNeighborhood/${subNeighorhoodId}`}>
-        <li onClick={putOneSubNeighborhoodInState.bind(this, subNeighorhoodId)}> SubNeighorhood: {spot.spot_subNeighborhood.subNeighborhood_name}</li>
+        <li>
+				<Link to={`/subNeighborhood/${subNeighorhoodId}`} onClick={putOneSubNeighborhoodInState.bind(this, subNeighorhoodId)}>
+				SubNeighorhood: {spot.spot_subNeighborhood.subNeighborhood_name}
 				</Link>
+				</li>
 				<li> Spot Dishes: {dishNodes} </li>
       </ul>
     </div>
