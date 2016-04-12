@@ -81,7 +81,6 @@ export default class DishForm extends React.Component{
 	}
 
 	render(){
-
 		let spotId = this.props.thisSpot._id
 	return(
 		<div>
@@ -123,7 +122,7 @@ export default class DishForm extends React.Component{
 	<input className="button btn-danger align-right" type="submit" value="Post"/>
 	</form>
 	<div style={this.state.dishFailureStyles}><h2>Dish failed. Try again and do something different.</h2></div>
-	<div style={this.state.dishSuccessStyles}><h2>Dish added! Click here to <Link to={`dish/${spotId}`}> go to the page for this dish</Link>.</h2>.</div>
+	<div style={this.state.dishSuccessStyles}><h2>Dish added! Check out the page for <Link to={`dish/${spotId}`}>this dish</Link>!</h2></div>
 
 </div>
 

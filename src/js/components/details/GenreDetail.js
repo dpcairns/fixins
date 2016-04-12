@@ -9,6 +9,7 @@ class GenreDetail extends React.Component{
 
     let allSpots = this.props.allSpots
     let putOneSpotInState = this.props.putOneSpotInState
+		let putOneDishInState = this.props.putOneDishInState
 		let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
     let genre = this.props.genre
 		let spotBoxStyle = {height:"100px",width:"200px",margin:"5px",float:"left",textAlign:"center"}
@@ -22,12 +23,13 @@ class GenreDetail extends React.Component{
               let spotId = spot._id
     									return (
 
-                          <div key={spot._id}  style={spotBoxStyle} className="bg-danger">
+                          <div key={spot._id}  style={spotBoxStyle} className="shad bg-danger">
 													<div>
                           <Link to={`/spot/${spotId}`}  onClick={putOneSpotInState.bind(this, spotId)}>{spot.spot_name}</Link><br/>
-													<Link  onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)} to={`/subNeighborhood/${subNeighborhoodId}`}>{spot.spot_subNeighborhood.subNeighborhood_name}</Link>
+													located in <Link  onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)} to={`/subNeighborhood/${subNeighborhoodId}`}>{spot.spot_subNeighborhood.subNeighborhood_name}</Link>
 													<br/>
-                          {spot.spot_dishes.length>0 ? spot.spot_dishes[0].dish_name: "none yet"}
+                          signature dish: {spot.spot_dishes.length>0 ? <Link onClick={putOneDishInState.bind(this, spot.spot_dishes[0]._id)} to={`/dish/${spot.spot_dishes[0]._id}`}>
+spot.spot_dishes[0].dish_name </Link>: <Link onClick={putOneSpotInState.bind(this, spotId)} to="index/newDish">be the first to add a dish!</Link>}
 													</div>
                           </div>
     										)
@@ -35,7 +37,8 @@ class GenreDetail extends React.Component{
 
 
     return(
-      <div className="bg-warning">
+      <div className="bg-warning med-pad med-mar">
+			<h3><Link to="index/allGenres">see all genres</Link></h3>
           <h1>{genre.genre_name}</h1>
 					<div className="flex">
           {allSpots.filter(findSpotsFilter).length> 0 ? spotNodes: (<h1>no relevant restaurants...yet!</h1>)}
@@ -54,6 +57,10 @@ function putOneSubNeighborhoodInState(_id){
   return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
 }
 
+function putOneDishInState(_id){
+  return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
+}
+
 const mapStateToProps = (state) => {
   const selectGenre = (genres, id) => {
           const ridiculousArray = genres.filter(x => x._id === id)
@@ -67,7 +74,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {putOneSpotInState: (_id) => dispatch(putOneSpotInState(_id)),
-		putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id))}
+		putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
+		putOneDishInState: (_id) => dispatch(putOneDishInState(_id))
+	}
 }
 
 const GenreDetailContainer = connect(mapStateToProps, mapDispatchToProps)(GenreDetail)

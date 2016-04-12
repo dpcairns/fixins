@@ -6,7 +6,7 @@ import Links from "../utils/Links"
 
 class SpotDetail extends React.Component{
 	render(){
-
+		let itemBoxStyle = {height:"100px",width:"200px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
     let allReviews = this.props.allReviews
 		let allSubNeighborhoods = this.props.allSubNeighborhoods
 		let allUsers = this.props.allUsers
@@ -26,36 +26,33 @@ class SpotDetail extends React.Component{
 									return (
 
 
-                      <tr key={dish._id}>
-                      <td>
+                      <div style={itemBoxStyle} className="shad bg-info" key={dish._id}>
 												<Link onClick={putOneDishInState.bind(this, dishId)} to={`/dish/${dishId}`}>
 														<b>{dish.dish_name}</b>
-												</Link>
-											</td>
-											<td>{dish.dish_blurb} calories</td>
-											<td>{dish.dish_calories} calories</td>
-											<td>{dish.dish_price} dollars</td>
-                      </tr>
+												</Link> <br/>
+
+											{dish.dish_blurb} <br/>
+											{dish.dish_calories} calories <br/>
+											{dish.dish_price} dollars
+                      </div>
 										)
 				})
 
 
     return (
 <div>
-<div className="bg-warning">
+<div className="bg-warning med-pad med-mar">
     		<h3>{spot.spot_name}</h3> located in
 				<Link to={`/subNeighborhood/${subNeighorhoodId}`} onClick={putOneSubNeighborhoodInState.bind(this, subNeighorhoodId)}>
-				{spot.spot_subNeighborhood.subNeighborhood_name}
+				 { spot.spot_subNeighborhood.subNeighborhood_name}
 				</Link>
-				Genre: <Link onClick={putOneGenreInState.bind(this, spot.spot_genres[0]._id)} to={`/genre/${spot.spot_genres[0]._id}`}>{spot.spot_genres[0].genre_name}</Link>
-				<table className="table">
-				<caption>dishes available at {spot.spot_name}</caption>
-					<tbody>
+				<br/><Link onClick={putOneGenreInState.bind(this, spot.spot_genres[0]._id)} to={`/genre/${spot.spot_genres[0]._id}`}>{spot.spot_genres[0].genre_name}</Link>
+
+				<h3>dishes available at {spot.spot_name}</h3>
 
 					{allDishes.filter(findDishesFilter).length>0 ? dishNodes : (<tr><td>no dishes for {spot.spot_name}...yet! <Link to="index/newDish">Click here to be the first to add one!</Link> </td></tr>)}
 						{dishNodes}
-					</tbody>
-				</table>
+
     </div>
 </div>
       )

@@ -17,11 +17,11 @@ export default class Splash extends React.Component{
 
 		render(){
 			return(
-		<div className="bg-success container">
+		<div className="bg-success container text-center" style={{marginTop:"10%", borderRadius:"15px"}}>
 			<h2>Hello and welcome to fixins!</h2>
-			<h2><Link to="index">for now, just click here to go to the (now rather broken) admin page</Link></h2>
-			<h2><Link to="index/mapPage">or click here to see all the data on a map</Link></h2>
-			<h2><Link to="index/myDashboard">or just like click here to pretend to be a user</Link></h2>
+			<h2><Link to="index">click here to go to the (now kind of broken) admin page</Link></h2>
+			<h2>or</h2>
+			<h2><Link to="index/myDashboard">click here to pretend to be a user</Link></h2>
 
 		</div>
 		)

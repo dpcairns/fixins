@@ -8,32 +8,52 @@ class NeighborhoodDetail extends React.Component{
 
 	render(){
 
-		let subNeighborhoodBoxStyle = {height:"100px",width:"200px",margin:"5px",float:"left",fontSize:"2em",textAlign:"center"}
+		let subNeighborhoodBoxStyle = {height:"150px",width:"200px",margin:"5px",float:"left",fontSize:"1.5em",textAlign:"center", borderRadius:"10px"}
 		let containerStyle = {display:"inline-block"}
     let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
     let allSubNeighborhoods = this.props.allSubNeighborhoods
     let neighborhood = this.props.neighborhood
+		let allSpots = this.props.allSpots
+		let allUsers = this.props.allUsers
 
     function findSubNeighborhoodsFilter(subNeighorhood){
                 return (subNeighorhood.sub_neighborhood_neighborhood._id === neighborhood._id)
           }
       let subNeighorhoodNodes = allSubNeighborhoods.filter(findSubNeighborhoodsFilter).map(function(subNeighborhood){
-        let subNeighborhoodId = subNeighborhood._id
+
+
+				    function findSpotsFilter(spot){
+				    							return (spot.spot_subNeighborhood._id === subNeighborhood._id)
+				    						}
+						let theseSpots = allSpots.filter(findSpotsFilter)
+
+						  function findUsersFilter(user){
+									      return(user.user_sub_neighborhood._id === subNeighborhood._id)
+												    }
+						let theseUsers = allUsers.filter(findUsersFilter)
+
+	      let subNeighborhoodId = subNeighborhood._id
                 return (
-                    <div key={subNeighborhoodId}>
-                      <Link onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)} to={`/subNeighborhood/${subNeighborhoodId}`}>
-													<div style={subNeighborhoodBoxStyle} className="bg-danger">
-													<b>{subNeighborhood.subNeighborhood_name}</b>
+                    <div key={subNeighborhoodId} onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)}>
+													<div style={subNeighborhoodBoxStyle} className="shad bg-danger">
+													<b> <Link to={`/subNeighborhood/${subNeighborhoodId}`}>
+														{subNeighborhood.subNeighborhood_name}</Link></b><br/>
+
+													<small> {theseSpots.length>0?
+														("spots " + theseSpots.length)
+														: (<Link to="index/newSpot">add a spot</Link>)
+													}
+												  <br/>users: {theseUsers.length}</small>
 													</div>
-                      </Link>
 										</div>
                   )
       })
 return(
-  <div className="bg-warning">
+  <div className="bg-warning med-pad med-mar">
+	<h3><Link to="index/allNeighborhoods">see all neighborhoods</Link></h3>
     <h1>Neighborhood Detail Page for {neighborhood.neighborhood_name}</h1>
     <h2>Here is every subNeighborhood in {neighborhood.neighborhood_name}</h2>
-		<div className="flex">
+		<div className="flex bg-warning">
 		{subNeighorhoodNodes}
 		</div>
   </div>
@@ -57,6 +77,8 @@ const mapStateToProps = (state) => {
         }
   return {
     allSubNeighborhoods: state.subNeighborhoods,
+		allSpots: state.spots,
+		allUsers: state.users,
     neighborhood: selectNeighborhood(state.neighborhoods, state.neighborhood._id)
   }
 }

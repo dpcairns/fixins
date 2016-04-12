@@ -10,7 +10,7 @@ render(){
   if(this.props.currentUser._id === undefined){
   this.context.router.push('index/login')
   }
-
+  let listStyle={maxHeight:"400px",overflowX:"hidden",overflowY:"scroll"}
   let allReviews = this.props.allReviews
   let allSubNeighborhoods = this.props.allSubNeighborhoods
   let allUsers = this.props.allUsers
@@ -49,7 +49,7 @@ render(){
         let dishId = review.reviewed_dish._id
                 return (
 
-                  <tr  key={review._id}>
+                  <tr key={review._id}>
                     <td>
                     <Link to={`/dish/${dishId}`} onClick={putOneDishInState.bind(this, dishId)}>{review.reviewed_dish.dish_name}</Link></td>
                     <td>{review.reviewed_dish.dish_calories}  calories</td>
@@ -63,7 +63,7 @@ render(){
 
   return (
 <div>
-<div className="bg-warning">
+<div className="bg-warning med-pad med-mar">
 <div className="row">
   <div className="col-md-6">
   <h1>welcome to your dashboard, {thisUser.username}</h1>
@@ -81,7 +81,7 @@ render(){
 
 <div>
   <div className="row">
-    <div className="col-md-6">
+    <div className="col-md-6" style={listStyle}>
         <h1>Your CheckIns</h1>
             <table className="table">
               <tbody>
@@ -89,7 +89,7 @@ render(){
             </tbody>
             </table>
     </div>
-    <div className="col-md-6">
+    <div className="col-md-6" style={listStyle}>
         <h1>Your Reviews</h1>
         <table className="table">
           <tbody>

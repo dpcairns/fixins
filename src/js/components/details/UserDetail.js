@@ -8,7 +8,7 @@ import Links from "../utils/Links"
 class UserDetail extends React.Component{
 
 	render(){
-
+		let listStyle={maxHeight:"400px",overflowX:"hidden",overflowY:"scroll"}
     let allReviews = this.props.allReviews
 		let allSubNeighborhoods = this.props.allSubNeighborhoods
 		let allUsers = this.props.allUsers
@@ -64,13 +64,13 @@ class UserDetail extends React.Component{
 
     return (
 <div>
-<div className="bg-warning">
+<div className="bg-info med-pad med-mar">
 <div className="row">
     <div className="col-md-6">
     </div>
     <div className="col-md-6">
-      <ul>
-        <li><h2>{this.props.user.username}</h2></li>
+      <ul style={{listStyleType:"none"}}>
+        <li><h2>User Page for {this.props.user.username}</h2></li>
         <li> Password: {this.props.user.password}</li>
 				<li>
 							<Link to={`/subNeighborhood/${subNeighborhoodId}`} onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)}>
@@ -80,11 +80,12 @@ class UserDetail extends React.Component{
       </ul>
     </div>
 </div>
+
 <CalorieDollarChart username={thisUser.username} userCheckIns={userCheckIns} />
 
 <div>
     <div className="row">
-      <div className="col-md-6">
+      <div className="col-md-6" style={listStyle}>
           <h1>CheckIns</h1>
               <table className="table">
                 <tbody>
@@ -92,7 +93,7 @@ class UserDetail extends React.Component{
               </tbody>
               </table>
       </div>
-      <div className="col-md-6">
+      <div className="col-md-6" style={listStyle}>
           <h1>Reviews</h1>
           <table className="table">
             <tbody>

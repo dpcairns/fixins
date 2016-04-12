@@ -75,11 +75,12 @@ export default class ReviewForm extends React.Component{
 	render(){
 	return(
 		<div>
-	<form onSubmit={this.handleSubmit.bind(this)}>
+	<form style={{width:"300px"}} onSubmit={this.handleSubmit.bind(this)}>
 		<div className="input-group">
 			Words:
-		  <input
-		  type="text"
+		  <textarea
+			rows="5"
+			length="300px"
 		  value={this.state.words}
 		  onChange={this.handleWordsChange.bind(this)}
 		  className="form-control"

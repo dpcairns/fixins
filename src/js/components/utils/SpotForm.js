@@ -151,7 +151,7 @@ export default class SpotForm extends React.Component{
 		</div>
 	<div className="btn btn-danger" onClick={this.handleSubmit.bind(this)}>Post</div>
 	<div style={this.state.spotFailureStyles}><h2>Spot failed. Try again and do something different.</h2></div>
-	<div style={this.state.spotSuccessStyles}><h2>Spot added! Click here to <Link to={`subNeighborhood/${subNeighborhoodId}`}> go to the page for the {this.props.mySubNeighborhood.subNeighborhood_name} subNeighborhood</Link>.</h2>.</div>
+	<div style={this.state.spotSuccessStyles}><h2>Spot added! Check out the detail page for the <Link to={`subNeighborhood/${subNeighborhoodId}`}> {this.props.mySubNeighborhood.subNeighborhood_name}</Link>.</h2>.</div>
 
 </div>
 

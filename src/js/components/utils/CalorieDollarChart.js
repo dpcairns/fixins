@@ -62,11 +62,11 @@ let title= this.props.username + "'s CalorieDollars over time'"
  return (
   <div>
     <LineChart
-  legend={true}
+  legend={false}
   data={lineData}
-  width={765}
-  height={400}
-  viewBoxObject={{x: 0, y: 0, width: 765, height: 400}}
+  width={1100}
+  height={500}
+  viewBoxObject={{x: 0, y: 0, width: 1100, height: 500}}
   title={title}
   yAxisLabel="Average CalorieDollars"
   xAxisLabel="Number of checkIns"

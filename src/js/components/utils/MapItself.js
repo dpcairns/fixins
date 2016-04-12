@@ -3,6 +3,7 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import * as FixinsActions from "../../actions/FixinsActions"
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+
 class MapItself extends React.Component {
     render(){
     const minZoom = 11
@@ -34,8 +35,7 @@ class MapItself extends React.Component {
 
                           <span onClick={signatureDish.length>0 ?
                             putOneDishInState.bind(this, signatureDish[0]._id)
-                            : () => router.push('/index/newDish')}>
-
+                            : putOneSpotInState.bind(this, spotId) }>
 
                           Signature dish: <br/>
                           <a onClick={ signatureDish.length>0 ?
@@ -54,7 +54,7 @@ class MapItself extends React.Component {
                                signatureDish[0].dish_price
                                : "n/a"}
                           )
-                               </span>
+                              </span>
                               </div>
                           </Popup>
                       </Marker>

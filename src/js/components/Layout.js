@@ -40,15 +40,22 @@ componentDidMount(){
 }
 
 		render(){
+			let containerStyle={borderRadius:"0px 0px 15px 15px", marginBottom:"25px"}
+			let greetingStyle={marginTop:"15px", marginRight: "10px", background:"lightyellow", maxWidth:"200px", float:"right"}
 			let currentUser = this.props.currentUser
 			return(
-			<div className="bg-success container">
-						<Links/>
-						<h2 className="bg-warning text-right"> fixins || get stuft </h2>
-						<div>
-						hello, {this.props.currentUser.username !== undefined ? this.props.currentUser.username : "honored guest"} || {this.props.currentUser.username !== undefined ? <a onClick={this.props.userLogout.bind(this)} >logout?</a> : <Link to="index/login">login?</Link>}
-
+			<div style={containerStyle} className="bg-success container">
+						<div className="row">
+								<div className="col-md-9">
+								<Links/>
+								</div>
+								<div style={greetingStyle} className="col-md-2 text-right"><h5>
+								hello, {this.props.currentUser.username !== undefined ? <Link to="index/myDashboard">{this.props.currentUser.username}</Link> : "honored guest"} | {this.props.currentUser.username !== undefined ? <a onClick={this.props.userLogout.bind(this)} >logout?</a> : <Link to="index/login">login?</Link>}
+													</h5>
+								</div>
 						</div>
+						<h2 className="bg-warning text-right"> fixins || get stuft </h2>
+
 
 						{this.props.children}
 			</div>

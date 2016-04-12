@@ -71,9 +71,11 @@ if(this.props.currentUser._id !== undefined){
 }
 
   return(
-    <div>
+    <div className="text-center">
     <Link to="index/signup">Need an account? Sign up here.</Link>
-    <form onSubmit={this.handleSubmit.bind(this)}>
+    <h5>
+
+    <form className="centered" style={{maxWidth: "300px"}} onSubmit={this.handleSubmit.bind(this)}>
       <div className="input-group">
         Username:
         <input type="text"
@@ -90,11 +92,13 @@ if(this.props.currentUser._id !== undefined){
          className="form-control"
            placeholder="password" />
       </div>
-    <input className="button btn-danger align-right" type="submit" value="Log-in"/>
+    <input className="button btn-danger align-right small-mar" type="submit" value="Log-in"/>
+
+    </form>
     <div style={this.state.loginFailureStyles}><h2>Login failed. Try again and do something different.</h2></div>
     <div style={this.state.loginSuccessStyles}><h2>Login success! Great work with that {this.props.currentUser ? this.props.currentUser.username : null}</h2>.</div>
 
-    </form>
+    </h5>
     </div>
     )
   }

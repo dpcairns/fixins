@@ -22,6 +22,8 @@ import NewCheckInPage from './js/components/pages/NewCheckInPage'
 import NewReviewPage from './js/components/pages/NewReviewPage'
 import NewDishPage from './js/components/pages/NewDishPage'
 import NewSpotPage from './js/components/pages/NewSpotPage'
+import AllNeighborhoods from './js/components/details/AllNeighborhoods'
+import AllGenres from './js/components/details/AllGenres'
 import MyDashboard from './js/components/pages/MyDashboard'
 
 
@@ -82,6 +84,8 @@ ReactDOM.render(
 		<Route name="newReview" path="newReview" component={NewReviewPage}></Route>
 		<Route name="newDish" path="newDish" component={NewDishPage}></Route>
 		<Route name="newSpot" path="newSpot" component={NewSpotPage}></Route>
+		<Route name="allNeighborhoods" path="allNeighborhoods" component={AllNeighborhoods}></Route>
+		<Route name="allGenres" path="allGenres" component={AllGenres}></Route>
 		<Route name= "mapPage" path="mapPage" component={MapContainer}></Route>
 
 	</Route>
