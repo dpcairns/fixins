@@ -8,6 +8,7 @@ import Links from "../utils/Links"
 class UserDetail extends React.Component{
 
 	render(){
+
     let allReviews = this.props.allReviews
 		let allSubNeighborhoods = this.props.allSubNeighborhoods
 		let allUsers = this.props.allUsers
@@ -135,6 +136,7 @@ const mapDispatchToProps = (dispatch) => {
 	 putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id))
  }
 }
+
 
 const UserDetailContainer = connect(mapStateToProps, mapDispatchToProps)(UserDetail)
 export default UserDetailContainer

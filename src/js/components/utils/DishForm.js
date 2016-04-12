@@ -104,7 +104,7 @@ export default class DishForm extends React.Component{
 		</div>
 		<div className="input-group">
 			Calories:
-		  <input type="text"
+		  <input type="number"
 		  		value={this.state.calories}
 		  		onChange={this.handleCaloriesChange.bind(this)}
 		  		className="form-control"
@@ -112,7 +112,7 @@ export default class DishForm extends React.Component{
 		</div>
 		<div className="input-group">
 			Price:
-		  <input type="text"
+		  <input type="number"
 		  	value={this.state.price}
 		  	onChange={this.handlePriceChange.bind(this)}
 		  	className="form-control"

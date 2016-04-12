@@ -6,6 +6,8 @@ import Links from "../utils/Links"
 
 class DishDetail extends React.Component{
 	render(){
+
+
     let allReviews = this.props.allReviews
 		let allSubNeighborhoods = this.props.allSubNeighborhoods
 		let allUsers = this.props.allUsers
@@ -14,6 +16,7 @@ class DishDetail extends React.Component{
 		let allCheckIns = this.props.allCheckIns
 		let putOneUserInState = this.props.putOneUserInState
 		let putOneSpotInState = this.props.putOneSpotInState
+		let putOneGenreInState = this.props.putOneGenreInState
 		let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
 
     let dish = this.props.dish
@@ -68,9 +71,10 @@ function findReviewsFilter(review){
 										 <Link onClick={putOneSpotInState.bind(this, spotId)} to={`/spot/${spotId}`}>
 											{spot.spot_name}
 											</Link></h3></td>
+											 ({dish.dish_calories} for $ {dish.dish_price}, or {dish.dish_calories / dish.dish_price} calorieDollars)
 										<td>
 										<Link  onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)} to={`/subNeighborhood/${subNeighborhoodId}`}>{spot.spot_subNeighborhood.subNeighborhood_name}</Link></td>
-	                  <td>genre: {spot.spot_genres[0].genre_name}</td>
+										<td>Genre: <Link onClick={putOneGenreInState.bind(this, spot.spot_genres[0]._id)} to={`/genre/${spot.spot_genres[0]._id}`}>{spot.spot_genres[0].genre_name}</Link></td>
 	                  <td>blurb: {spot.spot_blurb}</td>
                   </tr>
                 </tbody>
@@ -88,19 +92,20 @@ function findReviewsFilter(review){
 				<div className="row">
 				<div className="col-md-6">
 				<table className="table">
-				<caption>Reviews for {dish.dish_name}</caption>
-						<tbody>
-            {allReviews.filter(findReviewsFilter).length>0 ? reviewNodes : (<tr><td>no reviews for {dish.dish_name}...yet! <Link to="index/newReview">Click here to be the first!</Link> </td></tr>)}
-						</tbody>
-				</table>
-				</div>
-				<div className="col-md-6">
-				<table className="table">
 				<caption>CheckIns for {dish.dish_name}</caption>
 
 						<tbody>
             {allCheckIns.filter(findCheckInsFilter).length>0 ? checkInNodes : (<tr><td>no checkIns for {dish.dish_name}...yet! <Link to="index/newCheckIn"> Click here to be the first!.</Link> </td></tr>)}
 						</tbody>
+				</table>
+				</div>
+				<div className="col-md-6">
+				<table className="table">
+
+		<caption>Reviews for {dish.dish_name}</caption>
+				<tbody>
+				{allReviews.filter(findReviewsFilter).length>0 ? reviewNodes : (<tr><td>no reviews for {dish.dish_name}...yet! <Link to="index/newReview">Click here to be the first!</Link> </td></tr>)}
+				</tbody>
 				</table>
 				</div>
 				</div>
@@ -138,6 +143,9 @@ function putOneSubNeighborhoodInState(_id){
   return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
 }
 
+function putOneGenreInState(_id){
+  return {type: "PUT_ONE_GENRE_IN_STATE", _id:_id}
+}
 
 function putOneUserInState(_id){
   return {type: "PUT_ONE_USER_IN_STATE", _id:_id}
@@ -146,7 +154,8 @@ function putOneUserInState(_id){
 const mapDispatchToProps = (dispatch) => {
  return {putOneSpotInState: (_id) => dispatch(putOneSpotInState(_id)),
 	 	putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
-		putOneUserInState: (_id) => dispatch(putOneUserInState(_id))
+		putOneUserInState: (_id) => dispatch(putOneUserInState(_id)),
+		putOneGenreInState: (_id) => dispatch(putOneGenreInState(_id)),
 
 
  }

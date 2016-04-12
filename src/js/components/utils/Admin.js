@@ -26,7 +26,7 @@ export default class Admin extends React.Component{
 		<div>
 			<div>
 				<div className="admin-user-box bg-success row">
-					<div className="admin-user-input col-md-4">
+				<div className="admin-user-input col-md-4">
 									<h2>New User</h2>
 						<UserForm
 						allSubNeighborhoods={this.props.allSubNeighborhoods}
@@ -54,14 +54,7 @@ export default class Admin extends React.Component{
 
 				<div className="admin-spot-box row bg-info">
 					<div className="admin-spot-input col-md-4">
-									<h2>New Spot</h2>
 
-						<SpotForm
-						allGenres={this.props.allGenres}
-						allSubNeighborhoods={this.props.allSubNeighborhoods}
-						createSpot={this.props.createSpot}/>
-					</div>
-					<div className="admin-spot-output col-md-8">
 								<h2>All Spots</h2>
 
 						<SpotList
@@ -88,15 +81,6 @@ export default class Admin extends React.Component{
 							<div className="admin-dish-box bg-success row">
 
 								<div className="admin-dish-input col-md-4">
-												<h2>New Dish</h2>
-
-									<DishForm
-									allSpots={this.props.allSpots}
-									allGenres={this.props.allGenres}
-									createDish={this.props.createDish} />
-								</div>
-								<div className="admin-dish-output col-md-8">
-												<h2>All Dishes</h2>
 
 									<DishList
 									allReviews={this.props.allReviews}

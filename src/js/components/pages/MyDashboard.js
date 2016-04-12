@@ -69,7 +69,7 @@ render(){
   <h1>welcome to your dashboard, {thisUser.username}</h1>
   </div>
   <div className="col-md-6">
-      <h3>your are proud to call {
+      <h3>you are proud to call {
         thisUser.user_sub_neighborhood !== undefined ?
             <Link to={`/subNeighborhood/${thisUser.user_sub_neighborhood._id}`}
             onClick={putOneSubNeighborhoodInState.bind(this, thisUser.user_sub_neighborhood._id)}>

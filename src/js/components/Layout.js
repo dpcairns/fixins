@@ -26,6 +26,8 @@ handleLogin(){
 			{loggedIn: {display: "none"},
 		 	loggedOut: {display: "block"}
 				})
+				this.context.router.push('index/login')
+
 			}
 
 componentDidMount(){
@@ -44,7 +46,7 @@ componentDidMount(){
 						<Links/>
 						<h2 className="bg-warning text-right"> fixins || get stuft </h2>
 						<div>
-						hello
+						hello, {this.props.currentUser.username !== undefined ? this.props.currentUser.username : "honored guest"} || {this.props.currentUser.username !== undefined ? <a onClick={this.props.userLogout.bind(this)} >logout?</a> : <Link to="index/login">login?</Link>}
 
 						</div>
 
@@ -72,6 +74,11 @@ const mapDispatchToProps = (dispatch) => {
     return {
     userLogout: () => dispatch(userLogout())
   }
+}
+
+
+Layout.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout)

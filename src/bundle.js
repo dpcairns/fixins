@@ -133,15 +133,15 @@
 
 	var _NewReviewPage2 = _interopRequireDefault(_NewReviewPage);
 
-	var _NewDishPage = __webpack_require__(812);
+	var _NewDishPage = __webpack_require__(811);
 
 	var _NewDishPage2 = _interopRequireDefault(_NewDishPage);
 
-	var _NewSpotPage = __webpack_require__(813);
+	var _NewSpotPage = __webpack_require__(812);
 
 	var _NewSpotPage2 = _interopRequireDefault(_NewSpotPage);
 
-	var _MyDashboard = __webpack_require__(811);
+	var _MyDashboard = __webpack_require__(813);
 
 	var _MyDashboard2 = _interopRequireDefault(_MyDashboard);
 
@@ -34197,6 +34197,7 @@
 				this.setState({ loggedIn: { display: "none" },
 					loggedOut: { display: "block" }
 				});
+				this.context.router.push('index/login');
 			}
 		}, {
 			key: "componentDidMount",
@@ -34223,7 +34224,18 @@
 					_react2.default.createElement(
 						"div",
 						null,
-						"hello"
+						"hello, ",
+						this.props.currentUser.username !== undefined ? this.props.currentUser.username : "honored guest",
+						" || ",
+						this.props.currentUser.username !== undefined ? _react2.default.createElement(
+							"a",
+							{ onClick: this.props.userLogout.bind(this) },
+							"logout?"
+						) : _react2.default.createElement(
+							_reactRouter.Link,
+							{ to: "index/login" },
+							"login?"
+						)
 					),
 					this.props.children
 				);
@@ -34255,6 +34267,10 @@
 				return dispatch(_userLogout());
 			}
 		};
+	};
+
+	Layout.contextTypes = {
+		router: _react2.default.PropTypes.object.isRequired
 	};
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Layout);
@@ -34318,15 +34334,6 @@
 							"h4",
 							null,
 							"Home Page"
-						)
-					),
-					_react2.default.createElement(
-						_reactRouter.Link,
-						{ to: "index" },
-						_react2.default.createElement(
-							"h4",
-							null,
-							"Admin Page"
 						)
 					),
 					_react2.default.createElement(
@@ -35074,7 +35081,7 @@
 						_react2.default.createElement(
 							_reactRouter.Link,
 							{ to: "index" },
-							"for now, just click here to go to the admin page"
+							"for now, just click here to go to the (now rather broken) admin page"
 						)
 					),
 					_react2.default.createElement(
@@ -35457,19 +35464,6 @@
 								_react2.default.createElement(
 									"h2",
 									null,
-									"New Spot"
-								),
-								_react2.default.createElement(_SpotForm2.default, {
-									allGenres: this.props.allGenres,
-									allSubNeighborhoods: this.props.allSubNeighborhoods,
-									createSpot: this.props.createSpot })
-							),
-							_react2.default.createElement(
-								"div",
-								{ className: "admin-spot-output col-md-8" },
-								_react2.default.createElement(
-									"h2",
-									null,
 									"All Spots"
 								),
 								_react2.default.createElement(_SpotList2.default, {
@@ -35493,24 +35487,6 @@
 							_react2.default.createElement(
 								"div",
 								{ className: "admin-dish-input col-md-4" },
-								_react2.default.createElement(
-									"h2",
-									null,
-									"New Dish"
-								),
-								_react2.default.createElement(_DishForm2.default, {
-									allSpots: this.props.allSpots,
-									allGenres: this.props.allGenres,
-									createDish: this.props.createDish })
-							),
-							_react2.default.createElement(
-								"div",
-								{ className: "admin-dish-output col-md-8" },
-								_react2.default.createElement(
-									"h2",
-									null,
-									"All Dishes"
-								),
 								_react2.default.createElement(_DishList2.default, {
 									allReviews: this.props.allReviews,
 									allCheckIns: this.props.allCheckIns,
@@ -67224,7 +67200,7 @@
 							"div",
 							{ className: "input-group" },
 							"Calories:",
-							_react2.default.createElement("input", { type: "text",
+							_react2.default.createElement("input", { type: "number",
 								value: this.state.calories,
 								onChange: this.handleCaloriesChange.bind(this),
 								className: "form-control",
@@ -67234,7 +67210,7 @@
 							"div",
 							{ className: "input-group" },
 							"Price:",
-							_react2.default.createElement("input", { type: "text",
+							_react2.default.createElement("input", { type: "number",
 								value: this.state.price,
 								onChange: this.handlePriceChange.bind(this),
 								className: "form-control",
@@ -67594,7 +67570,7 @@
 				newReviewObject.words = this.state.words;
 				newReviewObject.stars = this.state.stars;
 				newReviewObject.review_user = this.props.currentUser;
-				if (newReviewObject.words.length < 1) {
+				if (newReviewObject.words.length < 1 || newReviewObject.stars === null) {
 					this.showReviewFailure();
 				} else {
 					this.props.createReview(newReviewObject);
@@ -67864,7 +67840,6 @@
 					this.props.createCheckIn(newCheckInObject);
 					this.showCheckInSuccess();
 				}
-				this.props.createCheckIn(newCheckInObject);
 				this.setState({ blurb: '', dish: '', user: '' });
 			}
 		}, {
@@ -69924,6 +69899,11 @@
 	  _createClass(MapPage, [{
 	    key: "render",
 	    value: function render() {
+
+	      if (this.props.currentUser === undefined) {
+	        this.context.router.push('index/login');
+	      }
+
 	      return _react2.default.createElement(
 	        "div",
 	        null,
@@ -69936,6 +69916,11 @@
 	}(_react2.default.Component);
 
 	exports.default = MapPage;
+
+
+	MapPage.contextTypes = {
+	  router: _react2.default.PropTypes.object.isRequired
+	};
 
 /***/ },
 /* 799 */
@@ -69994,7 +69979,13 @@
 	      var northEast = L.latLng(45.63610301220829, -122.44197151841945);
 	      var metroLimits = L.latLngBounds(southWest, northEast);
 	      var putOneSpotInState = this.props.putOneSpotInState;
+	      var allDishes = this.props.allDishes;
+	      var putOneDishInState = this.props.putOneDishInState;
 	      var markerNodes = this.props.allSpots.map(function (spot) {
+	        function findDishesFilter(dish) {
+	          return dish.dish_spot._id === spot._id;
+	        }
+	        var signatureDish = allDishes.filter(findDishesFilter);
 	        var spot_coordinates = [parseFloat(spot.spot_coordinates[0]), parseFloat(spot.spot_coordinates[1])];
 	        var spotId = spot._id;
 	        var router = _this2.context.router;
@@ -70005,28 +69996,44 @@
 	            _reactLeaflet.Popup,
 	            null,
 	            _react2.default.createElement(
-	              'span',
-	              { onClick: putOneSpotInState.bind(_this2, spotId) },
-	              ' Here is the spot: ',
+	              'div',
+	              null,
 	              _react2.default.createElement(
-	                'a',
-	                { onClick: function onClick() {
-	                    return router.push('/spot/' + spotId);
-	                  } },
-	                spot.spot_name
+	                'span',
+	                { onClick: putOneSpotInState.bind(_this2, spotId) },
+	                ' Here is the spot:',
+	                _react2.default.createElement(
+	                  'a',
+	                  { onClick: function onClick() {
+	                      return router.push('/spot/' + spotId);
+	                    } },
+	                  spot.spot_name
+	                )
 	              ),
 	              _react2.default.createElement('br', null),
-	              'Here is a dish: ',
-	              spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_name : "none yet",
-	              _react2.default.createElement('br', null),
-	              'It has this many calories: ',
-	              spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_calories : "none yet",
-	              _react2.default.createElement('br', null),
-	              'It costs this many dollars: ',
-	              spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_price : "none yet",
-	              _react2.default.createElement('br', null),
-	              'Here is the blurb: ',
-	              spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_blurb : "none yet"
+	              _react2.default.createElement(
+	                'span',
+	                { onClick: signatureDish.length > 0 ? putOneDishInState.bind(_this2, signatureDish[0]._id) : function () {
+	                    return router.push('/index/newDish');
+	                  } },
+	                'Signature dish: ',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement(
+	                  'a',
+	                  { onClick: signatureDish.length > 0 ? function () {
+	                      return router.push('/dish/' + signatureDish[0]._id);
+	                    } : function () {
+	                      return router.push('/index/newDish');
+	                    } },
+	                  signatureDish.length > 0 ? signatureDish[0].dish_name : "no dishes yet. be the first to add one!",
+	                  _react2.default.createElement('br', null)
+	                ),
+	                '(  ',
+	                signatureDish.length > 0 ? signatureDish[0].dish_calories : "n/a",
+	                ' calories for $',
+	                signatureDish.length > 0 ? signatureDish[0].dish_price : "n/a",
+	                ')'
+	              )
 	            )
 	          )
 	        );
@@ -70059,14 +70066,22 @@
 	  return { type: "PUT_ONE_SPOT_IN_STATE", _id: _id };
 	}
 
+	function _putOneDishInState(_id) {
+	  return { type: "PUT_ONE_DISH_IN_STATE", _id: _id };
+	}
+
 	var mapStateToProps = function mapStateToProps(state) {
-	  return { allSpots: state.spots };
+	  return { allSpots: state.spots, allDishes: state.dishes };
 	};
 
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return { putOneSpotInState: function putOneSpotInState(_id) {
 	      return dispatch(_putOneSpotInState(_id));
-	    } };
+	    },
+	    putOneDishInState: function putOneDishInState(_id) {
+	      return dispatch(_putOneDishInState(_id));
+	    }
+	  };
 	};
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MapItself);
@@ -70540,6 +70555,7 @@
 	  _createClass(UserDetail, [{
 	    key: "render",
 	    value: function render() {
+
 	      var allReviews = this.props.allReviews;
 	      var allSubNeighborhoods = this.props.allSubNeighborhoods;
 	      var allUsers = this.props.allUsers;
@@ -70824,36 +70840,38 @@
 	  _createClass(GenreDetail, [{
 	    key: "render",
 	    value: function render() {
+
 	      var allSpots = this.props.allSpots;
 	      var putOneSpotInState = this.props.putOneSpotInState;
+	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
 	      var genre = this.props.genre;
+	      var spotBoxStyle = { height: "100px", width: "200px", margin: "5px", float: "left", textAlign: "center" };
 
 	      function findSpotsFilter(spot) {
 	        return spot.spot_genres[0]._id === genre._id;
 	      }
 
 	      var spotNodes = allSpots.filter(findSpotsFilter).map(function (spot) {
+	        var subNeighborhoodId = spot.spot_subNeighborhood._id;
 	        var spotId = spot._id;
 	        return _react2.default.createElement(
-	          "tr",
-	          { key: spot._id },
+	          "div",
+	          { key: spot._id, style: spotBoxStyle, className: "bg-danger" },
 	          _react2.default.createElement(
-	            "td",
+	            "div",
 	            null,
 	            _react2.default.createElement(
 	              _reactRouter.Link,
 	              { to: "/spot/" + spotId, onClick: putOneSpotInState.bind(this, spotId) },
 	              spot.spot_name
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "td",
-	            null,
-	            spot.spot_subNeighborhood.subNeighborhood_name
-	          ),
-	          _react2.default.createElement(
-	            "td",
-	            null,
+	            ),
+	            _react2.default.createElement("br", null),
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { onClick: putOneSubNeighborhoodInState.bind(this, subNeighborhoodId), to: "/subNeighborhood/" + subNeighborhoodId },
+	              spot.spot_subNeighborhood.subNeighborhood_name
+	            ),
+	            _react2.default.createElement("br", null),
 	            spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_name : "none yet"
 	          )
 	        );
@@ -70868,35 +70886,12 @@
 	          genre.genre_name
 	        ),
 	        _react2.default.createElement(
-	          "table",
-	          { className: "table" },
-	          _react2.default.createElement(
-	            "th",
+	          "div",
+	          { className: "flex" },
+	          allSpots.filter(findSpotsFilter).length > 0 ? spotNodes : _react2.default.createElement(
+	            "h1",
 	            null,
-	            _react2.default.createElement(
-	              "td",
-	              null,
-	              "Spot name"
-	            ),
-	            _react2.default.createElement(
-	              "td",
-	              null,
-	              "SubNeighborhood"
-	            ),
-	            _react2.default.createElement(
-	              "td",
-	              null,
-	              "Signature dish"
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "tbody",
-	            null,
-	            allSpots.filter(findSpotsFilter).length > 0 ? spotNodes : _react2.default.createElement(
-	              "h1",
-	              null,
-	              "no relevant restaurants...yet!"
-	            )
+	            "no relevant restaurants...yet!"
 	          )
 	        )
 	      );
@@ -70908,6 +70903,10 @@
 
 	function _putOneSpotInState(_id) {
 	  return { type: "PUT_ONE_SPOT_IN_STATE", _id: _id };
+	}
+
+	function _putOneSubNeighborhoodInState(_id) {
+	  return { type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id: _id };
 	}
 
 	var mapStateToProps = function mapStateToProps(state) {
@@ -70926,6 +70925,9 @@
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return { putOneSpotInState: function putOneSpotInState(_id) {
 	      return dispatch(_putOneSpotInState(_id));
+	    },
+	    putOneSubNeighborhoodInState: function putOneSubNeighborhoodInState(_id) {
+	      return dispatch(_putOneSubNeighborhoodInState(_id));
 	    } };
 	};
 
@@ -70982,12 +70984,14 @@
 			_createClass(SpotDetail, [{
 					key: 'render',
 					value: function render() {
+
 							var allReviews = this.props.allReviews;
 							var allSubNeighborhoods = this.props.allSubNeighborhoods;
 							var allUsers = this.props.allUsers;
 							var allDishes = this.props.allDishes;
 							var allCheckIns = this.props.allCheckIns;
 							var putOneDishInState = this.props.putOneDishInState;
+							var putOneGenreInState = this.props.putOneGenreInState;
 							var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
 							var spot = this.props.spot;
 							var subNeighorhoodId = spot.spot_subNeighborhood._id;
@@ -71049,8 +71053,13 @@
 											_react2.default.createElement(
 													_reactRouter.Link,
 													{ to: '/subNeighborhood/' + subNeighorhoodId, onClick: putOneSubNeighborhoodInState.bind(this, subNeighorhoodId) },
-													'SubNeighorhood: ',
 													spot.spot_subNeighborhood.subNeighborhood_name
+											),
+											'Genre: ',
+											_react2.default.createElement(
+													_reactRouter.Link,
+													{ onClick: putOneGenreInState.bind(this, spot.spot_genres[0]._id), to: '/genre/' + spot.spot_genres[0]._id },
+													spot.spot_genres[0].genre_name
 											),
 											_react2.default.createElement(
 													'table',
@@ -71114,16 +71123,24 @@
 			return { type: "PUT_ONE_DISH_IN_STATE", _id: _id };
 	}
 
+	function _putOneGenreInState(_id) {
+			return { type: "PUT_ONE_GENRE_IN_STATE", _id: _id };
+	}
+
 	function _putOneSubNeighborhoodInState(_id) {
 			return { type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id: _id };
 	}
 
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-			return { putOneDishInState: function putOneDishInState(_id) {
+			return {
+					putOneDishInState: function putOneDishInState(_id) {
 							return dispatch(_putOneDishInState(_id));
 					},
 					putOneSubNeighborhoodInState: function putOneSubNeighborhoodInState(_id) {
 							return dispatch(_putOneSubNeighborhoodInState(_id));
+					},
+					putOneGenreInState: function putOneGenreInState(_id) {
+							return dispatch(_putOneGenreInState(_id));
 					}
 
 			};
@@ -71182,6 +71199,7 @@
 	  _createClass(DishDetail, [{
 	    key: 'render',
 	    value: function render() {
+
 	      var allReviews = this.props.allReviews;
 	      var allSubNeighborhoods = this.props.allSubNeighborhoods;
 	      var allUsers = this.props.allUsers;
@@ -71190,6 +71208,7 @@
 	      var allCheckIns = this.props.allCheckIns;
 	      var putOneUserInState = this.props.putOneUserInState;
 	      var putOneSpotInState = this.props.putOneSpotInState;
+	      var putOneGenreInState = this.props.putOneGenreInState;
 	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
 
 	      var dish = this.props.dish;
@@ -71290,6 +71309,13 @@
 	                )
 	              )
 	            ),
+	            '(',
+	            dish.dish_calories,
+	            ' for $ ',
+	            dish.dish_price,
+	            ', or ',
+	            dish.dish_calories / dish.dish_price,
+	            ' calorieDollars)',
 	            _react2.default.createElement(
 	              'td',
 	              null,
@@ -71302,8 +71328,12 @@
 	            _react2.default.createElement(
 	              'td',
 	              null,
-	              'genre: ',
-	              spot.spot_genres[0].genre_name
+	              'Genre: ',
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { onClick: putOneGenreInState.bind(this, spot.spot_genres[0]._id), to: '/genre/' + spot.spot_genres[0]._id },
+	                spot.spot_genres[0].genre_name
+	              )
 	            ),
 	            _react2.default.createElement(
 	              'td',
@@ -71344,41 +71374,6 @@
 	                _react2.default.createElement(
 	                  'caption',
 	                  null,
-	                  'Reviews for ',
-	                  dish.dish_name
-	                ),
-	                _react2.default.createElement(
-	                  'tbody',
-	                  null,
-	                  allReviews.filter(findReviewsFilter).length > 0 ? reviewNodes : _react2.default.createElement(
-	                    'tr',
-	                    null,
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'no reviews for ',
-	                      dish.dish_name,
-	                      '...yet! ',
-	                      _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: 'index/newReview' },
-	                        'Click here to be the first!'
-	                      ),
-	                      ' '
-	                    )
-	                  )
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-md-6' },
-	              _react2.default.createElement(
-	                'table',
-	                { className: 'table' },
-	                _react2.default.createElement(
-	                  'caption',
-	                  null,
 	                  'CheckIns for ',
 	                  dish.dish_name
 	                ),
@@ -71398,6 +71393,41 @@
 	                        _reactRouter.Link,
 	                        { to: 'index/newCheckIn' },
 	                        ' Click here to be the first!.'
+	                      ),
+	                      ' '
+	                    )
+	                  )
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-md-6' },
+	              _react2.default.createElement(
+	                'table',
+	                { className: 'table' },
+	                _react2.default.createElement(
+	                  'caption',
+	                  null,
+	                  'Reviews for ',
+	                  dish.dish_name
+	                ),
+	                _react2.default.createElement(
+	                  'tbody',
+	                  null,
+	                  allReviews.filter(findReviewsFilter).length > 0 ? reviewNodes : _react2.default.createElement(
+	                    'tr',
+	                    null,
+	                    _react2.default.createElement(
+	                      'td',
+	                      null,
+	                      'no reviews for ',
+	                      dish.dish_name,
+	                      '...yet! ',
+	                      _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: 'index/newReview' },
+	                        'Click here to be the first!'
 	                      ),
 	                      ' '
 	                    )
@@ -71458,6 +71488,10 @@
 	  return { type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id: _id };
 	}
 
+	function _putOneGenreInState(_id) {
+	  return { type: "PUT_ONE_GENRE_IN_STATE", _id: _id };
+	}
+
 	function _putOneUserInState(_id) {
 	  return { type: "PUT_ONE_USER_IN_STATE", _id: _id };
 	}
@@ -71471,6 +71505,9 @@
 	    },
 	    putOneUserInState: function putOneUserInState(_id) {
 	      return dispatch(_putOneUserInState(_id));
+	    },
+	    putOneGenreInState: function putOneGenreInState(_id) {
+	      return dispatch(_putOneGenreInState(_id));
 	    }
 
 	  };
@@ -71527,7 +71564,8 @@
 	  _createClass(NeighborhoodDetail, [{
 	    key: "render",
 	    value: function render() {
-	      var subNeighborhoodBoxStyle = { height: "100px", width: "200px", margin: "5px" };
+
+	      var subNeighborhoodBoxStyle = { height: "100px", width: "200px", margin: "5px", float: "left", fontSize: "2em", textAlign: "center" };
 	      var containerStyle = { display: "inline-block" };
 	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
 	      var allSubNeighborhoods = this.props.allSubNeighborhoods;
@@ -71546,7 +71584,7 @@
 	            { onClick: putOneSubNeighborhoodInState.bind(this, subNeighborhoodId), to: "/subNeighborhood/" + subNeighborhoodId },
 	            _react2.default.createElement(
 	              "div",
-	              { style: subNeighborhoodBoxStyle, className: "bg-info" },
+	              { style: subNeighborhoodBoxStyle, className: "bg-danger" },
 	              _react2.default.createElement(
 	                "b",
 	                null,
@@ -71573,7 +71611,7 @@
 	        ),
 	        _react2.default.createElement(
 	          "div",
-	          { style: containerStyle },
+	          { className: "flex" },
 	          subNeighorhoodNodes
 	        )
 	      );
@@ -71661,34 +71699,38 @@
 	  _createClass(SubNeighborhoodDetail, [{
 	    key: "render",
 	    value: function render() {
+
 	      var allSpots = this.props.allSpots;
 	      var allUsers = this.props.allUsers;
 	      var allCheckIns = this.props.allCheckIns;
 	      var putOneUserInState = this.props.putOneUserInState;
 	      var putOneSpotInState = this.props.putOneSpotInState;
 	      var putOneDishInState = this.props.putOneDishInState;
+	      var putOneGenreInState = this.props.putOneGenreInState;
 	      var putOneNeighborhoodInState = this.props.putOneNeighborhoodInState;
 	      var subNeighborhood = this.props.subNeighborhood;
+	      var itemBoxStyle = { height: "100px", width: "200px", margin: "5px", float: "left", textAlign: "center" };
+
 	      function findSpotsFilter(spot) {
+
 	        return spot.spot_subNeighborhood._id === subNeighborhood._id;
 	      }
 	      var spotNodes = allSpots.filter(findSpotsFilter).map(function (spot) {
+
 	        var spotId = spot._id;
 	        return _react2.default.createElement(
-	          "tr",
-	          { key: spot._id },
+	          "div",
+	          { style: itemBoxStyle, key: spot._id, className: "bg-info" },
 	          _react2.default.createElement(
-	            "td",
-	            null,
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { onClick: putOneSpotInState.bind(this, spotId), to: "/spot/" + spotId },
-	              spot.spot_name
-	            )
+	            _reactRouter.Link,
+	            { onClick: putOneSpotInState.bind(this, spotId), to: "/spot/" + spotId },
+	            spot.spot_name
 	          ),
+	          _react2.default.createElement("br", null),
+	          "Genre: ",
 	          _react2.default.createElement(
-	            "td",
-	            null,
+	            _reactRouter.Link,
+	            { onClick: putOneGenreInState.bind(this, spot.spot_genres[0]._id), to: "/genre/" + spot.spot_genres[0]._id },
 	            spot.spot_genres[0].genre_name
 	          )
 	        );
@@ -71701,24 +71743,17 @@
 	        var userId = user._id;
 
 	        return _react2.default.createElement(
-	          "tr",
-	          { key: userId },
+	          "div",
+	          { style: itemBoxStyle, key: userId, className: "bg-danger" },
 	          _react2.default.createElement(
-	            "td",
-	            null,
-	            "Username:",
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: "/user/" + userId, onClick: putOneUserInState.bind(this, userId) },
-	              user.username
-	            )
+	            _reactRouter.Link,
+	            { to: "/user/" + userId, onClick: putOneUserInState.bind(this, userId) },
+	            user.username
 	          ),
-	          _react2.default.createElement(
-	            "td",
-	            null,
-	            "Password: ",
-	            user.password
-	          )
+	          " ",
+	          _react2.default.createElement("br", null),
+	          "Password: ",
+	          user.password
 	        );
 	      });
 	      var neighborhoodId = subNeighborhood.sub_neighborhood_neighborhood._id;
@@ -71757,18 +71792,8 @@
 	            ),
 	            _react2.default.createElement(
 	              "div",
-	              null,
-	              allSpots.filter(findSpotsFilter).length > 0 ? _react2.default.createElement(
-	                "table",
-	                { className: "table" },
-	                _react2.default.createElement(
-	                  "tbody",
-	                  null,
-	                  " ",
-	                  spotNodes,
-	                  " "
-	                )
-	              ) : _react2.default.createElement(
+	              { className: "flex" },
+	              allSpots.filter(findSpotsFilter).length > 0 ? spotNodes : _react2.default.createElement(
 	                "h4",
 	                null,
 	                "no restaurants in  ",
@@ -71795,18 +71820,8 @@
 	            ),
 	            _react2.default.createElement(
 	              "div",
-	              null,
-	              allUsers.filter(findUsersFilter).length > 0 ? _react2.default.createElement(
-	                "table",
-	                { className: "table" },
-	                _react2.default.createElement(
-	                  "tbody",
-	                  null,
-	                  " ",
-	                  userNodes,
-	                  " "
-	                )
-	              ) : _react2.default.createElement(
+	              { className: "flex" },
+	              allUsers.filter(findUsersFilter).length > 0 ? userNodes : _react2.default.createElement(
 	                "h4",
 	                null,
 	                "no users in ",
@@ -71854,6 +71869,10 @@
 	  return { type: "PUT_ONE_NEIGHBORHOOD_IN_STATE", _id: _id };
 	}
 
+	function _putOneGenreInState(_id) {
+	  return { type: "PUT_ONE_GENRE_IN_STATE", _id: _id };
+	}
+
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
 	    putOneUserInState: function putOneUserInState(_id) {
@@ -71867,6 +71886,9 @@
 	    },
 	    putOneNeighborhoodInState: function putOneNeighborhoodInState(_id) {
 	      return dispatch(_putOneNeighborhoodInState(_id));
+	    },
+	    putOneGenreInState: function putOneGenreInState(_id) {
+	      return dispatch(_putOneGenreInState(_id));
 	    }
 
 	  };
@@ -72399,6 +72421,229 @@
 
 	var _reactRouter = __webpack_require__(184);
 
+	var _RemoveButton = __webpack_require__(542);
+
+	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
+
+	var _DishForm = __webpack_require__(778);
+
+	var _DishForm2 = _interopRequireDefault(_DishForm);
+
+	var _Links = __webpack_require__(533);
+
+	var _Links2 = _interopRequireDefault(_Links);
+
+	var _FixinsActions = __webpack_require__(535);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NewDishPage = function (_React$Component) {
+	  _inherits(NewDishPage, _React$Component);
+
+	  function NewDishPage() {
+	    _classCallCheck(this, NewDishPage);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NewDishPage).apply(this, arguments));
+	  }
+
+	  _createClass(NewDishPage, [{
+	    key: 'render',
+	    value: function render() {
+
+	      if (this.props.currentUser._id === undefined) {
+	        this.context.router.push('index/login');
+	      }
+
+	      var thisSpot = this.props.thisSpot;
+	      function findSpotFilter(spot) {
+	        return spot._id === thisSpot._id;
+	      }
+	      var mySpot = this.props.allSpots.filter(findSpotFilter);
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        'Okay, post a new dish at ',
+	        mySpot[0].spot_name,
+	        ' . . .',
+	        _react2.default.createElement(_DishForm2.default, {
+	          createDish: this.props.createDish,
+	          thisDish: this.props.thisDish,
+	          thisSpot: this.props.thisSpot,
+	          allSpots: this.props.allSpots,
+	          spotName: mySpot[0].spot_name,
+	          currentUser: this.props.currentUser
+	        })
+	      );
+	    }
+	  }]);
+
+	  return NewDishPage;
+	}(_react2.default.Component);
+
+	NewDishPage.contextTypes = {
+	  router: _react2.default.PropTypes.object.isRequired
+	};
+
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    currentUser: state.currentUser,
+	    thisDish: state.dish,
+	    thisSpot: state.spot,
+	    allSpots: state.spots
+	  };
+	};
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    createDish: function createDish(newDish) {
+	      return FixinsActions.createDish(newDish, dispatch);
+	    }
+	  };
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewDishPage);
+
+/***/ },
+/* 812 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(161);
+
+	var _reactRouter = __webpack_require__(184);
+
+	var _RemoveButton = __webpack_require__(542);
+
+	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
+
+	var _SpotForm = __webpack_require__(604);
+
+	var _SpotForm2 = _interopRequireDefault(_SpotForm);
+
+	var _Links = __webpack_require__(533);
+
+	var _Links2 = _interopRequireDefault(_Links);
+
+	var _FixinsActions = __webpack_require__(535);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NewSpotPage = function (_React$Component) {
+	  _inherits(NewSpotPage, _React$Component);
+
+	  function NewSpotPage() {
+	    _classCallCheck(this, NewSpotPage);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NewSpotPage).apply(this, arguments));
+	  }
+
+	  _createClass(NewSpotPage, [{
+	    key: 'render',
+	    value: function render() {
+
+	      if (this.props.currentUser._id === undefined) {
+	        this.context.router.push('index/login');
+	      }
+
+	      var thisSubNeighborhood = this.props.thisSubNeighborhood;
+	      function findSubNeighborhoodFilter(subNeighborhood) {
+	        return subNeighborhood._id === thisSubNeighborhood._id;
+	      }
+	      var mySubNeighborhood = this.props.allSubNeighborhoods.filter(findSubNeighborhoodFilter);
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_SpotForm2.default, {
+	          createSpot: this.props.createSpot,
+	          thisSpot: this.props.thisSpot,
+	          mySubNeighborhood: mySubNeighborhood[0],
+	          allSpots: this.props.allSpots,
+	          allGenres: this.props.allGenres,
+	          currentUser: this.props.currentUser
+	        })
+	      );
+	    }
+	  }]);
+
+	  return NewSpotPage;
+	}(_react2.default.Component);
+
+	NewSpotPage.contextTypes = {
+	  router: _react2.default.PropTypes.object.isRequired
+	};
+
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    currentUser: state.currentUser,
+	    thisSubNeighborhood: state.subNeighborhood,
+	    allGenres: state.genres,
+	    allSubNeighborhoods: state.subNeighborhoods
+	  };
+	};
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    createSpot: function createSpot(newSpot) {
+	      return FixinsActions.createSpot(newSpot, dispatch);
+	    }
+	  };
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewSpotPage);
+
+/***/ },
+/* 813 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(161);
+
+	var _reactRouter = __webpack_require__(184);
+
 	var _Links = __webpack_require__(533);
 
 	var _Links2 = _interopRequireDefault(_Links);
@@ -72560,7 +72805,7 @@
 	              _react2.default.createElement(
 	                'h3',
 	                null,
-	                'your are proud to call ',
+	                'you are proud to call ',
 	                thisUser.user_sub_neighborhood !== undefined ? _react2.default.createElement(
 	                  _reactRouter.Link,
 	                  { to: '/subNeighborhood/' + thisUser.user_sub_neighborhood._id,
@@ -72659,229 +72904,6 @@
 	  };
 	};
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MyDashboard);
-
-/***/ },
-/* 812 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(161);
-
-	var _reactRouter = __webpack_require__(184);
-
-	var _RemoveButton = __webpack_require__(542);
-
-	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
-
-	var _DishForm = __webpack_require__(778);
-
-	var _DishForm2 = _interopRequireDefault(_DishForm);
-
-	var _Links = __webpack_require__(533);
-
-	var _Links2 = _interopRequireDefault(_Links);
-
-	var _FixinsActions = __webpack_require__(535);
-
-	var FixinsActions = _interopRequireWildcard(_FixinsActions);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var NewDishPage = function (_React$Component) {
-	  _inherits(NewDishPage, _React$Component);
-
-	  function NewDishPage() {
-	    _classCallCheck(this, NewDishPage);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NewDishPage).apply(this, arguments));
-	  }
-
-	  _createClass(NewDishPage, [{
-	    key: 'render',
-	    value: function render() {
-
-	      if (this.props.currentUser._id === undefined) {
-	        this.context.router.push('index/login');
-	      }
-
-	      var thisSpot = this.props.thisSpot;
-	      function findSpotFilter(spot) {
-	        return spot._id === thisSpot._id;
-	      }
-	      var mySpot = this.props.allSpots.filter(findSpotFilter);
-
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        'Okay, post a new dish at ',
-	        mySpot[0].spot_name,
-	        ' . . .',
-	        _react2.default.createElement(_DishForm2.default, {
-	          createDish: this.props.createDish,
-	          thisDish: this.props.thisDish,
-	          thisSpot: this.props.thisSpot,
-	          allSpots: this.props.allSpots,
-	          spotName: mySpot[0].spot_name,
-	          currentUser: this.props.currentUser
-	        })
-	      );
-	    }
-	  }]);
-
-	  return NewDishPage;
-	}(_react2.default.Component);
-
-	NewDishPage.contextTypes = {
-	  router: _react2.default.PropTypes.object.isRequired
-	};
-
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    currentUser: state.currentUser,
-	    thisDish: state.dish,
-	    thisSpot: state.spot,
-	    allSpots: state.spots
-	  };
-	};
-
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    createDish: function createDish(newDish) {
-	      return FixinsActions.createDish(newDish, dispatch);
-	    }
-	  };
-	};
-
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewDishPage);
-
-/***/ },
-/* 813 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(161);
-
-	var _reactRouter = __webpack_require__(184);
-
-	var _RemoveButton = __webpack_require__(542);
-
-	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
-
-	var _SpotForm = __webpack_require__(604);
-
-	var _SpotForm2 = _interopRequireDefault(_SpotForm);
-
-	var _Links = __webpack_require__(533);
-
-	var _Links2 = _interopRequireDefault(_Links);
-
-	var _FixinsActions = __webpack_require__(535);
-
-	var FixinsActions = _interopRequireWildcard(_FixinsActions);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var NewSpotPage = function (_React$Component) {
-	  _inherits(NewSpotPage, _React$Component);
-
-	  function NewSpotPage() {
-	    _classCallCheck(this, NewSpotPage);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NewSpotPage).apply(this, arguments));
-	  }
-
-	  _createClass(NewSpotPage, [{
-	    key: 'render',
-	    value: function render() {
-
-	      if (this.props.currentUser._id === undefined) {
-	        this.context.router.push('index/login');
-	      }
-
-	      var thisSubNeighborhood = this.props.thisSubNeighborhood;
-	      function findSubNeighborhoodFilter(subNeighborhood) {
-	        return subNeighborhood._id === thisSubNeighborhood._id;
-	      }
-	      var mySubNeighborhood = this.props.allSubNeighborhoods.filter(findSubNeighborhoodFilter);
-
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(_SpotForm2.default, {
-	          createSpot: this.props.createSpot,
-	          thisSpot: this.props.thisSpot,
-	          mySubNeighborhood: mySubNeighborhood[0],
-	          allSpots: this.props.allSpots,
-	          allGenres: this.props.allGenres,
-	          currentUser: this.props.currentUser
-	        })
-	      );
-	    }
-	  }]);
-
-	  return NewSpotPage;
-	}(_react2.default.Component);
-
-	NewSpotPage.contextTypes = {
-	  router: _react2.default.PropTypes.object.isRequired
-	};
-
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    currentUser: state.currentUser,
-	    thisSubNeighborhood: state.subNeighborhood,
-	    allGenres: state.genres,
-	    allSubNeighborhoods: state.subNeighborhoods
-	  };
-	};
-
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    createSpot: function createSpot(newSpot) {
-	      return FixinsActions.createSpot(newSpot, dispatch);
-	    }
-	  };
-	};
-
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewSpotPage);
 
 /***/ }
 /******/ ]);

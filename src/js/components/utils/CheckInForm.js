@@ -60,7 +60,6 @@ export default class CheckInForm extends React.Component{
 		this.props.createCheckIn(newCheckInObject)
 		this.showCheckInSuccess();
 		}
-		this.props.createCheckIn(newCheckInObject)
 		this.setState({blurb: '', dish: '', user: ''})
 	}
 

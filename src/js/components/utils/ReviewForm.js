@@ -59,7 +59,7 @@ export default class ReviewForm extends React.Component{
 		newReviewObject.words = this.state.words
 		newReviewObject.stars = this.state.stars
 		newReviewObject.review_user = this.props.currentUser
-		if(newReviewObject.words.length<1){
+		if(newReviewObject.words.length<1 || newReviewObject.stars === null){
 			this.showReviewFailure();
 		}
 		else{

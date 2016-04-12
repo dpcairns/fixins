@@ -7,7 +7,8 @@ import { Link } from 'react-router'
 class NeighborhoodDetail extends React.Component{
 
 	render(){
-		let subNeighborhoodBoxStyle = {height:"100px",width:"200px",margin:"5px"}
+
+		let subNeighborhoodBoxStyle = {height:"100px",width:"200px",margin:"5px",float:"left",fontSize:"2em",textAlign:"center"}
 		let containerStyle = {display:"inline-block"}
     let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
     let allSubNeighborhoods = this.props.allSubNeighborhoods
@@ -21,7 +22,7 @@ class NeighborhoodDetail extends React.Component{
                 return (
                     <div key={subNeighborhoodId}>
                       <Link onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)} to={`/subNeighborhood/${subNeighborhoodId}`}>
-													<div style={subNeighborhoodBoxStyle} className="bg-info">
+													<div style={subNeighborhoodBoxStyle} className="bg-danger">
 													<b>{subNeighborhood.subNeighborhood_name}</b>
 													</div>
                       </Link>
@@ -32,7 +33,7 @@ return(
   <div className="bg-warning">
     <h1>Neighborhood Detail Page for {neighborhood.neighborhood_name}</h1>
     <h2>Here is every subNeighborhood in {neighborhood.neighborhood_name}</h2>
-		<div style={containerStyle}>
+		<div className="flex">
 		{subNeighorhoodNodes}
 		</div>
   </div>
