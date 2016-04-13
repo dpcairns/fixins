@@ -13,6 +13,7 @@ class SubNeighborhoodDetail extends React.Component{
     let allCheckIns = this.props.allCheckIns
     let putOneUserInState = this.props.putOneUserInState
 		let putOneSpotInState = this.props.putOneSpotInState
+		let allDishes = this.props.allDishes
 		let putOneDishInState = this.props.putOneDishInState
 		let putOneGenreInState = this.props.putOneGenreInState
 		let putOneNeighborhoodInState = this.props.putOneNeighborhoodInState
@@ -25,11 +26,25 @@ class SubNeighborhoodDetail extends React.Component{
     						}
     				let spotNodes = allSpots.filter(findSpotsFilter).map(function(spot){
 
+											function findDishesFilter(dish){
+																	return (dish.dish_spot._id === spot._id)
+														}
+								let theseDishes = allDishes.filter(findDishesFilter)
+								console.log("theseDishes:")
+								console.log(theseDishes)
 							let spotId = spot._id
     									return (
 												<div style={itemBoxStyle} key={spot._id} className="shad bg-info">
 														<Link onClick={putOneSpotInState.bind(this, spotId)} to={`/spot/${spotId}`}>{spot.spot_name}</Link><br/>
 														Genre: <Link onClick={putOneGenreInState.bind(this, spot.spot_genres[0]._id)} to={`/genre/${spot.spot_genres[0]._id}`}>{spot.spot_genres[0].genre_name}</Link>
+														<br/>Signature dish: {
+												theseDishes.length>0 ?
+														<Link onClick={putOneDishInState.bind(this, theseDishes[0]._id)}
+																	to={`/dish/${theseDishes[0]._id}`}>
+																	{theseDishes[0].dish_name} </Link>
+												:  <Link onClick={putOneSpotInState.bind(this, spotId)}
+												to="index/newDish">be the first to add a dish!</Link>
+											}
 												</div>
 												)
     				})
@@ -90,7 +105,8 @@ const mapStateToProps = (state) => {
         subNeighborhood: selectSubNeighborhood(state.subNeighborhoods, state.subNeighborhood._id),
         allSpots: state.spots,
         allUsers: state.users,
-        allCheckIns: state.checkIns
+        allCheckIns: state.checkIns,
+				allDishes: state.dishes
         }
 }
 

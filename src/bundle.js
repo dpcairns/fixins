@@ -109,13 +109,10 @@
 
 	var _DishDetail2 = _interopRequireDefault(_DishDetail);
 
-<<<<<<< HEAD
-=======
 	var _NeighborhoodDetail = __webpack_require__(805);
 
 	var _NeighborhoodDetail2 = _interopRequireDefault(_NeighborhoodDetail);
 
->>>>>>> change-review-model
 	var _SubNeighborhoodDetail = __webpack_require__(806);
 
 	var _SubNeighborhoodDetail2 = _interopRequireDefault(_SubNeighborhoodDetail);
@@ -34240,7 +34237,7 @@
 						),
 						_react2.default.createElement(
 							"div",
-							{ style: greetingStyle, className: "col-md-2 text-right" },
+							{ style: greetingStyle, className: "col-md-2 text-right anim-button" },
 							_react2.default.createElement(
 								"h5",
 								null,
@@ -34265,8 +34262,29 @@
 					),
 					_react2.default.createElement(
 						"h2",
-						{ className: "bg-warning text-right" },
-						" fixins || get stuft "
+						{ className: "bg-warning", style: { borderRadius: "50px 0 0 50px" } },
+						_react2.default.createElement(
+							"div",
+							{ className: "row" },
+							_react2.default.createElement(
+								"div",
+								{ className: "col-md-6" },
+								_react2.default.createElement(
+									"span",
+									{ className: "text-left" },
+									_react2.default.createElement("img", { src: "./static/glitter3.gif", height: "40px", className: "anim-sparkle" })
+								)
+							),
+							_react2.default.createElement(
+								"div",
+								{ className: "col-md-offset-3 col-md-3" },
+								_react2.default.createElement(
+									"span",
+									{ className: "text-right" },
+									"fixins || get stuft "
+								)
+							)
+						)
 					),
 					this.props.children
 				);
@@ -34355,37 +34373,10 @@
 		_createClass(Links, [{
 			key: "render",
 			value: function render() {
-<<<<<<< HEAD
-				return _react2.default.createElement(
-					"div",
-					{ className: "inline" },
-					_react2.default.createElement(
-						_reactRouter.Link,
-						{ to: "/" },
-						_react2.default.createElement(
-							"h4",
-							null,
-							"Home Page"
-						)
-					),
-					_react2.default.createElement(
-						_reactRouter.Link,
-						{ to: "index" },
-						_react2.default.createElement(
-							"h4",
-							null,
-							"Admin Page"
-						)
-					),
-					_react2.default.createElement(
-						_reactRouter.Link,
-						{ to: "index/mapPage" },
-						_react2.default.createElement(
-							"h4",
-							null,
-							"Big Map Page"
-=======
-				var liStyles = { float: "left", padding: "5px", margin: "5px", background: "pink" };
+				var listStyle = { float: "left",
+					padding: "5px",
+					margin: "5px",
+					background: "pink" };
 				return _react2.default.createElement(
 					"div",
 					null,
@@ -34398,7 +34389,7 @@
 							null,
 							_react2.default.createElement(
 								"li",
-								{ style: liStyles },
+								{ className: "anim-button", style: listStyle },
 								" ",
 								_react2.default.createElement(
 									_reactRouter.Link,
@@ -34409,7 +34400,7 @@
 							),
 							_react2.default.createElement(
 								"li",
-								{ style: liStyles },
+								{ className: "anim-button", style: listStyle },
 								" ",
 								_react2.default.createElement(
 									_reactRouter.Link,
@@ -34420,7 +34411,7 @@
 							),
 							_react2.default.createElement(
 								"li",
-								{ style: liStyles },
+								{ className: "anim-button", style: listStyle },
 								" ",
 								_react2.default.createElement(
 									_reactRouter.Link,
@@ -34431,7 +34422,7 @@
 							),
 							_react2.default.createElement(
 								"li",
-								{ style: liStyles },
+								{ className: "anim-button", style: listStyle },
 								" ",
 								_react2.default.createElement(
 									_reactRouter.Link,
@@ -34440,7 +34431,6 @@
 								),
 								" "
 							)
->>>>>>> change-review-model
 						)
 					)
 				);
@@ -35198,14 +35188,15 @@
 				var putOneUserInState = this.props.putOneUserInState;
 				var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
 				var checkInBoxStyle = { padding: "10px", maxWidth: "300px", margin: "0 auto", marginBottom: "20px", marginTop: "20px", borderRadius: "15px", background: "pink" };
-				var dishesBoxStyle = { padding: "10px", maxWidth: "300px", margin: "0 auto", marginBottom: "20px", marginTop: "20px", borderRadius: "15px", background: "lightyellow" };
+				var dishesBoxStyle = { padding: "10px", maxWidth: "300px", margin: "0 auto", marginBottom: "20px", marginTop: "20px", borderRadius: "15px", background: "lightblue" };
+				var topFiveStyle = { paddingLeft: "5px", paddinRight: "5px", paddingBottom: "5px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background: "#ffd281" };
 				var topFiveDishNodes = [];
 				var recentCheckInNodes = [];
 				var topFiveSubNeighborhoodNodes = [];
 
 				if (this.props.subNeighborhoods.length > 5) {
 					(function () {
-						var itemBoxStyle = { height: "100px", flexGrow: "1", width: "200px", margin: "2px", float: "left", textAlign: "center", background: "#BDA0CB", borderRadius: "10px" };
+						var itemBoxStyle = { height: "100px", margin: "2px", float: "left", textAlign: "center", background: "#BDA0CB", borderRadius: "10px" };
 						var allSubNeighborhoods = _this2.props.subNeighborhoods;
 						var allUsers = _this2.props.users;
 						var allSpots = _this2.props.spots;
@@ -35350,7 +35341,7 @@
 					null,
 					_react2.default.createElement(
 						"div",
-						{ className: "bg-success container text-center", style: { marginTop: "2%", marginBottom: "2%", borderRadius: "15px" } },
+						{ className: "bg-success container text-center", style: { marginTop: "2%", marginBottom: "2%", borderRadius: "15px", opacity: "0.99" } },
 						_react2.default.createElement(
 							"div",
 							{ className: "col-md-3" },
@@ -35369,32 +35360,17 @@
 							"div",
 							{ className: "col-md-6" },
 							_react2.default.createElement(
-								"h2",
-								null,
-								"Hello and welcome to fixins!"
-							),
-							_react2.default.createElement("img", { src: "./static/chewing.gif", height: "180px", width: "300px", style: { marginTop: "20px", borderRadius: "10px" } }),
-							_react2.default.createElement(
-								"h2",
-								null,
+								_reactRouter.Link,
+								{ to: "index/myDashboard" },
+								" ",
 								_react2.default.createElement(
-									_reactRouter.Link,
-									{ to: "index/myDashboard" },
-									"click here to pretend to be a user"
-								)
-							),
-							_react2.default.createElement(
-								"h2",
-								null,
-								"or"
-							),
-							_react2.default.createElement(
-								"h2",
-								null,
-								_react2.default.createElement(
-									_reactRouter.Link,
-									{ to: "index" },
-									"click here to go to the (broke) admin page"
+									"h1",
+									null,
+									" || FIXINS || ",
+									_react2.default.createElement("br", null),
+									_react2.default.createElement("img", { src: "./static/chewing.gif", height: "280px", width: "350px", style: { margin: "20px", borderRadius: "10px" } }),
+									_react2.default.createElement("br", null),
+									"|| GET STUFT || "
 								)
 							)
 						),
@@ -35414,16 +35390,34 @@
 						),
 						_react2.default.createElement(
 							"div",
-							{ className: "flex" },
+							{ className: "row" },
 							_react2.default.createElement(
-								"h3",
-								null,
-								"top five places to go fixin in pdx"
+								"div",
+								{ className: "col-md-1 text-right" },
+								_react2.default.createElement("img", { src: "./static/glitter6.gif", height: "150px", width: "70px", style: { borderRadius: "10px" } })
 							),
 							_react2.default.createElement(
 								"div",
-								{ className: "centered" },
-								this.props.subNeighborhoods.length > 5 ? topFiveSubNeighborhoodNodes : "never mind"
+								{ className: "col-md-10" },
+								_react2.default.createElement(
+									"div",
+									{ style: topFiveStyle },
+									_react2.default.createElement(
+										"h3",
+										null,
+										"top five subNeighborhoods in pdx"
+									),
+									_react2.default.createElement(
+										"div",
+										{ className: "top-five flex" },
+										this.props.subNeighborhoods.length > 5 ? topFiveSubNeighborhoodNodes : "never mind"
+									)
+								)
+							),
+							_react2.default.createElement(
+								"div",
+								{ className: "col-md-1 text-left" },
+								_react2.default.createElement("img", { src: "./static/glitter1.gif", height: "150px", width: "70px", style: { borderRadius: "10px" } })
 							)
 						)
 					)
@@ -50595,11 +50589,8 @@
 	var _CustomDropdown2 = _interopRequireDefault(_CustomDropdown);
 
 	var _reactLeaflet = __webpack_require__(605);
-<<<<<<< HEAD
-=======
 
 	var _reactRouter = __webpack_require__(184);
->>>>>>> change-review-model
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -71160,6 +71151,7 @@
 	      var putOneSpotInState = this.props.putOneSpotInState;
 	      var putOneDishInState = this.props.putOneDishInState;
 	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
+	      var allDishes = this.props.allDishes;
 	      var genre = this.props.genre;
 	      var spotBoxStyle = { height: "100px", width: "200px", margin: "5px", float: "left", textAlign: "center" };
 
@@ -71170,6 +71162,11 @@
 	      var spotNodes = allSpots.filter(findSpotsFilter).map(function (spot) {
 	        var subNeighborhoodId = spot.spot_subNeighborhood._id;
 	        var spotId = spot._id;
+
+	        function findDishesFilter(dish) {
+	          return dish.dish_spot._id === spot._id;
+	        }
+	        var theseDishes = allDishes.filter(findDishesFilter);
 	        return _react2.default.createElement(
 	          "div",
 	          { key: spot._id, style: spotBoxStyle, className: "shad bg-danger" },
@@ -71189,14 +71186,17 @@
 	              spot.spot_subNeighborhood.subNeighborhood_name
 	            ),
 	            _react2.default.createElement("br", null),
-	            "signature dish: ",
-	            spot.spot_dishes.length > 0 ? _react2.default.createElement(
+	            "signature dish:",
+	            theseDishes.length > 0 ? _react2.default.createElement(
 	              _reactRouter.Link,
-	              { onClick: putOneDishInState.bind(this, spot.spot_dishes[0]._id), to: "/dish/" + spot.spot_dishes[0]._id },
-	              "spot.spot_dishes[0].dish_name "
+	              { onClick: putOneDishInState.bind(this, theseDishes[0]._id),
+	                to: "/dish/" + theseDishes[0]._id },
+	              theseDishes[0].dish_name,
+	              " "
 	            ) : _react2.default.createElement(
 	              _reactRouter.Link,
-	              { onClick: putOneSpotInState.bind(this, spotId), to: "index/newDish" },
+	              { onClick: putOneSpotInState.bind(this, spotId),
+	                to: "index/newDish" },
 	              "be the first to add a dish!"
 	            )
 	          )
@@ -71257,7 +71257,8 @@
 	  };
 	  return {
 	    genre: selectGenre(state.genres, state.genre._id),
-	    allSpots: state.spots
+	    allSpots: state.spots,
+	    allDishes: state.dishes
 	  };
 	};
 
@@ -71387,7 +71388,7 @@
 													_react2.default.createElement(
 															_reactRouter.Link,
 															{ to: '/subNeighborhood/' + subNeighorhoodId, onClick: putOneSubNeighborhoodInState.bind(this, subNeighorhoodId) },
-															spot.spot_subNeighborhood.subNeighborhood_name
+															" " + spot.spot_subNeighborhood.subNeighborhood_name
 													)
 											),
 											_react2.default.createElement('br', null),
@@ -71874,8 +71875,7 @@
 	exports.default = DishDetailContainer;
 
 /***/ },
-/* 805 */,
-/* 806 */
+/* 805 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -71897,8 +71897,6 @@
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
 	var _Links = __webpack_require__(533);
-<<<<<<< HEAD
-=======
 
 	var _Links2 = _interopRequireDefault(_Links);
 
@@ -72008,7 +72006,7 @@
 	        ),
 	        _react2.default.createElement(
 	          "div",
-	          { className: "flex bg-warning" },
+	          { className: "bg-warning" },
 	          subNeighorhoodNodes
 	        )
 	      );
@@ -72057,7 +72055,7 @@
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+			value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -72073,7 +72071,6 @@
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
 	var _Links = __webpack_require__(533);
->>>>>>> change-review-model
 
 	var _Links2 = _interopRequireDefault(_Links);
 
@@ -72088,220 +72085,242 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var SubNeighborhoodDetail = function (_React$Component) {
-	  _inherits(SubNeighborhoodDetail, _React$Component);
+			_inherits(SubNeighborhoodDetail, _React$Component);
 
-	  function SubNeighborhoodDetail() {
-	    _classCallCheck(this, SubNeighborhoodDetail);
+			function SubNeighborhoodDetail() {
+					_classCallCheck(this, SubNeighborhoodDetail);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(SubNeighborhoodDetail).apply(this, arguments));
-	  }
+					return _possibleConstructorReturn(this, Object.getPrototypeOf(SubNeighborhoodDetail).apply(this, arguments));
+			}
 
-	  _createClass(SubNeighborhoodDetail, [{
-	    key: "render",
-	    value: function render() {
+			_createClass(SubNeighborhoodDetail, [{
+					key: "render",
+					value: function render() {
 
-	      var allSpots = this.props.allSpots;
-	      var allUsers = this.props.allUsers;
-	      var allCheckIns = this.props.allCheckIns;
-	      var putOneUserInState = this.props.putOneUserInState;
-	      var putOneSpotInState = this.props.putOneSpotInState;
-	      var putOneDishInState = this.props.putOneDishInState;
-	      var putOneGenreInState = this.props.putOneGenreInState;
-	      var putOneNeighborhoodInState = this.props.putOneNeighborhoodInState;
-	      var subNeighborhood = this.props.subNeighborhood;
-	      var itemBoxStyle = { height: "100px", width: "200px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
+							var allSpots = this.props.allSpots;
+							var allUsers = this.props.allUsers;
+							var allCheckIns = this.props.allCheckIns;
+							var putOneUserInState = this.props.putOneUserInState;
+							var putOneSpotInState = this.props.putOneSpotInState;
+							var allDishes = this.props.allDishes;
+							var putOneDishInState = this.props.putOneDishInState;
+							var putOneGenreInState = this.props.putOneGenreInState;
+							var putOneNeighborhoodInState = this.props.putOneNeighborhoodInState;
+							var subNeighborhood = this.props.subNeighborhood;
+							var itemBoxStyle = { height: "100px", width: "200px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
 
-	      function findSpotsFilter(spot) {
+							function findSpotsFilter(spot) {
 
-	        return spot.spot_subNeighborhood._id === subNeighborhood._id;
-	      }
-	      var spotNodes = allSpots.filter(findSpotsFilter).map(function (spot) {
+									return spot.spot_subNeighborhood._id === subNeighborhood._id;
+							}
+							var spotNodes = allSpots.filter(findSpotsFilter).map(function (spot) {
 
-	        var spotId = spot._id;
-	        return _react2.default.createElement(
-	          "div",
-	          { style: itemBoxStyle, key: spot._id, className: "shad bg-info" },
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { onClick: putOneSpotInState.bind(this, spotId), to: "/spot/" + spotId },
-	            spot.spot_name
-	          ),
-	          _react2.default.createElement("br", null),
-	          "Genre: ",
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { onClick: putOneGenreInState.bind(this, spot.spot_genres[0]._id), to: "/genre/" + spot.spot_genres[0]._id },
-	            spot.spot_genres[0].genre_name
-	          )
-	        );
-	      });
+									function findDishesFilter(dish) {
+											return dish.dish_spot._id === spot._id;
+									}
+									var theseDishes = allDishes.filter(findDishesFilter);
+									console.log("theseDishes:");
+									console.log(theseDishes);
+									var spotId = spot._id;
+									return _react2.default.createElement(
+											"div",
+											{ style: itemBoxStyle, key: spot._id, className: "shad bg-info" },
+											_react2.default.createElement(
+													_reactRouter.Link,
+													{ onClick: putOneSpotInState.bind(this, spotId), to: "/spot/" + spotId },
+													spot.spot_name
+											),
+											_react2.default.createElement("br", null),
+											"Genre: ",
+											_react2.default.createElement(
+													_reactRouter.Link,
+													{ onClick: putOneGenreInState.bind(this, spot.spot_genres[0]._id), to: "/genre/" + spot.spot_genres[0]._id },
+													spot.spot_genres[0].genre_name
+											),
+											_react2.default.createElement("br", null),
+											"Signature dish: ",
+											theseDishes.length > 0 ? _react2.default.createElement(
+													_reactRouter.Link,
+													{ onClick: putOneDishInState.bind(this, theseDishes[0]._id),
+															to: "/dish/" + theseDishes[0]._id },
+													theseDishes[0].dish_name,
+													" "
+											) : _react2.default.createElement(
+													_reactRouter.Link,
+													{ onClick: putOneSpotInState.bind(this, spotId),
+															to: "index/newDish" },
+													"be the first to add a dish!"
+											)
+									);
+							});
 
-	      function findUsersFilter(user) {
-	        return user.user_sub_neighborhood._id === subNeighborhood._id;
-	      }
-	      var userNodes = allUsers.filter(findUsersFilter).map(function (user) {
-	        var userId = user._id;
+							function findUsersFilter(user) {
+									return user.user_sub_neighborhood._id === subNeighborhood._id;
+							}
+							var userNodes = allUsers.filter(findUsersFilter).map(function (user) {
+									var userId = user._id;
 
-	        return _react2.default.createElement(
-	          "div",
-	          { style: itemBoxStyle, key: userId, className: "shad bg-danger" },
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: "/user/" + userId, onClick: putOneUserInState.bind(this, userId) },
-	            user.username
-	          ),
-	          " ",
-	          _react2.default.createElement("br", null),
-	          "Password: ",
-	          user.password
-	        );
-	      });
-	      var neighborhoodId = subNeighborhood.sub_neighborhood_neighborhood._id;
-	      return _react2.default.createElement(
-	        "div",
-	        { className: "bg-warning med-pad med-mar" },
-	        _react2.default.createElement(
-	          "h3",
-	          null,
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: "index/allNeighborhoods" },
-	            "see all neighborhoods"
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "h1",
-	          null,
-	          subNeighborhood.subNeighborhood_name
-	        ),
-	        _react2.default.createElement(
-	          "h3",
-	          null,
-	          subNeighborhood.subNeighborhood_name,
-	          " is located in ",
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: "/neighborhood/" + neighborhoodId, onClick: putOneNeighborhoodInState.bind(this, neighborhoodId) },
-	            " ",
-	            subNeighborhood.sub_neighborhood_neighborhood.neighborhood_name
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "row" },
-	          _react2.default.createElement(
-	            "div",
-	            { className: "col-md-6" },
-	            _react2.default.createElement("br", null),
-	            _react2.default.createElement("hr", null),
-	            _react2.default.createElement(
-	              "h2",
-	              null,
-	              "Spots in ",
-	              subNeighborhood.subNeighborhood_name
-	            ),
-	            _react2.default.createElement(
-	              "div",
-	              { className: "flex" },
-	              allSpots.filter(findSpotsFilter).length > 0 ? spotNodes : _react2.default.createElement(
-	                "h4",
-	                null,
-	                "no restaurants in  ",
-	                subNeighborhood.subNeighborhood_name,
-	                "...yet! ",
-	                _react2.default.createElement(
-	                  _reactRouter.Link,
-	                  { to: "index/newSpot" },
-	                  "Be the first to add one!"
-	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "col-md-6" },
-	            _react2.default.createElement("br", null),
-	            _react2.default.createElement("hr", null),
-	            _react2.default.createElement(
-	              "h2",
-	              null,
-	              "Users in ",
-	              subNeighborhood.subNeighborhood_name
-	            ),
-	            _react2.default.createElement(
-	              "div",
-	              { className: "flex" },
-	              allUsers.filter(findUsersFilter).length > 0 ? userNodes : _react2.default.createElement(
-	                "h4",
-	                null,
-	                "no users in ",
-	                subNeighborhood.subNeighborhood_name,
-	                "...yet!"
-	              )
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
+									return _react2.default.createElement(
+											"div",
+											{ style: itemBoxStyle, key: userId, className: "shad bg-danger" },
+											_react2.default.createElement(
+													_reactRouter.Link,
+													{ to: "/user/" + userId, onClick: putOneUserInState.bind(this, userId) },
+													user.username
+											),
+											" ",
+											_react2.default.createElement("br", null),
+											"Password: ",
+											user.password
+									);
+							});
+							var neighborhoodId = subNeighborhood.sub_neighborhood_neighborhood._id;
+							return _react2.default.createElement(
+									"div",
+									{ className: "bg-warning med-pad med-mar" },
+									_react2.default.createElement(
+											"h3",
+											null,
+											_react2.default.createElement(
+													_reactRouter.Link,
+													{ to: "index/allNeighborhoods" },
+													"see all neighborhoods"
+											)
+									),
+									_react2.default.createElement(
+											"h1",
+											null,
+											subNeighborhood.subNeighborhood_name
+									),
+									_react2.default.createElement(
+											"h3",
+											null,
+											subNeighborhood.subNeighborhood_name,
+											" is located in ",
+											_react2.default.createElement(
+													_reactRouter.Link,
+													{ to: "/neighborhood/" + neighborhoodId, onClick: putOneNeighborhoodInState.bind(this, neighborhoodId) },
+													" ",
+													subNeighborhood.sub_neighborhood_neighborhood.neighborhood_name
+											)
+									),
+									_react2.default.createElement(
+											"div",
+											{ className: "row" },
+											_react2.default.createElement(
+													"div",
+													{ className: "col-md-6" },
+													_react2.default.createElement("br", null),
+													_react2.default.createElement("hr", null),
+													_react2.default.createElement(
+															"h2",
+															null,
+															"Spots in ",
+															subNeighborhood.subNeighborhood_name
+													),
+													_react2.default.createElement(
+															"div",
+															{ className: "flex" },
+															allSpots.filter(findSpotsFilter).length > 0 ? spotNodes : _react2.default.createElement(
+																	"h4",
+																	null,
+																	"no restaurants in  ",
+																	subNeighborhood.subNeighborhood_name,
+																	"...yet! ",
+																	_react2.default.createElement(
+																			_reactRouter.Link,
+																			{ to: "index/newSpot" },
+																			"Be the first to add one!"
+																	)
+															)
+													)
+											),
+											_react2.default.createElement(
+													"div",
+													{ className: "col-md-6" },
+													_react2.default.createElement("br", null),
+													_react2.default.createElement("hr", null),
+													_react2.default.createElement(
+															"h2",
+															null,
+															"Users in ",
+															subNeighborhood.subNeighborhood_name
+													),
+													_react2.default.createElement(
+															"div",
+															{ className: "flex" },
+															allUsers.filter(findUsersFilter).length > 0 ? userNodes : _react2.default.createElement(
+																	"h4",
+																	null,
+																	"no users in ",
+																	subNeighborhood.subNeighborhood_name,
+																	"...yet!"
+															)
+													)
+											)
+									)
+							);
+					}
+			}]);
 
-	  return SubNeighborhoodDetail;
+			return SubNeighborhoodDetail;
 	}(_react2.default.Component);
 
 	var mapStateToProps = function mapStateToProps(state) {
-	  var selectSubNeighborhood = function selectSubNeighborhood(subNeighborhoods, id) {
-	    var ridiculousArray = subNeighborhoods.filter(function (x) {
-	      return x._id === id;
-	    });
-	    return ridiculousArray[0];
-	  };
-	  return {
-	    subNeighborhood: selectSubNeighborhood(state.subNeighborhoods, state.subNeighborhood._id),
-	    allSpots: state.spots,
-	    allUsers: state.users,
-	    allCheckIns: state.checkIns
-	  };
+			var selectSubNeighborhood = function selectSubNeighborhood(subNeighborhoods, id) {
+					var ridiculousArray = subNeighborhoods.filter(function (x) {
+							return x._id === id;
+					});
+					return ridiculousArray[0];
+			};
+			return {
+					subNeighborhood: selectSubNeighborhood(state.subNeighborhoods, state.subNeighborhood._id),
+					allSpots: state.spots,
+					allUsers: state.users,
+					allCheckIns: state.checkIns,
+					allDishes: state.dishes
+			};
 	};
 
 	function _putOneUserInState(_id) {
-	  return { type: "PUT_ONE_USER_IN_STATE", _id: _id };
+			return { type: "PUT_ONE_USER_IN_STATE", _id: _id };
 	}
 
 	function _putOneDishInState(_id) {
-	  return { type: "PUT_ONE_DISH_IN_STATE", _id: _id };
+			return { type: "PUT_ONE_DISH_IN_STATE", _id: _id };
 	}
 
 	function _putOneSpotInState(_id) {
-	  return { type: "PUT_ONE_SPOT_IN_STATE", _id: _id };
+			return { type: "PUT_ONE_SPOT_IN_STATE", _id: _id };
 	}
 
 	function _putOneNeighborhoodInState(_id) {
-	  return { type: "PUT_ONE_NEIGHBORHOOD_IN_STATE", _id: _id };
+			return { type: "PUT_ONE_NEIGHBORHOOD_IN_STATE", _id: _id };
 	}
 
 	function _putOneGenreInState(_id) {
-	  return { type: "PUT_ONE_GENRE_IN_STATE", _id: _id };
+			return { type: "PUT_ONE_GENRE_IN_STATE", _id: _id };
 	}
 
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    putOneUserInState: function putOneUserInState(_id) {
-	      return dispatch(_putOneUserInState(_id));
-	    },
-	    putOneSpotInState: function putOneSpotInState(_id) {
-	      return dispatch(_putOneSpotInState(_id));
-	    },
-	    putOneDishInState: function putOneDishInState(_id) {
-	      return dispatch(_putOneDishInState(_id));
-	    },
-	    putOneNeighborhoodInState: function putOneNeighborhoodInState(_id) {
-	      return dispatch(_putOneNeighborhoodInState(_id));
-	    },
-	    putOneGenreInState: function putOneGenreInState(_id) {
-	      return dispatch(_putOneGenreInState(_id));
-	    }
+			return {
+					putOneUserInState: function putOneUserInState(_id) {
+							return dispatch(_putOneUserInState(_id));
+					},
+					putOneSpotInState: function putOneSpotInState(_id) {
+							return dispatch(_putOneSpotInState(_id));
+					},
+					putOneDishInState: function putOneDishInState(_id) {
+							return dispatch(_putOneDishInState(_id));
+					},
+					putOneNeighborhoodInState: function putOneNeighborhoodInState(_id) {
+							return dispatch(_putOneNeighborhoodInState(_id));
+					},
+					putOneGenreInState: function putOneGenreInState(_id) {
+							return dispatch(_putOneGenreInState(_id));
+					}
 
-	  };
+			};
 	};
 
 	var SubNeighborhoodDetailContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SubNeighborhoodDetail);
@@ -73281,6 +73300,10 @@
 
 	var _CalorieDollarChart2 = _interopRequireDefault(_CalorieDollarChart);
 
+	var _HorizontalRainbow = __webpack_require__(816);
+
+	var _HorizontalRainbow2 = _interopRequireDefault(_HorizontalRainbow);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -73415,6 +73438,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'bg-warning med-pad med-mar' },
+	          _react2.default.createElement(_HorizontalRainbow2.default, null),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'row' },
@@ -73490,7 +73514,8 @@
 	                )
 	              )
 	            )
-	          )
+	          ),
+	          _react2.default.createElement(_HorizontalRainbow2.default, null)
 	        )
 	      );
 	    }
@@ -73533,6 +73558,61 @@
 	  };
 	};
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MyDashboard);
+
+/***/ },
+/* 816 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var HorizontalRainbow = function (_React$Component) {
+	  _inherits(HorizontalRainbow, _React$Component);
+
+	  function HorizontalRainbow() {
+	    _classCallCheck(this, HorizontalRainbow);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(HorizontalRainbow).apply(this, arguments));
+	  }
+
+	  _createClass(HorizontalRainbow, [{
+	    key: "render",
+	    value: function render() {
+	      var rand = 0; // Math.floor(Math.random()*5)
+	      var myImage = "./static/glitter" + rand + ".gif";
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "flex anim-flex" },
+	        _react2.default.createElement("img", { src: myImage, height: "40px", width: "100px" }),
+	        _react2.default.createElement("img", { src: myImage, height: "40px", width: "100px" }),
+	        _react2.default.createElement("img", { src: myImage, height: "40px", width: "100px" }),
+	        _react2.default.createElement("img", { src: myImage, height: "40px", width: "100px" }),
+	        _react2.default.createElement("img", { src: myImage, height: "40px", width: "100px" })
+	      );
+	    }
+	  }]);
+
+	  return HorizontalRainbow;
+	}(_react2.default.Component);
+
+	exports.default = HorizontalRainbow;
 
 /***/ }
 /******/ ]);

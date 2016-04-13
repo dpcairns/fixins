@@ -49,13 +49,25 @@ componentDidMount(){
 								<div className="col-md-9">
 								<Links/>
 								</div>
-								<div style={greetingStyle} className="col-md-2 text-right"><h5>
+								<div style={greetingStyle} className="col-md-2 text-right anim-button"><h5>
 								hello, {this.props.currentUser.username !== undefined ? <Link to="index/myDashboard">{this.props.currentUser.username}</Link> : "honored guest"} | {this.props.currentUser.username !== undefined ? <a onClick={this.props.userLogout.bind(this)} >logout?</a> : <Link to="index/login">login?</Link>}
 													</h5>
 								</div>
 						</div>
-						<h2 className="bg-warning text-right"> fixins || get stuft </h2>
 
+						<h2 className="bg-warning" style={{borderRadius:"50px 0 0 50px"}}>
+						<div className="row">
+								<div className="col-md-6">
+									<span className="text-left">
+									<img src="./static/glitter3.gif" height="40px" className="anim-sparkle" />
+									</span>
+								</div>
+								<div className="col-md-offset-3 col-md-3">
+
+									 <span className="text-right">fixins || get stuft </span>
+								</div>
+						 </div>
+						 </h2>
 
 						{this.props.children}
 			</div>

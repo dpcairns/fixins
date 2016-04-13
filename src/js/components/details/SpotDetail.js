@@ -42,9 +42,9 @@ class SpotDetail extends React.Component{
     return (
 <div>
 <div className="bg-warning med-pad med-mar">
-    		<h2>{spot.spot_name}</h2><h3> located in
+    		<h2>{spot.spot_name}</h2><h3> located in 
 				<Link to={`/subNeighborhood/${subNeighorhoodId}`} onClick={putOneSubNeighborhoodInState.bind(this, subNeighorhoodId)}>
-				 { spot.spot_subNeighborhood.subNeighborhood_name}
+				 {" " + spot.spot_subNeighborhood.subNeighborhood_name}
 				</Link>
 				</h3>
 				<br/><Link onClick={putOneGenreInState.bind(this, spot.spot_genres[0]._id)} to={`/genre/${spot.spot_genres[0]._id}`}>{spot.spot_genres[0].genre_name}</Link>

@@ -53,7 +53,7 @@ return(
 	<h3><Link to="index/allNeighborhoods">see all neighborhoods</Link></h3>
     <h1>Neighborhood Detail Page for {neighborhood.neighborhood_name}</h1>
     <h2>Here is every subNeighborhood in {neighborhood.neighborhood_name}</h2>
-		<div className="flex bg-warning">
+		<div className="bg-warning">
 		{subNeighorhoodNodes}
 		</div>
   </div>

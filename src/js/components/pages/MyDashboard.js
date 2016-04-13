@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Links from "../utils/Links"
 import CalorieDollarChart from "../utils/CalorieDollarChart"
+import HorizontalRainbow from "../utils/HorizontalRainbow"
+
 class MyDashboard extends React.Component{
 
 render(){
@@ -64,8 +66,11 @@ render(){
   return (
 <div>
 <div className="bg-warning med-pad med-mar">
+
+<HorizontalRainbow />
 <div className="row">
   <div className="col-md-6">
+
   <h1>welcome to your dashboard, {thisUser.username}</h1>
   </div>
   <div className="col-md-6">
@@ -99,7 +104,10 @@ render(){
     </div>
 </div>
 </div>
+<HorizontalRainbow />
+
 </div>
+
 </div>
       )
     }

@@ -20,13 +20,14 @@ export default class Splash extends React.Component{
 			let putOneUserInState = this.props.putOneUserInState
 			let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
 			let checkInBoxStyle = {padding: "10px", maxWidth:"300px", margin:"0 auto", marginBottom: "20px", marginTop: "20px", borderRadius: "15px", background:"pink"}
-			let dishesBoxStyle = {padding: "10px", maxWidth:"300px", margin:"0 auto", marginBottom: "20px", marginTop: "20px", borderRadius: "15px", background:"lightyellow"}
+			let dishesBoxStyle = {padding: "10px", maxWidth:"300px", margin:"0 auto", marginBottom: "20px", marginTop: "20px", borderRadius: "15px", background:"lightblue"}
+			let topFiveStyle = {paddingLeft: "5px", paddinRight: "5px", paddingBottom: "5px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background:"#ffd281"}
 			let topFiveDishNodes = []
 			let recentCheckInNodes = []
 			let topFiveSubNeighborhoodNodes = []
 
 			if(this.props.subNeighborhoods.length>5){
-				let itemBoxStyle = {height:"100px", flexGrow:"1", width:"200px",margin:"2px",float:"left",textAlign:"center", background:"#BDA0CB", borderRadius:"10px"}
+				let itemBoxStyle = {height:"100px",margin:"2px",float:"left",textAlign:"center", background:"#BDA0CB", borderRadius:"10px"}
 				let allSubNeighborhoods = this.props.subNeighborhoods
 				let allUsers = this.props.users
 				let allSpots = this.props.spots
@@ -118,7 +119,7 @@ export default class Splash extends React.Component{
 		}
 			return(
 				<div>
-		<div className="bg-success container text-center" style={{marginTop:"2%", marginBottom:"2%", borderRadius:"15px"}}>
+		<div className="bg-success container text-center" style={{marginTop:"2%", marginBottom:"2%", borderRadius:"15px", opacity:"0.99"}}>
 			<div className="col-md-3">
 				<div style={dishesBoxStyle}>
 				<h3>top 5 dishes</h3>
@@ -127,27 +128,39 @@ export default class Splash extends React.Component{
 			</div>
 
 		<div className="col-md-6">
-				<h2>Hello and welcome to fixins!</h2>
-			<img src="./static/chewing.gif" height="180px" width="300px" style={{marginTop:"20px",borderRadius:"10px"}}/>
-			<h2><Link to="index/myDashboard">click here to pretend to be a user</Link></h2>
-			<h2>or</h2>
-			<h2><Link to="index">click here to go to the (broke) admin page</Link></h2>
-		</div>
+		<Link to="index/myDashboard"> <h1> || FIXINS || <br/>
+			<img src="./static/chewing.gif" height="280px" width="350px" style={{margin:"20px",borderRadius:"10px"}}/><br/>
+			 || GET STUFT || </h1></Link>
+			</div>
 		<div className="col-md-3">
 			<div style={checkInBoxStyle}>
 			<h3>checkIn ticker</h3>
 			{this.props.checkIns.length>5 ? recentCheckInNodes : "never mind"}
 			</div>
 		</div>
-		<div className="flex">
-		<h3>top five places to go fixin in pdx</h3>
-			<div className="centered">
-		{this.props.subNeighborhoods.length>5 ? topFiveSubNeighborhoodNodes : "never mind"}
-			</div>
-		</div>
+
+		<div className="row">
+				<div className="col-md-1 text-right">
+						<img src="./static/glitter6.gif" height="150px" width="70px" style={{borderRadius:"10px"}}/>
+
+
+				</div>
+				<div className="col-md-10">
+						<div style={topFiveStyle}>
+									<h3>top five subNeighborhoods in pdx</h3>
+									<div className="top-five flex">
+												{this.props.subNeighborhoods.length>5 ? topFiveSubNeighborhoodNodes : "never mind"}
+									</div>
+						</div>
+				</div>
+				<div className="col-md-1 text-left">
+					<img src="./static/glitter1.gif" height="150px" width="70px" style={{borderRadius:"10px"}}/>
+				</div>
+
 		</div>
 
-			</div>
+		</div>
+</div>
 		)
 
 		}

@@ -11,6 +11,7 @@ class GenreDetail extends React.Component{
     let putOneSpotInState = this.props.putOneSpotInState
 		let putOneDishInState = this.props.putOneDishInState
 		let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
+		let allDishes = this.props.allDishes
     let genre = this.props.genre
 		let spotBoxStyle = {height:"100px",width:"200px",margin:"5px",float:"left",textAlign:"center"}
 
@@ -21,15 +22,27 @@ class GenreDetail extends React.Component{
     				let spotNodes = allSpots.filter(findSpotsFilter).map(function(spot){
 							let subNeighborhoodId = spot.spot_subNeighborhood._id
               let spotId = spot._id
-    									return (
+
+										function findDishesFilter(dish){
+																return (dish.dish_spot._id === spot._id)
+													}
+							let theseDishes = allDishes.filter(findDishesFilter)
+											return (
 
                           <div key={spot._id}  style={spotBoxStyle} className="shad bg-danger">
 													<div>
                           <Link to={`/spot/${spotId}`}  onClick={putOneSpotInState.bind(this, spotId)}>{spot.spot_name}</Link><br/>
 													located in <Link  onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)} to={`/subNeighborhood/${subNeighborhoodId}`}>{spot.spot_subNeighborhood.subNeighborhood_name}</Link>
 													<br/>
-                          signature dish: {spot.spot_dishes.length>0 ? <Link onClick={putOneDishInState.bind(this, spot.spot_dishes[0]._id)} to={`/dish/${spot.spot_dishes[0]._id}`}>
-spot.spot_dishes[0].dish_name </Link>: <Link onClick={putOneSpotInState.bind(this, spotId)} to="index/newDish">be the first to add a dish!</Link>}
+                          signature dish:
+													{
+											theseDishes.length>0 ?
+													<Link onClick={putOneDishInState.bind(this, theseDishes[0]._id)}
+																to={`/dish/${theseDishes[0]._id}`}>
+																{theseDishes[0].dish_name} </Link>
+											:  <Link onClick={putOneSpotInState.bind(this, spotId)}
+											to="index/newDish">be the first to add a dish!</Link>
+										}
 													</div>
                           </div>
     										)
@@ -68,7 +81,8 @@ const mapStateToProps = (state) => {
         }
 	    return {
         genre: selectGenre(state.genres, state.genre._id),
-        allSpots: state.spots
+        allSpots: state.spots,
+				allDishes: state.dishes
         }
 }
 
