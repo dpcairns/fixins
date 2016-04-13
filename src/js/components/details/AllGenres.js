@@ -22,12 +22,13 @@ class AllGenres extends React.Component{
         let genreId = genre._id
        return(  <div key={genre._id} style={itemBoxStyle} className="shad bg-danger">
           <Link onClick={putOneGenreInState.bind(this, genreId)} to={`/genre/${genre._id}`}><h3>{genre.genre_name}</h3></Link>
-          {theseSpots.length>0 ? ("this many spots: " + theseSpots.length): <Link to="index/newSpot">be the first to add a {genre.genre_name} spot!</Link>}
-        </div>
+          <h4>{theseSpots.length>0 ? ("this many spots: " + theseSpots.length): <Link to="index/newSpot">be the first to add a {genre.genre_name} spot!</Link>}
+					</h4>
+			  </div>
         )
       })
       return(
-        <div>
+        <div className="flex flexwrap">
           {genreNodes}
         </div>
 

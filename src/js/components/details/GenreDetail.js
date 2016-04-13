@@ -13,7 +13,7 @@ class GenreDetail extends React.Component{
 		let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
 		let allDishes = this.props.allDishes
     let genre = this.props.genre
-		let spotBoxStyle = {height:"100px",width:"200px",margin:"5px",float:"left",textAlign:"center"}
+		let spotBoxStyle = {height:"180px",padding:"5px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
 
     function findSpotsFilter(spot){
     									return (spot.spot_genres[0]._id === genre._id)
@@ -31,8 +31,8 @@ class GenreDetail extends React.Component{
 
                           <div key={spot._id}  style={spotBoxStyle} className="shad bg-danger">
 													<div>
-                          <Link to={`/spot/${spotId}`}  onClick={putOneSpotInState.bind(this, spotId)}>{spot.spot_name}</Link><br/>
-													located in <Link  onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)} to={`/subNeighborhood/${subNeighborhoodId}`}>{spot.spot_subNeighborhood.subNeighborhood_name}</Link>
+                          <Link to={`/spot/${spotId}`}  onClick={putOneSpotInState.bind(this, spotId)}><h3>{spot.spot_name}</h3></Link><br/>
+													<h4>located in <Link  onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)} to={`/subNeighborhood/${subNeighborhoodId}`}>{spot.spot_subNeighborhood.subNeighborhood_name}</Link>
 													<br/>
                           signature dish:
 													{
@@ -43,6 +43,7 @@ class GenreDetail extends React.Component{
 											:  <Link onClick={putOneSpotInState.bind(this, spotId)}
 											to="index/newDish">be the first to add a dish!</Link>
 										}
+										</h4>
 													</div>
                           </div>
     										)
@@ -53,7 +54,7 @@ class GenreDetail extends React.Component{
       <div className="bg-warning med-pad med-mar">
 			<h3><Link to="index/allGenres">see all genres</Link></h3>
           <h1>{genre.genre_name}</h1>
-					<div className="flex">
+					<div className="flex flexwrap">
           {allSpots.filter(findSpotsFilter).length> 0 ? spotNodes: (<h1>no relevant restaurants...yet!</h1>)}
 					</div>
       </div>

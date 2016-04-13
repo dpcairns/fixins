@@ -7,8 +7,8 @@ import { Link } from 'react-router'
 class MapItself extends React.Component {
     render(){
     const minZoom = 11
-    const center = [45.53, -122.67]
-    const zoom = 13
+    const center = [45.50, -122.63]
+    const zoom = 12
     const southWest = L.latLng(45.47672003479257,  -122.72280953111476)
     const northEast = L.latLng(45.63610301220829, -122.44197151841945)
     const metroLimits = L.latLngBounds(southWest, northEast);
@@ -27,12 +27,12 @@ class MapItself extends React.Component {
                       <Marker position={spot_coordinates} key={spotId}>
                           <Popup>
                           <div>
-                          <span onClick={putOneSpotInState.bind(this, spotId)}> Here is the spot:
+                          <h3>
+                          <span onClick={putOneSpotInState.bind(this, spotId)}>
                           <a onClick={ () => router.push(`/spot/${spotId}`)}>{spot.spot_name}</a>
                           </span>
-
-                          <br/>
-
+                          </h3>
+                          <h4>
                           <span onClick={signatureDish.length>0 ?
                             putOneDishInState.bind(this, signatureDish[0]._id)
                             : putOneSpotInState.bind(this, spotId) }>
@@ -55,8 +55,10 @@ class MapItself extends React.Component {
                                : "n/a"}
                           )
                               </span>
+                              </h4>
                               </div>
                           </Popup>
+
                       </Marker>
                   )
               })

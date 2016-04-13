@@ -18,7 +18,7 @@ class SubNeighborhoodDetail extends React.Component{
 		let putOneGenreInState = this.props.putOneGenreInState
 		let putOneNeighborhoodInState = this.props.putOneNeighborhoodInState
     let subNeighborhood = this.props.subNeighborhood
-		let itemBoxStyle = {height:"100px",width:"200px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
+		let itemBoxStyle = {height:"180px",width:"200px", overflow:"hidden",padding: "3px", margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
 
     function findSpotsFilter(spot){
 
@@ -35,8 +35,9 @@ class SubNeighborhoodDetail extends React.Component{
 							let spotId = spot._id
     									return (
 												<div style={itemBoxStyle} key={spot._id} className="shad bg-info">
-														<Link onClick={putOneSpotInState.bind(this, spotId)} to={`/spot/${spotId}`}>{spot.spot_name}</Link><br/>
-														Genre: <Link onClick={putOneGenreInState.bind(this, spot.spot_genres[0]._id)} to={`/genre/${spot.spot_genres[0]._id}`}>{spot.spot_genres[0].genre_name}</Link>
+														<Link onClick={putOneSpotInState.bind(this, spotId)} to={`/spot/${spotId}`}><h3>{spot.spot_name}</h3></Link>
+														<h4>
+														<Link onClick={putOneGenreInState.bind(this, spot.spot_genres[0]._id)} to={`/genre/${spot.spot_genres[0]._id}`}>({spot.spot_genres[0].genre_name})</Link>
 														<br/>Signature dish: {
 												theseDishes.length>0 ?
 														<Link onClick={putOneDishInState.bind(this, theseDishes[0]._id)}
@@ -45,6 +46,7 @@ class SubNeighborhoodDetail extends React.Component{
 												:  <Link onClick={putOneSpotInState.bind(this, spotId)}
 												to="index/newDish">be the first to add a dish!</Link>
 											}
+											</h4>
 												</div>
 												)
     				})
@@ -60,8 +62,8 @@ class SubNeighborhoodDetail extends React.Component{
                     return (
 											<div style={itemBoxStyle} key={userId} className="shad bg-danger">
                         <Link to={`/user/${userId}`} onClick={putOneUserInState.bind(this, userId)}>
-                        {user.username}</Link> <br/>
-                        Password: {user.password}
+                        <h3>{user.username}</h3></Link> <br/>
+                        <h4>Password: {user.password}</h4>
 												</div>
                     )
         })

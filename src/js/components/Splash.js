@@ -21,7 +21,7 @@ export default class Splash extends React.Component{
 			let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
 			let checkInBoxStyle = {padding: "10px", maxWidth:"300px", margin:"0 auto", marginBottom: "20px", marginTop: "20px", borderRadius: "15px", background:"pink"}
 			let dishesBoxStyle = {padding: "10px", maxWidth:"300px", margin:"0 auto", marginBottom: "20px", marginTop: "20px", borderRadius: "15px", background:"lightblue"}
-			let topFiveStyle = {paddingLeft: "5px", paddinRight: "5px", paddingBottom: "5px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background:"#ffd281"}
+			let topFiveStyle = {paddingTop: "1px", paddingLeft: "15px", paddingRight: "15px", paddingBottom: "15px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background:"#ffd281"}
 			let topFiveDishNodes = []
 			let recentCheckInNodes = []
 			let topFiveSubNeighborhoodNodes = []

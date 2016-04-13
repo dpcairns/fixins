@@ -17,6 +17,7 @@ class DishDetail extends React.Component{
 		let putOneUserInState = this.props.putOneUserInState
 		let putOneSpotInState = this.props.putOneSpotInState
 		let putOneGenreInState = this.props.putOneGenreInState
+		let putOneDishInState = this.props.putOneDishInState
 		let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
     let dish = this.props.dish
 
@@ -25,14 +26,22 @@ function findCheckInsFilter(checkIn){
       }
   let checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function(checkIn){
 		let userId = checkIn.checkIn_user._id
+		let dishId = checkIn.checkIn_dish._id
             return (
-              <tr key={checkIn._id}>
-                <td>{checkIn.checkIn_blurb}</td>
-								<td> <Link onClick={putOneUserInState.bind(this, userId)} to={`/user/${userId}`}>
-								{checkIn.checkIn_user.username}
-								</Link></td>
-								<td>{checkIn.checkIn_date}</td>
-                </tr>
+
+
+								 <tr key={checkIn._id}>
+
+																	<td>
+																	<h4> <Link to={`/dish/${dishId}`} onClick={putOneDishInState.bind(this, dishId)}>
+																	 {checkIn.checkIn_dish.dish_name}
+																	 </Link></h4></td>
+																	<td><h4>{checkIn.checkIn_dish.dish_calories} calories</h4></td>
+																	<td><h4>{checkIn.checkIn_dish.dish_price} dollars</h4></td>
+																	<td><h5>{checkIn.checkIn_blurb}</h5></td>
+																	<td><h4>{checkIn.checkIn_dish.dish_spot.spot_name}</h4></td>
+
+																	</tr>
 
               )
   })
@@ -42,15 +51,20 @@ function findReviewsFilter(review){
       }
   let reviewNodes = allReviews.filter(findReviewsFilter).map(function(review){
 		let userId = review.review_user._id
+		let dishId = review.reviewed_dish._id
             return (
-              <tr key={review._id}>
-                <td>{review.review_words}</td>
-                <td>{review.review_stars} stars</td>
-                <td>{review.review_date}</td>
-								<td> <Link onClick={putOneUserInState.bind(this, userId)} to={`/user/${userId}`}>
-								{review.review_user.username}
-								</Link></td>
-                </tr>
+							<tr key={review._id}>
+							<h4>
+								<td>
+								<h4><Link to={`/dish/${dishId}`} onClick={putOneDishInState.bind(this, dishId)}>{review.reviewed_dish.dish_name}</Link></h4></td>
+								<td><h4>{review.reviewed_dish.dish_calories}  calories</h4></td>
+								<td><h4>{review.reviewed_dish.dish_price} dollars </h4></td>
+								<td><h5>{review.review_words} </h5></td>
+								<td><h4>{review.review_stars} stars </h4></td>
+								<td><h4>{review.review_date}</h4></td>
+								</h4>
+							</tr>
+
 
               )
   })
@@ -167,11 +181,16 @@ function putOneUserInState(_id){
   return {type: "PUT_ONE_USER_IN_STATE", _id:_id}
 }
 
+function putOneDishInState(_id){
+  return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
+}
+
 const mapDispatchToProps = (dispatch) => {
  return {putOneSpotInState: (_id) => dispatch(putOneSpotInState(_id)),
 	 	putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
 		putOneUserInState: (_id) => dispatch(putOneUserInState(_id)),
 		putOneGenreInState: (_id) => dispatch(putOneGenreInState(_id)),
+		putOneDishInState: (_id) => dispatch(putOneDishInState(_id)),
 
 
  }
