@@ -85,7 +85,12 @@ table{
 
 .shad:hover {
     box-shadow: 5px 4px 4px pink;
-		height: 500px;
+}
+
+.shadow-container {
+	-webkit-box-shadow: 0 0 10px grey;
+	box-shadow: 0 0 10px grey;
+
 }
 
 .flex{

@@ -40,11 +40,11 @@ componentDidMount(){
 }
 
 		render(){
-			let containerStyle={borderRadius:"0px 0px 15px 15px", marginBottom:"25px"}
+			let containerStyle={borderRadius:"15px 15px 15px 15px", marginBottom:"25px", marginTop:"2%", opacity:"0.99"}
 			let greetingStyle={marginTop:"15px", marginRight: "10px", background:"lightyellow", maxWidth:"200px", float:"right"}
 			let currentUser = this.props.currentUser
 			return(
-			<div style={containerStyle} className="bg-success container">
+			<div style={containerStyle} className="bg-success container shadow-container">
 						<div className="row">
 								<div className="col-md-9">
 								<Links/>

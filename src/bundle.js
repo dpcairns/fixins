@@ -34221,12 +34221,12 @@
 		}, {
 			key: "render",
 			value: function render() {
-				var containerStyle = { borderRadius: "0px 0px 15px 15px", marginBottom: "25px" };
+				var containerStyle = { borderRadius: "15px 15px 15px 15px", marginBottom: "25px", marginTop: "2%", opacity: "0.99" };
 				var greetingStyle = { marginTop: "15px", marginRight: "10px", background: "lightyellow", maxWidth: "200px", float: "right" };
 				var currentUser = this.props.currentUser;
 				return _react2.default.createElement(
 					"div",
-					{ style: containerStyle, className: "bg-success container" },
+					{ style: containerStyle, className: "bg-success container shadow-container" },
 					_react2.default.createElement(
 						"div",
 						{ className: "row" },
@@ -35187,16 +35187,16 @@
 				var putOneSpotInState = this.props.putOneSpotInState;
 				var putOneUserInState = this.props.putOneUserInState;
 				var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
-				var checkInBoxStyle = { padding: "10px", maxWidth: "300px", margin: "0 auto", marginBottom: "20px", marginTop: "20px", borderRadius: "15px", background: "pink" };
-				var dishesBoxStyle = { padding: "10px", maxWidth: "300px", margin: "0 auto", marginBottom: "20px", marginTop: "20px", borderRadius: "15px", background: "lightblue" };
-				var topFiveStyle = { paddingTop: "1px", paddingLeft: "15px", paddingRight: "15px", paddingBottom: "15px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background: "#ffd281" };
+				var checkInBoxStyle = { padding: "10px", maxWidth: "300px", margin: "0 auto", marginBottom: "0", marginTop: "0", height: "100%", background: "pink" };
+				var dishesBoxStyle = { padding: "10px", maxWidth: "300px", margin: "0 auto", marginBottom: "0", marginTop: "0", height: "100%", background: "lightblue" };
+				var topFiveStyle = { paddingTop: "1px", height: "200px", paddingLeft: "15px", paddingRight: "15px", paddingBottom: "15px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background: "#ffd281" };
 				var topFiveDishNodes = [];
 				var recentCheckInNodes = [];
 				var topFiveSubNeighborhoodNodes = [];
 
 				if (this.props.subNeighborhoods.length > 5) {
 					(function () {
-						var itemBoxStyle = { height: "100px", margin: "2px", float: "left", textAlign: "center", background: "#BDA0CB", borderRadius: "10px" };
+						var itemBoxStyle = { height: "130px", margin: "2px", float: "left", textAlign: "center", background: "#BDA0CB", borderRadius: "10px" };
 						var allSubNeighborhoods = _this2.props.subNeighborhoods;
 						var allUsers = _this2.props.users;
 						var allSpots = _this2.props.spots;
@@ -35258,7 +35258,7 @@
 					})();
 				}
 
-				if (this.props.dishes.length > 5) {
+				if (this.props.dishes.length > 9) {
 					(function () {
 						var allDishes = _this2.props.dishes;
 						var allCheckIns = _this2.props.checkIns;
@@ -35278,7 +35278,7 @@
 						sortedDishes.sort(function (dishA, dishB) {
 							return dishB.numberOfCheckIns - dishA.numberOfCheckIns;
 						});
-						var topFiveDishes = [sortedDishes[0], sortedDishes[1], sortedDishes[2], sortedDishes[3], sortedDishes[4]];
+						var topFiveDishes = [sortedDishes[0], sortedDishes[1], sortedDishes[2], sortedDishes[3], sortedDishes[4], sortedDishes[5], sortedDishes[6], sortedDishes[7]];
 						topFiveDishNodes = topFiveDishes.map(function (dish) {
 							return _react2.default.createElement(
 								"h4",
@@ -35307,10 +35307,10 @@
 					})();
 				}
 
-				if (this.props.checkIns.length > 5) {
+				if (this.props.checkIns.length > 12) {
 					var _allCheckIns = this.props.checkIns;
 
-					var lastFiveCheckIns = [_allCheckIns[_allCheckIns.length - 1], _allCheckIns[_allCheckIns.length - 2], _allCheckIns[_allCheckIns.length - 3], _allCheckIns[_allCheckIns.length - 4], _allCheckIns[_allCheckIns.length - 5]];
+					var lastFiveCheckIns = [_allCheckIns[_allCheckIns.length - 1], _allCheckIns[_allCheckIns.length - 2], _allCheckIns[_allCheckIns.length - 3], _allCheckIns[_allCheckIns.length - 4], _allCheckIns[_allCheckIns.length - 5], _allCheckIns[_allCheckIns.length - 6], _allCheckIns[_allCheckIns.length - 7], _allCheckIns[_allCheckIns.length - 8], _allCheckIns[_allCheckIns.length - 9]];
 
 					recentCheckInNodes = lastFiveCheckIns.map(function (checkIn) {
 
@@ -35339,9 +35339,10 @@
 				return _react2.default.createElement(
 					"div",
 					null,
+					_react2.default.createElement("div", { className: "bg-info", style: { height: "100%", width: "100%", position: "fixed", backgroundImage: "url(./static/pizza.gif)", backgroundSize: "contain", backgroundRepeat: "repeat", zIndex: "-1" } }),
 					_react2.default.createElement(
 						"div",
-						{ className: "bg-success container text-center", style: { marginTop: "2%", marginBottom: "2%", borderRadius: "15px", opacity: "0.99" } },
+						{ className: "shadow-container container-fluid text-center", style: { zIndex: "2", marginBottom: "2%", opacity: "0.8" } },
 						_react2.default.createElement(
 							"div",
 							{ className: "col-md-3" },
@@ -35368,9 +35369,43 @@
 									null,
 									" || FIXINS || ",
 									_react2.default.createElement("br", null),
-									_react2.default.createElement("img", { src: "./static/chewing.gif", height: "280px", width: "350px", style: { margin: "20px", borderRadius: "10px" } }),
-									_react2.default.createElement("br", null),
 									"|| GET STUFT || "
+								)
+							),
+							_react2.default.createElement(
+								"div",
+								{ className: "row" },
+								_react2.default.createElement(
+									"div",
+									{ className: "col-md-12" },
+									_react2.default.createElement(
+										"div",
+										{ style: topFiveStyle },
+										_react2.default.createElement(
+											"h3",
+											null,
+											"top five subNeighborhoods in pdx"
+										),
+										_react2.default.createElement(
+											"div",
+											{ className: "top-five flex" },
+											this.props.subNeighborhoods.length > 5 ? topFiveSubNeighborhoodNodes : "never mind"
+										)
+									)
+								)
+							),
+							_react2.default.createElement(
+								"div",
+								{ className: "row" },
+								_react2.default.createElement(
+									"div",
+									{ className: "col-md-2" },
+									_react2.default.createElement("img", { src: "./static/glitter6.gif", height: "270px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
+								),
+								_react2.default.createElement(
+									"div",
+									{ className: "col-md-offset-2 col-md-3" },
+									_react2.default.createElement("img", { src: "./static/glitter1.gif", height: "270px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
 								)
 							)
 						),
@@ -35386,38 +35421,6 @@
 									"checkIn ticker"
 								),
 								this.props.checkIns.length > 5 ? recentCheckInNodes : "never mind"
-							)
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "row" },
-							_react2.default.createElement(
-								"div",
-								{ className: "col-md-1 text-right" },
-								_react2.default.createElement("img", { src: "./static/glitter6.gif", height: "150px", width: "70px", style: { borderRadius: "10px" } })
-							),
-							_react2.default.createElement(
-								"div",
-								{ className: "col-md-10" },
-								_react2.default.createElement(
-									"div",
-									{ style: topFiveStyle },
-									_react2.default.createElement(
-										"h3",
-										null,
-										"top five subNeighborhoods in pdx"
-									),
-									_react2.default.createElement(
-										"div",
-										{ className: "top-five flex" },
-										this.props.subNeighborhoods.length > 5 ? topFiveSubNeighborhoodNodes : "never mind"
-									)
-								)
-							),
-							_react2.default.createElement(
-								"div",
-								{ className: "col-md-1 text-left" },
-								_react2.default.createElement("img", { src: "./static/glitter1.gif", height: "150px", width: "70px", style: { borderRadius: "10px" } })
 							)
 						)
 					)
