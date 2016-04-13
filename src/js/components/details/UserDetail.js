@@ -8,6 +8,7 @@ import Links from "../utils/Links"
 class UserDetail extends React.Component{
 
 	render(){
+		let listStyle={maxHeight:"400px",overflowX:"hidden",overflowY:"scroll"}
     let allReviews = this.props.allReviews
 		let allSubNeighborhoods = this.props.allSubNeighborhoods
 		let allUsers = this.props.allUsers
@@ -27,12 +28,13 @@ class UserDetail extends React.Component{
 				let checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function(checkIn){
 					let dishId = checkIn.checkIn_dish._id
 									return (
-                      <tr key={checkIn._id}  onClick={putOneDishInState.bind(this, dishId)}>
+                      <tr key={checkIn._id}>
                       <td>
 
-											 <Link to={`/dish/${dishId}`}>{checkIn.checkIn_dish.dish_name}
+											 <Link to={`/dish/${dishId}`} onClick={putOneDishInState.bind(this, dishId)}>
+											 {checkIn.checkIn_dish.dish_name}
 											 </Link></td>
-											<td>>{checkIn.checkIn_dish.dish_calories} calories</td>
+											<td>{checkIn.checkIn_dish.dish_calories} calories</td>
 											<td>{checkIn.checkIn_dish.dish_price} dollars</td>
 											<td>{checkIn.checkIn_blurb}</td>
 											<td>{checkIn.checkIn_dish.dish_spot.spot_name}</td>
@@ -48,8 +50,8 @@ class UserDetail extends React.Component{
 									return (
 
                     <tr  key={review._id}>
-											<td onClick={putOneDishInState.bind(this, dishId)}>
-											<Link to={`/dish/${dishId}`}>{review.reviewed_dish.dish_name}</Link></td>
+											<td>
+											<Link to={`/dish/${dishId}`} onClick={putOneDishInState.bind(this, dishId)}>{review.reviewed_dish.dish_name}</Link></td>
 											<td>{review.reviewed_dish.dish_calories}  calories</td>
 											<td>{review.reviewed_dish.dish_price} dollars</td>
 											<td>{review.review_words}</td>
@@ -62,28 +64,28 @@ class UserDetail extends React.Component{
 
     return (
 <div>
-<div className="container bg-warning">
+<div className="bg-info med-pad med-mar">
 <div className="row">
     <div className="col-md-6">
-    <Links/>
     </div>
     <div className="col-md-6">
-      <ul>
-        <li><h2>{this.props.user.username}</h2></li>
+      <ul style={{listStyleType:"none"}}>
+        <li><h2>User Page for {this.props.user.username}</h2></li>
         <li> Password: {this.props.user.password}</li>
-				<li onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)}>
-							<Link to={`/subNeighborhood/${subNeighborhoodId}`}>
+				<li>
+							<Link to={`/subNeighborhood/${subNeighborhoodId}`} onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)}>
 									{this.props.user.user_sub_neighborhood.subNeighborhood_name}
 							</Link>
 			</li>
       </ul>
     </div>
 </div>
+
 <CalorieDollarChart username={thisUser.username} userCheckIns={userCheckIns} />
 
 <div>
     <div className="row">
-      <div className="col-md-6">
+      <div className="col-md-6" style={listStyle}>
           <h1>CheckIns</h1>
               <table className="table">
                 <tbody>
@@ -91,7 +93,7 @@ class UserDetail extends React.Component{
               </tbody>
               </table>
       </div>
-      <div className="col-md-6">
+      <div className="col-md-6" style={listStyle}>
           <h1>Reviews</h1>
           <table className="table">
             <tbody>
@@ -135,6 +137,7 @@ const mapDispatchToProps = (dispatch) => {
 	 putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id))
  }
 }
+
 
 const UserDetailContainer = connect(mapStateToProps, mapDispatchToProps)(UserDetail)
 export default UserDetailContainer

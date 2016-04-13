@@ -1,18 +1,49 @@
 import React from "react"
 import CustomDropdown from "./CustomDropdown"
+import { Link } from 'react-router'
 
 export default class DishForm extends React.Component{
 	constructor(){
 		super();
 		this.state = {
 			name: '',
-			spot: '',
 			calories: '',
 			price: '',
 			blurb: '',
-			genres: ''
+			genres: '',
+			dishFailureStyles: {display: "none"},
+			dishSuccessStyles: {display: "none"}
 		}
-	}
+		}
+
+		showDishFailure(){
+			this.setState({
+				dishSuccessStyles: {
+					display: "none"
+				},
+				dishFailureStyles: {
+				display: "block",
+				background: '#FF6666',
+				height: '50px',
+				width: '100%'
+			}
+		})
+		}
+
+
+		showDishSuccess(){
+			this.setState({
+				dishFailureStyles: {display: "none"},
+				dishSuccessStyles: {
+				display: "block",
+				background: '#98FB98',
+				height: '50px',
+				width: '100%'
+			}
+		})
+
+		}
+
 
 	handleNameChange(e){
 		this.setState({name: e.target.value})
@@ -30,9 +61,6 @@ export default class DishForm extends React.Component{
 		this.setState({price: e.target.value})
 	}
 
-	handleSpotChange(e){
-		this.setState({spot: e.target.value})
-	}
 
 	handleSubmit(e){
 		e.preventDefault();
@@ -40,14 +68,20 @@ export default class DishForm extends React.Component{
 		newDishObject.name = this.state.name
 		newDishObject.calories = this.state.calories
 		newDishObject.price = this.state.price
-		newDishObject.spot = this.state.spot
+		newDishObject.spot = this.props.thisSpot
 		newDishObject.blurb = this.state.blurb
-
-		this.props.createDish(newDishObject)
-		this.setState({name: "", spot: "", calories: "", price: "", blurb: '', genres: ''})
+		if(newDishObject.blurb.length<1 || newDishObject.price<1 || newDishObject.calories<1 ){
+			this.showDishFailure();
+		}
+		else{
+			this.props.createDish(newDishObject)
+			this.showDishSuccess();
+		}
+		this.setState({name: "", calories: "", price: "", blurb: '', genres: ''})
 	}
 
 	render(){
+		let spotId = this.props.thisSpot._id
 	return(
 		<div>
 	<form onSubmit={this.handleSubmit.bind(this)}>
@@ -69,7 +103,7 @@ export default class DishForm extends React.Component{
 		</div>
 		<div className="input-group">
 			Calories:
-		  <input type="text"
+		  <input type="number"
 		  		value={this.state.calories}
 		  		onChange={this.handleCaloriesChange.bind(this)}
 		  		className="form-control"
@@ -77,24 +111,19 @@ export default class DishForm extends React.Component{
 		</div>
 		<div className="input-group">
 			Price:
-		  <input type="text"
+		  <input type="number"
 		  	value={this.state.price}
 		  	onChange={this.handlePriceChange.bind(this)}
 		  	className="form-control"
 		  	placeholder="dish price"/>
 		</div>
-		<div className="input-group">
-			Spot:
-			<CustomDropdown
-				setValueTo={this.state.spot}
-				onchange2={this.handleSpotChange.bind(this)}
-				data={this.props.allSpots}
-				nameName="spot_name" />
-		</div>
 
 
 	<input className="button btn-danger align-right" type="submit" value="Post"/>
 	</form>
+	<div style={this.state.dishFailureStyles}><h2>Dish failed. Try again and do something different.</h2></div>
+	<div style={this.state.dishSuccessStyles}><h2>Dish added! Check out the page for <Link to={`dish/${spotId}`}>this dish</Link>!</h2></div>
+
 </div>
 
 		)

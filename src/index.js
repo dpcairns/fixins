@@ -13,15 +13,25 @@ import FixinsApp from './js/reducers/rootReducer'
 import UserDetailContainer from './js/components/details/UserDetail'
 import GenreDetailContainer from './js/components/details/GenreDetail'
 import SpotDetailContainer from './js/components/details/SpotDetail'
-
 import DishDetailContainer from './js/components/details/DishDetail'
+import NeighborhoodDetail from './js/components/details/NeighborhoodDetail'
 import SubNeighborhoodDetailContainer from './js/components/details/SubNeighborhoodDetail'
+import LogInPage from './js/components/pages/LogInPage'
+import SignUpPage from './js/components/pages/SignUpPage'
+import NewCheckInPage from './js/components/pages/NewCheckInPage'
+import NewReviewPage from './js/components/pages/NewReviewPage'
+import NewDishPage from './js/components/pages/NewDishPage'
+import NewSpotPage from './js/components/pages/NewSpotPage'
+import AllNeighborhoods from './js/components/details/AllNeighborhoods'
+import AllGenres from './js/components/details/AllGenres'
+import MyDashboard from './js/components/pages/MyDashboard'
 
 
 const app = document.getElementById('app');
 
 
 let initialState = {
+	currentUser: {},
 	genre: "",
 	genres: [],
 	neighborhood: "",
@@ -47,6 +57,14 @@ let store = createStoreWithMiddleware(
 											window.devToolsExtension ? window.devToolsExtension() : f => f
 										)
 
+function requireAuth(nextState, replaceState) {
+	let state = store.getState()
+console.log(state.currentUser._id)
+	  if (state.currentUser._id !== null){
+		  window.locaton = '/login'
+										}
+						}
+
 ReactDOM.render(
 	<Provider store={store}>
 <Router history={hashHistory}>
@@ -58,8 +76,18 @@ ReactDOM.render(
 		<Route name="spot" path="/spot/:id" component={SpotDetailContainer}></Route>
 		<Route name="dish" path="/dish/:id" component={DishDetailContainer}></Route>
 		<Route name="subNeighborhood" path="/subNeighborhood/:id" component={SubNeighborhoodDetailContainer}></Route>
-
+		<Route name="neighborhood" path="/neighborhood/:id" component={NeighborhoodDetail}></Route>
+		<Route name="login" path="login" component={LogInPage}></Route>
+		<Route name="myDashboard" path="myDashboard" component={MyDashboard}></Route>
+		<Route name="signup" path="signup" component={SignUpPage}></Route>
+		<Route name="newCheckIn" path="newCheckIn" component={NewCheckInPage}></Route>
+		<Route name="newReview" path="newReview" component={NewReviewPage}></Route>
+		<Route name="newDish" path="newDish" component={NewDishPage}></Route>
+		<Route name="newSpot" path="newSpot" component={NewSpotPage}></Route>
+		<Route name="allNeighborhoods" path="allNeighborhoods" component={AllNeighborhoods}></Route>
+		<Route name="allGenres" path="allGenres" component={AllGenres}></Route>
 		<Route name= "mapPage" path="mapPage" component={MapContainer}></Route>
+
 	</Route>
 </Router>
 </Provider>, app);

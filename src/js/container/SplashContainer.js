@@ -6,17 +6,30 @@ import Splash from '../components/Splash'
 
 const mapStateToProps = (state) => {
   return {
-    genres: state.allGenres,
-    spots: state.allSpots,
-    dishes: state.allDishes,
-    users: state.allUsers,
-    neighborhoods: state.allNeighborhoods,
-    subNeighborhoods: state.allSubNeighborhoods,
-    reviews: state.allReviews,
-    checkIns: state.allCheckIns
+    genres: state.genres,
+    spots: state.spots,
+    dishes: state.dishes,
+    users: state.users,
+    neighborhoods: state.neighborhoods,
+    subNeighborhoods: state.subNeighborhoods,
+    reviews: state.reviews,
+    checkIns: state.checkIns
   }
-  console.log("here is state")
-  console.log(state)
+}
+
+function putOneSpotInState(_id){
+  return {type: "PUT_ONE_SPOT_IN_STATE", _id:_id}
+}
+
+function putOneSubNeighborhoodInState(_id){
+  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
+}
+
+function putOneDishInState(_id){
+  return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
+}
+function putOneUserInState(_id){
+  return {type: "PUT_ONE_USER_IN_STATE", _id:_id}
 }
 
 
@@ -30,6 +43,11 @@ function mapDispatchToProps(dispatch) {
       initializeReviews: () => FixinsActions.initializeReviews(dispatch),
       initializeDishes: () => FixinsActions.initializeDishes(dispatch),
       initializeCheckIns: () => FixinsActions.initializeCheckIns(dispatch),
+
+          putOneUserInState: (_id) => dispatch(putOneUserInState(_id)),
+          putOneSpotInState: (_id) => dispatch(putOneSpotInState(_id)),
+      		putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
+      		putOneDishInState: (_id) => dispatch(putOneDishInState(_id))
     }
 }
 

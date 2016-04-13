@@ -2,7 +2,7 @@
 import React from "react"
 import CustomDropdown from "./CustomDropdown"
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
-
+import {Link} from 'react-router'
 
 export default class SpotForm extends React.Component{
 	constructor(){
@@ -13,22 +13,45 @@ export default class SpotForm extends React.Component{
 			genres: '',
 			coordinates: '',
 			clickPosition: '',
-			subNeighborhood: '',
 			hasLocation: false,
-	        defaultLatlng: {lat: 45.53,
-            lng: -122.67},
-            zoom: 13,
-    };
-		}
+	    defaultLatlng: {lat: 45.53,
+      lng: -122.67},
+      zoom: 13,
+			spotFailureStyles: {display: "none"},
+			spotSuccessStyles: {display: "none"}
+					}
+					}
 
+					showSpotFailure(){
+						this.setState({
+							spotSuccessStyles: {
+								display: "none"
+							},
+							spotFailureStyles: {
+							display: "block",
+							background: '#FF6666',
+							height: '50px',
+							width: '100%'
+						}
+					})
+					}
+
+
+					showSpotSuccess(){
+						this.setState({
+							spotFailureStyles: {display: "none"},
+							spotSuccessStyles: {
+							display: "block",
+							background: '#98FB98',
+							height: '50px',
+							width: '100%'
+						}
+					})
+
+					}
 
 	handleNameChange(e){
 	this.setState({name: e.target.value})
-
-	}
-
-	handleSubNeighborhoodChange(e){
-		this.setState({subNeighborhood: e.target.value})
 
 	}
 
@@ -55,18 +78,25 @@ export default class SpotForm extends React.Component{
 		e.preventDefault();
 		let newSpotObject = {}
 		newSpotObject.name = this.state.name
-		newSpotObject.subNeighborhood = this.state.subNeighborhood
+		newSpotObject.subNeighborhood = this.props.mySubNeighborhood._id
 		newSpotObject.coordinates = []
 		newSpotObject.coordinates.push(this.state.coordinates.lat)
 		newSpotObject.coordinates.push(this.state.coordinates.lng)
 		newSpotObject.genres = this.state.genres
 		newSpotObject.blurb = this.state.blurb
-		this.props.createSpot(newSpotObject)
-		this.setState({username: "", blurb: "", genres: "", coordinates: "", neighborhood: '', subNeighborhood: ''})
+		if(newSpotObject.blurb.length<1 || newSpotObject.coordinates.length<1 || newSpotObject.name.length<1 ){
+			this.showSpotFailure();
+		}
+		else{
+			this.props.createSpot(newSpotObject)
+			this.showSpotSuccess();
+		}
+		this.setState({username: "", blurb: "", genres: "", coordinates: "", clickPosition: ""})
 	}
 
 	render(){
-
+		let allGenres = this.props.allGenres
+		let subNeighborhoodId = this.props.mySubNeighborhood._id
 		    const marker = this.state.hasLocation ?
          <Marker position={this.state.clickPosition}>
           <Popup>
@@ -83,6 +113,7 @@ export default class SpotForm extends React.Component{
 
 	return(
 		<div>
+		<h3>Post a new spot in {this.props.mySubNeighborhood.subNeighborhood_name}</h3>
 		<div className="input-group">
 			Spot name:
 		  <input type="text" value={this.state.name}
@@ -100,22 +131,11 @@ export default class SpotForm extends React.Component{
 			Genres:
 			<CustomDropdown setValueTo={this.state.genres}
 				onchange2={this.handleGenresChange.bind(this)}
-				 data={this.props.allGenres}
+				 data={allGenres}
 				  nameName="genre_name" />
 		</div>
-
-		<div className="input-group">
-			subNeighborhood:
-			<CustomDropdown
-				setValueTo={this.state.subNeighborhood}
-				onchange2={this.handleSubNeighborhoodChange.bind(this)}
-				data={this.props.allSubNeighborhoods}
-				nameName="subNeighborhood_name" />
-		</div>
-		<div className="map-input-box">
+	<div className="map-input-box">
 		<h2>Show us the spot on the map:</h2>
-
-
       <Map onLeafletClick={this.handleMapClick.bind(this)} center={position} zoom={this.state.zoom} minZoom={minZoom}>
         <TileLayer
           id="dpcairns.pee063cb"
@@ -128,11 +148,11 @@ export default class SpotForm extends React.Component{
 
       </Map>
 
-
-
-
 		</div>
 	<div className="btn btn-danger" onClick={this.handleSubmit.bind(this)}>Post</div>
+	<div style={this.state.spotFailureStyles}><h2>Spot failed. Try again and do something different.</h2></div>
+	<div style={this.state.spotSuccessStyles}><h2>Spot added! Check out the detail page for the <Link to={`subNeighborhood/${subNeighborhoodId}`}> {this.props.mySubNeighborhood.subNeighborhood_name}</Link>.</h2>.</div>
+
 </div>
 
 

@@ -24,10 +24,9 @@ export default class Admin extends React.Component{
 	render(){
 	return(
 		<div>
-			<div className="container">
-			<Links />
+			<div>
 				<div className="admin-user-box bg-success row">
-					<div className="admin-user-input col-md-4">
+				<div className="admin-user-input col-md-4">
 									<h2>New User</h2>
 						<UserForm
 						allSubNeighborhoods={this.props.allSubNeighborhoods}
@@ -55,14 +54,7 @@ export default class Admin extends React.Component{
 
 				<div className="admin-spot-box row bg-info">
 					<div className="admin-spot-input col-md-4">
-									<h2>New Spot</h2>
 
-						<SpotForm
-						allGenres={this.props.allGenres}
-						allSubNeighborhoods={this.props.allSubNeighborhoods}
-						createSpot={this.props.createSpot}/>
-					</div>
-					<div className="admin-spot-output col-md-8">
 								<h2>All Spots</h2>
 
 						<SpotList
@@ -89,15 +81,6 @@ export default class Admin extends React.Component{
 							<div className="admin-dish-box bg-success row">
 
 								<div className="admin-dish-input col-md-4">
-												<h2>New Dish</h2>
-
-									<DishForm
-									allSpots={this.props.allSpots}
-									allGenres={this.props.allGenres}
-									createDish={this.props.createDish} />
-								</div>
-								<div className="admin-dish-output col-md-8">
-												<h2>All Dishes</h2>
 
 									<DishList
 									allReviews={this.props.allReviews}
@@ -116,13 +99,7 @@ export default class Admin extends React.Component{
 
 				<div className="admin-review-box bg-success row">
 					<div className="admin-review-input col-md-4">
-									<h2>New Review</h2>
 
-						<ReviewForm
-						allDishes={this.props.allDishes}
-						allUsers={this.props.allUsers}
-						createReview={this.props.createReview}
-						/>
 					</div>
 					<div className="admin-review-output col-md-8">
 							<h2>All Reviews</h2>
@@ -140,13 +117,7 @@ export default class Admin extends React.Component{
 
 				<div className="admin-checkIn-box bg-info row">
 					<div className="admin-checkIn-input col-md-4">
-									<h2>New CheckIn</h2>
 
-						<CheckInForm
-						 allUsers={this.props.allUsers}
-						allDishes={this.props.allDishes}
-						createCheckIn={this.props.createCheckIn}
-						/>
 					</div>
 					<div className="admin-checkIn-output col-md-8">
 									<h2>All CheckIns</h2>
@@ -178,6 +149,8 @@ export default class Admin extends React.Component{
 						allNeighborhoods={this.props.allNeighborhoods}
 						allSubNeighborhoods={this.props.allSubNeighborhoods}
 						removeNeighborhood={this.props.removeNeighborhood}
+						putOneNeighborhoodInState={this.props.putOneNeighborhoodInState}
+						putOneSubNeighborhoodInState={this.props.putOneSubNeighborhoodInState}
 						findAndChangeNeighborhood={this.props.findAndChangeNeighborhood}
 
 
@@ -189,12 +162,7 @@ export default class Admin extends React.Component{
 
 				<div className="admin-subNeighborhood-box bg-info row">
 					<div className="admin-subNeighborhood-input col-md-4">
-									<h2>New Sub-Neighborhood</h2>
 
-						<SubNeighborhoodForm
-						allNeighborhoods={this.props.allNeighborhoods}
-						createSubNeighborhood={this.props.createSubNeighborhood}
-						/>
 					</div>
 
 					<div className="admin-subNeighborhood-output col-md-8">
