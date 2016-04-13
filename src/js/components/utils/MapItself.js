@@ -47,13 +47,18 @@ class MapItself extends React.Component {
                             : "no dishes yet. be the first to add one!"}<br/>
 
                           </a>
-                        (  {signatureDish.length>0 ?
+                        ({signatureDish.length>0 ?
                             signatureDish[0].dish_calories:
                             "n/a"} calories for $
+
                             {signatureDish.length>0 ?
                                signatureDish[0].dish_price
                                : "n/a"}
-                          )
+                                =
+                               {signatureDish.length>0 ?
+                                " " + parseInt(signatureDish[0].dish_calories / signatureDish[0].dish_price + " ")
+                                 : "n/a"}
+                                  calorieDollars)
                               </span>
                               </h4>
                               </div>

@@ -78,7 +78,7 @@ table{
 
 .shad {
     box-shadow: none;
-    transition: box-shadow .3s;
+    transition: all .4s ease;
 
     border: 1px solid #eee;
 }
@@ -87,10 +87,17 @@ table{
     box-shadow: 5px 4px 4px pink;
 }
 
-.shadow-container {
-	-webkit-box-shadow: 0 0 10px grey;
-	box-shadow: 0 0 10px grey;
+.shadow-container:hover {
+	-webkit-box-shadow: 0 0 20px #253f3f;
+	box-shadow: 0 0 20px #253f3f;
 
+}
+
+
+.shadow-container {
+	-webkit-box-shadow: 0 0 20px pink;
+	box-shadow: 0 0 20px pink;
+	transition: all .3s ease
 }
 
 .flex{

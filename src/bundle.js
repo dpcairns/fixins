@@ -35189,14 +35189,14 @@
 				var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
 				var checkInBoxStyle = { padding: "10px", maxWidth: "300px", margin: "0 auto", marginBottom: "0", marginTop: "0", height: "100%", background: "pink" };
 				var dishesBoxStyle = { padding: "10px", maxWidth: "300px", margin: "0 auto", marginBottom: "0", marginTop: "0", height: "100%", background: "lightblue" };
-				var topFiveStyle = { paddingTop: "1px", height: "200px", paddingLeft: "15px", paddingRight: "15px", paddingBottom: "15px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background: "#ffd281" };
+				var topFiveStyle = { height: "240px", paddingTop: "1px", paddingLeft: "15px", paddingRight: "15px", paddingBottom: "15px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background: "#ffd281" };
 				var topFiveDishNodes = [];
 				var recentCheckInNodes = [];
 				var topFiveSubNeighborhoodNodes = [];
 
 				if (this.props.subNeighborhoods.length > 5) {
 					(function () {
-						var itemBoxStyle = { height: "130px", margin: "2px", float: "left", textAlign: "center", background: "#BDA0CB", borderRadius: "10px" };
+						var itemBoxStyle = { margin: "2px", padding: "3px", float: "left", textAlign: "center", background: "#BDA0CB", borderRadius: "10px" };
 						var allSubNeighborhoods = _this2.props.subNeighborhoods;
 						var allUsers = _this2.props.users;
 						var allSpots = _this2.props.spots;
@@ -35339,20 +35339,20 @@
 				return _react2.default.createElement(
 					"div",
 					null,
-					_react2.default.createElement("div", { className: "bg-info", style: { height: "100%", width: "100%", position: "fixed", backgroundImage: "url(./static/pizza.gif)", backgroundSize: "contain", backgroundRepeat: "repeat", zIndex: "-1" } }),
+					_react2.default.createElement("div", { className: "bg-info", style: { height: "100%", width: "100%", position: "fixed", backgroundImage: "url(./static/pizza.gif)", backgroundSize: "cover", zIndex: "-1" } }),
 					_react2.default.createElement(
 						"div",
-						{ className: "shadow-container container-fluid text-center", style: { zIndex: "2", marginBottom: "2%", opacity: "0.8" } },
+						{ className: "ontainer-fluid text-center", style: { zIndex: "2", opacity: "0.9" } },
 						_react2.default.createElement(
 							"div",
 							{ className: "col-md-3" },
 							_react2.default.createElement(
 								"div",
-								{ style: dishesBoxStyle },
+								{ style: dishesBoxStyle, className: "shadow-container" },
 								_react2.default.createElement(
 									"h3",
 									null,
-									"top 5 dishes"
+									"top dishes"
 								),
 								this.props.dishes.length > 5 ? topFiveDishNodes : "never mind"
 							)
@@ -35380,7 +35380,7 @@
 									{ className: "col-md-12" },
 									_react2.default.createElement(
 										"div",
-										{ style: topFiveStyle },
+										{ style: topFiveStyle, className: "shadow-container" },
 										_react2.default.createElement(
 											"h3",
 											null,
@@ -35400,12 +35400,12 @@
 								_react2.default.createElement(
 									"div",
 									{ className: "col-md-2" },
-									_react2.default.createElement("img", { src: "./static/glitter6.gif", height: "270px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
+									_react2.default.createElement("img", { src: "./static/glitter6.gif", height: "240px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
 								),
 								_react2.default.createElement(
 									"div",
 									{ className: "col-md-offset-2 col-md-3" },
-									_react2.default.createElement("img", { src: "./static/glitter1.gif", height: "270px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
+									_react2.default.createElement("img", { src: "./static/glitter1.gif", height: "240px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
 								)
 							)
 						),
@@ -35414,7 +35414,7 @@
 							{ className: "col-md-3" },
 							_react2.default.createElement(
 								"div",
-								{ style: checkInBoxStyle },
+								{ className: "shadow-container", style: checkInBoxStyle },
 								_react2.default.createElement(
 									"h3",
 									null,
@@ -70341,11 +70341,13 @@
 	                    signatureDish.length > 0 ? signatureDish[0].dish_name : "no dishes yet. be the first to add one!",
 	                    _react2.default.createElement('br', null)
 	                  ),
-	                  '(  ',
+	                  '(',
 	                  signatureDish.length > 0 ? signatureDish[0].dish_calories : "n/a",
 	                  ' calories for $',
 	                  signatureDish.length > 0 ? signatureDish[0].dish_price : "n/a",
-	                  ')'
+	                  '=',
+	                  signatureDish.length > 0 ? " " + parseInt(signatureDish[0].dish_calories / signatureDish[0].dish_price + " ") : "n/a",
+	                  'calorieDollars)'
 	                )
 	              )
 	            )
@@ -70954,69 +70956,65 @@
 											"tr",
 											{ key: review._id },
 											_react2.default.createElement(
-													"h4",
+													"td",
 													null,
 													_react2.default.createElement(
-															"td",
+															"h4",
 															null,
 															_react2.default.createElement(
-																	"h4",
-																	null,
-																	_react2.default.createElement(
-																			_reactRouter.Link,
-																			{ to: "/dish/" + dishId, onClick: putOneDishInState.bind(this, dishId) },
-																			review.reviewed_dish.dish_name
-																	)
+																	_reactRouter.Link,
+																	{ to: "/dish/" + dishId, onClick: putOneDishInState.bind(this, dishId) },
+																	review.reviewed_dish.dish_name
 															)
-													),
+													)
+											),
+											_react2.default.createElement(
+													"td",
+													null,
 													_react2.default.createElement(
-															"td",
+															"h4",
 															null,
-															_react2.default.createElement(
-																	"h4",
-																	null,
-																	review.reviewed_dish.dish_calories,
-																	"  calories"
-															)
-													),
+															review.reviewed_dish.dish_calories,
+															"  calories"
+													)
+											),
+											_react2.default.createElement(
+													"td",
+													null,
 													_react2.default.createElement(
-															"td",
+															"h4",
 															null,
-															_react2.default.createElement(
-																	"h4",
-																	null,
-																	review.reviewed_dish.dish_price,
-																	" dollars "
-															)
-													),
+															review.reviewed_dish.dish_price,
+															" dollars "
+													)
+											),
+											_react2.default.createElement(
+													"td",
+													null,
 													_react2.default.createElement(
-															"td",
+															"h5",
 															null,
-															_react2.default.createElement(
-																	"h5",
-																	null,
-																	review.review_words,
-																	" "
-															)
-													),
+															review.review_words,
+															" "
+													)
+											),
+											_react2.default.createElement(
+													"td",
+													null,
 													_react2.default.createElement(
-															"td",
+															"h4",
 															null,
-															_react2.default.createElement(
-																	"h4",
-																	null,
-																	review.review_stars,
-																	" stars "
-															)
-													),
+															review.review_stars,
+															" stars "
+													)
+											),
+											_react2.default.createElement(
+													"td",
+													null,
 													_react2.default.createElement(
-															"td",
+															"h4",
 															null,
-															_react2.default.createElement(
-																	"h4",
-																	null,
-																	review.review_date
-															)
+															review.review_date
 													)
 											)
 									);
@@ -71630,20 +71628,6 @@
 													_react2.default.createElement(
 															'h4',
 															null,
-															' ',
-															_react2.default.createElement(
-																	_reactRouter.Link,
-																	{ to: '/dish/' + dishId, onClick: putOneDishInState.bind(this, dishId) },
-																	checkIn.checkIn_dish.dish_name
-															)
-													)
-											),
-											_react2.default.createElement(
-													'td',
-													null,
-													_react2.default.createElement(
-															'h4',
-															null,
 															checkIn.checkIn_dish.dish_calories,
 															' calories'
 													)
@@ -71689,69 +71673,52 @@
 											'tr',
 											{ key: review._id },
 											_react2.default.createElement(
-													'h4',
+													'td',
 													null,
 													_react2.default.createElement(
-															'td',
+															'h4',
 															null,
-															_react2.default.createElement(
-																	'h4',
-																	null,
-																	_react2.default.createElement(
-																			_reactRouter.Link,
-																			{ to: '/dish/' + dishId, onClick: putOneDishInState.bind(this, dishId) },
-																			review.reviewed_dish.dish_name
-																	)
-															)
-													),
+															review.reviewed_dish.dish_calories,
+															'  calories'
+													)
+											),
+											_react2.default.createElement(
+													'td',
+													null,
 													_react2.default.createElement(
-															'td',
+															'h4',
 															null,
-															_react2.default.createElement(
-																	'h4',
-																	null,
-																	review.reviewed_dish.dish_calories,
-																	'  calories'
-															)
-													),
+															review.reviewed_dish.dish_price,
+															' dollars '
+													)
+											),
+											_react2.default.createElement(
+													'td',
+													null,
 													_react2.default.createElement(
-															'td',
+															'h5',
 															null,
-															_react2.default.createElement(
-																	'h4',
-																	null,
-																	review.reviewed_dish.dish_price,
-																	' dollars '
-															)
-													),
+															review.review_words,
+															' '
+													)
+											),
+											_react2.default.createElement(
+													'td',
+													null,
 													_react2.default.createElement(
-															'td',
+															'h4',
 															null,
-															_react2.default.createElement(
-																	'h5',
-																	null,
-																	review.review_words,
-																	' '
-															)
-													),
+															review.review_stars,
+															' stars '
+													)
+											),
+											_react2.default.createElement(
+													'td',
+													null,
 													_react2.default.createElement(
-															'td',
+															'h4',
 															null,
-															_react2.default.createElement(
-																	'h4',
-																	null,
-																	review.review_stars,
-																	' stars '
-															)
-													),
-													_react2.default.createElement(
-															'td',
-															null,
-															_react2.default.createElement(
-																	'h4',
-																	null,
-																	review.review_date
-															)
+															review.review_date
 													)
 											)
 									);
@@ -72608,39 +72575,53 @@
 
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'text-center' },
+	        { className: 'row text-center' },
 	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: 'index/signup' },
-	          'Need an account? Sign up here.'
+	          'h1',
+	          null,
+	          'login'
 	        ),
 	        _react2.default.createElement(
-	          'h5',
-	          null,
+	          'div',
+	          { className: 'col-md-offset-3 col-md-3' },
 	          _react2.default.createElement(
-	            'form',
-	            { className: 'centered', style: { maxWidth: "300px" }, onSubmit: this.handleSubmit.bind(this) },
+	            'h4',
+	            null,
 	            _react2.default.createElement(
-	              'div',
-	              { className: 'input-group' },
-	              'Username:',
-	              _react2.default.createElement('input', { type: 'text',
-	                value: this.state.username,
-	                onChange: this.handleUsernameChange.bind(this),
-	                className: 'form-control',
-	                placeholder: 'username' })
+	              _reactRouter.Link,
+	              { to: 'index/signup' },
+	              'Need an account? Sign up here.'
 	            ),
+	            _react2.default.createElement('br', null),
 	            _react2.default.createElement(
-	              'div',
-	              { className: 'input-group' },
-	              'Password:',
-	              _react2.default.createElement('input', { type: 'password',
-	                value: this.state.password,
-	                onChange: this.handlePasswordChange.bind(this),
-	                className: 'form-control',
-	                placeholder: 'password' })
-	            ),
-	            _react2.default.createElement('input', { className: 'button btn-danger align-right small-mar', type: 'submit', value: 'Log-in' })
+	              'form',
+	              { className: 'centered', style: { maxWidth: "500px" }, onSubmit: this.handleSubmit.bind(this) },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'input-group' },
+	                'Username:',
+	                _react2.default.createElement('input', { type: 'text',
+	                  value: this.state.username,
+	                  onChange: this.handleUsernameChange.bind(this),
+	                  className: 'form-control',
+	                  placeholder: 'username' })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'input-group' },
+	                'Password:',
+	                _react2.default.createElement('input', { type: 'password',
+	                  value: this.state.password,
+	                  onChange: this.handlePasswordChange.bind(this),
+	                  className: 'form-control',
+	                  placeholder: 'password' })
+	              ),
+	              _react2.default.createElement(
+	                'h5',
+	                null,
+	                _react2.default.createElement('input', { className: 'button btn-danger align-right small-mar', type: 'submit', value: 'Log-in' })
+	              )
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -72662,6 +72643,11 @@
 	            ),
 	            '.'
 	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-md-2' },
+	          _react2.default.createElement('img', { src: './static/chewing.gif', style: { borderRadius: "25px", margin: "15px" } })
 	        )
 	      );
 	    }
@@ -73589,69 +73575,65 @@
 	          'tr',
 	          { key: review._id },
 	          _react2.default.createElement(
-	            'h4',
+	            'td',
 	            null,
 	            _react2.default.createElement(
-	              'td',
+	              'h4',
 	              null,
 	              _react2.default.createElement(
-	                'h4',
-	                null,
-	                _react2.default.createElement(
-	                  _reactRouter.Link,
-	                  { to: '/dish/' + dishId, onClick: putOneDishInState.bind(this, dishId) },
-	                  review.reviewed_dish.dish_name
-	                )
+	                _reactRouter.Link,
+	                { to: '/dish/' + dishId, onClick: putOneDishInState.bind(this, dishId) },
+	                review.reviewed_dish.dish_name
 	              )
-	            ),
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
 	            _react2.default.createElement(
-	              'td',
+	              'h4',
 	              null,
-	              _react2.default.createElement(
-	                'h4',
-	                null,
-	                review.reviewed_dish.dish_calories,
-	                '  calories'
-	              )
-	            ),
+	              review.reviewed_dish.dish_calories,
+	              '  calories'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
 	            _react2.default.createElement(
-	              'td',
+	              'h4',
 	              null,
-	              _react2.default.createElement(
-	                'h4',
-	                null,
-	                review.reviewed_dish.dish_price,
-	                ' dollars '
-	              )
-	            ),
+	              review.reviewed_dish.dish_price,
+	              ' dollars '
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
 	            _react2.default.createElement(
-	              'td',
+	              'h5',
 	              null,
-	              _react2.default.createElement(
-	                'h5',
-	                null,
-	                review.review_words,
-	                ' '
-	              )
-	            ),
+	              review.review_words,
+	              ' '
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
 	            _react2.default.createElement(
-	              'td',
+	              'h4',
 	              null,
-	              _react2.default.createElement(
-	                'h4',
-	                null,
-	                review.review_stars,
-	                ' stars '
-	              )
-	            ),
+	              review.review_stars,
+	              ' stars '
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
 	            _react2.default.createElement(
-	              'td',
+	              'h4',
 	              null,
-	              _react2.default.createElement(
-	                'h4',
-	                null,
-	                review.review_date
-	              )
+	              review.review_date
 	            )
 	          )
 	        );

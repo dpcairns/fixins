@@ -21,13 +21,13 @@ export default class Splash extends React.Component{
 			let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
 			let checkInBoxStyle = {padding: "10px", maxWidth:"300px", margin:"0 auto", marginBottom: "0", marginTop: "0", height: "100%", background:"pink"}
 			let dishesBoxStyle = {padding: "10px", maxWidth:"300px", margin:"0 auto", marginBottom: "0", marginTop: "0", height: "100%", background:"lightblue"}
-			let topFiveStyle = {paddingTop: "1px", height: "200px", paddingLeft: "15px", paddingRight: "15px", paddingBottom: "15px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background:"#ffd281"}
+			let topFiveStyle = {height:"240px" ,paddingTop: "1px", paddingLeft: "15px", paddingRight: "15px", paddingBottom: "15px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background:"#ffd281"}
 			let topFiveDishNodes = []
 			let recentCheckInNodes = []
 			let topFiveSubNeighborhoodNodes = []
 
 			if(this.props.subNeighborhoods.length>5){
-				let itemBoxStyle = {height:"130px",margin:"2px",float:"left",textAlign:"center", background:"#BDA0CB", borderRadius:"10px"}
+				let itemBoxStyle = {margin:"2px",padding:"3px",float:"left",textAlign:"center", background:"#BDA0CB", borderRadius:"10px"}
 				let allSubNeighborhoods = this.props.subNeighborhoods
 				let allUsers = this.props.users
 				let allSpots = this.props.spots
@@ -119,13 +119,13 @@ export default class Splash extends React.Component{
 		}
 			return(
 				<div>
-				<div className="bg-info" style={{height: "100%", width: "100%", position:"fixed", backgroundImage: "url(./static/pizza.gif)", backgroundSize: "contain", backgroundRepeat: "repeat", zIndex:"-1"}}>
+				<div className="bg-info" style={{height: "100%", width: "100%", position:"fixed", backgroundImage: "url(./static/pizza.gif)", backgroundSize: "cover", zIndex:"-1"}}>
 				</div>
 
-		<div className="shadow-container container-fluid text-center" style={{zIndex:"2", marginBottom:"2%" , opacity:"0.8"}}>
+		<div className="ontainer-fluid text-center" style={{zIndex:"2", opacity:"0.9"}}>
 			<div className="col-md-3">
-				<div style={dishesBoxStyle}>
-				<h3>top 5 dishes</h3>
+				<div style={dishesBoxStyle} className="shadow-container">
+				<h3>top dishes</h3>
 				{this.props.dishes.length>5 ? topFiveDishNodes : "never mind"}
 				</div>
 			</div>
@@ -141,7 +141,7 @@ export default class Splash extends React.Component{
 			 		<div className="row">
 
 			 				<div className="col-md-12">
-			 						<div style={topFiveStyle}>
+			 						<div style={topFiveStyle} className="shadow-container">
 			 									<h3>top five subNeighborhoods in pdx</h3>
 			 									<div className="top-five flex">
 			 												{this.props.subNeighborhoods.length>5 ? topFiveSubNeighborhoodNodes : "never mind"}
@@ -151,12 +151,12 @@ export default class Splash extends React.Component{
 					</div>
 					<div className="row">
 							<div className="col-md-2">
-									<img src="./static/glitter6.gif" height="270px" width="400px" style={{marginBottom: "25px", borderRadius:"10px"}}/>
+									<img src="./static/glitter6.gif" height="240px" width="400px" style={{marginBottom: "25px", borderRadius:"10px"}}/>
 
 
 							</div>
 			 				<div className="col-md-offset-2 col-md-3">
-			 					<img src="./static/glitter1.gif" height="270px" width="400px" style={{marginBottom: "25px", borderRadius:"10px"}}/>
+			 					<img src="./static/glitter1.gif" height="240px" width="400px" style={{marginBottom: "25px", borderRadius:"10px"}}/>
 			 				</div>
 
 			 		</div>
@@ -164,7 +164,7 @@ export default class Splash extends React.Component{
 </div>
 
 		<div className="col-md-3">
-			<div style={checkInBoxStyle}>
+			<div className="shadow-container" style={checkInBoxStyle}>
 			<h3>checkIn ticker</h3>
 			{this.props.checkIns.length>5 ? recentCheckInNodes : "never mind"}
 			</div>

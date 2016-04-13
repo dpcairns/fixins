@@ -54,7 +54,6 @@ render(){
                 return (
 
                   <tr key={review._id}>
-                  <h4>
                     <td>
                     <h4><Link to={`/dish/${dishId}`} onClick={putOneDishInState.bind(this, dishId)}>{review.reviewed_dish.dish_name}</Link></h4></td>
                     <td><h4>{review.reviewed_dish.dish_calories}  calories</h4></td>
@@ -62,7 +61,6 @@ render(){
                     <td><h5>{review.review_words} </h5></td>
                     <td><h4>{review.review_stars} stars </h4></td>
                     <td><h4>{review.review_date}</h4></td>
-                    </h4>
                   </tr>
                   )
       })
