@@ -42,13 +42,14 @@ class SpotDetail extends React.Component{
     return (
 <div>
 <div className="bg-warning med-pad med-mar">
-    		<h3>{spot.spot_name}</h3> located in
+    		<h2>{spot.spot_name}</h2><h3> located in
 				<Link to={`/subNeighborhood/${subNeighorhoodId}`} onClick={putOneSubNeighborhoodInState.bind(this, subNeighorhoodId)}>
 				 { spot.spot_subNeighborhood.subNeighborhood_name}
 				</Link>
+				</h3>
 				<br/><Link onClick={putOneGenreInState.bind(this, spot.spot_genres[0]._id)} to={`/genre/${spot.spot_genres[0]._id}`}>{spot.spot_genres[0].genre_name}</Link>
 
-				<h3>dishes available at {spot.spot_name}</h3>
+				<h4>dishes available at {spot.spot_name}</h4>
 
 					{allDishes.filter(findDishesFilter).length>0 ? dishNodes : (<tr><td>no dishes for {spot.spot_name}...yet! <Link to="index/newDish">Click here to be the first to add one!</Link> </td></tr>)}
 						{dishNodes}

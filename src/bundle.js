@@ -145,11 +145,11 @@
 
 	var _AllNeighborhoods2 = _interopRequireDefault(_AllNeighborhoods);
 
-	var _AllGenres = __webpack_require__(815);
+	var _AllGenres = __webpack_require__(814);
 
 	var _AllGenres2 = _interopRequireDefault(_AllGenres);
 
-	var _MyDashboard = __webpack_require__(814);
+	var _MyDashboard = __webpack_require__(815);
 
 	var _MyDashboard2 = _interopRequireDefault(_MyDashboard);
 
@@ -34444,18 +34444,31 @@
 
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    genres: state.allGenres,
-	    spots: state.allSpots,
-	    dishes: state.allDishes,
-	    users: state.allUsers,
-	    neighborhoods: state.allNeighborhoods,
-	    subNeighborhoods: state.allSubNeighborhoods,
-	    reviews: state.allReviews,
-	    checkIns: state.allCheckIns
+	    genres: state.genres,
+	    spots: state.spots,
+	    dishes: state.dishes,
+	    users: state.users,
+	    neighborhoods: state.neighborhoods,
+	    subNeighborhoods: state.subNeighborhoods,
+	    reviews: state.reviews,
+	    checkIns: state.checkIns
 	  };
-	  console.log("here is state");
-	  console.log(state);
 	};
+
+	function _putOneSpotInState(_id) {
+	  return { type: "PUT_ONE_SPOT_IN_STATE", _id: _id };
+	}
+
+	function _putOneSubNeighborhoodInState(_id) {
+	  return { type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id: _id };
+	}
+
+	function _putOneDishInState(_id) {
+	  return { type: "PUT_ONE_DISH_IN_STATE", _id: _id };
+	}
+	function _putOneUserInState(_id) {
+	  return { type: "PUT_ONE_USER_IN_STATE", _id: _id };
+	}
 
 	function mapDispatchToProps(dispatch) {
 	  return {
@@ -34482,6 +34495,19 @@
 	    },
 	    initializeCheckIns: function initializeCheckIns() {
 	      return FixinsActions.initializeCheckIns(dispatch);
+	    },
+
+	    putOneUserInState: function putOneUserInState(_id) {
+	      return dispatch(_putOneUserInState(_id));
+	    },
+	    putOneSpotInState: function putOneSpotInState(_id) {
+	      return dispatch(_putOneSpotInState(_id));
+	    },
+	    putOneSubNeighborhoodInState: function putOneSubNeighborhoodInState(_id) {
+	      return dispatch(_putOneSubNeighborhoodInState(_id));
+	    },
+	    putOneDishInState: function putOneDishInState(_id) {
+	      return dispatch(_putOneDishInState(_id));
 	    }
 	  };
 	}
@@ -35131,35 +35157,240 @@
 		}, {
 			key: "render",
 			value: function render() {
+				var _this2 = this;
+
+				var putOneDishInState = this.props.putOneDishInState;
+				var putOneSpotInState = this.props.putOneSpotInState;
+				var putOneUserInState = this.props.putOneUserInState;
+				var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
+				var checkInBoxStyle = { padding: "10px", maxWidth: "300px", margin: "0 auto", marginBottom: "20px", marginTop: "20px", borderRadius: "15px", background: "pink" };
+				var dishesBoxStyle = { padding: "10px", maxWidth: "300px", margin: "0 auto", marginBottom: "20px", marginTop: "20px", borderRadius: "15px", background: "lightyellow" };
+				var topFiveDishNodes = [];
+				var recentCheckInNodes = [];
+				var topFiveSubNeighborhoodNodes = [];
+
+				if (this.props.subNeighborhoods.length > 5) {
+					(function () {
+						var itemBoxStyle = { height: "100px", flexGrow: "1", width: "200px", margin: "2px", float: "left", textAlign: "center", background: "#BDA0CB", borderRadius: "10px" };
+						var allSubNeighborhoods = _this2.props.subNeighborhoods;
+						var allUsers = _this2.props.users;
+						var allSpots = _this2.props.spots;
+						var sortedSubNeighborhoods = [];
+
+						allSubNeighborhoods.forEach(function (subNeighborhood) {
+
+							function userFilter(user) {
+								return subNeighborhood._id === user.user_sub_neighborhood._id;
+							}
+							var thisManyUsers = allUsers.filter(userFilter).length;
+
+							function spotFilter(spot) {
+								return spot.spot_subNeighborhood._id === subNeighborhood._id;
+							}
+							var thisManySpots = allSpots.filter(spotFilter).length;
+
+							sortedSubNeighborhoods.push({
+								numberOfUsers: thisManyUsers,
+								numberOfSpots: thisManySpots,
+								totalItems: thisManyUsers + thisManySpots,
+								_id: subNeighborhood._id,
+								subNeighborhood_name: subNeighborhood.subNeighborhood_name
+							});
+						});
+						sortedSubNeighborhoods.sort(function (subNeighborhoodA, subNeighborhoodB) {
+							return subNeighborhoodB.totalItems - subNeighborhoodA.totalItems;
+						});
+						var topFiveSubNeighborhoods = [sortedSubNeighborhoods[0], sortedSubNeighborhoods[1], sortedSubNeighborhoods[2], sortedSubNeighborhoods[3], sortedSubNeighborhoods[4]];
+						topFiveSubNeighborhoodNodes = topFiveSubNeighborhoods.map(function (subNeighborhood) {
+							return _react2.default.createElement(
+								"div",
+								{ style: itemBoxStyle, key: subNeighborhood._id },
+								_react2.default.createElement(
+									_reactRouter.Link,
+									{ onClick: putOneSubNeighborhoodInState.bind(this, subNeighborhood._id), to: "/subNeighborhood/" + subNeighborhood._id },
+									_react2.default.createElement(
+										"h3",
+										null,
+										" ",
+										subNeighborhood.subNeighborhood_name + " "
+									)
+								),
+								_react2.default.createElement(
+									"h4",
+									null,
+									"  ",
+									_react2.default.createElement(
+										"i",
+										null,
+										subNeighborhood.numberOfUsers,
+										" users and ",
+										subNeighborhood.numberOfSpots,
+										" spots!"
+									)
+								)
+							);
+						});
+					})();
+				}
+
+				if (this.props.dishes.length > 5) {
+					(function () {
+						var allDishes = _this2.props.dishes;
+						var allCheckIns = _this2.props.checkIns;
+						var sortedDishes = [];
+						allDishes.forEach(function (dish) {
+							function checkInFilter(checkIn) {
+								return checkIn.checkIn_dish._id === dish._id;
+							}
+							var thisManyCheckIns = allCheckIns.filter(checkInFilter).length;
+							sortedDishes.push({
+								numberOfCheckIns: thisManyCheckIns,
+								_id: dish._id,
+								spotId: dish.dish_spot._id,
+								nameOfSpot: dish.dish_spot.spot_name,
+								name: dish.dish_name });
+						});
+						sortedDishes.sort(function (dishA, dishB) {
+							return dishB.numberOfCheckIns - dishA.numberOfCheckIns;
+						});
+						var topFiveDishes = [sortedDishes[0], sortedDishes[1], sortedDishes[2], sortedDishes[3], sortedDishes[4]];
+						topFiveDishNodes = topFiveDishes.map(function (dish) {
+							return _react2.default.createElement(
+								"h4",
+								{ key: dish._id },
+								_react2.default.createElement(
+									_reactRouter.Link,
+									{ onClick: putOneDishInState.bind(this, dish._id), to: "/dish/" + dish._id },
+									dish.name + " "
+								),
+								"at",
+								_react2.default.createElement(
+									_reactRouter.Link,
+									{ to: "/spot/" + dish.spotId, onClick: putOneSpotInState.bind(this, dish.spotId) },
+									" " + dish.nameOfSpot
+								),
+								_react2.default.createElement("br", null),
+								_react2.default.createElement(
+									"i",
+									null,
+									" has ",
+									dish.numberOfCheckIns,
+									" checkIns "
+								)
+							);
+						});
+					})();
+				}
+
+				if (this.props.checkIns.length > 5) {
+					var _allCheckIns = this.props.checkIns;
+
+					var lastFiveCheckIns = [_allCheckIns[_allCheckIns.length - 1], _allCheckIns[_allCheckIns.length - 2], _allCheckIns[_allCheckIns.length - 3], _allCheckIns[_allCheckIns.length - 4], _allCheckIns[_allCheckIns.length - 5]];
+
+					recentCheckInNodes = lastFiveCheckIns.map(function (checkIn) {
+
+						return _react2.default.createElement(
+							"h4",
+							{ key: checkIn._id },
+							_react2.default.createElement(
+								_reactRouter.Link,
+								{ to: "/user/" + checkIn.checkIn_user._id, onClick: putOneUserInState.bind(this, checkIn.checkIn_user._id) },
+								checkIn.checkIn_user.username + " "
+							),
+							"ate",
+							_react2.default.createElement(
+								_reactRouter.Link,
+								{ onClick: putOneDishInState.bind(this, checkIn.checkIn_dish._id), to: "/dish/" + checkIn.checkIn_dish._id },
+								" " + checkIn.checkIn_dish.dish_name + " "
+							),
+							"at ",
+							" " + checkIn.checkIn_date + " ",
+							" and said \"",
+							checkIn.checkIn_blurb,
+							"\""
+						);
+					});
+				}
 				return _react2.default.createElement(
 					"div",
-					{ className: "bg-success container text-center", style: { marginTop: "10%", borderRadius: "15px" } },
+					null,
 					_react2.default.createElement(
-						"h2",
-						null,
-						"Hello and welcome to fixins!"
-					),
-					_react2.default.createElement(
-						"h2",
-						null,
+						"div",
+						{ className: "bg-success container text-center", style: { marginTop: "2%", marginBottom: "2%", borderRadius: "15px" } },
 						_react2.default.createElement(
-							_reactRouter.Link,
-							{ to: "index" },
-							"click here to go to the (now kind of broken) admin page"
-						)
-					),
-					_react2.default.createElement(
-						"h2",
-						null,
-						"or"
-					),
-					_react2.default.createElement(
-						"h2",
-						null,
+							"div",
+							{ className: "col-md-3" },
+							_react2.default.createElement(
+								"div",
+								{ style: dishesBoxStyle },
+								_react2.default.createElement(
+									"h3",
+									null,
+									"top 5 dishes"
+								),
+								this.props.dishes.length > 5 ? topFiveDishNodes : "never mind"
+							)
+						),
 						_react2.default.createElement(
-							_reactRouter.Link,
-							{ to: "index/myDashboard" },
-							"click here to pretend to be a user"
+							"div",
+							{ className: "col-md-6" },
+							_react2.default.createElement(
+								"h2",
+								null,
+								"Hello and welcome to fixins!"
+							),
+							_react2.default.createElement("img", { src: "./static/chewing.gif", height: "180px", width: "300px", style: { marginTop: "20px", borderRadius: "10px" } }),
+							_react2.default.createElement(
+								"h2",
+								null,
+								_react2.default.createElement(
+									_reactRouter.Link,
+									{ to: "index/myDashboard" },
+									"click here to pretend to be a user"
+								)
+							),
+							_react2.default.createElement(
+								"h2",
+								null,
+								"or"
+							),
+							_react2.default.createElement(
+								"h2",
+								null,
+								_react2.default.createElement(
+									_reactRouter.Link,
+									{ to: "index" },
+									"click here to go to the (broke) admin page"
+								)
+							)
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "col-md-3" },
+							_react2.default.createElement(
+								"div",
+								{ style: checkInBoxStyle },
+								_react2.default.createElement(
+									"h3",
+									null,
+									"checkIn ticker"
+								),
+								this.props.checkIns.length > 5 ? recentCheckInNodes : "never mind"
+							)
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "flex" },
+							_react2.default.createElement(
+								"h3",
+								null,
+								"top five places to go fixin in pdx"
+							),
+							_react2.default.createElement(
+								"div",
+								{ className: "centered" },
+								this.props.subNeighborhoods.length > 5 ? topFiveSubNeighborhoodNodes : "never mind"
+							)
 						)
 					)
 				);
@@ -71108,15 +71339,19 @@
 											'div',
 											{ className: 'bg-warning med-pad med-mar' },
 											_react2.default.createElement(
-													'h3',
+													'h2',
 													null,
 													spot.spot_name
 											),
-											' located in',
 											_react2.default.createElement(
-													_reactRouter.Link,
-													{ to: '/subNeighborhood/' + subNeighorhoodId, onClick: putOneSubNeighborhoodInState.bind(this, subNeighorhoodId) },
-													spot.spot_subNeighborhood.subNeighborhood_name
+													'h3',
+													null,
+													' located in',
+													_react2.default.createElement(
+															_reactRouter.Link,
+															{ to: '/subNeighborhood/' + subNeighorhoodId, onClick: putOneSubNeighborhoodInState.bind(this, subNeighorhoodId) },
+															spot.spot_subNeighborhood.subNeighborhood_name
+													)
 											),
 											_react2.default.createElement('br', null),
 											_react2.default.createElement(
@@ -71125,7 +71360,7 @@
 													spot.spot_genres[0].genre_name
 											),
 											_react2.default.createElement(
-													'h3',
+													'h4',
 													null,
 													'dishes available at ',
 													spot.spot_name
@@ -72868,6 +73103,119 @@
 /* 814 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(161);
+
+	var _RemoveButton = __webpack_require__(542);
+
+	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
+
+	var _reactRouter = __webpack_require__(184);
+
+	var _Links = __webpack_require__(533);
+
+	var _Links2 = _interopRequireDefault(_Links);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AllGenres = function (_React$Component) {
+	  _inherits(AllGenres, _React$Component);
+
+	  function AllGenres() {
+	    _classCallCheck(this, AllGenres);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(AllGenres).apply(this, arguments));
+	  }
+
+	  _createClass(AllGenres, [{
+	    key: "render",
+	    value: function render() {
+	      var itemBoxStyle = { height: "125px", width: "200px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
+	      var putOneGenreInState = this.props.putOneGenreInState;
+	      var allGenres = this.props.allGenres;
+	      var allSpots = this.props.allSpots;
+
+	      var genreNodes = allGenres.map(function (genre) {
+	        function findSpotsFilter(spot) {
+	          return spot.spot_genres[0]._id === genre._id;
+	        }
+	        var theseSpots = allSpots.filter(findSpotsFilter);
+
+	        var genreId = genre._id;
+	        return _react2.default.createElement(
+	          "div",
+	          { key: genre._id, style: itemBoxStyle, className: "shad bg-danger" },
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { onClick: putOneGenreInState.bind(this, genreId), to: "/genre/" + genre._id },
+	            _react2.default.createElement(
+	              "h3",
+	              null,
+	              genre.genre_name
+	            )
+	          ),
+	          theseSpots.length > 0 ? "this many spots: " + theseSpots.length : _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: "index/newSpot" },
+	            "be the first to add a ",
+	            genre.genre_name,
+	            " spot!"
+	          )
+	        );
+	      });
+	      return _react2.default.createElement(
+	        "div",
+	        null,
+	        genreNodes
+	      );
+	    }
+	  }]);
+
+	  return AllGenres;
+	}(_react2.default.Component);
+
+	function _putOneGenreInState(_id) {
+	  return { type: "PUT_ONE_GENRE_IN_STATE", _id: _id };
+	}
+
+	var mapStateToProps = function mapStateToProps(state) {
+
+	  return {
+	    allGenres: state.genres,
+	    allSpots: state.spots
+	  };
+	};
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return { putOneGenreInState: function putOneGenreInState(_id) {
+	      return dispatch(_putOneGenreInState(_id));
+	    }
+	  };
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AllGenres);
+
+/***/ },
+/* 815 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -73144,119 +73492,6 @@
 	  };
 	};
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MyDashboard);
-
-/***/ },
-/* 815 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(161);
-
-	var _RemoveButton = __webpack_require__(542);
-
-	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
-
-	var _reactRouter = __webpack_require__(184);
-
-	var _Links = __webpack_require__(533);
-
-	var _Links2 = _interopRequireDefault(_Links);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var AllGenres = function (_React$Component) {
-	  _inherits(AllGenres, _React$Component);
-
-	  function AllGenres() {
-	    _classCallCheck(this, AllGenres);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(AllGenres).apply(this, arguments));
-	  }
-
-	  _createClass(AllGenres, [{
-	    key: "render",
-	    value: function render() {
-	      var itemBoxStyle = { height: "125px", width: "200px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
-	      var putOneGenreInState = this.props.putOneGenreInState;
-	      var allGenres = this.props.allGenres;
-	      var allSpots = this.props.allSpots;
-
-	      var genreNodes = allGenres.map(function (genre) {
-	        function findSpotsFilter(spot) {
-	          return spot.spot_genres[0]._id === genre._id;
-	        }
-	        var theseSpots = allSpots.filter(findSpotsFilter);
-
-	        var genreId = genre._id;
-	        return _react2.default.createElement(
-	          "div",
-	          { key: genre._id, style: itemBoxStyle, className: "shad bg-danger" },
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { onClick: putOneGenreInState.bind(this, genreId), to: "/genre/" + genre._id },
-	            _react2.default.createElement(
-	              "h3",
-	              null,
-	              genre.genre_name
-	            )
-	          ),
-	          theseSpots.length > 0 ? "this many spots: " + theseSpots.length : _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: "index/newSpot" },
-	            "be the first to add a ",
-	            genre.genre_name,
-	            " spot!"
-	          )
-	        );
-	      });
-	      return _react2.default.createElement(
-	        "div",
-	        null,
-	        genreNodes
-	      );
-	    }
-	  }]);
-
-	  return AllGenres;
-	}(_react2.default.Component);
-
-	function _putOneGenreInState(_id) {
-	  return { type: "PUT_ONE_GENRE_IN_STATE", _id: _id };
-	}
-
-	var mapStateToProps = function mapStateToProps(state) {
-
-	  return {
-	    allGenres: state.genres,
-	    allSpots: state.spots
-	  };
-	};
-
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return { putOneGenreInState: function putOneGenreInState(_id) {
-	      return dispatch(_putOneGenreInState(_id));
-	    }
-	  };
-	};
-
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AllGenres);
 
 /***/ }
 /******/ ]);
