@@ -6,7 +6,7 @@ import Links from "../utils/Links"
 
 class AllGenres extends React.Component{
 	render(){
-    let itemBoxStyle = {height:"125px",width:"200px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
+    let itemBoxStyle = {height:"125px", padding:"8px", width:"200px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
       let putOneGenreInState = this.props.putOneGenreInState
 			let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
       let allGenres = this.props.allGenres

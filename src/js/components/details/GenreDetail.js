@@ -39,7 +39,7 @@ class GenreDetail extends React.Component{
 											theseDishes.length>0 ?
 													<Link onClick={putOneDishInState.bind(this, theseDishes[0]._id)}
 																to={`/dish/${theseDishes[0]._id}`}>
-																{theseDishes[0].dish_name} </Link>
+																{" " + theseDishes[0].dish_name} </Link>
 											:  <Link onClick={putOneSpotInState.bind(this, spotId)}
 											to="index/newDish">be the first to add a dish!</Link>
 										}

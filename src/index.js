@@ -59,7 +59,6 @@ let store = createStoreWithMiddleware(
 
 function requireAuth(nextState, replaceState) {
 	let state = store.getState()
-console.log(state.currentUser._id)
 	  if (state.currentUser._id !== null){
 		  window.locaton = '/login'
 										}

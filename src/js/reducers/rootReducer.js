@@ -377,8 +377,19 @@ const genres = (state = [], action) => {
   }
 }
 
+const jackpot = (state = "", action) => {
+  switch (action.type) {
+    case 'JACKPOT':
+      return state.concat("JACKPOT")
+  default:
+    return state
+     }
+   }
+
+
 
 const FixinsApp = combineReducers({
+  jackpot,
   currentUser,
   review,
   reviews,

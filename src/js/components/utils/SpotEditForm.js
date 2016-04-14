@@ -53,7 +53,6 @@ export default class SpotEditForm extends React.Component{
 		newSpotInfo.newGenre = this.state.newGenre
 		newSpotInfo.newBlurb = this.state.newBlurb
 		newSpotInfo.newCoordinates = this.state.newCoordinates
-		console.log("trying to handleSubmit...")
 		this.props.findAndChangeSpot(newSpotInfo)
 		this.setState({		newName: "",
 							newSubNeighborhood: "",

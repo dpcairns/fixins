@@ -5,6 +5,28 @@ body{
 	font-family: "News Cycle" !important;
 }
 
+
+.shadow-container:hover {
+	-webkit-box-shadow: 0 0 20px #253f3f;
+	box-shadow: 0 0 20px #253f3f;
+
+}
+
+.shad2 {
+    transition: box-shadow .5s ease;
+}
+
+.shad2:hover {
+    box-shadow: 0px 0px 6px black;
+}
+
+
+.shadow-container {
+	-webkit-box-shadow: 0 0 20px pink;
+	box-shadow: 0 0 20px pink;
+	transition: box-shadow .3s ease
+}
+
 table{
 	font-size: 1.3rem
 }
@@ -12,7 +34,6 @@ table{
 .flexwrap{
 	flex-wrap: wrap;
 }
-
 .top-five div:nth-of-type(1) {transition: flex-grow 0.3s ease; flex-grow: 1;}
 .top-five div:nth-of-type(2) {transition: flex-grow 0.3s ease; flex-grow: 1;}
 .top-five div:nth-of-type(3) {transition: flex-grow 0.3s ease; flex-grow: 1;}
@@ -97,27 +118,6 @@ table{
     box-shadow: 5px 4px 4px pink;
 }
 
-
-.shad2 {
-    transition: all .5s ease;
-}
-
-.shad2:hover {
-    box-shadow: 0px 0px 6px black;
-}
-
-.shadow-container:hover {
-	-webkit-box-shadow: 0 0 20px #253f3f;
-	box-shadow: 0 0 20px #253f3f;
-
-}
-
-
-.shadow-container {
-	-webkit-box-shadow: 0 0 20px pink;
-	box-shadow: 0 0 20px pink;
-	transition: all .3s ease
-}
 
 .flex{
 	display: flex;
@@ -212,3 +212,37 @@ table{
 	height: 300px;
 	overflow-y: scroll;
 }
+
+
+.jackpot{
+    -webkit-animation: color-change 1s infinite;
+    -moz-animation: color-change 1s infinite;
+    -o-animation: color-change 1s infinite;
+    -ms-animation: color-change 1s infinite;
+    animation: color-change 1s infinite;
+}
+
+@-webkit-keyframes color-change {
+    0% { color: orange; }
+    50% { color: purple; }
+    75% { color: pink; }
+}
+@-moz-keyframes color-change {
+    0% { color: orange; }
+    50% { color: purple; }
+    75% { color: pink; }
+}
+@-ms-keyframes color-change {
+    0% { color: orange; }
+    50% { color: purple; }
+    75% { color: pink; }
+}
+@-o-keyframes color-change {
+    0% { color: orange; }
+    50% { color: purple; }
+    75% { color: pink; }
+}
+@keyframes color-change {
+    0% { color: orange; }
+    50% { color: purple; }
+    75% { color: pink; }

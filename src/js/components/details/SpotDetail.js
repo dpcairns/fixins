@@ -6,7 +6,7 @@ import Links from "../utils/Links"
 
 class SpotDetail extends React.Component{
 	render(){
-		let itemBoxStyle = {height:"180px",padding:"3px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
+		let itemBoxStyle = {height:"180px",padding:"8px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
     let allReviews = this.props.allReviews
 		let allSubNeighborhoods = this.props.allSubNeighborhoods
 		let allUsers = this.props.allUsers
@@ -21,7 +21,8 @@ class SpotDetail extends React.Component{
 			function findDishesFilter(dish){
 									return (dish.dish_spot._id === spot._id)
 						}
-				let dishNodes = allDishes.filter(findDishesFilter).map(function(dish){
+				let theseDishes = allDishes.filter(findDishesFilter)
+				let dishNodes = theseDishes.map(function(dish){
 					let dishId = dish._id
 									return (
 
@@ -39,19 +40,30 @@ class SpotDetail extends React.Component{
                       </div>
 										)
 				})
-
-
     return (
 <div>
 <div className="bg-warning med-pad med-mar">
-    		<h2>{spot.spot_name}</h2><h3> located in
-				<Link to={`/subNeighborhood/${subNeighorhoodId}`} onClick={putOneSubNeighborhoodInState.bind(this, subNeighorhoodId)}>
-				 {" " + spot.spot_subNeighborhood.subNeighborhood_name}
-				</Link>
-				</h3>
-				<br/><Link onClick={putOneGenreInState.bind(this, spot.spot_genres[0]._id)} to={`/genre/${spot.spot_genres[0]._id}`}>{spot.spot_genres[0].genre_name}</Link>
-				<h4>dishes available at {spot.spot_name}
-				(Missing your favorite dish?  <Link to="index/newDish">add it here!</Link> )</h4>
+				<div className="row">
+								<div className="col-md-6">
+						    		<h2>{spot.spot_name}</h2>
+										<h3>located in
+										<Link to={`/subNeighborhood/${subNeighorhoodId}`} onClick={putOneSubNeighborhoodInState.bind(this, subNeighorhoodId)}>
+										 {" " + spot.spot_subNeighborhood.subNeighborhood_name}
+										</Link>
+										<br/>
+										<Link onClick={putOneGenreInState.bind(this, spot.spot_genres[0]._id)} to={`/genre/${spot.spot_genres[0]._id}`}>{spot.spot_genres[0].genre_name}</Link>
+
+										</h3>
+								</div>
+
+								<div className="col-md-6">
+										<h2>
+										<Link to="index/newDish">Add a new dish!</Link>
+										</h2>
+								</div>
+
+			  </div>
+				<h3>dishes available at {spot.spot_name}</h3>
 				<div className="flex flexwrap">
 					{allDishes.filter(findDishesFilter).length>0 ? dishNodes : (<tr><td>no dishes for {spot.spot_name}...yet! <Link to="index/newDish">Click here to be the first to add one!</Link> </td></tr>)}
 						{dishNodes}

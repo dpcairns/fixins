@@ -18,19 +18,21 @@ export default class Splash extends React.Component{
 			let myGif = ""
 			let myGlitterFood = ""
 			let myOtherGlitterFood = ""
+			let jackpot = this.props.jackpot
+			let jackpotStyles = {display: "none", textDecoration: "none", zIndex:"5", position: "fixed", marginLeft: "130px", fontSize: "7em", marginTop: "-230px"}
 			let putOneDishInState = this.props.putOneDishInState
 			let putOneSpotInState = this.props.putOneSpotInState
 			let putOneUserInState = this.props.putOneUserInState
 			let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
 			let checkInBoxStyle = {padding: "10px", maxWidth:"300px", margin:"0 auto", marginBottom: "0", marginTop: "0", height: "100%", background:"pink"}
 			let dishesBoxStyle = {padding: "10px", maxWidth:"300px", margin:"0 auto", marginBottom: "0", marginTop: "0", height: "100%", background:"lightblue"}
-			let topFiveStyle = {height:"240px" ,paddingTop: "1px", paddingLeft: "15px", paddingRight: "15px", paddingBottom: "15px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background:"#ffd281"}
+			let topFiveStyle = {overflow: "hidden", height:"220px", paddingTop: "1px", paddingLeft: "4px", paddingRight: "4px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background:"#ffd281"}
 			let topFiveDishNodes = []
 			let recentCheckInNodes = []
 			let topFiveSubNeighborhoodNodes = []
 
 			if(this.props.subNeighborhoods.length>5){
-				let itemBoxStyle = {margin:"2px",padding:"3px",float:"left",textAlign:"center", background:"#BDA0CB", borderRadius:"10px"}
+				let itemBoxStyle = {margin:"2px",maxWidth:"150px",padding:"5px",float:"left",textAlign:"center", background:"#BDA0CB", borderRadius:"10px"}
 				let allSubNeighborhoods = this.props.subNeighborhoods
 				let allUsers = this.props.users
 				let allSpots = this.props.spots
@@ -38,10 +40,15 @@ export default class Splash extends React.Component{
 				let randA = Math.floor(Math.random()*7)
 				let randB = Math.floor(Math.random()*5)
 				let randC = Math.floor(Math.random()*5)
-
 				myGif = "url(./static/pizza" + randA + ".gif)"
 				myGlitterFood = "./static/glitterFood" + randB + ".gif"
 				myOtherGlitterFood = "./static/glitterFood" + randC + ".gif"
+				if(randB === randC){
+					jackpot()
+					jackpotStyles.display = "block"
+					console.log(jackpotStyles)
+				}
+
 				allSubNeighborhoods.forEach(function(subNeighborhood){
 
 					function userFilter(user){return (subNeighborhood._id === user.user_sub_neighborhood._id )}
@@ -67,7 +74,7 @@ export default class Splash extends React.Component{
 						<Link onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhood._id)} to={`/subNeighborhood/${subNeighborhood._id}`}>
 						<h3> {subNeighborhood.subNeighborhood_name + " "}</h3>
 						</Link>
-						<h4>  <i>{subNeighborhood.numberOfUsers} users and {subNeighborhood.numberOfSpots} spots!</i></h4>
+						<h4>  <i>{subNeighborhood.numberOfUsers} users <br/>and {subNeighborhood.numberOfSpots} spots!</i></h4>
 							</div>
 						)
 				})
@@ -126,7 +133,6 @@ export default class Splash extends React.Component{
 					at {" " +checkIn.checkIn_date+ " "} and said "{checkIn.checkIn_blurb}"</h4>)
 			})
 		}
-		console.log(myGif)
 			return(
 				<div>
 				<div className="bg-info" style={{height: "100%", width: "100%", position:"fixed", backgroundImage: myGif, backgroundSize: "cover", zIndex:"-1"}}>
@@ -160,14 +166,16 @@ export default class Splash extends React.Component{
 			 				</div>
 					</div>
 					<div className="row">
+
+
 							<div className="col-md-2">
 									<img src={myGlitterFood} height="240px" width="400px" style={{marginBottom: "25px", borderRadius:"10px"}}/>
-
-
-							</div>
+									<div style={jackpotStyles}><a target="_blank" href="http://pizzaparty.party" className="jackpot">JACKPOT</a></div>
+									</div>
 			 				<div className="col-md-offset-2 col-md-3">
 			 					<img src={myOtherGlitterFood} height="240px" width="400px" style={{marginBottom: "25px", borderRadius:"10px"}}/>
 			 				</div>
+
 
 			 		</div>
 

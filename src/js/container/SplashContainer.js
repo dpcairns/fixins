@@ -32,9 +32,13 @@ function putOneUserInState(_id){
   return {type: "PUT_ONE_USER_IN_STATE", _id:_id}
 }
 
+function jackpot(){
+  return {type: "JACKPOT"}
+}
 
 function mapDispatchToProps(dispatch) {
   return {
+      jackpot: () => jackpot(),
       initializeSubNeighborhoods: () => FixinsActions.initializeSubNeighborhoods(dispatch),
       initializeNeighborhoods: () => FixinsActions.initializeNeighborhoods(dispatch),
       initializeGenres: () => FixinsActions.initializeGenres(dispatch),

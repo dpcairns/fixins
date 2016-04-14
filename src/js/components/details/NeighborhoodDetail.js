@@ -49,8 +49,8 @@ class NeighborhoodDetail extends React.Component{
 															{subNeighborhood.subNeighborhood_name}</Link>
 														}
 
-													<small> {theseSpots.length>0?
-														("spots " + theseSpots.length)
+													<small> <br/>{theseSpots.length>0?
+														("spots: " + theseSpots.length)
 														: (<Link to="index/newSpot">add a spot</Link>)
 													}
 												  <br/>users: {theseUsers.length}</small>

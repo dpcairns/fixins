@@ -8,7 +8,7 @@ import NeighborhoodList from "../utils/NeighborhoodList"
 
 class AllNeighborhoods extends React.Component{
 	render(){
-    let itemBoxStyle = {height:"100px",width:"200px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
+    let itemBoxStyle = {height:"100px",width:"200px", padding:"8px", margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
       let putOneNeighborhoodInState = this.props.putOneNeighborhoodInState
       let allNeighborhoods = this.props.allNeighborhoods
 			let stateSubNeighorhood = this.props.subNeighorhood

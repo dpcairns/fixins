@@ -113,7 +113,6 @@ export function createSubNeighborhood(newSubNeighborhood, dispatch){
 			type: 'POST',
 			data: newSubNeighborhood,
 			success: function(postedSubNeighborhood){
-				console.log(postedSubNeighborhood)
 				dispatch(//{
 						//type: "CREATE_USER",
 						//postedUser

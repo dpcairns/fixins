@@ -77,7 +77,6 @@ componentDidMount(){
 
 
 const userLogout = () => {
-  console.log()
         return {
           type: "LOG_OUT",
 	       }

@@ -121,7 +121,6 @@ LogInPage.contextTypes = {
 }
 
       const userLogin = (thisUser) => {
-        console.log(thisUser)
               return {
                 type: "LOG_IN",
                 user: thisUser[0]

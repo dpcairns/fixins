@@ -184,7 +184,6 @@
 
 	function requireAuth(nextState, replaceState) {
 		var state = store.getState();
-		console.log(state.currentUser._id);
 		if (state.currentUser._id !== null) {
 			window.locaton = '/login';
 		}
@@ -34298,7 +34297,6 @@
 
 
 	var _userLogout = function _userLogout() {
-		console.log();
 		return {
 			type: "LOG_OUT"
 		};
@@ -34509,8 +34507,15 @@
 	  return { type: "PUT_ONE_USER_IN_STATE", _id: _id };
 	}
 
+	function _jackpot() {
+	  return { type: "JACKPOT" };
+	}
+
 	function mapDispatchToProps(dispatch) {
 	  return {
+	    jackpot: function jackpot() {
+	      return _jackpot();
+	    },
 	    initializeSubNeighborhoods: function initializeSubNeighborhoods() {
 	      return FixinsActions.initializeSubNeighborhoods(dispatch);
 	    },
@@ -34699,7 +34704,6 @@
 			type: 'POST',
 			data: newSubNeighborhood,
 			success: function (postedSubNeighborhood) {
-				console.log(postedSubNeighborhood);
 				dispatch( //{
 				//type: "CREATE_USER",
 				//postedUser
@@ -35201,20 +35205,22 @@
 				var myGif = "";
 				var myGlitterFood = "";
 				var myOtherGlitterFood = "";
+				var jackpot = this.props.jackpot;
+				var jackpotStyles = { display: "none", textDecoration: "none", zIndex: "5", position: "fixed", marginLeft: "130px", fontSize: "7em", marginTop: "-230px" };
 				var putOneDishInState = this.props.putOneDishInState;
 				var putOneSpotInState = this.props.putOneSpotInState;
 				var putOneUserInState = this.props.putOneUserInState;
 				var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
 				var checkInBoxStyle = { padding: "10px", maxWidth: "300px", margin: "0 auto", marginBottom: "0", marginTop: "0", height: "100%", background: "pink" };
 				var dishesBoxStyle = { padding: "10px", maxWidth: "300px", margin: "0 auto", marginBottom: "0", marginTop: "0", height: "100%", background: "lightblue" };
-				var topFiveStyle = { height: "240px", paddingTop: "1px", paddingLeft: "15px", paddingRight: "15px", paddingBottom: "15px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background: "#ffd281" };
+				var topFiveStyle = { overflow: "hidden", height: "220px", paddingTop: "1px", paddingLeft: "4px", paddingRight: "4px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background: "#ffd281" };
 				var topFiveDishNodes = [];
 				var recentCheckInNodes = [];
 				var topFiveSubNeighborhoodNodes = [];
 
 				if (this.props.subNeighborhoods.length > 5) {
 					(function () {
-						var itemBoxStyle = { margin: "2px", padding: "3px", float: "left", textAlign: "center", background: "#BDA0CB", borderRadius: "10px" };
+						var itemBoxStyle = { margin: "2px", maxWidth: "150px", padding: "5px", float: "left", textAlign: "center", background: "#BDA0CB", borderRadius: "10px" };
 						var allSubNeighborhoods = _this2.props.subNeighborhoods;
 						var allUsers = _this2.props.users;
 						var allSpots = _this2.props.spots;
@@ -35222,10 +35228,15 @@
 						var randA = Math.floor(Math.random() * 7);
 						var randB = Math.floor(Math.random() * 5);
 						var randC = Math.floor(Math.random() * 5);
-
 						myGif = "url(./static/pizza" + randA + ".gif)";
 						myGlitterFood = "./static/glitterFood" + randB + ".gif";
 						myOtherGlitterFood = "./static/glitterFood" + randC + ".gif";
+						if (randB === randC) {
+							jackpot();
+							jackpotStyles.display = "block";
+							console.log(jackpotStyles);
+						}
+
 						allSubNeighborhoods.forEach(function (subNeighborhood) {
 
 							function userFilter(user) {
@@ -35272,7 +35283,9 @@
 										"i",
 										null,
 										subNeighborhood.numberOfUsers,
-										" users and ",
+										" users ",
+										_react2.default.createElement("br", null),
+										"and ",
 										subNeighborhood.numberOfSpots,
 										" spots!"
 									)
@@ -35360,7 +35373,6 @@
 						);
 					});
 				}
-				console.log(myGif);
 				return _react2.default.createElement(
 					"div",
 					null,
@@ -35425,7 +35437,16 @@
 								_react2.default.createElement(
 									"div",
 									{ className: "col-md-2" },
-									_react2.default.createElement("img", { src: myGlitterFood, height: "240px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
+									_react2.default.createElement("img", { src: myGlitterFood, height: "240px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } }),
+									_react2.default.createElement(
+										"div",
+										{ style: jackpotStyles },
+										_react2.default.createElement(
+											"a",
+											{ target: "_blank", href: "http://pizzaparty.party", className: "jackpot" },
+											"JACKPOT"
+										)
+									)
 								),
 								_react2.default.createElement(
 									"div",
@@ -67352,7 +67373,6 @@
 				newSpotInfo.newGenre = this.state.newGenre;
 				newSpotInfo.newBlurb = this.state.newBlurb;
 				newSpotInfo.newCoordinates = this.state.newCoordinates;
-				console.log("trying to handleSubmit...");
 				this.props.findAndChangeSpot(newSpotInfo);
 				this.setState({ newName: "",
 					newSubNeighborhood: "",
@@ -67934,7 +67954,6 @@
 			key: "handleStarsChange",
 			value: function handleStarsChange(e) {
 				this.setState({ stars: e.target.value });
-				console.log(this.state.stars);
 			}
 		}, {
 			key: "handleSubmit",
@@ -70213,8 +70232,6 @@
 	  return {
 	    allSpots: state.spots
 	  };
-	  console.log("here is state");
-	  console.log(state);
 	};
 
 	var MapContainer = (0, _reactRedux.connect)(mapStateToProps)(_MapPage2.default);
@@ -70851,7 +70868,20 @@
 	  }
 	};
 
+	var jackpot = function jackpot() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case 'JACKPOT':
+	      return state.concat("JACKPOT");
+	    default:
+	      return state;
+	  }
+	};
+
 	var FixinsApp = (0, _redux.combineReducers)({
+	  jackpot: jackpot,
 	  currentUser: currentUser,
 	  review: review,
 	  reviews: reviews,
@@ -71311,7 +71341,7 @@
 	                _reactRouter.Link,
 	                { onClick: putOneDishInState.bind(this, theseDishes[0]._id),
 	                  to: "/dish/" + theseDishes[0]._id },
-	                theseDishes[0].dish_name,
+	                " " + theseDishes[0].dish_name,
 	                " "
 	              ) : _react2.default.createElement(
 	                _reactRouter.Link,
@@ -71449,7 +71479,7 @@
 			_createClass(SpotDetail, [{
 					key: 'render',
 					value: function render() {
-							var itemBoxStyle = { height: "180px", padding: "3px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
+							var itemBoxStyle = { height: "180px", padding: "8px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
 							var allReviews = this.props.allReviews;
 							var allSubNeighborhoods = this.props.allSubNeighborhoods;
 							var allUsers = this.props.allUsers;
@@ -71464,7 +71494,8 @@
 							function findDishesFilter(dish) {
 									return dish.dish_spot._id === spot._id;
 							}
-							var dishNodes = allDishes.filter(findDishesFilter).map(function (dish) {
+							var theseDishes = allDishes.filter(findDishesFilter);
+							var dishNodes = theseDishes.map(function (dish) {
 									var dishId = dish._id;
 									return _react2.default.createElement(
 											'div',
@@ -71492,7 +71523,6 @@
 											)
 									);
 							});
-
 							return _react2.default.createElement(
 									'div',
 									null,
@@ -71500,38 +71530,52 @@
 											'div',
 											{ className: 'bg-warning med-pad med-mar' },
 											_react2.default.createElement(
-													'h2',
-													null,
-													spot.spot_name
+													'div',
+													{ className: 'row' },
+													_react2.default.createElement(
+															'div',
+															{ className: 'col-md-6' },
+															_react2.default.createElement(
+																	'h2',
+																	null,
+																	spot.spot_name
+															),
+															_react2.default.createElement(
+																	'h3',
+																	null,
+																	'located in',
+																	_react2.default.createElement(
+																			_reactRouter.Link,
+																			{ to: '/subNeighborhood/' + subNeighorhoodId, onClick: putOneSubNeighborhoodInState.bind(this, subNeighorhoodId) },
+																			" " + spot.spot_subNeighborhood.subNeighborhood_name
+																	),
+																	_react2.default.createElement('br', null),
+																	_react2.default.createElement(
+																			_reactRouter.Link,
+																			{ onClick: putOneGenreInState.bind(this, spot.spot_genres[0]._id), to: '/genre/' + spot.spot_genres[0]._id },
+																			spot.spot_genres[0].genre_name
+																	)
+															)
+													),
+													_react2.default.createElement(
+															'div',
+															{ className: 'col-md-6' },
+															_react2.default.createElement(
+																	'h2',
+																	null,
+																	_react2.default.createElement(
+																			_reactRouter.Link,
+																			{ to: 'index/newDish' },
+																			'Add a new dish!'
+																	)
+															)
+													)
 											),
 											_react2.default.createElement(
 													'h3',
 													null,
-													' located in',
-													_react2.default.createElement(
-															_reactRouter.Link,
-															{ to: '/subNeighborhood/' + subNeighorhoodId, onClick: putOneSubNeighborhoodInState.bind(this, subNeighorhoodId) },
-															" " + spot.spot_subNeighborhood.subNeighborhood_name
-													)
-											),
-											_react2.default.createElement('br', null),
-											_react2.default.createElement(
-													_reactRouter.Link,
-													{ onClick: putOneGenreInState.bind(this, spot.spot_genres[0]._id), to: '/genre/' + spot.spot_genres[0]._id },
-													spot.spot_genres[0].genre_name
-											),
-											_react2.default.createElement(
-													'h4',
-													null,
 													'dishes available at ',
-													spot.spot_name,
-													'(Missing your favorite dish?  ',
-													_react2.default.createElement(
-															_reactRouter.Link,
-															{ to: 'index/newDish' },
-															'add it here!'
-													),
-													' )'
+													spot.spot_name
 											),
 											_react2.default.createElement(
 													'div',
@@ -72147,7 +72191,8 @@
 															"small",
 															null,
 															" ",
-															theseSpots.length > 0 ? "spots " + theseSpots.length : _react2.default.createElement(
+															_react2.default.createElement("br", null),
+															theseSpots.length > 0 ? "spots: " + theseSpots.length : _react2.default.createElement(
 																	_reactRouter.Link,
 																	{ to: "index/newSpot" },
 																	"add a spot"
@@ -72291,7 +72336,7 @@
 							var putOneGenreInState = this.props.putOneGenreInState;
 							var putOneNeighborhoodInState = this.props.putOneNeighborhoodInState;
 							var subNeighborhood = this.props.subNeighborhood;
-							var itemBoxStyle = { height: "180px", width: "200px", overflow: "hidden", padding: "3px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
+							var itemBoxStyle = { height: "180px", width: "200px", overflow: "hidden", padding: "8px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
 
 							function findSpotsFilter(spot) {
 
@@ -72303,8 +72348,6 @@
 											return dish.dish_spot._id === spot._id;
 									}
 									var theseDishes = allDishes.filter(findDishesFilter);
-									console.log("theseDishes:");
-									console.log(theseDishes);
 									var spotId = spot._id;
 									return _react2.default.createElement(
 											"div",
@@ -72723,7 +72766,6 @@
 	};
 
 	var _userLogin = function _userLogin(thisUser) {
-	  console.log(thisUser);
 	  return {
 	    type: "LOG_IN",
 	    user: thisUser[0]
@@ -73328,7 +73370,7 @@
 	  _createClass(AllNeighborhoods, [{
 	    key: "render",
 	    value: function render() {
-	      var itemBoxStyle = { height: "100px", width: "200px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
+	      var itemBoxStyle = { height: "100px", width: "200px", padding: "8px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
 	      var putOneNeighborhoodInState = this.props.putOneNeighborhoodInState;
 	      var allNeighborhoods = this.props.allNeighborhoods;
 	      var stateSubNeighorhood = this.props.subNeighorhood;
@@ -73437,7 +73479,7 @@
 	  _createClass(AllGenres, [{
 	    key: "render",
 	    value: function render() {
-	      var itemBoxStyle = { height: "125px", width: "200px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
+	      var itemBoxStyle = { height: "125px", padding: "8px", width: "200px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
 	      var putOneGenreInState = this.props.putOneGenreInState;
 	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
 	      var allGenres = this.props.allGenres;

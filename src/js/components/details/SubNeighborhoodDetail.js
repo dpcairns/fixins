@@ -18,7 +18,7 @@ class SubNeighborhoodDetail extends React.Component{
 		let putOneGenreInState = this.props.putOneGenreInState
 		let putOneNeighborhoodInState = this.props.putOneNeighborhoodInState
     let subNeighborhood = this.props.subNeighborhood
-		let itemBoxStyle = {height:"180px",width:"200px", overflow:"hidden",padding: "3px", margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
+		let itemBoxStyle = {height:"180px",width:"200px", overflow:"hidden",padding: "8px", margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
 
     function findSpotsFilter(spot){
 
@@ -30,8 +30,6 @@ class SubNeighborhoodDetail extends React.Component{
 																	return (dish.dish_spot._id === spot._id)
 														}
 								let theseDishes = allDishes.filter(findDishesFilter)
-								console.log("theseDishes:")
-								console.log(theseDishes)
 							let spotId = spot._id
     									return (
 												<div style={itemBoxStyle} key={spot._id} className="shad bg-info">

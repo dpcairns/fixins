@@ -48,7 +48,6 @@ export default class ReviewForm extends React.Component{
 
 	handleStarsChange(e){
 		this.setState({stars: e.target.value})
-		console.log(this.state.stars)
 	}
 
 
