@@ -67,7 +67,7 @@ render(){
 
   return (
 <div>
-<div className="bg-warning med-pad med-mar">
+<div className="bg-warning med-pad med-mar" style={{overflow: "hidden"}}>
 
 <HorizontalRainbow />
 <div className="row">

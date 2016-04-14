@@ -65,13 +65,13 @@ class UserDetail extends React.Component{
 
     return (
 <div>
-<div className="bg-info med-pad med-mar">
+<div className="bg-info med-pad med-mar" style={{overflow: "hidden"}}>
 <div className="row">
     <div className="col-md-6">
     </div>
     <div className="col-md-6">
       <ul style={{listStyleType:"none"}}>
-        <li><h2>User Page for {this.props.user.username}</h2></li>
+        <li><h2>User info for {this.props.user.username}</h2></li>
         <li> Password: {this.props.user.password}</li>
 				<li>
 							<Link to={`/subNeighborhood/${subNeighborhoodId}`} onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)}>

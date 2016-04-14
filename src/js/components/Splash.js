@@ -117,7 +117,10 @@ export default class Splash extends React.Component{
 			if (this.props.checkIns.length>12){
 			let allCheckIns = this.props.checkIns
 
-			let lastFiveCheckIns = [allCheckIns[allCheckIns.length -1], allCheckIns[allCheckIns.length -2], allCheckIns[allCheckIns.length -3], allCheckIns[allCheckIns.length -4], allCheckIns[allCheckIns.length -5], allCheckIns[allCheckIns.length -6], allCheckIns[allCheckIns.length -7], allCheckIns[allCheckIns.length -8]]
+			let lastFiveCheckIns = [allCheckIns[allCheckIns.length -1], allCheckIns[allCheckIns.length -2],
+																allCheckIns[allCheckIns.length -3], allCheckIns[allCheckIns.length -4],
+																allCheckIns[allCheckIns.length -5], allCheckIns[allCheckIns.length -6],
+																 allCheckIns[allCheckIns.length -7], allCheckIns[allCheckIns.length -8]]
 
 			recentCheckInNodes = lastFiveCheckIns.map(function(checkIn){
 
