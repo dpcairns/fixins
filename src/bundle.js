@@ -35185,6 +35185,9 @@
 			value: function render() {
 				var _this2 = this;
 
+				var myGif = "";
+				var myGlitterFood = "";
+				var myOtherGlitterFood = "";
 				var putOneDishInState = this.props.putOneDishInState;
 				var putOneSpotInState = this.props.putOneSpotInState;
 				var putOneUserInState = this.props.putOneUserInState;
@@ -35203,7 +35206,13 @@
 						var allUsers = _this2.props.users;
 						var allSpots = _this2.props.spots;
 						var sortedSubNeighborhoods = [];
+						var randA = Math.floor(Math.random() * 7);
+						var randB = Math.floor(Math.random() * 5);
+						var randC = Math.floor(Math.random() * 5);
 
+						myGif = "url(./static/pizza" + randA + ".gif)";
+						myGlitterFood = "./static/glitterFood" + randB + ".gif";
+						myOtherGlitterFood = "./static/glitterFood" + randC + ".gif";
 						allSubNeighborhoods.forEach(function (subNeighborhood) {
 
 							function userFilter(user) {
@@ -35338,10 +35347,11 @@
 						);
 					});
 				}
+				console.log(myGif);
 				return _react2.default.createElement(
 					"div",
 					null,
-					_react2.default.createElement("div", { className: "bg-info", style: { height: "100%", width: "100%", position: "fixed", backgroundImage: "url(./static/pizza.gif)", backgroundSize: "cover", zIndex: "-1" } }),
+					_react2.default.createElement("div", { className: "bg-info", style: { height: "100%", width: "100%", position: "fixed", backgroundImage: myGif, backgroundSize: "cover", zIndex: "-1" } }),
 					_react2.default.createElement(
 						"div",
 						{ className: "ontainer-fluid text-center", style: { zIndex: "2", opacity: "0.9" } },
@@ -35402,12 +35412,12 @@
 								_react2.default.createElement(
 									"div",
 									{ className: "col-md-2" },
-									_react2.default.createElement("img", { src: "./static/glitter6.gif", height: "240px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
+									_react2.default.createElement("img", { src: myGlitterFood, height: "240px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
 								),
 								_react2.default.createElement(
 									"div",
 									{ className: "col-md-offset-2 col-md-3" },
-									_react2.default.createElement("img", { src: "./static/glitter1.gif", height: "240px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
+									_react2.default.createElement("img", { src: myOtherGlitterFood, height: "240px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
 								)
 							)
 						),
@@ -50765,6 +50775,32 @@
 						"div",
 						{ className: "btn btn-danger", onClick: this.handleSubmit.bind(this) },
 						"Post"
+					),
+					_react2.default.createElement(
+						"div",
+						{ style: this.state.spotFailureStyles },
+						_react2.default.createElement(
+							"h2",
+							null,
+							"Spot failed. Try again and do something different."
+						)
+					),
+					_react2.default.createElement(
+						"div",
+						{ style: this.state.spotSuccessStyles },
+						_react2.default.createElement(
+							"h2",
+							null,
+							"Spot added! Check out the detail page for the ",
+							_react2.default.createElement(
+								_reactRouter.Link,
+								{ to: "subNeighborhood/" + subNeighborhoodId },
+								" ",
+								this.props.mySubNeighborhood.subNeighborhood_name
+							),
+							"."
+						),
+						"."
 					),
 					_react2.default.createElement(
 						"div",

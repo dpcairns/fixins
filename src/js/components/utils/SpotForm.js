@@ -135,6 +135,8 @@ export default class SpotForm extends React.Component{
 				  nameName="genre_name" />
 		</div>
 		<div className="btn btn-danger" onClick={this.handleSubmit.bind(this)}>Post</div>
+		<div style={this.state.spotFailureStyles}><h2>Spot failed. Try again and do something different.</h2></div>
+		<div style={this.state.spotSuccessStyles}><h2>Spot added! Check out the detail page for the <Link to={`subNeighborhood/${subNeighborhoodId}`}> {this.props.mySubNeighborhood.subNeighborhood_name}</Link>.</h2>.</div>
 
 	<div className="map-input-box">
 		<h2>Show us the spot on the map:</h2>

@@ -15,6 +15,9 @@ export default class Splash extends React.Component{
 		this.props.initializeCheckIns();
 	}
 		render(){
+			let myGif = ""
+			let myGlitterFood = ""
+			let myOtherGlitterFood = ""
 			let putOneDishInState = this.props.putOneDishInState
 			let putOneSpotInState = this.props.putOneSpotInState
 			let putOneUserInState = this.props.putOneUserInState
@@ -32,7 +35,13 @@ export default class Splash extends React.Component{
 				let allUsers = this.props.users
 				let allSpots = this.props.spots
 				let sortedSubNeighborhoods = []
+				let randA = Math.floor(Math.random()*7)
+				let randB = Math.floor(Math.random()*5)
+				let randC = Math.floor(Math.random()*5)
 
+				myGif = "url(./static/pizza" + randA + ".gif)"
+				myGlitterFood = "./static/glitterFood" + randB + ".gif"
+				myOtherGlitterFood = "./static/glitterFood" + randC + ".gif"
 				allSubNeighborhoods.forEach(function(subNeighborhood){
 
 					function userFilter(user){return (subNeighborhood._id === user.user_sub_neighborhood._id )}
@@ -117,9 +126,10 @@ export default class Splash extends React.Component{
 					at {" " +checkIn.checkIn_date+ " "} and said "{checkIn.checkIn_blurb}"</h4>)
 			})
 		}
+		console.log(myGif)
 			return(
 				<div>
-				<div className="bg-info" style={{height: "100%", width: "100%", position:"fixed", backgroundImage: "url(./static/pizza.gif)", backgroundSize: "cover", zIndex:"-1"}}>
+				<div className="bg-info" style={{height: "100%", width: "100%", position:"fixed", backgroundImage: myGif, backgroundSize: "cover", zIndex:"-1"}}>
 				</div>
 
 		<div className="ontainer-fluid text-center" style={{zIndex:"2", opacity:"0.9"}}>
@@ -151,12 +161,12 @@ export default class Splash extends React.Component{
 					</div>
 					<div className="row">
 							<div className="col-md-2">
-									<img src="./static/glitter6.gif" height="240px" width="400px" style={{marginBottom: "25px", borderRadius:"10px"}}/>
+									<img src={myGlitterFood} height="240px" width="400px" style={{marginBottom: "25px", borderRadius:"10px"}}/>
 
 
 							</div>
 			 				<div className="col-md-offset-2 col-md-3">
-			 					<img src="./static/glitter1.gif" height="240px" width="400px" style={{marginBottom: "25px", borderRadius:"10px"}}/>
+			 					<img src={myOtherGlitterFood} height="240px" width="400px" style={{marginBottom: "25px", borderRadius:"10px"}}/>
 			 				</div>
 
 			 		</div>
