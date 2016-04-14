@@ -11,6 +11,7 @@ class NeighborhoodDetail extends React.Component{
 		let subNeighborhoodBoxStyle = {height:"150px",width:"200px",margin:"5px",float:"left",fontSize:"1.5em",textAlign:"center", borderRadius:"10px"}
 		let containerStyle = {display:"inline-block"}
     let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
+		let stateSubNeighorhood = this.props.subNeighorhood
     let allSubNeighborhoods = this.props.allSubNeighborhoods
     let neighborhood = this.props.neighborhood
 		let allSpots = this.props.allSpots
@@ -36,8 +37,17 @@ class NeighborhoodDetail extends React.Component{
                 return (
                     <div key={subNeighborhoodId} onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)}>
 													<div style={subNeighborhoodBoxStyle} className="shad bg-danger">
-													<b> <Link to={`/subNeighborhood/${subNeighborhoodId}`}>
-														{subNeighborhood.subNeighborhood_name}</Link></b><br/>
+
+													{ stateSubNeighorhood && stateSubNeighorhood._id === "TRUE_NEW_SPOT" ?
+
+													<Link to={`/index/newSpot`}>
+														{subNeighborhood.subNeighborhood_name}</Link>
+
+														:
+
+														<Link to={`/subNeighborhood/${subNeighborhoodId}`}>
+															{subNeighborhood.subNeighborhood_name}</Link>
+														}
 
 													<small> {theseSpots.length>0?
 														("spots " + theseSpots.length)
@@ -52,7 +62,10 @@ return(
   <div className="bg-warning med-pad med-mar">
 	<h3><Link to="index/allNeighborhoods">see all neighborhoods</Link></h3>
     <h1>Neighborhood Detail Page for {neighborhood.neighborhood_name}</h1>
-    <h2>Here is every subNeighborhood in {neighborhood.neighborhood_name}</h2>
+		{stateSubNeighorhood && stateSubNeighorhood._id === "TRUE_NEW_SPOT" ?
+		<h2>Where do you want to add a spot?</h2>
+		:
+    <h2>Here is every subNeighborhood in {neighborhood.neighborhood_name}</h2>}
 		<div className="flex flexwrap">
 		{subNeighorhoodNodes}
 		</div>
@@ -79,6 +92,7 @@ const mapStateToProps = (state) => {
     allSubNeighborhoods: state.subNeighborhoods,
 		allSpots: state.spots,
 		allUsers: state.users,
+		subNeighorhood: state.subNeighborhood,
     neighborhood: selectNeighborhood(state.neighborhoods, state.neighborhood._id)
   }
 }

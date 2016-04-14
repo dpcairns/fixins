@@ -8,6 +8,7 @@ class AllGenres extends React.Component{
 	render(){
     let itemBoxStyle = {height:"125px",width:"200px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
       let putOneGenreInState = this.props.putOneGenreInState
+			let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
       let allGenres = this.props.allGenres
       let allSpots = this.props.allSpots
 
@@ -22,20 +23,32 @@ class AllGenres extends React.Component{
         let genreId = genre._id
        return(  <div key={genre._id} style={itemBoxStyle} className="shad bg-danger">
           <Link onClick={putOneGenreInState.bind(this, genreId)} to={`/genre/${genre._id}`}><h3>{genre.genre_name}</h3></Link>
-          <h4>{theseSpots.length>0 ? ("this many spots: " + theseSpots.length): <Link to="index/newSpot">be the first to add a {genre.genre_name} spot!</Link>}
+          <h4>
+					{theseSpots.length>0 ?
+						("this many spots: " + theseSpots.length)
+					: <Link onClick={putOneSubNeighborhoodInState.bind(this, "TRUE_NEW_SPOT")}
+					to="index/allNeighborhoods">be the first to add a {genre.genre_name} spot!</Link>
+				 }
 					</h4>
 			  </div>
         )
       })
       return(
-        <div className="flex flexwrap">
-          {genreNodes}
+				<div>
+					<h2>Explore a genre</h2><br/>
+					<div className="flex flexwrap">
+	          {genreNodes}
+					</div>
         </div>
 
       )
   }
 }
 
+
+function putOneSubNeighborhoodInState(_id){
+  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
+}
 
 function putOneGenreInState(_id){
   return {type: "PUT_ONE_GENRE_IN_STATE", _id:_id}
@@ -51,6 +64,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {putOneGenreInState: (_id) => dispatch(putOneGenreInState(_id)),
+		putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id))
 }
 }
 

@@ -11,6 +11,7 @@ class AllNeighborhoods extends React.Component{
     let itemBoxStyle = {height:"100px",width:"200px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
       let putOneNeighborhoodInState = this.props.putOneNeighborhoodInState
       let allNeighborhoods = this.props.allNeighborhoods
+			let stateSubNeighorhood = this.props.subNeighorhood
       let neighborhoodNodes = allNeighborhoods.map(function(neighborhood){
         let neighborhoodId = neighborhood._id
        return(  <div key={neighborhood._id} style={itemBoxStyle} className="shad bg-danger">
@@ -20,6 +21,9 @@ class AllNeighborhoods extends React.Component{
       })
       return(
         <div>
+				{stateSubNeighorhood !== undefined &&  stateSubNeighorhood._id === "TRUE_NEW_SPOT" ?
+				<h2>Where do you want to add a spot?</h2>
+				: <h2>Explore a neighborhood</h2>}
           {neighborhoodNodes}
         </div>
       )
@@ -34,7 +38,8 @@ function putOneNeighborhoodInState(_id){
 const mapStateToProps = (state) => {
 
 	    return {
-        allNeighborhoods: state.neighborhoods
+        allNeighborhoods: state.neighborhoods,
+				subNeighorhood: state.subNeighborhood
         }
 }
 

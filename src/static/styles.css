@@ -35,13 +35,13 @@ table{
 .top-five:hover div:nth-of-type(5) {-webkit-flex-grow: 1;}
 
 .anim-sparkle{
-	transition: all 0.2s ease;
+	transition: all 0.8s ease;
  border-radius: 50px;
  width: 800px
 }
 
 .anim-sparkle:hover{
-	width: 650px
+	width: 350px
 }
 
 

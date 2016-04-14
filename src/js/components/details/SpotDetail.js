@@ -50,7 +50,8 @@ class SpotDetail extends React.Component{
 				</Link>
 				</h3>
 				<br/><Link onClick={putOneGenreInState.bind(this, spot.spot_genres[0]._id)} to={`/genre/${spot.spot_genres[0]._id}`}>{spot.spot_genres[0].genre_name}</Link>
-				<h4>dishes available at {spot.spot_name}</h4>
+				<h4>dishes available at {spot.spot_name}
+				(Missing your favorite dish?  <Link to="index/newDish">add it here!</Link> )</h4>
 				<div className="flex flexwrap">
 					{allDishes.filter(findDishesFilter).length>0 ? dishNodes : (<tr><td>no dishes for {spot.spot_name}...yet! <Link to="index/newDish">Click here to be the first to add one!</Link> </td></tr>)}
 						{dishNodes}
@@ -94,7 +95,6 @@ const mapDispatchToProps = (dispatch) => {
 	 				putOneDishInState: (_id) => dispatch(putOneDishInState(_id)),
 	 				putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
 					putOneGenreInState: (_id) => dispatch(putOneGenreInState(_id)),
-
  }
 }
 
