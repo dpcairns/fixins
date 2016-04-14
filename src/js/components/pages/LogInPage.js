@@ -120,12 +120,37 @@ LogInPage.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-      const userLogin = (thisUser) => {
+const userLogin = (thisUser) => {
               return {
                 type: "LOG_IN",
                 user: thisUser[0]
               }
           }
+
+
+/*const userLogin = (thisUser) => {
+$.ajax({
+  url: "http://localhost:4444/api/authenticate",
+  type: 'POST',
+  data: newReview,
+  success: function(postedReview){
+    dispatch(//
+        //type: "CREATE_USER",
+        //postedUser
+      {
+          type: 'CREATE_REVIEW',
+          ...postedReview
+        }
+
+              );
+  }.bind(this),
+  error: function(xhr, status, err){
+    console.error('./Reviews', status, err.toString());
+  }.bind(this)
+});
+
+}
+*/
 
 const mapStateToProps = (state) => {
   return {

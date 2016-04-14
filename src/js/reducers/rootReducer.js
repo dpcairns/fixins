@@ -99,6 +99,7 @@ const reviews = (state = [], action) => {
   }
 
 const checkIn = (state = "", action) => {
+  console.log(action.checkIn_dish)
   switch (action.type) {
     case 'CREATE_CHECKIN':
       return {

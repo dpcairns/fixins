@@ -15,6 +15,7 @@ class MapItself extends React.Component {
     let putOneSpotInState = this.props.putOneSpotInState
     let allDishes = this.props.allDishes
     let putOneDishInState = this.props.putOneDishInState
+    let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
     let markerNodes = this.props.allSpots.map((spot) => {
       	function findDishesFilter(dish){
           									return (dish.dish_spot._id === spot._id)
@@ -70,6 +71,8 @@ class MapItself extends React.Component {
 
       return (
         <div>
+        <h3>(did we miss a spot? <Link onClick={putOneSubNeighborhoodInState.bind(this, "TRUE_NEW_SPOT")}
+        to="index/allNeighborhoods"> add it here!</Link>)</h3>
         <Map center={center} zoom={zoom} minZoom={minZoom}>
           <TileLayer
             id="dpcairns.pee063cb"
@@ -86,6 +89,7 @@ class MapItself extends React.Component {
     }
   }
 
+
 MapItself.contextTypes = {router: React.PropTypes.object.isRequired}
 
 function putOneSpotInState(_id){
@@ -97,13 +101,18 @@ function putOneDishInState(_id){
   return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
 }
 
+function putOneSubNeighborhoodInState(_id){
+  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
+}
+
 const mapStateToProps = (state) => {
  return {allSpots: state.spots, allDishes: state.dishes}
 }
 
 const mapDispatchToProps = (dispatch) => {
  return {putOneSpotInState: (_id) => dispatch(putOneSpotInState(_id)),
-        putOneDishInState: (_id) => dispatch(putOneDishInState(_id))
+        putOneDishInState: (_id) => dispatch(putOneDishInState(_id)),
+        putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
  }
 }
 

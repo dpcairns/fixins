@@ -68,11 +68,28 @@ class SubNeighborhoodDetail extends React.Component{
 				let neighborhoodId = subNeighborhood.sub_neighborhood_neighborhood._id
     return(
       <div className="bg-warning med-pad med-mar">
+
+
+			<div className="row">
+				 <div className="col-md-6">
 				<h3><Link to="index/allNeighborhoods">see all neighborhoods</Link></h3>
           <h1>{subNeighborhood.subNeighborhood_name}</h1>
-					<h3>{subNeighborhood.subNeighborhood_name} is located in <Link to={`/neighborhood/${neighborhoodId}`} onClick={putOneNeighborhoodInState.bind(this, neighborhoodId)}> {subNeighborhood.sub_neighborhood_neighborhood.neighborhood_name}
+					<h3>{subNeighborhood.subNeighborhood_name} is located in <Link to={`/neighborhood/${neighborhoodId}`} onClick={putOneNeighborhoodInState.bind(this, neighborhoodId)}>
+					{subNeighborhood.sub_neighborhood_neighborhood.neighborhood_name}
 					</Link>
+					</h3>
+
+					</div>
+		 <div className="col-md-6">
+		 <h3>
+
+					Think we missed a spot?<br/>
+					<Link to="index/newSpot"><i>Add one here!</i></Link>
 					 </h3>
+			</div>
+			</div>
+
+
 					 <div className="row">
 					 		<div className="col-md-6">
 							<br/><hr/>

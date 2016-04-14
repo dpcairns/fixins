@@ -4,7 +4,7 @@ export function createUser(newUser, dispatch){
 			type: 'POST',
 			data: newUser,
 			success: function(postedUser){
-						dispatch(//{
+						dispatch(//
 								//type: "CREATE_USER",
 								//postedUser
 							{
@@ -20,13 +20,14 @@ export function createUser(newUser, dispatch){
 		});
 	}
 
+
 export function createSpot(newSpot, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Spots",
 			type: 'POST',
 			data: newSpot,
 			success: function(postedSpot){
-				dispatch(//{
+				dispatch(//
 						//type: "CREATE_USER",
 						//postedUser
 					{
@@ -48,7 +49,7 @@ export function createDish(newDish, dispatch){
 			type: 'POST',
 			data: newDish,
 			success: function(postedDish){
-				dispatch(//{
+				dispatch(//
 						//type: "CREATE_USER",
 						//postedUser
 					{
@@ -64,13 +65,14 @@ export function createDish(newDish, dispatch){
 		});
 	}
 
+
 export function createReview(newReview, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Reviews",
 			type: 'POST',
 			data: newReview,
 			success: function(postedReview){
-				dispatch(//{
+				dispatch(//
 						//type: "CREATE_USER",
 						//postedUser
 					{
@@ -85,13 +87,15 @@ export function createReview(newReview, dispatch){
 			}.bind(this)
 		});
 	}
+
+
 export function createNeighborhood(newNeighborhood, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Neighborhoods",
 			type: 'POST',
 			data: newNeighborhood,
 			success: function(postedNeighborhood){
-				dispatch(//{
+				dispatch(//
 						//type: "CREATE_USER",
 						//postedUser
 					{
@@ -107,13 +111,14 @@ export function createNeighborhood(newNeighborhood, dispatch){
 		});
 	}
 
+
 export function createSubNeighborhood(newSubNeighborhood, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/SubNeighborhoods",
 			type: 'POST',
 			data: newSubNeighborhood,
 			success: function(postedSubNeighborhood){
-				dispatch(//{
+				dispatch(//
 						//type: "CREATE_USER",
 						//postedUser
 
@@ -130,13 +135,14 @@ export function createSubNeighborhood(newSubNeighborhood, dispatch){
 		});
 	}
 
+
 export function createGenre(newGenre, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Genres",
 			type: 'POST',
 			data: newGenre,
 			success: function(postedGenre){
-				dispatch(//{
+				dispatch(//
 						//type: "CREATE_USER",
 						//postedUser
 					{
@@ -159,7 +165,7 @@ export function createCheckIn(newCheckIn, dispatch){
 			type: 'POST',
 			data: newCheckIn,
 			success: function(postedCheckIn){
-						dispatch(//{
+						dispatch(//
 								//type: "CREATE_USER",
 								//postedUser
 							{
@@ -174,6 +180,7 @@ export function createCheckIn(newCheckIn, dispatch){
 			}.bind(this)
 		});
 	}
+
 
 export function initializeUsers(dispatch){
 		$.ajax({

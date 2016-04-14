@@ -64,6 +64,15 @@ function requireAuth(nextState, replaceState) {
 										}
 						}
 
+/*						
+						let token = localStorage.getItem('token')
+						let username = localStorage.getItem('username')
+
+						if (token !== null) {
+						  store.dispatch(loginSuccess(token, username))
+						}
+*/
+
 ReactDOM.render(
 	<Provider store={store}>
 <Router history={hashHistory}>
