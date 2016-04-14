@@ -107,7 +107,7 @@ if(this.props.currentUser._id !== undefined){
     </div>
 
     <div className="col-md-2">
-    <img src="./static/chewing.gif" style={{borderRadius: "25px", margin: "15px"}}/>
+    <img src="./static/chewing.gif" style={{borderRadius: "25px", boxShadow: "0 0 10px grey", margin: "15px"}}/>
 
     </div>
     </div>

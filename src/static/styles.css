@@ -45,6 +45,16 @@ table{
 }
 
 
+.anim-height{
+	transition: all 0.2s ease;
+}
+
+.anim-height:hover{
+	height: 210px
+}
+
+
+
 .anim-button{
 	transition: all 0.4s ease;
 	border-radius: 1px;
@@ -85,6 +95,15 @@ table{
 
 .shad:hover {
     box-shadow: 5px 4px 4px pink;
+}
+
+
+.shad2 {
+    transition: all .5s ease;
+}
+
+.shad2:hover {
+    box-shadow: 0px 0px 6px black;
 }
 
 .shadow-container:hover {

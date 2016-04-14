@@ -54,7 +54,7 @@ export default class Splash extends React.Component{
 				topFiveSubNeighborhoodNodes = topFiveSubNeighborhoods.map(function(subNeighborhood){
 					return (
 
-						<div style={itemBoxStyle} key={subNeighborhood._id}>
+						<div style={itemBoxStyle} className="shad2" key={subNeighborhood._id}>
 						<Link onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhood._id)} to={`/subNeighborhood/${subNeighborhood._id}`}>
 						<h3> {subNeighborhood.subNeighborhood_name + " "}</h3>
 						</Link>

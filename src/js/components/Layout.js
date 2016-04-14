@@ -41,7 +41,7 @@ componentDidMount(){
 
 		render(){
 			let containerStyle={borderRadius:"15px 15px 15px 15px", marginBottom:"25px", marginTop:"2%", opacity:"0.99"}
-			let greetingStyle={marginTop:"15px", marginRight: "10px", background:"lightyellow", maxWidth:"200px", float:"right"}
+			let greetingStyle={marginTop:"15px", marginRight: "10px", boxShadow: "1px 1px 2px grey", background:"lightyellow", maxWidth:"200px", float:"right"}
 			let currentUser = this.props.currentUser
 			return(
 			<div style={containerStyle} className="bg-success container shadow-container">

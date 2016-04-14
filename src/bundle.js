@@ -34222,7 +34222,7 @@
 			key: "render",
 			value: function render() {
 				var containerStyle = { borderRadius: "15px 15px 15px 15px", marginBottom: "25px", marginTop: "2%", opacity: "0.99" };
-				var greetingStyle = { marginTop: "15px", marginRight: "10px", background: "lightyellow", maxWidth: "200px", float: "right" };
+				var greetingStyle = { marginTop: "15px", marginRight: "10px", boxShadow: "1px 1px 2px grey", background: "lightyellow", maxWidth: "200px", float: "right" };
 				var currentUser = this.props.currentUser;
 				return _react2.default.createElement(
 					"div",
@@ -34374,9 +34374,11 @@
 			key: "render",
 			value: function render() {
 				var listStyle = { float: "left",
-					padding: "5px",
+					padding: "8px",
 					margin: "5px",
-					background: "pink" };
+					background: "pink",
+					boxShadow: "1px 1px 2px grey",
+					border: "none !important" };
 				return _react2.default.createElement(
 					"div",
 					null,
@@ -34389,7 +34391,7 @@
 							null,
 							_react2.default.createElement(
 								"li",
-								{ className: "anim-button", style: listStyle },
+								{ className: "anim-button shad", style: listStyle },
 								" ",
 								_react2.default.createElement(
 									_reactRouter.Link,
@@ -34400,7 +34402,7 @@
 							),
 							_react2.default.createElement(
 								"li",
-								{ className: "anim-button", style: listStyle },
+								{ className: "anim-button shad", style: listStyle },
 								" ",
 								_react2.default.createElement(
 									_reactRouter.Link,
@@ -34411,7 +34413,7 @@
 							),
 							_react2.default.createElement(
 								"li",
-								{ className: "anim-button", style: listStyle },
+								{ className: "anim-button shad", style: listStyle },
 								" ",
 								_react2.default.createElement(
 									_reactRouter.Link,
@@ -34422,7 +34424,7 @@
 							),
 							_react2.default.createElement(
 								"li",
-								{ className: "anim-button", style: listStyle },
+								{ className: "anim-button shad", style: listStyle },
 								" ",
 								_react2.default.createElement(
 									_reactRouter.Link,
@@ -35229,7 +35231,7 @@
 						topFiveSubNeighborhoodNodes = topFiveSubNeighborhoods.map(function (subNeighborhood) {
 							return _react2.default.createElement(
 								"div",
-								{ style: itemBoxStyle, key: subNeighborhood._id },
+								{ style: itemBoxStyle, className: "shad2", key: subNeighborhood._id },
 								_react2.default.createElement(
 									_reactRouter.Link,
 									{ onClick: putOneSubNeighborhoodInState.bind(this, subNeighborhood._id), to: "/subNeighborhood/" + subNeighborhood._id },
@@ -50697,7 +50699,7 @@
 					this.props.createSpot(newSpotObject);
 					this.showSpotSuccess();
 				}
-				this.setState({ username: "", blurb: "", genres: "", coordinates: "", clickPosition: "" });
+				this.setState({ username: "", blurb: "", genres: "", coordinates: "" });
 			}
 		}, {
 			key: "render",
@@ -50758,6 +50760,11 @@
 							onchange2: this.handleGenresChange.bind(this),
 							data: allGenres,
 							nameName: "genre_name" })
+					),
+					_react2.default.createElement(
+						"div",
+						{ className: "btn btn-danger", onClick: this.handleSubmit.bind(this) },
+						"Post"
 					),
 					_react2.default.createElement(
 						"div",
@@ -70342,11 +70349,11 @@
 	                    _react2.default.createElement('br', null)
 	                  ),
 	                  '(',
-	                  signatureDish.length > 0 ? signatureDish[0].dish_calories : "n/a",
+	                  signatureDish.length > 0 ? signatureDish[0].dish_calories : "n/a ",
 	                  ' calories for $',
-	                  signatureDish.length > 0 ? signatureDish[0].dish_price : "n/a",
+	                  signatureDish.length > 0 ? signatureDish[0].dish_price : " n/a ",
 	                  '=',
-	                  signatureDish.length > 0 ? " " + parseInt(signatureDish[0].dish_calories / signatureDish[0].dish_price + " ") : "n/a",
+	                  signatureDish.length > 0 ? " " + parseInt(signatureDish[0].dish_calories / signatureDish[0].dish_price) + " " : " n/a ",
 	                  'calorieDollars)'
 	                )
 	              )
@@ -71626,29 +71633,31 @@
 													'td',
 													null,
 													_react2.default.createElement(
-															'h4',
-															null,
-															checkIn.checkIn_dish.dish_calories,
-															' calories'
-													)
-											),
-											_react2.default.createElement(
-													'td',
-													null,
-													_react2.default.createElement(
-															'h4',
-															null,
-															checkIn.checkIn_dish.dish_price,
-															' dollars'
-													)
-											),
-											_react2.default.createElement(
-													'td',
-													null,
-													_react2.default.createElement(
 															'h5',
 															null,
 															checkIn.checkIn_blurb
+													)
+											),
+											_react2.default.createElement(
+													_reactRouter.Link,
+													{ to: '/user/' + userId, onClick: putOneUserInState.bind(this, userId) },
+													_react2.default.createElement(
+															'td',
+															null,
+															_react2.default.createElement(
+																	'h5',
+																	null,
+																	checkIn.checkIn_user.username
+															)
+													),
+													_react2.default.createElement(
+															'td',
+															null,
+															_react2.default.createElement(
+																	'h5',
+																	null,
+																	checkIn.checkIn_date
+															)
 													)
 											),
 											_react2.default.createElement(
@@ -71676,30 +71685,24 @@
 													'td',
 													null,
 													_react2.default.createElement(
-															'h4',
-															null,
-															review.reviewed_dish.dish_calories,
-															'  calories'
-													)
-											),
-											_react2.default.createElement(
-													'td',
-													null,
-													_react2.default.createElement(
-															'h4',
-															null,
-															review.reviewed_dish.dish_price,
-															' dollars '
-													)
-											),
-											_react2.default.createElement(
-													'td',
-													null,
-													_react2.default.createElement(
 															'h5',
 															null,
 															review.review_words,
 															' '
+													)
+											),
+											_react2.default.createElement(
+													_reactRouter.Link,
+													{ to: '/user/' + userId, onClick: putOneUserInState.bind(this, userId) },
+													_react2.default.createElement(
+															'td',
+															null,
+															_react2.default.createElement(
+																	'h5',
+																	null,
+																	review.review_user.username,
+																	' '
+															)
 													)
 											),
 											_react2.default.createElement(
@@ -72647,7 +72650,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-md-2' },
-	          _react2.default.createElement('img', { src: './static/chewing.gif', style: { borderRadius: "25px", margin: "15px" } })
+	          _react2.default.createElement('img', { src: './static/chewing.gif', style: { borderRadius: "25px", boxShadow: "0 0 10px grey", margin: "15px" } })
 	        )
 	      );
 	    }

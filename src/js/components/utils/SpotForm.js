@@ -91,7 +91,7 @@ export default class SpotForm extends React.Component{
 			this.props.createSpot(newSpotObject)
 			this.showSpotSuccess();
 		}
-		this.setState({username: "", blurb: "", genres: "", coordinates: "", clickPosition: ""})
+		this.setState({username: "", blurb: "", genres: "", coordinates: ""})
 	}
 
 	render(){
@@ -134,6 +134,8 @@ export default class SpotForm extends React.Component{
 				 data={allGenres}
 				  nameName="genre_name" />
 		</div>
+		<div className="btn btn-danger" onClick={this.handleSubmit.bind(this)}>Post</div>
+
 	<div className="map-input-box">
 		<h2>Show us the spot on the map:</h2>
       <Map onLeafletClick={this.handleMapClick.bind(this)} center={position} zoom={this.state.zoom} minZoom={minZoom}>

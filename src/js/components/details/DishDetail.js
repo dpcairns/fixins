@@ -32,9 +32,11 @@ function findCheckInsFilter(checkIn){
 
 								 <tr key={checkIn._id}>
 
-																	<td><h4>{checkIn.checkIn_dish.dish_calories} calories</h4></td>
-																	<td><h4>{checkIn.checkIn_dish.dish_price} dollars</h4></td>
 																	<td><h5>{checkIn.checkIn_blurb}</h5></td>
+																	<Link to={`/user/${userId}`} onClick={putOneUserInState.bind(this, userId)}>
+																	<td><h5>{checkIn.checkIn_user.username}</h5></td>
+																	<td><h5>{checkIn.checkIn_date}</h5></td>
+																	</Link>
 																	<td><h4>{checkIn.checkIn_dish.dish_spot.spot_name}</h4></td>
 
 																	</tr>
@@ -50,9 +52,10 @@ function findReviewsFilter(review){
 		let dishId = review.reviewed_dish._id
             return (
 							<tr key={review._id}>
-								<td><h4>{review.reviewed_dish.dish_calories}  calories</h4></td>
-								<td><h4>{review.reviewed_dish.dish_price} dollars </h4></td>
 								<td><h5>{review.review_words} </h5></td>
+								<Link to={`/user/${userId}`} onClick={putOneUserInState.bind(this, userId)}>
+								<td><h5>{review.review_user.username} </h5></td>
+									</Link>
 								<td><h4>{review.review_stars} stars </h4></td>
 								<td><h4>{review.review_date}</h4></td>
 							</tr>
