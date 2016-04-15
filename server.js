@@ -13,6 +13,7 @@ var Genre = require('./src/js/models/GenreModel')
 var Review = require('./src/js/models/ReviewModel')
 var Dish = require('./src/js/models/DishModel')
 var Spot = require('./src/js/models/SpotModel')
+var bcrypt = require('bcrypt')
 var db ='mongodb://localhost/test'
 
 mongoose.connect(db)
@@ -42,22 +43,33 @@ router.get('/', function(req,res){
 	res.send('hello and welcome to the api')
 })
 
-/*
-router.route('/login').get(function(req, res){
+
+router.route('/login').post(function(req, res){
 				User.findOne({username: req.body.username}, function(err, user){
 					if(err)
 						return done(err);
 					if(!user)
 						console.log('No User found')
-					if(!user.validPassword(req.body.password)){
-						console.log('invalid password');
-					}
+					bcrypt.compare(req.body.password, user.password, function(err, didItWork) {
+						if(err){console.log(err)}
 
+
+				})
+			})
+			.populate('user_sub_neighborhood')
+			.populate('user_review')
+			.populate('user_checkIns')
+			.populate('user_favorites')
+			.populate('user_friends')
+			.exec(function(err, user){
+				if(err){
+					console.log('Couldn\'t find user')
+				} else {
 					res.json(user);
-
-				});
+				}
 })
-*/
+})
+
 app.use('/api', router)
 
 app.listen(4444)

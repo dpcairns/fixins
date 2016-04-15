@@ -74110,14 +74110,16 @@
 	    key: 'handleSubmit',
 	    value: function handleSubmit(e) {
 	      e.preventDefault(e);
-	      var username1 = this.state.username;
-	      var password1 = this.state.password;
-	      var thisUserFilter = function thisUserFilter(user) {
-	        return username1 === user.username && password1 === user.password;
-	      };
-	      var thisUser = this.props.users.filter(thisUserFilter);
+	      //  let username1 = this.state.username
+	      //  let password1 = this.state.password
+	      //    let thisUserFilter = (user) => {
+	      //    return (username1 === user.username && password1 === user.password )
+	      //          }
+	      //let thisUser = this.props.users.filter(thisUserFilter)
+	      var thisUser = {};
+	      thisUser.username = this.state.username;
+	      thisUser.password = this.state.password;
 	      this.props.userLogin(thisUser);
-	      //this.props.secureLogin(thisUser)
 	      if (thisUser.length === 0) {
 	        this.showLoginFailure();
 	      } else {
@@ -74220,11 +74222,22 @@
 	  router: _react2.default.PropTypes.object.isRequired
 	};
 
-	var _userLogin = function _userLogin(thisUser) {
-	  return {
-	    type: "LOG_IN",
-	    user: thisUser[0]
-	  };
+	var _userLogin = function _userLogin(thisUser, dispatch) {
+	  $.ajax({
+	    url: "http://localhost:4444/api/login",
+	    type: 'POST',
+	    data: thisUser,
+	    success: function (loggedInUser) {
+	      console.log(loggedInUser);
+	      dispatch({
+	        type: "LOG_IN",
+	        user: loggedInUser
+	      });
+	    }.bind(undefined),
+	    error: function (xhr, status, err) {
+	      console.error('./login', status, err.toString());
+	    }.bind(undefined)
+	  });
 	};
 
 	var mapStateToProps = function mapStateToProps(state) {
@@ -74237,7 +74250,7 @@
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
 	    userLogin: function userLogin(thisUser) {
-	      return dispatch(_userLogin(thisUser));
+	      return _userLogin(thisUser, dispatch);
 	    },
 	    secureLogin: function secureLogin(thisUser) {
 	      return dispatch((0, _AuthModule2.default)(thisUser));

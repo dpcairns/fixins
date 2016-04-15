@@ -51,16 +51,19 @@ class LogInPage extends React.Component{
 
 	handleSubmit(e){
 		e.preventDefault(e);
-    let username1 = this.state.username
-    let password1 = this.state.password
-      let thisUserFilter = (user) => {
-      return (username1 === user.username && password1 === user.password )
-            }
-    let thisUser = this.props.users.filter(thisUserFilter)
+  //  let username1 = this.state.username
+  //  let password1 = this.state.password
+  //    let thisUserFilter = (user) => {
+  //    return (username1 === user.username && password1 === user.password )
+  //          }
+    //let thisUser = this.props.users.filter(thisUserFilter)
+    let thisUser = {}
+    thisUser.username = this.state.username
+    thisUser.password = this.state.password
 		this.props.userLogin(thisUser)
-    //this.props.secureLogin(thisUser)
     if(thisUser.length === 0){
       this.showLoginFailure();
+
     } else {this.showLoginSuccess();}
 		this.setState({username: "", password: ""})
 	}
@@ -123,13 +126,25 @@ LogInPage.contextTypes = {
 }
 
 
-const userLogin = (thisUser) => {
-              return {
-                type: "LOG_IN",
-                user: thisUser[0]
-              }
+const userLogin = (thisUser, dispatch) => {
+  $.ajax({
+    url: "http://localhost:4444/api/login",
+    type: 'POST',
+    data: thisUser,
+    success: function(loggedInUser){
+      console.log(loggedInUser)
+      dispatch(
+        {
+          type: "LOG_IN",
+          user: loggedInUser
           }
-
+                )
+    }.bind(this),
+    error: function(xhr, status, err){
+      console.error('./login', status, err.toString());
+    }.bind(this)
+  })
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -140,7 +155,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-    userLogin: (thisUser) => dispatch(userLogin(thisUser)),
+    userLogin: (thisUser) => userLogin(thisUser, dispatch),
     secureLogin: (thisUser) => dispatch(secureLogin(thisUser))
   }
 }
