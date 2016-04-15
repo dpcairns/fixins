@@ -21,7 +21,7 @@ export default class SpotList extends React.Component{
 			let spotId=spot._id
 			return(
 			<div className="row user-boxes" onClick={putOneSpotInState.bind(this, spotId)} key={spotId}>
-				<div className="col-md-6">
+				<div className="col-md-8">
 					<ul>
 						<li>
 								<Link to={`/spot/${spotId}`}>
@@ -36,6 +36,8 @@ export default class SpotList extends React.Component{
 						<li> <ApproveButton spot={spot} approved={spot.approved} type="Spot" id={spot._id} findAndChange={findAndChangeSpot}/> </li>
 					</ul>
 				</div>
+
+				{/*
 				<div className="col-md-6">
 					<SpotEditForm
 							spotID={spot._id}
@@ -45,6 +47,7 @@ export default class SpotList extends React.Component{
 							allSubNeighborhoods={allSubNeighborhoods}
 							findAndChangeSpot={findAndChangeSpot}/>
 				</div>
+		*/	}
 			</div>
 				)
 		}).reverse()

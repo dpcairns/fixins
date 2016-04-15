@@ -36918,13 +36918,13 @@
 									"li",
 									null,
 									" CheckIns: ",
-									checkInNodes
+									checkInNodes.length
 								),
 								_react2.default.createElement(
 									"li",
 									null,
 									" Reviews: ",
-									reviewNodes
+									reviewNodes.length
 								),
 								_react2.default.createElement(
 									"li",
@@ -67632,7 +67632,7 @@
 						{ className: "row user-boxes", onClick: putOneSpotInState.bind(this, spotId), key: spotId },
 						_react2.default.createElement(
 							"div",
-							{ className: "col-md-6" },
+							{ className: "col-md-8" },
 							_react2.default.createElement(
 								"ul",
 								null,
@@ -67689,17 +67689,6 @@
 									" "
 								)
 							)
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "col-md-6" },
-							_react2.default.createElement(_SpotEditForm2.default, {
-								spotID: spot._id,
-								allUsers: allUsers,
-								allGenres: allGenres,
-								allDishes: allDishes,
-								allSubNeighborhoods: allSubNeighborhoods,
-								findAndChangeSpot: findAndChangeSpot })
 						)
 					);
 				}).reverse();
@@ -68349,14 +68338,14 @@
 							"td",
 							null,
 							"Dish reviews: ",
-							reviewNodes,
+							reviewNodes.length,
 							" "
 						),
 						_react2.default.createElement(
 							"td",
 							null,
 							"Dish check-ins: ",
-							checkInNodes
+							checkInNodes.length
 						),
 						_react2.default.createElement(
 							"td",
