@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Links from "../utils/Links"
+import secureLogin from "../utils/AuthModule"
 
 class LogInPage extends React.Component{
   constructor(){
@@ -55,8 +56,9 @@ class LogInPage extends React.Component{
       let thisUserFilter = (user) => {
       return (username1 === user.username && password1 === user.password )
             }
-       let thisUser = this.props.users.filter(thisUserFilter)
+    let thisUser = this.props.users.filter(thisUserFilter)
 		this.props.userLogin(thisUser)
+    //this.props.secureLogin(thisUser)
     if(thisUser.length === 0){
       this.showLoginFailure();
     } else {this.showLoginSuccess();}
@@ -120,6 +122,7 @@ LogInPage.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
+
 const userLogin = (thisUser) => {
               return {
                 type: "LOG_IN",
@@ -127,30 +130,6 @@ const userLogin = (thisUser) => {
               }
           }
 
-
-/*const userLogin = (thisUser) => {
-$.ajax({
-  url: "http://localhost:4444/api/authenticate",
-  type: 'POST',
-  data: newReview,
-  success: function(postedReview){
-    dispatch(//
-        //type: "CREATE_USER",
-        //postedUser
-      {
-          type: 'CREATE_REVIEW',
-          ...postedReview
-        }
-
-              );
-  }.bind(this),
-  error: function(xhr, status, err){
-    console.error('./Reviews', status, err.toString());
-  }.bind(this)
-});
-
-}
-*/
 
 const mapStateToProps = (state) => {
   return {
@@ -161,7 +140,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-    userLogin: (thisUser) => dispatch(userLogin(thisUser))
+    userLogin: (thisUser) => dispatch(userLogin(thisUser)),
+    secureLogin: (thisUser) => dispatch(secureLogin(thisUser))
   }
 }
 

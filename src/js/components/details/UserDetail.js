@@ -67,9 +67,7 @@ class UserDetail extends React.Component{
 <div>
 <div className="bg-info med-pad med-mar" style={{overflow: "hidden"}}>
 <div className="row">
-    <div className="col-md-6">
-    </div>
-    <div className="col-md-6">
+    <div className="col-md-12">
       <ul style={{listStyleType:"none"}}>
         <li><h2>User info for {this.props.user.username}</h2></li>
         <li> Password: {this.props.user.password}</li>

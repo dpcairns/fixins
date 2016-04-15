@@ -24,8 +24,8 @@ export default class Splash extends React.Component{
 			let putOneSpotInState = this.props.putOneSpotInState
 			let putOneUserInState = this.props.putOneUserInState
 			let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
-			let checkInBoxStyle = {padding: "10px", maxWidth:"300px", margin:"0 auto", marginBottom: "0", marginTop: "0", height: "100%", background:"pink"}
-			let dishesBoxStyle = {padding: "10px", maxWidth:"300px", margin:"0 auto", marginBottom: "0", marginTop: "0", height: "100%", background:"lightblue"}
+			let checkInBoxStyle = {padding: "10px", maxWidth:"300px", margin:"0 auto", height: "100%", background:"pink"}
+			let dishesBoxStyle = {padding: "10px", maxWidth:"300px", margin:"0 auto", height: "100%", background:"lightblue"}
 			let topFiveStyle = {overflow: "hidden", height:"220px", paddingTop: "1px", paddingLeft: "4px", paddingRight: "4px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background:"#ffd281"}
 			let topFiveDishNodes = []
 			let recentCheckInNodes = []
@@ -46,7 +46,6 @@ export default class Splash extends React.Component{
 				if(randB === randC){
 					jackpot()
 					jackpotStyles.display = "block"
-					console.log(jackpotStyles)
 				}
 
 				allSubNeighborhoods.forEach(function(subNeighborhood){

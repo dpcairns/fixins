@@ -22,7 +22,7 @@ module.exports = function(router){
 	.post(function (req, res) {
 			var newUser = new User()
 						newUser.username = req.body.name
-						newUser.password = req.body.password
+						newUser.password = newUser.generateHash(req.body.password);
 						newUser.user_sub_neighborhood = req.body.user_sub_neighborhood
 						newUser.save(
 							function(){

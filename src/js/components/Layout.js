@@ -22,11 +22,11 @@ handleLogin(){
 
 
 	handleLogout(){
+		this.context.router.push('index/login')
 		this.setState(
 			{loggedIn: {display: "none"},
 		 	loggedOut: {display: "block"}
 				})
-				this.context.router.push('index/login')
 
 			}
 
@@ -50,7 +50,13 @@ componentDidMount(){
 								<Links/>
 								</div>
 								<div style={greetingStyle} className="col-md-2 text-right anim-button"><h5>
-								hello, {this.props.currentUser.username !== undefined ? <Link to="index/myDashboard">{this.props.currentUser.username}</Link> : "honored guest"} | {this.props.currentUser.username !== undefined ? <a onClick={this.props.userLogout.bind(this)} >logout?</a> : <Link to="index/login">login?</Link>}
+								hello, {this.props.currentUser.username !== undefined ?
+									<Link to="index/myDashboard">{this.props.currentUser.username + " "}</Link>
+								: "honored guest "}
+								|
+								{this.props.currentUser.username !== undefined ?
+									 <a onClick={this.props.userLogout.bind(this)}><span onClick={this.handleLogout.bind(this)}> logout? </span></a> :
+									 <Link to="index/login"> login? </Link>}
 													</h5>
 								</div>
 						</div>

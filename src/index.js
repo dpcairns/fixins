@@ -25,12 +25,13 @@ import NewSpotPage from './js/components/pages/NewSpotPage'
 import AllNeighborhoods from './js/components/details/AllNeighborhoods'
 import AllGenres from './js/components/details/AllGenres'
 import MyDashboard from './js/components/pages/MyDashboard'
-
+import { loginSuccess } from './js/components/utils/AuthModule'
 
 const app = document.getElementById('app');
 
 
 let initialState = {
+	jackpot: "",
 	currentUser: {},
 	genre: "",
 	genres: [],
@@ -57,21 +58,21 @@ let store = createStoreWithMiddleware(
 											window.devToolsExtension ? window.devToolsExtension() : f => f
 										)
 
-function requireAuth(nextState, replaceState) {
+/*function requireAuth(nextState, replaceState) {
 	let state = store.getState()
 	  if (state.currentUser._id !== null){
 		  window.locaton = '/login'
 										}
 						}
+*/
 
-/*						
 						let token = localStorage.getItem('token')
 						let username = localStorage.getItem('username')
 
 						if (token !== null) {
 						  store.dispatch(loginSuccess(token, username))
 						}
-*/
+
 
 ReactDOM.render(
 	<Provider store={store}>

@@ -33,11 +33,10 @@ function findCheckInsFilter(checkIn){
 								 <tr key={checkIn._id}>
 
 																	<td><h5>{checkIn.checkIn_blurb}</h5></td>
-																	<Link to={`/user/${userId}`} onClick={putOneUserInState.bind(this, userId)}>
-																	<td><h5>{checkIn.checkIn_user.username}</h5></td>
+																	<td><Link to={`/user/${userId}`} onClick={putOneUserInState.bind(this, userId)}>
+																	<h5>{checkIn.checkIn_user.username}</h5>
+																	</Link></td>
 																	<td><h5>{checkIn.checkIn_date}</h5></td>
-																	</Link>
-																	<td><h4>{checkIn.checkIn_dish.dish_spot.spot_name}</h4></td>
 
 																	</tr>
 
@@ -120,7 +119,7 @@ function findReviewsFilter(review){
 				<div className="row">
 				<div className="col-md-6" style={listStyle}>
 				<table className="table">
-				<h3>CheckIns for {dish.dish_name}</h3>
+				<caption><h3>CheckIns for {dish.dish_name}</h3></caption>
 
 						<tbody>
             {allCheckIns.filter(findCheckInsFilter).length>0 ? checkInNodes : (<tr><td>no checkIns for {dish.dish_name}...yet! <Link to="index/newCheckIn"> Click here to be the first!.</Link> </td></tr>)}
@@ -130,7 +129,7 @@ function findReviewsFilter(review){
 				<div className="col-md-6" style={listStyle}>
 				<table className="table">
 
-				<h3>Reviews for {dish.dish_name}</h3>
+				<caption><h3>Reviews for {dish.dish_name}</h3></caption>
 				<tbody>
 				{allReviews.filter(findReviewsFilter).length>0 ? reviewNodes : (<tr><td>no reviews for {dish.dish_name}...yet! <Link to="index/newReview">Click here to be the first!</Link> </td></tr>)}
 				</tbody>

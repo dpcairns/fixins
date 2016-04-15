@@ -53,7 +53,7 @@ class MapItself extends React.Component {
                             "n/a "} calories for $
 
                             {signatureDish.length>0 ?
-                               signatureDish[0].dish_price
+                               signatureDish[0].dish_price + " "
                                : " n/a "}
                                 =
                                {signatureDish.length>0 ?

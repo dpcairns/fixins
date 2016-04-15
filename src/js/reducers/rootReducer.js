@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-
+import auth from "../components/utils/AuthModule"
 const currentUser = (state = {}, action) => {
     switch(action.type) {
       case 'LOG_IN':
@@ -380,7 +380,10 @@ const genres = (state = [], action) => {
 const jackpot = (state = "", action) => {
   switch (action.type) {
     case 'JACKPOT':
+    if (state === ""){
       return state.concat("JACKPOT")
+    }
+    else {return state}
   default:
     return state
      }
@@ -389,6 +392,7 @@ const jackpot = (state = "", action) => {
 
 
 const FixinsApp = combineReducers({
+  auth,
   jackpot,
   currentUser,
   review,
