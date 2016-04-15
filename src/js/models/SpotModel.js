@@ -12,7 +12,7 @@ var SpotSchema = new Schema({
 		type: String,
 		default: "default spot blurb"
 	},
-	spot_coordinates: 
+	spot_coordinates:
 	{
 		type: Array,
 		default: [45.53, -122.67]
@@ -39,8 +39,12 @@ var SpotSchema = new Schema({
 			{
 				type: Schema.Types.ObjectId,
 				ref: 'SubNeighborhood'
+			},
+			approved: {
+					type: Boolean,
+					default: false
 			}
-});
+		});
 
 
 module.exports = mongoose.model('Spot', SpotSchema)

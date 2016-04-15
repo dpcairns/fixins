@@ -84,7 +84,7 @@ render(){
         : ("nothing")} home</h3>
   </div>
 </div>
-<CalorieDollarChart username={thisUser.username} userCheckIns={userCheckIns} />
+<CalorieDollarChart username={thisUser.username} userTarget={thisUser.user_target} userCheckIns={userCheckIns} />
 
 <div>
   <div className="row">

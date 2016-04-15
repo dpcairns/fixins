@@ -85,75 +85,75 @@
 
 	var _AdminContainer2 = _interopRequireDefault(_AdminContainer);
 
-	var _MapContainer = __webpack_require__(804);
+	var _MapContainer = __webpack_require__(805);
 
 	var _MapContainer2 = _interopRequireDefault(_MapContainer);
 
-	var _rootReducer = __webpack_require__(807);
+	var _rootReducer = __webpack_require__(808);
 
 	var _rootReducer2 = _interopRequireDefault(_rootReducer);
 
-	var _UserDetail = __webpack_require__(817);
+	var _UserDetail = __webpack_require__(818);
 
 	var _UserDetail2 = _interopRequireDefault(_UserDetail);
 
-	var _GenreDetail = __webpack_require__(818);
+	var _GenreDetail = __webpack_require__(819);
 
 	var _GenreDetail2 = _interopRequireDefault(_GenreDetail);
 
-	var _SpotDetail = __webpack_require__(819);
+	var _SpotDetail = __webpack_require__(820);
 
 	var _SpotDetail2 = _interopRequireDefault(_SpotDetail);
 
-	var _DishDetail = __webpack_require__(820);
+	var _DishDetail = __webpack_require__(821);
 
 	var _DishDetail2 = _interopRequireDefault(_DishDetail);
 
-	var _NeighborhoodDetail = __webpack_require__(821);
+	var _NeighborhoodDetail = __webpack_require__(822);
 
 	var _NeighborhoodDetail2 = _interopRequireDefault(_NeighborhoodDetail);
 
-	var _SubNeighborhoodDetail = __webpack_require__(822);
+	var _SubNeighborhoodDetail = __webpack_require__(823);
 
 	var _SubNeighborhoodDetail2 = _interopRequireDefault(_SubNeighborhoodDetail);
 
-	var _LogInPage = __webpack_require__(823);
+	var _LogInPage = __webpack_require__(824);
 
 	var _LogInPage2 = _interopRequireDefault(_LogInPage);
 
-	var _SignUpPage = __webpack_require__(824);
+	var _SignUpPage = __webpack_require__(825);
 
 	var _SignUpPage2 = _interopRequireDefault(_SignUpPage);
 
-	var _NewCheckInPage = __webpack_require__(825);
+	var _NewCheckInPage = __webpack_require__(826);
 
 	var _NewCheckInPage2 = _interopRequireDefault(_NewCheckInPage);
 
-	var _NewReviewPage = __webpack_require__(826);
+	var _NewReviewPage = __webpack_require__(827);
 
 	var _NewReviewPage2 = _interopRequireDefault(_NewReviewPage);
 
-	var _NewDishPage = __webpack_require__(827);
+	var _NewDishPage = __webpack_require__(828);
 
 	var _NewDishPage2 = _interopRequireDefault(_NewDishPage);
 
-	var _NewSpotPage = __webpack_require__(828);
+	var _NewSpotPage = __webpack_require__(829);
 
 	var _NewSpotPage2 = _interopRequireDefault(_NewSpotPage);
 
-	var _AllNeighborhoods = __webpack_require__(829);
+	var _AllNeighborhoods = __webpack_require__(830);
 
 	var _AllNeighborhoods2 = _interopRequireDefault(_AllNeighborhoods);
 
-	var _AllGenres = __webpack_require__(830);
+	var _AllGenres = __webpack_require__(831);
 
 	var _AllGenres2 = _interopRequireDefault(_AllGenres);
 
-	var _MyDashboard = __webpack_require__(831);
+	var _MyDashboard = __webpack_require__(832);
 
 	var _MyDashboard2 = _interopRequireDefault(_MyDashboard);
 
-	var _AuthModule = __webpack_require__(808);
+	var _AuthModule = __webpack_require__(809);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35418,10 +35418,9 @@
 			type: 'PUT',
 			data: newDishInfo,
 			success: function (changedDish) {
-				dispatch({
-					type: "CHANGED_DISH",
-					changedDish: changedDish
-				});
+				dispatch(_extends({
+					type: "CHANGED_DISH"
+				}, changedDish));
 			}.bind(this),
 			error: function (xhr, status, err) {
 				console.error('./Dishes', status, err.toString());
@@ -35503,10 +35502,9 @@
 			type: 'PUT',
 			data: newSpotInfo,
 			success: function (changedSpot) {
-				dispatch({
-					type: "CHANGED_SPOT",
-					changedSpot: changedSpot
-				});
+				dispatch(_extends({
+					type: "CHANGED_SPOT"
+				}, changedSpot));
 			}.bind(this),
 			error: function (xhr, status, err) {
 				console.error('./Spots', status, err.toString());
@@ -35802,7 +35800,11 @@
 								_react2.default.createElement(
 									"div",
 									{ className: "col-md-2" },
-									_react2.default.createElement("img", { src: myGlitterFood, height: "240px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } }),
+									_react2.default.createElement(
+										_reactRouter.Link,
+										{ to: "index" },
+										_react2.default.createElement("img", { src: myGlitterFood, height: "240px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
+									),
 									_react2.default.createElement(
 										"div",
 										{ style: jackpotStyles },
@@ -35977,29 +35979,29 @@
 	      return FixinsActions.removeCheckIn(id, dispatch);
 	    },
 
-	    findAndChangeSubNeighborhood: function findAndChangeSubNeighborhood(id) {
-	      return FixinsActions.findAndChangeSubNeighborhood(id, dispatch);
+	    findAndChangeSubNeighborhood: function findAndChangeSubNeighborhood(newInfo) {
+	      return FixinsActions.findAndChangeSubNeighborhood(newInfo, dispatch);
 	    },
-	    findAndChangeNeighborhood: function findAndChangeNeighborhood(id) {
-	      return FixinsActions.findAndChangeNeighborhood(id, dispatch);
+	    findAndChangeNeighborhood: function findAndChangeNeighborhood(newInfo) {
+	      return FixinsActions.findAndChangeNeighborhood(newInfo, dispatch);
 	    },
-	    findAndChangeGenre: function findAndChangeGenre(id) {
-	      return FixinsActions.findAndChangeGenre(id, dispatch);
+	    findAndChangeGenre: function findAndChangeGenre(newInfo) {
+	      return FixinsActions.findAndChangeGenre(newInfo, dispatch);
 	    },
-	    findAndChangeUser: function findAndChangeUser(id) {
-	      return FixinsActions.findAndChangeUser(id, dispatch);
+	    findAndChangeUser: function findAndChangeUser(newInfo) {
+	      return FixinsActions.findAndChangeUser(newInfo, dispatch);
 	    },
-	    findAndChangeSpot: function findAndChangeSpot(id) {
-	      return FixinsActions.findAndChangeSpot(id, dispatch);
+	    findAndChangeSpot: function findAndChangeSpot(newInfo) {
+	      return FixinsActions.findAndChangeSpot(newInfo, dispatch);
 	    },
-	    findAndChangeDish: function findAndChangeDish(id) {
-	      return FixinsActions.findAndChangeDish(id, dispatch);
+	    findAndChangeDish: function findAndChangeDish(newInfo) {
+	      return FixinsActions.findAndChangeDish(newInfo, dispatch);
 	    },
-	    findAndChangeReview: function findAndChangeReview(id) {
-	      return FixinsActions.findAndChangeReview(id, dispatch);
+	    findAndChangeReview: function findAndChangeReview(newInfo) {
+	      return FixinsActions.findAndChangeReview(newInfo, dispatch);
 	    },
-	    findAndChangeCheckIn: function findAndChangeCheckIn(id) {
-	      return FixinsActions.findAndChangeCheckIn(id, dispatch);
+	    findAndChangeCheckIn: function findAndChangeCheckIn(newInfo) {
+	      return FixinsActions.findAndChangeCheckIn(newInfo, dispatch);
 	    }
 
 	  };
@@ -36059,51 +36061,51 @@
 
 	var _SpotList2 = _interopRequireDefault(_SpotList);
 
-	var _DishForm = __webpack_require__(785);
+	var _DishForm = __webpack_require__(786);
 
 	var _DishForm2 = _interopRequireDefault(_DishForm);
 
-	var _DishList = __webpack_require__(786);
+	var _DishList = __webpack_require__(787);
 
 	var _DishList2 = _interopRequireDefault(_DishList);
 
-	var _ReviewForm = __webpack_require__(787);
+	var _ReviewForm = __webpack_require__(788);
 
 	var _ReviewForm2 = _interopRequireDefault(_ReviewForm);
 
-	var _ReviewList = __webpack_require__(788);
+	var _ReviewList = __webpack_require__(789);
 
 	var _ReviewList2 = _interopRequireDefault(_ReviewList);
 
-	var _CheckInForm = __webpack_require__(789);
+	var _CheckInForm = __webpack_require__(790);
 
 	var _CheckInForm2 = _interopRequireDefault(_CheckInForm);
 
-	var _CheckInList = __webpack_require__(790);
+	var _CheckInList = __webpack_require__(791);
 
 	var _CheckInList2 = _interopRequireDefault(_CheckInList);
 
-	var _GenreForm = __webpack_require__(791);
+	var _GenreForm = __webpack_require__(792);
 
 	var _GenreForm2 = _interopRequireDefault(_GenreForm);
 
-	var _GenreList = __webpack_require__(792);
+	var _GenreList = __webpack_require__(793);
 
 	var _GenreList2 = _interopRequireDefault(_GenreList);
 
-	var _NeighborhoodForm = __webpack_require__(793);
+	var _NeighborhoodForm = __webpack_require__(794);
 
 	var _NeighborhoodForm2 = _interopRequireDefault(_NeighborhoodForm);
 
-	var _NeighborhoodList = __webpack_require__(794);
+	var _NeighborhoodList = __webpack_require__(795);
 
 	var _NeighborhoodList2 = _interopRequireDefault(_NeighborhoodList);
 
-	var _SubNeighborhoodForm = __webpack_require__(796);
+	var _SubNeighborhoodForm = __webpack_require__(797);
 
 	var _SubNeighborhoodForm2 = _interopRequireDefault(_SubNeighborhoodForm);
 
-	var _SubNeighborhoodList = __webpack_require__(797);
+	var _SubNeighborhoodList = __webpack_require__(798);
 
 	var _SubNeighborhoodList2 = _interopRequireDefault(_SubNeighborhoodList);
 
@@ -36115,7 +36117,7 @@
 
 	var FixinsActions = _interopRequireWildcard(_FixinsActions);
 
-	var _FixinsStore = __webpack_require__(798);
+	var _FixinsStore = __webpack_require__(799);
 
 	var _FixinsStore2 = _interopRequireDefault(_FixinsStore);
 
@@ -36143,12 +36145,67 @@
 		_createClass(Admin, [{
 			key: "render",
 			value: function render() {
+
 				return _react2.default.createElement(
 					"div",
 					null,
 					_react2.default.createElement(
 						"div",
 						null,
+						_react2.default.createElement(
+							"div",
+							{ className: "admin-spot-box row bg-info" },
+							_react2.default.createElement(
+								"div",
+								{ className: "admin-spot-output col-md-12" },
+								_react2.default.createElement(
+									"h2",
+									null,
+									"All Spots"
+								),
+								_react2.default.createElement(_SpotList2.default, {
+									allSpots: this.props.allSpots,
+									allSubNeighborhoods: this.props.allSubNeighborhoods,
+									allReviews: this.props.allReviews,
+									allGenres: this.props.allGenres,
+									allDishes: this.props.allDishes,
+									removeSpot: this.props.removeSpot,
+									findAndChangeSpot: this.props.findAndChangeSpot,
+									putOneSpotInState: this.props.putOneSpotInState,
+									putOneSubNeighborhoodInState: this.props.putOneSubNeighborhoodInState
+
+								})
+							)
+						),
+						_react2.default.createElement("hr", null),
+						_react2.default.createElement("hr", null),
+						_react2.default.createElement("hr", null),
+						_react2.default.createElement("hr", null),
+						_react2.default.createElement(
+							"div",
+							{ className: "admin-dish-box bg-success row" },
+							_react2.default.createElement(
+								"div",
+								{ className: "admin-dish-output col-md-12" },
+								_react2.default.createElement(
+									"h1",
+									null,
+									"All dishes"
+								),
+								_react2.default.createElement(_DishList2.default, {
+									allReviews: this.props.allReviews,
+									allCheckIns: this.props.allCheckIns,
+									allDishes: this.props.allDishes,
+									removeDish: this.props.removeDish,
+									findAndChangeDish: this.props.findAndChangeDish,
+									putOneDishInState: this.props.putOneDishInState
+
+								})
+							)
+						),
+						_react2.default.createElement("hr", null),
+						_react2.default.createElement("hr", null),
+						_react2.default.createElement("hr", null),
 						_react2.default.createElement(
 							"div",
 							{ className: "admin-user-box bg-success row" },
@@ -36188,49 +36245,7 @@
 							)
 						),
 						_react2.default.createElement("hr", null),
-						_react2.default.createElement(
-							"div",
-							{ className: "admin-spot-box row bg-info" },
-							_react2.default.createElement(
-								"div",
-								{ className: "admin-spot-input col-md-4" },
-								_react2.default.createElement(
-									"h2",
-									null,
-									"All Spots"
-								),
-								_react2.default.createElement(_SpotList2.default, {
-									allSpots: this.props.allSpots,
-									allSubNeighborhoods: this.props.allSubNeighborhoods,
-									allReviews: this.props.allReviews,
-									allGenres: this.props.allGenres,
-									allDishes: this.props.allDishes,
-									removeSpot: this.props.removeSpot,
-									findAndChangeSpot: this.props.findAndChangeSpot,
-									putOneSpotInState: this.props.putOneSpotInState,
-									putOneSubNeighborhoodInState: this.props.putOneSubNeighborhoodInState
-
-								})
-							)
-						),
 						_react2.default.createElement("hr", null),
-						_react2.default.createElement(
-							"div",
-							{ className: "admin-dish-box bg-success row" },
-							_react2.default.createElement(
-								"div",
-								{ className: "admin-dish-input col-md-4" },
-								_react2.default.createElement(_DishList2.default, {
-									allReviews: this.props.allReviews,
-									allCheckIns: this.props.allCheckIns,
-									allDishes: this.props.allDishes,
-									removeDish: this.props.removeDish,
-									findAndChangeDish: this.props.findAndChangeDish,
-									putOneDishInState: this.props.putOneDishInState
-
-								})
-							)
-						),
 						_react2.default.createElement("hr", null),
 						_react2.default.createElement(
 							"div",
@@ -36253,6 +36268,8 @@
 							)
 						),
 						_react2.default.createElement("hr", null),
+						_react2.default.createElement("hr", null),
+						_react2.default.createElement("hr", null),
 						_react2.default.createElement(
 							"div",
 							{ className: "admin-checkIn-box bg-info row" },
@@ -36273,6 +36290,8 @@
 								})
 							)
 						),
+						_react2.default.createElement("hr", null),
+						_react2.default.createElement("hr", null),
 						_react2.default.createElement("hr", null),
 						_react2.default.createElement(
 							"div",
@@ -36309,6 +36328,8 @@
 							)
 						),
 						_react2.default.createElement("hr", null),
+						_react2.default.createElement("hr", null),
+						_react2.default.createElement("hr", null),
 						_react2.default.createElement(
 							"div",
 							{ className: "admin-subNeighborhood-box bg-info row" },
@@ -36330,6 +36351,8 @@
 								})
 							)
 						),
+						_react2.default.createElement("hr", null),
+						_react2.default.createElement("hr", null),
 						_react2.default.createElement("hr", null),
 						_react2.default.createElement(
 							"div",
@@ -36416,6 +36439,7 @@
 				username: '',
 				password: '',
 				user_sub_neighborhood: '',
+				target: '',
 				signUpFailureStyles: { display: "none" },
 				signUpSuccessStyles: { display: "none" }
 			};
@@ -36456,6 +36480,11 @@
 				this.setState({ username: e.target.value });
 			}
 		}, {
+			key: "handleTargetChange",
+			value: function handleTargetChange(e) {
+				this.setState({ target: e.target.value });
+			}
+		}, {
 			key: "handlePasswordChange",
 			value: function handlePasswordChange(e) {
 				this.setState({ password: e.target.value });
@@ -36491,27 +36520,47 @@
 						"form",
 						{ onSubmit: this.handleSubmit.bind(this) },
 						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Username:",
-							_react2.default.createElement("input", { type: "text", value: this.state.username, onChange: this.handleUsernameChange.bind(this), className: "form-control", placeholder: "username" })
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Password:",
-							_react2.default.createElement("input", { type: "password", value: this.state.password, onChange: this.handlePasswordChange.bind(this), className: "form-control", placeholder: "password" })
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Sub-Neighborhood:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.user_sub_neighborhood,
-								onchange2: this.handleSubNeighborhoodChange.bind(this),
-								data: this.props.allSubNeighborhoods,
-								nameName: "subNeighborhood_name" })
-						),
-						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Post" })
+							"h3",
+							null,
+							_react2.default.createElement(
+								"div",
+								{ className: "input-group" },
+								"Username:",
+								_react2.default.createElement("input", { type: "text", value: this.state.username, onChange: this.handleUsernameChange.bind(this), className: "form-control", placeholder: "username" })
+							),
+							_react2.default.createElement(
+								"div",
+								{ className: "input-group" },
+								"Password:",
+								_react2.default.createElement("input", { type: "password", value: this.state.password, onChange: this.handlePasswordChange.bind(this), className: "form-control", placeholder: "password" })
+							),
+							_react2.default.createElement(
+								"div",
+								{ className: "input-group" },
+								"Sub-Neighborhood:",
+								_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.user_sub_neighborhood,
+									onchange2: this.handleSubNeighborhoodChange.bind(this),
+									data: this.props.allSubNeighborhoods,
+									nameName: "subNeighborhood_name" })
+							),
+							_react2.default.createElement(
+								"div",
+								{ className: "input-group" },
+								"What is your calorieDollar target?",
+								_react2.default.createElement("input", { type: "number",
+									value: this.state.target,
+									onChange: this.handleTargetChange.bind(this),
+									className: "form-control",
+									placeholder: "ex: 250" }),
+								" ",
+								_react2.default.createElement(
+									"h4",
+									null,
+									"calories per dollar."
+								)
+							),
+							_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Sign up!" })
+						)
 					),
 					_react2.default.createElement(
 						"div",
@@ -36830,7 +36879,6 @@
 					return _react2.default.createElement(
 						"div",
 						{ className: "row user-boxes", onClick: putOneUserInState.bind(this, userId), key: userId },
-						_react2.default.createElement(_CalorieDollarChart2.default, { username: user.username, userCheckIns: userCheckIns }),
 						_react2.default.createElement(
 							"div",
 							{ className: "col-md-6" },
@@ -37192,6 +37240,9 @@
 	    key: "render",
 	    value: function render() {
 	      var target = parseInt(300);
+	      if (this.props.userTarget) {
+	        target = parseInt(this.props.userTarget);
+	      }
 	      var cumulativeArray = [];
 	      var averagesOverTime = [target];
 
@@ -37214,11 +37265,21 @@
 	      var chartValues = averagesOverTime.map(function (item, index) {
 	        return { x: parseInt(index), y: parseInt(item) };
 	      });
+
+	      var targetValues = averagesOverTime.map(function (item, index) {
+	        return { x: parseInt(index), y: parseInt(target) };
+	      });
+
 	      var lineData = [{
-	        name: this.props.username,
-	        values: chartValues,
+	        name: "your target calorieDollars",
+	        values: targetValues,
 	        strokeWidth: 5,
+	        stroke: "#fff",
 	        strokeDashArray: "5,5"
+	      }, {
+	        name: this.props.username + "actual calorieDollars",
+	        values: chartValues,
+	        strokeWidth: 10
 	      }];
 
 	      /////////////_______END_CHART_VALUES_________/////////////
@@ -37247,7 +37308,7 @@
 	        "div",
 	        null,
 	        _react2.default.createElement(_rd.LineChart, {
-	          legend: false,
+	          legend: true,
 	          data: lineData,
 	          width: 1100,
 	          height: 500,
@@ -67528,6 +67589,10 @@
 
 	var _SpotEditForm2 = _interopRequireDefault(_SpotEditForm);
 
+	var _ApproveButton = __webpack_require__(785);
+
+	var _ApproveButton2 = _interopRequireDefault(_ApproveButton);
+
 	var _reactRouter = __webpack_require__(191);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -67557,6 +67622,7 @@
 				var allGenres = this.props.allGenres;
 				var allSubNeighborhoods = this.props.allSubNeighborhoods;
 				var removeSpot = this.props.removeSpot;
+				var approveSpot = this.props.approveSpot;
 				var findAndChangeSpot = this.props.findAndChangeSpot;
 				var putOneSpotInState = this.props.putOneSpotInState;
 				var spotNodes = this.props.allSpots.map(function (spot) {
@@ -67565,71 +67631,78 @@
 						"div",
 						{ className: "row user-boxes", onClick: putOneSpotInState.bind(this, spotId), key: spotId },
 						_react2.default.createElement(
-							_reactRouter.Link,
-							{ to: "/spot/" + spotId },
+							"div",
+							{ className: "col-md-6" },
 							_react2.default.createElement(
-								"div",
-								{ className: "col-md-6" },
+								"ul",
+								null,
 								_react2.default.createElement(
-									"ul",
+									"li",
 									null,
 									_react2.default.createElement(
-										"li",
-										null,
+										_reactRouter.Link,
+										{ to: "/spot/" + spotId },
 										_react2.default.createElement(
 											"h2",
 											null,
 											spot.spot_name
 										)
-									),
-									_react2.default.createElement(
-										"li",
-										null,
-										" Spot Blurb: ",
-										spot.spot_blurb
-									),
-									_react2.default.createElement(
-										"li",
-										null,
-										" Spot Genre: ",
-										spot.spot_genres[0].genre_name
-									),
-									_react2.default.createElement(
-										"li",
-										null,
-										" Spot Coordinates: ",
-										spot.spot_coordinates[0],
-										" ",
-										spot.spot_coordinates[1]
-									),
-									_react2.default.createElement(
-										"li",
-										null,
-										" Featured dish: ",
-										spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_name : "none yet"
-									),
-									_react2.default.createElement(
-										"li",
-										null,
-										" ",
-										_react2.default.createElement(_RemoveButton2.default, { removeSpot: removeSpot, type: "Spot", id: spot._id })
 									)
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									" Spot Blurb: ",
+									spot.spot_blurb
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									" Spot Genre: ",
+									spot.spot_genres[0].genre_name
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									" Spot Coordinates: ",
+									spot.spot_coordinates[0],
+									" ",
+									spot.spot_coordinates[1]
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									" Featured dish: ",
+									spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_name : "none yet"
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									" ",
+									_react2.default.createElement(_RemoveButton2.default, { removeSpot: removeSpot, type: "Spot", id: spot._id })
+								),
+								_react2.default.createElement(
+									"li",
+									null,
+									" ",
+									_react2.default.createElement(_ApproveButton2.default, { spot: spot, approved: spot.approved, type: "Spot", id: spot._id, findAndChange: findAndChangeSpot }),
+									" "
 								)
-							),
-							_react2.default.createElement(
-								"div",
-								{ className: "col-md-6" },
-								_react2.default.createElement(_SpotEditForm2.default, {
-									spotID: spot._id,
-									allUsers: allUsers,
-									allGenres: allGenres,
-									allDishes: allDishes,
-									allSubNeighborhoods: allSubNeighborhoods,
-									findAndChangeSpot: findAndChangeSpot })
 							)
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "col-md-6" },
+							_react2.default.createElement(_SpotEditForm2.default, {
+								spotID: spot._id,
+								allUsers: allUsers,
+								allGenres: allGenres,
+								allDishes: allDishes,
+								allSubNeighborhoods: allSubNeighborhoods,
+								findAndChangeSpot: findAndChangeSpot })
 						)
 					);
-				});
+				}).reverse();
 				return _react2.default.createElement(
 					"div",
 					null,
@@ -67813,6 +67886,81 @@
 
 /***/ },
 /* 785 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ApproveButton = function (_React$Component) {
+		_inherits(ApproveButton, _React$Component);
+
+		function ApproveButton() {
+			_classCallCheck(this, ApproveButton);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(ApproveButton).apply(this, arguments));
+		}
+
+		_createClass(ApproveButton, [{
+			key: "approve",
+			value: function approve() {
+				if (this.props.type === "Dish") {
+					var newDishInfo = this.props.item;
+					if (newDishInfo.approved !== undefined) {
+						newDishInfo.toggleApproved = !this.props.item.approved;
+					}
+					this.props.findAndChange(newDishInfo);
+				} else if (this.props.type === "Spot") {
+					var newSpotInfo = this.props.item;
+					if (newSpotInfo.approved !== undefined) {
+						newSpotInfo.toggleApproved = !this.props.item.approved;
+					}
+					this.props.findAndChange(newSpotInfo);
+				} else {
+					console.log("no type specified to approve");
+				}
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				var approvedStyle = { background: "green" };
+				var unapprovedStyle = { background: "red" };
+
+				return _react2.default.createElement(
+					"button",
+					{ onClick: this.approve.bind(this), style: this.props.approved ? approvedStyle : unapprovedStyle, className: "btn btn-xs" },
+					_react2.default.createElement(
+						"h4",
+						null,
+						this.props.approved ? "it's VISIBLE: unapprove this item?" : "it's HIDDEN: approve this item?"
+					)
+				);
+			}
+		}]);
+
+		return ApproveButton;
+	}(_react2.default.Component);
+
+	exports.default = ApproveButton;
+
+/***/ },
+/* 786 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68013,7 +68161,7 @@
 	exports.default = DishForm;
 
 /***/ },
-/* 786 */
+/* 787 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68031,6 +68179,10 @@
 	var _RemoveButton = __webpack_require__(549);
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
+
+	var _ApproveButton = __webpack_require__(785);
+
+	var _ApproveButton2 = _interopRequireDefault(_ApproveButton);
 
 	var _reactRouter = __webpack_require__(191);
 
@@ -68211,9 +68363,16 @@
 							null,
 							" ",
 							_react2.default.createElement(_RemoveButton2.default, { removeDish: removeDish, type: "Dish", id: dish._id })
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							" ",
+							_react2.default.createElement(_ApproveButton2.default, { item: dish, approved: dish.approved, type: "Dish", id: dish._id, findAndChange: findAndChangeDish }),
+							" "
 						)
 					);
-				});
+				}).reverse();
 				return _react2.default.createElement(
 					"div",
 					null,
@@ -68236,7 +68395,7 @@
 	exports.default = DishList;
 
 /***/ },
-/* 787 */
+/* 788 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68407,7 +68566,7 @@
 	exports.default = ReviewForm;
 
 /***/ },
-/* 788 */
+/* 789 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68506,7 +68665,7 @@
 	exports.default = Reviewtdst;
 
 /***/ },
-/* 789 */
+/* 790 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68654,7 +68813,7 @@
 	exports.default = CheckInForm;
 
 /***/ },
-/* 790 */
+/* 791 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68759,7 +68918,7 @@
 	exports.default = CheckInList;
 
 /***/ },
-/* 791 */
+/* 792 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68837,7 +68996,7 @@
 	exports.default = GenreForm;
 
 /***/ },
-/* 792 */
+/* 793 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68927,7 +69086,7 @@
 	exports.default = GenresList;
 
 /***/ },
-/* 793 */
+/* 794 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -69009,7 +69168,7 @@
 	exports.default = NeighborhoodForm;
 
 /***/ },
-/* 794 */
+/* 795 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -69028,7 +69187,7 @@
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
-	var _NeighborhoodEditForm = __webpack_require__(795);
+	var _NeighborhoodEditForm = __webpack_require__(796);
 
 	var _NeighborhoodEditForm2 = _interopRequireDefault(_NeighborhoodEditForm);
 
@@ -69134,7 +69293,7 @@
 	exports.default = NeighborhoodList;
 
 /***/ },
-/* 795 */
+/* 796 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -69223,7 +69382,7 @@
 	exports.default = NeighborhoodEditForm;
 
 /***/ },
-/* 796 */
+/* 797 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -69315,7 +69474,7 @@
 	exports.default = SubNeighborhoodForm;
 
 /***/ },
-/* 797 */
+/* 798 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -69406,7 +69565,7 @@
 	exports.default = SubNeighborhoodList;
 
 /***/ },
-/* 798 */
+/* 799 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -69417,13 +69576,13 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _events = __webpack_require__(799);
+	var _events = __webpack_require__(800);
 
 	var _FixinsActions = __webpack_require__(542);
 
 	var FixinsActions = _interopRequireWildcard(_FixinsActions);
 
-	var _dispatcher = __webpack_require__(800);
+	var _dispatcher = __webpack_require__(801);
 
 	var _dispatcher2 = _interopRequireDefault(_dispatcher);
 
@@ -69950,7 +70109,7 @@
 	exports.default = fixinsStore;
 
 /***/ },
-/* 799 */
+/* 800 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -70254,7 +70413,7 @@
 
 
 /***/ },
-/* 800 */
+/* 801 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -70263,12 +70422,12 @@
 	  value: true
 	});
 
-	var _flux = __webpack_require__(801);
+	var _flux = __webpack_require__(802);
 
 	exports.default = new _flux.Dispatcher();
 
 /***/ },
-/* 801 */
+/* 802 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -70280,11 +70439,11 @@
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 */
 
-	module.exports.Dispatcher = __webpack_require__(802);
+	module.exports.Dispatcher = __webpack_require__(803);
 
 
 /***/ },
-/* 802 */
+/* 803 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -70306,7 +70465,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var invariant = __webpack_require__(803);
+	var invariant = __webpack_require__(804);
 
 	var _prefix = 'ID_';
 
@@ -70521,7 +70680,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 803 */
+/* 804 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -70576,7 +70735,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 804 */
+/* 805 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70587,7 +70746,7 @@
 
 	var _reactRedux = __webpack_require__(168);
 
-	var _MapPage = __webpack_require__(805);
+	var _MapPage = __webpack_require__(806);
 
 	var _MapPage2 = _interopRequireDefault(_MapPage);
 
@@ -70604,7 +70763,7 @@
 	exports.default = MapContainer;
 
 /***/ },
-/* 805 */
+/* 806 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -70623,11 +70782,11 @@
 
 	var FixinsActions = _interopRequireWildcard(_FixinsActions);
 
-	var _FixinsStore = __webpack_require__(798);
+	var _FixinsStore = __webpack_require__(799);
 
 	var _FixinsStore2 = _interopRequireDefault(_FixinsStore);
 
-	var _MapItself = __webpack_require__(806);
+	var _MapItself = __webpack_require__(807);
 
 	var _MapItself2 = _interopRequireDefault(_MapItself);
 
@@ -70671,7 +70830,7 @@
 	exports.default = MapPage;
 
 /***/ },
-/* 806 */
+/* 807 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70728,9 +70887,16 @@
 	      var metroLimits = L.latLngBounds(southWest, northEast);
 	      var putOneSpotInState = this.props.putOneSpotInState;
 	      var allDishes = this.props.allDishes;
+	      var allSpots = this.props.allSpots;
 	      var putOneDishInState = this.props.putOneDishInState;
 	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
-	      var markerNodes = this.props.allSpots.map(function (spot) {
+
+	      function findSpotsFilter(spot) {
+	        return spot.approved;
+	      }
+	      var approvedSpots = allSpots.filter(findSpotsFilter);
+
+	      var markerNodes = approvedSpots.map(function (spot) {
 	        function findDishesFilter(dish) {
 	          return dish.dish_spot._id === spot._id;
 	        }
@@ -70861,7 +71027,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MapItself);
 
 /***/ },
-/* 807 */
+/* 808 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70874,7 +71040,7 @@
 
 	var _redux = __webpack_require__(174);
 
-	var _AuthModule = __webpack_require__(808);
+	var _AuthModule = __webpack_require__(809);
 
 	var _AuthModule2 = _interopRequireDefault(_AuthModule);
 
@@ -71086,6 +71252,18 @@
 	        spot_coordinates: action.spot_coordinates,
 	        addDate: action.addDate
 	      };
+	    case 'CHANGED_SPOT':
+	      return {
+	        _id: action._id,
+	        spot_name: action.spot_name,
+	        spot_genres: action.spot_genres,
+	        spot_dishes: action.spot_dishes,
+	        spot_blurb: action.spot_blurb,
+	        spot_subNeighborhood: action.spot_subNeighborhood,
+	        spot_coordinates: action.spot_coordinates,
+	        approved: action.approved,
+	        addDate: action.addDate
+	      };
 	    case 'PUT_ONE_SPOT_IN_STATE':
 	      return Object.assign({}, {
 	        _id: action._id
@@ -71112,6 +71290,10 @@
 	      return state.filter(function (x) {
 	        return x._id !== action._id;
 	      });
+	    case 'CHANGED_SPOT':
+	      return [].concat(_toConsumableArray(state.filter(function (x) {
+	        return x._id !== action._id;
+	      })), [spot(state, action)]);
 	    default:
 	      return state;
 	  }
@@ -71134,6 +71316,20 @@
 	        dish_calories: action.dish_calories,
 	        dish_price: action.dish_price
 	      };
+	    case 'CHANGED_DISH':
+	      return {
+	        _id: action._id,
+	        dish_name: action.dish_name,
+	        dish_blurb: action.dish_blurb,
+	        dish_subNeighborhood: action.dish_subNeighborhood,
+	        dish_spot: action.dish_spot,
+	        dish_checkIns: action.dish_checkIns,
+	        dish_reviews: action.dish_reviews,
+	        dish_calories: action.dish_calories,
+	        dish_price: action.dish_price,
+	        approved: action.approved
+	      };
+
 	    case 'PUT_ONE_DISH_IN_STATE':
 	      return Object.assign({}, {
 	        _id: action._id
@@ -71154,13 +71350,10 @@
 	      return state.filter(function (x) {
 	        return x._id !== action._id;
 	      });
-	    /*case 'CHANGED_DISH':
-	      return [
-	        state.map(x =>
-	        dish(x, action)
-	        )
-	      ]
-	      */
+	    case 'CHANGED_DISH':
+	      return [].concat(_toConsumableArray(state.filter(function (x) {
+	        return x._id !== action._id;
+	      })), [dish(state, action)]);
 	    case 'FETCH_DISHES':
 	      if (state.length === 0) {
 	        return [].concat(_toConsumableArray(state), _toConsumableArray(action.allDishes));
@@ -71300,7 +71493,7 @@
 	exports.default = FixinsApp;
 
 /***/ },
-/* 808 */
+/* 809 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71315,9 +71508,9 @@
 	exports.secureLogin = secureLogin;
 	exports.default = authReducer;
 
-	var _api = __webpack_require__(809);
+	var _api = __webpack_require__(810);
 
-	var _reactRouterRedux = __webpack_require__(812);
+	var _reactRouterRedux = __webpack_require__(813);
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -71422,7 +71615,7 @@
 	}
 
 /***/ },
-/* 809 */
+/* 810 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71434,9 +71627,9 @@
 
 	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-	__webpack_require__(810);
+	__webpack_require__(811);
 
-	var _AuthModule = __webpack_require__(808);
+	var _AuthModule = __webpack_require__(809);
 
 	var API_ROOT = '';
 
@@ -71563,19 +71756,19 @@
 	};
 
 /***/ },
-/* 810 */
+/* 811 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// the whatwg-fetch polyfill installs the fetch() function
 	// on the global object (window or self)
 	//
 	// Return that as the export for use in Webpack, Browserify etc.
-	__webpack_require__(811);
+	__webpack_require__(812);
 	module.exports = self.fetch.bind(self);
 
 
 /***/ },
-/* 811 */
+/* 812 */
 /***/ function(module, exports) {
 
 	(function(self) {
@@ -71970,7 +72163,7 @@
 
 
 /***/ },
-/* 812 */
+/* 813 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71980,7 +72173,7 @@
 	});
 	exports.routerMiddleware = exports.routerActions = exports.goForward = exports.goBack = exports.go = exports.replace = exports.push = exports.CALL_HISTORY_METHOD = exports.routerReducer = exports.LOCATION_CHANGE = exports.syncHistoryWithStore = undefined;
 
-	var _reducer = __webpack_require__(813);
+	var _reducer = __webpack_require__(814);
 
 	Object.defineProperty(exports, 'LOCATION_CHANGE', {
 	  enumerable: true,
@@ -71995,7 +72188,7 @@
 	  }
 	});
 
-	var _actions = __webpack_require__(814);
+	var _actions = __webpack_require__(815);
 
 	Object.defineProperty(exports, 'CALL_HISTORY_METHOD', {
 	  enumerable: true,
@@ -72040,11 +72233,11 @@
 	  }
 	});
 
-	var _sync = __webpack_require__(815);
+	var _sync = __webpack_require__(816);
 
 	var _sync2 = _interopRequireDefault(_sync);
 
-	var _middleware = __webpack_require__(816);
+	var _middleware = __webpack_require__(817);
 
 	var _middleware2 = _interopRequireDefault(_middleware);
 
@@ -72054,7 +72247,7 @@
 	exports.routerMiddleware = _middleware2['default'];
 
 /***/ },
-/* 813 */
+/* 814 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -72098,7 +72291,7 @@
 	}
 
 /***/ },
-/* 814 */
+/* 815 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -72140,7 +72333,7 @@
 	var routerActions = exports.routerActions = { push: push, replace: replace, go: go, goBack: goBack, goForward: goForward };
 
 /***/ },
-/* 815 */
+/* 816 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72153,7 +72346,7 @@
 
 	exports['default'] = syncHistoryWithStore;
 
-	var _reducer = __webpack_require__(813);
+	var _reducer = __webpack_require__(814);
 
 	var defaultSelectLocationState = function defaultSelectLocationState(state) {
 	  return state.routing;
@@ -72292,7 +72485,7 @@
 	}
 
 /***/ },
-/* 816 */
+/* 817 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72302,7 +72495,7 @@
 	});
 	exports['default'] = routerMiddleware;
 
-	var _actions = __webpack_require__(814);
+	var _actions = __webpack_require__(815);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -72330,7 +72523,7 @@
 	}
 
 /***/ },
-/* 817 */
+/* 818 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -72667,13 +72860,13 @@
 	exports.default = UserDetailContainer;
 
 /***/ },
-/* 818 */
+/* 819 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+			value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -72703,159 +72896,158 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var GenreDetail = function (_React$Component) {
-	  _inherits(GenreDetail, _React$Component);
+			_inherits(GenreDetail, _React$Component);
 
-	  function GenreDetail() {
-	    _classCallCheck(this, GenreDetail);
+			function GenreDetail() {
+					_classCallCheck(this, GenreDetail);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(GenreDetail).apply(this, arguments));
-	  }
+					return _possibleConstructorReturn(this, Object.getPrototypeOf(GenreDetail).apply(this, arguments));
+			}
 
-	  _createClass(GenreDetail, [{
-	    key: "render",
-	    value: function render() {
+			_createClass(GenreDetail, [{
+					key: "render",
+					value: function render() {
 
-	      var allSpots = this.props.allSpots;
-	      var putOneSpotInState = this.props.putOneSpotInState;
-	      var putOneDishInState = this.props.putOneDishInState;
-	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
-	      var allDishes = this.props.allDishes;
-	      var genre = this.props.genre;
-	      var spotBoxStyle = { height: "180px", padding: "5px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
+							var allSpots = this.props.allSpots;
+							var putOneSpotInState = this.props.putOneSpotInState;
+							var putOneDishInState = this.props.putOneDishInState;
+							var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
+							var allDishes = this.props.allDishes;
+							var genre = this.props.genre;
+							var spotBoxStyle = { height: "180px", padding: "5px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
 
-	      function findSpotsFilter(spot) {
-	        return spot.spot_genres[0]._id === genre._id;
-	      }
+							function findSpotsFilter(spot) {
+									return spot.spot_genres[0]._id === genre._id && spot.approved;
+							}
 
-	      var spotNodes = allSpots.filter(findSpotsFilter).map(function (spot) {
-	        var subNeighborhoodId = spot.spot_subNeighborhood._id;
-	        var spotId = spot._id;
+							var spotNodes = allSpots.filter(findSpotsFilter).map(function (spot) {
+									var subNeighborhoodId = spot.spot_subNeighborhood._id;
+									var spotId = spot._id;
+									function findDishesFilter(dish) {
+											return dish.dish_spot._id === spot._id;
+									}
+									var theseDishes = allDishes.filter(findDishesFilter);
+									return _react2.default.createElement(
+											"div",
+											{ key: spot._id, style: spotBoxStyle, className: "shad bg-danger" },
+											_react2.default.createElement(
+													"div",
+													null,
+													_react2.default.createElement(
+															_reactRouter.Link,
+															{ to: "/spot/" + spotId, onClick: putOneSpotInState.bind(this, spotId) },
+															_react2.default.createElement(
+																	"h3",
+																	null,
+																	spot.spot_name
+															)
+													),
+													_react2.default.createElement("br", null),
+													_react2.default.createElement(
+															"h4",
+															null,
+															"located in ",
+															_react2.default.createElement(
+																	_reactRouter.Link,
+																	{ onClick: putOneSubNeighborhoodInState.bind(this, subNeighborhoodId), to: "/subNeighborhood/" + subNeighborhoodId },
+																	spot.spot_subNeighborhood.subNeighborhood_name
+															),
+															_react2.default.createElement("br", null),
+															"signature dish:",
+															theseDishes.length > 0 ? _react2.default.createElement(
+																	_reactRouter.Link,
+																	{ onClick: putOneDishInState.bind(this, theseDishes[0]._id),
+																			to: "/dish/" + theseDishes[0]._id },
+																	" " + theseDishes[0].dish_name,
+																	" "
+															) : _react2.default.createElement(
+																	_reactRouter.Link,
+																	{ onClick: putOneSpotInState.bind(this, spotId),
+																			to: "index/newDish" },
+																	"be the first to add a dish!"
+															)
+													)
+											)
+									);
+							});
 
-	        function findDishesFilter(dish) {
-	          return dish.dish_spot._id === spot._id;
-	        }
-	        var theseDishes = allDishes.filter(findDishesFilter);
-	        return _react2.default.createElement(
-	          "div",
-	          { key: spot._id, style: spotBoxStyle, className: "shad bg-danger" },
-	          _react2.default.createElement(
-	            "div",
-	            null,
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: "/spot/" + spotId, onClick: putOneSpotInState.bind(this, spotId) },
-	              _react2.default.createElement(
-	                "h3",
-	                null,
-	                spot.spot_name
-	              )
-	            ),
-	            _react2.default.createElement("br", null),
-	            _react2.default.createElement(
-	              "h4",
-	              null,
-	              "located in ",
-	              _react2.default.createElement(
-	                _reactRouter.Link,
-	                { onClick: putOneSubNeighborhoodInState.bind(this, subNeighborhoodId), to: "/subNeighborhood/" + subNeighborhoodId },
-	                spot.spot_subNeighborhood.subNeighborhood_name
-	              ),
-	              _react2.default.createElement("br", null),
-	              "signature dish:",
-	              theseDishes.length > 0 ? _react2.default.createElement(
-	                _reactRouter.Link,
-	                { onClick: putOneDishInState.bind(this, theseDishes[0]._id),
-	                  to: "/dish/" + theseDishes[0]._id },
-	                " " + theseDishes[0].dish_name,
-	                " "
-	              ) : _react2.default.createElement(
-	                _reactRouter.Link,
-	                { onClick: putOneSpotInState.bind(this, spotId),
-	                  to: "index/newDish" },
-	                "be the first to add a dish!"
-	              )
-	            )
-	          )
-	        );
-	      });
+							return _react2.default.createElement(
+									"div",
+									{ className: "bg-warning med-pad med-mar" },
+									_react2.default.createElement(
+											"h3",
+											null,
+											_react2.default.createElement(
+													_reactRouter.Link,
+													{ to: "index/allGenres" },
+													"see all genres"
+											)
+									),
+									_react2.default.createElement(
+											"h1",
+											null,
+											genre.genre_name
+									),
+									_react2.default.createElement(
+											"div",
+											{ className: "flex flexwrap" },
+											allSpots.filter(findSpotsFilter).length > 0 ? spotNodes : _react2.default.createElement(
+													"h1",
+													null,
+													"no relevant restaurants...yet!"
+											)
+									)
+							);
+					}
+			}]);
 
-	      return _react2.default.createElement(
-	        "div",
-	        { className: "bg-warning med-pad med-mar" },
-	        _react2.default.createElement(
-	          "h3",
-	          null,
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: "index/allGenres" },
-	            "see all genres"
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "h1",
-	          null,
-	          genre.genre_name
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "flex flexwrap" },
-	          allSpots.filter(findSpotsFilter).length > 0 ? spotNodes : _react2.default.createElement(
-	            "h1",
-	            null,
-	            "no relevant restaurants...yet!"
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return GenreDetail;
+			return GenreDetail;
 	}(_react2.default.Component);
 
 	function _putOneSpotInState(_id) {
-	  return { type: "PUT_ONE_SPOT_IN_STATE", _id: _id };
+			return { type: "PUT_ONE_SPOT_IN_STATE", _id: _id };
 	}
 
 	function _putOneSubNeighborhoodInState(_id) {
-	  return { type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id: _id };
+			return { type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id: _id };
 	}
 
 	function _putOneDishInState(_id) {
-	  return { type: "PUT_ONE_DISH_IN_STATE", _id: _id };
+			return { type: "PUT_ONE_DISH_IN_STATE", _id: _id };
 	}
 
 	var mapStateToProps = function mapStateToProps(state) {
-	  var selectGenre = function selectGenre(genres, id) {
-	    var ridiculousArray = genres.filter(function (x) {
-	      return x._id === id;
-	    });
-	    return ridiculousArray[0];
-	  };
-	  return {
-	    genre: selectGenre(state.genres, state.genre._id),
-	    allSpots: state.spots,
-	    allDishes: state.dishes
-	  };
+			var selectGenre = function selectGenre(genres, id) {
+					var ridiculousArray = genres.filter(function (x) {
+							return x._id === id;
+					});
+					return ridiculousArray[0];
+			};
+			return {
+					genre: selectGenre(state.genres, state.genre._id),
+					allSpots: state.spots,
+					allDishes: state.dishes
+			};
 	};
 
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return { putOneSpotInState: function putOneSpotInState(_id) {
-	      return dispatch(_putOneSpotInState(_id));
-	    },
-	    putOneSubNeighborhoodInState: function putOneSubNeighborhoodInState(_id) {
-	      return dispatch(_putOneSubNeighborhoodInState(_id));
-	    },
-	    putOneDishInState: function putOneDishInState(_id) {
-	      return dispatch(_putOneDishInState(_id));
-	    }
-	  };
+			return { putOneSpotInState: function putOneSpotInState(_id) {
+							return dispatch(_putOneSpotInState(_id));
+					},
+					putOneSubNeighborhoodInState: function putOneSubNeighborhoodInState(_id) {
+							return dispatch(_putOneSubNeighborhoodInState(_id));
+					},
+					putOneDishInState: function putOneDishInState(_id) {
+							return dispatch(_putOneDishInState(_id));
+					}
+			};
 	};
 
 	var GenreDetailContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(GenreDetail);
 	exports.default = GenreDetailContainer;
 
 /***/ },
-/* 819 */
+/* 820 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72917,7 +73109,7 @@
 							var subNeighorhoodId = spot.spot_subNeighborhood._id;
 
 							function findDishesFilter(dish) {
-									return dish.dish_spot._id === spot._id;
+									return dish.dish_spot._id === spot._id && dish.approved;
 							}
 							var theseDishes = allDishes.filter(findDishesFilter);
 							var dishNodes = theseDishes.map(function (dish) {
@@ -73080,7 +73272,7 @@
 	exports.default = SpotDetailContainer;
 
 /***/ },
-/* 820 */
+/* 821 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -73207,17 +73399,18 @@
 													)
 											),
 											_react2.default.createElement(
-													_reactRouter.Link,
-													{ to: '/user/' + userId, onClick: putOneUserInState.bind(this, userId) },
+													'td',
+													null,
 													_react2.default.createElement(
-															'td',
-															null,
+															_reactRouter.Link,
+															{ to: '/user/' + userId, onClick: putOneUserInState.bind(this, userId) },
 															_react2.default.createElement(
 																	'h5',
 																	null,
 																	review.review_user.username,
 																	' '
-															)
+															),
+															' '
 													)
 											),
 											_react2.default.createElement(
@@ -73523,7 +73716,7 @@
 	exports.default = DishDetailContainer;
 
 /***/ },
-/* 821 */
+/* 822 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -73702,7 +73895,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NeighborhoodDetail);
 
 /***/ },
-/* 822 */
+/* 823 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -73764,7 +73957,7 @@
 
 							function findSpotsFilter(spot) {
 
-									return spot.spot_subNeighborhood._id === subNeighborhood._id;
+									return spot.spot_subNeighborhood._id === subNeighborhood._id && spot.approved;
 							}
 							var spotNodes = allSpots.filter(findSpotsFilter).map(function (spot) {
 
@@ -74020,7 +74213,7 @@
 	exports.default = SubNeighborhoodDetailContainer;
 
 /***/ },
-/* 823 */
+/* 824 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74043,7 +74236,7 @@
 
 	var _Links2 = _interopRequireDefault(_Links);
 
-	var _AuthModule = __webpack_require__(808);
+	var _AuthModule = __webpack_require__(809);
 
 	var _AuthModule2 = _interopRequireDefault(_AuthModule);
 
@@ -74078,7 +74271,7 @@
 	      this.setState({ loginFailureStyles: {
 	          display: "block",
 	          background: '#FF6666',
-	          height: '50px',
+	          height: '120px',
 	          width: '100%'
 	        }
 	      });
@@ -74091,7 +74284,7 @@
 	        loginSuccessStyles: {
 	          display: "block",
 	          background: '#98FB98',
-	          height: '50px',
+	          height: '120px',
 	          width: '100%'
 	        }
 	      });
@@ -74119,11 +74312,15 @@
 	      var thisUser = {};
 	      thisUser.username = this.state.username;
 	      thisUser.password = this.state.password;
-	      this.props.userLogin(thisUser);
-	      if (thisUser.length === 0) {
+	      if (thisUser.username.length < 1 || thisUser.password.length < 1) {
 	        this.showLoginFailure();
 	      } else {
+	        this.props.userLogin(thisUser);
+	        //      if(this.state.currentUser){
 	        this.showLoginSuccess();
+	        //      else{
+	        //        this.showLoginFailure()
+	        //      }
 	      }
 	      this.setState({ username: "", password: "" });
 	    }
@@ -74145,7 +74342,31 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'col-md-offset-3 col-md-3' },
+	          { className: 'col-md-offset-1 col-md-3' },
+	          _react2.default.createElement(
+	            'div',
+	            { style: this.state.loginFailureStyles },
+	            _react2.default.createElement(
+	              'h2',
+	              null,
+	              'Login failed. Try again and do something different.'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { style: this.state.loginSuccessStyles },
+	            _react2.default.createElement(
+	              'h2',
+	              null,
+	              'Login success! Great work with that',
+	              this.props.currentUser ? this.props.currentUser.username : null
+	            ),
+	            '.'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-md-3' },
 	          _react2.default.createElement(
 	            'h4',
 	            null,
@@ -74184,26 +74405,6 @@
 	                _react2.default.createElement('input', { className: 'button btn-danger align-right small-mar', type: 'submit', value: 'Log-in' })
 	              )
 	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { style: this.state.loginFailureStyles },
-	            _react2.default.createElement(
-	              'h2',
-	              null,
-	              'Login failed. Try again and do something different.'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { style: this.state.loginSuccessStyles },
-	            _react2.default.createElement(
-	              'h2',
-	              null,
-	              'Login success! Great work with that ',
-	              this.props.currentUser ? this.props.currentUser.username : null
-	            ),
-	            '.'
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -74228,7 +74429,6 @@
 	    type: 'POST',
 	    data: thisUser,
 	    success: function (loggedInUser) {
-	      console.log(loggedInUser);
 	      dispatch({
 	        type: "LOG_IN",
 	        user: loggedInUser
@@ -74261,7 +74461,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LogInPage);
 
 /***/ },
-/* 824 */
+/* 825 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74312,7 +74512,8 @@
 
 	    _this.state = {
 	      username: '',
-	      password: ''
+	      password: '',
+	      target: ''
 	    };
 	    return _this;
 	  }
@@ -74363,7 +74564,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SignUpPage);
 
 /***/ },
-/* 825 */
+/* 826 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74386,7 +74587,7 @@
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
-	var _CheckInForm = __webpack_require__(789);
+	var _CheckInForm = __webpack_require__(790);
 
 	var _CheckInForm2 = _interopRequireDefault(_CheckInForm);
 
@@ -74465,7 +74666,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewCheckInPage);
 
 /***/ },
-/* 826 */
+/* 827 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74488,7 +74689,7 @@
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
-	var _ReviewForm = __webpack_require__(787);
+	var _ReviewForm = __webpack_require__(788);
 
 	var _ReviewForm2 = _interopRequireDefault(_ReviewForm);
 
@@ -74567,7 +74768,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewReviewPage);
 
 /***/ },
-/* 827 */
+/* 828 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74590,7 +74791,7 @@
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
-	var _DishForm = __webpack_require__(785);
+	var _DishForm = __webpack_require__(786);
 
 	var _DishForm2 = _interopRequireDefault(_DishForm);
 
@@ -74680,7 +74881,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewDishPage);
 
 /***/ },
-/* 828 */
+/* 829 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74790,7 +74991,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewSpotPage);
 
 /***/ },
-/* 829 */
+/* 830 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -74817,7 +75018,7 @@
 
 	var _Links2 = _interopRequireDefault(_Links);
 
-	var _NeighborhoodList = __webpack_require__(794);
+	var _NeighborhoodList = __webpack_require__(795);
 
 	var _NeighborhoodList2 = _interopRequireDefault(_NeighborhoodList);
 
@@ -74903,7 +75104,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AllNeighborhoods);
 
 /***/ },
-/* 830 */
+/* 831 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -75039,7 +75240,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AllGenres);
 
 /***/ },
-/* 831 */
+/* 832 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75066,7 +75267,7 @@
 
 	var _CalorieDollarChart2 = _interopRequireDefault(_CalorieDollarChart);
 
-	var _HorizontalRainbow = __webpack_require__(832);
+	var _HorizontalRainbow = __webpack_require__(833);
 
 	var _HorizontalRainbow2 = _interopRequireDefault(_HorizontalRainbow);
 
@@ -75282,7 +75483,7 @@
 	              )
 	            )
 	          ),
-	          _react2.default.createElement(_CalorieDollarChart2.default, { username: thisUser.username, userCheckIns: userCheckIns }),
+	          _react2.default.createElement(_CalorieDollarChart2.default, { username: thisUser.username, userTarget: thisUser.user_target, userCheckIns: userCheckIns }),
 	          _react2.default.createElement(
 	            'div',
 	            null,
@@ -75372,7 +75573,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MyDashboard);
 
 /***/ },
-/* 832 */
+/* 833 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";

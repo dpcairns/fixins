@@ -14,9 +14,18 @@ class MapItself extends React.Component {
     const metroLimits = L.latLngBounds(southWest, northEast);
     let putOneSpotInState = this.props.putOneSpotInState
     let allDishes = this.props.allDishes
+    let allSpots = this.props.allSpots
     let putOneDishInState = this.props.putOneDishInState
     let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
-    let markerNodes = this.props.allSpots.map((spot) => {
+
+
+    function findSpotsFilter(spot){
+        				return (spot.approved)
+    				}
+  	let approvedSpots = allSpots.filter(findSpotsFilter)
+
+
+    let markerNodes = approvedSpots.map((spot) => {
       	function findDishesFilter(dish){
           									return (dish.dish_spot._id === spot._id)
           						}

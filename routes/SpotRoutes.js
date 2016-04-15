@@ -55,6 +55,9 @@ module.exports = function(router){
 				if (req.body.newName){
 					Spot.spot_name = req.body.newName
 			}
+			if (req.body.toggleApproved){
+				Spot.approved = req.body.toggleApproved
+		}
 				if (req.body.newSubNeighborhood){
 					Spot.spot_subNeighborhood = req.body.newSubNeighborhood
 			}
@@ -76,6 +79,7 @@ module.exports = function(router){
 
 				Spot.save()
 				res.json(Spot)
+				console.log(Spot)
 		}
 
 		})

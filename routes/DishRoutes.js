@@ -52,6 +52,37 @@ router.route('/Dishes/:DishId')
 			}
 		})
 	})
+
+
+.put(function (req, res) {
+			console.log("finding a given Dish in fixins")
+			var id = req.body._id
+			Dish.findOne({_id: id}).exec(function(err, Dish){
+				console.log('here is the Dish in routes')
+				console.log(Dish)
+				console.log('here are the items to be changed in routes')
+				console.log(req.body)
+				if(err){
+					console.log("couldn\t find this Dish")
+				}
+
+
+				else{
+
+				if (req.body.toggleApproved){
+					Dish.approved = req.body.toggleApproved
+			}
+
+					Dish.save()
+					res.json(Dish)
+					console.log(Dish)
+			}
+
+			})
+		})
+
+
+
 	.delete(function (req, res) {
 		console.log("deleting a given Dishes in fixins")
 		var id = req.params.DishId

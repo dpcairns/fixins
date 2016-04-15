@@ -200,6 +200,18 @@ const spot = (state = "", action) => {
         spot_coordinates: action.spot_coordinates,
         addDate: action.addDate
       }
+    case 'CHANGED_SPOT':
+      return {
+        _id: action._id,
+        spot_name: action.spot_name,
+        spot_genres: action.spot_genres,
+        spot_dishes: action.spot_dishes,
+        spot_blurb: action.spot_blurb,
+        spot_subNeighborhood: action.spot_subNeighborhood,
+        spot_coordinates: action.spot_coordinates,
+        approved: action.approved,
+        addDate: action.addDate
+      }
     case 'PUT_ONE_SPOT_IN_STATE':
       return Object.assign({}, {
         _id: action._id
@@ -229,6 +241,12 @@ const spots = (state = [], action) => {
        return x._id !== action._id
 
      })
+     case 'CHANGED_SPOT':
+     return [
+       ...state.filter(x =>{
+      return x._id !== action._id
+    }), spot(state, action)
+  ]
     default:
       return state
   }
@@ -248,6 +266,20 @@ const dish = (state = "", action) => {
         dish_calories: action.dish_calories,
         dish_price: action.dish_price
       }
+      case 'CHANGED_DISH':
+        return {
+          _id: action._id,
+          dish_name: action.dish_name,
+          dish_blurb: action.dish_blurb,
+          dish_subNeighborhood: action.dish_subNeighborhood,
+          dish_spot: action.dish_spot,
+          dish_checkIns: action.dish_checkIns,
+          dish_reviews: action.dish_reviews,
+          dish_calories: action.dish_calories,
+          dish_price: action.dish_price,
+          approved: action.approved,
+        }
+
     case 'PUT_ONE_DISH_IN_STATE':
       return Object.assign({}, {
         _id: action._id
@@ -268,13 +300,12 @@ const dishes = (state = [], action) => {
          return x._id !== action._id
 
        })
-    /*case 'CHANGED_DISH':
-      return [
-        state.map(x =>
-        dish(x, action)
-        )
-      ]
-      */
+    case 'CHANGED_DISH':
+       return [
+         ...state.filter(x =>{
+        return x._id !== action._id
+      }), dish(state, action)
+    ]
     case 'FETCH_DISHES':
         if(state.length === 0){
         return [

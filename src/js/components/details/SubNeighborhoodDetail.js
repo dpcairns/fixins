@@ -22,7 +22,7 @@ class SubNeighborhoodDetail extends React.Component{
 
     function findSpotsFilter(spot){
 
-    									return (spot.spot_subNeighborhood._id === subNeighborhood._id)
+    									return (spot.spot_subNeighborhood._id === subNeighborhood._id && spot.approved)
     						}
     				let spotNodes = allSpots.filter(findSpotsFilter).map(function(spot){
 

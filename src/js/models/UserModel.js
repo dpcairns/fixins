@@ -12,6 +12,10 @@ var UserSchema = new Schema({
 		type: String,
 		required: true
 	},
+	user_target:{
+		type: Number,
+		default: 300
+	},
 	joinDate: {
 		type: Date,
 		default: Date.now
@@ -44,7 +48,6 @@ var UserSchema = new Schema({
 				type: Schema.Types.ObjectId,
 				ref: 'SubNeighborhood'
 	}
-
 });
 
 

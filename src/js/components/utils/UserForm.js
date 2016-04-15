@@ -9,6 +9,7 @@ export default class UserForm extends React.Component{
 			username: '',
 			password: '',
 			user_sub_neighborhood: '',
+			target: '',
       signUpFailureStyles: {display: "none"},
       signUpSuccessStyles: {display: "none"}
 		}
@@ -46,6 +47,10 @@ export default class UserForm extends React.Component{
 	this.setState({username: e.target.value})
 	}
 
+		handleTargetChange(e){
+		this.setState({target: e.target.value})
+		}
+
 	handlePasswordChange(e){
 	this.setState({password: e.target.value})
 	}
@@ -74,7 +79,7 @@ export default class UserForm extends React.Component{
 	return(
 		<div>
 				<form onSubmit={this.handleSubmit.bind(this)}>
-
+			<h3>
 		<div className="input-group">
 			Username:
 		  <input type="text" value={this.state.username} onChange={this.handleUsernameChange.bind(this)} className="form-control" placeholder="username"/>
@@ -90,7 +95,18 @@ export default class UserForm extends React.Component{
 					data={this.props.allSubNeighborhoods}
 					nameName="subNeighborhood_name" />
 		</div>
-	<input className="button btn-danger align-right" type="submit" value="Post"/>
+		<div className="input-group">
+			What is your calorieDollar target?
+		  <input type="number"
+		  	value={this.state.target}
+		  	onChange={this.handleTargetChange.bind(this)}
+		  	className="form-control"
+		  	placeholder="ex: 250"/> <h4>calories per dollar.</h4>
+		</div>
+
+	<input className="button btn-danger align-right" type="submit" value="Sign up!"/>
+	</h3>
+
 	</form>
 	<div style={this.state.signUpFailureStyles}><h2>Signup failed. Try again and do something different.</h2></div>
 	<div style={this.state.signUpSuccessStyles}><h2>Signup success! Click here to <Link to="index/login">login</Link>.</h2>.</div>

@@ -174,17 +174,17 @@ table{
 
 
 .admin-user-output{
-	height: 500px;
+	height: 800px;
 	overflow-y: scroll;
 }
 
 .admin-dish-output{
-	height: 300px;
+	height: 800px;
 	overflow-y: scroll;
 }
 
 .admin-spot-output{
-	height: 300px;
+	height: 800px;
 	overflow-y: scroll;
 }
 

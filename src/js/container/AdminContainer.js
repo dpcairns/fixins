@@ -69,14 +69,14 @@ const mapDispatchToProps = (dispatch) => {
           removeReview: (id) => FixinsActions.removeReview(id, dispatch),
           removeCheckIn: (id) => FixinsActions.removeCheckIn(id, dispatch),
 
-          findAndChangeSubNeighborhood: (id) => FixinsActions.findAndChangeSubNeighborhood(id, dispatch),
-          findAndChangeNeighborhood: (id) => FixinsActions.findAndChangeNeighborhood(id, dispatch),
-          findAndChangeGenre: (id) => FixinsActions.findAndChangeGenre(id, dispatch),
-          findAndChangeUser: (id) => FixinsActions.findAndChangeUser(id, dispatch),
-          findAndChangeSpot: (id) => FixinsActions.findAndChangeSpot(id, dispatch),
-          findAndChangeDish: (id) => FixinsActions.findAndChangeDish(id, dispatch),
-          findAndChangeReview: (id) => FixinsActions.findAndChangeReview(id, dispatch),
-          findAndChangeCheckIn: (id) => FixinsActions.findAndChangeCheckIn(id, dispatch)
+          findAndChangeSubNeighborhood: (newInfo) => FixinsActions.findAndChangeSubNeighborhood(newInfo, dispatch),
+          findAndChangeNeighborhood: (newInfo) => FixinsActions.findAndChangeNeighborhood(newInfo, dispatch),
+          findAndChangeGenre: (newInfo) => FixinsActions.findAndChangeGenre(newInfo, dispatch),
+          findAndChangeUser: (newInfo) => FixinsActions.findAndChangeUser(newInfo, dispatch),
+          findAndChangeSpot: (newInfo) => FixinsActions.findAndChangeSpot(newInfo, dispatch),
+          findAndChangeDish: (newInfo) => FixinsActions.findAndChangeDish(newInfo, dispatch),
+          findAndChangeReview: (newInfo) => FixinsActions.findAndChangeReview(newInfo, dispatch),
+          findAndChangeCheckIn: (newInfo) => FixinsActions.findAndChangeCheckIn(newInfo, dispatch)
 
   }
 }

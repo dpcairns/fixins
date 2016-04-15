@@ -5,6 +5,9 @@ export default class CalorieDollarChart extends React.Component{
 
 render(){
   let target = parseInt(300)
+  if (this.props.userTarget){
+    target = parseInt(this.props.userTarget)
+  }
   let cumulativeArray = []
   let averagesOverTime = [target]
 
@@ -29,14 +32,28 @@ render(){
 let chartValues = averagesOverTime.map(function(item, index){
    return {x: parseInt(index), y: parseInt(item)}
  })
+
+
+ let targetValues = averagesOverTime.map(function(item, index){
+    return {x: parseInt(index), y: parseInt(target)}
+  })
+
 let lineData = [
+  {
+    name: "your target calorieDollars",
+    values: targetValues,
+    strokeWidth: 5,
+    stroke: "#fff",
+    strokeDashArray: "5,5",
+  },
 {
-  name: this.props.username,
+  name: this.props.username + "actual calorieDollars",
   values: chartValues,
-  strokeWidth: 5,
-  strokeDashArray: "5,5",
-},
+  strokeWidth: 10,
+}
+
 ];
+
 
 /////////////_______END_CHART_VALUES_________/////////////
 
@@ -62,7 +79,7 @@ let title= this.props.username + "'s CalorieDollars over time'"
  return (
   <div>
     <LineChart
-  legend={false}
+  legend={true}
   data={lineData}
   width={1100}
   height={500}

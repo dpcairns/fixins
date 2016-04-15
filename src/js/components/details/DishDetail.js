@@ -52,9 +52,9 @@ function findReviewsFilter(review){
             return (
 							<tr key={review._id}>
 								<td><h5>{review.review_words} </h5></td>
-								<Link to={`/user/${userId}`} onClick={putOneUserInState.bind(this, userId)}>
-								<td><h5>{review.review_user.username} </h5></td>
-									</Link>
+								<td><Link to={`/user/${userId}`} onClick={putOneUserInState.bind(this, userId)}>
+									<h5>{review.review_user.username} </h5> </Link>
+								</td>
 								<td><h4>{review.review_stars} stars </h4></td>
 								<td><h4>{review.review_date}</h4></td>
 							</tr>

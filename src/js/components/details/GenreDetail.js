@@ -16,13 +16,13 @@ class GenreDetail extends React.Component{
 		let spotBoxStyle = {height:"180px",padding:"5px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
 
     function findSpotsFilter(spot){
-    									return (spot.spot_genres[0]._id === genre._id)
+    									return (spot.spot_genres[0]._id === genre._id
+												&& spot.approved)
     						}
 
     				let spotNodes = allSpots.filter(findSpotsFilter).map(function(spot){
 							let subNeighborhoodId = spot.spot_subNeighborhood._id
               let spotId = spot._id
-
 										function findDishesFilter(dish){
 																return (dish.dish_spot._id === spot._id)
 													}

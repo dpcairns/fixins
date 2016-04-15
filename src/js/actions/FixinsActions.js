@@ -486,7 +486,7 @@ export function initializeCheckIns(dispatch){
 			success: function(changedDish){
 						dispatch({
 								type: "CHANGED_DISH",
-								changedDish: changedDish
+								...changedDish
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -573,7 +573,7 @@ export function initializeCheckIns(dispatch){
 			success: function(changedSpot){
 						dispatch({
 								type: "CHANGED_SPOT",
-								changedSpot: changedSpot
+								...changedSpot
 											});
 			}.bind(this),
 			error: function(xhr, status, err){

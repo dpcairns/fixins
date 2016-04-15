@@ -19,7 +19,7 @@ class LogInPage extends React.Component{
     this.setState({loginFailureStyles: {
       display: "block",
       background: '#FF6666',
-      height: '50px',
+      height: '120px',
       width: '100%'
     }
   })
@@ -32,7 +32,7 @@ class LogInPage extends React.Component{
       loginSuccessStyles: {
       display: "block",
       background: '#98FB98',
-      height: '50px',
+      height: '120px',
       width: '100%'
     }
   })
@@ -60,11 +60,18 @@ class LogInPage extends React.Component{
     let thisUser = {}
     thisUser.username = this.state.username
     thisUser.password = this.state.password
-		this.props.userLogin(thisUser)
-    if(thisUser.length === 0){
+    if(thisUser.username.length < 1 || thisUser.password.length < 1){
       this.showLoginFailure();
 
-    } else {this.showLoginSuccess();}
+    } else{
+                  this.props.userLogin(thisUser)
+            //      if(this.state.currentUser){
+                  this.showLoginSuccess();
+            //      else{
+            //        this.showLoginFailure()
+            //      }
+
+    }
 		this.setState({username: "", password: ""})
 	}
 
@@ -79,7 +86,13 @@ if(this.props.currentUser._id !== undefined){
 
     <div className="row text-center">
     <h1>login</h1>
-  <div className="col-md-offset-3 col-md-3">
+    <div className="col-md-offset-1 col-md-3">
+    <div style={this.state.loginFailureStyles}><h2>Login failed. Try again and do something different.</h2></div>
+    <div style={this.state.loginSuccessStyles}><h2>Login success! Great work with that
+    {this.props.currentUser ? this.props.currentUser.username : null}</h2>.</div>
+
+    </div>
+  <div className="col-md-3">
   <h4>
 
     <Link to="index/signup">Need an account? Sign up here.</Link>
@@ -106,8 +119,6 @@ if(this.props.currentUser._id !== undefined){
     </form>
 
         </h4>
-    <div style={this.state.loginFailureStyles}><h2>Login failed. Try again and do something different.</h2></div>
-    <div style={this.state.loginSuccessStyles}><h2>Login success! Great work with that {this.props.currentUser ? this.props.currentUser.username : null}</h2>.</div>
 
     </div>
 
@@ -132,7 +143,6 @@ const userLogin = (thisUser, dispatch) => {
     type: 'POST',
     data: thisUser,
     success: function(loggedInUser){
-      console.log(loggedInUser)
       dispatch(
         {
           type: "LOG_IN",

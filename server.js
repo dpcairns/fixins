@@ -47,11 +47,15 @@ router.get('/', function(req,res){
 router.route('/login').post(function(req, res){
 				User.findOne({username: req.body.username}, function(err, user){
 					if(err)
-						return done(err);
+						res.json("LoginError");
 					if(!user)
 						console.log('No User found')
 					bcrypt.compare(req.body.password, user.password, function(err, didItWork) {
-						if(err){console.log(err)}
+						if(err){
+							res.json("LoginError");
+
+
+						}
 
 
 				})

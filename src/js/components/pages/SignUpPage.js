@@ -11,6 +11,7 @@ class SignUpPage extends React.Component{
 		this.state = {
 			username: '',
       password: '',
+      target: ''
 		}
 	}
 

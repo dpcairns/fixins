@@ -105,7 +105,6 @@ toggleEdit(){
 
 			return(
 			<div className="row user-boxes" onClick={putOneUserInState.bind(this, userId)} key={userId}>
-			<CalorieDollarChart username={user.username} userCheckIns={userCheckIns} />
 
 				<div className="col-md-6">
 					<ul>

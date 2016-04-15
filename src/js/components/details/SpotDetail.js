@@ -19,7 +19,7 @@ class SpotDetail extends React.Component{
 		let subNeighorhoodId = spot.spot_subNeighborhood._id
 
 			function findDishesFilter(dish){
-									return (dish.dish_spot._id === spot._id)
+									return (dish.dish_spot._id === spot._id && dish.approved)
 						}
 				let theseDishes = allDishes.filter(findDishesFilter)
 				let dishNodes = theseDishes.map(function(dish){
