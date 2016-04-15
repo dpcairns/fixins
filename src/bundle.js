@@ -36146,6 +36146,10 @@
 			key: "render",
 			value: function render() {
 
+				if (this.props.currentUser === undefined || this.props.currentUser.username !== "admin") {
+					this.context.router.push('index/login');
+				}
+
 				return _react2.default.createElement(
 					"div",
 					null,
@@ -36396,6 +36400,11 @@
 	}(_react2.default.Component);
 
 	exports.default = Admin;
+
+
+	Admin.contextTypes = {
+		router: _react2.default.PropTypes.object.isRequired
+	};
 
 /***/ },
 /* 546 */
@@ -67628,80 +67637,89 @@
 				var spotNodes = this.props.allSpots.map(function (spot) {
 					var spotId = spot._id;
 					return _react2.default.createElement(
-						"div",
-						{ className: "row user-boxes", onClick: putOneSpotInState.bind(this, spotId), key: spotId },
+						"tr",
+						{ onClick: putOneSpotInState.bind(this, spotId), key: spotId },
 						_react2.default.createElement(
-							"div",
-							{ className: "col-md-8" },
+							"td",
+							null,
 							_react2.default.createElement(
-								"ul",
-								null,
+								_reactRouter.Link,
+								{ to: "/spot/" + spotId },
 								_react2.default.createElement(
-									"li",
+									"h2",
 									null,
-									_react2.default.createElement(
-										_reactRouter.Link,
-										{ to: "/spot/" + spotId },
-										_react2.default.createElement(
-											"h2",
-											null,
-											spot.spot_name
-										)
-									)
-								),
-								_react2.default.createElement(
-									"li",
-									null,
-									" Spot Blurb: ",
-									spot.spot_blurb
-								),
-								_react2.default.createElement(
-									"li",
-									null,
-									" Spot Genre: ",
-									spot.spot_genres[0].genre_name
-								),
-								_react2.default.createElement(
-									"li",
-									null,
-									" Spot Coordinates: ",
-									spot.spot_coordinates[0],
-									" ",
-									spot.spot_coordinates[1]
-								),
-								_react2.default.createElement(
-									"li",
-									null,
-									" Featured dish: ",
-									spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_name : "none yet"
-								),
-								_react2.default.createElement(
-									"li",
-									null,
-									" ",
-									_react2.default.createElement(_RemoveButton2.default, { removeSpot: removeSpot, type: "Spot", id: spot._id })
-								),
-								_react2.default.createElement(
-									"li",
-									null,
-									" ",
-									_react2.default.createElement(_ApproveButton2.default, { spot: spot, approved: spot.approved, type: "Spot", id: spot._id, findAndChange: findAndChangeSpot }),
-									" "
+									spot.spot_name
 								)
 							)
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							" Spot Blurb: ",
+							spot.spot_blurb
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							" Spot Genre: ",
+							spot.spot_genres[0].genre_name
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							" Spot Coordinates: ",
+							spot.spot_coordinates[0],
+							" ",
+							spot.spot_coordinates[1]
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							" Featured dish: ",
+							spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_name : "none yet"
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							" ",
+							_react2.default.createElement(_RemoveButton2.default, { removeSpot: removeSpot, type: "Spot", id: spot._id })
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							" ",
+							_react2.default.createElement(_ApproveButton2.default, { spot: spot, approved: spot.approved, type: "Spot", id: spot._id, findAndChange: findAndChangeSpot }),
+							" "
 						)
 					);
 				}).reverse();
 				return _react2.default.createElement(
-					"div",
-					null,
-					spotNodes
+					"table",
+					{ className: "table" },
+					_react2.default.createElement(
+						"tbody",
+						null,
+						spotNodes
+					)
 				);
 			}
 		}]);
 
 		return SpotList;
 	}(_react2.default.Component);
+
+	/*
+	<div className="col-md-6">
+		<SpotEditForm
+				spotID={spot._id}
+				allUsers={allUsers}
+				allGenres={allGenres}
+				allDishes={allDishes}
+				allSubNeighborhoods={allSubNeighborhoods}
+				findAndChangeSpot={findAndChangeSpot}/>
+	</div>
+	*/
+
 
 	exports.default = SpotList;
 

@@ -23,6 +23,11 @@ import { connect } from 'react-redux'
 export default class Admin extends React.Component{
 	render(){
 
+
+		  if(this.props.currentUser === undefined || this.props.currentUser.username !== "admin"){
+		  this.context.router.push('index/login')
+		  }
+
 	return(
 		<div>
 			<div>
@@ -229,4 +234,9 @@ export default class Admin extends React.Component{
 
 		)
 	}
+}
+
+
+Admin.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }

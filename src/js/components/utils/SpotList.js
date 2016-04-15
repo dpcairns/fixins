@@ -20,24 +20,37 @@ export default class SpotList extends React.Component{
 		let spotNodes = this.props.allSpots.map(function(spot){
 			let spotId=spot._id
 			return(
-			<div className="row user-boxes" onClick={putOneSpotInState.bind(this, spotId)} key={spotId}>
-				<div className="col-md-8">
-					<ul>
-						<li>
+			<tr onClick={putOneSpotInState.bind(this, spotId)} key={spotId}>
+
+						<td>
 								<Link to={`/spot/${spotId}`}>
 								<h2>{spot.spot_name}</h2>
 								</Link>
-						</li>
-						<li> Spot Blurb: {spot.spot_blurb}</li>
-						<li> Spot Genre: {spot.spot_genres[0].genre_name}</li>
-						<li> Spot Coordinates: {spot.spot_coordinates[0]} {spot.spot_coordinates[1]}</li>
-						<li> Featured dish: {spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_name : "none yet"}</li>
-						<li> <RemoveButton removeSpot={removeSpot} type="Spot" id={spot._id}/></li>
-						<li> <ApproveButton spot={spot} approved={spot.approved} type="Spot" id={spot._id} findAndChange={findAndChangeSpot}/> </li>
-					</ul>
-				</div>
+						</td>
+						<td> Spot Blurb: {spot.spot_blurb}</td>
+						<td> Spot Genre: {spot.spot_genres[0].genre_name}</td>
+						<td> Spot Coordinates: {spot.spot_coordinates[0]} {spot.spot_coordinates[1]}</td>
+						<td> Featured dish: {spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_name : "none yet"}</td>
+						<td> <RemoveButton removeSpot={removeSpot} type="Spot" id={spot._id}/></td>
+						<td> <ApproveButton spot={spot} approved={spot.approved} type="Spot" id={spot._id} findAndChange={findAndChangeSpot}/> </td>
+					</tr>
 
-				{/*
+				)
+		}).reverse()
+	return(
+		<table className="table">
+				<tbody>
+						{spotNodes}
+				</tbody>
+		</table>
+
+		)
+
+	}
+
+}
+
+				/*
 				<div className="col-md-6">
 					<SpotEditForm
 							spotID={spot._id}
@@ -47,17 +60,4 @@ export default class SpotList extends React.Component{
 							allSubNeighborhoods={allSubNeighborhoods}
 							findAndChangeSpot={findAndChangeSpot}/>
 				</div>
-		*/	}
-			</div>
-				)
-		}).reverse()
-	return(
-		<div>
-			{spotNodes}
-		</div>
-
-		)
-
-	}
-
-}
+		*/
