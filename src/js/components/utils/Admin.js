@@ -24,9 +24,10 @@ export default class Admin extends React.Component{
 	render(){
 
 
-		  if(this.props.currentUser === undefined || this.props.currentUser.username !== "admin"){
+/*		  if(this.props.currentUser === undefined || this.props.currentUser.username !== "admin"){
 		  this.context.router.push('index/login')
 		  }
+*/
 
 	return(
 		<div>
@@ -84,10 +85,6 @@ export default class Admin extends React.Component{
 
 				<div className="admin-user-box bg-success row">
 				<div className="admin-user-input col-md-4">
-									<h2>New User</h2>
-						<UserForm
-						allSubNeighborhoods={this.props.allSubNeighborhoods}
-						createUser={this.props.createUser} />
 					</div>
 					<div className="admin-user-output col-md-8">
 								<h2>All Users</h2>

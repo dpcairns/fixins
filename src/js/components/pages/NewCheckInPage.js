@@ -9,7 +9,6 @@ import * as FixinsActions from "../../actions/FixinsActions"
 class NewCheckInPage extends React.Component{
 
 render(){
-  console.log(this.props.thisDish)
   if(this.props.currentUser._id === undefined){
   this.context.router.push('index/login')
   }

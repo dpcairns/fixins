@@ -22,8 +22,8 @@ module.exports = function(router){
 						newReview.review_user = req.body.review_user
 						newReview.review_stars = req.body.stars
 						newReview.review_words = req.body.words
-						newReview.save(function(){
-						Review.findOne({review_words: newReview.review_words})
+						newReview.save(function(err, savedReview){
+						Review.findOne({_id: savedReview._id})
 							.populate('reviewed_dish')
 							.populate('review_user')
 							.exec(function(err, Review){

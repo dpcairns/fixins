@@ -22,6 +22,7 @@ render(){
     <Link to="index/login">Already have an account? Login here.</Link>
     <UserForm
     allSubNeighborhoods={this.props.allSubNeighborhoods}
+    subNeighborhood={this.props.subNeighborhood}
     createUser={this.props.createUser}
      />
     </div>
@@ -40,6 +41,7 @@ const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser,
     allSubNeighborhoods: state.subNeighborhoods,
+    subNeighborhood: state.subNeighborhood,
     users: state.users
   }
 }

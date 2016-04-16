@@ -165,9 +165,9 @@ export function createCheckIn(newCheckIn, dispatch){
 			type: 'POST',
 			data: newCheckIn,
 			success: function(postedCheckIn){
-						dispatch(//
-								//type: "CREATE_USER",
-								//postedUser
+					console.log("FixinsActions > postedCheckIn")
+					console.log(postedCheckIn)
+						dispatch(
 							{
 									type: 'CREATE_CHECKIN',
 									...postedCheckIn

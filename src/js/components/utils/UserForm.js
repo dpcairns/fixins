@@ -8,7 +8,6 @@ export default class UserForm extends React.Component{
 		this.state = {
 			username: '',
 			password: '',
-			user_sub_neighborhood: '',
 			target: '',
       signUpFailureStyles: {display: "none"},
       signUpSuccessStyles: {display: "none"}
@@ -55,16 +54,12 @@ export default class UserForm extends React.Component{
 	this.setState({password: e.target.value})
 	}
 
-	handleSubNeighborhoodChange(e){
-	this.setState({user_sub_neighborhood: e.target.value})
-	}
-
 	handleSubmit(e){
 		e.preventDefault();
 		var newUser = {}
 		newUser.name = this.state.username
 		newUser.password = this.state.password
-		newUser.user_sub_neighborhood = this.state.user_sub_neighborhood
+		newUser.user_sub_neighborhood = this.props.subNeighborhood
 		if(newUser.name.length<1 || newUser.password.length<1 || newUser.user_sub_neighborhood.length<1){
 			this.showSignUpFailure();
 		}
@@ -72,14 +67,20 @@ export default class UserForm extends React.Component{
 		this.props.createUser(newUser)
 		this.showSignUpSuccess();
 		}
-		this.setState({username: "", password: "", user_sub_neighborhood: ""})
+		this.setState({username: "", password: ""})
 	}
 
+
+
 	render(){
+		let allSubNeighborhoods = this.props.allSubNeighborhoods
+		let subNeighborhoodFilter = (subNeighborhood) => {return (subNeighborhood._id === this.props.subNeighborhood._id)}
+		let mySubNeighborhood = allSubNeighborhoods.filter(subNeighborhoodFilter)
+
 	return(
 		<div>
 				<form onSubmit={this.handleSubmit.bind(this)}>
-			<h3>
+			<h3> You call {mySubNeighborhood[0].subNeighborhood_name} home.
 		<div className="input-group">
 			Username:
 		  <input type="text" value={this.state.username} onChange={this.handleUsernameChange.bind(this)} className="form-control" placeholder="username"/>
@@ -87,13 +88,6 @@ export default class UserForm extends React.Component{
 		<div className="input-group">
 			Password:
 		  <input type="password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)} className="form-control" placeholder="password"/>
-		</div>
-		<div className="input-group">
-			Sub-Neighborhood:
-			<CustomDropdown setValueTo={this.state.user_sub_neighborhood}
-					onchange2={this.handleSubNeighborhoodChange.bind(this)}
-					data={this.props.allSubNeighborhoods}
-					nameName="subNeighborhood_name" />
 		</div>
 		<div className="input-group">
 			What is your calorieDollar target?

@@ -11,16 +11,16 @@ class NeighborhoodDetail extends React.Component{
 		let subNeighborhoodBoxStyle = {height:"150px",width:"200px",margin:"5px",float:"left",fontSize:"1.5em",textAlign:"center", borderRadius:"10px"}
 		let containerStyle = {display:"inline-block"}
     let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
-		let stateSubNeighorhood = this.props.subNeighorhood
+		let stateSubNeighborhood = this.props.subNeighborhood
     let allSubNeighborhoods = this.props.allSubNeighborhoods
     let neighborhood = this.props.neighborhood
 		let allSpots = this.props.allSpots
 		let allUsers = this.props.allUsers
 
-    function findSubNeighborhoodsFilter(subNeighorhood){
-                return (subNeighorhood.sub_neighborhood_neighborhood._id === neighborhood._id)
+    function findSubNeighborhoodsFilter(subNeighborhood){
+                return (subNeighborhood.sub_neighborhood_neighborhood._id === neighborhood._id)
           }
-      let subNeighorhoodNodes = allSubNeighborhoods.filter(findSubNeighborhoodsFilter).map(function(subNeighborhood){
+      let subNeighborhoodNodes = allSubNeighborhoods.filter(findSubNeighborhoodsFilter).map(function(subNeighborhood){
 
 
 				    function findSpotsFilter(spot){
@@ -34,22 +34,21 @@ class NeighborhoodDetail extends React.Component{
 						let theseUsers = allUsers.filter(findUsersFilter)
 
 	      let subNeighborhoodId = subNeighborhood._id
+				let specialLink = ""
+				if (stateSubNeighborhood && stateSubNeighborhood._id === "TRUE_NEW_SPOT")
+						{specialLink = "index/newSpot" }
+				else if (stateSubNeighborhood && stateSubNeighborhood._id === "TRUE_NEW_USER")
+						{specialLink = "index/signup" }
+				else{specialLink = "subNeighborhood/" + subNeighborhoodId }
+
+
                 return (
                     <div key={subNeighborhoodId} onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)}>
 													<div style={subNeighborhoodBoxStyle} className="shad bg-danger">
-
-													{ stateSubNeighorhood && stateSubNeighorhood._id === "TRUE_NEW_SPOT" ?
-
-													<Link to={`/index/newSpot`}>
-														{subNeighborhood.subNeighborhood_name}</Link>
-
-														:
-
-														<Link to={`/subNeighborhood/${subNeighborhoodId}`}>
-															{subNeighborhood.subNeighborhood_name}</Link>
-														}
-
-													<small> <br/>{theseSpots.length>0?
+													<Link to={`/${specialLink}`}>
+													{subNeighborhood.subNeighborhood_name}</Link>
+													<small> <br/>
+													{theseSpots.length>0?
 														("spots: " + theseSpots.length)
 														: (<Link to="index/newSpot">add a spot</Link>)
 													}
@@ -61,13 +60,13 @@ class NeighborhoodDetail extends React.Component{
 return(
   <div className="bg-warning med-pad med-mar">
 	<h3><Link to="index/allNeighborhoods">see all neighborhoods</Link></h3>
-    <h1>Neighborhood Detail Page for {neighborhood.neighborhood_name}</h1>
-		{stateSubNeighorhood && stateSubNeighorhood._id === "TRUE_NEW_SPOT" ?
+    <h1>{neighborhood.neighborhood_name}</h1>
+		{stateSubNeighborhood && stateSubNeighborhood._id === "TRUE_NEW_SPOT" ?
 		<h2>Where do you want to add a spot?</h2>
 		:
     <h2>Here is every subNeighborhood in {neighborhood.neighborhood_name}</h2>}
 		<div className="flex flexwrap">
-		{subNeighorhoodNodes}
+		{subNeighborhoodNodes}
 		</div>
   </div>
 )
@@ -92,7 +91,7 @@ const mapStateToProps = (state) => {
     allSubNeighborhoods: state.subNeighborhoods,
 		allSpots: state.spots,
 		allUsers: state.users,
-		subNeighorhood: state.subNeighborhood,
+		subNeighborhood: state.subNeighborhood,
     neighborhood: selectNeighborhood(state.neighborhoods, state.neighborhood._id)
   }
 }

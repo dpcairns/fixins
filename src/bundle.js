@@ -35109,10 +35109,9 @@
 			type: 'POST',
 			data: newCheckIn,
 			success: function (postedCheckIn) {
-				dispatch( //
-				//type: "CREATE_USER",
-				//postedUser
-				_extends({
+				console.log("FixinsActions > postedCheckIn");
+				console.log(postedCheckIn);
+				dispatch(_extends({
 					type: 'CREATE_CHECKIN'
 				}, postedCheckIn));
 			}.bind(this),
@@ -35584,7 +35583,7 @@
 
 				if (this.props.subNeighborhoods.length > 5) {
 					(function () {
-						var itemBoxStyle = { margin: "2px", maxWidth: "150px", padding: "5px", float: "left", textAlign: "center", background: "#BDA0CB", borderRadius: "10px" };
+						var itemBoxStyle = { overflow: "hidden", margin: "2px", maxHeight: "150px", maxWidth: "150px", padding: "5px", float: "left", textAlign: "center", background: "#BDA0CB", borderRadius: "10px" };
 						var allSubNeighborhoods = _this2.props.subNeighborhoods;
 						var allUsers = _this2.props.users;
 						var allSpots = _this2.props.spots;
@@ -35738,7 +35737,7 @@
 				}
 				return _react2.default.createElement(
 					"div",
-					null,
+					{ style: { overflow: "hidden" } },
 					_react2.default.createElement("div", { className: "bg-info", style: { height: "100%", width: "100%", position: "fixed", backgroundImage: myGif, backgroundSize: "cover", zIndex: "-1" } }),
 					_react2.default.createElement(
 						"div",
@@ -36146,9 +36145,10 @@
 			key: "render",
 			value: function render() {
 
-				if (this.props.currentUser === undefined || this.props.currentUser.username !== "admin") {
-					this.context.router.push('index/login');
-				}
+				/*		  if(this.props.currentUser === undefined || this.props.currentUser.username !== "admin"){
+	   		  this.context.router.push('index/login')
+	   		  }
+	   */
 
 				return _react2.default.createElement(
 					"div",
@@ -36213,18 +36213,7 @@
 						_react2.default.createElement(
 							"div",
 							{ className: "admin-user-box bg-success row" },
-							_react2.default.createElement(
-								"div",
-								{ className: "admin-user-input col-md-4" },
-								_react2.default.createElement(
-									"h2",
-									null,
-									"New User"
-								),
-								_react2.default.createElement(_UserForm2.default, {
-									allSubNeighborhoods: this.props.allSubNeighborhoods,
-									createUser: this.props.createUser })
-							),
+							_react2.default.createElement("div", { className: "admin-user-input col-md-4" }),
 							_react2.default.createElement(
 								"div",
 								{ className: "admin-user-output col-md-8" },
@@ -36447,7 +36436,6 @@
 			_this.state = {
 				username: '',
 				password: '',
-				user_sub_neighborhood: '',
 				target: '',
 				signUpFailureStyles: { display: "none" },
 				signUpSuccessStyles: { display: "none" }
@@ -36499,29 +36487,32 @@
 				this.setState({ password: e.target.value });
 			}
 		}, {
-			key: "handleSubNeighborhoodChange",
-			value: function handleSubNeighborhoodChange(e) {
-				this.setState({ user_sub_neighborhood: e.target.value });
-			}
-		}, {
 			key: "handleSubmit",
 			value: function handleSubmit(e) {
 				e.preventDefault();
 				var newUser = {};
 				newUser.name = this.state.username;
 				newUser.password = this.state.password;
-				newUser.user_sub_neighborhood = this.state.user_sub_neighborhood;
+				newUser.user_sub_neighborhood = this.props.subNeighborhood;
 				if (newUser.name.length < 1 || newUser.password.length < 1 || newUser.user_sub_neighborhood.length < 1) {
 					this.showSignUpFailure();
 				} else {
 					this.props.createUser(newUser);
 					this.showSignUpSuccess();
 				}
-				this.setState({ username: "", password: "", user_sub_neighborhood: "" });
+				this.setState({ username: "", password: "" });
 			}
 		}, {
 			key: "render",
 			value: function render() {
+				var _this2 = this;
+
+				var allSubNeighborhoods = this.props.allSubNeighborhoods;
+				var subNeighborhoodFilter = function subNeighborhoodFilter(subNeighborhood) {
+					return subNeighborhood._id === _this2.props.subNeighborhood._id;
+				};
+				var mySubNeighborhood = allSubNeighborhoods.filter(subNeighborhoodFilter);
+
 				return _react2.default.createElement(
 					"div",
 					null,
@@ -36531,6 +36522,9 @@
 						_react2.default.createElement(
 							"h3",
 							null,
+							" You call ",
+							mySubNeighborhood[0].subNeighborhood_name,
+							" home.",
 							_react2.default.createElement(
 								"div",
 								{ className: "input-group" },
@@ -36542,15 +36536,6 @@
 								{ className: "input-group" },
 								"Password:",
 								_react2.default.createElement("input", { type: "password", value: this.state.password, onChange: this.handlePasswordChange.bind(this), className: "form-control", placeholder: "password" })
-							),
-							_react2.default.createElement(
-								"div",
-								{ className: "input-group" },
-								"Sub-Neighborhood:",
-								_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.user_sub_neighborhood,
-									onchange2: this.handleSubNeighborhoodChange.bind(this),
-									data: this.props.allSubNeighborhoods,
-									nameName: "subNeighborhood_name" })
 							),
 							_react2.default.createElement(
 								"div",
@@ -67688,7 +67673,7 @@
 							"td",
 							null,
 							" ",
-							_react2.default.createElement(_ApproveButton2.default, { spot: spot, approved: spot.approved, type: "Spot", id: spot._id, findAndChange: findAndChangeSpot }),
+							_react2.default.createElement(_ApproveButton2.default, { item: spot, approved: spot.approved, type: "Spot", id: spot._id, findAndChange: findAndChangeSpot }),
 							" "
 						)
 					);
@@ -68763,6 +68748,8 @@
 				if (newCheckInObject.blurb.length < 1 || newCheckInObject.dish.length < 1 || newCheckInObject.user.length < 1) {
 					this.showCheckInFailure();
 				} else {
+					console.log("CheckInForm > newCheckInObject");
+					console.log(newCheckInObject);
 					this.props.createCheckIn(newCheckInObject);
 					this.showCheckInSuccess();
 				}
@@ -73774,16 +73761,16 @@
 							var subNeighborhoodBoxStyle = { height: "150px", width: "200px", margin: "5px", float: "left", fontSize: "1.5em", textAlign: "center", borderRadius: "10px" };
 							var containerStyle = { display: "inline-block" };
 							var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
-							var stateSubNeighorhood = this.props.subNeighorhood;
+							var stateSubNeighborhood = this.props.subNeighborhood;
 							var allSubNeighborhoods = this.props.allSubNeighborhoods;
 							var neighborhood = this.props.neighborhood;
 							var allSpots = this.props.allSpots;
 							var allUsers = this.props.allUsers;
 
-							function findSubNeighborhoodsFilter(subNeighorhood) {
-									return subNeighorhood.sub_neighborhood_neighborhood._id === neighborhood._id;
+							function findSubNeighborhoodsFilter(subNeighborhood) {
+									return subNeighborhood.sub_neighborhood_neighborhood._id === neighborhood._id;
 							}
-							var subNeighorhoodNodes = allSubNeighborhoods.filter(findSubNeighborhoodsFilter).map(function (subNeighborhood) {
+							var subNeighborhoodNodes = allSubNeighborhoods.filter(findSubNeighborhoodsFilter).map(function (subNeighborhood) {
 
 									function findSpotsFilter(spot) {
 											return spot.spot_subNeighborhood._id === subNeighborhood._id;
@@ -73796,19 +73783,24 @@
 									var theseUsers = allUsers.filter(findUsersFilter);
 
 									var subNeighborhoodId = subNeighborhood._id;
+									var specialLink = "";
+									if (stateSubNeighborhood && stateSubNeighborhood._id === "TRUE_NEW_SPOT") {
+											specialLink = "index/newSpot";
+									} else if (stateSubNeighborhood && stateSubNeighborhood._id === "TRUE_NEW_USER") {
+											specialLink = "index/signup";
+									} else {
+											specialLink = "subNeighborhood/" + subNeighborhoodId;
+									}
+
 									return _react2.default.createElement(
 											"div",
 											{ key: subNeighborhoodId, onClick: putOneSubNeighborhoodInState.bind(this, subNeighborhoodId) },
 											_react2.default.createElement(
 													"div",
 													{ style: subNeighborhoodBoxStyle, className: "shad bg-danger" },
-													stateSubNeighorhood && stateSubNeighorhood._id === "TRUE_NEW_SPOT" ? _react2.default.createElement(
+													_react2.default.createElement(
 															_reactRouter.Link,
-															{ to: "/index/newSpot" },
-															subNeighborhood.subNeighborhood_name
-													) : _react2.default.createElement(
-															_reactRouter.Link,
-															{ to: "/subNeighborhood/" + subNeighborhoodId },
+															{ to: "/" + specialLink },
 															subNeighborhood.subNeighborhood_name
 													),
 													_react2.default.createElement(
@@ -73843,10 +73835,9 @@
 									_react2.default.createElement(
 											"h1",
 											null,
-											"Neighborhood Detail Page for ",
 											neighborhood.neighborhood_name
 									),
-									stateSubNeighorhood && stateSubNeighorhood._id === "TRUE_NEW_SPOT" ? _react2.default.createElement(
+									stateSubNeighborhood && stateSubNeighborhood._id === "TRUE_NEW_SPOT" ? _react2.default.createElement(
 											"h2",
 											null,
 											"Where do you want to add a spot?"
@@ -73859,7 +73850,7 @@
 									_react2.default.createElement(
 											"div",
 											{ className: "flex flexwrap" },
-											subNeighorhoodNodes
+											subNeighborhoodNodes
 									)
 							);
 					}
@@ -73886,7 +73877,7 @@
 					allSubNeighborhoods: state.subNeighborhoods,
 					allSpots: state.spots,
 					allUsers: state.users,
-					subNeighorhood: state.subNeighborhood,
+					subNeighborhood: state.subNeighborhood,
 					neighborhood: selectNeighborhood(state.neighborhoods, state.neighborhood._id)
 			};
 	};
@@ -74339,6 +74330,8 @@
 	        this.context.router.push('index/myDashboard');
 	      }
 
+	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
+
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'row text-center' },
@@ -74379,7 +74372,8 @@
 	            null,
 	            _react2.default.createElement(
 	              _reactRouter.Link,
-	              { to: 'index/signup' },
+	              { onClick: putOneSubNeighborhoodInState.bind(this, "TRUE_NEW_USER"),
+	                to: 'index/allNeighborhoods' },
 	              'Need an account? Sign up here.'
 	            ),
 	            _react2.default.createElement('br', null),
@@ -74447,6 +74441,10 @@
 	  });
 	};
 
+	function _putOneSubNeighborhoodInState(_id) {
+	  return { type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id: _id };
+	}
+
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    currentUser: state.currentUser,
@@ -74458,6 +74456,9 @@
 	  return {
 	    userLogin: function userLogin(thisUser) {
 	      return _userLogin(thisUser, dispatch);
+	    },
+	    putOneSubNeighborhoodInState: function putOneSubNeighborhoodInState(_id) {
+	      return dispatch(_putOneSubNeighborhoodInState(_id));
 	    },
 	    secureLogin: function secureLogin(thisUser) {
 	      return dispatch((0, _AuthModule2.default)(thisUser));
@@ -74539,6 +74540,7 @@
 	        ),
 	        _react2.default.createElement(_UserForm2.default, {
 	          allSubNeighborhoods: this.props.allSubNeighborhoods,
+	          subNeighborhood: this.props.subNeighborhood,
 	          createUser: this.props.createUser
 	        })
 	      );
@@ -74556,6 +74558,7 @@
 	  return {
 	    currentUser: state.currentUser,
 	    allSubNeighborhoods: state.subNeighborhoods,
+	    subNeighborhood: state.subNeighborhood,
 	    users: state.users
 	  };
 	};
@@ -74628,7 +74631,6 @@
 	  _createClass(NewCheckInPage, [{
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.props.thisDish);
 	      if (this.props.currentUser._id === undefined) {
 	        this.context.router.push('index/login');
 	      }
@@ -75004,7 +75006,7 @@
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+			value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75038,74 +75040,81 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var AllNeighborhoods = function (_React$Component) {
-	  _inherits(AllNeighborhoods, _React$Component);
+			_inherits(AllNeighborhoods, _React$Component);
 
-	  function AllNeighborhoods() {
-	    _classCallCheck(this, AllNeighborhoods);
+			function AllNeighborhoods() {
+					_classCallCheck(this, AllNeighborhoods);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(AllNeighborhoods).apply(this, arguments));
-	  }
+					return _possibleConstructorReturn(this, Object.getPrototypeOf(AllNeighborhoods).apply(this, arguments));
+			}
 
-	  _createClass(AllNeighborhoods, [{
-	    key: "render",
-	    value: function render() {
-	      var itemBoxStyle = { height: "100px", width: "200px", padding: "8px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
-	      var putOneNeighborhoodInState = this.props.putOneNeighborhoodInState;
-	      var allNeighborhoods = this.props.allNeighborhoods;
-	      var stateSubNeighorhood = this.props.subNeighorhood;
-	      var neighborhoodNodes = allNeighborhoods.map(function (neighborhood) {
-	        var neighborhoodId = neighborhood._id;
-	        return _react2.default.createElement(
-	          "div",
-	          { key: neighborhood._id, style: itemBoxStyle, className: "shad bg-danger" },
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { onClick: putOneNeighborhoodInState.bind(this, neighborhoodId), to: "/neighborhood/" + neighborhood._id },
-	            _react2.default.createElement(
-	              "h1",
-	              null,
-	              neighborhood.neighborhood_name
-	            )
-	          )
-	        );
-	      });
-	      return _react2.default.createElement(
-	        "div",
-	        null,
-	        stateSubNeighorhood !== undefined && stateSubNeighorhood._id === "TRUE_NEW_SPOT" ? _react2.default.createElement(
-	          "h2",
-	          null,
-	          "Where do you want to add a spot?"
-	        ) : _react2.default.createElement(
-	          "h2",
-	          null,
-	          "Explore a neighborhood"
-	        ),
-	        neighborhoodNodes
-	      );
-	    }
-	  }]);
+			_createClass(AllNeighborhoods, [{
+					key: "render",
+					value: function render() {
+							var itemBoxStyle = { height: "100px", width: "200px", padding: "8px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
+							var putOneNeighborhoodInState = this.props.putOneNeighborhoodInState;
+							var allNeighborhoods = this.props.allNeighborhoods;
+							var stateSubNeighorhood = this.props.subNeighorhood;
+							var neighborhoodNodes = allNeighborhoods.map(function (neighborhood) {
+									var neighborhoodId = neighborhood._id;
+									return _react2.default.createElement(
+											"div",
+											{ key: neighborhood._id, style: itemBoxStyle, className: "shad bg-danger" },
+											_react2.default.createElement(
+													_reactRouter.Link,
+													{ onClick: putOneNeighborhoodInState.bind(this, neighborhoodId),
+															to: "/neighborhood/" + neighborhood._id },
+													_react2.default.createElement(
+															"h1",
+															null,
+															neighborhood.neighborhood_name
+													)
+											)
+									);
+							});
 
-	  return AllNeighborhoods;
+							var header = "";
+							if (stateSubNeighorhood !== undefined && stateSubNeighorhood._id === "TRUE_NEW_SPOT") {
+									header = "Where do you want to add a spot?";
+							} else if (stateSubNeighorhood !== undefined && stateSubNeighorhood._id === "TRUE_NEW_USER") {
+									header = "Where do you call home?";
+							} else {
+									header = "Explore a neighborhood";
+							}
+
+							return _react2.default.createElement(
+									"div",
+									null,
+									_react2.default.createElement(
+											"h2",
+											null,
+											header
+									),
+									neighborhoodNodes
+							);
+					}
+			}]);
+
+			return AllNeighborhoods;
 	}(_react2.default.Component);
 
 	function _putOneNeighborhoodInState(_id) {
-	  return { type: "PUT_ONE_NEIGHBORHOOD_IN_STATE", _id: _id };
+			return { type: "PUT_ONE_NEIGHBORHOOD_IN_STATE", _id: _id };
 	}
 
 	var mapStateToProps = function mapStateToProps(state) {
 
-	  return {
-	    allNeighborhoods: state.neighborhoods,
-	    subNeighorhood: state.subNeighborhood
-	  };
+			return {
+					allNeighborhoods: state.neighborhoods,
+					subNeighorhood: state.subNeighborhood
+			};
 	};
 
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return { putOneNeighborhoodInState: function putOneNeighborhoodInState(_id) {
-	      return dispatch(_putOneNeighborhoodInState(_id));
-	    }
-	  };
+			return { putOneNeighborhoodInState: function putOneNeighborhoodInState(_id) {
+							return dispatch(_putOneNeighborhoodInState(_id));
+					}
+			};
 	};
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AllNeighborhoods);

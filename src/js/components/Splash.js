@@ -32,7 +32,7 @@ export default class Splash extends React.Component{
 			let topFiveSubNeighborhoodNodes = []
 
 			if(this.props.subNeighborhoods.length>5){
-				let itemBoxStyle = {margin:"2px",maxWidth:"150px",padding:"5px",float:"left",textAlign:"center", background:"#BDA0CB", borderRadius:"10px"}
+				let itemBoxStyle = {overflow: "hidden", margin:"2px",maxHeight:"150px",maxWidth:"150px",padding:"5px",float:"left",textAlign:"center", background:"#BDA0CB", borderRadius:"10px"}
 				let allSubNeighborhoods = this.props.subNeighborhoods
 				let allUsers = this.props.users
 				let allSpots = this.props.spots
@@ -136,7 +136,7 @@ export default class Splash extends React.Component{
 			})
 		}
 			return(
-				<div>
+				<div style={{overflow: "hidden"}}>
 				<div className="bg-info" style={{height: "100%", width: "100%", position:"fixed", backgroundImage: myGif, backgroundSize: "cover", zIndex:"-1"}}>
 				</div>
 

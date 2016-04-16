@@ -82,6 +82,8 @@ if(this.props.currentUser._id !== undefined){
   this.context.router.push('index/myDashboard')
 }
 
+let putOneSubNeighborhoodInState=this.props.putOneSubNeighborhoodInState
+
   return(
 
     <div className="row text-center">
@@ -95,7 +97,9 @@ if(this.props.currentUser._id !== undefined){
   <div className="col-md-3">
   <h4>
 
-    <Link to="index/signup">Need an account? Sign up here.</Link>
+  <Link onClick={putOneSubNeighborhoodInState.bind(this, "TRUE_NEW_USER")}
+  to="index/allNeighborhoods">
+    Need an account? Sign up here.</Link>
     <br/>
     <form className="centered" style={{maxWidth: "500px"}} onSubmit={this.handleSubmit.bind(this)}>
       <div className="input-group">
@@ -156,6 +160,10 @@ const userLogin = (thisUser, dispatch) => {
   })
 }
 
+function putOneSubNeighborhoodInState(_id){
+  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
+}
+
 const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser,
@@ -166,6 +174,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
     userLogin: (thisUser) => userLogin(thisUser, dispatch),
+    putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
     secureLogin: (thisUser) => dispatch(secureLogin(thisUser))
   }
 }

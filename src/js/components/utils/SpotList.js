@@ -32,7 +32,7 @@ export default class SpotList extends React.Component{
 						<td> Spot Coordinates: {spot.spot_coordinates[0]} {spot.spot_coordinates[1]}</td>
 						<td> Featured dish: {spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_name : "none yet"}</td>
 						<td> <RemoveButton removeSpot={removeSpot} type="Spot" id={spot._id}/></td>
-						<td> <ApproveButton spot={spot} approved={spot.approved} type="Spot" id={spot._id} findAndChange={findAndChangeSpot}/> </td>
+						<td> <ApproveButton item={spot} approved={spot.approved} type="Spot" id={spot._id} findAndChange={findAndChangeSpot}/> </td>
 					</tr>
 
 				)
