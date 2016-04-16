@@ -75313,6 +75313,7 @@
 	      if (this.props.currentUser._id === undefined) {
 	        this.context.router.push('index/login');
 	      }
+
 	      var listStyle = { maxHeight: "400px", overflowX: "hidden", overflowY: "scroll" };
 	      var allReviews = this.props.allReviews;
 	      var allSubNeighborhoods = this.props.allSubNeighborhoods;
@@ -75321,7 +75322,58 @@
 	      var allCheckIns = this.props.allCheckIns;
 	      var thisUser = this.props.currentUser;
 	      var putOneDishInState = this.props.putOneDishInState;
+	      var putOneSpotInState = this.props.putOneSpotInState;
 	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
+	      var itemBoxStyle = { flexGrow: "1", padding: "5px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
+
+	      var sortedDishes = [];
+	      allDishes.forEach(function (dish) {
+	        sortedDishes.push({
+	          calories: dish.dish_calories,
+	          dollars: dish.dish_price,
+	          calorieDollars: parseInt(dish.dish_calories / dish.dish_price),
+	          _id: dish._id,
+	          spotId: dish.dish_spot._id,
+	          nameOfSpot: dish.dish_spot.spot_name,
+	          name: dish.dish_name });
+	      });
+	      sortedDishes.sort(function (dishA, dishB) {
+	        return dishB.calorieDollars - dishA.calorieDollars;
+	      });
+	      var rand1 = Math.floor(Math.random() * 10);
+	      var rand2 = Math.floor(Math.random() * 10);
+	      var rand3 = Math.floor(Math.random() * 10);
+	      var rand4 = Math.floor(Math.random() * 10);
+	      var topFiveCalorieDollarDishes = [sortedDishes[rand1], sortedDishes[rand2], sortedDishes[rand3], sortedDishes[rand4]];
+	      var topFiveCalorieDollarDishesNodes = topFiveCalorieDollarDishes.map(function (dish) {
+	        return _react2.default.createElement(
+	          'div',
+	          { style: itemBoxStyle, className: 'bg-info', key: dish._id },
+	          _react2.default.createElement(
+	            'h5',
+	            null,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { onClick: putOneDishInState.bind(this, dish._id), to: '/dish/' + dish._id },
+	              dish.name + " "
+	            ),
+	            'at',
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/spot/' + dish.spotId, onClick: putOneSpotInState.bind(this, dish.spotId) },
+	              " " + dish.nameOfSpot
+	            ),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(
+	              'i',
+	              null,
+	              ' gets ',
+	              dish.calorieDollars,
+	              ' calorieDollars '
+	            )
+	          )
+	        );
+	      });
 
 	      function findCheckInsFilter(checkIn) {
 	        return checkIn.checkIn_user._id === thisUser._id || checkIn.checkIn_user === thisUser._id;
@@ -75499,7 +75551,18 @@
 	              )
 	            )
 	          ),
+	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(_CalorieDollarChart2.default, { username: thisUser.username, userTarget: thisUser.user_target, userCheckIns: userCheckIns }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'flex' },
+	            _react2.default.createElement(
+	              'h3',
+	              { className: 'bg-danger', style: itemBoxStyle },
+	              'not hitting your target? here are some highly efficient ideas for you to chew on'
+	            ),
+	            topFiveCalorieDollarDishesNodes
+	          ),
 	          _react2.default.createElement(
 	            'div',
 	            null,
@@ -75557,6 +75620,10 @@
 	  return { type: "PUT_ONE_DISH_IN_STATE", _id: _id };
 	}
 
+	function _putOneSpotInState(_id) {
+	  return { type: "PUT_ONE_SPOT_IN_STATE", _id: _id };
+	}
+
 	function _putOneSubNeighborhoodInState(_id) {
 	  return { type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id: _id };
 	}
@@ -75583,6 +75650,9 @@
 	    },
 	    putOneSubNeighborhoodInState: function putOneSubNeighborhoodInState(_id) {
 	      return dispatch(_putOneSubNeighborhoodInState(_id));
+	    },
+	    putOneSpotInState: function putOneSpotInState(_id) {
+	      return dispatch(_putOneSpotInState(_id));
 	    }
 	  };
 	};

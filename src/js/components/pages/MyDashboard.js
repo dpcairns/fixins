@@ -12,6 +12,8 @@ render(){
   if(this.props.currentUser._id === undefined){
   this.context.router.push('index/login')
   }
+
+
   let listStyle={maxHeight:"400px",overflowX:"hidden",overflowY:"scroll"}
   let allReviews = this.props.allReviews
   let allSubNeighborhoods = this.props.allSubNeighborhoods
@@ -20,7 +22,42 @@ render(){
   let allCheckIns = this.props.allCheckIns
   let thisUser = this.props.currentUser
   let putOneDishInState = this.props.putOneDishInState
+  let putOneSpotInState = this.props.putOneSpotInState
   let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
+  let itemBoxStyle = {flexGrow: "1", padding:"5px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
+
+
+    				let sortedDishes = []
+    				allDishes.forEach(function(dish){
+    					sortedDishes.push({
+            calories: dish.dish_calories,
+            dollars: dish.dish_price,
+            calorieDollars: parseInt(dish.dish_calories / dish.dish_price),
+    					_id: dish._id,
+    					spotId: dish.dish_spot._id,
+    					nameOfSpot: dish.dish_spot.spot_name,
+    					name: dish.dish_name})
+            })
+    				sortedDishes.sort(function(dishA, dishB){return dishB.calorieDollars - dishA.calorieDollars})
+            let rand1 = Math.floor(Math.random()*10)
+            let rand2 = Math.floor(Math.random()*10)
+            let rand3 = Math.floor(Math.random()*10)
+            let rand4 = Math.floor(Math.random()*10)
+    				let topFiveCalorieDollarDishes = [sortedDishes[rand1],sortedDishes[rand2],sortedDishes[rand3], sortedDishes[rand4]]
+    				let topFiveCalorieDollarDishesNodes = topFiveCalorieDollarDishes.map(function(dish){
+    					return (
+                <div style={itemBoxStyle} className="bg-info" key={dish._id}>
+                <h5>
+    						<Link onClick={putOneDishInState.bind(this, dish._id)} to={`/dish/${dish._id}`}>
+    						 {dish.name + " "}
+    						</Link>
+    						  at
+    						 <Link to={`/spot/${dish.spotId}`}  onClick={putOneSpotInState.bind(this, dish.spotId)}>
+    						  {" " + dish.nameOfSpot}
+    						 </Link>
+    						  <br/><i> gets {dish.calorieDollars} calorieDollars </i></h5></div>)
+    				})
+
 
     function findCheckInsFilter(checkIn){
                 return (checkIn.checkIn_user._id === thisUser._id || checkIn.checkIn_user === thisUser._id)
@@ -84,8 +121,14 @@ render(){
         : ("nothing")} home</h3>
   </div>
 </div>
+<br/>
 <CalorieDollarChart username={thisUser.username} userTarget={thisUser.user_target} userCheckIns={userCheckIns} />
 
+
+<div className="flex">
+<h3 className="bg-danger" style={itemBoxStyle}>not hitting your target? here are some highly efficient ideas for you to chew on</h3>
+{topFiveCalorieDollarDishesNodes}
+</div>
 <div>
   <div className="row">
     <div className="col-md-6" style={listStyle}>
@@ -120,6 +163,10 @@ function putOneDishInState(_id){
   return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
 }
 
+function putOneSpotInState(_id){
+  return {type: "PUT_ONE_SPOT_IN_STATE", _id:_id}
+}
+
 function putOneSubNeighborhoodInState(_id){
   return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
 }
@@ -142,7 +189,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
   putOneDishInState: (_id) => dispatch(putOneDishInState(_id)),
-  putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id))
+  putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
+  putOneSpotInState: (_id) => dispatch(putOneSpotInState(_id)),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MyDashboard)
