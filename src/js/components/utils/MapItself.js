@@ -18,6 +18,22 @@ class MapItself extends React.Component {
     let putOneDishInState = this.props.putOneDishInState
     let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
 
+const findOne = (query) => {
+    		  $.ajax({
+    			url: "/geocoding/v5/mapbox.places/" + query + ".json",
+    			type: 'GET',
+    			data: newUser,
+    			success: function(myLocation){
+    							console.log(myLocation)
+    			}.bind(this),
+    			error: function(xhr, status, err){
+    				console.error('uh oh dont blame mapbox', status, err.toString());
+    			}.bind(this)
+    		});
+    	}
+
+
+
 
     function findSpotsFilter(spot){
         				return (spot.approved)

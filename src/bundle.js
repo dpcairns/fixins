@@ -70885,6 +70885,20 @@
 	      var putOneDishInState = this.props.putOneDishInState;
 	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
 
+	      var findOne = function findOne(query) {
+	        $.ajax({
+	          url: "/geocoding/v5/mapbox.places/" + query + ".json",
+	          type: 'GET',
+	          data: newUser,
+	          success: function (myLocation) {
+	            console.log(myLocation);
+	          }.bind(_this2),
+	          error: function (xhr, status, err) {
+	            console.error('uh oh dont blame mapbox', status, err.toString());
+	          }.bind(_this2)
+	        });
+	      };
+
 	      function findSpotsFilter(spot) {
 	        return spot.approved;
 	      }
@@ -73207,8 +73221,7 @@
 																	),
 																	' '
 															)
-													),
-													dishNodes
+													)
 											)
 									)
 							);
@@ -75338,7 +75351,7 @@
 	          name: dish.dish_name });
 	      });
 	      sortedDishes.sort(function (dishA, dishB) {
-	        return dishB.calorieDollars - dishA.calorieDollars;
+	        return dishB.calorieDollars - dishA.caunalorieDollars;
 	      });
 	      var rand1 = Math.floor(Math.random() * 10);
 	      var rand2 = Math.floor(Math.random() * 10);

@@ -38,7 +38,7 @@ render(){
     					nameOfSpot: dish.dish_spot.spot_name,
     					name: dish.dish_name})
             })
-    				sortedDishes.sort(function(dishA, dishB){return dishB.calorieDollars - dishA.calorieDollars})
+    				sortedDishes.sort(function(dishA, dishB){return dishB.calorieDollars - dishA.caunalorieDollars})
             let rand1 = Math.floor(Math.random()*10)
             let rand2 = Math.floor(Math.random()*10)
             let rand3 = Math.floor(Math.random()*10)

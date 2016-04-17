@@ -66,7 +66,6 @@ class SpotDetail extends React.Component{
 				<h3>dishes available at {spot.spot_name}</h3>
 				<div className="flex flexwrap">
 					{allDishes.filter(findDishesFilter).length>0 ? dishNodes : (<tr><td>no dishes for {spot.spot_name}...yet! <Link to="index/newDish">Click here to be the first to add one!</Link> </td></tr>)}
-						{dishNodes}
 				</div>
     </div>
 </div>
