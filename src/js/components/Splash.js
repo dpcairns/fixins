@@ -24,8 +24,9 @@ export default class Splash extends React.Component{
 			let putOneSpotInState = this.props.putOneSpotInState
 			let putOneUserInState = this.props.putOneUserInState
 			let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
-			let checkInBoxStyle = {padding: "10px", maxWidth:"300px", margin:"0 auto", height: "100%", background:"pink"}
-			let dishesBoxStyle = {padding: "10px", maxWidth:"300px", margin:"0 auto", height: "100%", background:"lightblue"}
+			let scrollItemStyle = {width: "80%", padding: "10px", margin: "0 auto"}
+			let checkInBoxStyle = {padding: "10px", minWidth:"300px", margin:"0 auto", height: "100%", position: "fixed", background:"pink"}
+			let dishesBoxStyle = {padding: "10px", minWidth:"300px", margin:"0 auto", height: "100%", position: "fixed", background:"lightblue"}
 			let topFiveStyle = {overflow: "hidden", height:"220px", paddingTop: "1px", paddingLeft: "4px", paddingRight: "4px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background:"#ffd281"}
 			let topFiveDishNodes = []
 			let recentCheckInNodes = []
@@ -82,7 +83,7 @@ export default class Splash extends React.Component{
 			}
 
 
-			if (this.props.dishes.length>9){
+			if (this.props.dishes.length>35){
 				let allDishes = this.props.dishes
 				let allCheckIns = this.props.checkIns
 				let sortedDishes = []
@@ -97,9 +98,9 @@ export default class Splash extends React.Component{
 					name: dish.dish_name})
 				})
 				sortedDishes.sort(function(dishA, dishB){return dishB.numberOfCheckIns - dishA.numberOfCheckIns})
-				let topFiveDishes = [sortedDishes[0],sortedDishes[1],sortedDishes[2],sortedDishes[3], sortedDishes[4], sortedDishes[5], sortedDishes[6], sortedDishes[7]]
+				let topFiveDishes = sortedDishes.slice(0,35)
 				topFiveDishNodes = topFiveDishes.map(function(dish){
-					return (<h4 key={dish._id}>
+					return (<h4 style={scrollItemStyle} key={dish._id}>
 						<Link onClick={putOneDishInState.bind(this, dish._id)} to={`/dish/${dish._id}`}>
 						 {dish.name + " "}
 						</Link>
@@ -113,17 +114,14 @@ export default class Splash extends React.Component{
 			}
 
 
-			if (this.props.checkIns.length>12){
+			if (this.props.checkIns.length>90){
 			let allCheckIns = this.props.checkIns
 
-			let lastFiveCheckIns = [allCheckIns[allCheckIns.length -1], allCheckIns[allCheckIns.length -2],
-																allCheckIns[allCheckIns.length -3], allCheckIns[allCheckIns.length -4],
-																allCheckIns[allCheckIns.length -5], allCheckIns[allCheckIns.length -6],
-																 allCheckIns[allCheckIns.length -7], allCheckIns[allCheckIns.length -8]]
+			let lastFiveCheckIns = allCheckIns.slice(1, 90)
 
 			recentCheckInNodes = lastFiveCheckIns.map(function(checkIn){
 
-				return (<h4 key={checkIn._id}>
+				return (<h4 style={scrollItemStyle} key={checkIn._id}>
 					<Link to={`/user/${checkIn.checkIn_user._id}`} onClick={putOneUserInState.bind(this, checkIn.checkIn_user._id)}>
 					{checkIn.checkIn_user.username + " "}
 					</Link>
@@ -140,12 +138,14 @@ export default class Splash extends React.Component{
 				<div className="bg-info" style={{height: "100%", width: "100%", position:"fixed", backgroundImage: myGif, backgroundSize: "cover", zIndex:"-1"}}>
 				</div>
 
-		<div className="ontainer-fluid text-center" style={{zIndex:"2", opacity:"0.9"}}>
+		<div className="text-center" style={{zIndex:"2", opacity:"0.9"}}>
 			<div className="col-md-3">
-				<div style={dishesBoxStyle} className="shadow-container">
-				<h3>top dishes</h3>
+			<div  style={dishesBoxStyle} className="shadow-container">
+							<div className="SplashBoxAnim">
 				{this.props.dishes.length>5 ? topFiveDishNodes : "never mind"}
+
 				</div>
+			</div>
 			</div>
 
 		<div className="col-md-6">
@@ -184,9 +184,10 @@ export default class Splash extends React.Component{
 </div>
 
 		<div className="col-md-3">
-			<div className="shadow-container" style={checkInBoxStyle}>
-			<h3>checkIn ticker</h3>
-			{this.props.checkIns.length>5 ? recentCheckInNodes : "never mind"}
+		<div style={checkInBoxStyle} className="shadow-container">
+			<div className="SplashBoxAnimReverse">
+{this.props.checkIns.length>5 ? recentCheckInNodes : "never mind"}
+			</div>
 			</div>
 		</div>
 

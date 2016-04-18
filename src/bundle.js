@@ -85,75 +85,75 @@
 
 	var _AdminContainer2 = _interopRequireDefault(_AdminContainer);
 
-	var _MapContainer = __webpack_require__(805);
+	var _MapContainer = __webpack_require__(804);
 
 	var _MapContainer2 = _interopRequireDefault(_MapContainer);
 
-	var _rootReducer = __webpack_require__(808);
+	var _rootReducer = __webpack_require__(807);
 
 	var _rootReducer2 = _interopRequireDefault(_rootReducer);
 
-	var _UserDetail = __webpack_require__(818);
+	var _UserDetail = __webpack_require__(817);
 
 	var _UserDetail2 = _interopRequireDefault(_UserDetail);
 
-	var _GenreDetail = __webpack_require__(819);
+	var _GenreDetail = __webpack_require__(818);
 
 	var _GenreDetail2 = _interopRequireDefault(_GenreDetail);
 
-	var _SpotDetail = __webpack_require__(820);
+	var _SpotDetail = __webpack_require__(819);
 
 	var _SpotDetail2 = _interopRequireDefault(_SpotDetail);
 
-	var _DishDetail = __webpack_require__(821);
+	var _DishDetail = __webpack_require__(820);
 
 	var _DishDetail2 = _interopRequireDefault(_DishDetail);
 
-	var _NeighborhoodDetail = __webpack_require__(822);
+	var _NeighborhoodDetail = __webpack_require__(821);
 
 	var _NeighborhoodDetail2 = _interopRequireDefault(_NeighborhoodDetail);
 
-	var _SubNeighborhoodDetail = __webpack_require__(823);
+	var _SubNeighborhoodDetail = __webpack_require__(822);
 
 	var _SubNeighborhoodDetail2 = _interopRequireDefault(_SubNeighborhoodDetail);
 
-	var _LogInPage = __webpack_require__(824);
+	var _LogInPage = __webpack_require__(823);
 
 	var _LogInPage2 = _interopRequireDefault(_LogInPage);
 
-	var _SignUpPage = __webpack_require__(825);
+	var _SignUpPage = __webpack_require__(824);
 
 	var _SignUpPage2 = _interopRequireDefault(_SignUpPage);
 
-	var _NewCheckInPage = __webpack_require__(826);
+	var _NewCheckInPage = __webpack_require__(825);
 
 	var _NewCheckInPage2 = _interopRequireDefault(_NewCheckInPage);
 
-	var _NewReviewPage = __webpack_require__(827);
+	var _NewReviewPage = __webpack_require__(826);
 
 	var _NewReviewPage2 = _interopRequireDefault(_NewReviewPage);
 
-	var _NewDishPage = __webpack_require__(828);
+	var _NewDishPage = __webpack_require__(827);
 
 	var _NewDishPage2 = _interopRequireDefault(_NewDishPage);
 
-	var _NewSpotPage = __webpack_require__(829);
+	var _NewSpotPage = __webpack_require__(828);
 
 	var _NewSpotPage2 = _interopRequireDefault(_NewSpotPage);
 
-	var _AllNeighborhoods = __webpack_require__(830);
+	var _AllNeighborhoods = __webpack_require__(829);
 
 	var _AllNeighborhoods2 = _interopRequireDefault(_AllNeighborhoods);
 
-	var _AllGenres = __webpack_require__(831);
+	var _AllGenres = __webpack_require__(830);
 
 	var _AllGenres2 = _interopRequireDefault(_AllGenres);
 
-	var _MyDashboard = __webpack_require__(832);
+	var _MyDashboard = __webpack_require__(831);
 
 	var _MyDashboard2 = _interopRequireDefault(_MyDashboard);
 
-	var _AuthModule = __webpack_require__(809);
+	var _AuthModule = __webpack_require__(808);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35574,8 +35574,9 @@
 				var putOneSpotInState = this.props.putOneSpotInState;
 				var putOneUserInState = this.props.putOneUserInState;
 				var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
-				var checkInBoxStyle = { padding: "10px", maxWidth: "300px", margin: "0 auto", height: "100%", background: "pink" };
-				var dishesBoxStyle = { padding: "10px", maxWidth: "300px", margin: "0 auto", height: "100%", background: "lightblue" };
+				var scrollItemStyle = { width: "80%", padding: "10px", margin: "0 auto" };
+				var checkInBoxStyle = { padding: "10px", minWidth: "300px", margin: "0 auto", height: "100%", position: "fixed", background: "pink" };
+				var dishesBoxStyle = { padding: "10px", minWidth: "300px", margin: "0 auto", height: "100%", position: "fixed", background: "lightblue" };
 				var topFiveStyle = { overflow: "hidden", height: "220px", paddingTop: "1px", paddingLeft: "4px", paddingRight: "4px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background: "#ffd281" };
 				var topFiveDishNodes = [];
 				var recentCheckInNodes = [];
@@ -35657,7 +35658,7 @@
 					})();
 				}
 
-				if (this.props.dishes.length > 9) {
+				if (this.props.dishes.length > 35) {
 					(function () {
 						var allDishes = _this2.props.dishes;
 						var allCheckIns = _this2.props.checkIns;
@@ -35677,11 +35678,11 @@
 						sortedDishes.sort(function (dishA, dishB) {
 							return dishB.numberOfCheckIns - dishA.numberOfCheckIns;
 						});
-						var topFiveDishes = [sortedDishes[0], sortedDishes[1], sortedDishes[2], sortedDishes[3], sortedDishes[4], sortedDishes[5], sortedDishes[6], sortedDishes[7]];
+						var topFiveDishes = sortedDishes.slice(0, 35);
 						topFiveDishNodes = topFiveDishes.map(function (dish) {
 							return _react2.default.createElement(
 								"h4",
-								{ key: dish._id },
+								{ style: scrollItemStyle, key: dish._id },
 								_react2.default.createElement(
 									_reactRouter.Link,
 									{ onClick: putOneDishInState.bind(this, dish._id), to: "/dish/" + dish._id },
@@ -35706,16 +35707,16 @@
 					})();
 				}
 
-				if (this.props.checkIns.length > 12) {
+				if (this.props.checkIns.length > 90) {
 					var _allCheckIns = this.props.checkIns;
 
-					var lastFiveCheckIns = [_allCheckIns[_allCheckIns.length - 1], _allCheckIns[_allCheckIns.length - 2], _allCheckIns[_allCheckIns.length - 3], _allCheckIns[_allCheckIns.length - 4], _allCheckIns[_allCheckIns.length - 5], _allCheckIns[_allCheckIns.length - 6], _allCheckIns[_allCheckIns.length - 7], _allCheckIns[_allCheckIns.length - 8]];
+					var lastFiveCheckIns = _allCheckIns.slice(1, 90);
 
 					recentCheckInNodes = lastFiveCheckIns.map(function (checkIn) {
 
 						return _react2.default.createElement(
 							"h4",
-							{ key: checkIn._id },
+							{ style: scrollItemStyle, key: checkIn._id },
 							_react2.default.createElement(
 								_reactRouter.Link,
 								{ to: "/user/" + checkIn.checkIn_user._id, onClick: putOneUserInState.bind(this, checkIn.checkIn_user._id) },
@@ -35741,7 +35742,7 @@
 					_react2.default.createElement("div", { className: "bg-info", style: { height: "100%", width: "100%", position: "fixed", backgroundImage: myGif, backgroundSize: "cover", zIndex: "-1" } }),
 					_react2.default.createElement(
 						"div",
-						{ className: "ontainer-fluid text-center", style: { zIndex: "2", opacity: "0.9" } },
+						{ className: "text-center", style: { zIndex: "2", opacity: "0.9" } },
 						_react2.default.createElement(
 							"div",
 							{ className: "col-md-3" },
@@ -35749,11 +35750,10 @@
 								"div",
 								{ style: dishesBoxStyle, className: "shadow-container" },
 								_react2.default.createElement(
-									"h3",
-									null,
-									"top dishes"
-								),
-								this.props.dishes.length > 5 ? topFiveDishNodes : "never mind"
+									"div",
+									{ className: "SplashBoxAnim" },
+									this.props.dishes.length > 5 ? topFiveDishNodes : "never mind"
+								)
 							)
 						),
 						_react2.default.createElement(
@@ -35826,13 +35826,12 @@
 							{ className: "col-md-3" },
 							_react2.default.createElement(
 								"div",
-								{ className: "shadow-container", style: checkInBoxStyle },
+								{ style: checkInBoxStyle, className: "shadow-container" },
 								_react2.default.createElement(
-									"h3",
-									null,
-									"checkIn ticker"
-								),
-								this.props.checkIns.length > 5 ? recentCheckInNodes : "never mind"
+									"div",
+									{ className: "SplashBoxAnimReverse" },
+									this.props.checkIns.length > 5 ? recentCheckInNodes : "never mind"
+								)
 							)
 						)
 					)
@@ -36060,51 +36059,51 @@
 
 	var _SpotList2 = _interopRequireDefault(_SpotList);
 
-	var _DishForm = __webpack_require__(786);
+	var _DishForm = __webpack_require__(784);
 
 	var _DishForm2 = _interopRequireDefault(_DishForm);
 
-	var _DishList = __webpack_require__(787);
+	var _DishList = __webpack_require__(785);
 
 	var _DishList2 = _interopRequireDefault(_DishList);
 
-	var _ReviewForm = __webpack_require__(788);
+	var _ReviewForm = __webpack_require__(787);
 
 	var _ReviewForm2 = _interopRequireDefault(_ReviewForm);
 
-	var _ReviewList = __webpack_require__(789);
+	var _ReviewList = __webpack_require__(788);
 
 	var _ReviewList2 = _interopRequireDefault(_ReviewList);
 
-	var _CheckInForm = __webpack_require__(790);
+	var _CheckInForm = __webpack_require__(789);
 
 	var _CheckInForm2 = _interopRequireDefault(_CheckInForm);
 
-	var _CheckInList = __webpack_require__(791);
+	var _CheckInList = __webpack_require__(790);
 
 	var _CheckInList2 = _interopRequireDefault(_CheckInList);
 
-	var _GenreForm = __webpack_require__(792);
+	var _GenreForm = __webpack_require__(791);
 
 	var _GenreForm2 = _interopRequireDefault(_GenreForm);
 
-	var _GenreList = __webpack_require__(793);
+	var _GenreList = __webpack_require__(792);
 
 	var _GenreList2 = _interopRequireDefault(_GenreList);
 
-	var _NeighborhoodForm = __webpack_require__(794);
+	var _NeighborhoodForm = __webpack_require__(793);
 
 	var _NeighborhoodForm2 = _interopRequireDefault(_NeighborhoodForm);
 
-	var _NeighborhoodList = __webpack_require__(795);
+	var _NeighborhoodList = __webpack_require__(794);
 
 	var _NeighborhoodList2 = _interopRequireDefault(_NeighborhoodList);
 
-	var _SubNeighborhoodForm = __webpack_require__(797);
+	var _SubNeighborhoodForm = __webpack_require__(796);
 
 	var _SubNeighborhoodForm2 = _interopRequireDefault(_SubNeighborhoodForm);
 
-	var _SubNeighborhoodList = __webpack_require__(798);
+	var _SubNeighborhoodList = __webpack_require__(797);
 
 	var _SubNeighborhoodList2 = _interopRequireDefault(_SubNeighborhoodList);
 
@@ -36116,7 +36115,7 @@
 
 	var FixinsActions = _interopRequireWildcard(_FixinsActions);
 
-	var _FixinsStore = __webpack_require__(799);
+	var _FixinsStore = __webpack_require__(798);
 
 	var _FixinsStore2 = _interopRequireDefault(_FixinsStore);
 
@@ -51088,7 +51087,8 @@
 					lng: -122.67 },
 				zoom: 13,
 				spotFailureStyles: { display: "none" },
-				spotSuccessStyles: { display: "none" }
+				spotSuccessStyles: { display: "none" },
+				address: ''
 			};
 			return _this;
 		}
@@ -51139,11 +51139,30 @@
 		}, {
 			key: "handleMapClick",
 			value: function handleMapClick(e) {
-				this.setState({
-					hasLocation: true,
-					clickPosition: e.latlng,
-					coordinates: e.latlng
-				});
+				var _this2 = this;
+
+				var findOne = function findOne(query) {
+					$.ajax({
+						url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + query.lat + "," + query.lng,
+						type: 'GET',
+						success: function (myLocation) {
+							console.log('my location inside ajax call');
+							console.log(myLocation.results[0].formatted_address);
+
+							this.setState({
+								hasLocation: true,
+								clickPosition: e.latlng,
+								coordinates: e.latlng,
+								address: myLocation.results[0].formatted_address
+							});
+						}.bind(_this2),
+						error: function error(xhr, status, err) {
+							console.error('uh oh dont blame mapbox', status, err.toString());
+						}
+					});
+				};
+
+				findOne(e.latlng);
 			}
 		}, {
 			key: "handleSubmit",
@@ -51157,17 +51176,20 @@
 				newSpotObject.coordinates.push(this.state.coordinates.lng);
 				newSpotObject.genres = this.state.genres;
 				newSpotObject.blurb = this.state.blurb;
-				if (newSpotObject.blurb.length < 1 || newSpotObject.coordinates.length < 1 || newSpotObject.name.length < 1) {
+				newSpotObject.spot_address = this.state.address;
+				console.log(newSpotObject);
+				if (newSpotObject.blurb.length < 1 || newSpotObject.spot_address.length < 1 || newSpotObject.coordinates.length < 1 || newSpotObject.name.length < 1) {
 					this.showSpotFailure();
 				} else {
 					this.props.createSpot(newSpotObject);
 					this.showSpotSuccess();
 				}
-				this.setState({ username: "", blurb: "", genres: "", coordinates: "" });
+				this.setState({ username: "", blurb: "", genres: "", coordinates: "", address: "" });
 			}
 		}, {
 			key: "render",
 			value: function render() {
+
 				var allGenres = this.props.allGenres;
 				var subNeighborhoodId = this.props.mySubNeighborhood._id;
 				var marker = this.state.hasLocation ? _react2.default.createElement(
@@ -67579,11 +67601,11 @@
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
-	var _SpotEditForm = __webpack_require__(784);
+	var _SpotEditForm = __webpack_require__(833);
 
 	var _SpotEditForm2 = _interopRequireDefault(_SpotEditForm);
 
-	var _ApproveButton = __webpack_require__(785);
+	var _ApproveButton = __webpack_require__(786);
 
 	var _ApproveButton2 = _interopRequireDefault(_ApproveButton);
 
@@ -67660,6 +67682,12 @@
 						_react2.default.createElement(
 							"td",
 							null,
+							"Spot Address: ",
+							spot.spot_address ? spot.spot_address : "no address"
+						),
+						_react2.default.createElement(
+							"td",
+							null,
 							" Featured dish: ",
 							spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_name : "none yet"
 						),
@@ -67710,249 +67738,6 @@
 
 /***/ },
 /* 784 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _CustomDropdown = __webpack_require__(547);
-
-	var _CustomDropdown2 = _interopRequireDefault(_CustomDropdown);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var SpotEditForm = function (_React$Component) {
-		_inherits(SpotEditForm, _React$Component);
-
-		function SpotEditForm() {
-			_classCallCheck(this, SpotEditForm);
-
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SpotEditForm).call(this));
-
-			_this.state = {
-				newName: "",
-				newSubNeighborhood: "",
-				newGenre: "",
-				newDish: "",
-				newBlurb: "",
-				newCoordinates: "",
-				newReview: ""
-			};
-			return _this;
-		}
-
-		_createClass(SpotEditForm, [{
-			key: "handleNameChange",
-			value: function handleNameChange(e) {
-				this.setState({ newName: e.target.value });
-			}
-		}, {
-			key: "handleBlurbChange",
-			value: function handleBlurbChange(e) {
-				this.setState({ newBlurb: e.target.value });
-			}
-		}, {
-			key: "handleSubNeighborhoodChange",
-			value: function handleSubNeighborhoodChange(e) {
-				this.setState({ newSubNeighborhood: e.target.value });
-			}
-		}, {
-			key: "handleReviewChange",
-			value: function handleReviewChange(e) {
-				this.setState({ newReview: e.target.value });
-			}
-		}, {
-			key: "handleGenreChange",
-			value: function handleGenreChange(e) {
-				this.setState({ newGenre: e.target.value });
-			}
-		}, {
-			key: "handleDishChange",
-			value: function handleDishChange(e) {
-				this.setState({ newDish: e.target.value });
-			}
-		}, {
-			key: "handleCoordinatesChange",
-			value: function handleCoordinatesChange(e) {
-				this.setState({ newCoordinates: e.target.value });
-			}
-		}, {
-			key: "handleSubmit",
-			value: function handleSubmit(e) {
-				e.preventDefault();
-				var newSpotInfo = {};
-				newSpotInfo._id = this.props.spotID;
-				newSpotInfo.newName = this.state.newName;
-				newSpotInfo.newSubNeighborhood = this.state.newSubNeighborhood;
-				newSpotInfo.newDish = this.state.newDish;
-				newSpotInfo.newGenre = this.state.newGenre;
-				newSpotInfo.newBlurb = this.state.newBlurb;
-				newSpotInfo.newCoordinates = this.state.newCoordinates;
-				this.props.findAndChangeSpot(newSpotInfo);
-				this.setState({ newName: "",
-					newSubNeighborhood: "",
-					newGenre: "",
-					newBlurb: "",
-					newCoordinates: ""
-				});
-			}
-		}, {
-			key: "render",
-			value: function render() {
-				return _react2.default.createElement(
-					"div",
-					null,
-					_react2.default.createElement(
-						"form",
-						{ onSubmit: this.handleSubmit.bind(this) },
-						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Update Spot Name:",
-							_react2.default.createElement("input", { type: "text", value: this.state.newName, onChange: this.handleNameChange.bind(this), className: "form-control", placeholder: "spot name" })
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Update Blurb:",
-							_react2.default.createElement("input", { type: "text", value: this.state.newBlurb, onChange: this.handleBlurbChange.bind(this), className: "form-control", placeholder: "spot blurb" })
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Update Coordinates:",
-							_react2.default.createElement("input", { type: "text", value: this.state.newCoordinates, onChange: this.handleCoordinatesChange.bind(this), className: "form-control", placeholder: "spot coordinates" })
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Add a new Dish:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newDish,
-								onchange2: this.handleDishChange.bind(this),
-								data: this.props.allDishes,
-								nameName: "dish_name" })
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Update Sub-Neighborhood:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newSubNeighborhood,
-								onchange2: this.handleSubNeighborhoodChange.bind(this),
-								data: this.props.allSubNeighborhoods,
-								nameName: "subNeighborhood_name" })
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "input-group" },
-							"Add a new Genre:",
-							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newGenre,
-								onchange2: this.handleGenreChange.bind(this),
-								data: this.props.allGenres,
-								nameName: "genre_name" })
-						),
-						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Update" })
-					)
-				);
-			}
-		}]);
-
-		return SpotEditForm;
-	}(_react2.default.Component);
-
-	exports.default = SpotEditForm;
-
-/***/ },
-/* 785 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ApproveButton = function (_React$Component) {
-		_inherits(ApproveButton, _React$Component);
-
-		function ApproveButton() {
-			_classCallCheck(this, ApproveButton);
-
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(ApproveButton).apply(this, arguments));
-		}
-
-		_createClass(ApproveButton, [{
-			key: "approve",
-			value: function approve() {
-				if (this.props.type === "Dish") {
-					var newDishInfo = this.props.item;
-					if (newDishInfo.approved !== undefined) {
-						newDishInfo.toggleApproved = !this.props.item.approved;
-					}
-					this.props.findAndChange(newDishInfo);
-				} else if (this.props.type === "Spot") {
-					var newSpotInfo = this.props.item;
-					if (newSpotInfo.approved !== undefined) {
-						newSpotInfo.toggleApproved = !this.props.item.approved;
-					}
-					this.props.findAndChange(newSpotInfo);
-				} else {
-					console.log("no type specified to approve");
-				}
-			}
-		}, {
-			key: "render",
-			value: function render() {
-				var approvedStyle = { background: "green" };
-				var unapprovedStyle = { background: "red" };
-
-				return _react2.default.createElement(
-					"button",
-					{ onClick: this.approve.bind(this), style: this.props.approved ? approvedStyle : unapprovedStyle, className: "btn btn-xs" },
-					_react2.default.createElement(
-						"h4",
-						null,
-						this.props.approved ? "it's VISIBLE: unapprove this item?" : "it's HIDDEN: approve this item?"
-					)
-				);
-			}
-		}]);
-
-		return ApproveButton;
-	}(_react2.default.Component);
-
-	exports.default = ApproveButton;
-
-/***/ },
-/* 786 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68153,7 +67938,7 @@
 	exports.default = DishForm;
 
 /***/ },
-/* 787 */
+/* 785 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68172,7 +67957,7 @@
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
-	var _ApproveButton = __webpack_require__(785);
+	var _ApproveButton = __webpack_require__(786);
 
 	var _ApproveButton2 = _interopRequireDefault(_ApproveButton);
 
@@ -68387,7 +68172,82 @@
 	exports.default = DishList;
 
 /***/ },
-/* 788 */
+/* 786 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ApproveButton = function (_React$Component) {
+		_inherits(ApproveButton, _React$Component);
+
+		function ApproveButton() {
+			_classCallCheck(this, ApproveButton);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(ApproveButton).apply(this, arguments));
+		}
+
+		_createClass(ApproveButton, [{
+			key: "approve",
+			value: function approve() {
+				if (this.props.type === "Dish") {
+					var newDishInfo = this.props.item;
+					if (newDishInfo.approved !== undefined) {
+						newDishInfo.toggleApproved = !this.props.item.approved;
+					}
+					this.props.findAndChange(newDishInfo);
+				} else if (this.props.type === "Spot") {
+					var newSpotInfo = this.props.item;
+					if (newSpotInfo.approved !== undefined) {
+						newSpotInfo.toggleApproved = !this.props.item.approved;
+					}
+					this.props.findAndChange(newSpotInfo);
+				} else {
+					console.log("no type specified to approve");
+				}
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				var approvedStyle = { background: "green" };
+				var unapprovedStyle = { background: "red" };
+
+				return _react2.default.createElement(
+					"button",
+					{ onClick: this.approve.bind(this), style: this.props.approved ? approvedStyle : unapprovedStyle, className: "btn btn-xs" },
+					_react2.default.createElement(
+						"h4",
+						null,
+						this.props.approved ? "it's VISIBLE: unapprove this item?" : "it's HIDDEN: approve this item?"
+					)
+				);
+			}
+		}]);
+
+		return ApproveButton;
+	}(_react2.default.Component);
+
+	exports.default = ApproveButton;
+
+/***/ },
+/* 787 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68558,7 +68418,7 @@
 	exports.default = ReviewForm;
 
 /***/ },
-/* 789 */
+/* 788 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68657,7 +68517,7 @@
 	exports.default = Reviewtdst;
 
 /***/ },
-/* 790 */
+/* 789 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68807,7 +68667,7 @@
 	exports.default = CheckInForm;
 
 /***/ },
-/* 791 */
+/* 790 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68912,7 +68772,7 @@
 	exports.default = CheckInList;
 
 /***/ },
-/* 792 */
+/* 791 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68990,7 +68850,7 @@
 	exports.default = GenreForm;
 
 /***/ },
-/* 793 */
+/* 792 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -69080,7 +68940,7 @@
 	exports.default = GenresList;
 
 /***/ },
-/* 794 */
+/* 793 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -69162,7 +69022,7 @@
 	exports.default = NeighborhoodForm;
 
 /***/ },
-/* 795 */
+/* 794 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -69181,7 +69041,7 @@
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
-	var _NeighborhoodEditForm = __webpack_require__(796);
+	var _NeighborhoodEditForm = __webpack_require__(795);
 
 	var _NeighborhoodEditForm2 = _interopRequireDefault(_NeighborhoodEditForm);
 
@@ -69287,7 +69147,7 @@
 	exports.default = NeighborhoodList;
 
 /***/ },
-/* 796 */
+/* 795 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -69376,7 +69236,7 @@
 	exports.default = NeighborhoodEditForm;
 
 /***/ },
-/* 797 */
+/* 796 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -69468,7 +69328,7 @@
 	exports.default = SubNeighborhoodForm;
 
 /***/ },
-/* 798 */
+/* 797 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -69559,7 +69419,7 @@
 	exports.default = SubNeighborhoodList;
 
 /***/ },
-/* 799 */
+/* 798 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -69570,13 +69430,13 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _events = __webpack_require__(800);
+	var _events = __webpack_require__(799);
 
 	var _FixinsActions = __webpack_require__(542);
 
 	var FixinsActions = _interopRequireWildcard(_FixinsActions);
 
-	var _dispatcher = __webpack_require__(801);
+	var _dispatcher = __webpack_require__(800);
 
 	var _dispatcher2 = _interopRequireDefault(_dispatcher);
 
@@ -70103,7 +69963,7 @@
 	exports.default = fixinsStore;
 
 /***/ },
-/* 800 */
+/* 799 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -70407,7 +70267,7 @@
 
 
 /***/ },
-/* 801 */
+/* 800 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -70416,12 +70276,12 @@
 	  value: true
 	});
 
-	var _flux = __webpack_require__(802);
+	var _flux = __webpack_require__(801);
 
 	exports.default = new _flux.Dispatcher();
 
 /***/ },
-/* 802 */
+/* 801 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -70433,11 +70293,11 @@
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 */
 
-	module.exports.Dispatcher = __webpack_require__(803);
+	module.exports.Dispatcher = __webpack_require__(802);
 
 
 /***/ },
-/* 803 */
+/* 802 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -70459,7 +70319,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var invariant = __webpack_require__(804);
+	var invariant = __webpack_require__(803);
 
 	var _prefix = 'ID_';
 
@@ -70674,7 +70534,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 804 */
+/* 803 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -70729,7 +70589,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 805 */
+/* 804 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70740,7 +70600,7 @@
 
 	var _reactRedux = __webpack_require__(168);
 
-	var _MapPage = __webpack_require__(806);
+	var _MapPage = __webpack_require__(805);
 
 	var _MapPage2 = _interopRequireDefault(_MapPage);
 
@@ -70757,7 +70617,7 @@
 	exports.default = MapContainer;
 
 /***/ },
-/* 806 */
+/* 805 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -70776,11 +70636,11 @@
 
 	var FixinsActions = _interopRequireWildcard(_FixinsActions);
 
-	var _FixinsStore = __webpack_require__(799);
+	var _FixinsStore = __webpack_require__(798);
 
 	var _FixinsStore2 = _interopRequireDefault(_FixinsStore);
 
-	var _MapItself = __webpack_require__(807);
+	var _MapItself = __webpack_require__(806);
 
 	var _MapItself2 = _interopRequireDefault(_MapItself);
 
@@ -70824,7 +70684,7 @@
 	exports.default = MapPage;
 
 /***/ },
-/* 807 */
+/* 806 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70885,20 +70745,6 @@
 	      var putOneDishInState = this.props.putOneDishInState;
 	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
 
-	      var findOne = function findOne(query) {
-	        $.ajax({
-	          url: "/geocoding/v5/mapbox.places/" + query + ".json",
-	          type: 'GET',
-	          data: newUser,
-	          success: function (myLocation) {
-	            console.log(myLocation);
-	          }.bind(_this2),
-	          error: function (xhr, status, err) {
-	            console.error('uh oh dont blame mapbox', status, err.toString());
-	          }.bind(_this2)
-	        });
-	      };
-
 	      function findSpotsFilter(spot) {
 	        return spot.approved;
 	      }
@@ -70925,16 +70771,17 @@
 	                'h3',
 	                null,
 	                _react2.default.createElement(
-	                  'span',
-	                  { onClick: putOneSpotInState.bind(_this2, spotId) },
-	                  _react2.default.createElement(
-	                    'a',
-	                    { onClick: function onClick() {
-	                        return router.push('/spot/' + spotId);
-	                      } },
-	                    spot.spot_name
-	                  )
+	                  'a',
+	                  { onClick: function onClick() {
+	                      return router.push('/spot/' + spotId);
+	                    } },
+	                  spot.spot_name
 	                )
+	              ),
+	              _react2.default.createElement(
+	                'h5',
+	                null,
+	                spot.spot_address ? spot.spot_address : ""
 	              ),
 	              _react2.default.createElement(
 	                'h4',
@@ -71035,7 +70882,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MapItself);
 
 /***/ },
-/* 808 */
+/* 807 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71048,7 +70895,7 @@
 
 	var _redux = __webpack_require__(174);
 
-	var _AuthModule = __webpack_require__(809);
+	var _AuthModule = __webpack_require__(808);
 
 	var _AuthModule2 = _interopRequireDefault(_AuthModule);
 
@@ -71258,6 +71105,7 @@
 	        spot_blurb: action.spot_blurb,
 	        spot_subNeighborhood: action.spot_subNeighborhood,
 	        spot_coordinates: action.spot_coordinates,
+	        spot_address: action.spot_address,
 	        addDate: action.addDate
 	      };
 	    case 'CHANGED_SPOT':
@@ -71501,7 +71349,7 @@
 	exports.default = FixinsApp;
 
 /***/ },
-/* 809 */
+/* 808 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71516,9 +71364,9 @@
 	exports.secureLogin = secureLogin;
 	exports.default = authReducer;
 
-	var _api = __webpack_require__(810);
+	var _api = __webpack_require__(809);
 
-	var _reactRouterRedux = __webpack_require__(813);
+	var _reactRouterRedux = __webpack_require__(812);
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -71623,7 +71471,7 @@
 	}
 
 /***/ },
-/* 810 */
+/* 809 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71635,9 +71483,9 @@
 
 	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-	__webpack_require__(811);
+	__webpack_require__(810);
 
-	var _AuthModule = __webpack_require__(809);
+	var _AuthModule = __webpack_require__(808);
 
 	var API_ROOT = '';
 
@@ -71764,19 +71612,19 @@
 	};
 
 /***/ },
-/* 811 */
+/* 810 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// the whatwg-fetch polyfill installs the fetch() function
 	// on the global object (window or self)
 	//
 	// Return that as the export for use in Webpack, Browserify etc.
-	__webpack_require__(812);
+	__webpack_require__(811);
 	module.exports = self.fetch.bind(self);
 
 
 /***/ },
-/* 812 */
+/* 811 */
 /***/ function(module, exports) {
 
 	(function(self) {
@@ -72171,7 +72019,7 @@
 
 
 /***/ },
-/* 813 */
+/* 812 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72181,7 +72029,7 @@
 	});
 	exports.routerMiddleware = exports.routerActions = exports.goForward = exports.goBack = exports.go = exports.replace = exports.push = exports.CALL_HISTORY_METHOD = exports.routerReducer = exports.LOCATION_CHANGE = exports.syncHistoryWithStore = undefined;
 
-	var _reducer = __webpack_require__(814);
+	var _reducer = __webpack_require__(813);
 
 	Object.defineProperty(exports, 'LOCATION_CHANGE', {
 	  enumerable: true,
@@ -72196,7 +72044,7 @@
 	  }
 	});
 
-	var _actions = __webpack_require__(815);
+	var _actions = __webpack_require__(814);
 
 	Object.defineProperty(exports, 'CALL_HISTORY_METHOD', {
 	  enumerable: true,
@@ -72241,11 +72089,11 @@
 	  }
 	});
 
-	var _sync = __webpack_require__(816);
+	var _sync = __webpack_require__(815);
 
 	var _sync2 = _interopRequireDefault(_sync);
 
-	var _middleware = __webpack_require__(817);
+	var _middleware = __webpack_require__(816);
 
 	var _middleware2 = _interopRequireDefault(_middleware);
 
@@ -72255,7 +72103,7 @@
 	exports.routerMiddleware = _middleware2['default'];
 
 /***/ },
-/* 814 */
+/* 813 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -72299,7 +72147,7 @@
 	}
 
 /***/ },
-/* 815 */
+/* 814 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -72341,7 +72189,7 @@
 	var routerActions = exports.routerActions = { push: push, replace: replace, go: go, goBack: goBack, goForward: goForward };
 
 /***/ },
-/* 816 */
+/* 815 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72354,7 +72202,7 @@
 
 	exports['default'] = syncHistoryWithStore;
 
-	var _reducer = __webpack_require__(814);
+	var _reducer = __webpack_require__(813);
 
 	var defaultSelectLocationState = function defaultSelectLocationState(state) {
 	  return state.routing;
@@ -72493,7 +72341,7 @@
 	}
 
 /***/ },
-/* 817 */
+/* 816 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72503,7 +72351,7 @@
 	});
 	exports['default'] = routerMiddleware;
 
-	var _actions = __webpack_require__(815);
+	var _actions = __webpack_require__(814);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -72531,7 +72379,7 @@
 	}
 
 /***/ },
-/* 818 */
+/* 817 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -72868,7 +72716,7 @@
 	exports.default = UserDetailContainer;
 
 /***/ },
-/* 819 */
+/* 818 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -73055,7 +72903,7 @@
 	exports.default = GenreDetailContainer;
 
 /***/ },
-/* 820 */
+/* 819 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -73279,7 +73127,7 @@
 	exports.default = SpotDetailContainer;
 
 /***/ },
-/* 821 */
+/* 820 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -73723,7 +73571,7 @@
 	exports.default = DishDetailContainer;
 
 /***/ },
-/* 822 */
+/* 821 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -73906,7 +73754,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NeighborhoodDetail);
 
 /***/ },
-/* 823 */
+/* 822 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -74224,7 +74072,7 @@
 	exports.default = SubNeighborhoodDetailContainer;
 
 /***/ },
-/* 824 */
+/* 823 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74247,7 +74095,7 @@
 
 	var _Links2 = _interopRequireDefault(_Links);
 
-	var _AuthModule = __webpack_require__(809);
+	var _AuthModule = __webpack_require__(808);
 
 	var _AuthModule2 = _interopRequireDefault(_AuthModule);
 
@@ -74313,25 +74161,23 @@
 	  }, {
 	    key: 'handleSubmit',
 	    value: function handleSubmit(e) {
+	      var _this2 = this;
+
 	      e.preventDefault(e);
-	      //  let username1 = this.state.username
-	      //  let password1 = this.state.password
-	      //    let thisUserFilter = (user) => {
-	      //    return (username1 === user.username && password1 === user.password )
-	      //          }
-	      //let thisUser = this.props.users.filter(thisUserFilter)
 	      var thisUser = {};
 	      thisUser.username = this.state.username;
 	      thisUser.password = this.state.password;
 	      if (thisUser.username.length < 1 || thisUser.password.length < 1) {
 	        this.showLoginFailure();
 	      } else {
-	        this.props.userLogin(thisUser);
-	        //      if(this.state.currentUser){
-	        this.showLoginSuccess();
-	        //      else{
-	        //        this.showLoginFailure()
-	        //      }
+	        this.props.userLogin(thisUser, function (loggedInUser) {
+	          console.log(loggedInUser);
+	          if (loggedInUser === "LoginError" || loggedInUser === "LoginError2") {
+	            _this2.showLoginFailure();
+	          } else {
+	            _this2.showLoginSuccess();
+	          };
+	        });
 	      }
 	      this.setState({ username: "", password: "" });
 	    }
@@ -74437,7 +74283,7 @@
 	  router: _react2.default.PropTypes.object.isRequired
 	};
 
-	var _userLogin = function _userLogin(thisUser, dispatch) {
+	var _userLogin = function _userLogin(thisUser, callback, dispatch) {
 	  $.ajax({
 	    url: "http://localhost:4444/api/login",
 	    type: 'POST',
@@ -74447,6 +74293,7 @@
 	        type: "LOG_IN",
 	        user: loggedInUser
 	      });
+	      callback(loggedInUser);
 	    }.bind(undefined),
 	    error: function (xhr, status, err) {
 	      console.error('./login', status, err.toString());
@@ -74467,14 +74314,11 @@
 
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
-	    userLogin: function userLogin(thisUser) {
-	      return _userLogin(thisUser, dispatch);
+	    userLogin: function userLogin(thisUser, callback) {
+	      return _userLogin(thisUser, callback, dispatch);
 	    },
 	    putOneSubNeighborhoodInState: function putOneSubNeighborhoodInState(_id) {
 	      return dispatch(_putOneSubNeighborhoodInState(_id));
-	    },
-	    secureLogin: function secureLogin(thisUser) {
-	      return dispatch((0, _AuthModule2.default)(thisUser));
 	    }
 	  };
 	};
@@ -74482,7 +74326,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LogInPage);
 
 /***/ },
-/* 825 */
+/* 824 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74587,7 +74431,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SignUpPage);
 
 /***/ },
-/* 826 */
+/* 825 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74610,7 +74454,7 @@
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
-	var _CheckInForm = __webpack_require__(790);
+	var _CheckInForm = __webpack_require__(789);
 
 	var _CheckInForm2 = _interopRequireDefault(_CheckInForm);
 
@@ -74688,7 +74532,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewCheckInPage);
 
 /***/ },
-/* 827 */
+/* 826 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74711,7 +74555,7 @@
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
-	var _ReviewForm = __webpack_require__(788);
+	var _ReviewForm = __webpack_require__(787);
 
 	var _ReviewForm2 = _interopRequireDefault(_ReviewForm);
 
@@ -74790,7 +74634,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewReviewPage);
 
 /***/ },
-/* 828 */
+/* 827 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74813,7 +74657,7 @@
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
-	var _DishForm = __webpack_require__(786);
+	var _DishForm = __webpack_require__(784);
 
 	var _DishForm2 = _interopRequireDefault(_DishForm);
 
@@ -74903,7 +74747,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewDishPage);
 
 /***/ },
-/* 829 */
+/* 828 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75013,7 +74857,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewSpotPage);
 
 /***/ },
-/* 830 */
+/* 829 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -75040,7 +74884,7 @@
 
 	var _Links2 = _interopRequireDefault(_Links);
 
-	var _NeighborhoodList = __webpack_require__(795);
+	var _NeighborhoodList = __webpack_require__(794);
 
 	var _NeighborhoodList2 = _interopRequireDefault(_NeighborhoodList);
 
@@ -75133,7 +74977,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AllNeighborhoods);
 
 /***/ },
-/* 831 */
+/* 830 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -75269,7 +75113,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AllGenres);
 
 /***/ },
-/* 832 */
+/* 831 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75296,7 +75140,7 @@
 
 	var _CalorieDollarChart2 = _interopRequireDefault(_CalorieDollarChart);
 
-	var _HorizontalRainbow = __webpack_require__(833);
+	var _HorizontalRainbow = __webpack_require__(832);
 
 	var _HorizontalRainbow2 = _interopRequireDefault(_HorizontalRainbow);
 
@@ -75672,7 +75516,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MyDashboard);
 
 /***/ },
-/* 833 */
+/* 832 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -75725,6 +75569,174 @@
 	}(_react2.default.Component);
 
 	exports.default = HorizontalRainbow;
+
+/***/ },
+/* 833 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _CustomDropdown = __webpack_require__(547);
+
+	var _CustomDropdown2 = _interopRequireDefault(_CustomDropdown);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SpotEditForm = function (_React$Component) {
+		_inherits(SpotEditForm, _React$Component);
+
+		function SpotEditForm() {
+			_classCallCheck(this, SpotEditForm);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SpotEditForm).call(this));
+
+			_this.state = {
+				newName: "",
+				newSubNeighborhood: "",
+				newGenre: "",
+				newDish: "",
+				newBlurb: "",
+				newCoordinates: "",
+				newReview: ""
+			};
+			return _this;
+		}
+
+		_createClass(SpotEditForm, [{
+			key: "handleNameChange",
+			value: function handleNameChange(e) {
+				this.setState({ newName: e.target.value });
+			}
+		}, {
+			key: "handleBlurbChange",
+			value: function handleBlurbChange(e) {
+				this.setState({ newBlurb: e.target.value });
+			}
+		}, {
+			key: "handleSubNeighborhoodChange",
+			value: function handleSubNeighborhoodChange(e) {
+				this.setState({ newSubNeighborhood: e.target.value });
+			}
+		}, {
+			key: "handleReviewChange",
+			value: function handleReviewChange(e) {
+				this.setState({ newReview: e.target.value });
+			}
+		}, {
+			key: "handleGenreChange",
+			value: function handleGenreChange(e) {
+				this.setState({ newGenre: e.target.value });
+			}
+		}, {
+			key: "handleDishChange",
+			value: function handleDishChange(e) {
+				this.setState({ newDish: e.target.value });
+			}
+		}, {
+			key: "handleCoordinatesChange",
+			value: function handleCoordinatesChange(e) {
+				this.setState({ newCoordinates: e.target.value });
+			}
+		}, {
+			key: "handleSubmit",
+			value: function handleSubmit(e) {
+				e.preventDefault();
+				var newSpotInfo = {};
+				newSpotInfo._id = this.props.spotID;
+				newSpotInfo.newName = this.state.newName;
+				newSpotInfo.newSubNeighborhood = this.state.newSubNeighborhood;
+				newSpotInfo.newDish = this.state.newDish;
+				newSpotInfo.newGenre = this.state.newGenre;
+				newSpotInfo.newBlurb = this.state.newBlurb;
+				newSpotInfo.newCoordinates = this.state.newCoordinates;
+				this.props.findAndChangeSpot(newSpotInfo);
+				this.setState({ newName: "",
+					newSubNeighborhood: "",
+					newGenre: "",
+					newBlurb: "",
+					newCoordinates: ""
+				});
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"div",
+					null,
+					_react2.default.createElement(
+						"form",
+						{ onSubmit: this.handleSubmit.bind(this) },
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Update Spot Name:",
+							_react2.default.createElement("input", { type: "text", value: this.state.newName, onChange: this.handleNameChange.bind(this), className: "form-control", placeholder: "spot name" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Update Blurb:",
+							_react2.default.createElement("input", { type: "text", value: this.state.newBlurb, onChange: this.handleBlurbChange.bind(this), className: "form-control", placeholder: "spot blurb" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Update Coordinates:",
+							_react2.default.createElement("input", { type: "text", value: this.state.newCoordinates, onChange: this.handleCoordinatesChange.bind(this), className: "form-control", placeholder: "spot coordinates" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Add a new Dish:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newDish,
+								onchange2: this.handleDishChange.bind(this),
+								data: this.props.allDishes,
+								nameName: "dish_name" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Update Sub-Neighborhood:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newSubNeighborhood,
+								onchange2: this.handleSubNeighborhoodChange.bind(this),
+								data: this.props.allSubNeighborhoods,
+								nameName: "subNeighborhood_name" })
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "input-group" },
+							"Add a new Genre:",
+							_react2.default.createElement(_CustomDropdown2.default, { setValueTo: this.state.newGenre,
+								onchange2: this.handleGenreChange.bind(this),
+								data: this.props.allGenres,
+								nameName: "genre_name" })
+						),
+						_react2.default.createElement("input", { className: "button btn-danger align-right", type: "submit", value: "Update" })
+					)
+				);
+			}
+		}]);
+
+		return SpotEditForm;
+	}(_react2.default.Component);
+
+	exports.default = SpotEditForm;
 
 /***/ }
 /******/ ]);

@@ -1,6 +1,7 @@
 var express = require('express');
-var bodyParser = require('body-parser');
 var app = express();
+var bodyParser = require('body-parser');
+var session = require('express-session')
 var mongoose = require('mongoose');
 var crypto = require('crypto')
 var router = express.Router()
@@ -15,8 +16,15 @@ var Dish = require('./src/js/models/DishModel')
 var Spot = require('./src/js/models/SpotModel')
 var bcrypt = require('bcrypt')
 var db ='mongodb://localhost/test'
-
 mongoose.connect(db)
+
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 
 require('./routes/UserRoutes')(router)
 require('./routes/SpotRoutes')(router)
@@ -47,16 +55,14 @@ router.get('/', function(req,res){
 router.route('/login').post(function(req, res){
 				User.findOne({username: req.body.username}, function(err, user){
 					if(err)
-						res.json("LoginError");
+						return res.json("LoginError");
 					if(!user)
-						console.log('No User found')
-					bcrypt.compare(req.body.password, user.password, function(err, didItWork) {
-						if(err){
-							res.json("LoginError");
-
-
+						return res.json("LoginError2")
+					bcrypt.compare(req.body.password, user.password, function(err, response) {
+						if(err || !response){
+							return res.json("LoginError3");
 						}
-
+						return res.json(user);
 
 				})
 			})
@@ -65,14 +71,9 @@ router.route('/login').post(function(req, res){
 			.populate('user_checkIns')
 			.populate('user_favorites')
 			.populate('user_friends')
-			.exec(function(err, user){
-				if(err){
-					console.log('Couldn\'t find user')
-				} else {
-					res.json(user);
-				}
+			.exec()
 })
-})
+
 
 app.use('/api', router)
 

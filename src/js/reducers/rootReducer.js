@@ -198,6 +198,7 @@ const spot = (state = "", action) => {
         spot_blurb: action.spot_blurb,
         spot_subNeighborhood: action.spot_subNeighborhood,
         spot_coordinates: action.spot_coordinates,
+        spot_address: action.spot_address,
         addDate: action.addDate
       }
     case 'CHANGED_SPOT':

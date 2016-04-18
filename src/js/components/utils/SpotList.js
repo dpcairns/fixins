@@ -30,6 +30,7 @@ export default class SpotList extends React.Component{
 						<td> Spot Blurb: {spot.spot_blurb}</td>
 						<td> Spot Genre: {spot.spot_genres[0].genre_name}</td>
 						<td> Spot Coordinates: {spot.spot_coordinates[0]} {spot.spot_coordinates[1]}</td>
+						<td>Spot Address: {spot.spot_address ? spot.spot_address :"no address"}</td>
 						<td> Featured dish: {spot.spot_dishes.length > 0 ? spot.spot_dishes[0].dish_name : "none yet"}</td>
 						<td> <RemoveButton removeSpot={removeSpot} type="Spot" id={spot._id}/></td>
 						<td> <ApproveButton item={spot} approved={spot.approved} type="Spot" id={spot._id} findAndChange={findAndChangeSpot}/> </td>

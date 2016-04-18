@@ -24,6 +24,7 @@ module.exports = function(router){
 						newSpot.spot_blurb = req.body.blurb
 						newSpot.spot_coordinates = req.body.coordinates
 						newSpot.spot_subNeighborhood = req.body.subNeighborhood
+						newSpot.spot_address = req.body.spot_address
 						newSpot.save(function(err, savedSpot){
 							Spot.findOne({_id: savedSpot._id})
 							.populate('spot_genres')

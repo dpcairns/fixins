@@ -51,12 +51,6 @@ class LogInPage extends React.Component{
 
 	handleSubmit(e){
 		e.preventDefault(e);
-  //  let username1 = this.state.username
-  //  let password1 = this.state.password
-  //    let thisUserFilter = (user) => {
-  //    return (username1 === user.username && password1 === user.password )
-  //          }
-    //let thisUser = this.props.users.filter(thisUserFilter)
     let thisUser = {}
     thisUser.username = this.state.username
     thisUser.password = this.state.password
@@ -64,13 +58,13 @@ class LogInPage extends React.Component{
       this.showLoginFailure();
 
     } else{
-                  this.props.userLogin(thisUser)
-            //      if(this.state.currentUser){
-                  this.showLoginSuccess();
-            //      else{
-            //        this.showLoginFailure()
-            //      }
-
+          this.props.userLogin(thisUser, (loggedInUser) => {
+            console.log(loggedInUser)
+            if(loggedInUser === "LoginError" || loggedInUser === "LoginError2" ){
+              this.showLoginFailure();
+            }
+            else{this.showLoginSuccess()};
+          })
     }
 		this.setState({username: "", password: ""})
 	}
@@ -141,7 +135,7 @@ LogInPage.contextTypes = {
 }
 
 
-const userLogin = (thisUser, dispatch) => {
+const userLogin = (thisUser, callback, dispatch) => {
   $.ajax({
     url: "http://localhost:4444/api/login",
     type: 'POST',
@@ -151,8 +145,9 @@ const userLogin = (thisUser, dispatch) => {
         {
           type: "LOG_IN",
           user: loggedInUser
-          }
-                )
+        })
+          callback(loggedInUser)
+
     }.bind(this),
     error: function(xhr, status, err){
       console.error('./login', status, err.toString());
@@ -173,9 +168,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-    userLogin: (thisUser) => userLogin(thisUser, dispatch),
+    userLogin: (thisUser, callback) => userLogin(thisUser, callback, dispatch),
     putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
-    secureLogin: (thisUser) => dispatch(secureLogin(thisUser))
   }
 }
 

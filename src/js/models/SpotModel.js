@@ -12,6 +12,10 @@ var SpotSchema = new Schema({
 		type: String,
 		default: "default spot blurb"
 	},
+	spot_address: {
+		type: String,
+		default: "123 Fake Street Portland OR, 90210"
+	},
 	spot_coordinates:
 	{
 		type: Array,

@@ -18,9 +18,10 @@ export default class SpotForm extends React.Component{
       lng: -122.67},
       zoom: 13,
 			spotFailureStyles: {display: "none"},
-			spotSuccessStyles: {display: "none"}
+			spotSuccessStyles: {display: "none"},
+			address: ''
 					}
-					}
+			}
 
 					showSpotFailure(){
 						this.setState({
@@ -67,11 +68,29 @@ export default class SpotForm extends React.Component{
 
 
 	handleMapClick(e){
-		this.setState({
-		      hasLocation: true,
-		      clickPosition: e.latlng,
-		      coordinates: e.latlng
-		    })
+		const findOne = (query) => {
+								$.ajax({
+								url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + query.lat +"," + query.lng,
+								type: 'GET',
+								success: function(myLocation){
+									console.log('my location inside ajax call')
+									console.log(myLocation.results[0].formatted_address)
+
+								this.setState({
+								      hasLocation: true,
+								      clickPosition: e.latlng,
+								      coordinates: e.latlng,
+											address: myLocation.results[0].formatted_address
+								    })
+								}.bind(this),
+								error: function(xhr, status, err){
+									console.error('uh oh dont blame mapbox', status, err.toString());
+								}
+							});
+						}
+
+				findOne(e.latlng)
+
 	}
 
 	handleSubmit(e){
@@ -84,17 +103,22 @@ export default class SpotForm extends React.Component{
 		newSpotObject.coordinates.push(this.state.coordinates.lng)
 		newSpotObject.genres = this.state.genres
 		newSpotObject.blurb = this.state.blurb
-		if(newSpotObject.blurb.length<1 || newSpotObject.coordinates.length<1 || newSpotObject.name.length<1 ){
+		newSpotObject.spot_address = this.state.address
+		console.log(newSpotObject)
+		if(newSpotObject.blurb.length<1 || newSpotObject.spot_address.length<1 || newSpotObject.coordinates.length<1 || newSpotObject.name.length<1 ){
 			this.showSpotFailure();
 		}
 		else{
 			this.props.createSpot(newSpotObject)
 			this.showSpotSuccess();
 		}
-		this.setState({username: "", blurb: "", genres: "", coordinates: ""})
+		this.setState({username: "", blurb: "", genres: "", coordinates: "", address: ""})
 	}
 
 	render(){
+
+
+
 		let allGenres = this.props.allGenres
 		let subNeighborhoodId = this.props.mySubNeighborhood._id
 		    const marker = this.state.hasLocation ?

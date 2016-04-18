@@ -18,23 +18,6 @@ class MapItself extends React.Component {
     let putOneDishInState = this.props.putOneDishInState
     let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
 
-const findOne = (query) => {
-    		  $.ajax({
-    			url: "/geocoding/v5/mapbox.places/" + query + ".json",
-    			type: 'GET',
-    			data: newUser,
-    			success: function(myLocation){
-    							console.log(myLocation)
-    			}.bind(this),
-    			error: function(xhr, status, err){
-    				console.error('uh oh dont blame mapbox', status, err.toString());
-    			}.bind(this)
-    		});
-    	}
-
-
-
-
     function findSpotsFilter(spot){
         				return (spot.approved)
     				}
@@ -54,14 +37,17 @@ const findOne = (query) => {
                           <Popup>
                           <div>
                           <h3>
-                          <span onClick={putOneSpotInState.bind(this, spotId)}>
-                          <a onClick={ () => router.push(`/spot/${spotId}`)}>{spot.spot_name}</a>
-                          </span>
+                            <a onClick={ () => router.push(`/spot/${spotId}`)}>{spot.spot_name}</a>
                           </h3>
+                          <h5>
+                            {spot.spot_address ?
+                            spot.spot_address
+                            : ""}
+                            </h5>
                           <h4>
-                          <span onClick={signatureDish.length>0 ?
-                            putOneDishInState.bind(this, signatureDish[0]._id)
-                            : putOneSpotInState.bind(this, spotId) }>
+                            <span onClick={signatureDish.length>0 ?
+                              putOneDishInState.bind(this, signatureDish[0]._id)
+                              : putOneSpotInState.bind(this, spotId) }>
 
                           Signature dish: <br/>
                           <a onClick={ signatureDish.length>0 ?
