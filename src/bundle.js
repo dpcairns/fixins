@@ -35751,7 +35751,7 @@
 								{ style: dishesBoxStyle, className: "shadow-container" },
 								_react2.default.createElement(
 									"div",
-									{ className: "SplashBoxAnim" },
+									{ className: "DishBoxAnim  space-between" },
 									this.props.dishes.length > 5 ? topFiveDishNodes : "never mind"
 								)
 							)
@@ -35829,7 +35829,7 @@
 								{ style: checkInBoxStyle, className: "shadow-container" },
 								_react2.default.createElement(
 									"div",
-									{ className: "SplashBoxAnimReverse" },
+									{ className: "CheckInBoxAnim" },
 									this.props.checkIns.length > 5 ? recentCheckInNodes : "never mind"
 								)
 							)

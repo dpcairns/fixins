@@ -119,13 +119,19 @@ table{
 }
 
 
-.SplashBoxAnim{
-	display: -webkit-flex;
+.DishBoxAnim{
 	position: absolute;
+
+	animation: bottom-to-top 200s infinite;
+}
+
+.space-between{
 	display: flex;
+	display: -webkit-flex;
 	-webkit-flex-direction: column;
 	flex-direction: column;
-	animation: bottom-to-top 150s infinite;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
 }
 
 @keyframes bottom-to-top{
@@ -138,12 +144,13 @@ table{
 
 }
 
-.SplashBoxAnimReverse{
+.CheckInBoxAnim{
 	display: -webkit-flex;
 	position: absolute;
 	display: flex;
 	-webkit-flex-direction: column;
 	flex-direction: column;
+	justify-content: space-between;
 	animation: top-to-bottom 100s infinite;
 }
 
