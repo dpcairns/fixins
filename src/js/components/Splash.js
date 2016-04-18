@@ -141,7 +141,8 @@ export default class Splash extends React.Component{
 		<div className="text-center" style={{zIndex:"2", opacity:"0.9"}}>
 			<div className="col-md-3">
 			<div  style={dishesBoxStyle} className="shadow-container">
-							<div className="DishBoxAnim  space-between">
+							<div className="DishBoxAnim space-between">
+
 				{this.props.dishes.length>5 ? topFiveDishNodes : "never mind"}
 
 				</div>

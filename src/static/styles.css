@@ -121,8 +121,9 @@ table{
 
 .DishBoxAnim{
 	position: absolute;
-
-	animation: bottom-to-top 200s infinite;
+	height: 3500px;
+	animation-timing-function: ease-in-out;
+	animation: top-to-bottom 100s infinite;
 }
 
 .space-between{
@@ -134,32 +135,35 @@ table{
 	-webkit-justify-content: space-between;
 }
 
-@keyframes bottom-to-top{
+@keyframes top-to-bottom{
 	0%{
 		top: -2000px
 	}
+	50%{
+		top: 0px
+	}
 	100%{
-		top: 2000px
+		top: -2000px
 	}
 
 }
 
 .CheckInBoxAnim{
-	display: -webkit-flex;
 	position: absolute;
-	display: flex;
-	-webkit-flex-direction: column;
-	flex-direction: column;
 	justify-content: space-between;
-	animation: top-to-bottom 100s infinite;
+	animation-timing-function: ease-in-out;
+	animation: bottom-to-top 200s infinite;
 }
 
-@keyframes top-to-bottom{
+@keyframes bottom-to-top{
 	0%{
 		top: 0px
 	}
-	100%{
+	50%{
 		top: -2000px
+	}
+	100%{
+		top: 0px
 	}
 
 }
