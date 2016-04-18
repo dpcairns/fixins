@@ -16,7 +16,7 @@ import SpotDetailContainer from './js/components/details/SpotDetail'
 import DishDetailContainer from './js/components/details/DishDetail'
 import NeighborhoodDetail from './js/components/details/NeighborhoodDetail'
 import SubNeighborhoodDetailContainer from './js/components/details/SubNeighborhoodDetail'
-import LogInPage from './js/components/pages/LogInPage'
+import LogInPageRedux from './js/components/pages/LogInPageRedux'
 import SignUpPage from './js/components/pages/SignUpPage'
 import NewCheckInPage from './js/components/pages/NewCheckInPage'
 import NewReviewPage from './js/components/pages/NewReviewPage'
@@ -86,7 +86,7 @@ ReactDOM.render(
 		<Route name="dish" path="/dish/:id" component={DishDetailContainer}></Route>
 		<Route name="subNeighborhood" path="/subNeighborhood/:id" component={SubNeighborhoodDetailContainer}></Route>
 		<Route name="neighborhood" path="/neighborhood/:id" component={NeighborhoodDetail}></Route>
-		<Route name="login" path="login" component={LogInPage}></Route>
+		<Route name="login" path="login" component={LogInPageRedux}></Route>
 		<Route name="myDashboard" path="myDashboard" component={MyDashboard}></Route>
 		<Route name="signup" path="signup" component={SignUpPage}></Route>
 		<Route name="newCheckIn" path="newCheckIn" component={NewCheckInPage}></Route>

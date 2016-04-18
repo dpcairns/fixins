@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from 'react-redux'
 import RemoveButton from "../utils/RemoveButton"
 import { Link } from 'react-router'
+import * as FixinsActions from "../../actions/FixinsActions"
 import Links from "../utils/Links"
 
 class AllGenres extends React.Component{
@@ -45,15 +46,6 @@ class AllGenres extends React.Component{
   }
 }
 
-
-function putOneSubNeighborhoodInState(_id){
-  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
-}
-
-function putOneGenreInState(_id){
-  return {type: "PUT_ONE_GENRE_IN_STATE", _id:_id}
-}
-
 const mapStateToProps = (state) => {
 
 	    return {
@@ -63,8 +55,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {putOneGenreInState: (_id) => dispatch(putOneGenreInState(_id)),
-		putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id))
+  return {putOneGenreInState: (_id) => dispatch(FixinsActions.putOneGenreInState(_id)),
+		putOneSubNeighborhoodInState: (_id) => dispatch(FixinsActions.putOneSubNeighborhoodInState(_id))
 }
 }
 

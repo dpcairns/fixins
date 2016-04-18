@@ -135,7 +135,7 @@ export default class Splash extends React.Component{
 		}
 			return(
 				<div style={{overflow: "hidden"}}>
-				<div className="bg-info" style={{height: "100%", width: "100%", position:"fixed", backgroundImage: myGif, backgroundSize: "cover", zIndex:"-1"}}>
+				<div className="bg-info" style={{height: "100%", width: "100%", position:"fixed", backgroundImage: myGif, backgroundSize: "cover", zIndex:"0"}}>
 				</div>
 
 		<div className="text-center" style={{zIndex:"2", opacity:"0.9"}}>

@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import RemoveButton from "../utils/RemoveButton"
+import * as FixinsActions from "../../actions/FixinsActions"
 import Links from "../utils/Links"
 
 class SpotDetail extends React.Component{
@@ -89,23 +90,12 @@ const mapStateToProps = (state) => {
         }
 }
 
-function putOneDishInState(_id){
-  return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
-}
-
-function putOneGenreInState(_id){
-  return {type: "PUT_ONE_GENRE_IN_STATE", _id:_id}
-}
-
-function putOneSubNeighborhoodInState(_id){
-  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
-}
 
 const mapDispatchToProps = (dispatch) => {
  return {
-	 				putOneDishInState: (_id) => dispatch(putOneDishInState(_id)),
-	 				putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
-					putOneGenreInState: (_id) => dispatch(putOneGenreInState(_id)),
+	 				putOneDishInState: (_id) => dispatch(FixinsActions.putOneDishInState(_id)),
+	 				putOneSubNeighborhoodInState: (_id) => dispatch(FixinsActions.putOneSubNeighborhoodInState(_id)),
+					putOneGenreInState: (_id) => dispatch(FixinsActions.putOneGenreInState(_id)),
  }
 }
 

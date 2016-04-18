@@ -62,6 +62,12 @@ export default class SpotForm extends React.Component{
 
 	}
 
+
+		handleAddressChange(e){
+			this.setState({address: e.target.value})
+
+		}
+
 	handleGenresChange(e){
 		this.setState({genres: e.target.value})
 	}
@@ -145,6 +151,14 @@ export default class SpotForm extends React.Component{
 			  className="form-control"
 			  placeholder="spot name" />
 		</div>
+		<div className="input-group">
+			Spot address:
+		  <input type="text" value={this.state.address}
+			  onChange={this.handleAddressChange.bind(this)}
+			  className="form-control"
+			  placeholder="Ex: 132 Fake Street Portland OR 23456" />
+		</div>
+
 		<div className="input-group">
 			Blurb:
 		  <input type="text" value={this.state.blurb}

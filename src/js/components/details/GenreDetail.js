@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from 'react-redux'
 import RemoveButton from "../utils/RemoveButton"
 import { Link } from 'react-router'
+import * as FixinsActions from "../../actions/FixinsActions"
 import Links from "../utils/Links"
 
 class GenreDetail extends React.Component{
@@ -53,7 +54,20 @@ class GenreDetail extends React.Component{
     return(
       <div className="bg-warning med-pad med-mar">
 			<h3><Link to="index/allGenres">see all genres</Link></h3>
+			<div className="row">
+			<div className="col-md-6">
           <h1>{genre.genre_name}</h1>
+			</div>
+			<div className="col-md-6">
+						<h3>
+							Think we missed a spot?<br/>
+								<Link onClick={putOneSubNeighborhoodInState.bind(this, "TRUE_NEW_SPOT")}
+								to="index/allNeighborhoods">
+									<i>Add one here!</i>
+								</Link>
+						</h3>
+			</div>
+			</div>
 					<div className="flex flexwrap">
           {allSpots.filter(findSpotsFilter).length> 0 ? spotNodes: (<h1>no relevant restaurants...yet!</h1>)}
 					</div>
@@ -63,17 +77,6 @@ class GenreDetail extends React.Component{
   }
 }
 
-function putOneSpotInState(_id){
-  return {type: "PUT_ONE_SPOT_IN_STATE", _id:_id}
-}
-
-function putOneSubNeighborhoodInState(_id){
-  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
-}
-
-function putOneDishInState(_id){
-  return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
-}
 
 const mapStateToProps = (state) => {
   const selectGenre = (genres, id) => {
@@ -88,9 +91,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {putOneSpotInState: (_id) => dispatch(putOneSpotInState(_id)),
-		putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
-		putOneDishInState: (_id) => dispatch(putOneDishInState(_id))
+  return {putOneSpotInState: (_id) => dispatch(FixinsActions.putOneSpotInState(_id)),
+		putOneSubNeighborhoodInState: (_id) => dispatch(FixinsActions.putOneSubNeighborhoodInState(_id)),
+		putOneDishInState: (_id) => dispatch(FixinsActions.putOneDishInState(_id))
 	}
 }
 

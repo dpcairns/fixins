@@ -1,3 +1,28 @@
+
+export function putOneSpotInState(_id){
+  return {type: "PUT_ONE_SPOT_IN_STATE", _id:_id}
+}
+
+export function putOneSubNeighborhoodInState(_id){
+  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
+}
+
+export function putOneNeighborhoodInState(_id){
+  return {type: "PUT_ONE_NEIGHBORHOOD_IN_STATE", _id:_id}
+}
+
+export function putOneGenreInState(_id){
+  return {type: "PUT_ONE_GENRE_IN_STATE", _id:_id}
+}
+
+export function putOneUserInState(_id){
+  return {type: "PUT_ONE_USER_IN_STATE", _id:_id}
+}
+
+export function putOneDishInState(_id){
+  return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
+}
+
 export function createUser(newUser, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Users",

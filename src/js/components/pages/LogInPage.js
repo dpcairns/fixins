@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Links from "../utils/Links"
+import * as FixinsActions from "../../actions/FixinsActions"
 import secureLogin from "../utils/AuthModule"
 
 class LogInPage extends React.Component{
@@ -59,7 +60,6 @@ class LogInPage extends React.Component{
 
     } else{
           this.props.userLogin(thisUser, (loggedInUser) => {
-            console.log(loggedInUser)
             if(loggedInUser === "LoginError" || loggedInUser === "LoginError2" ){
               this.showLoginFailure();
             }
@@ -155,10 +155,6 @@ const userLogin = (thisUser, callback, dispatch) => {
   })
 }
 
-function putOneSubNeighborhoodInState(_id){
-  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
-}
-
 const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser,
@@ -169,7 +165,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
     userLogin: (thisUser, callback) => userLogin(thisUser, callback, dispatch),
-    putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
+    putOneSubNeighborhoodInState: (_id) => dispatch(FixinsActions.putOneSubNeighborhoodInState(_id)),
   }
 }
 

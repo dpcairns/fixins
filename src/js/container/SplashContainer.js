@@ -2,8 +2,6 @@ import { connect } from 'react-redux'
 import * as FixinsActions from "../actions/FixinsActions"
 import Splash from '../components/Splash'
 
-
-
 const mapStateToProps = (state) => {
   return {
     genres: state.genres,
@@ -15,21 +13,6 @@ const mapStateToProps = (state) => {
     reviews: state.reviews,
     checkIns: state.checkIns
   }
-}
-
-function putOneSpotInState(_id){
-  return {type: "PUT_ONE_SPOT_IN_STATE", _id:_id}
-}
-
-function putOneSubNeighborhoodInState(_id){
-  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
-}
-
-function putOneDishInState(_id){
-  return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
-}
-function putOneUserInState(_id){
-  return {type: "PUT_ONE_USER_IN_STATE", _id:_id}
 }
 
 function jackpot(){
@@ -48,10 +31,10 @@ function mapDispatchToProps(dispatch) {
       initializeDishes: () => FixinsActions.initializeDishes(dispatch),
       initializeCheckIns: () => FixinsActions.initializeCheckIns(dispatch),
 
-          putOneUserInState: (_id) => dispatch(putOneUserInState(_id)),
-          putOneSpotInState: (_id) => dispatch(putOneSpotInState(_id)),
-      		putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
-      		putOneDishInState: (_id) => dispatch(putOneDishInState(_id))
+          putOneUserInState: (_id) => dispatch(FixinsActions.putOneUserInState(_id)),
+          putOneSpotInState: (_id) => dispatch(FixinsActions.putOneSpotInState(_id)),
+      		putOneSubNeighborhoodInState: (_id) => dispatch(FixinsActions.putOneSubNeighborhoodInState(_id)),
+      		putOneDishInState: (_id) => dispatch(FixinsActions.putOneDishInState(_id))
     }
 }
 

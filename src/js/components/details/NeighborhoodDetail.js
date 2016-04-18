@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from 'react-redux'
 import RemoveButton from "../utils/RemoveButton"
 import Links from "../utils/Links"
+import * as FixinsActions from "../../actions/FixinsActions"
 import { Link } from 'react-router'
 
 class NeighborhoodDetail extends React.Component{
@@ -75,12 +76,6 @@ return(
   }
 }
 
-function putOneSubNeighborhoodInState(_id){
-  return {
-    type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE",
-     _id: _id
-  }
-}
 
 const mapStateToProps = (state) => {
   const selectNeighborhood = (neighborhoods, id) => {
@@ -98,7 +93,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id))
+    putOneSubNeighborhoodInState: (_id) => dispatch(FixinsActions.putOneSubNeighborhoodInState(_id))
   }
 }
 

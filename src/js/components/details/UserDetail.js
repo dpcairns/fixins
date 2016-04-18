@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import CalorieDollarChart from "../utils/CalorieDollarChart"
 import RemoveButton from "../utils/RemoveButton"
 import { Link } from 'react-router'
+import * as FixinsActions from "../../actions/FixinsActions"
 import Links from "../utils/Links"
 
 class UserDetail extends React.Component{
@@ -123,17 +124,11 @@ const mapStateToProps = (state) => {
     		allCheckIns: state.checkIns
         }
 }
-function putOneDishInState(_id){
-  return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
-}
 
-function putOneSubNeighborhoodInState(_id){
-  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
-}
 const mapDispatchToProps = (dispatch) => {
  return {
-	 putOneDishInState: (_id) => dispatch(putOneDishInState(_id)),
-	 putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id))
+	 putOneDishInState: (_id) => dispatch(FixinsActions.putOneDishInState(_id)),
+	 putOneSubNeighborhoodInState: (_id) => dispatch(FixinsActions.putOneSubNeighborhoodInState(_id))
  }
 }
 

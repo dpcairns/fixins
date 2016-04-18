@@ -1,5 +1,8 @@
 import { combineReducers } from 'redux'
 import auth from "../components/utils/AuthModule"
+import checkInForm from "../components/utils/CheckInFormRedux"
+import {reducer as formReducer} from 'redux-form';
+
 const currentUser = (state = {}, action) => {
     switch(action.type) {
       case 'LOG_IN':
@@ -442,7 +445,8 @@ const FixinsApp = combineReducers({
   subNeighborhood,
   subNeighborhoods,
   genre,
-  genres
+  genres,
+  form: formReducer,
 })
 
 export default FixinsApp

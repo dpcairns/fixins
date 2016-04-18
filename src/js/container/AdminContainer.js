@@ -15,42 +15,15 @@ const mapStateToProps = (state) => {
   }
 }
 
-
-
-function  putOneUserInState(_id){
-  return {type: "PUT_ONE_USER_IN_STATE", _id:_id}
-}
-
-
-function putOneSpotInState(_id){
-  return {type: "PUT_ONE_SPOT_IN_STATE", _id:_id}
-}
-
-function putOneDishInState(_id){
-  return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
-}
-
-function putOneGenreInState(_id){
-  return {type: "PUT_ONE_GENRE_IN_STATE", _id:_id}
-}
-
-function putOneNeighborhoodInState(_id){
-  return {type: "PUT_ONE_NEIGHBORHOOD_IN_STATE", _id:_id}
-}
-
-function putOneSubNeighborhoodInState(_id){
-  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
 
-          putOneUserInState: (_id) => dispatch(putOneUserInState(_id)),
-          putOneSpotInState: (_id) => dispatch(putOneSpotInState(_id)),
-          putOneGenreInState: (_id) => dispatch(putOneGenreInState(_id)),
-          putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
-          putOneDishInState: (_id) => dispatch(putOneDishInState(_id)),
-          putOneNeighborhoodInState: (_id) => dispatch(putOneNeighborhoodInState(_id)),
+          putOneUserInState: (_id) => dispatch(FixinsActions.putOneUserInState(_id)),
+          putOneSpotInState: (_id) => dispatch(FixinsActions.putOneSpotInState(_id)),
+          putOneGenreInState: (_id) => dispatch(FixinsActions.putOneGenreInState(_id)),
+          putOneSubNeighborhoodInState: (_id) => dispatch(FixinsActions.putOneSubNeighborhoodInState(_id)),
+          putOneDishInState: (_id) => dispatch(FixinsActions.putOneDishInState(_id)),
+          putOneNeighborhoodInState: (_id) => dispatch(FixinsActions.putOneNeighborhoodInState(_id)),
 
 
           createSubNeighborhood: (newSubNeighborhood) => FixinsActions.createSubNeighborhood(newSubNeighborhood, dispatch),
@@ -82,25 +55,6 @@ const mapDispatchToProps = (dispatch) => {
 
   }
 }
-//everything listed above is available through this.props now in Admin...
 const AdminContainer = connect(mapStateToProps, mapDispatchToProps)(Admin)
 
 export default AdminContainer
-
-/*
-const CheckInForm = connect(mapStateToProps)(CheckInForm)
-const CheckInList = connect(mapStateToProps)(CheckInList)
-const DishForm = connect(mapStateToProps)(DishForm)
-const DishList = connect(mapStateToProps)(DishList)
-const GenreForm = connect(mapStateToProps)(GenreForm)
-const GenreList = connect(mapStateToProps)(GenreList)
-const NeighborhoodForm = connect(mapStateToProps)(NeighborhoodForm)
-const NeighborhoodList = connect(mapStateToProps)(NeighborhoodList)
-const SubNeighborhoodForm = connect(mapStateToProps)(SubNeighborhoodForm)
-const SubNeighborhoodList = connect(mapStateToProps)(SubNeighborhoodList)
-const ReviewForm = connect(mapStateToProps)(ReviewForm)
-const ReviewList = connect(mapStateToProps)(ReviewList)
-const UserForm = connect(mapStateToProps)(UserForm)
-const UserList = connect(mapStateToProps)(UserList)
-const SpotForm = connect(mapStateToProps)(SpotForm)
-const SpotList = connect(mapStateToProps)(SpotList) */

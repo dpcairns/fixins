@@ -4,6 +4,8 @@ import { Link } from 'react-router'
 import Links from "../utils/Links"
 import CalorieDollarChart from "../utils/CalorieDollarChart"
 import HorizontalRainbow from "../utils/HorizontalRainbow"
+import * as FixinsActions from "../../actions/FixinsActions"
+
 
 class MyDashboard extends React.Component{
 
@@ -159,17 +161,6 @@ render(){
   }
 
 
-function putOneDishInState(_id){
-  return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
-}
-
-function putOneSpotInState(_id){
-  return {type: "PUT_ONE_SPOT_IN_STATE", _id:_id}
-}
-
-function putOneSubNeighborhoodInState(_id){
-  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
-}
 MyDashboard.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
@@ -188,9 +179,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-  putOneDishInState: (_id) => dispatch(putOneDishInState(_id)),
-  putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
-  putOneSpotInState: (_id) => dispatch(putOneSpotInState(_id)),
+  putOneDishInState: (_id) => dispatch(FixinsActions.putOneDishInState(_id)),
+  putOneSubNeighborhoodInState: (_id) => dispatch(FixinsActions.putOneSubNeighborhoodInState(_id)),
+  putOneSpotInState: (_id) => dispatch(FixinsActions.putOneSpotInState(_id)),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MyDashboard)

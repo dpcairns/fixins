@@ -4,6 +4,7 @@ import RemoveButton from "../utils/RemoveButton"
 import { Link } from 'react-router'
 import Links from "../utils/Links"
 import NeighborhoodList from "../utils/NeighborhoodList"
+import * as FixinsActions from "../../actions/FixinsActions"
 
 
 class AllNeighborhoods extends React.Component{
@@ -47,11 +48,6 @@ class AllNeighborhoods extends React.Component{
 
 }
 
-
-function putOneNeighborhoodInState(_id){
-  return {type: "PUT_ONE_NEIGHBORHOOD_IN_STATE", _id:_id}
-}
-
 const mapStateToProps = (state) => {
 
 	    return {
@@ -61,7 +57,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {putOneNeighborhoodInState: (_id) => dispatch(putOneNeighborhoodInState(_id)),
+  return {putOneNeighborhoodInState: (_id) => dispatch(FixinsActions.putOneNeighborhoodInState(_id)),
 }
 }
 
