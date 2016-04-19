@@ -93,63 +93,63 @@
 
 	var _rootReducer2 = _interopRequireDefault(_rootReducer);
 
-	var _UserDetail = __webpack_require__(867);
+	var _UserDetail = __webpack_require__(868);
 
 	var _UserDetail2 = _interopRequireDefault(_UserDetail);
 
-	var _GenreDetail = __webpack_require__(868);
+	var _GenreDetail = __webpack_require__(869);
 
 	var _GenreDetail2 = _interopRequireDefault(_GenreDetail);
 
-	var _SpotDetail = __webpack_require__(869);
+	var _SpotDetail = __webpack_require__(870);
 
 	var _SpotDetail2 = _interopRequireDefault(_SpotDetail);
 
-	var _DishDetail = __webpack_require__(870);
+	var _DishDetail = __webpack_require__(871);
 
 	var _DishDetail2 = _interopRequireDefault(_DishDetail);
 
-	var _NeighborhoodDetail = __webpack_require__(871);
+	var _NeighborhoodDetail = __webpack_require__(872);
 
 	var _NeighborhoodDetail2 = _interopRequireDefault(_NeighborhoodDetail);
 
-	var _SubNeighborhoodDetail = __webpack_require__(872);
+	var _SubNeighborhoodDetail = __webpack_require__(873);
 
 	var _SubNeighborhoodDetail2 = _interopRequireDefault(_SubNeighborhoodDetail);
 
-	var _LogInPageRedux = __webpack_require__(873);
+	var _LogInPageRedux = __webpack_require__(874);
 
 	var _LogInPageRedux2 = _interopRequireDefault(_LogInPageRedux);
 
-	var _SignUpPage = __webpack_require__(874);
+	var _SignUpPage = __webpack_require__(875);
 
 	var _SignUpPage2 = _interopRequireDefault(_SignUpPage);
 
-	var _NewCheckInPage = __webpack_require__(875);
+	var _NewCheckInPage = __webpack_require__(877);
 
 	var _NewCheckInPage2 = _interopRequireDefault(_NewCheckInPage);
 
-	var _NewReviewPage = __webpack_require__(876);
+	var _NewReviewPage = __webpack_require__(878);
 
 	var _NewReviewPage2 = _interopRequireDefault(_NewReviewPage);
 
-	var _NewDishPage = __webpack_require__(877);
+	var _NewDishPage = __webpack_require__(880);
 
 	var _NewDishPage2 = _interopRequireDefault(_NewDishPage);
 
-	var _NewSpotPage = __webpack_require__(879);
+	var _NewSpotPage = __webpack_require__(882);
 
 	var _NewSpotPage2 = _interopRequireDefault(_NewSpotPage);
 
-	var _AllNeighborhoods = __webpack_require__(880);
+	var _AllNeighborhoods = __webpack_require__(883);
 
 	var _AllNeighborhoods2 = _interopRequireDefault(_AllNeighborhoods);
 
-	var _AllGenres = __webpack_require__(881);
+	var _AllGenres = __webpack_require__(884);
 
 	var _AllGenres2 = _interopRequireDefault(_AllGenres);
 
-	var _MyDashboard = __webpack_require__(882);
+	var _MyDashboard = __webpack_require__(885);
 
 	var _MyDashboard2 = _interopRequireDefault(_MyDashboard);
 
@@ -160,7 +160,8 @@
 	var app = document.getElementById('app');
 
 	var initialState = {
-		jackpot: "",
+		hiddenValue: "none",
+		jackpot: "none",
 		currentUser: {},
 		genre: "",
 		genres: [],
@@ -34545,29 +34546,14 @@
 		function Layout() {
 			_classCallCheck(this, Layout);
 
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Layout).call(this));
-
-			_this.state = {
-				loggedIn: { display: "block" },
-				loggedOut: { display: "none" }
-			};
-			return _this;
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Layout).apply(this, arguments));
 		}
 
 		_createClass(Layout, [{
-			key: "handleLogin",
-			value: function handleLogin() {
-				this.setState({ loggedIn: { display: "block" },
-					loggedOut: { display: "none" }
-				});
-			}
-		}, {
 			key: "handleLogout",
 			value: function handleLogout() {
+				this.props.userLogout();
 				this.context.router.push('index/login');
-				this.setState({ loggedIn: { display: "none" },
-					loggedOut: { display: "block" }
-				});
 			}
 		}, {
 			key: "componentDidMount",
@@ -34581,76 +34567,82 @@
 		}, {
 			key: "render",
 			value: function render() {
-				var containerStyle = { borderRadius: "15px 15px 15px 15px", marginBottom: "25px", marginTop: "2%", opacity: "0.99" };
+				var jackpot = this.props.jackpot;
+				var jackpotStyle = { display: jackpot, backgroundImage: "url(./static/jackpot3.gif)" };
+				var containerStyle = { borderRadius: "15px 15px 15px 15px", opacity: "0.99" };
 				var greetingStyle = { marginTop: "15px", marginRight: "10px", boxShadow: "1px 1px 2px grey", background: "lightyellow", maxWidth: "200px", float: "right" };
 				var currentUser = this.props.currentUser;
 				return _react2.default.createElement(
 					"div",
-					{ style: containerStyle, className: "bg-success container shadow-container" },
+					{ style: jackpot === "show" ? jackpotStyle : { display: "block" } },
 					_react2.default.createElement(
 						"div",
-						{ className: "row" },
+						{ style: containerStyle, className: "bg-success container shadow-container" },
 						_react2.default.createElement(
 							"div",
-							{ className: "col-md-9" },
-							_react2.default.createElement(_Links2.default, null)
-						),
-						_react2.default.createElement(
-							"div",
-							{ style: greetingStyle, className: "col-md-2 text-right anim-button" },
-							_react2.default.createElement(
-								"h5",
-								null,
-								"hello, ",
-								this.props.currentUser.username !== undefined ? _react2.default.createElement(
-									_reactRouter.Link,
-									{ to: "index/myDashboard" },
-									this.props.currentUser.username + " "
-								) : "honored guest ",
-								"|",
-								this.props.currentUser.username !== undefined ? _react2.default.createElement(
-									"a",
-									{ onClick: this.props.userLogout.bind(this) },
-									_react2.default.createElement(
-										"span",
-										{ onClick: this.handleLogout.bind(this) },
-										" logout? "
-									)
-								) : _react2.default.createElement(
-									_reactRouter.Link,
-									{ to: "index/login" },
-									" login? "
-								)
-							)
-						)
-					),
-					_react2.default.createElement(
-						"h2",
-						{ className: "bg-warning", style: { borderRadius: "50px 0 0 50px" } },
-						_react2.default.createElement(
-							"div",
-							{ className: "row" },
+							{ className: "row med-mar" },
 							_react2.default.createElement(
 								"div",
-								{ className: "col-md-6" },
-								_react2.default.createElement(
-									"span",
-									{ className: "text-left" },
-									_react2.default.createElement("img", { src: "./static/glitter3.gif", height: "40px", className: "anim-sparkle" })
-								)
+								{ className: "col-md-9" },
+								_react2.default.createElement(_Links2.default, null)
 							),
 							_react2.default.createElement(
 								"div",
-								{ className: "col-md-offset-3 col-md-3" },
+								{ style: greetingStyle, className: "col-md-2 text-right anim-button" },
 								_react2.default.createElement(
-									"span",
-									{ className: "text-right" },
-									"fixins || get stuft "
+									"h5",
+									null,
+									"hello, ",
+									this.props.currentUser.username !== undefined ? _react2.default.createElement(
+										_reactRouter.Link,
+										{ to: "index/myDashboard" },
+										this.props.currentUser.username + " "
+									) : "honored guest ",
+									"|",
+									this.props.currentUser.username !== undefined ? _react2.default.createElement(
+										"a",
+										{ onClick: this.props.userLogout.bind(this) },
+										_react2.default.createElement(
+											"span",
+											{ onClick: this.handleLogout.bind(this) },
+											" logout? "
+										)
+									) : _react2.default.createElement(
+										_reactRouter.Link,
+										{ to: "index/login" },
+										" login? "
+									)
 								)
 							)
-						)
-					),
-					this.props.children
+						),
+						_react2.default.createElement(
+							"h2",
+							{ className: "bg-warning", style: { borderRadius: "50px 0 0 50px" } },
+							_react2.default.createElement(
+								"div",
+								{ className: "row" },
+								_react2.default.createElement(
+									"div",
+									{ className: "col-md-6" },
+									_react2.default.createElement(
+										"span",
+										{ className: "text-left" },
+										_react2.default.createElement("img", { src: "./static/glitter3.gif", height: "40px", className: "anim-sparkle" })
+									)
+								),
+								_react2.default.createElement(
+									"div",
+									{ className: "col-md-offset-3 col-md-3" },
+									_react2.default.createElement(
+										"span",
+										{ className: "text-right" },
+										"fixins || get stuft "
+									)
+								)
+							)
+						),
+						this.props.children
+					)
 				);
 			}
 		}]);
@@ -34669,7 +34661,8 @@
 
 	var mapStateToProps = function mapStateToProps(state) {
 		return {
-			currentUser: state.currentUser
+			currentUser: state.currentUser,
+			jackpot: state.jackpot
 		};
 	};
 
@@ -34853,18 +34846,25 @@
 	    neighborhoods: state.neighborhoods,
 	    subNeighborhoods: state.subNeighborhoods,
 	    reviews: state.reviews,
-	    checkIns: state.checkIns
+	    checkIns: state.checkIns,
+	    jackpot: state.jackpot
 	  };
 	};
 
-	function _jackpot() {
+	function _noDice() {
+	  return { type: "NO_DICE" };
+	}
+	function _jackpotGo() {
 	  return { type: "JACKPOT" };
 	}
 
 	function mapDispatchToProps(dispatch) {
 	  return {
-	    jackpot: function jackpot() {
-	      return _jackpot();
+	    jackpotGo: function jackpotGo() {
+	      return dispatch(_jackpotGo());
+	    },
+	    noDice: function noDice() {
+	      return dispatch(_noDice());
 	    },
 	    initializeSubNeighborhoods: function initializeSubNeighborhoods() {
 	      return FixinsActions.initializeSubNeighborhoods(dispatch);
@@ -35124,8 +35124,6 @@
 			type: 'POST',
 			data: newCheckIn,
 			success: function (postedCheckIn) {
-				console.log("FixinsActions > postedCheckIn");
-				console.log(postedCheckIn);
 				dispatch(_extends({
 					type: 'CREATE_CHECKIN'
 				}, postedCheckIn));
@@ -35583,8 +35581,9 @@
 				var myGif = "";
 				var myGlitterFood = "";
 				var myOtherGlitterFood = "";
-				var jackpot = this.props.jackpot;
-				var jackpotStyles = { display: "none", textDecoration: "none", zIndex: "5", position: "fixed", marginLeft: "130px", fontSize: "7em", marginTop: "-230px" };
+				var jackpotGo = this.props.jackpotGo;
+				var noDice = this.props.noDice;
+				var jackpotStyles = { display: this.props.jackpot, textDecoration: "none", zIndex: "2", position: "fixed", bottom: "8%", left: "25%", fontSize: "12em" };
 				var putOneDishInState = this.props.putOneDishInState;
 				var putOneSpotInState = this.props.putOneSpotInState;
 				var putOneUserInState = this.props.putOneUserInState;
@@ -35597,7 +35596,7 @@
 				var recentCheckInNodes = [];
 				var topFiveSubNeighborhoodNodes = [];
 
-				if (this.props.subNeighborhoods.length > 5) {
+				if (this.props.subNeighborhoods.length > 89) {
 					(function () {
 						var itemBoxStyle = { overflow: "hidden", margin: "2px", maxHeight: "150px", maxWidth: "150px", padding: "5px", float: "left", textAlign: "center", background: "#BDA0CB", borderRadius: "10px" };
 						var allSubNeighborhoods = _this2.props.subNeighborhoods;
@@ -35605,14 +35604,15 @@
 						var allSpots = _this2.props.spots;
 						var sortedSubNeighborhoods = [];
 						var randA = Math.floor(Math.random() * 7);
-						var randB = Math.floor(Math.random() * 5);
-						var randC = Math.floor(Math.random() * 5);
+						var randB = Math.floor(Math.random() * 7);
+						var randC = Math.floor(Math.random() * 7);
 						myGif = "url(./static/pizza" + randA + ".gif)";
 						myGlitterFood = "./static/glitterFood" + randB + ".gif";
 						myOtherGlitterFood = "./static/glitterFood" + randC + ".gif";
 						if (randB === randC) {
-							jackpot();
-							jackpotStyles.display = "block";
+							jackpotGo();
+						} else {
+							noDice();
 						}
 
 						allSubNeighborhoods.forEach(function (subNeighborhood) {
@@ -35767,7 +35767,7 @@
 								_react2.default.createElement(
 									"div",
 									{ className: "DishBoxAnim space-between" },
-									this.props.dishes.length > 5 ? topFiveDishNodes : "never mind"
+									this.props.dishes.length > 5 ? topFiveDishNodes : _react2.default.createElement("img", { height: "50", width: "100", src: "./static/loading.gif" })
 								)
 							)
 						),
@@ -35803,7 +35803,7 @@
 										_react2.default.createElement(
 											"div",
 											{ className: "top-five flex" },
-											this.props.subNeighborhoods.length > 5 ? topFiveSubNeighborhoodNodes : "never mind"
+											this.props.subNeighborhoods.length > 5 ? topFiveSubNeighborhoodNodes : _react2.default.createElement("img", { height: "50", width: "100", src: "./static/loading.gif" })
 										)
 									)
 								)
@@ -35845,7 +35845,7 @@
 								_react2.default.createElement(
 									"div",
 									{ className: "CheckInBoxAnim" },
-									this.props.checkIns.length > 5 ? recentCheckInNodes : "never mind"
+									this.props.checkIns.length > 5 ? recentCheckInNodes : _react2.default.createElement("img", { height: "50", width: "100", src: "./static/loading.gif" })
 								)
 							)
 						)
@@ -71474,10 +71474,25 @@
 
 	  switch (action.type) {
 	    case 'JACKPOT':
-	      if (state === "") {
-	        return state.concat("JACKPOT");
-	      } else {
-	        return state;
+	      return "block";
+	    case 'NO_DICE':
+	      return "none";
+	    default:
+	      return state;
+	  }
+	};
+
+	var hiddenValue = function hiddenValue() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case 'TOGGLE_HIDDEN':
+	      console.log("toggle_hidden in reducer");
+	      if (state === "none") {
+	        return "block";
+	      } else if (state === "block") {
+	        return "none";
 	      }
 	    default:
 	      return state;
@@ -71485,6 +71500,7 @@
 	};
 
 	var FixinsApp = (0, _redux.combineReducers)({
+	  hiddenValue: hiddenValue,
 	  auth: _AuthModule2.default,
 	  jackpot: jackpot,
 	  currentUser: currentUser,
@@ -72559,7 +72575,11 @@
 
 	var _reduxForm = __webpack_require__(819);
 
+	var _validation = __webpack_require__(867);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -72586,9 +72606,10 @@
 	      var _props = this.props;
 	      var blurb = _props.fields.blurb;
 	      var handleSubmit = _props.handleSubmit;
+	      var resetForm = _props.resetForm;
 	      var submitting = _props.submitting;
 
-	      var nameErrorMsg = name.touched && name.error ? name.error : '';
+	      var blurbErrorMsg = blurb.touched && blurb.error ? blurb.error : '';
 
 	      return _react2.default.createElement(
 	        'div',
@@ -72602,6 +72623,7 @@
 	              newCheckInObject.dish = _this2.props.thisDish;
 	              newCheckInObject.user = _this2.props.currentUser;
 	              _this2.props.createCheckIn(newCheckInObject);
+	              resetForm();
 	            }), className: 'form', role: 'form' },
 	          _react2.default.createElement(
 	            'fieldset',
@@ -72615,10 +72637,10 @@
 	            _react2.default.createElement(
 	              'label',
 	              { className: 'text-danger' },
-	              nameErrorMsg
+	              blurbErrorMsg
 	            ),
 	            _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control', id: 'blurb',
-	              placeholder: 'Enter blurb of the checkIn' }, blurb, { required: '' }))
+	              placeholder: 'Say a little something about the experience (140 char max)' }, blurb, { required: '' }))
 	          ),
 	          _react2.default.createElement(
 	            'button',
@@ -72644,11 +72666,19 @@
 	  fields: _react.PropTypes.object.isRequired,
 	  handleSubmit: _react.PropTypes.func.isRequired,
 	  createCheckIn: _react.PropTypes.func.isRequired,
-	  submitting: _react.PropTypes.bool.isRequired
+	  submitting: _react.PropTypes.bool.isRequired,
+	  resetForm: _react.PropTypes.func.isRequired
 	};
+
+
+	var CheckInFormValidation = (0, _validation.createValidator)(_defineProperty({
+	  blurb: _validation.required
+	}, 'blurb', (0, _validation.maxLength)(140)));
+
 	exports.default = (0, _reduxForm.reduxForm)({
 	  form: 'checkInForm',
-	  fields: fields
+	  fields: fields,
+	  validate: CheckInFormValidation
 	})(CheckInFormRedux);
 
 /***/ },
@@ -75766,6 +75796,171 @@
 
 /***/ },
 /* 867 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.required = required;
+	exports.oneNumber = oneNumber;
+	exports.oneSpecial = oneSpecial;
+	exports.minLength = minLength;
+	exports.minLengthField = minLengthField;
+	exports.maxLength = maxLength;
+	exports.integer = integer;
+	exports.number = number;
+	exports.oneOf = oneOf;
+	exports.match = match;
+	exports.notMatch = notMatch;
+	exports.email = email;
+	exports.createValidator = createValidator;
+	var isEmpty = function isEmpty(value) {
+	  return value === undefined || value === null || value === '';
+	};
+	var join = function join(rules) {
+	  return function (value, data) {
+	    return rules.map(function (rule) {
+	      return rule(value, data);
+	    }).filter(function (error) {
+	      return !!error;
+	    })[0];
+	  };
+	};
+
+	function required(value) {
+	  if (isEmpty(value)) {
+	    return 'Required';
+	  }
+	}
+
+	function oneNumber(field) {
+	  return function (value, data) {
+	    if (data) {
+	      if (data[field]) {
+	        var matches = data[field].match(/\d+/g);
+	        if (matches == null) {
+	          return 'Password must have at least one number';
+	        }
+	      } else {
+	        return 'Invalid data';
+	      }
+	    }
+	  };
+	}
+
+	function oneSpecial(field) {
+	  return function (value, data) {
+	    if (data) {
+	      if (data[field]) {
+	        var matches = data[field].match(/[^A-Za-z0-9]+/g);
+
+	        if (matches == null) {
+	          return 'Password must have at least one special character';
+	        }
+	      } else {
+	        return 'Invalid data';
+	      }
+	    }
+	  };
+	}
+
+	function minLength(min) {
+	  return function (value) {
+	    if (!isEmpty(value) && value.length < min) {
+	      return 'Must be at least ' + min + ' characters';
+	    }
+	  };
+	}
+
+	function minLengthField(min, field) {
+	  return function (value, data) {
+	    if (!data[field]) return 'Invalid data';
+	    if (data && data[field] && !isEmpty(data[field]) && data[field].length < min) {
+	      return 'Must be at least ' + min + ' characters';
+	    }
+	  };
+	}
+
+	function maxLength(max) {
+	  return function (value) {
+	    if (!isEmpty(value) && value.length > max) {
+	      return 'Must be no more than ' + max + ' characters';
+	    }
+	  };
+	}
+
+	function integer(value) {
+	  if (!value) return;
+	  if (!Number.isInteger(Number(value))) {
+	    return 'Must be an integer';
+	  }
+	}
+
+	function number(value) {
+	  if (!value) return;
+	  var num = Number.parseFloat(value);
+	  if (isNaN(num)) {
+	    return 'Must be a numeric';
+	  }
+	}
+
+	function oneOf(enumeration) {
+	  return function (value) {
+	    if (! ~enumeration.indexOf(value)) {
+	      return 'Must be one of: ' + enumeration.join(', ');
+	    }
+	  };
+	}
+
+	function match(field) {
+	  return function (value, data) {
+	    if (data) {
+	      if (value !== data[field]) {
+	        return 'Does not match';
+	      }
+	    }
+	  };
+	}
+
+	function notMatch(field) {
+	  return function (value, data) {
+	    if (data) {
+	      if (value === data[field]) {
+	        return 'Must not be the same';
+	      }
+	    }
+	  };
+	}
+
+	function email(data) {
+	  if (data) {
+	    var matches = data.match(/^.+@.+\..+$/);
+	    if (matches == null) {
+	      return 'Is Invalid';
+	    }
+	  }
+	}
+
+	function createValidator(rules) {
+	  return function () {
+	    var data = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+	    var errors = {};
+	    Object.keys(rules).forEach(function (key) {
+	      var rule = join([].concat(rules[key])); // concat enables both functions and arrays of functions
+	      var error = rule(data[key], data);
+	      if (error) {
+	        errors[key] = error;
+	      }
+	    });
+	    return errors;
+	  };
+	}
+
+/***/ },
+/* 868 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -76102,7 +76297,7 @@
 	exports.default = UserDetailContainer;
 
 /***/ },
-/* 868 */
+/* 869 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -76311,7 +76506,7 @@
 	exports.default = GenreDetailContainer;
 
 /***/ },
-/* 869 */
+/* 870 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76529,7 +76724,7 @@
 	exports.default = SpotDetailContainer;
 
 /***/ },
-/* 870 */
+/* 871 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76959,7 +77154,7 @@
 	exports.default = DishDetailContainer;
 
 /***/ },
-/* 871 */
+/* 872 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -77066,7 +77261,7 @@
 															theseSpots.length > 0 ? "spots: " + theseSpots.length : _react2.default.createElement(
 																	_reactRouter.Link,
 																	{ to: "index/newSpot" },
-																	"add a spot"
+																	"no spots--add the first!"
 															),
 															_react2.default.createElement("br", null),
 															"users: ",
@@ -77141,7 +77336,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NeighborhoodDetail);
 
 /***/ },
-/* 872 */
+/* 873 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -77445,7 +77640,7 @@
 	exports.default = SubNeighborhoodDetailContainer;
 
 /***/ },
-/* 873 */
+/* 874 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77465,6 +77660,8 @@
 	var _FixinsActions = __webpack_require__(542);
 
 	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	var _validation = __webpack_require__(867);
 
 	var _reactRouter = __webpack_require__(191);
 
@@ -77498,16 +77695,29 @@
 	    value: function render() {
 	      var _this2 = this;
 
+	      if (this.props.currentUser._id !== undefined) {
+	        this.context.router.push('index/myDashboard');
+	      }
+	      var hiddenValue = this.props.hiddenValue;
+	      var toggleHidden = this.props.toggleHidden;
 	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
+	      var loginFailureStyles = {
+	        display: hiddenValue,
+	        background: "pink",
+	        height: "60px",
+	        width: "100%"
+	      };
+
 	      var _props = this.props;
 	      var _props$fields = _props.fields;
 	      var username = _props$fields.username;
 	      var password = _props$fields.password;
+	      var resetForm = _props.resetForm;
 	      var handleSubmit = _props.handleSubmit;
 	      var submitting = _props.submitting;
 
-	      var nameErrorMsg = name.touched && name.error ? name.error : '';
-
+	      var usernameErrorMsg = username.touched && username.error ? username.error : '';
+	      var passwordErrorMsg = password.touched && password.error ? password.error : '';
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -77515,7 +77725,20 @@
 	          _reactRouter.Link,
 	          { onClick: putOneSubNeighborhoodInState.bind(this, "TRUE_NEW_USER"),
 	            to: 'index/allNeighborhoods' },
-	          'Need an account? Sign up here.'
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            'Need an account? Sign up here.'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { style: loginFailureStyles },
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            'Login failed. Try again and do something different.'
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -77527,10 +77750,14 @@
 	                thisUser.username = data.username;
 	                thisUser.password = data.password;
 	                _this2.props.userLogin(thisUser, function (loggedInUser) {
-	                  if (loggedInUser === "LoginError" || loggedInUser === "LoginError2") {
-	                    console.log('wrong stuff');
+	                  if (loggedInUser === "LoginError") {
+	                    console.log("toggle_hidden");
+	                    toggleHidden();
+	                  } else if (hiddenValue === "block" && loggedInUser !== "LoginError") {
+	                    toggleHidden();
 	                  }
 	                });
+	                resetForm();
 	              }), className: 'form', role: 'form' },
 	            _react2.default.createElement(
 	              'fieldset',
@@ -77544,7 +77771,7 @@
 	              _react2.default.createElement(
 	                'label',
 	                { className: 'text-danger' },
-	                nameErrorMsg
+	                usernameErrorMsg
 	              ),
 	              _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control', id: 'name',
 	                placeholder: 'Ex: SomebodySpecial321' }, username, { required: '' }))
@@ -77561,7 +77788,7 @@
 	              _react2.default.createElement(
 	                'label',
 	                { className: 'text-danger' },
-	                nameErrorMsg
+	                passwordErrorMsg
 	              ),
 	              _react2.default.createElement('input', _extends({ type: 'password', className: 'form-control', id: 'password',
 	                placeholder: 'And the password?' }, password, { required: '' }))
@@ -77585,9 +77812,15 @@
 	  fields: _react.PropTypes.object.isRequired,
 	  handleSubmit: _react.PropTypes.func.isRequired,
 	  userLogin: _react.PropTypes.func.isRequired,
-	  submitting: _react.PropTypes.bool.isRequired
+	  submitting: _react.PropTypes.bool.isRequired,
+	  resetForm: _react.PropTypes.func.isRequired,
+	  toggleHidden: _react.PropTypes.func.isRequired
 	};
 
+
+	LogInPageRedux.contextTypes = {
+	  router: _react2.default.PropTypes.object.isRequired
+	};
 
 	var _userLogin = function _userLogin(thisUser, callback, dispatch) {
 	  $.ajax({
@@ -77607,10 +77840,17 @@
 	  });
 	};
 
+	var _toggleHidden = function _toggleHidden() {
+	  return {
+	    type: "TOGGLE_HIDDEN"
+	  };
+	};
+
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    currentUser: state.currentUser,
-	    users: state.users
+	    users: state.users,
+	    hiddenValue: state.hiddenValue
 	  };
 	};
 
@@ -77619,21 +77859,30 @@
 	    userLogin: function userLogin(thisUser, callback) {
 	      return _userLogin(thisUser, callback, dispatch);
 	    },
+	    toggleHidden: function toggleHidden() {
+	      return dispatch(_toggleHidden());
+	    },
 	    putOneSubNeighborhoodInState: function putOneSubNeighborhoodInState(_id) {
 	      return dispatch(FixinsActions.putOneSubNeighborhoodInState(_id));
 	    }
 	  };
 	};
 
-	var LogInPageRedux2 = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LogInPageRedux);
+	var LoginFormValidation = (0, _validation.createValidator)({
+	  username: _validation.required,
+	  password: _validation.required
+	});
+
+	var LogInPageReduxConnected = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LogInPageRedux);
 
 	exports.default = (0, _reduxForm.reduxForm)({
 	  form: 'loginForm',
-	  fields: fields
-	})(LogInPageRedux2);
+	  fields: fields,
+	  validate: LoginFormValidation
+	})(LogInPageReduxConnected);
 
 /***/ },
-/* 874 */
+/* 875 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77656,7 +77905,7 @@
 
 	var _Links2 = _interopRequireDefault(_Links);
 
-	var _UserFormRedux = __webpack_require__(885);
+	var _UserFormRedux = __webpack_require__(876);
 
 	var _UserFormRedux2 = _interopRequireDefault(_UserFormRedux);
 
@@ -77731,7 +77980,203 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SignUpPage);
 
 /***/ },
-/* 875 */
+/* 876 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reduxForm = __webpack_require__(819);
+
+	var _validation = __webpack_require__(867);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var fields = ['username', 'password', 'target'];
+
+	var UserFormRedux = function (_Component) {
+	  _inherits(UserFormRedux, _Component);
+
+	  function UserFormRedux() {
+	    _classCallCheck(this, UserFormRedux);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(UserFormRedux).apply(this, arguments));
+	  }
+
+	  _createClass(UserFormRedux, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      var _props = this.props;
+	      var _props$fields = _props.fields;
+	      var username = _props$fields.username;
+	      var password = _props$fields.password;
+	      var target = _props$fields.target;
+	      var resetForm = _props.resetForm;
+	      var handleSubmit = _props.handleSubmit;
+	      var submitting = _props.submitting;
+
+	      var usernameErrorMsg = username.touched && username.error ? username.error : '';
+	      var passwordErrorMsg = password.touched && password.error ? password.error : '';
+	      var targetErrorMsg = password.touched && password.error ? password.error : '';
+	      var successStyles = { disply: "none" };
+	      var allSubNeighborhoods = this.props.allSubNeighborhoods;
+	      var subNeighborhoodFilter = function subNeighborhoodFilter(subNeighborhood) {
+	        return subNeighborhood._id === _this2.props.subNeighborhood._id;
+	      };
+	      var mySubNeighborhood = allSubNeighborhoods.filter(subNeighborhoodFilter);
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'userForm' },
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          ' You call ',
+	          mySubNeighborhood[0].subNeighborhood_name,
+	          ' home.'
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: handleSubmit(function (data) {
+	              var newUser = {};
+	              newUser.name = data.username;
+	              newUser.password = data.password;
+	              newUser.target = parseInt(data.target);
+	              newUser.user_sub_neighborhood = _this2.props.subNeighborhood;
+	              _this2.props.createUser(newUser);
+	              resetForm();
+	              successStyles = {
+	                display: "block",
+	                background: '#98FB98',
+	                height: '120px',
+	                width: '100%'
+	              };
+
+	              ///
+	            }), className: 'form', role: 'form' },
+	          _react2.default.createElement(
+	            'fieldset',
+	            { className: 'form-group' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'username' },
+	              'Username'
+	            ),
+	            ' ',
+	            _react2.default.createElement(
+	              'label',
+	              { className: 'text-danger' },
+	              usernameErrorMsg
+	            ),
+	            _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control', id: 'name',
+	              placeholder: 'Pick a username you might like. Ex: SomebodySpecial321' }, username, { required: '' }))
+	          ),
+	          _react2.default.createElement(
+	            'fieldset',
+	            { className: 'form-group' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'password' },
+	              'Password'
+	            ),
+	            ' ',
+	            _react2.default.createElement(
+	              'label',
+	              { className: 'text-danger' },
+	              passwordErrorMsg
+	            ),
+	            _react2.default.createElement('input', _extends({ type: 'password', className: 'form-control', id: 'password',
+	              placeholder: 'And what password would you like?' }, password, { required: '' }))
+	          ),
+	          _react2.default.createElement(
+	            'fieldset',
+	            { className: 'form-group' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'target' },
+	              'How many calorieDollars would your target meal have?'
+	            ),
+	            ' ',
+	            _react2.default.createElement(
+	              'label',
+	              { className: 'text-danger' },
+	              targetErrorMsg
+	            ),
+	            _react2.default.createElement('input', _extends({ type: 'number', className: 'form-control', id: 'target',
+	              placeholder: 'Maybe like 300 calorieDollars is a good amount' }, target, { required: '' }))
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'submit', className: 'btn btn-primary btn-block', disabled: submitting },
+	            'Save',
+	            submitting ? _react2.default.createElement('span', { className: 'loader glyphicon glyphicon-refresh spin' }) : _react2.default.createElement('span', null)
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { style: this.state.successStyles },
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            'Signup success! Click here to ',
+	            _react2.default.createElement(
+	              Link,
+	              { to: 'index/login' },
+	              'login'
+	            ),
+	            '.'
+	          ),
+	          '.'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return UserFormRedux;
+	}(_react.Component);
+
+	UserFormRedux.propTypes = {
+	  fields: _react.PropTypes.object.isRequired,
+	  handleSubmit: _react.PropTypes.func.isRequired,
+	  resetForm: _react.PropTypes.func.isRequired,
+	  createUser: _react.PropTypes.func.isRequired,
+	  submitting: _react.PropTypes.bool.isRequired
+	};
+
+
+	var UserFormValidation = (0, _validation.createValidator)({
+	  username: _validation.required,
+	  password: _validation.required,
+	  target: _validation.required
+	});
+
+	exports.default = (0, _reduxForm.reduxForm)({
+	  form: 'userForm',
+	  fields: fields,
+	  validate: UserFormValidation
+	})(UserFormRedux);
+
+/***/ },
+/* 877 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77843,7 +78288,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewCheckInPage);
 
 /***/ },
-/* 876 */
+/* 878 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77866,7 +78311,7 @@
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
-	var _ReviewFormRedux = __webpack_require__(884);
+	var _ReviewFormRedux = __webpack_require__(879);
 
 	var _ReviewFormRedux2 = _interopRequireDefault(_ReviewFormRedux);
 
@@ -77945,7 +78390,146 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewReviewPage);
 
 /***/ },
-/* 877 */
+/* 879 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reduxForm = __webpack_require__(819);
+
+	var _validation = __webpack_require__(867);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var fields = ['words', 'stars'];
+
+	var ReviewFormRedux = function (_Component) {
+	  _inherits(ReviewFormRedux, _Component);
+
+	  function ReviewFormRedux() {
+	    _classCallCheck(this, ReviewFormRedux);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(ReviewFormRedux).apply(this, arguments));
+	  }
+
+	  _createClass(ReviewFormRedux, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      var _props = this.props;
+	      var _props$fields = _props.fields;
+	      var words = _props$fields.words;
+	      var stars = _props$fields.stars;
+	      var resetForm = _props.resetForm;
+	      var handleSubmit = _props.handleSubmit;
+	      var submitting = _props.submitting;
+
+	      var wordsErrorMsg = words.touched && words.error ? words.error : '';
+	      var starsErrorMsg = stars.touched && stars.error ? stars.error : '';
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'reviewForm' },
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: handleSubmit(function (data) {
+	              var newReviewObject = {};
+	              newReviewObject.reviewed_dish = _this2.props.thisDish;
+	              newReviewObject.words = data.words;
+	              newReviewObject.stars = data.stars;
+	              newReviewObject.review_user = _this2.props.currentUser;
+	              _this2.props.createReview(newReviewObject);
+	              resetForm();
+	            }), className: 'form', role: 'form' },
+	          _react2.default.createElement(
+	            'fieldset',
+	            { className: 'form-group' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'words' },
+	              'Your review:'
+	            ),
+	            ' ',
+	            _react2.default.createElement(
+	              'label',
+	              { className: 'text-danger' },
+	              blurbErrorMsg
+	            ),
+	            _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control', id: 'blurb',
+	              placeholder: 'Tell us what you think about the dish . . .' }, words, { required: '' }))
+	          ),
+	          _react2.default.createElement(
+	            'fieldset',
+	            { className: 'form-group' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'stars' },
+	              'Stars'
+	            ),
+	            ' ',
+	            _react2.default.createElement(
+	              'label',
+	              { className: 'text-danger' },
+	              starsErrorMsg
+	            ),
+	            _react2.default.createElement('input', _extends({ type: 'number', min: '0', max: '5', className: 'form-control', id: 'stars',
+	              placeholder: 'How many stars out of five?' }, stars, { required: '' }))
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'submit', className: 'btn btn-primary btn-block', disabled: submitting },
+	            'Save',
+	            submitting ? _react2.default.createElement('span', { className: 'loader glyphicon glyphicon-refresh spin' }) : _react2.default.createElement('span', null)
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return ReviewFormRedux;
+	}(_react.Component);
+
+	ReviewFormRedux.propTypes = {
+	  fields: _react.PropTypes.object.isRequired,
+	  handleSubmit: _react.PropTypes.func.isRequired,
+	  createReview: _react.PropTypes.func.isRequired,
+	  submitting: _react.PropTypes.bool.isRequired,
+	  resetForm: _react.PropTypes.func.isRequired
+	};
+
+
+	var ReviewFormValidation = (0, _validation.createValidator)({
+	  words: _validation.required,
+	  stars: _validation.required
+	});
+
+	exports.default = (0, _reduxForm.reduxForm)({
+	  form: 'reviewForm',
+	  fields: fields,
+	  validate: ReviewFormValidation
+	})(ReviewFormRedux);
+
+/***/ },
+/* 880 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77968,7 +78552,7 @@
 
 	var _RemoveButton2 = _interopRequireDefault(_RemoveButton);
 
-	var _DishFormRedux = __webpack_require__(878);
+	var _DishFormRedux = __webpack_require__(881);
 
 	var _DishFormRedux2 = _interopRequireDefault(_DishFormRedux);
 
@@ -78058,7 +78642,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewDishPage);
 
 /***/ },
-/* 878 */
+/* 881 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78076,6 +78660,8 @@
 	var _react2 = _interopRequireDefault(_react);
 
 	var _reduxForm = __webpack_require__(819);
+
+	var _validation = __webpack_require__(867);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -78109,9 +78695,13 @@
 	      var calories = _props$fields.calories;
 	      var map = _props$fields.map;
 	      var handleSubmit = _props.handleSubmit;
+	      var resetForm = _props.resetForm;
 	      var submitting = _props.submitting;
 
+	      var blurbErrorMsg = blurb.touched && blurb.error ? blurb.error : '';
+	      var priceErrorMsg = price.touched && price.error ? price.error : '';
 	      var nameErrorMsg = name.touched && name.error ? name.error : '';
+	      var caloriesErrorMsg = calories.touched && calories.error ? calories.error : '';
 
 	      return _react2.default.createElement(
 	        'div',
@@ -78126,6 +78716,7 @@
 	              newDishObject.spot = _this2.props.thisSpot;
 	              newDishObject.blurb = data.blurb;
 	              _this2.props.createDish(newDishObject);
+	              resetForm();
 	            }), className: 'form', role: 'form' },
 	          _react2.default.createElement(
 	            'fieldset',
@@ -78149,14 +78740,31 @@
 	            { className: 'form-group' },
 	            _react2.default.createElement(
 	              'label',
-	              { htmlFor: 'calories' },
-	              'Name'
+	              { htmlFor: 'blurb' },
+	              'Blurb'
 	            ),
 	            ' ',
 	            _react2.default.createElement(
 	              'label',
 	              { className: 'text-danger' },
-	              nameErrorMsg
+	              blurbErrorMsg
+	            ),
+	            _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control', id: 'blurb',
+	              placeholder: 'Tell us a little bit about the dish' }, blurb, { required: '' }))
+	          ),
+	          _react2.default.createElement(
+	            'fieldset',
+	            { className: 'form-group' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'calories' },
+	              'Calories'
+	            ),
+	            ' ',
+	            _react2.default.createElement(
+	              'label',
+	              { className: 'text-danger' },
+	              caloriesErrorMsg
 	            ),
 	            _react2.default.createElement('input', _extends({ type: 'number', className: 'form-control', id: 'calories',
 	              placeholder: 'How many calories does this dish have?' }, calories, { required: '' }))
@@ -78173,27 +78781,10 @@
 	            _react2.default.createElement(
 	              'label',
 	              { className: 'text-danger' },
-	              nameErrorMsg
+	              priceErrorMsg
 	            ),
 	            _react2.default.createElement('input', _extends({ type: 'number', className: 'form-control', id: 'price',
 	              placeholder: 'How much does it cost?' }, price, { required: '' }))
-	          ),
-	          _react2.default.createElement(
-	            'fieldset',
-	            { className: 'form-group' },
-	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: 'blurb' },
-	              'Blurb'
-	            ),
-	            ' ',
-	            _react2.default.createElement(
-	              'label',
-	              { className: 'text-danger' },
-	              nameErrorMsg
-	            ),
-	            _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control', id: 'blurb',
-	              placeholder: 'Tell us a little bit about the dish' }, blurb, { required: '' }))
 	          ),
 	          _react2.default.createElement(
 	            'button',
@@ -78213,15 +78804,26 @@
 	  fields: _react.PropTypes.object.isRequired,
 	  handleSubmit: _react.PropTypes.func.isRequired,
 	  createDish: _react.PropTypes.func.isRequired,
-	  submitting: _react.PropTypes.bool.isRequired
+	  submitting: _react.PropTypes.bool.isRequired,
+	  resetForm: _react.PropTypes.func.isRequired
 	};
+
+
+	var DishFormValidation = (0, _validation.createValidator)({
+	  blurb: _validation.required,
+	  price: _validation.required,
+	  name: _validation.required,
+	  calories: _validation.required
+	});
+
 	exports.default = (0, _reduxForm.reduxForm)({
 	  form: 'dishForm',
-	  fields: fields
+	  fields: fields,
+	  validate: DishFormValidation
 	})(DishFormRedux);
 
 /***/ },
-/* 879 */
+/* 882 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78331,7 +78933,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewSpotPage);
 
 /***/ },
-/* 880 */
+/* 883 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -78453,7 +79055,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AllNeighborhoods);
 
 /***/ },
-/* 881 */
+/* 884 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -78587,7 +79189,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AllGenres);
 
 /***/ },
-/* 882 */
+/* 885 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78614,7 +79216,7 @@
 
 	var _CalorieDollarChart2 = _interopRequireDefault(_CalorieDollarChart);
 
-	var _HorizontalRainbow = __webpack_require__(883);
+	var _HorizontalRainbow = __webpack_require__(886);
 
 	var _HorizontalRainbow2 = _interopRequireDefault(_HorizontalRainbow);
 
@@ -78985,7 +79587,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MyDashboard);
 
 /***/ },
-/* 883 */
+/* 886 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -79038,287 +79640,6 @@
 	}(_react2.default.Component);
 
 	exports.default = HorizontalRainbow;
-
-/***/ },
-/* 884 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reduxForm = __webpack_require__(819);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var fields = ['words', 'stars'];
-
-	var ReviewFormRedux = function (_Component) {
-	  _inherits(ReviewFormRedux, _Component);
-
-	  function ReviewFormRedux() {
-	    _classCallCheck(this, ReviewFormRedux);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(ReviewFormRedux).apply(this, arguments));
-	  }
-
-	  _createClass(ReviewFormRedux, [{
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-
-	      var _props = this.props;
-	      var _props$fields = _props.fields;
-	      var words = _props$fields.words;
-	      var stars = _props$fields.stars;
-	      var handleSubmit = _props.handleSubmit;
-	      var submitting = _props.submitting;
-
-	      var nameErrorMsg = name.touched && name.error ? name.error : '';
-
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'reviewForm' },
-	        _react2.default.createElement(
-	          'form',
-	          { onSubmit: handleSubmit(function (data) {
-	              var newReviewObject = {};
-	              newReviewObject.reviewed_dish = _this2.props.thisDish;
-	              newReviewObject.words = data.words;
-	              newReviewObject.stars = data.stars;
-	              newReviewObject.review_user = _this2.props.currentUser;
-	              _this2.props.createReview(newReviewObject);
-	            }), className: 'form', role: 'form' },
-	          _react2.default.createElement(
-	            'fieldset',
-	            { className: 'form-group' },
-	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: 'words' },
-	              'Your review:'
-	            ),
-	            ' ',
-	            _react2.default.createElement(
-	              'label',
-	              { className: 'text-danger' },
-	              nameErrorMsg
-	            ),
-	            _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control', id: 'blurb',
-	              placeholder: 'Tell us what you think about the dish . . .' }, words, { required: '' }))
-	          ),
-	          _react2.default.createElement(
-	            'fieldset',
-	            { className: 'form-group' },
-	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: 'stars' },
-	              'Stars'
-	            ),
-	            ' ',
-	            _react2.default.createElement(
-	              'label',
-	              { className: 'text-danger' },
-	              nameErrorMsg
-	            ),
-	            _react2.default.createElement('input', _extends({ type: 'number', min: '1', max: '5', className: 'form-control', id: 'stars',
-	              placeholder: 'How many stars out of five?' }, stars, { required: '' }))
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { type: 'submit', className: 'btn btn-primary btn-block', disabled: submitting },
-	            'Save',
-	            submitting ? _react2.default.createElement('span', { className: 'loader glyphicon glyphicon-refresh spin' }) : _react2.default.createElement('span', null)
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return ReviewFormRedux;
-	}(_react.Component);
-
-	ReviewFormRedux.propTypes = {
-	  fields: _react.PropTypes.object.isRequired,
-	  handleSubmit: _react.PropTypes.func.isRequired,
-	  createReview: _react.PropTypes.func.isRequired,
-	  submitting: _react.PropTypes.bool.isRequired
-	};
-	exports.default = (0, _reduxForm.reduxForm)({
-	  form: 'reviewForm',
-	  fields: fields
-	})(ReviewFormRedux);
-
-/***/ },
-/* 885 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reduxForm = __webpack_require__(819);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var fields = ['username', 'password', 'target'];
-
-	var UserFormRedux = function (_Component) {
-	  _inherits(UserFormRedux, _Component);
-
-	  function UserFormRedux() {
-	    _classCallCheck(this, UserFormRedux);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(UserFormRedux).apply(this, arguments));
-	  }
-
-	  _createClass(UserFormRedux, [{
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-
-	      var _props = this.props;
-	      var _props$fields = _props.fields;
-	      var username = _props$fields.username;
-	      var password = _props$fields.password;
-	      var target = _props$fields.target;
-	      var handleSubmit = _props.handleSubmit;
-	      var submitting = _props.submitting;
-
-	      var nameErrorMsg = name.touched && name.error ? name.error : '';
-
-	      var allSubNeighborhoods = this.props.allSubNeighborhoods;
-	      var subNeighborhoodFilter = function subNeighborhoodFilter(subNeighborhood) {
-	        return subNeighborhood._id === _this2.props.subNeighborhood._id;
-	      };
-	      var mySubNeighborhood = allSubNeighborhoods.filter(subNeighborhoodFilter);
-
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'userForm' },
-	        _react2.default.createElement(
-	          'h3',
-	          null,
-	          ' You call ',
-	          mySubNeighborhood[0].subNeighborhood_name,
-	          ' home.'
-	        ),
-	        _react2.default.createElement(
-	          'form',
-	          { onSubmit: handleSubmit(function (data) {
-	              var newUser = {};
-	              newUser.name = data.username;
-	              newUser.password = data.password;
-	              newUser.target = parseInt(data.target);
-	              newUser.user_sub_neighborhood = _this2.props.subNeighborhood;
-	              _this2.props.createUser(newUser);
-	            }), className: 'form', role: 'form' },
-	          _react2.default.createElement(
-	            'fieldset',
-	            { className: 'form-group' },
-	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: 'username' },
-	              'Username'
-	            ),
-	            ' ',
-	            _react2.default.createElement(
-	              'label',
-	              { className: 'text-danger' },
-	              nameErrorMsg
-	            ),
-	            _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control', id: 'name',
-	              placeholder: 'Pick a username you might like. Ex: SomebodySpecial321' }, username, { required: '' }))
-	          ),
-	          _react2.default.createElement(
-	            'fieldset',
-	            { className: 'form-group' },
-	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: 'password' },
-	              'Password'
-	            ),
-	            ' ',
-	            _react2.default.createElement(
-	              'label',
-	              { className: 'text-danger' },
-	              nameErrorMsg
-	            ),
-	            _react2.default.createElement('input', _extends({ type: 'password', className: 'form-control', id: 'password',
-	              placeholder: 'And what password would you like?' }, password, { required: '' }))
-	          ),
-	          _react2.default.createElement(
-	            'fieldset',
-	            { className: 'form-group' },
-	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: 'target' },
-	              'How many calorieDollars would your target meal have?'
-	            ),
-	            ' ',
-	            _react2.default.createElement(
-	              'label',
-	              { className: 'text-danger' },
-	              nameErrorMsg
-	            ),
-	            _react2.default.createElement('input', _extends({ type: 'number', className: 'form-control', id: 'target',
-	              placeholder: 'Maybe like 300 calorieDollars is a good amount' }, target, { required: '' }))
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { type: 'submit', className: 'btn btn-primary btn-block', disabled: submitting },
-	            'Save',
-	            submitting ? _react2.default.createElement('span', { className: 'loader glyphicon glyphicon-refresh spin' }) : _react2.default.createElement('span', null)
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return UserFormRedux;
-	}(_react.Component);
-
-	UserFormRedux.propTypes = {
-	  fields: _react.PropTypes.object.isRequired,
-	  handleSubmit: _react.PropTypes.func.isRequired,
-	  createUser: _react.PropTypes.func.isRequired,
-	  submitting: _react.PropTypes.bool.isRequired
-	};
-	exports.default = (0, _reduxForm.reduxForm)({
-	  form: 'userForm',
-	  fields: fields
-	})(UserFormRedux);
 
 /***/ }
 /******/ ]);

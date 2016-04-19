@@ -415,18 +415,31 @@ const genres = (state = [], action) => {
 const jackpot = (state = "", action) => {
   switch (action.type) {
     case 'JACKPOT':
-    if (state === ""){
-      return state.concat("JACKPOT")
-    }
-    else {return state}
+    return "block"
+    case 'NO_DICE':
+    return "none"
   default:
     return state
      }
    }
 
-
+const hiddenValue = (state = "", action) => {
+  switch (action.type) {
+    case 'TOGGLE_HIDDEN':
+    console.log("toggle_hidden in reducer")
+    if (state === "none"){
+        return "block"
+    }
+    else if(state === "block"){
+      return "none"
+    }
+  default:
+    return state
+  }
+}
 
 const FixinsApp = combineReducers({
+  hiddenValue,
   auth,
   jackpot,
   currentUser,

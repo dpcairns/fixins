@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {reduxForm} from 'redux-form'
+import {createValidator, maxLength, required} from '../../middleware/validation'
 
 const fields = ['blurb']
 
@@ -13,12 +14,13 @@ class CheckInFormRedux extends Component {
     fields: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
 		createCheckIn: PropTypes.func.isRequired,
-    submitting: PropTypes.bool.isRequired
+    submitting: PropTypes.bool.isRequired,
+    resetForm: PropTypes.func.isRequired,
   };
 
   render () {
-    const {fields: {blurb}, handleSubmit, submitting} = this.props
-    const nameErrorMsg = name.touched && name.error ? name.error : ''
+    const {fields: {blurb}, handleSubmit, resetForm, submitting} = this.props
+    const blurbErrorMsg = blurb.touched && blurb.error ? blurb.error : ''
 
     return (
       <div className='checkInForm'>
@@ -29,11 +31,13 @@ class CheckInFormRedux extends Component {
 	    		newCheckInObject.dish = this.props.thisDish
 	    		newCheckInObject.user = this.props.currentUser
 	    		this.props.createCheckIn(newCheckInObject)
+          resetForm()
+
 	    	})} className='form' role='form'>
           <fieldset className='form-group'>
-            <label htmlFor='blurb'>Blurb</label> <label className='text-danger'>{nameErrorMsg}</label>
+            <label htmlFor='blurb'>Blurb</label> <label className='text-danger'>{blurbErrorMsg}</label>
             <input type='text' className='form-control' id='blurb'
-              placeholder='Enter blurb of the checkIn' {...blurb} required=''/>
+              placeholder='Say a little something about the experience (140 char max)' {...blurb} required=''/>
           </fieldset>
           <button type='submit' className='btn btn-primary btn-block' disabled={submitting}>Save
             {submitting ? <span className='loader glyphicon glyphicon-refresh spin'></span>
@@ -45,7 +49,15 @@ class CheckInFormRedux extends Component {
     )
   }
 }
+
+
+const CheckInFormValidation = createValidator({
+  blurb: required,
+  blurb: maxLength(140)
+})
+
 export default reduxForm({
   form: 'checkInForm',
   fields,
+  validate: CheckInFormValidation
 })(CheckInFormRedux)

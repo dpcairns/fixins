@@ -18,8 +18,9 @@ export default class Splash extends React.Component{
 			let myGif = ""
 			let myGlitterFood = ""
 			let myOtherGlitterFood = ""
-			let jackpot = this.props.jackpot
-			let jackpotStyles = {display: "none", textDecoration: "none", zIndex:"5", position: "fixed", marginLeft: "130px", fontSize: "7em", marginTop: "-230px"}
+			let jackpotGo = this.props.jackpotGo
+			let noDice = this.props.noDice
+			let jackpotStyles = {display: this.props.jackpot, textDecoration: "none", zIndex:"2", position: "fixed", bottom: "8%", left: "25%", fontSize: "12em"}
 			let putOneDishInState = this.props.putOneDishInState
 			let putOneSpotInState = this.props.putOneSpotInState
 			let putOneUserInState = this.props.putOneUserInState
@@ -32,21 +33,23 @@ export default class Splash extends React.Component{
 			let recentCheckInNodes = []
 			let topFiveSubNeighborhoodNodes = []
 
-			if(this.props.subNeighborhoods.length>5){
+			if(this.props.subNeighborhoods.length>89){
 				let itemBoxStyle = {overflow: "hidden", margin:"2px",maxHeight:"150px",maxWidth:"150px",padding:"5px",float:"left",textAlign:"center", background:"#BDA0CB", borderRadius:"10px"}
 				let allSubNeighborhoods = this.props.subNeighborhoods
 				let allUsers = this.props.users
 				let allSpots = this.props.spots
 				let sortedSubNeighborhoods = []
 				let randA = Math.floor(Math.random()*7)
-				let randB = Math.floor(Math.random()*5)
-				let randC = Math.floor(Math.random()*5)
+				let randB = Math.floor(Math.random()*7)
+				let randC = Math.floor(Math.random()*7)
 				myGif = "url(./static/pizza" + randA + ".gif)"
 				myGlitterFood = "./static/glitterFood" + randB + ".gif"
 				myOtherGlitterFood = "./static/glitterFood" + randC + ".gif"
 				if(randB === randC){
-					jackpot()
-					jackpotStyles.display = "block"
+					jackpotGo()
+				}
+				else{
+					noDice()
 				}
 
 				allSubNeighborhoods.forEach(function(subNeighborhood){
@@ -143,7 +146,7 @@ export default class Splash extends React.Component{
 			<div  style={dishesBoxStyle} className="shadow-container">
 							<div className="DishBoxAnim space-between">
 
-				{this.props.dishes.length>5 ? topFiveDishNodes : "never mind"}
+				{this.props.dishes.length>5 ? topFiveDishNodes : <img height="50" width="100" src="./static/loading.gif" />}
 
 				</div>
 			</div>
@@ -151,11 +154,8 @@ export default class Splash extends React.Component{
 
 		<div className="col-md-6">
 
-
-
 		<Link to="index/myDashboard"> <h1> || FIXINS || <br/>
 			 || GET STUFT || </h1></Link>
-
 
 			 		<div className="row">
 
@@ -163,7 +163,7 @@ export default class Splash extends React.Component{
 			 						<div style={topFiveStyle} className="shadow-container">
 			 									<h3>top five subNeighborhoods in pdx</h3>
 			 									<div className="top-five flex">
-			 												{this.props.subNeighborhoods.length>5 ? topFiveSubNeighborhoodNodes : "never mind"}
+			 												{this.props.subNeighborhoods.length>5 ? topFiveSubNeighborhoodNodes :  <img  height="50" width="100" src="./static/loading.gif" />}
 			 									</div>
 			 						</div>
 			 				</div>
@@ -187,7 +187,7 @@ export default class Splash extends React.Component{
 		<div className="col-md-3">
 		<div style={checkInBoxStyle} className="shadow-container">
 			<div className="CheckInBoxAnim">
-{this.props.checkIns.length>5 ? recentCheckInNodes : "never mind"}
+{this.props.checkIns.length>5 ? recentCheckInNodes :  <img height="50" width="100" src="./static/loading.gif" />}
 			</div>
 			</div>
 		</div>

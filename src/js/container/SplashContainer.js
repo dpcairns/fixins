@@ -11,17 +11,22 @@ const mapStateToProps = (state) => {
     neighborhoods: state.neighborhoods,
     subNeighborhoods: state.subNeighborhoods,
     reviews: state.reviews,
-    checkIns: state.checkIns
+    checkIns: state.checkIns,
+    jackpot: state.jackpot
   }
 }
 
-function jackpot(){
+function noDice(){
+  return {type: "NO_DICE"}
+}
+function jackpotGo(){
   return {type: "JACKPOT"}
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-      jackpot: () => jackpot(),
+      jackpotGo: () => dispatch(jackpotGo()),
+      noDice: () => dispatch(noDice()),
       initializeSubNeighborhoods: () => FixinsActions.initializeSubNeighborhoods(dispatch),
       initializeNeighborhoods: () => FixinsActions.initializeNeighborhoods(dispatch),
       initializeGenres: () => FixinsActions.initializeGenres(dispatch),

@@ -57,10 +57,10 @@ router.route('/login').post(function(req, res){
 					if(err)
 						return res.json("LoginError");
 					if(!user)
-						return res.json("LoginError2")
+						return res.json("LoginError")
 					bcrypt.compare(req.body.password, user.password, function(err, response) {
 						if(err || !response){
-							return res.json("LoginError3");
+							return res.json("LoginError");
 						}
 						return res.json(user);
 

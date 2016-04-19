@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import * as FixinsActions from "../../actions/FixinsActions"
+import {createValidator, required} from '../../middleware/validation'
 import { Link } from 'react-router'
 import {reduxForm} from 'redux-form'
 import { connect } from 'react-redux'
@@ -12,39 +13,57 @@ class LogInPageRedux extends Component {
     fields: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
 		userLogin: PropTypes.func.isRequired,
-    submitting: PropTypes.bool.isRequired
+    submitting: PropTypes.bool.isRequired,
+    resetForm: PropTypes.func.isRequired,
+    toggleHidden:  PropTypes.func.isRequired
   };
 
   render () {
-    let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
-    const {fields: {username, password}, handleSubmit, submitting} = this.props
-    const nameErrorMsg = name.touched && name.error ? name.error : ''
 
+        if(this.props.currentUser._id !== undefined){
+          this.context.router.push('index/myDashboard')
+        }
+    let hiddenValue = this.props.hiddenValue
+    let toggleHidden = this.props.toggleHidden
+    let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
+    let loginFailureStyles = {
+        display: hiddenValue,
+        background: "pink",
+        height: "60px",
+        width: "100%"
+      }
+
+    const {fields: {username, password}, resetForm, handleSubmit, submitting} = this.props
+    const usernameErrorMsg = username.touched && username.error ? username.error : ''
+    const passwordErrorMsg = password.touched && password.error ? password.error : ''
     return (
       <div>
       <Link onClick={putOneSubNeighborhoodInState.bind(this, "TRUE_NEW_USER")}
       to="index/allNeighborhoods">
-        Need an account? Sign up here.</Link>
+        <h2>Need an account? Sign up here.</h2></Link>
+        <div style={loginFailureStyles}><h2>Login failed. Try again and do something different.</h2></div>
       <div className='loginForm'>
         <form onSubmit={handleSubmit( data => {
           let thisUser = {}
           thisUser.username = data.username
           thisUser.password = data.password
                 this.props.userLogin(thisUser, (loggedInUser) => {
-                  if(loggedInUser === "LoginError" || loggedInUser === "LoginError2" ){
-                    console.log('wrong stuff');
-                  }
-                })
-          } )
-
-	    	} className='form' role='form'>
+                  if(loggedInUser === "LoginError"){
+                    console.log("toggle_hidden")
+                    toggleHidden()
+                } else if (hiddenValue === "block" && loggedInUser !== "LoginError"){
+                  toggleHidden()
+                }
+          })
+          resetForm()
+	    	})} className='form' role='form'>
         <fieldset className='form-group'>
-          <label htmlFor='username'>Username</label> <label className='text-danger'>{nameErrorMsg}</label>
+          <label htmlFor='username'>Username</label> <label className='text-danger'>{usernameErrorMsg}</label>
           <input type='text' className='form-control' id='name'
             placeholder='Ex: SomebodySpecial321' {...username} required=''/>
         </fieldset>
         <fieldset className='form-group'>
-          <label htmlFor='password'>Password</label> <label className='text-danger'>{nameErrorMsg}</label>
+          <label htmlFor='password'>Password</label> <label className='text-danger'>{passwordErrorMsg}</label>
           <input type='password' className='form-control' id='password'
             placeholder='And the password?' {...password} required=''/>
         </fieldset>
@@ -59,7 +78,9 @@ class LogInPageRedux extends Component {
   }
 }
 
-
+LogInPageRedux.contextTypes = {
+  router: React.PropTypes.object.isRequired
+}
 
 const userLogin = (thisUser, callback, dispatch) => {
   $.ajax({
@@ -81,23 +102,38 @@ const userLogin = (thisUser, callback, dispatch) => {
   })
 }
 
+const toggleHidden = () => {
+  return {
+    type: "TOGGLE_HIDDEN"
+  }
+}
+
 const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser,
-    users: state.users
+    users: state.users,
+    hiddenValue: state.hiddenValue
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
     userLogin: (thisUser, callback) => userLogin(thisUser, callback, dispatch),
+    toggleHidden: () => dispatch(toggleHidden()),
     putOneSubNeighborhoodInState: (_id) => dispatch(FixinsActions.putOneSubNeighborhoodInState(_id)),
   }
 }
 
-const LogInPageRedux2 = connect(mapStateToProps, mapDispatchToProps)(LogInPageRedux)
+const LoginFormValidation = createValidator({
+  username: required,
+  password: required
+})
+
+
+const LogInPageReduxConnected = connect(mapStateToProps, mapDispatchToProps)(LogInPageRedux)
 
 export default reduxForm({
   form: 'loginForm',
   fields,
-})(LogInPageRedux2)
+  validate: LoginFormValidation
+})(LogInPageReduxConnected)

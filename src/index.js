@@ -31,7 +31,8 @@ const app = document.getElementById('app');
 
 
 let initialState = {
-	jackpot: "",
+	hiddenValue: "none",
+	jackpot: "none",
 	currentUser: {},
 	genre: "",
 	genres: [],
