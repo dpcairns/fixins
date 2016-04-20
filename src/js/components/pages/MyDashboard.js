@@ -26,7 +26,7 @@ render(){
   let putOneDishInState = this.props.putOneDishInState
   let putOneSpotInState = this.props.putOneSpotInState
   let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
-  let itemBoxStyle = {flexGrow: "1", padding:"5px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
+  let itemBoxStyle = {flexGrow: "1", padding:"15px", maxWidth: "250px", margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
 
 
     				let sortedDishes = []
@@ -40,16 +40,18 @@ render(){
     					nameOfSpot: dish.dish_spot.spot_name,
     					name: dish.dish_name})
             })
-    				sortedDishes.sort(function(dishA, dishB){return dishB.calorieDollars - dishA.caunalorieDollars})
-            let rand1 = Math.floor(Math.random()*10)
-            let rand2 = Math.floor(Math.random()*10)
-            let rand3 = Math.floor(Math.random()*10)
-            let rand4 = Math.floor(Math.random()*10)
-    				let topFiveCalorieDollarDishes = [sortedDishes[rand1],sortedDishes[rand2],sortedDishes[rand3], sortedDishes[rand4]]
+    				sortedDishes.sort(function(dishA, dishB){return dishB.calorieDollars - dishA.calorieDollars})
+            let rand1 = Math.floor(Math.random()*20)
+            let rand2 = Math.floor(Math.random()*20)
+            let rand3 = Math.floor(Math.random()*20)
+            let rand4 = Math.floor(Math.random()*20)
+            let rand5 = Math.floor(Math.random()*20)
+            let rand6 = Math.floor(Math.random()*20)
+    				let topFiveCalorieDollarDishes = [sortedDishes[rand1],sortedDishes[rand2],sortedDishes[rand3], sortedDishes[rand4], sortedDishes[rand5], sortedDishes[rand6]]
     				let topFiveCalorieDollarDishesNodes = topFiveCalorieDollarDishes.map(function(dish){
     					return (
-                <div style={itemBoxStyle} className="bg-info" key={dish._id}>
-                <h5>
+                <div style={itemBoxStyle} className="bg-info flex" key={dish._id}>
+                <h4>
     						<Link onClick={putOneDishInState.bind(this, dish._id)} to={`/dish/${dish._id}`}>
     						 {dish.name + " "}
     						</Link>
@@ -57,7 +59,7 @@ render(){
     						 <Link to={`/spot/${dish.spotId}`}  onClick={putOneSpotInState.bind(this, dish.spotId)}>
     						  {" " + dish.nameOfSpot}
     						 </Link>
-    						  <br/><i> gets {dish.calorieDollars} calorieDollars </i></h5></div>)
+    						  <br/><i> gets {dish.calorieDollars} calorieDollars </i></h4></div>)
     				})
 
 
@@ -120,14 +122,14 @@ render(){
             <Link to={`/subNeighborhood/${thisUser.user_sub_neighborhood._id}`}
             onClick={putOneSubNeighborhoodInState.bind(this, thisUser.user_sub_neighborhood._id)}>
             {thisUser.user_sub_neighborhood.subNeighborhood_name} </Link>
-        : ("nothing")} home</h3>
+        : <img height="50" width="100" src="./static/loading.gif" />} home</h3>
   </div>
 </div>
 <br/>
 <CalorieDollarChart username={thisUser.username} userTarget={thisUser.user_target} userCheckIns={userCheckIns} />
 
 
-<div className="flex">
+<div className="flex top-bottom-big-mar flexCenter">
 <h3 className="bg-danger" style={itemBoxStyle}>not hitting your target? here are some highly efficient ideas for you to chew on</h3>
 {topFiveCalorieDollarDishesNodes}
 </div>

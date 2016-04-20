@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {reduxForm} from 'redux-form'
+import {Link} from 'react-router'
 import {createValidator, required} from '../../middleware/validation'
 
 const fields = ['words', 'stars']
@@ -14,6 +15,18 @@ class ReviewFormRedux extends Component {
   };
 
   render () {
+
+
+    let hiddenValue = this.props.hiddenValue
+    let toggleHidden = this.props.toggleHidden
+    let successStyles = {
+    display: hiddenValue,
+    background: "lightgreen",
+    height: "60px",
+    width: "100%",
+    textAlign: "center"
+    }
+
     const {fields: {words, stars}, resetForm, handleSubmit, submitting} = this.props
     const wordsErrorMsg = words.touched && words.error ? words.error : ''
     const starsErrorMsg = stars.touched && stars.error ? stars.error : ''
@@ -27,12 +40,13 @@ class ReviewFormRedux extends Component {
           newReviewObject.stars = data.stars
           newReviewObject.review_user = this.props.currentUser
             this.props.createReview(newReviewObject)
+            toggleHidden()
             resetForm()
 
 	    	})} className='form' role='form'>
           <fieldset className='form-group'>
-            <label htmlFor='words'>Your review:</label> <label className='text-danger'>{blurbErrorMsg}</label>
-            <input type='text' className='form-control' id='blurb'
+            <label htmlFor='words'>Your review:</label> <label className='text-danger'>{wordsErrorMsg}</label>
+            <input type='text' className='form-control' id='words'
               placeholder='Tell us what you think about the dish . . .' {...words} required=''/>
           </fieldset>
           <fieldset className='form-group'>
@@ -46,6 +60,8 @@ class ReviewFormRedux extends Component {
               : <span></span>}
           </button>
         </form>
+        <div style={successStyles}><h2>Review success! <Link onClick={toggleHidden}to="index/myDashboard"> Go back go to your dashboard?</Link></h2> </div>
+
       </div>
 
     )

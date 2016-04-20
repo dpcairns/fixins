@@ -19,7 +19,7 @@ class SubNeighborhoodDetail extends React.Component{
 		let putOneGenreInState = this.props.putOneGenreInState
 		let putOneNeighborhoodInState = this.props.putOneNeighborhoodInState
     let subNeighborhood = this.props.subNeighborhood
-		let itemBoxStyle = {height:"180px",width:"200px", overflow:"hidden",padding: "8px", margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
+		let itemBoxStyle = {minHeight:"180px", maxWidth: "250px", minWidth:"200px", overflow:"hidden",padding: "8px", margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
 
     function findSpotsFilter(spot){
 
@@ -95,14 +95,14 @@ class SubNeighborhoodDetail extends React.Component{
 					 		<div className="col-md-6">
 							<br/><hr/>
 		          <h2>Spots in {subNeighborhood.subNeighborhood_name}</h2>
-							<div className="flex">
+							<div className="flex flexwrap">
 		          {allSpots.filter(findSpotsFilter).length> 0 ? spotNodes: (<h4>no restaurants in  {subNeighborhood.subNeighborhood_name}...yet! <Link to="index/newSpot">Be the first to add one!</Link></h4>)}
 							</div>
 							</div>
 							<div className="col-md-6">
 							<br/><hr/>
 		          <h2>Users in {subNeighborhood.subNeighborhood_name}</h2>
-							<div className="flex">
+							<div className="flex flexwrap">
 		          {allUsers.filter(findUsersFilter).length> 0 ? userNodes: (<h4>no users in {subNeighborhood.subNeighborhood_name}...yet!</h4>)}
 		      		</div>
 							</div>

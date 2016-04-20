@@ -18,13 +18,15 @@ var bcrypt = require('bcrypt')
 var db ='mongodb://localhost/test'
 mongoose.connect(db)
 
-app.set('trust proxy', 1) // trust first proxy
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}))
+app.use(
+  session({
+    resave: true,
+    saveUninitialized: true,
+    secret: 'SOMERANDOMSECRETHERE',
+    cookie: { maxAge: 60000 }
+  })
+);
+
 
 require('./routes/UserRoutes')(router)
 require('./routes/SpotRoutes')(router)
@@ -43,7 +45,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(__dirname + "/src"))
 
 router.use(function(req,res,next){
-	console.log('hello from router.use function')
+
 	next()
 })
 
@@ -51,6 +53,14 @@ router.get('/', function(req,res){
 	res.send('hello and welcome to the api')
 })
 
+router.route('/Session').get(function(req, res){
+  console.log('checking for session')
+if(req.session.user) {
+  console.log("found a session with this username:")
+  console.log(req.session.user)
+  return res.json(req.session.user);
+}
+})
 
 router.route('/login').post(function(req, res){
 				User.findOne({username: req.body.username}, function(err, user){
@@ -62,10 +72,10 @@ router.route('/login').post(function(req, res){
 						if(err || !response){
 							return res.json("LoginError");
 						}
-						return res.json(user);
-
+            req.session.user = user;
+						return res.json(req.session.user);
+          })
 				})
-			})
 			.populate('user_sub_neighborhood')
 			.populate('user_review')
 			.populate('user_checkIns')

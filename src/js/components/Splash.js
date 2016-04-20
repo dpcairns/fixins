@@ -13,6 +13,7 @@ export default class Splash extends React.Component{
 		this.props.initializeReviews();
 		this.props.initializeSpots();
 		this.props.initializeCheckIns();
+		this.props.checkForSession();
 	}
 		render(){
 			let myGif = ""
@@ -146,7 +147,7 @@ export default class Splash extends React.Component{
 			<div  style={dishesBoxStyle} className="shadow-container">
 							<div className="DishBoxAnim space-between">
 
-				{this.props.dishes.length>5 ? topFiveDishNodes : <img height="50" width="100" src="./static/loading.gif" />}
+				{this.props.dishes.length>35 ? topFiveDishNodes : <img height="50" width="100" src="./static/loading.gif" />}
 
 				</div>
 			</div>
@@ -162,8 +163,8 @@ export default class Splash extends React.Component{
 			 				<div className="col-md-12">
 			 						<div style={topFiveStyle} className="shadow-container">
 			 									<h3>top five subNeighborhoods in pdx</h3>
-			 									<div className="top-five flex">
-			 												{this.props.subNeighborhoods.length>5 ? topFiveSubNeighborhoodNodes :  <img  height="50" width="100" src="./static/loading.gif" />}
+			 									<div className="top-five flex flexCenter">
+			 												{this.props.subNeighborhoods.length>88 ? topFiveSubNeighborhoodNodes :  <img  height="50" width="100" src="./static/loading.gif" />}
 			 									</div>
 			 						</div>
 			 				</div>
@@ -187,7 +188,7 @@ export default class Splash extends React.Component{
 		<div className="col-md-3">
 		<div style={checkInBoxStyle} className="shadow-container">
 			<div className="CheckInBoxAnim">
-{this.props.checkIns.length>5 ? recentCheckInNodes :  <img height="50" width="100" src="./static/loading.gif" />}
+{this.props.checkIns.length>88 ? recentCheckInNodes :  <img height="50" width="100" src="./static/loading.gif" />}
 			</div>
 			</div>
 		</div>

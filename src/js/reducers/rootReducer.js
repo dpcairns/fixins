@@ -5,6 +5,11 @@ import {reducer as formReducer} from 'redux-form';
 
 const currentUser = (state = {}, action) => {
     switch(action.type) {
+      case 'CHECK_FOR_SESSION':
+      console.log(action)
+      return Object.assign({}, {
+      ...action.user
+          })
       case 'LOG_IN':
       return Object.assign({}, {
       ...action.user

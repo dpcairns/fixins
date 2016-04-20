@@ -31,6 +31,8 @@ let thisSpot = this.props.thisSpot
       allSpots={this.props.allSpots}
       spotName={mySpot[0].spot_name}
       currentUser={this.props.currentUser}
+      toggleHidden={this.props.toggleHidden}
+      hiddenValue={this.props.hiddenValue}
       />
     </div>
     )
@@ -47,12 +49,14 @@ const mapStateToProps = (state) => {
     currentUser: state.currentUser,
     thisDish: state.dish,
     thisSpot: state.spot,
-    allSpots: state.spots
+    allSpots: state.spots,
+    hiddenValue: state.hiddenValue
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+            toggleHidden: () => dispatch(FixinsActions.toggleHidden()),
       createDish: (newDish) => FixinsActions.createDish(newDish, dispatch),
   }
 }

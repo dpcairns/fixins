@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {reduxForm} from 'redux-form'
 import {createValidator, required} from '../../middleware/validation'
+import { Link } from 'react-router'
 
 const fields = ['blurb', 'price', 'calories', 'name']
 
@@ -14,6 +15,15 @@ class DishFormRedux extends Component {
   };
 
   render () {
+    let hiddenValue = this.props.hiddenValue
+    let toggleHidden = this.props.toggleHidden
+        let successStyles = {
+            display: hiddenValue,
+            background: "lightgreen",
+            height: "60px",
+            width: "100%",
+            textAlign: "center"
+          }
     const {fields: {blurb, price, name, calories, map}, handleSubmit, resetForm, submitting} = this.props
     const blurbErrorMsg = blurb.touched && blurb.error ? blurb.error : ''
     const priceErrorMsg = price.touched && price.error ? price.error : ''
@@ -31,6 +41,7 @@ class DishFormRedux extends Component {
           newDishObject.blurb = data.blurb
           this.props.createDish(newDishObject)
           resetForm()
+          toggleHidden()
 	    	})} className='form' role='form'>
         <fieldset className='form-group'>
           <label htmlFor='name'>Name</label> <label className='text-danger'>{nameErrorMsg}</label>
@@ -59,6 +70,8 @@ class DishFormRedux extends Component {
               : <span></span>}
           </button>
         </form>
+        <div style={successStyles}><h2>Dish pending review! <Link onClick={toggleHidden} to="index/login"> Back to the dashboard? </Link>.</h2></div>
+
       </div>
 
     )

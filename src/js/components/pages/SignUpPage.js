@@ -16,6 +16,8 @@ render(){
     allSubNeighborhoods={this.props.allSubNeighborhoods}
     subNeighborhood={this.props.subNeighborhood}
     createUser={this.props.createUser}
+    toggleHidden={this.props.toggleHidden}
+    hiddenValue={this.props.hiddenValue}
      />
     </div>
 
@@ -34,13 +36,17 @@ const mapStateToProps = (state) => {
     currentUser: state.currentUser,
     allSubNeighborhoods: state.subNeighborhoods,
     subNeighborhood: state.subNeighborhood,
-    users: state.users
+    users: state.users,
+    hiddenValue: state.hiddenValue
+
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
       createUser: (newUser) => FixinsActions.createUser(newUser, dispatch),
+      toggleHidden: () => dispatch(FixinsActions.toggleHidden())
+
   }
 }
 

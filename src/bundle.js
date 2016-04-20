@@ -93,31 +93,31 @@
 
 	var _rootReducer2 = _interopRequireDefault(_rootReducer);
 
-	var _UserDetail = __webpack_require__(868);
+	var _UserDetail = __webpack_require__(867);
 
 	var _UserDetail2 = _interopRequireDefault(_UserDetail);
 
-	var _GenreDetail = __webpack_require__(869);
+	var _GenreDetail = __webpack_require__(868);
 
 	var _GenreDetail2 = _interopRequireDefault(_GenreDetail);
 
-	var _SpotDetail = __webpack_require__(870);
+	var _SpotDetail = __webpack_require__(869);
 
 	var _SpotDetail2 = _interopRequireDefault(_SpotDetail);
 
-	var _DishDetail = __webpack_require__(871);
+	var _DishDetail = __webpack_require__(870);
 
 	var _DishDetail2 = _interopRequireDefault(_DishDetail);
 
-	var _NeighborhoodDetail = __webpack_require__(872);
+	var _NeighborhoodDetail = __webpack_require__(871);
 
 	var _NeighborhoodDetail2 = _interopRequireDefault(_NeighborhoodDetail);
 
-	var _SubNeighborhoodDetail = __webpack_require__(873);
+	var _SubNeighborhoodDetail = __webpack_require__(872);
 
 	var _SubNeighborhoodDetail2 = _interopRequireDefault(_SubNeighborhoodDetail);
 
-	var _LogInPageRedux = __webpack_require__(874);
+	var _LogInPageRedux = __webpack_require__(873);
 
 	var _LogInPageRedux2 = _interopRequireDefault(_LogInPageRedux);
 
@@ -34866,6 +34866,9 @@
 	    noDice: function noDice() {
 	      return dispatch(_noDice());
 	    },
+	    checkForSession: function checkForSession() {
+	      return FixinsActions.checkForSession(dispatch);
+	    },
 	    initializeSubNeighborhoods: function initializeSubNeighborhoods() {
 	      return FixinsActions.initializeSubNeighborhoods(dispatch);
 	    },
@@ -34936,6 +34939,7 @@
 	exports.createSubNeighborhood = createSubNeighborhood;
 	exports.createGenre = createGenre;
 	exports.createCheckIn = createCheckIn;
+	exports.checkForSession = checkForSession;
 	exports.initializeUsers = initializeUsers;
 	exports.initializeSpots = initializeSpots;
 	exports.initializeDishes = initializeDishes;
@@ -34960,6 +34964,11 @@
 	exports.findAndChangeReview = findAndChangeReview;
 	exports.findAndChangeCheckIn = findAndChangeCheckIn;
 	exports.findAndChangeSpot = findAndChangeSpot;
+	var toggleHidden = exports.toggleHidden = function toggleHidden() {
+		return {
+			type: "TOGGLE_HIDDEN"
+		};
+	};
 	function putOneSpotInState(_id) {
 		return { type: "PUT_ONE_SPOT_IN_STATE", _id: _id };
 	}
@@ -35131,6 +35140,24 @@
 			error: function (xhr, status, err) {
 				console.error('./CheckIns', status, err.toString());
 			}.bind(this)
+		});
+	}
+
+	function checkForSession(dispatch) {
+		$.ajax({
+			url: "http://localhost:4444/api/Session",
+			type: 'GET',
+			dataType: "json",
+			success: function success(thisSession) {
+				console.log(thisSession);
+				dispatch({
+					type: "CHECK_FOR_SESSION",
+					user: thisSession
+				});
+			},
+			error: function error(xhr, status, err) {
+				console.error('./Session', status, err.toString());
+			}
 		});
 	}
 
@@ -35572,6 +35599,7 @@
 				this.props.initializeReviews();
 				this.props.initializeSpots();
 				this.props.initializeCheckIns();
+				this.props.checkForSession();
 			}
 		}, {
 			key: "render",
@@ -35767,7 +35795,7 @@
 								_react2.default.createElement(
 									"div",
 									{ className: "DishBoxAnim space-between" },
-									this.props.dishes.length > 5 ? topFiveDishNodes : _react2.default.createElement("img", { height: "50", width: "100", src: "./static/loading.gif" })
+									this.props.dishes.length > 35 ? topFiveDishNodes : _react2.default.createElement("img", { height: "50", width: "100", src: "./static/loading.gif" })
 								)
 							)
 						),
@@ -35802,8 +35830,8 @@
 										),
 										_react2.default.createElement(
 											"div",
-											{ className: "top-five flex" },
-											this.props.subNeighborhoods.length > 5 ? topFiveSubNeighborhoodNodes : _react2.default.createElement("img", { height: "50", width: "100", src: "./static/loading.gif" })
+											{ className: "top-five flex flexCenter" },
+											this.props.subNeighborhoods.length > 88 ? topFiveSubNeighborhoodNodes : _react2.default.createElement("img", { height: "50", width: "100", src: "./static/loading.gif" })
 										)
 									)
 								)
@@ -35845,7 +35873,7 @@
 								_react2.default.createElement(
 									"div",
 									{ className: "CheckInBoxAnim" },
-									this.props.checkIns.length > 5 ? recentCheckInNodes : _react2.default.createElement("img", { height: "50", width: "100", src: "./static/loading.gif" })
+									this.props.checkIns.length > 88 ? recentCheckInNodes : _react2.default.createElement("img", { height: "50", width: "100", src: "./static/loading.gif" })
 								)
 							)
 						)
@@ -51076,7 +51104,8 @@
 						display: "block",
 						background: '#FF6666',
 						height: '50px',
-						width: '100%'
+						width: '100%',
+						textAlign: "center"
 					}
 				});
 			}
@@ -51089,7 +51118,8 @@
 						display: "block",
 						background: '#98FB98',
 						height: '50px',
-						width: '100%'
+						width: '100%',
+						textAlign: "center"
 					}
 				});
 			}
@@ -51304,7 +51334,7 @@
 						_react2.default.createElement(
 							"h2",
 							null,
-							"Spot added! Check out the detail page for the ",
+							"Spot pending review! Check out the detail page for ",
 							_react2.default.createElement(
 								_reactRouter.Link,
 								{ to: "subNeighborhood/" + subNeighborhoodId },
@@ -71068,6 +71098,9 @@
 	  var action = arguments[1];
 
 	  switch (action.type) {
+	    case 'CHECK_FOR_SESSION':
+	      console.log(action);
+	      return Object.assign({}, _extends({}, action.user));
 	    case 'LOG_IN':
 	      return Object.assign({}, _extends({}, action.user));
 	    case 'LOG_OUT':
@@ -72575,7 +72608,9 @@
 
 	var _reduxForm = __webpack_require__(819);
 
-	var _validation = __webpack_require__(867);
+	var _validation = __webpack_require__(874);
+
+	var _reactRouter = __webpack_require__(191);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -72603,6 +72638,16 @@
 	    value: function render() {
 	      var _this2 = this;
 
+	      var hiddenValue = this.props.hiddenValue;
+	      var toggleHidden = this.props.toggleHidden;
+
+	      var successStyles = {
+	        display: hiddenValue,
+	        background: "lightgreen",
+	        height: "60px",
+	        width: "100%",
+	        textAlign: "center"
+	      };
 	      var _props = this.props;
 	      var blurb = _props.fields.blurb;
 	      var handleSubmit = _props.handleSubmit;
@@ -72624,6 +72669,7 @@
 	              newCheckInObject.user = _this2.props.currentUser;
 	              _this2.props.createCheckIn(newCheckInObject);
 	              resetForm();
+	              toggleHidden();
 	            }), className: 'form', role: 'form' },
 	          _react2.default.createElement(
 	            'fieldset',
@@ -72648,6 +72694,21 @@
 	            'Save',
 	            submitting ? _react2.default.createElement('span', { className: 'loader glyphicon glyphicon-refresh spin' }) : _react2.default.createElement('span', null)
 	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { style: successStyles },
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            'CheckIn added! ',
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { onClick: toggleHidden, to: 'index/myDashboard' },
+	              ' Go back go to your dashboard?'
+	            )
+	          ),
+	          ' '
 	        )
 	      );
 	    }
@@ -75796,171 +75857,6 @@
 
 /***/ },
 /* 867 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.required = required;
-	exports.oneNumber = oneNumber;
-	exports.oneSpecial = oneSpecial;
-	exports.minLength = minLength;
-	exports.minLengthField = minLengthField;
-	exports.maxLength = maxLength;
-	exports.integer = integer;
-	exports.number = number;
-	exports.oneOf = oneOf;
-	exports.match = match;
-	exports.notMatch = notMatch;
-	exports.email = email;
-	exports.createValidator = createValidator;
-	var isEmpty = function isEmpty(value) {
-	  return value === undefined || value === null || value === '';
-	};
-	var join = function join(rules) {
-	  return function (value, data) {
-	    return rules.map(function (rule) {
-	      return rule(value, data);
-	    }).filter(function (error) {
-	      return !!error;
-	    })[0];
-	  };
-	};
-
-	function required(value) {
-	  if (isEmpty(value)) {
-	    return 'Required';
-	  }
-	}
-
-	function oneNumber(field) {
-	  return function (value, data) {
-	    if (data) {
-	      if (data[field]) {
-	        var matches = data[field].match(/\d+/g);
-	        if (matches == null) {
-	          return 'Password must have at least one number';
-	        }
-	      } else {
-	        return 'Invalid data';
-	      }
-	    }
-	  };
-	}
-
-	function oneSpecial(field) {
-	  return function (value, data) {
-	    if (data) {
-	      if (data[field]) {
-	        var matches = data[field].match(/[^A-Za-z0-9]+/g);
-
-	        if (matches == null) {
-	          return 'Password must have at least one special character';
-	        }
-	      } else {
-	        return 'Invalid data';
-	      }
-	    }
-	  };
-	}
-
-	function minLength(min) {
-	  return function (value) {
-	    if (!isEmpty(value) && value.length < min) {
-	      return 'Must be at least ' + min + ' characters';
-	    }
-	  };
-	}
-
-	function minLengthField(min, field) {
-	  return function (value, data) {
-	    if (!data[field]) return 'Invalid data';
-	    if (data && data[field] && !isEmpty(data[field]) && data[field].length < min) {
-	      return 'Must be at least ' + min + ' characters';
-	    }
-	  };
-	}
-
-	function maxLength(max) {
-	  return function (value) {
-	    if (!isEmpty(value) && value.length > max) {
-	      return 'Must be no more than ' + max + ' characters';
-	    }
-	  };
-	}
-
-	function integer(value) {
-	  if (!value) return;
-	  if (!Number.isInteger(Number(value))) {
-	    return 'Must be an integer';
-	  }
-	}
-
-	function number(value) {
-	  if (!value) return;
-	  var num = Number.parseFloat(value);
-	  if (isNaN(num)) {
-	    return 'Must be a numeric';
-	  }
-	}
-
-	function oneOf(enumeration) {
-	  return function (value) {
-	    if (! ~enumeration.indexOf(value)) {
-	      return 'Must be one of: ' + enumeration.join(', ');
-	    }
-	  };
-	}
-
-	function match(field) {
-	  return function (value, data) {
-	    if (data) {
-	      if (value !== data[field]) {
-	        return 'Does not match';
-	      }
-	    }
-	  };
-	}
-
-	function notMatch(field) {
-	  return function (value, data) {
-	    if (data) {
-	      if (value === data[field]) {
-	        return 'Must not be the same';
-	      }
-	    }
-	  };
-	}
-
-	function email(data) {
-	  if (data) {
-	    var matches = data.match(/^.+@.+\..+$/);
-	    if (matches == null) {
-	      return 'Is Invalid';
-	    }
-	  }
-	}
-
-	function createValidator(rules) {
-	  return function () {
-	    var data = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-	    var errors = {};
-	    Object.keys(rules).forEach(function (key) {
-	      var rule = join([].concat(rules[key])); // concat enables both functions and arrays of functions
-	      var error = rule(data[key], data);
-	      if (error) {
-	        errors[key] = error;
-	      }
-	    });
-	    return errors;
-	  };
-	}
-
-/***/ },
-/* 868 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -76297,7 +76193,7 @@
 	exports.default = UserDetailContainer;
 
 /***/ },
-/* 869 */
+/* 868 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -76506,7 +76402,7 @@
 	exports.default = GenreDetailContainer;
 
 /***/ },
-/* 870 */
+/* 869 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76724,7 +76620,7 @@
 	exports.default = SpotDetailContainer;
 
 /***/ },
-/* 871 */
+/* 870 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77154,7 +77050,7 @@
 	exports.default = DishDetailContainer;
 
 /***/ },
-/* 872 */
+/* 871 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -77336,7 +77232,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NeighborhoodDetail);
 
 /***/ },
-/* 873 */
+/* 872 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -77400,7 +77296,7 @@
 							var putOneGenreInState = this.props.putOneGenreInState;
 							var putOneNeighborhoodInState = this.props.putOneNeighborhoodInState;
 							var subNeighborhood = this.props.subNeighborhood;
-							var itemBoxStyle = { height: "180px", width: "200px", overflow: "hidden", padding: "8px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
+							var itemBoxStyle = { minHeight: "180px", maxWidth: "250px", minWidth: "200px", overflow: "hidden", padding: "8px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
 
 							function findSpotsFilter(spot) {
 
@@ -77553,7 +77449,7 @@
 													),
 													_react2.default.createElement(
 															"div",
-															{ className: "flex" },
+															{ className: "flex flexwrap" },
 															allSpots.filter(findSpotsFilter).length > 0 ? spotNodes : _react2.default.createElement(
 																	"h4",
 																	null,
@@ -77581,7 +77477,7 @@
 													),
 													_react2.default.createElement(
 															"div",
-															{ className: "flex" },
+															{ className: "flex flexwrap" },
 															allUsers.filter(findUsersFilter).length > 0 ? userNodes : _react2.default.createElement(
 																	"h4",
 																	null,
@@ -77640,7 +77536,7 @@
 	exports.default = SubNeighborhoodDetailContainer;
 
 /***/ },
-/* 874 */
+/* 873 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77661,7 +77557,7 @@
 
 	var FixinsActions = _interopRequireWildcard(_FixinsActions);
 
-	var _validation = __webpack_require__(867);
+	var _validation = __webpack_require__(874);
 
 	var _reactRouter = __webpack_require__(191);
 
@@ -77750,6 +77646,7 @@
 	                thisUser.username = data.username;
 	                thisUser.password = data.password;
 	                _this2.props.userLogin(thisUser, function (loggedInUser) {
+	                  console.log(loggedInUser);
 	                  if (loggedInUser === "LoginError") {
 	                    console.log("toggle_hidden");
 	                    toggleHidden();
@@ -77882,6 +77779,171 @@
 	})(LogInPageReduxConnected);
 
 /***/ },
+/* 874 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.required = required;
+	exports.oneNumber = oneNumber;
+	exports.oneSpecial = oneSpecial;
+	exports.minLength = minLength;
+	exports.minLengthField = minLengthField;
+	exports.maxLength = maxLength;
+	exports.integer = integer;
+	exports.number = number;
+	exports.oneOf = oneOf;
+	exports.match = match;
+	exports.notMatch = notMatch;
+	exports.email = email;
+	exports.createValidator = createValidator;
+	var isEmpty = function isEmpty(value) {
+	  return value === undefined || value === null || value === '';
+	};
+	var join = function join(rules) {
+	  return function (value, data) {
+	    return rules.map(function (rule) {
+	      return rule(value, data);
+	    }).filter(function (error) {
+	      return !!error;
+	    })[0];
+	  };
+	};
+
+	function required(value) {
+	  if (isEmpty(value)) {
+	    return 'Required';
+	  }
+	}
+
+	function oneNumber(field) {
+	  return function (value, data) {
+	    if (data) {
+	      if (data[field]) {
+	        var matches = data[field].match(/\d+/g);
+	        if (matches == null) {
+	          return 'Password must have at least one number';
+	        }
+	      } else {
+	        return 'Invalid data';
+	      }
+	    }
+	  };
+	}
+
+	function oneSpecial(field) {
+	  return function (value, data) {
+	    if (data) {
+	      if (data[field]) {
+	        var matches = data[field].match(/[^A-Za-z0-9]+/g);
+
+	        if (matches == null) {
+	          return 'Password must have at least one special character';
+	        }
+	      } else {
+	        return 'Invalid data';
+	      }
+	    }
+	  };
+	}
+
+	function minLength(min) {
+	  return function (value) {
+	    if (!isEmpty(value) && value.length < min) {
+	      return 'Must be at least ' + min + ' characters';
+	    }
+	  };
+	}
+
+	function minLengthField(min, field) {
+	  return function (value, data) {
+	    if (!data[field]) return 'Invalid data';
+	    if (data && data[field] && !isEmpty(data[field]) && data[field].length < min) {
+	      return 'Must be at least ' + min + ' characters';
+	    }
+	  };
+	}
+
+	function maxLength(max) {
+	  return function (value) {
+	    if (!isEmpty(value) && value.length > max) {
+	      return 'Must be no more than ' + max + ' characters';
+	    }
+	  };
+	}
+
+	function integer(value) {
+	  if (!value) return;
+	  if (!Number.isInteger(Number(value))) {
+	    return 'Must be an integer';
+	  }
+	}
+
+	function number(value) {
+	  if (!value) return;
+	  var num = Number.parseFloat(value);
+	  if (isNaN(num)) {
+	    return 'Must be a numeric';
+	  }
+	}
+
+	function oneOf(enumeration) {
+	  return function (value) {
+	    if (! ~enumeration.indexOf(value)) {
+	      return 'Must be one of: ' + enumeration.join(', ');
+	    }
+	  };
+	}
+
+	function match(field) {
+	  return function (value, data) {
+	    if (data) {
+	      if (value !== data[field]) {
+	        return 'Does not match';
+	      }
+	    }
+	  };
+	}
+
+	function notMatch(field) {
+	  return function (value, data) {
+	    if (data) {
+	      if (value === data[field]) {
+	        return 'Must not be the same';
+	      }
+	    }
+	  };
+	}
+
+	function email(data) {
+	  if (data) {
+	    var matches = data.match(/^.+@.+\..+$/);
+	    if (matches == null) {
+	      return 'Is Invalid';
+	    }
+	  }
+	}
+
+	function createValidator(rules) {
+	  return function () {
+	    var data = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+	    var errors = {};
+	    Object.keys(rules).forEach(function (key) {
+	      var rule = join([].concat(rules[key])); // concat enables both functions and arrays of functions
+	      var error = rule(data[key], data);
+	      if (error) {
+	        errors[key] = error;
+	      }
+	    });
+	    return errors;
+	  };
+	}
+
+/***/ },
 /* 875 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -77947,7 +78009,9 @@
 	        _react2.default.createElement(_UserFormRedux2.default, {
 	          allSubNeighborhoods: this.props.allSubNeighborhoods,
 	          subNeighborhood: this.props.subNeighborhood,
-	          createUser: this.props.createUser
+	          createUser: this.props.createUser,
+	          toggleHidden: this.props.toggleHidden,
+	          hiddenValue: this.props.hiddenValue
 	        })
 	      );
 	    }
@@ -77965,7 +78029,9 @@
 	    currentUser: state.currentUser,
 	    allSubNeighborhoods: state.subNeighborhoods,
 	    subNeighborhood: state.subNeighborhood,
-	    users: state.users
+	    users: state.users,
+	    hiddenValue: state.hiddenValue
+
 	  };
 	};
 
@@ -77973,7 +78039,11 @@
 	  return {
 	    createUser: function createUser(newUser) {
 	      return FixinsActions.createUser(newUser, dispatch);
+	    },
+	    toggleHidden: function toggleHidden() {
+	      return dispatch(FixinsActions.toggleHidden());
 	    }
+
 	  };
 	};
 
@@ -77999,7 +78069,9 @@
 
 	var _reduxForm = __webpack_require__(819);
 
-	var _validation = __webpack_require__(867);
+	var _validation = __webpack_require__(874);
+
+	var _reactRouter = __webpack_require__(191);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -78025,6 +78097,9 @@
 	    value: function render() {
 	      var _this2 = this;
 
+	      var hiddenValue = this.props.hiddenValue;
+	      var toggleHidden = this.props.toggleHidden;
+
 	      var _props = this.props;
 	      var _props$fields = _props.fields;
 	      var username = _props$fields.username;
@@ -78037,7 +78112,13 @@
 	      var usernameErrorMsg = username.touched && username.error ? username.error : '';
 	      var passwordErrorMsg = password.touched && password.error ? password.error : '';
 	      var targetErrorMsg = password.touched && password.error ? password.error : '';
-	      var successStyles = { disply: "none" };
+	      var successStyles = {
+	        display: hiddenValue,
+	        background: '#98FB98',
+	        height: '120px',
+	        width: '100%',
+	        textAlign: "center"
+	      };
 	      var allSubNeighborhoods = this.props.allSubNeighborhoods;
 	      var subNeighborhoodFilter = function subNeighborhoodFilter(subNeighborhood) {
 	        return subNeighborhood._id === _this2.props.subNeighborhood._id;
@@ -78064,14 +78145,9 @@
 	              newUser.user_sub_neighborhood = _this2.props.subNeighborhood;
 	              _this2.props.createUser(newUser);
 	              resetForm();
-	              successStyles = {
-	                display: "block",
-	                background: '#98FB98',
-	                height: '120px',
-	                width: '100%'
-	              };
-
-	              ///
+	              if (hiddenValue === "none") {
+	                toggleHidden();
+	              }
 	            }), className: 'form', role: 'form' },
 	          _react2.default.createElement(
 	            'fieldset',
@@ -78133,14 +78209,14 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { style: this.state.successStyles },
+	          { style: successStyles },
 	          _react2.default.createElement(
 	            'h2',
 	            null,
 	            'Signup success! Click here to ',
 	            _react2.default.createElement(
-	              Link,
-	              { to: 'index/login' },
+	              _reactRouter.Link,
+	              { onClick: toggleHidden, to: 'index/login' },
 	              'login'
 	            ),
 	            '.'
@@ -78256,7 +78332,9 @@
 	        _react2.default.createElement(_CheckInFormRedux2.default, {
 	          createCheckIn: this.props.createCheckIn,
 	          thisDish: this.props.thisDish,
-	          currentUser: this.props.currentUser
+	          currentUser: this.props.currentUser,
+	          toggleHidden: this.props.toggleHidden,
+	          hiddenValue: this.props.hiddenValue
 	        })
 	      );
 	    }
@@ -78273,7 +78351,8 @@
 	  return {
 	    currentUser: state.currentUser,
 	    thisDish: state.dish,
-	    allDishes: state.dishes
+	    allDishes: state.dishes,
+	    hiddenValue: state.hiddenValue
 	  };
 	};
 
@@ -78281,6 +78360,9 @@
 	  return {
 	    createCheckIn: function createCheckIn(newCheckIn) {
 	      return FixinsActions.createCheckIn(newCheckIn, dispatch);
+	    },
+	    toggleHidden: function toggleHidden() {
+	      return dispatch(FixinsActions.toggleHidden());
 	    }
 	  };
 	};
@@ -78359,7 +78441,9 @@
 	        _react2.default.createElement(_ReviewFormRedux2.default, {
 	          createReview: this.props.createReview,
 	          thisDish: this.props.thisDish,
-	          currentUser: this.props.currentUser
+	          currentUser: this.props.currentUser,
+	          toggleHidden: this.props.toggleHidden,
+	          hiddenValue: this.props.hiddenValue
 	        })
 	      );
 	    }
@@ -78375,7 +78459,8 @@
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    currentUser: state.currentUser,
-	    thisDish: state.dish
+	    thisDish: state.dish,
+	    hiddenValue: state.hiddenValue
 	  };
 	};
 
@@ -78383,6 +78468,9 @@
 	  return {
 	    createReview: function createReview(newReview) {
 	      return FixinsActions.createReview(newReview, dispatch);
+	    },
+	    toggleHidden: function toggleHidden() {
+	      return dispatch(FixinsActions.toggleHidden());
 	    }
 	  };
 	};
@@ -78409,7 +78497,9 @@
 
 	var _reduxForm = __webpack_require__(819);
 
-	var _validation = __webpack_require__(867);
+	var _reactRouter = __webpack_require__(191);
+
+	var _validation = __webpack_require__(874);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -78435,6 +78525,16 @@
 	    value: function render() {
 	      var _this2 = this;
 
+	      var hiddenValue = this.props.hiddenValue;
+	      var toggleHidden = this.props.toggleHidden;
+	      var successStyles = {
+	        display: hiddenValue,
+	        background: "lightgreen",
+	        height: "60px",
+	        width: "100%",
+	        textAlign: "center"
+	      };
+
 	      var _props = this.props;
 	      var _props$fields = _props.fields;
 	      var words = _props$fields.words;
@@ -78458,6 +78558,7 @@
 	              newReviewObject.stars = data.stars;
 	              newReviewObject.review_user = _this2.props.currentUser;
 	              _this2.props.createReview(newReviewObject);
+	              toggleHidden();
 	              resetForm();
 	            }), className: 'form', role: 'form' },
 	          _react2.default.createElement(
@@ -78472,9 +78573,9 @@
 	            _react2.default.createElement(
 	              'label',
 	              { className: 'text-danger' },
-	              blurbErrorMsg
+	              wordsErrorMsg
 	            ),
-	            _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control', id: 'blurb',
+	            _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control', id: 'words',
 	              placeholder: 'Tell us what you think about the dish . . .' }, words, { required: '' }))
 	          ),
 	          _react2.default.createElement(
@@ -78500,6 +78601,21 @@
 	            'Save',
 	            submitting ? _react2.default.createElement('span', { className: 'loader glyphicon glyphicon-refresh spin' }) : _react2.default.createElement('span', null)
 	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { style: successStyles },
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            'Review success! ',
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { onClick: toggleHidden, to: 'index/myDashboard' },
+	              ' Go back go to your dashboard?'
+	            )
+	          ),
+	          ' '
 	        )
 	      );
 	    }
@@ -78609,7 +78725,9 @@
 	          thisSpot: this.props.thisSpot,
 	          allSpots: this.props.allSpots,
 	          spotName: mySpot[0].spot_name,
-	          currentUser: this.props.currentUser
+	          currentUser: this.props.currentUser,
+	          toggleHidden: this.props.toggleHidden,
+	          hiddenValue: this.props.hiddenValue
 	        })
 	      );
 	    }
@@ -78627,12 +78745,16 @@
 	    currentUser: state.currentUser,
 	    thisDish: state.dish,
 	    thisSpot: state.spot,
-	    allSpots: state.spots
+	    allSpots: state.spots,
+	    hiddenValue: state.hiddenValue
 	  };
 	};
 
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
+	    toggleHidden: function toggleHidden() {
+	      return dispatch(FixinsActions.toggleHidden());
+	    },
 	    createDish: function createDish(newDish) {
 	      return FixinsActions.createDish(newDish, dispatch);
 	    }
@@ -78661,7 +78783,9 @@
 
 	var _reduxForm = __webpack_require__(819);
 
-	var _validation = __webpack_require__(867);
+	var _validation = __webpack_require__(874);
+
+	var _reactRouter = __webpack_require__(191);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -78687,6 +78811,15 @@
 	    value: function render() {
 	      var _this2 = this;
 
+	      var hiddenValue = this.props.hiddenValue;
+	      var toggleHidden = this.props.toggleHidden;
+	      var successStyles = {
+	        display: hiddenValue,
+	        background: "lightgreen",
+	        height: "60px",
+	        width: "100%",
+	        textAlign: "center"
+	      };
 	      var _props = this.props;
 	      var _props$fields = _props.fields;
 	      var blurb = _props$fields.blurb;
@@ -78717,6 +78850,7 @@
 	              newDishObject.blurb = data.blurb;
 	              _this2.props.createDish(newDishObject);
 	              resetForm();
+	              toggleHidden();
 	            }), className: 'form', role: 'form' },
 	          _react2.default.createElement(
 	            'fieldset',
@@ -78791,6 +78925,21 @@
 	            { type: 'submit', className: 'btn btn-primary btn-block', disabled: submitting },
 	            'Save',
 	            submitting ? _react2.default.createElement('span', { className: 'loader glyphicon glyphicon-refresh spin' }) : _react2.default.createElement('span', null)
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { style: successStyles },
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            'Dish pending review! ',
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { onClick: toggleHidden, to: 'index/login' },
+	              ' Back to the dashboard? '
+	            ),
+	            '.'
 	          )
 	        )
 	      );
@@ -79263,7 +79412,7 @@
 	      var putOneDishInState = this.props.putOneDishInState;
 	      var putOneSpotInState = this.props.putOneSpotInState;
 	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
-	      var itemBoxStyle = { flexGrow: "1", padding: "5px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
+	      var itemBoxStyle = { flexGrow: "1", padding: "15px", maxWidth: "250px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
 
 	      var sortedDishes = [];
 	      allDishes.forEach(function (dish) {
@@ -79277,19 +79426,21 @@
 	          name: dish.dish_name });
 	      });
 	      sortedDishes.sort(function (dishA, dishB) {
-	        return dishB.calorieDollars - dishA.caunalorieDollars;
+	        return dishB.calorieDollars - dishA.calorieDollars;
 	      });
-	      var rand1 = Math.floor(Math.random() * 10);
-	      var rand2 = Math.floor(Math.random() * 10);
-	      var rand3 = Math.floor(Math.random() * 10);
-	      var rand4 = Math.floor(Math.random() * 10);
-	      var topFiveCalorieDollarDishes = [sortedDishes[rand1], sortedDishes[rand2], sortedDishes[rand3], sortedDishes[rand4]];
+	      var rand1 = Math.floor(Math.random() * 20);
+	      var rand2 = Math.floor(Math.random() * 20);
+	      var rand3 = Math.floor(Math.random() * 20);
+	      var rand4 = Math.floor(Math.random() * 20);
+	      var rand5 = Math.floor(Math.random() * 20);
+	      var rand6 = Math.floor(Math.random() * 20);
+	      var topFiveCalorieDollarDishes = [sortedDishes[rand1], sortedDishes[rand2], sortedDishes[rand3], sortedDishes[rand4], sortedDishes[rand5], sortedDishes[rand6]];
 	      var topFiveCalorieDollarDishesNodes = topFiveCalorieDollarDishes.map(function (dish) {
 	        return _react2.default.createElement(
 	          'div',
-	          { style: itemBoxStyle, className: 'bg-info', key: dish._id },
+	          { style: itemBoxStyle, className: 'bg-info flex', key: dish._id },
 	          _react2.default.createElement(
-	            'h5',
+	            'h4',
 	            null,
 	            _react2.default.createElement(
 	              _reactRouter.Link,
@@ -79485,7 +79636,7 @@
 	                    onClick: putOneSubNeighborhoodInState.bind(this, thisUser.user_sub_neighborhood._id) },
 	                  thisUser.user_sub_neighborhood.subNeighborhood_name,
 	                  ' '
-	                ) : "nothing",
+	                ) : _react2.default.createElement('img', { height: '50', width: '100', src: './static/loading.gif' }),
 	                ' home'
 	              )
 	            )
@@ -79494,7 +79645,7 @@
 	          _react2.default.createElement(_CalorieDollarChart2.default, { username: thisUser.username, userTarget: thisUser.user_target, userCheckIns: userCheckIns }),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'flex' },
+	            { className: 'flex top-bottom-big-mar flexCenter' },
 	            _react2.default.createElement(
 	              'h3',
 	              { className: 'bg-danger', style: itemBoxStyle },

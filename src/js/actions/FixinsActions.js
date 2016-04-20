@@ -1,4 +1,8 @@
-
+export const toggleHidden = () => {
+  return {
+    type: "TOGGLE_HIDDEN"
+  }
+}
 export function putOneSpotInState(_id){
   return {type: "PUT_ONE_SPOT_IN_STATE", _id:_id}
 }
@@ -204,6 +208,24 @@ export function createCheckIn(newCheckIn, dispatch){
 		});
 	}
 
+
+  export function checkForSession(dispatch){
+  		$.ajax({
+  			url: "http://localhost:4444/api/Session",
+  			type: 'GET',
+  			dataType: "json",
+  			success: function(thisSession){
+          console.log(thisSession)
+  						dispatch({
+  								type: "CHECK_FOR_SESSION",
+  								user: thisSession
+  							});
+  			},
+  			error: function(xhr, status, err){
+  				console.error('./Session', status, err.toString());
+  			}
+  		});
+  	}
 
 export function initializeUsers(dispatch){
 		$.ajax({

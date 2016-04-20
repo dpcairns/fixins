@@ -23,10 +23,12 @@ function jackpotGo(){
   return {type: "JACKPOT"}
 }
 
+
 function mapDispatchToProps(dispatch) {
   return {
       jackpotGo: () => dispatch(jackpotGo()),
       noDice: () => dispatch(noDice()),
+      checkForSession: () => FixinsActions.checkForSession(dispatch),
       initializeSubNeighborhoods: () => FixinsActions.initializeSubNeighborhoods(dispatch),
       initializeNeighborhoods: () => FixinsActions.initializeNeighborhoods(dispatch),
       initializeGenres: () => FixinsActions.initializeGenres(dispatch),

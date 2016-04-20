@@ -29,6 +29,8 @@ render(){
       createCheckIn={this.props.createCheckIn}
       thisDish={this.props.thisDish}
       currentUser={this.props.currentUser}
+      toggleHidden={this.props.toggleHidden}
+      hiddenValue={this.props.hiddenValue}
       />
     </div>
     )
@@ -44,13 +46,15 @@ const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser,
     thisDish: state.dish,
-    allDishes: state.dishes
+    allDishes: state.dishes,
+    hiddenValue: state.hiddenValue
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
       createCheckIn: (newCheckIn) => FixinsActions.createCheckIn(newCheckIn, dispatch),
+      toggleHidden: () => dispatch(FixinsActions.toggleHidden())
   }
 }
 

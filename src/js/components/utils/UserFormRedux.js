@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {reduxForm} from 'redux-form'
 import {createValidator, required} from '../../middleware/validation'
+import {Link} from 'react-router'
 
 const fields = ['username', 'password', 'target']
 
@@ -14,11 +15,20 @@ class UserFormRedux extends Component {
   };
 
   render () {
+    let hiddenValue = this.props.hiddenValue
+    let toggleHidden = this.props.toggleHidden
+
     const {fields: {username, password, target}, resetForm, handleSubmit, submitting} = this.props
     const usernameErrorMsg = username.touched && username.error ? username.error : ''
     const passwordErrorMsg = password.touched && password.error ? password.error : ''
     const targetErrorMsg = password.touched && password.error ? password.error : ''
-      let successStyles ={disply: "none"}
+      let successStyles = {
+          display: hiddenValue,
+          background: '#98FB98',
+          height: '120px',
+          width: '100%',
+          textAlign: "center"
+        }
       let allSubNeighborhoods = this.props.allSubNeighborhoods
       let subNeighborhoodFilter = (subNeighborhood) => {return (subNeighborhood._id === this.props.subNeighborhood._id)}
       let mySubNeighborhood = allSubNeighborhoods.filter(subNeighborhoodFilter)
@@ -35,14 +45,9 @@ class UserFormRedux extends Component {
       		newUser.user_sub_neighborhood = this.props.subNeighborhood
       		this.props.createUser(newUser)
           resetForm()
-          successStyles = {
-              display: "block",
-              background: '#98FB98',
-              height: '120px',
-              width: '100%'
-            }
+          if(hiddenValue === "none"){
+          toggleHidden()}
 
-          ///
 
 	    	})} className='form' role='form'>
         <fieldset className='form-group'>
@@ -66,7 +71,7 @@ class UserFormRedux extends Component {
               : <span></span>}
           </button>
         </form>
-        <div style={this.state.successStyles}><h2>Signup success! Click here to <Link to="index/login">login</Link>.</h2>.</div>
+        <div style={successStyles}><h2>Signup success! Click here to <Link onClick={toggleHidden} to="index/login">login</Link>.</h2>.</div>
       </div>
 
     )

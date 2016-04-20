@@ -32,7 +32,8 @@ export default class SpotForm extends React.Component{
 							display: "block",
 							background: '#FF6666',
 							height: '50px',
-							width: '100%'
+							width: '100%',
+	            textAlign: "center"
 						}
 					})
 					}
@@ -45,7 +46,8 @@ export default class SpotForm extends React.Component{
 							display: "block",
 							background: '#98FB98',
 							height: '50px',
-							width: '100%'
+							width: '100%',
+	            textAlign: "center"
 						}
 					})
 
@@ -193,7 +195,7 @@ export default class SpotForm extends React.Component{
 		</div>
 	<div className="btn btn-danger" onClick={this.handleSubmit.bind(this)}>Post</div>
 	<div style={this.state.spotFailureStyles}><h2>Spot failed. Try again and do something different.</h2></div>
-	<div style={this.state.spotSuccessStyles}><h2>Spot added! Check out the detail page for the <Link to={`subNeighborhood/${subNeighborhoodId}`}> {this.props.mySubNeighborhood.subNeighborhood_name}</Link>.</h2>.</div>
+	<div style={this.state.spotSuccessStyles}><h2>Spot pending review! Check out the detail page for <Link to={`subNeighborhood/${subNeighborhoodId}`}> {this.props.mySubNeighborhood.subNeighborhood_name}</Link>.</h2>.</div>
 
 </div>
 

@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {reduxForm} from 'redux-form'
 import {createValidator, maxLength, required} from '../../middleware/validation'
+import {Link} from 'react-router'
 
 const fields = ['blurb']
 
@@ -19,6 +20,17 @@ class CheckInFormRedux extends Component {
   };
 
   render () {
+
+    let hiddenValue = this.props.hiddenValue
+    let toggleHidden = this.props.toggleHidden
+
+        let successStyles = {
+            display: hiddenValue,
+            background: "lightgreen",
+            height: "60px",
+            width: "100%",
+            textAlign: "center"
+          }
     const {fields: {blurb}, handleSubmit, resetForm, submitting} = this.props
     const blurbErrorMsg = blurb.touched && blurb.error ? blurb.error : ''
 
@@ -32,6 +44,7 @@ class CheckInFormRedux extends Component {
 	    		newCheckInObject.user = this.props.currentUser
 	    		this.props.createCheckIn(newCheckInObject)
           resetForm()
+          toggleHidden()
 
 	    	})} className='form' role='form'>
           <fieldset className='form-group'>
@@ -44,6 +57,7 @@ class CheckInFormRedux extends Component {
               : <span></span>}
           </button>
         </form>
+                <div style={successStyles}><h2>CheckIn added! <Link onClick={toggleHidden} to="index/myDashboard"> Go back go to your dashboard?</Link></h2> </div>
       </div>
 
     )

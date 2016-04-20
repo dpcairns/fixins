@@ -21,6 +21,8 @@ render(){
       createReview={this.props.createReview}
       thisDish={this.props.thisDish}
       currentUser={this.props.currentUser}
+      toggleHidden={this.props.toggleHidden}
+      hiddenValue={this.props.hiddenValue}
       />
     </div>
     )
@@ -35,13 +37,15 @@ NewReviewPage.contextTypes = {
 const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser,
-    thisDish: state.dish
+    thisDish: state.dish,
+    hiddenValue: state.hiddenValue
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
       createReview: (newReview) => FixinsActions.createReview(newReview, dispatch),
+      toggleHidden: () => dispatch(FixinsActions.toggleHidden())
   }
 }
 
