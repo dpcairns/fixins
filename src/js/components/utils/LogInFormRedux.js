@@ -47,7 +47,7 @@ class DishFormRedux extends Component {
               placeholder='Tell us a little bit about the dish' {...blurb} required=''/>
           </fieldset>
 
-          <button type='submit' className='btn btn-primary btn-block' disabled={submitting}>Save
+          <button type='submit' className='btn btn-primary btn-block' disabled={submitting}>login
             {submitting ? <span className='loader glyphicon glyphicon-refresh spin'></span>
               : <span></span>}
           </button>

@@ -3,7 +3,10 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import RemoveButton from "../utils/RemoveButton"
 import * as FixinsActions from "../../actions/FixinsActions"
+import NewCheckInPage from "../pages/NewCheckInPage"
+import NewReviewPage from "../pages/NewReviewPage"
 import Links from "../utils/Links"
+import { Modal, Button } from "react-bootstrap"
 
 class DishDetail extends React.Component{
 	render(){
@@ -102,6 +105,8 @@ function findReviewsFilter(review){
                 )
     })
 
+let toggleCheckInModal = this.props.toggleCheckInModal
+let toggleReviewModal = this.props.toggleReviewModal
     return (
 <div className="bg-warning med-pad med-mar">
 <div>
@@ -110,10 +115,10 @@ function findReviewsFilter(review){
 		<h1>Detail page for {dish.dish_name}</h1>
 		</div>
 		<div className="col-md-3">
-		<h3><Link to="index/newCheckIn"> Just ate this? CheckIn!</Link></h3>
+		<h3><a onClick={toggleCheckInModal}> Just ate this? CheckIn!</a></h3>
 		</div>
 		<div className="col-md-3">
-		<h3><Link to="index/newReview"> Review this dish.</Link></h3>
+		<h3><a  onClick={toggleReviewModal}> Review this dish.</a></h3>
 		</div>
 		</div>
 						{spotNode}
@@ -138,6 +143,37 @@ function findReviewsFilter(review){
 				</div>
 				</div>
     </div>
+
+
+		<Modal show={this.props.showCheckInModal} bsSize="small" aria-labelledby="contained-modal-title-sm">
+	<Modal.Header>
+		<Modal.Title id="contained-modal-title-sm">CheckIn!</Modal.Title>
+	</Modal.Header>
+	<Modal.Body>
+	 <NewCheckInPage/>
+	</Modal.Body>
+	<Modal.Footer>
+		<Button onClick={toggleCheckInModal}>Close</Button>
+	</Modal.Footer>
+</Modal>
+
+ <Modal show={this.props.showReviewModal} bsSize="small" aria-labelledby="contained-modal-title-sm">
+	 <Modal.Header>
+		 <Modal.Title id="contained-modal-title-sm">Write a review!</Modal.Title>
+	 </Modal.Header>
+	 <Modal.Body>
+		<NewReviewPage/>
+	 </Modal.Body>
+	 <Modal.Footer>
+		 <Button onClick={toggleReviewModal}>Close</Button>
+	 </Modal.Footer>
+ </Modal>
+
+
+
+
+
+
 </div>
       )
   }
@@ -156,8 +192,18 @@ const mapStateToProps = (state) => {
     		allUsers: state.users,
     		allDishes: state.dishes,
         allSpots: state.spots,
-    		allCheckIns: state.checkIns
+    		allCheckIns: state.checkIns,
+				showReviewModal: state.showReviewModal,
+				showCheckInModal: state.showCheckInModal
         }
+}
+
+const toggleCheckInModal = () => {
+	return {type:"TOGGLE_CHECKIN_MODAL"}
+}
+
+const toggleReviewModal = () => {
+	return {type:"TOGGLE_REVIEW_MODAL"}
 }
 
 
@@ -167,6 +213,8 @@ const mapDispatchToProps = (dispatch) => {
 		putOneGenreInState: (_id) => dispatch(FixinsActions.putOneGenreInState(_id)),
 		putOneUserInState: (_id) => dispatch(FixinsActions.putOneUserInState(_id)),
 		putOneDishInState: (_id) => dispatch(FixinsActions.putOneDishInState(_id)),
+	 	toggleCheckInModal: () => dispatch(toggleCheckInModal()),
+	 	toggleReviewModal: () => dispatch(toggleReviewModal())
 
 
  }

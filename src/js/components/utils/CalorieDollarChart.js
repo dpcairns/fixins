@@ -1,7 +1,8 @@
 import React from "react"
 import { LineChart } from "rd3"
-export default class CalorieDollarChart extends React.Component{
+import MtSvgLines from 'react-mt-svg-lines';      // ES6+
 
+export default class CalorieDollarChart extends React.Component{
 
 render(){
   let target = parseInt(300)
@@ -54,7 +55,6 @@ let lineData = [
 
 ];
 
-
 /////////////_______END_CHART_VALUES_________/////////////
 
 /////////////_________NODES_________//////////////
@@ -78,18 +78,21 @@ let lineData = [
 let title= this.props.username + "'s CalorieDollars over time'"
  return (
   <div>
-    <LineChart
-  legend={true}
-  data={lineData}
-  width={1100}
-  height={500}
-  viewBoxObject={{x: 0, y: 0, width: 1100, height: 500}}
-  title={title}
-  yAxisLabel="Average CalorieDollars"
-  xAxisLabel="Number of checkIns"
-  gridHorizontal={true}
-/>
+            <LineChart
+          legend={true}
+          data={lineData}
+          width={1100}
+          height={500}
+          viewBoxObject={{x: 0, y: 0, width: 1100, height: 500}}
+          title={title}
+          hoverAnimation={false}
+          yAxisLabel="Average CalorieDollars"
+          xAxisLabel="Number of checkIns"
+          gridHorizontal={true}
+        />
   </div>
 )
       }
 }
+
+///  <MtSvgLines animate={ true } duration={ 500 }>

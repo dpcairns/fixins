@@ -23,6 +23,65 @@ const currentUser = (state = {}, action) => {
     }
 }
 
+const showReviewModal = (state = "", action) => {
+  switch (action.type) {
+    case "TOGGLE_REVIEW_MODAL":
+    if(state===false){
+    return true}
+    else{return false}
+    default:
+    return state
+  }
+}
+
+
+const showCheckInModal = (state = "", action) => {
+  switch (action.type) {
+    case "TOGGLE_CHECKIN_MODAL":
+    if(state === false){
+    return true}
+    else{return false}
+    default:
+    return state
+  }
+}
+
+
+const showSignUpModal = (state = "", action) => {
+  switch (action.type) {
+    case "TOGGLE_SIGNUP_MODAL":
+    if(state===false){
+    return true}
+    else{return false}
+    default:
+    return state
+  }
+}
+
+
+const showLoginModal = (state = "", action) => {
+  switch (action.type) {
+    case "TOGGLE_LOGIN_MODAL":
+    if(state === false){
+    return true}
+    else{return false}
+    default:
+    return state
+  }
+}
+
+
+const showDishModal = (state = "", action) => {
+  switch (action.type) {
+    case "TOGGLE_DISH_MODAL":
+    if(state === false){
+    return true}
+    else{return false}
+    default:
+    return state
+  }
+}
+
 const neighborhood = (state = "", action) => {
   switch (action.type) {
     case 'CREATE_NEIGHBORHOOD':
@@ -444,6 +503,11 @@ const hiddenValue = (state = "", action) => {
 }
 
 const FixinsApp = combineReducers({
+  showDishModal,
+  showLoginModal,
+  showSignUpModal,
+  showReviewModal,
+  showCheckInModal,
   hiddenValue,
   auth,
   jackpot,

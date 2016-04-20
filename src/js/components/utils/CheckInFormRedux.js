@@ -52,12 +52,11 @@ class CheckInFormRedux extends Component {
             <input type='text' className='form-control' id='blurb'
               placeholder='Say a little something about the experience (140 char max)' {...blurb} required=''/>
           </fieldset>
-          <button type='submit' className='btn btn-primary btn-block' disabled={submitting}>Save
+          <button type='submit' className='btn btn-primary btn-block' disabled={submitting}>post checkIn
             {submitting ? <span className='loader glyphicon glyphicon-refresh spin'></span>
               : <span></span>}
           </button>
         </form>
-                <div style={successStyles}><h2>CheckIn added! <Link onClick={toggleHidden} to="index/myDashboard"> Go back go to your dashboard?</Link></h2> </div>
       </div>
 
     )

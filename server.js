@@ -18,6 +18,7 @@ var bcrypt = require('bcrypt')
 var db ='mongodb://localhost/test'
 mongoose.connect(db)
 
+
 app.use(
   session({
     resave: true,

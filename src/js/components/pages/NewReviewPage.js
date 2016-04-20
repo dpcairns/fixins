@@ -14,9 +14,16 @@ render(){
   this.context.router.push('index/login')
   }
 
+    let thisDish = this.props.thisDish
+      function findDishFilter(dish){
+      	    return (dish._id === thisDish._id)
+      		    }
+    	 thisDish = this.props.allDishes.filter(findDishFilter)
+
+
   return(
     <div>
-      Okay, make a Review with {this.props.thisDish.dish_name} . . .
+      Okay, write a review for {thisDish[0].dish_name} . . .
       <ReviewFormRedux
       createReview={this.props.createReview}
       thisDish={this.props.thisDish}
@@ -38,7 +45,8 @@ const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser,
     thisDish: state.dish,
-    hiddenValue: state.hiddenValue
+    hiddenValue: state.hiddenValue,
+    allDishes: state.dishes
   }
 }
 

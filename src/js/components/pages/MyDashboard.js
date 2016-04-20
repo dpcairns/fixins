@@ -5,6 +5,7 @@ import Links from "../utils/Links"
 import CalorieDollarChart from "../utils/CalorieDollarChart"
 import HorizontalRainbow from "../utils/HorizontalRainbow"
 import * as FixinsActions from "../../actions/FixinsActions"
+import MtSvgLines from 'react-mt-svg-lines';      // ES6+
 
 
 class MyDashboard extends React.Component{
@@ -127,7 +128,6 @@ render(){
 </div>
 <br/>
 <CalorieDollarChart username={thisUser.username} userTarget={thisUser.user_target} userCheckIns={userCheckIns} />
-
 
 <div className="flex top-bottom-big-mar flexCenter">
 <h3 className="bg-danger" style={itemBoxStyle}>not hitting your target? here are some highly efficient ideas for you to chew on</h3>

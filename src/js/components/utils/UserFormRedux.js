@@ -38,10 +38,11 @@ class UserFormRedux extends Component {
       <h3> You call {mySubNeighborhood[0].subNeighborhood_name} home.</h3>
 
         <form onSubmit={handleSubmit( data => {
+          console.log(data)
           var newUser = {}
       		newUser.name = data.username
       		newUser.password = data.password
-          newUser.target = parseInt(data.target)
+          newUser.target = data.target
       		newUser.user_sub_neighborhood = this.props.subNeighborhood
       		this.props.createUser(newUser)
           resetForm()

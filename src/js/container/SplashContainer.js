@@ -12,7 +12,8 @@ const mapStateToProps = (state) => {
     subNeighborhoods: state.subNeighborhoods,
     reviews: state.reviews,
     checkIns: state.checkIns,
-    jackpot: state.jackpot
+    jackpot: state.jackpot,
+    currentUser: state.currentUser
   }
 }
 
@@ -23,11 +24,18 @@ function jackpotGo(){
   return {type: "JACKPOT"}
 }
 
+const userLogout = () => {
+        return {
+          type: "LOG_OUT",
+	       }
+    }
+
 
 function mapDispatchToProps(dispatch) {
   return {
       jackpotGo: () => dispatch(jackpotGo()),
       noDice: () => dispatch(noDice()),
+      logout: () => dispatch(logout()),
       checkForSession: () => FixinsActions.checkForSession(dispatch),
       initializeSubNeighborhoods: () => FixinsActions.initializeSubNeighborhoods(dispatch),
       initializeNeighborhoods: () => FixinsActions.initializeNeighborhoods(dispatch),

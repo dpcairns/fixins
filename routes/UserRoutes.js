@@ -24,8 +24,7 @@ module.exports = function(router){
 						newUser.username = req.body.name
 						newUser.password = newUser.generateHash(req.body.password);
 						newUser.user_sub_neighborhood = req.body.user_sub_neighborhood
-						newUser.target = req.body.target
-
+						newUser.user_target = req.body.target
 						newUser.save(
 							function(){
 							User.findOne({username: newUser.username})

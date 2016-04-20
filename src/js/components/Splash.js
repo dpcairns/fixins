@@ -4,7 +4,7 @@ import { Link } from "react-router"
 
 export default class Splash extends React.Component{
 
-	componentDidMount(){
+	componentWillMount(){
 		this.props.initializeUsers();
 		this.props.initializeDishes();
 		this.props.initializeGenres();
@@ -21,6 +21,7 @@ export default class Splash extends React.Component{
 			let myOtherGlitterFood = ""
 			let jackpotGo = this.props.jackpotGo
 			let noDice = this.props.noDice
+			let logout = this.props.logout
 			let jackpotStyles = {display: this.props.jackpot, textDecoration: "none", zIndex:"2", position: "fixed", bottom: "8%", left: "25%", fontSize: "12em"}
 			let putOneDishInState = this.props.putOneDishInState
 			let putOneSpotInState = this.props.putOneSpotInState
@@ -162,7 +163,9 @@ export default class Splash extends React.Component{
 
 			 				<div className="col-md-12">
 			 						<div style={topFiveStyle} className="shadow-container">
-			 									<h3>top five subNeighborhoods in pdx</h3>
+									<h4>{this.props.currentUser._id !== undefined ? "Welcome back" + this.props.currentUser.username + "!": ""}</h4>
+
+												<h3>top five subNeighborhoods in pdx</h3>
 			 									<div className="top-five flex flexCenter">
 			 												{this.props.subNeighborhoods.length>88 ? topFiveSubNeighborhoodNodes :  <img  height="50" width="100" src="./static/loading.gif" />}
 			 									</div>

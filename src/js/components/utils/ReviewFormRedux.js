@@ -55,12 +55,11 @@ class ReviewFormRedux extends Component {
           <input type='number' min='0' max='5' className='form-control' id='stars'
             placeholder='How many stars out of five?' {...stars} required=''/>
         </fieldset>
-          <button type='submit' className='btn btn-primary btn-block' disabled={submitting}>Save
+          <button type='submit' className='btn btn-primary btn-block' disabled={submitting}>post review
             {submitting ? <span className='loader glyphicon glyphicon-refresh spin'></span>
               : <span></span>}
           </button>
         </form>
-        <div style={successStyles}><h2>Review success! <Link onClick={toggleHidden}to="index/myDashboard"> Go back go to your dashboard?</Link></h2> </div>
 
       </div>
 

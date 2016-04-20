@@ -31,6 +31,11 @@ const app = document.getElementById('app');
 
 
 let initialState = {
+	showSignUpModal: false,
+	showLoginModal: false,
+	showDishModal: false,
+	showReviewModal: false,
+	showCheckInModal: false,
 	hiddenValue: "none",
 	jackpot: "none",
 	currentUser: {},

@@ -13,7 +13,7 @@ export default class Layout extends React.Component{
 
 componentDidMount(){
 	if(this.props.currentUser._id !== undefined){
-		this.handleLogin()
+		this.context.router.push('index/login')
 	}
 	else{
 		this.handleLogout()

@@ -60,6 +60,7 @@ export default class UserForm extends React.Component{
 		newUser.name = this.state.username
 		newUser.password = this.state.password
 		newUser.user_sub_neighborhood = this.props.subNeighborhood
+		newUSer.target = this.props.target
 		if(newUser.name.length<1 || newUser.password.length<1 || newUser.user_sub_neighborhood.length<1){
 			this.showSignUpFailure();
 		}
