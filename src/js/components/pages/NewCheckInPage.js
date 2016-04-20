@@ -24,7 +24,7 @@ render(){
 
   return(
     <div>
-      <h2>Okay, make a checkIn with {myDish[0].dish_name} . . .</h2>
+      <h2>Make a checkIn with {myDish[0].dish_name}!</h2>
       <CheckInFormRedux
       createCheckIn={this.props.createCheckIn}
       thisDish={this.props.thisDish}

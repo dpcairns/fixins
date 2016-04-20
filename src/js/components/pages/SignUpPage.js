@@ -18,6 +18,7 @@ render(){
     createUser={this.props.createUser}
     toggleHidden={this.props.toggleHidden}
     hiddenValue={this.props.hiddenValue}
+    router={this.context.router}
      />
     </div>
 

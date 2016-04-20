@@ -43,7 +43,7 @@ class UserDetail extends React.Component{
 									                    </tr>
 
 										)
-				})
+				}).reverse()
 			function findReviewsFilter(review){
 									return (review.review_user._id === thisUser._id || review.review_user === thisUser._id)
 						}
@@ -61,7 +61,7 @@ class UserDetail extends React.Component{
 	                  </tr>
 
 										)
-				})
+				}).reverse()
 
 
     return (

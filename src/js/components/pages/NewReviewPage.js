@@ -23,7 +23,7 @@ render(){
 
   return(
     <div>
-      Okay, write a review for {thisDish[0].dish_name} . . .
+      Write a review for {thisDish[0].dish_name}!
       <ReviewFormRedux
       createReview={this.props.createReview}
       thisDish={this.props.thisDish}

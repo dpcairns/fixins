@@ -35851,18 +35851,18 @@
 										{ style: topFiveStyle, className: "shadow-container" },
 										_react2.default.createElement(
 											"h4",
-											null,
-											this.props.currentUser._id !== undefined ? "Welcome back" + this.props.currentUser.username + "!" : ""
-										),
-										_react2.default.createElement(
-											"h3",
-											null,
-											"top five subNeighborhoods in pdx"
+											{ className: "colorChange" },
+											this.props.currentUser._id !== undefined ? "Welcome back " + this.props.currentUser.username + "!" : ""
 										),
 										_react2.default.createElement(
 											"div",
 											{ className: "top-five flex flexCenter" },
 											this.props.subNeighborhoods.length > 88 ? topFiveSubNeighborhoodNodes : _react2.default.createElement("img", { height: "50", width: "100", src: "./static/loading.gif" })
+										),
+										_react2.default.createElement(
+											"h3",
+											null,
+											"top five subNeighborhoods in pdx"
 										)
 									)
 								)
@@ -95780,7 +95780,7 @@
 													)
 											)
 									);
-							});
+							}).reverse();
 							function findReviewsFilter(review) {
 									return review.review_user._id === thisUser._id || review.review_user === thisUser._id;
 							}
@@ -95852,7 +95852,7 @@
 													)
 											)
 									);
-							});
+							}).reverse();
 
 							return _react2.default.createElement(
 									"div",
@@ -116496,9 +116496,9 @@
 	        _react2.default.createElement(
 	          'h2',
 	          null,
-	          'Okay, make a checkIn with ',
+	          'Make a checkIn with ',
 	          myDish[0].dish_name,
-	          ' . . .'
+	          '!'
 	        ),
 	        _react2.default.createElement(_CheckInFormRedux2.default, {
 	          createCheckIn: this.props.createCheckIn,
@@ -116612,9 +116612,9 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'Okay, write a review for ',
+	        'Write a review for ',
 	        thisDish[0].dish_name,
-	        ' . . .',
+	        '!',
 	        _react2.default.createElement(_ReviewFormRedux2.default, {
 	          createReview: this.props.createReview,
 	          thisDish: this.props.thisDish,
@@ -116753,7 +116753,7 @@
 	              { className: 'text-danger' },
 	              wordsErrorMsg
 	            ),
-	            _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control', id: 'words',
+	            _react2.default.createElement('textarea', _extends({ rows: '10', className: 'form-control', id: 'words',
 	              placeholder: 'Tell us what you think about the dish . . .' }, words, { required: '' }))
 	          ),
 	          _react2.default.createElement(
@@ -117376,83 +117376,105 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { onClick: putOneSubNeighborhoodInState.bind(this, "TRUE_NEW_USER"),
-	            to: 'index/allNeighborhoods' },
-	          _react2.default.createElement(
-	            'h2',
-	            null,
-	            'Need an account? Sign up here.'
-	          )
-	        ),
-	        _react2.default.createElement(
 	          'div',
-	          { style: loginFailureStyles },
+	          { className: 'row' },
 	          _react2.default.createElement(
-	            'h2',
-	            null,
-	            'Login failed. Try again and do something different.'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'loginForm' },
-	          _react2.default.createElement(
-	            'form',
-	            { onSubmit: handleSubmit(function (data) {
-	                var thisUser = {};
-	                thisUser.username = data.username;
-	                thisUser.password = data.password;
-	                _this2.props.userLogin(thisUser, function (loggedInUser) {
-	                  console.log(loggedInUser);
-	                  if (loggedInUser === "LoginError") {
-	                    console.log("toggle_hidden");
-	                    toggleHidden();
-	                  } else if (hiddenValue === "block" && loggedInUser !== "LoginError") {
-	                    toggleHidden();
-	                  }
-	                });
-	                resetForm();
-	              }), className: 'form', role: 'form' },
+	            'div',
+	            { className: 'col-md-4 text-right' },
 	            _react2.default.createElement(
-	              'fieldset',
-	              { className: 'form-group' },
+	              'h1',
+	              null,
+	              'Log in',
 	              _react2.default.createElement(
-	                'label',
-	                { htmlFor: 'username' },
-	                'Username'
-	              ),
-	              ' ',
-	              _react2.default.createElement(
-	                'label',
-	                { className: 'text-danger' },
-	                usernameErrorMsg
-	              ),
-	              _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control', id: 'name',
-	                placeholder: 'Ex: SomebodySpecial321' }, username, { required: '' }))
+	                _reactRouter.Link,
+	                { onClick: putOneSubNeighborhoodInState.bind(this, "TRUE_NEW_USER"),
+	                  to: 'index/allNeighborhoods' },
+	                _react2.default.createElement(
+	                  'h2',
+	                  null,
+	                  '(Need an account? Click here to sign up.)'
+	                )
+	              )
 	            ),
 	            _react2.default.createElement(
-	              'fieldset',
-	              { className: 'form-group' },
+	              'div',
+	              { style: loginFailureStyles },
 	              _react2.default.createElement(
-	                'label',
-	                { htmlFor: 'password' },
-	                'Password'
-	              ),
-	              ' ',
-	              _react2.default.createElement(
-	                'label',
-	                { className: 'text-danger' },
-	                passwordErrorMsg
-	              ),
-	              _react2.default.createElement('input', _extends({ type: 'password', className: 'form-control', id: 'password',
-	                placeholder: 'And the password?' }, password, { required: '' }))
-	            ),
+	                'h2',
+	                null,
+	                'Login failed. Try again and do something different.'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-md-3 text-left' },
+	            _react2.default.createElement('img', { src: './static/chewing.gif', style: { borderRadius: "25px", boxShadow: "0 0 10px grey", margin: "15px" } })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-md-4' },
 	            _react2.default.createElement(
-	              'button',
-	              { type: 'submit', className: 'btn btn-primary btn-block', disabled: submitting },
-	              'Save',
-	              submitting ? _react2.default.createElement('span', { className: 'loader glyphicon glyphicon-refresh spin' }) : _react2.default.createElement('span', null)
+	              'div',
+	              { className: 'loginForm' },
+	              _react2.default.createElement(
+	                'form',
+	                { onSubmit: handleSubmit(function (data) {
+	                    var thisUser = {};
+	                    thisUser.username = data.username;
+	                    thisUser.password = data.password;
+	                    _this2.props.userLogin(thisUser, function (loggedInUser) {
+	                      console.log(loggedInUser);
+	                      if (loggedInUser === "LoginError") {
+	                        console.log("toggle_hidden");
+	                        toggleHidden();
+	                      } else if (hiddenValue === "block" && loggedInUser !== "LoginError") {
+	                        toggleHidden();
+	                      }
+	                    });
+	                    resetForm();
+	                  }), className: 'form', role: 'form' },
+	                _react2.default.createElement(
+	                  'fieldset',
+	                  { className: 'form-group' },
+	                  _react2.default.createElement(
+	                    'label',
+	                    { htmlFor: 'username' },
+	                    'Username'
+	                  ),
+	                  ' ',
+	                  _react2.default.createElement(
+	                    'label',
+	                    { className: 'text-danger' },
+	                    usernameErrorMsg
+	                  ),
+	                  _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control', id: 'name',
+	                    placeholder: 'Ex: SomebodySpecial321' }, username, { required: '' }))
+	                ),
+	                _react2.default.createElement(
+	                  'fieldset',
+	                  { className: 'form-group' },
+	                  _react2.default.createElement(
+	                    'label',
+	                    { htmlFor: 'password' },
+	                    'Password'
+	                  ),
+	                  ' ',
+	                  _react2.default.createElement(
+	                    'label',
+	                    { className: 'text-danger' },
+	                    passwordErrorMsg
+	                  ),
+	                  _react2.default.createElement('input', _extends({ type: 'password', className: 'form-control', id: 'password',
+	                    placeholder: 'And the password?' }, password, { required: '' }))
+	                ),
+	                _react2.default.createElement(
+	                  'button',
+	                  { type: 'submit', className: 'btn btn-primary btn-block', disabled: submitting },
+	                  'Save',
+	                  submitting ? _react2.default.createElement('span', { className: 'loader glyphicon glyphicon-refresh spin' }) : _react2.default.createElement('span', null)
+	                )
+	              )
 	            )
 	          )
 	        )
@@ -117604,7 +117626,8 @@
 	          subNeighborhood: this.props.subNeighborhood,
 	          createUser: this.props.createUser,
 	          toggleHidden: this.props.toggleHidden,
-	          hiddenValue: this.props.hiddenValue
+	          hiddenValue: this.props.hiddenValue,
+	          router: this.context.router
 	        })
 	      );
 	    }
@@ -117692,7 +117715,7 @@
 
 	      var hiddenValue = this.props.hiddenValue;
 	      var toggleHidden = this.props.toggleHidden;
-
+	      var router = this.props.router;
 	      var _props = this.props;
 	      var _props$fields = _props.fields;
 	      var username = _props$fields.username;
@@ -117739,9 +117762,7 @@
 	              newUser.user_sub_neighborhood = _this2.props.subNeighborhood;
 	              _this2.props.createUser(newUser);
 	              resetForm();
-	              if (hiddenValue === "none") {
-	                toggleHidden();
-	              }
+	              router.push('index/login');
 	            }), className: 'form', role: 'form' },
 	          _react2.default.createElement(
 	            'fieldset',
@@ -118418,7 +118439,7 @@
 	            )
 	          )
 	        );
-	      });
+	      }).reverse();
 	      function findReviewsFilter(review) {
 	        return review.review_user._id === thisUser._id || review.review_user === thisUser._id;
 	      }
@@ -118490,7 +118511,7 @@
 	            )
 	          )
 	        );
-	      });
+	      }).reverse();
 
 	      return _react2.default.createElement(
 	        'div',

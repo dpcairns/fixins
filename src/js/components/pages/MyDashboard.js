@@ -89,7 +89,7 @@ render(){
                     </tr>
 
                   )
-      })
+      }).reverse()
     function findReviewsFilter(review){
                 return (review.review_user._id === thisUser._id || review.review_user === thisUser._id)
           }
@@ -107,7 +107,7 @@ render(){
                     <td><h4>{review.review_date}</h4></td>
                   </tr>
                   )
-      })
+      }).reverse()
 
   return (
 <div>

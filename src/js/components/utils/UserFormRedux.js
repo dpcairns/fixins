@@ -17,7 +17,7 @@ class UserFormRedux extends Component {
   render () {
     let hiddenValue = this.props.hiddenValue
     let toggleHidden = this.props.toggleHidden
-
+    let router = this.props.router
     const {fields: {username, password, target}, resetForm, handleSubmit, submitting} = this.props
     const usernameErrorMsg = username.touched && username.error ? username.error : ''
     const passwordErrorMsg = password.touched && password.error ? password.error : ''
@@ -46,10 +46,7 @@ class UserFormRedux extends Component {
       		newUser.user_sub_neighborhood = this.props.subNeighborhood
       		this.props.createUser(newUser)
           resetForm()
-          if(hiddenValue === "none"){
-          toggleHidden()}
-
-
+          router.push('index/login')
 	    	})} className='form' role='form'>
         <fieldset className='form-group'>
           <label htmlFor='username'>Username</label> <label className='text-danger'>{usernameErrorMsg}</label>

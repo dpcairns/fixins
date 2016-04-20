@@ -37,10 +37,21 @@ class LogInPageRedux extends Component {
     const passwordErrorMsg = password.touched && password.error ? password.error : ''
     return (
       <div>
+      <div className="row">
+      <div className="col-md-4 text-right">
+      <h1>Log in
       <Link onClick={putOneSubNeighborhoodInState.bind(this, "TRUE_NEW_USER")}
       to="index/allNeighborhoods">
-        <h2>Need an account? Sign up here.</h2></Link>
+        <h2>(Need an account? Click here to sign up.)</h2></Link></h1>
         <div style={loginFailureStyles}><h2>Login failed. Try again and do something different.</h2></div>
+
+      </div>
+      <div className="col-md-3 text-left">
+      <img src="./static/chewing.gif" style={{borderRadius: "25px", boxShadow: "0 0 10px grey", margin: "15px"}}/>
+
+      </div>
+
+      <div className="col-md-4">
       <div className='loginForm'>
         <form onSubmit={handleSubmit( data => {
           let thisUser = {}
@@ -72,6 +83,8 @@ class LogInPageRedux extends Component {
             : <span></span>}
           </button>
         </form>
+      </div>
+      </div>
       </div>
       </div>
     )

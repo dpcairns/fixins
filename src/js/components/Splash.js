@@ -163,12 +163,13 @@ export default class Splash extends React.Component{
 
 			 				<div className="col-md-12">
 			 						<div style={topFiveStyle} className="shadow-container">
-									<h4>{this.props.currentUser._id !== undefined ? "Welcome back" + this.props.currentUser.username + "!": ""}</h4>
+									<h4 className="colorChange">{this.props.currentUser._id !== undefined ? "Welcome back " + this.props.currentUser.username + "!": ""}</h4>
 
-												<h3>top five subNeighborhoods in pdx</h3>
 			 									<div className="top-five flex flexCenter">
 			 												{this.props.subNeighborhoods.length>88 ? topFiveSubNeighborhoodNodes :  <img  height="50" width="100" src="./static/loading.gif" />}
-			 									</div>
+												</div>
+												<h3>top five subNeighborhoods in pdx</h3>
+
 			 						</div>
 			 				</div>
 					</div>

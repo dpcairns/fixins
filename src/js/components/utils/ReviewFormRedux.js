@@ -46,7 +46,7 @@ class ReviewFormRedux extends Component {
 	    	})} className='form' role='form'>
           <fieldset className='form-group'>
             <label htmlFor='words'>Your review:</label> <label className='text-danger'>{wordsErrorMsg}</label>
-            <input type='text' className='form-control' id='words'
+            <textarea rows="10" className='form-control' id='words'
               placeholder='Tell us what you think about the dish . . .' {...words} required=''/>
           </fieldset>
           <fieldset className='form-group'>
