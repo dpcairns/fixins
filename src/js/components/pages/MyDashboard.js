@@ -6,17 +6,17 @@ import CalorieDollarChart from "../utils/CalorieDollarChart"
 import HorizontalRainbow from "../utils/HorizontalRainbow"
 import * as FixinsActions from "../../actions/FixinsActions"
 import MtSvgLines from 'react-mt-svg-lines';      // ES6+
-
+import { Modal, Button } from "react-bootstrap"
+import NewCheckInPage from './NewCheckInPage'
 
 class MyDashboard extends React.Component{
 
 render(){
-
   if(this.props.currentUser._id === undefined){
   this.context.router.push('index/login')
   }
 
-
+  let toggleCheckInModal = this.props.toggleCheckInModal
   let listStyle={maxHeight:"400px",overflowX:"hidden",overflowY:"scroll"}
   let allReviews = this.props.allReviews
   let allSubNeighborhoods = this.props.allSubNeighborhoods
@@ -53,14 +53,16 @@ render(){
     					return (
                 <div style={itemBoxStyle} className="bg-info flex" key={dish._id}>
                 <h4>
-    						<Link onClick={putOneDishInState.bind(this, dish._id)} to={`/dish/${dish._id}`}>
-    						 {dish.name + " "}
-    						</Link>
+                 <span onClick={toggleCheckInModal}>
+    						<a onClick={putOneDishInState.bind(this, dish._id)}>
+    						{dish.name + " "}
+    						</a></span>
     						  at
     						 <Link to={`/spot/${dish.spotId}`}  onClick={putOneSpotInState.bind(this, dish.spotId)}>
     						  {" " + dish.nameOfSpot}
     						 </Link>
-    						  <br/><i> gets {dish.calorieDollars} calorieDollars </i></h4></div>)
+    						  <br/><i> gets {dish.calorieDollars} calorieDollars </i></h4>
+                  </div>)
     				})
 
 
@@ -155,6 +157,17 @@ render(){
 </div>
 <HorizontalRainbow />
 
+		<Modal show={this.props.showCheckInModal} bsSize="small" aria-labelledby="contained-modal-title-sm">
+	<Modal.Header>
+		<Modal.Title id="contained-modal-title-sm">CheckIn!</Modal.Title>
+	</Modal.Header>
+	<Modal.Body>
+	 <NewCheckInPage/>
+	</Modal.Body>
+	<Modal.Footer>
+		<Button onClick={toggleCheckInModal}>Close</Button>
+	</Modal.Footer>
+</Modal>
 </div>
 
 </div>
@@ -167,6 +180,11 @@ MyDashboard.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
+
+const toggleCheckInModal = () => {
+	return {type:"TOGGLE_CHECKIN_MODAL"}
+}
+
 const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser,
@@ -175,7 +193,8 @@ const mapStateToProps = (state) => {
     allSubNeighborhoods: state.subNeighborhoods,
     allUsers: state.users,
     allDishes: state.dishes,
-    allCheckIns: state.checkIns
+    allCheckIns: state.checkIns,
+    showCheckInModal: state.showCheckInModal
   }
 }
 
@@ -184,6 +203,8 @@ const mapDispatchToProps = (dispatch) => {
   putOneDishInState: (_id) => dispatch(FixinsActions.putOneDishInState(_id)),
   putOneSubNeighborhoodInState: (_id) => dispatch(FixinsActions.putOneSubNeighborhoodInState(_id)),
   putOneSpotInState: (_id) => dispatch(FixinsActions.putOneSpotInState(_id)),
+  toggleCheckInModal: () => dispatch(toggleCheckInModal()),
+
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MyDashboard)

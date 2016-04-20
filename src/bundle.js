@@ -118251,6 +118251,12 @@
 
 	var _reactMtSvgLines2 = _interopRequireDefault(_reactMtSvgLines);
 
+	var _reactBootstrap = __webpack_require__(1029);
+
+	var _NewCheckInPage = __webpack_require__(1297);
+
+	var _NewCheckInPage2 = _interopRequireDefault(_NewCheckInPage);
+
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -118261,9 +118267,8 @@
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // ES6+
 
-	// ES6+
 
 	var MyDashboard = function (_React$Component) {
 	  _inherits(MyDashboard, _React$Component);
@@ -118277,11 +118282,11 @@
 	  _createClass(MyDashboard, [{
 	    key: 'render',
 	    value: function render() {
-
 	      if (this.props.currentUser._id === undefined) {
 	        this.context.router.push('index/login');
 	      }
 
+	      var toggleCheckInModal = this.props.toggleCheckInModal;
 	      var listStyle = { maxHeight: "400px", overflowX: "hidden", overflowY: "scroll" };
 	      var allReviews = this.props.allReviews;
 	      var allSubNeighborhoods = this.props.allSubNeighborhoods;
@@ -118323,9 +118328,13 @@
 	            'h4',
 	            null,
 	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { onClick: putOneDishInState.bind(this, dish._id), to: '/dish/' + dish._id },
-	              dish.name + " "
+	              'span',
+	              { onClick: toggleCheckInModal },
+	              _react2.default.createElement(
+	                'a',
+	                { onClick: putOneDishInState.bind(this, dish._id) },
+	                dish.name + " "
+	              )
 	            ),
 	            'at',
 	            _react2.default.createElement(
@@ -118577,7 +118586,34 @@
 	              )
 	            )
 	          ),
-	          _react2.default.createElement(_HorizontalRainbow2.default, null)
+	          _react2.default.createElement(_HorizontalRainbow2.default, null),
+	          _react2.default.createElement(
+	            _reactBootstrap.Modal,
+	            { show: this.props.showCheckInModal, bsSize: 'small', 'aria-labelledby': 'contained-modal-title-sm' },
+	            _react2.default.createElement(
+	              _reactBootstrap.Modal.Header,
+	              null,
+	              _react2.default.createElement(
+	                _reactBootstrap.Modal.Title,
+	                { id: 'contained-modal-title-sm' },
+	                'CheckIn!'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.Modal.Body,
+	              null,
+	              _react2.default.createElement(_NewCheckInPage2.default, null)
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.Modal.Footer,
+	              null,
+	              _react2.default.createElement(
+	                _reactBootstrap.Button,
+	                { onClick: toggleCheckInModal },
+	                'Close'
+	              )
+	            )
+	          )
 	        )
 	      );
 	    }
@@ -118590,6 +118626,10 @@
 	  router: _react2.default.PropTypes.object.isRequired
 	};
 
+	var _toggleCheckInModal = function _toggleCheckInModal() {
+	  return { type: "TOGGLE_CHECKIN_MODAL" };
+	};
+
 	var mapStateToProps = function mapStateToProps(state) {
 	  var _ref;
 
@@ -118599,7 +118639,7 @@
 	    allReviews: state.reviews,
 	    allSubNeighborhoods: state.subNeighborhoods,
 	    allUsers: state.users
-	  }, _defineProperty(_ref, 'allDishes', state.dishes), _defineProperty(_ref, 'allCheckIns', state.checkIns), _ref;
+	  }, _defineProperty(_ref, 'allDishes', state.dishes), _defineProperty(_ref, 'allCheckIns', state.checkIns), _defineProperty(_ref, 'showCheckInModal', state.showCheckInModal), _ref;
 	};
 
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -118612,7 +118652,11 @@
 	    },
 	    putOneSpotInState: function putOneSpotInState(_id) {
 	      return dispatch(FixinsActions.putOneSpotInState(_id));
+	    },
+	    toggleCheckInModal: function toggleCheckInModal() {
+	      return dispatch(_toggleCheckInModal());
 	    }
+
 	  };
 	};
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MyDashboard);
