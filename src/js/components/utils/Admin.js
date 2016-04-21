@@ -22,15 +22,69 @@ import { connect } from 'react-redux'
 
 export default class Admin extends React.Component{
 	render(){
+
+
+/*		  if(this.props.currentUser === undefined || this.props.currentUser.username !== "admin"){
+		  this.context.router.push('index/login')
+		  }
+*/
+
 	return(
 		<div>
 			<div>
+
+							<div className="admin-spot-box row bg-info">
+								<div className="admin-spot-output col-md-12">
+
+											<h2>All Spots</h2>
+
+
+
+									<SpotList
+									allSpots={this.props.allSpots}
+									allSubNeighborhoods={this.props.allSubNeighborhoods}
+									allReviews={this.props.allReviews}
+									allGenres={this.props.allGenres}
+									allDishes={this.props.allDishes}
+									removeSpot={this.props.removeSpot}
+									findAndChangeSpot={this.props.findAndChangeSpot}
+									putOneSpotInState={this.props.putOneSpotInState}
+									putOneSubNeighborhoodInState={this.props.putOneSubNeighborhoodInState}
+
+									/>
+
+								</div>
+							</div>
+
+						<hr />
+						<hr />
+						<hr />
+						<hr />
+
+
+										<div className="admin-dish-box bg-success row">
+
+											<div className="admin-dish-output col-md-12">
+<h1>All dishes</h1>
+												<DishList
+												allReviews={this.props.allReviews}
+												allCheckIns={this.props.allCheckIns}
+												allDishes={this.props.allDishes}
+												removeDish={this.props.removeDish}
+												findAndChangeDish={this.props.findAndChangeDish}
+												putOneDishInState={this.props.putOneDishInState}
+
+						 							/>
+											</div>
+
+										</div>
+
+										<hr />
+										<hr />
+										<hr />
+
 				<div className="admin-user-box bg-success row">
 				<div className="admin-user-input col-md-4">
-									<h2>New User</h2>
-						<UserForm
-						allSubNeighborhoods={this.props.allSubNeighborhoods}
-						createUser={this.props.createUser} />
 					</div>
 					<div className="admin-user-output col-md-8">
 								<h2>All Users</h2>
@@ -50,51 +104,10 @@ export default class Admin extends React.Component{
 						/>
 					</div>
 				</div>
-				<hr />
-
-				<div className="admin-spot-box row bg-info">
-					<div className="admin-spot-input col-md-4">
-
-								<h2>All Spots</h2>
-
-						<SpotList
-						allSpots={this.props.allSpots}
-						allSubNeighborhoods={this.props.allSubNeighborhoods}
-						allReviews={this.props.allReviews}
-						allGenres={this.props.allGenres}
-						allDishes={this.props.allDishes}
-						removeSpot={this.props.removeSpot}
-						findAndChangeSpot={this.props.findAndChangeSpot}
-						putOneSpotInState={this.props.putOneSpotInState}
-						putOneSubNeighborhoodInState={this.props.putOneSubNeighborhoodInState}
 
 
-
-						/>
-
-					</div>
-				</div>
-
-			<hr />
-
-
-							<div className="admin-dish-box bg-success row">
-
-								<div className="admin-dish-input col-md-4">
-
-									<DishList
-									allReviews={this.props.allReviews}
-									allCheckIns={this.props.allCheckIns}
-									allDishes={this.props.allDishes}
-									removeDish={this.props.removeDish}
-									findAndChangeDish={this.props.findAndChangeDish}
-									putOneDishInState={this.props.putOneDishInState}
-
-			 							/>
-								</div>
-
-							</div>
-
+						<hr />
+						<hr />
 						<hr />
 
 				<div className="admin-review-box bg-success row">
@@ -114,6 +127,8 @@ export default class Admin extends React.Component{
 				</div>
 
 			<hr />
+			<hr />
+			<hr />
 
 				<div className="admin-checkIn-box bg-info row">
 					<div className="admin-checkIn-input col-md-4">
@@ -131,6 +146,8 @@ export default class Admin extends React.Component{
 					</div>
 				</div>
 
+			<hr />
+			<hr />
 			<hr />
 
 				<div className="admin-neighborhood-box bg-success row">
@@ -159,6 +176,8 @@ export default class Admin extends React.Component{
 				</div>
 
 			<hr />
+			<hr />
+			<hr />
 
 				<div className="admin-subNeighborhood-box bg-info row">
 					<div className="admin-subNeighborhood-input col-md-4">
@@ -179,6 +198,9 @@ export default class Admin extends React.Component{
 				</div>
 
 				<hr/>
+				<hr />
+				<hr />
+
 				<div className="admin-genre-box row bg-success">
 					<div className="admin-genre-input col-md-4">
 									<h2>New Genre</h2>
@@ -209,4 +231,9 @@ export default class Admin extends React.Component{
 
 		)
 	}
+}
+
+
+Admin.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }

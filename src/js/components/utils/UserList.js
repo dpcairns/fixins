@@ -105,7 +105,6 @@ toggleEdit(){
 
 			return(
 			<div className="row user-boxes" onClick={putOneUserInState.bind(this, userId)} key={userId}>
-			<CalorieDollarChart username={user.username} userCheckIns={userCheckIns} />
 
 				<div className="col-md-6">
 					<ul>
@@ -119,8 +118,8 @@ toggleEdit(){
 						<li onClick={putOneSubNeighborhoodInState.bind(this, subNeighborhoodId)}>
 						SubNeighborhood: {user.user_sub_neighborhood.subNeighborhood_name}</li>
 						</Link>
-						<li> CheckIns: {checkInNodes}</li>
-						<li> Reviews: {reviewNodes}</li>
+						<li> CheckIns: {checkInNodes.length}</li>
+						<li> Reviews: {reviewNodes.length}</li>
 
 						<li> <RemoveButton removeUser={removeUser} type="User" id={user._id}/></li>
 					</ul>

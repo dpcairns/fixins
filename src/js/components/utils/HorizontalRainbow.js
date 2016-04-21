@@ -11,8 +11,6 @@ render(){
 <img src={myImage} height="40px" width="100px"/>
 <img src={myImage} height="40px" width="100px"/>
 <img src={myImage} height="40px" width="100px"/>
-
-
 </div>
     )
   }

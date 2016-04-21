@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from 'react-redux'
 import RemoveButton from "../utils/RemoveButton"
 import Links from "../utils/Links"
+import * as FixinsActions from "../../actions/FixinsActions"
 import { Link } from 'react-router'
 
 class SubNeighborhoodDetail extends React.Component{
@@ -18,11 +19,11 @@ class SubNeighborhoodDetail extends React.Component{
 		let putOneGenreInState = this.props.putOneGenreInState
 		let putOneNeighborhoodInState = this.props.putOneNeighborhoodInState
     let subNeighborhood = this.props.subNeighborhood
-		let itemBoxStyle = {height:"180px",width:"200px", overflow:"hidden",padding: "8px", margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
+		let itemBoxStyle = {minHeight:"180px", maxWidth: "250px", minWidth:"200px", overflow:"hidden",padding: "8px", margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
 
     function findSpotsFilter(spot){
 
-    									return (spot.spot_subNeighborhood._id === subNeighborhood._id)
+    									return (spot.spot_subNeighborhood._id === subNeighborhood._id && spot.approved)
     						}
     				let spotNodes = allSpots.filter(findSpotsFilter).map(function(spot){
 
@@ -68,23 +69,40 @@ class SubNeighborhoodDetail extends React.Component{
 				let neighborhoodId = subNeighborhood.sub_neighborhood_neighborhood._id
     return(
       <div className="bg-warning med-pad med-mar">
+
+
+			<div className="row">
+				 <div className="col-md-6">
 				<h3><Link to="index/allNeighborhoods">see all neighborhoods</Link></h3>
           <h1>{subNeighborhood.subNeighborhood_name}</h1>
-					<h3>{subNeighborhood.subNeighborhood_name} is located in <Link to={`/neighborhood/${neighborhoodId}`} onClick={putOneNeighborhoodInState.bind(this, neighborhoodId)}> {subNeighborhood.sub_neighborhood_neighborhood.neighborhood_name}
+					<h3>{subNeighborhood.subNeighborhood_name} is located in <Link to={`/neighborhood/${neighborhoodId}`} onClick={putOneNeighborhoodInState.bind(this, neighborhoodId)}>
+					{subNeighborhood.sub_neighborhood_neighborhood.neighborhood_name}
 					</Link>
+					</h3>
+
+					</div>
+		 <div className="col-md-6">
+		 <h3>
+
+					Think we missed a spot?<br/>
+					<Link to="index/newSpot"><i>Add one here!</i></Link>
 					 </h3>
+			</div>
+			</div>
+
+
 					 <div className="row">
 					 		<div className="col-md-6">
 							<br/><hr/>
 		          <h2>Spots in {subNeighborhood.subNeighborhood_name}</h2>
-							<div className="flex">
+							<div className="flex flexwrap">
 		          {allSpots.filter(findSpotsFilter).length> 0 ? spotNodes: (<h4>no restaurants in  {subNeighborhood.subNeighborhood_name}...yet! <Link to="index/newSpot">Be the first to add one!</Link></h4>)}
 							</div>
 							</div>
 							<div className="col-md-6">
 							<br/><hr/>
 		          <h2>Users in {subNeighborhood.subNeighborhood_name}</h2>
-							<div className="flex">
+							<div className="flex flexwrap">
 		          {allUsers.filter(findUsersFilter).length> 0 ? userNodes: (<h4>no users in {subNeighborhood.subNeighborhood_name}...yet!</h4>)}
 		      		</div>
 							</div>
@@ -110,35 +128,13 @@ const mapStateToProps = (state) => {
         }
 }
 
-
-function  putOneUserInState(_id){
-  return {type: "PUT_ONE_USER_IN_STATE", _id:_id}
-}
-
-function putOneDishInState(_id){
-  return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
-}
-
-
-function  putOneSpotInState(_id){
-  return {type: "PUT_ONE_SPOT_IN_STATE", _id:_id}
-}
-
-function  putOneNeighborhoodInState(_id){
-  return {type: "PUT_ONE_NEIGHBORHOOD_IN_STATE", _id:_id}
-}
-
-function  putOneGenreInState(_id){
-  return {type: "PUT_ONE_GENRE_IN_STATE", _id:_id}
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
-  putOneUserInState: (_id) => dispatch(putOneUserInState(_id)),
-	putOneSpotInState: (_id) => dispatch(putOneSpotInState(_id)),
-	putOneDishInState: (_id) => dispatch(putOneDishInState(_id)),
-	putOneNeighborhoodInState: (_id) => dispatch(putOneNeighborhoodInState(_id)),
-	putOneGenreInState: (_id) => dispatch(putOneGenreInState(_id)),
+  putOneUserInState: (_id) => dispatch(FixinsActions.putOneUserInState(_id)),
+	putOneSpotInState: (_id) => dispatch(FixinsActions.putOneSpotInState(_id)),
+	putOneDishInState: (_id) => dispatch(FixinsActions.putOneDishInState(_id)),
+	putOneNeighborhoodInState: (_id) => dispatch(FixinsActions.putOneNeighborhoodInState(_id)),
+	putOneGenreInState: (_id) => dispatch(FixinsActions.putOneGenreInState(_id)),
 
 
   }

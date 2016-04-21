@@ -2,10 +2,14 @@ import React from "react"
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import RemoveButton from "../utils/RemoveButton"
+import * as FixinsActions from "../../actions/FixinsActions"
 import Links from "../utils/Links"
+import { Modal, Button } from "react-bootstrap"
+import NewDishPage from "../pages/NewDishPage"
 
 class SpotDetail extends React.Component{
 	render(){
+		let toggleDishModal = this.props.toggleDishModal
 		let itemBoxStyle = {height:"180px",padding:"8px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
     let allReviews = this.props.allReviews
 		let allSubNeighborhoods = this.props.allSubNeighborhoods
@@ -19,7 +23,7 @@ class SpotDetail extends React.Component{
 		let subNeighorhoodId = spot.spot_subNeighborhood._id
 
 			function findDishesFilter(dish){
-									return (dish.dish_spot._id === spot._id)
+									return (dish.dish_spot._id === spot._id && dish.approved)
 						}
 				let theseDishes = allDishes.filter(findDishesFilter)
 				let dishNodes = theseDishes.map(function(dish){
@@ -58,17 +62,35 @@ class SpotDetail extends React.Component{
 
 								<div className="col-md-6">
 										<h2>
-										<Link to="index/newDish">Add a new dish!</Link>
+										<a onClick={toggleDishModal}>Add a new dish!</a>
 										</h2>
 								</div>
 
 			  </div>
 				<h3>dishes available at {spot.spot_name}</h3>
 				<div className="flex flexwrap">
-					{allDishes.filter(findDishesFilter).length>0 ? dishNodes : (<tr><td>no dishes for {spot.spot_name}...yet! <Link to="index/newDish">Click here to be the first to add one!</Link> </td></tr>)}
-						{dishNodes}
+					{allDishes.filter(findDishesFilter).length>0 ? dishNodes : (<tr><td>no dishes for {spot.spot_name}...yet! <a onClick={toggleDishModal}>Click here to be the first to add one!</a> </td></tr>)}
 				</div>
     </div>
+
+
+
+				<Modal show={this.props.showDishModal} bsSize="small" aria-labelledby="contained-modal-title-sm">
+			<Modal.Header>
+				<Modal.Title id="contained-modal-title-sm">New dish!</Modal.Title>
+			</Modal.Header>
+			<Modal.Body>
+			 <NewDishPage/>
+			</Modal.Body>
+			<Modal.Footer>
+				<Button onClick={toggleDishModal}>Close</Button>
+			</Modal.Footer>
+		</Modal>
+
+
+
+
+
 </div>
       )
   }
@@ -86,27 +108,21 @@ const mapStateToProps = (state) => {
     		allSubNeighborhoods: state.subNeighborhoods,
     		allUsers: state.users,
     		allDishes: state.dishes,
-    		allCheckIns: state.checkIns
+    		allCheckIns: state.checkIns,
+				showDishModal: state.showDishModal
         }
 }
 
-function putOneDishInState(_id){
-  return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
-}
-
-function putOneGenreInState(_id){
-  return {type: "PUT_ONE_GENRE_IN_STATE", _id:_id}
-}
-
-function putOneSubNeighborhoodInState(_id){
-  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
+const toggleDishModal = () => {
+	return {type: "TOGGLE_DISH_MODAL"}
 }
 
 const mapDispatchToProps = (dispatch) => {
  return {
-	 				putOneDishInState: (_id) => dispatch(putOneDishInState(_id)),
-	 				putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
-					putOneGenreInState: (_id) => dispatch(putOneGenreInState(_id)),
+	 				putOneDishInState: (_id) => dispatch(FixinsActions.putOneDishInState(_id)),
+	 				putOneSubNeighborhoodInState: (_id) => dispatch(FixinsActions.putOneSubNeighborhoodInState(_id)),
+					putOneGenreInState: (_id) => dispatch(FixinsActions.putOneGenreInState(_id)),
+					toggleDishModal: () => dispatch(toggleDishModal())
  }
 }
 

@@ -4,6 +4,7 @@ import RemoveButton from "../utils/RemoveButton"
 import { Link } from 'react-router'
 import Links from "../utils/Links"
 import NeighborhoodList from "../utils/NeighborhoodList"
+import * as FixinsActions from "../../actions/FixinsActions"
 
 
 class AllNeighborhoods extends React.Component{
@@ -15,24 +16,36 @@ class AllNeighborhoods extends React.Component{
       let neighborhoodNodes = allNeighborhoods.map(function(neighborhood){
         let neighborhoodId = neighborhood._id
        return(  <div key={neighborhood._id} style={itemBoxStyle} className="shad bg-danger">
-          <Link onClick={putOneNeighborhoodInState.bind(this, neighborhoodId)} to={`/neighborhood/${neighborhood._id}`}><h1>{neighborhood.neighborhood_name}</h1></Link>
+          <Link onClick={putOneNeighborhoodInState.bind(this, neighborhoodId)}
+					to={`/neighborhood/${neighborhood._id}`}><h1>{neighborhood.neighborhood_name}</h1></Link>
         </div>
         )
       })
+
+			let header = ""
+			if (stateSubNeighorhood !== undefined &&  stateSubNeighorhood._id === "TRUE_NEW_SPOT")
+									{
+										header = "Where do you want to add a spot?"
+									}
+		else if (stateSubNeighorhood !== undefined && stateSubNeighorhood._id === "TRUE_NEW_USER")
+				{
+			 header = "Where do you call home?"
+			 		}
+		else {
+			   header = "Explore a neighborhood"
+
+				}
+
+
+
       return(
         <div>
-				{stateSubNeighorhood !== undefined &&  stateSubNeighorhood._id === "TRUE_NEW_SPOT" ?
-				<h2>Where do you want to add a spot?</h2>
-				: <h2>Explore a neighborhood</h2>}
-          {neighborhoodNodes}
+					<h2>{header}</h2>
+			    {neighborhoodNodes}
         </div>
-      )
-  }
-}
+			)
+ }
 
-
-function putOneNeighborhoodInState(_id){
-  return {type: "PUT_ONE_NEIGHBORHOOD_IN_STATE", _id:_id}
 }
 
 const mapStateToProps = (state) => {
@@ -44,7 +57,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {putOneNeighborhoodInState: (_id) => dispatch(putOneNeighborhoodInState(_id)),
+  return {putOneNeighborhoodInState: (_id) => dispatch(FixinsActions.putOneNeighborhoodInState(_id)),
 }
 }
 

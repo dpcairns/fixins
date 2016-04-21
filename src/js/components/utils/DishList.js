@@ -1,5 +1,6 @@
 import React from "react"
 import RemoveButton from "./RemoveButton"
+import ApproveButton from "./ApproveButton"
 import { Link } from 'react-router'
 
 export default class DishList extends React.Component{
@@ -54,14 +55,16 @@ let dishId = dish._id
 						<td> Dish Price: {dish.dish_price}</td>
 						<td> Dish Calories: {dish.dish_calories}</td>
 						<td> Dish Spot: {dish.dish_spot.spot_name}</td>
-						<td>Dish reviews: {reviewNodes} </td>
-						<td>Dish check-ins: {checkInNodes}</td>
+						<td>Dish reviews: {reviewNodes.length} </td>
+						<td>Dish check-ins: {checkInNodes.length}</td>
 						<td> <RemoveButton removeDish={removeDish} type="Dish" id={dish._id}/></td>
+						<td> <ApproveButton item={dish} approved={dish.approved} type="Dish" id={dish._id} findAndChange={findAndChangeDish}/> </td>
+
 
 					</tr>
 
 				)
-		})
+		}).reverse()
 	return(
 		<div>
 

@@ -2,7 +2,7 @@ import React from "react"
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import RemoveButton from "../utils/RemoveButton"
-import ReviewForm from "../utils/ReviewForm"
+import ReviewFormRedux from "../utils/ReviewFormRedux"
 import Links from "../utils/Links"
 import * as FixinsActions from "../../actions/FixinsActions"
 
@@ -14,13 +14,22 @@ render(){
   this.context.router.push('index/login')
   }
 
+    let thisDish = this.props.thisDish
+      function findDishFilter(dish){
+      	    return (dish._id === thisDish._id)
+      		    }
+    	 thisDish = this.props.allDishes.filter(findDishFilter)
+
+
   return(
     <div>
-      Okay, make a Review with {this.props.thisDish.dish_name} . . .
-      <ReviewForm
+      Write a review for {thisDish[0].dish_name}!
+      <ReviewFormRedux
       createReview={this.props.createReview}
       thisDish={this.props.thisDish}
       currentUser={this.props.currentUser}
+      toggleHidden={this.props.toggleHidden}
+      hiddenValue={this.props.hiddenValue}
       />
     </div>
     )
@@ -35,13 +44,16 @@ NewReviewPage.contextTypes = {
 const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser,
-    thisDish: state.dish
+    thisDish: state.dish,
+    hiddenValue: state.hiddenValue,
+    allDishes: state.dishes
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
       createReview: (newReview) => FixinsActions.createReview(newReview, dispatch),
+      toggleHidden: () => dispatch(FixinsActions.toggleHidden())
   }
 }
 

@@ -2,7 +2,11 @@ import React from "react"
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import RemoveButton from "../utils/RemoveButton"
+import * as FixinsActions from "../../actions/FixinsActions"
+import NewCheckInPage from "../pages/NewCheckInPage"
+import NewReviewPage from "../pages/NewReviewPage"
 import Links from "../utils/Links"
+import { Modal, Button } from "react-bootstrap"
 
 class DishDetail extends React.Component{
 	render(){
@@ -33,11 +37,10 @@ function findCheckInsFilter(checkIn){
 								 <tr key={checkIn._id}>
 
 																	<td><h5>{checkIn.checkIn_blurb}</h5></td>
-																	<Link to={`/user/${userId}`} onClick={putOneUserInState.bind(this, userId)}>
-																	<td><h5>{checkIn.checkIn_user.username}</h5></td>
+																	<td><Link to={`/user/${userId}`} onClick={putOneUserInState.bind(this, userId)}>
+																	<h5>{checkIn.checkIn_user.username}</h5>
+																	</Link></td>
 																	<td><h5>{checkIn.checkIn_date}</h5></td>
-																	</Link>
-																	<td><h4>{checkIn.checkIn_dish.dish_spot.spot_name}</h4></td>
 
 																	</tr>
 
@@ -53,9 +56,9 @@ function findReviewsFilter(review){
             return (
 							<tr key={review._id}>
 								<td><h5>{review.review_words} </h5></td>
-								<Link to={`/user/${userId}`} onClick={putOneUserInState.bind(this, userId)}>
-								<td><h5>{review.review_user.username} </h5></td>
-									</Link>
+								<td><Link to={`/user/${userId}`} onClick={putOneUserInState.bind(this, userId)}>
+									<h5>{review.review_user.username} </h5> </Link>
+								</td>
 								<td><h4>{review.review_stars} stars </h4></td>
 								<td><h4>{review.review_date}</h4></td>
 							</tr>
@@ -102,6 +105,8 @@ function findReviewsFilter(review){
                 )
     })
 
+let toggleCheckInModal = this.props.toggleCheckInModal
+let toggleReviewModal = this.props.toggleReviewModal
     return (
 <div className="bg-warning med-pad med-mar">
 <div>
@@ -110,17 +115,17 @@ function findReviewsFilter(review){
 		<h1>Detail page for {dish.dish_name}</h1>
 		</div>
 		<div className="col-md-3">
-		<h3><Link to="index/newCheckIn"> Just ate this? CheckIn!</Link></h3>
+		<h3><a onClick={toggleCheckInModal}> Just ate this? CheckIn!</a></h3>
 		</div>
 		<div className="col-md-3">
-		<h3><Link to="index/newReview"> Review this dish.</Link></h3>
+		<h3><a  onClick={toggleReviewModal}> Review this dish.</a></h3>
 		</div>
 		</div>
 						{spotNode}
 				<div className="row">
 				<div className="col-md-6" style={listStyle}>
 				<table className="table">
-				<h3>CheckIns for {dish.dish_name}</h3>
+				<caption><h3>CheckIns for {dish.dish_name}</h3></caption>
 
 						<tbody>
             {allCheckIns.filter(findCheckInsFilter).length>0 ? checkInNodes : (<tr><td>no checkIns for {dish.dish_name}...yet! <Link to="index/newCheckIn"> Click here to be the first!.</Link> </td></tr>)}
@@ -130,7 +135,7 @@ function findReviewsFilter(review){
 				<div className="col-md-6" style={listStyle}>
 				<table className="table">
 
-				<h3>Reviews for {dish.dish_name}</h3>
+				<caption><h3>Reviews for {dish.dish_name}</h3></caption>
 				<tbody>
 				{allReviews.filter(findReviewsFilter).length>0 ? reviewNodes : (<tr><td>no reviews for {dish.dish_name}...yet! <Link to="index/newReview">Click here to be the first!</Link> </td></tr>)}
 				</tbody>
@@ -138,6 +143,37 @@ function findReviewsFilter(review){
 				</div>
 				</div>
     </div>
+
+
+		<Modal show={this.props.showCheckInModal} bsSize="small" aria-labelledby="contained-modal-title-sm">
+	<Modal.Header>
+		<Modal.Title id="contained-modal-title-sm">CheckIn!</Modal.Title>
+	</Modal.Header>
+	<Modal.Body>
+	 <NewCheckInPage/>
+	</Modal.Body>
+	<Modal.Footer>
+		<Button onClick={toggleCheckInModal}>Close</Button>
+	</Modal.Footer>
+</Modal>
+
+ <Modal show={this.props.showReviewModal} bsSize="small" aria-labelledby="contained-modal-title-sm">
+	 <Modal.Header>
+		 <Modal.Title id="contained-modal-title-sm">Write a review!</Modal.Title>
+	 </Modal.Header>
+	 <Modal.Body>
+		<NewReviewPage/>
+	 </Modal.Body>
+	 <Modal.Footer>
+		 <Button onClick={toggleReviewModal}>Close</Button>
+	 </Modal.Footer>
+ </Modal>
+
+
+
+
+
+
 </div>
       )
   }
@@ -156,36 +192,29 @@ const mapStateToProps = (state) => {
     		allUsers: state.users,
     		allDishes: state.dishes,
         allSpots: state.spots,
-    		allCheckIns: state.checkIns
+    		allCheckIns: state.checkIns,
+				showReviewModal: state.showReviewModal,
+				showCheckInModal: state.showCheckInModal
         }
 }
 
-function putOneSpotInState(_id){
-  return {type: "PUT_ONE_SPOT_IN_STATE", _id:_id}
+const toggleCheckInModal = () => {
+	return {type:"TOGGLE_CHECKIN_MODAL"}
 }
 
-function putOneSubNeighborhoodInState(_id){
-  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
+const toggleReviewModal = () => {
+	return {type:"TOGGLE_REVIEW_MODAL"}
 }
 
-function putOneGenreInState(_id){
-  return {type: "PUT_ONE_GENRE_IN_STATE", _id:_id}
-}
-
-function putOneUserInState(_id){
-  return {type: "PUT_ONE_USER_IN_STATE", _id:_id}
-}
-
-function putOneDishInState(_id){
-  return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
-}
 
 const mapDispatchToProps = (dispatch) => {
- return {putOneSpotInState: (_id) => dispatch(putOneSpotInState(_id)),
-	 	putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
-		putOneUserInState: (_id) => dispatch(putOneUserInState(_id)),
-		putOneGenreInState: (_id) => dispatch(putOneGenreInState(_id)),
-		putOneDishInState: (_id) => dispatch(putOneDishInState(_id)),
+ return {putOneSpotInState: (_id) => dispatch(FixinsActions.putOneSpotInState(_id)),
+	 	putOneSubNeighborhoodInState: (_id) => dispatch(FixinsActions.putOneSubNeighborhoodInState(_id)),
+		putOneGenreInState: (_id) => dispatch(FixinsActions.putOneGenreInState(_id)),
+		putOneUserInState: (_id) => dispatch(FixinsActions.putOneUserInState(_id)),
+		putOneDishInState: (_id) => dispatch(FixinsActions.putOneDishInState(_id)),
+	 	toggleCheckInModal: () => dispatch(toggleCheckInModal()),
+	 	toggleReviewModal: () => dispatch(toggleReviewModal())
 
 
  }

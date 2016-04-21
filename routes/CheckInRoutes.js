@@ -21,8 +21,8 @@ module.exports = function(router){
 						newCheckIn.checkIn_dish = req.body.dish
 						newCheckIn.checkIn_user = req.body.user
 						newCheckIn.checkIn_blurb = req.body.blurb
-						newCheckIn.save(function(){
-						CheckIn.findOne({checkIn_blurb: newCheckIn.checkIn_blurb})
+						newCheckIn.save(function(err, savedCheckIn){
+						CheckIn.findOne({_id: savedCheckIn._id})
 							.populate('checkIn_dish').populate('checkIn_user')
 							.exec(function(err, CheckIn){
 							if(err){

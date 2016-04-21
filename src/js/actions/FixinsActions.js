@@ -1,10 +1,39 @@
+export const toggleHidden = () => {
+  return {
+    type: "TOGGLE_HIDDEN"
+  }
+}
+export function putOneSpotInState(_id){
+  return {type: "PUT_ONE_SPOT_IN_STATE", _id:_id}
+}
+
+export function putOneSubNeighborhoodInState(_id){
+  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
+}
+
+export function putOneNeighborhoodInState(_id){
+  return {type: "PUT_ONE_NEIGHBORHOOD_IN_STATE", _id:_id}
+}
+
+export function putOneGenreInState(_id){
+  return {type: "PUT_ONE_GENRE_IN_STATE", _id:_id}
+}
+
+export function putOneUserInState(_id){
+  return {type: "PUT_ONE_USER_IN_STATE", _id:_id}
+}
+
+export function putOneDishInState(_id){
+  return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
+}
+
 export function createUser(newUser, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Users",
 			type: 'POST',
 			data: newUser,
 			success: function(postedUser){
-						dispatch(//{
+						dispatch(//
 								//type: "CREATE_USER",
 								//postedUser
 							{
@@ -20,13 +49,14 @@ export function createUser(newUser, dispatch){
 		});
 	}
 
+
 export function createSpot(newSpot, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Spots",
 			type: 'POST',
 			data: newSpot,
 			success: function(postedSpot){
-				dispatch(//{
+				dispatch(//
 						//type: "CREATE_USER",
 						//postedUser
 					{
@@ -48,7 +78,7 @@ export function createDish(newDish, dispatch){
 			type: 'POST',
 			data: newDish,
 			success: function(postedDish){
-				dispatch(//{
+				dispatch(//
 						//type: "CREATE_USER",
 						//postedUser
 					{
@@ -64,13 +94,14 @@ export function createDish(newDish, dispatch){
 		});
 	}
 
+
 export function createReview(newReview, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Reviews",
 			type: 'POST',
 			data: newReview,
 			success: function(postedReview){
-				dispatch(//{
+				dispatch(//
 						//type: "CREATE_USER",
 						//postedUser
 					{
@@ -85,13 +116,15 @@ export function createReview(newReview, dispatch){
 			}.bind(this)
 		});
 	}
+
+
 export function createNeighborhood(newNeighborhood, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Neighborhoods",
 			type: 'POST',
 			data: newNeighborhood,
 			success: function(postedNeighborhood){
-				dispatch(//{
+				dispatch(//
 						//type: "CREATE_USER",
 						//postedUser
 					{
@@ -107,13 +140,14 @@ export function createNeighborhood(newNeighborhood, dispatch){
 		});
 	}
 
+
 export function createSubNeighborhood(newSubNeighborhood, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/SubNeighborhoods",
 			type: 'POST',
 			data: newSubNeighborhood,
 			success: function(postedSubNeighborhood){
-				dispatch(//{
+				dispatch(//
 						//type: "CREATE_USER",
 						//postedUser
 
@@ -130,13 +164,14 @@ export function createSubNeighborhood(newSubNeighborhood, dispatch){
 		});
 	}
 
+
 export function createGenre(newGenre, dispatch){
 		$.ajax({
 			url: "http://localhost:4444/api/Genres",
 			type: 'POST',
 			data: newGenre,
 			success: function(postedGenre){
-				dispatch(//{
+				dispatch(//
 						//type: "CREATE_USER",
 						//postedUser
 					{
@@ -159,9 +194,7 @@ export function createCheckIn(newCheckIn, dispatch){
 			type: 'POST',
 			data: newCheckIn,
 			success: function(postedCheckIn){
-						dispatch(//{
-								//type: "CREATE_USER",
-								//postedUser
+						dispatch(
 							{
 									type: 'CREATE_CHECKIN',
 									...postedCheckIn
@@ -174,6 +207,25 @@ export function createCheckIn(newCheckIn, dispatch){
 			}.bind(this)
 		});
 	}
+
+
+  export function checkForSession(dispatch){
+  		$.ajax({
+  			url: "http://localhost:4444/api/Session",
+  			type: 'GET',
+  			dataType: "json",
+  			success: function(thisSession){
+          console.log(thisSession)
+  						dispatch({
+  								type: "CHECK_FOR_SESSION",
+  								user: thisSession
+  							});
+  			},
+  			error: function(xhr, status, err){
+  				console.error('./Session', status, err.toString());
+  			}
+  		});
+  	}
 
 export function initializeUsers(dispatch){
 		$.ajax({
@@ -479,7 +531,7 @@ export function initializeCheckIns(dispatch){
 			success: function(changedDish){
 						dispatch({
 								type: "CHANGED_DISH",
-								changedDish: changedDish
+								...changedDish
 											});
 			}.bind(this),
 			error: function(xhr, status, err){
@@ -566,7 +618,7 @@ export function initializeCheckIns(dispatch){
 			success: function(changedSpot){
 						dispatch({
 								type: "CHANGED_SPOT",
-								changedSpot: changedSpot
+								...changedSpot
 											});
 			}.bind(this),
 			error: function(xhr, status, err){

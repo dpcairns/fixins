@@ -1,7 +1,15 @@
 import { combineReducers } from 'redux'
+import auth from "../components/utils/AuthModule"
+import checkInForm from "../components/utils/CheckInFormRedux"
+import {reducer as formReducer} from 'redux-form';
 
 const currentUser = (state = {}, action) => {
     switch(action.type) {
+      case 'CHECK_FOR_SESSION':
+      console.log(action)
+      return Object.assign({}, {
+      ...action.user
+          })
       case 'LOG_IN':
       return Object.assign({}, {
       ...action.user
@@ -13,6 +21,65 @@ const currentUser = (state = {}, action) => {
     default:
       return state
     }
+}
+
+const showReviewModal = (state = "", action) => {
+  switch (action.type) {
+    case "TOGGLE_REVIEW_MODAL":
+    if(state===false){
+    return true}
+    else{return false}
+    default:
+    return state
+  }
+}
+
+
+const showCheckInModal = (state = "", action) => {
+  switch (action.type) {
+    case "TOGGLE_CHECKIN_MODAL":
+    if(state === false){
+    return true}
+    else{return false}
+    default:
+    return state
+  }
+}
+
+
+const showSignUpModal = (state = "", action) => {
+  switch (action.type) {
+    case "TOGGLE_SIGNUP_MODAL":
+    if(state===false){
+    return true}
+    else{return false}
+    default:
+    return state
+  }
+}
+
+
+const showLoginModal = (state = "", action) => {
+  switch (action.type) {
+    case "TOGGLE_LOGIN_MODAL":
+    if(state === false){
+    return true}
+    else{return false}
+    default:
+    return state
+  }
+}
+
+
+const showDishModal = (state = "", action) => {
+  switch (action.type) {
+    case "TOGGLE_DISH_MODAL":
+    if(state === false){
+    return true}
+    else{return false}
+    default:
+    return state
+  }
 }
 
 const neighborhood = (state = "", action) => {
@@ -198,6 +265,19 @@ const spot = (state = "", action) => {
         spot_blurb: action.spot_blurb,
         spot_subNeighborhood: action.spot_subNeighborhood,
         spot_coordinates: action.spot_coordinates,
+        spot_address: action.spot_address,
+        addDate: action.addDate
+      }
+    case 'CHANGED_SPOT':
+      return {
+        _id: action._id,
+        spot_name: action.spot_name,
+        spot_genres: action.spot_genres,
+        spot_dishes: action.spot_dishes,
+        spot_blurb: action.spot_blurb,
+        spot_subNeighborhood: action.spot_subNeighborhood,
+        spot_coordinates: action.spot_coordinates,
+        approved: action.approved,
         addDate: action.addDate
       }
     case 'PUT_ONE_SPOT_IN_STATE':
@@ -229,6 +309,12 @@ const spots = (state = [], action) => {
        return x._id !== action._id
 
      })
+     case 'CHANGED_SPOT':
+     return [
+       ...state.filter(x =>{
+      return x._id !== action._id
+    }), spot(state, action)
+  ]
     default:
       return state
   }
@@ -248,6 +334,20 @@ const dish = (state = "", action) => {
         dish_calories: action.dish_calories,
         dish_price: action.dish_price
       }
+      case 'CHANGED_DISH':
+        return {
+          _id: action._id,
+          dish_name: action.dish_name,
+          dish_blurb: action.dish_blurb,
+          dish_subNeighborhood: action.dish_subNeighborhood,
+          dish_spot: action.dish_spot,
+          dish_checkIns: action.dish_checkIns,
+          dish_reviews: action.dish_reviews,
+          dish_calories: action.dish_calories,
+          dish_price: action.dish_price,
+          approved: action.approved,
+        }
+
     case 'PUT_ONE_DISH_IN_STATE':
       return Object.assign({}, {
         _id: action._id
@@ -268,13 +368,12 @@ const dishes = (state = [], action) => {
          return x._id !== action._id
 
        })
-    /*case 'CHANGED_DISH':
-      return [
-        state.map(x =>
-        dish(x, action)
-        )
-      ]
-      */
+    case 'CHANGED_DISH':
+       return [
+         ...state.filter(x =>{
+        return x._id !== action._id
+      }), dish(state, action)
+    ]
     case 'FETCH_DISHES':
         if(state.length === 0){
         return [
@@ -380,15 +479,37 @@ const genres = (state = [], action) => {
 const jackpot = (state = "", action) => {
   switch (action.type) {
     case 'JACKPOT':
-      return state.concat("JACKPOT")
+    return "block"
+    case 'NO_DICE':
+    return "none"
   default:
     return state
      }
    }
 
-
+const hiddenValue = (state = "", action) => {
+  switch (action.type) {
+    case 'TOGGLE_HIDDEN':
+    console.log("toggle_hidden in reducer")
+    if (state === "none"){
+        return "block"
+    }
+    else if(state === "block"){
+      return "none"
+    }
+  default:
+    return state
+  }
+}
 
 const FixinsApp = combineReducers({
+  showDishModal,
+  showLoginModal,
+  showSignUpModal,
+  showReviewModal,
+  showCheckInModal,
+  hiddenValue,
+  auth,
   jackpot,
   currentUser,
   review,
@@ -406,7 +527,8 @@ const FixinsApp = combineReducers({
   subNeighborhood,
   subNeighborhoods,
   genre,
-  genres
+  genres,
+  form: formReducer,
 })
 
 export default FixinsApp

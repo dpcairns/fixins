@@ -6,6 +6,10 @@ body{
 }
 
 
+.flexCenter{
+	align-items: center
+}
+
 .shadow-container:hover {
 	-webkit-box-shadow: 0 0 20px #253f3f;
 	box-shadow: 0 0 20px #253f3f;
@@ -119,6 +123,186 @@ table{
 }
 
 
+.DishBoxAnim{
+	position: absolute;
+	height: 3500px;
+	animation-timing-function: ease-in-out;
+	animation: bottom-to-top 150s infinite;
+}
+
+.space-between{
+	display: flex;
+	display: -webkit-flex;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+}
+
+@keyframes top-to-bottom{
+	0%{
+		bottom: 0px
+	}
+	50%{
+		bottom: -2000px
+	}
+	100%{
+		bottom: 0px
+	}
+
+}
+
+.CheckInBoxAnim{
+	position: absolute;
+	justify-content: space-between;
+	animation-timing-function: ease-in-out;
+	animation: top-to-bottom 200s infinite;
+}
+
+
+@keyframes bottom-to-top{
+	0%{
+		top: 0px
+	}
+	50%{
+		top: -2000px
+	}
+	100%{
+		top: 0px
+	}
+
+}
+
+
+
+/*
+ * INNRR.NET
+ * CSS3 Animation
+ **/
+
+/*
+ * animation classes
+ **/
+
+ /* basic behavior */
+
+.animate                      { animation-play-state: running }
+.animate.on-hover             { animation-play-state: paused  }
+  .animate.on-hover:hover     { animation-play-state: running }
+.animate.unless-hover         { animation-play-state: running }
+  .animate.unless-hover:hover { animation-play-state: paused  }
+
+/*
+ * durations
+ **/
+
+/* fractions */
+.d-point5 { animation-duration: 0.5s  }
+
+/* whole numbers */
+.d-1  { animation-duration: 1s  }
+.d-2  { animation-duration: 2s  }
+.d-3  { animation-duration: 3s  }
+.d-4  { animation-duration: 4s  }
+.d-5  { animation-duration: 5s  }
+.d-6  { animation-duration: 6s  }
+.d-10 { animation-duration: 10s }
+.d-20 { animation-duration: 20s }
+.d-40 { animation-duration: 40s }
+.d-60 { animation-duration: 60s }
+.d-80 { animation-duration: 80s }
+
+/*
+ * iterations
+ **/
+
+.infinite { animation-iteration-count: infinite }
+
+/*
+ * timing functions
+ **/
+
+.linear      { animation-timing-function: linear      }
+.ease-in     { animation-timing-function: ease-in     }
+.ease-out    { animation-timing-function: ease-out    }
+.ease-in-out { animation-timing-function: ease-in-out }
+
+/*
+ * names & keyframes
+ **/
+
+/*
+ * floataround
+ **/
+
+/* default to 12 */
+.floataround   { animation-name: floataround   }
+.floataround-4 { animation-name: floataround-4 }
+
+@keyframes floataround {
+  0%   { top: 0;    }
+  50%  { top: 12px; }
+  100% { top: 0;    }
+}
+
+@keyframes floataround-4 {
+  0%   { top: 0;    }
+  50%  { top: 4px;  }
+  100% { top: 0;    }
+}
+
+/*
+ * woosh
+ **/
+
+.woosh { animation-name: woosh }
+
+@keyframes woosh {
+  0% {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  45% {
+    top: -2900px;
+  }
+  50% {
+    right: -700px;
+    top: -3100px;
+  }
+  65% {
+    right: -705px;
+    top: -3150px;
+  }
+  100% {
+    right: 0;
+    left: 0;
+    top: 0;
+  }
+}
+
+/*
+ * blink
+ **/
+
+.blink { animation-name: blink }
+
+@keyframes blink {
+  0%   { opacity: 0 }
+  45%  { opacity: 0 }
+  46%  { opacity: 1 }
+  100% { opacity: 1 }
+}
+
+/*
+ * blink
+ **/
+
+
+@keyframes slide-up {
+  100% { bottom: 5000px }
+}
 .flex{
 	display: flex;
   display: -webkit-flex: 1; /* Safari 6.1+ */
@@ -147,6 +331,13 @@ table{
 	margin: 40px;
 }
 
+
+.top-bottom-big-mar{
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+
 .top-mar{
 	margin-top: 400px;
 }
@@ -174,17 +365,17 @@ table{
 
 
 .admin-user-output{
-	height: 500px;
+	height: 800px;
 	overflow-y: scroll;
 }
 
 .admin-dish-output{
-	height: 300px;
+	height: 800px;
 	overflow-y: scroll;
 }
 
 .admin-spot-output{
-	height: 300px;
+	height: 800px;
 	overflow-y: scroll;
 }
 
@@ -220,6 +411,15 @@ table{
     -o-animation: color-change 1s infinite;
     -ms-animation: color-change 1s infinite;
     animation: color-change 1s infinite;
+}
+
+.colorChange{
+
+	    -webkit-animation: color-change 3s infinite;
+	    -moz-animation: color-change 3s infinite;
+	    -o-animation: color-change 3s infinite;
+	    -ms-animation: color-change 3s infinite;
+	    animation: color-change 3s infinite;
 }
 
 @-webkit-keyframes color-change {

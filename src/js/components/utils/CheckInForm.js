@@ -57,6 +57,8 @@ export default class CheckInForm extends React.Component{
 			this.showCheckInFailure();
 		}
 		else{
+			console.log("CheckInForm > newCheckInObject")
+			console.log(newCheckInObject)
 		this.props.createCheckIn(newCheckInObject)
 		this.showCheckInSuccess();
 		}

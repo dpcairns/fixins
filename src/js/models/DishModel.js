@@ -19,12 +19,15 @@ var DishSchema = new Schema({
 		type:String,
 		default: "a really yummy, really dense dish for cheap"
 	},
-	dish_spot: 
+	dish_spot:
 			{
 				type: Schema.Types.ObjectId,
 				ref: 'Spot'
-			}
-	
+			},
+	approved: {
+			type: Boolean,
+			default: false
+	}
 })
 
 module.exports = mongoose.model('Dish', DishSchema)

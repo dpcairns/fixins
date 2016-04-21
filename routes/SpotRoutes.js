@@ -24,8 +24,9 @@ module.exports = function(router){
 						newSpot.spot_blurb = req.body.blurb
 						newSpot.spot_coordinates = req.body.coordinates
 						newSpot.spot_subNeighborhood = req.body.subNeighborhood
-						newSpot.save(function(){
-							Spot.findOne({spot_name: newSpot.spot_name})
+						newSpot.spot_address = req.body.spot_address
+						newSpot.save(function(err, savedSpot){
+							Spot.findOne({_id: savedSpot._id})
 							.populate('spot_genres')
 							.populate('spot_subNeighborhood')
 							.populate('spot_dishes')
@@ -55,6 +56,9 @@ module.exports = function(router){
 				if (req.body.newName){
 					Spot.spot_name = req.body.newName
 			}
+			if (req.body.toggleApproved){
+				Spot.approved = req.body.toggleApproved
+		}
 				if (req.body.newSubNeighborhood){
 					Spot.spot_subNeighborhood = req.body.newSubNeighborhood
 			}
@@ -76,6 +80,7 @@ module.exports = function(router){
 
 				Spot.save()
 				res.json(Spot)
+				console.log(Spot)
 		}
 
 		})

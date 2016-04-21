@@ -18,9 +18,10 @@ export default class SpotForm extends React.Component{
       lng: -122.67},
       zoom: 13,
 			spotFailureStyles: {display: "none"},
-			spotSuccessStyles: {display: "none"}
+			spotSuccessStyles: {display: "none"},
+			address: ''
 					}
-					}
+			}
 
 					showSpotFailure(){
 						this.setState({
@@ -31,7 +32,8 @@ export default class SpotForm extends React.Component{
 							display: "block",
 							background: '#FF6666',
 							height: '50px',
-							width: '100%'
+							width: '100%',
+	            textAlign: "center"
 						}
 					})
 					}
@@ -44,7 +46,8 @@ export default class SpotForm extends React.Component{
 							display: "block",
 							background: '#98FB98',
 							height: '50px',
-							width: '100%'
+							width: '100%',
+	            textAlign: "center"
 						}
 					})
 
@@ -61,17 +64,41 @@ export default class SpotForm extends React.Component{
 
 	}
 
+
+		handleAddressChange(e){
+			this.setState({address: e.target.value})
+
+		}
+
 	handleGenresChange(e){
 		this.setState({genres: e.target.value})
 	}
 
 
 	handleMapClick(e){
-		this.setState({
-		      hasLocation: true,
-		      clickPosition: e.latlng,
-		      coordinates: e.latlng
-		    })
+		const findOne = (query) => {
+								$.ajax({
+								url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + query.lat +"," + query.lng,
+								type: 'GET',
+								success: function(myLocation){
+									console.log('my location inside ajax call')
+									console.log(myLocation.results[0].formatted_address)
+
+								this.setState({
+								      hasLocation: true,
+								      clickPosition: e.latlng,
+								      coordinates: e.latlng,
+											address: myLocation.results[0].formatted_address
+								    })
+								}.bind(this),
+								error: function(xhr, status, err){
+									console.error('uh oh dont blame mapbox', status, err.toString());
+								}
+							});
+						}
+
+				findOne(e.latlng)
+
 	}
 
 	handleSubmit(e){
@@ -84,17 +111,22 @@ export default class SpotForm extends React.Component{
 		newSpotObject.coordinates.push(this.state.coordinates.lng)
 		newSpotObject.genres = this.state.genres
 		newSpotObject.blurb = this.state.blurb
-		if(newSpotObject.blurb.length<1 || newSpotObject.coordinates.length<1 || newSpotObject.name.length<1 ){
+		newSpotObject.spot_address = this.state.address
+		console.log(newSpotObject)
+		if(newSpotObject.blurb.length<1 || newSpotObject.spot_address.length<1 || newSpotObject.coordinates.length<1 || newSpotObject.name.length<1 ){
 			this.showSpotFailure();
 		}
 		else{
 			this.props.createSpot(newSpotObject)
 			this.showSpotSuccess();
 		}
-		this.setState({username: "", blurb: "", genres: "", coordinates: ""})
+		this.setState({username: "", blurb: "", genres: "", coordinates: "", address: ""})
 	}
 
 	render(){
+
+
+
 		let allGenres = this.props.allGenres
 		let subNeighborhoodId = this.props.mySubNeighborhood._id
 		    const marker = this.state.hasLocation ?
@@ -121,6 +153,14 @@ export default class SpotForm extends React.Component{
 			  className="form-control"
 			  placeholder="spot name" />
 		</div>
+		<div className="input-group">
+			Spot address:
+		  <input type="text" value={this.state.address}
+			  onChange={this.handleAddressChange.bind(this)}
+			  className="form-control"
+			  placeholder="Ex: 132 Fake Street Portland OR 23456" />
+		</div>
+
 		<div className="input-group">
 			Blurb:
 		  <input type="text" value={this.state.blurb}
@@ -155,7 +195,7 @@ export default class SpotForm extends React.Component{
 		</div>
 	<div className="btn btn-danger" onClick={this.handleSubmit.bind(this)}>Post</div>
 	<div style={this.state.spotFailureStyles}><h2>Spot failed. Try again and do something different.</h2></div>
-	<div style={this.state.spotSuccessStyles}><h2>Spot added! Check out the detail page for the <Link to={`subNeighborhood/${subNeighborhoodId}`}> {this.props.mySubNeighborhood.subNeighborhood_name}</Link>.</h2>.</div>
+	<div style={this.state.spotSuccessStyles}><h2>Spot pending review! Check out the detail page for <Link to={`subNeighborhood/${subNeighborhoodId}`}> {this.props.mySubNeighborhood.subNeighborhood_name}</Link>.</h2>.</div>
 
 </div>
 

@@ -14,8 +14,17 @@ class MapItself extends React.Component {
     const metroLimits = L.latLngBounds(southWest, northEast);
     let putOneSpotInState = this.props.putOneSpotInState
     let allDishes = this.props.allDishes
+    let allSpots = this.props.allSpots
     let putOneDishInState = this.props.putOneDishInState
-    let markerNodes = this.props.allSpots.map((spot) => {
+    let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
+
+    function findSpotsFilter(spot){
+        				return (spot.approved)
+    				}
+  	let approvedSpots = allSpots.filter(findSpotsFilter)
+
+
+    let markerNodes = approvedSpots.map((spot) => {
       	function findDishesFilter(dish){
           									return (dish.dish_spot._id === spot._id)
           						}
@@ -28,14 +37,17 @@ class MapItself extends React.Component {
                           <Popup>
                           <div>
                           <h3>
-                          <span onClick={putOneSpotInState.bind(this, spotId)}>
-                          <a onClick={ () => router.push(`/spot/${spotId}`)}>{spot.spot_name}</a>
-                          </span>
+                            <a onClick={ () => router.push(`/spot/${spotId}`)}>{spot.spot_name}</a>
                           </h3>
+                          <h5>
+                            {spot.spot_address ?
+                            spot.spot_address
+                            : ""}
+                            </h5>
                           <h4>
-                          <span onClick={signatureDish.length>0 ?
-                            putOneDishInState.bind(this, signatureDish[0]._id)
-                            : putOneSpotInState.bind(this, spotId) }>
+                            <span onClick={signatureDish.length>0 ?
+                              putOneDishInState.bind(this, signatureDish[0]._id)
+                              : putOneSpotInState.bind(this, spotId) }>
 
                           Signature dish: <br/>
                           <a onClick={ signatureDish.length>0 ?
@@ -52,7 +64,7 @@ class MapItself extends React.Component {
                             "n/a "} calories for $
 
                             {signatureDish.length>0 ?
-                               signatureDish[0].dish_price
+                               signatureDish[0].dish_price + " "
                                : " n/a "}
                                 =
                                {signatureDish.length>0 ?
@@ -70,6 +82,8 @@ class MapItself extends React.Component {
 
       return (
         <div>
+        <h3>(did we miss a spot? <Link onClick={putOneSubNeighborhoodInState.bind(this, "TRUE_NEW_SPOT")}
+        to="index/allNeighborhoods"> add it here!</Link>)</h3>
         <Map center={center} zoom={zoom} minZoom={minZoom}>
           <TileLayer
             id="dpcairns.pee063cb"
@@ -86,6 +100,7 @@ class MapItself extends React.Component {
     }
   }
 
+
 MapItself.contextTypes = {router: React.PropTypes.object.isRequired}
 
 function putOneSpotInState(_id){
@@ -97,13 +112,18 @@ function putOneDishInState(_id){
   return {type: "PUT_ONE_DISH_IN_STATE", _id:_id}
 }
 
+function putOneSubNeighborhoodInState(_id){
+  return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
+}
+
 const mapStateToProps = (state) => {
  return {allSpots: state.spots, allDishes: state.dishes}
 }
 
 const mapDispatchToProps = (dispatch) => {
  return {putOneSpotInState: (_id) => dispatch(putOneSpotInState(_id)),
-        putOneDishInState: (_id) => dispatch(putOneDishInState(_id))
+        putOneDishInState: (_id) => dispatch(putOneDishInState(_id)),
+        putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
  }
 }
 
