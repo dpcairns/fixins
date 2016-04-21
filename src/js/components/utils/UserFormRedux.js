@@ -69,7 +69,6 @@ class UserFormRedux extends Component {
               : <span></span>}
           </button>
         </form>
-        <div style={successStyles}><h2>Signup success! Click here to <Link onClick={toggleHidden} to="index/login">login</Link>.</h2>.</div>
       </div>
 
     )

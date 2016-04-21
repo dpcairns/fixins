@@ -37341,6 +37341,8 @@
 	        _react2.default.createElement(_rd.LineChart, {
 	          legend: true,
 	          data: lineData,
+	          animation: true,
+	          duration: 200,
 	          width: 1100,
 	          height: 500,
 	          viewBoxObject: { x: 0, y: 0, width: 1100, height: 500 },
@@ -49263,7 +49265,8 @@
 	        strokeWidth: props.strokeWidth,
 	        strokeDasharray: props.strokeDashArray,
 	        fill: props.fill,
-	        className: props.className}
+	        className: props.className,
+	        }
 	      )
 
 	    );
@@ -117400,7 +117403,7 @@
 	              'div',
 	              { style: loginFailureStyles },
 	              _react2.default.createElement(
-	                'h2',
+	                'h3',
 	                null,
 	                'Login failed. Try again and do something different.'
 	              )
@@ -117821,22 +117824,6 @@
 	            'Save',
 	            submitting ? _react2.default.createElement('span', { className: 'loader glyphicon glyphicon-refresh spin' }) : _react2.default.createElement('span', null)
 	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { style: successStyles },
-	          _react2.default.createElement(
-	            'h2',
-	            null,
-	            'Signup success! Click here to ',
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { onClick: toggleHidden, to: 'index/login' },
-	              'login'
-	            ),
-	            '.'
-	          ),
-	          '.'
 	        )
 	      );
 	    }

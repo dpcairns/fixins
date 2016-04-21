@@ -81,6 +81,8 @@ let title= this.props.username + "'s CalorieDollars over time'"
             <LineChart
           legend={true}
           data={lineData}
+          animation={true}
+          duration={200}
           width={1100}
           height={500}
           viewBoxObject={{x: 0, y: 0, width: 1100, height: 500}}

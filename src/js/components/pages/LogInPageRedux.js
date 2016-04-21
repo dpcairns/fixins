@@ -43,7 +43,7 @@ class LogInPageRedux extends Component {
       <Link onClick={putOneSubNeighborhoodInState.bind(this, "TRUE_NEW_USER")}
       to="index/allNeighborhoods">
         <h2>(Need an account? Click here to sign up.)</h2></Link></h1>
-        <div style={loginFailureStyles}><h2>Login failed. Try again and do something different.</h2></div>
+        <div style={loginFailureStyles}><h3>Login failed. Try again and do something different.</h3></div>
 
       </div>
       <div className="col-md-3 text-left">
