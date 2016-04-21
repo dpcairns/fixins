@@ -31,6 +31,7 @@ const app = document.getElementById('app');
 
 
 let initialState = {
+	mapStuff: {},
 	showSignUpModal: false,
 	showLoginModal: false,
 	showDishModal: false,

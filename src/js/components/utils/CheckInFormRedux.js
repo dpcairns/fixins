@@ -66,7 +66,6 @@ class CheckInFormRedux extends Component {
 
 const CheckInFormValidation = createValidator({
   blurb: required,
-  blurb: maxLength(140)
 })
 
 export default reduxForm({

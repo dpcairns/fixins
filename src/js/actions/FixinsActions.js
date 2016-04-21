@@ -215,7 +215,7 @@ export function createCheckIn(newCheckIn, dispatch){
   			type: 'GET',
   			dataType: "json",
   			success: function(thisSession){
-          console.log(thisSession)
+          console.log("found session: " + thisSession.username)
   						dispatch({
   								type: "CHECK_FOR_SESSION",
   								user: thisSession

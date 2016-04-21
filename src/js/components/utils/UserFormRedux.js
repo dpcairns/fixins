@@ -38,7 +38,6 @@ class UserFormRedux extends Component {
       <h3> You call {mySubNeighborhood[0].subNeighborhood_name} home.</h3>
 
         <form onSubmit={handleSubmit( data => {
-          console.log(data)
           var newUser = {}
       		newUser.name = data.username
       		newUser.password = data.password

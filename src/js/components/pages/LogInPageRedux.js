@@ -19,9 +19,7 @@ class LogInPageRedux extends Component {
   };
 
   render () {
-        if(this.props.currentUser._id !== undefined){
-          this.context.router.push('index/myDashboard')
-        }
+    let router = this.context.router
     let hiddenValue = this.props.hiddenValue
     let toggleHidden = this.props.toggleHidden
     let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
@@ -58,12 +56,13 @@ class LogInPageRedux extends Component {
           thisUser.username = data.username
           thisUser.password = data.password
                 this.props.userLogin(thisUser, (loggedInUser) => {
-                  console.log(loggedInUser)
-                  if(loggedInUser === "LoginError"){
-                    console.log("toggle_hidden")
+                  if(hiddenValue === "none" && loggedInUser === "LoginError"){
                     toggleHidden()
                 } else if (hiddenValue === "block" && loggedInUser !== "LoginError"){
                   toggleHidden()
+                }
+                if(loggedInUser !== "LoginError"){
+                  router.push('index/myDashboard')
                 }
           })
           resetForm()

@@ -3,10 +3,21 @@ import auth from "../components/utils/AuthModule"
 import checkInForm from "../components/utils/CheckInFormRedux"
 import {reducer as formReducer} from 'redux-form';
 
+
+
+const mapStuff = (state = {}, action) => {
+    switch(action.type) {
+      case 'MAP_CLICK':
+      return Object.assign({}, {
+      ...action.payload
+          })
+      default: return state
+        }
+      }
+
 const currentUser = (state = {}, action) => {
     switch(action.type) {
       case 'CHECK_FOR_SESSION':
-      console.log(action)
       return Object.assign({}, {
       ...action.user
           })
@@ -27,6 +38,19 @@ const showReviewModal = (state = "", action) => {
   switch (action.type) {
     case "TOGGLE_REVIEW_MODAL":
     if(state===false){
+    return true}
+    else{return false}
+    default:
+    return state
+  }
+}
+
+
+
+const showGenresModal = (state = "", action) => {
+  switch (action.type) {
+    case "TOGGLE_GENRE_MODAL":
+    if(state === false){
     return true}
     else{return false}
     default:
@@ -74,6 +98,18 @@ const showLoginModal = (state = "", action) => {
 const showDishModal = (state = "", action) => {
   switch (action.type) {
     case "TOGGLE_DISH_MODAL":
+    if(state === false){
+    return true}
+    else{return false}
+    default:
+    return state
+  }
+}
+
+
+const showSpotModal = (state = "", action) => {
+  switch (action.type) {
+    case "TOGGLE_SPOT_MODAL":
     if(state === false){
     return true}
     else{return false}
@@ -503,10 +539,13 @@ const hiddenValue = (state = "", action) => {
 }
 
 const FixinsApp = combineReducers({
+  mapStuff,
   showDishModal,
   showLoginModal,
+  showSpotModal,
   showSignUpModal,
   showReviewModal,
+  showGenresModal,
   showCheckInModal,
   hiddenValue,
   auth,

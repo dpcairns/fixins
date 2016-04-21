@@ -1,4 +1,4 @@
-FROM node:argon
+FROM node:4-onbuild
 
 # Create app directory
 RUN mkdir -p /usr/src/app
@@ -12,4 +12,4 @@ RUN npm install
 COPY . /usr/src/app
 
 EXPOSE 4444
-CMD [ "npm", "start" ]
+CMD [ "node", "server" ]
