@@ -36,7 +36,7 @@ class MapItself extends React.Component {
                       <Marker position={spot_coordinates} key={spotId}>
                           <Popup>
                           <div>
-                          <h3>
+                          <h3 onClick={putOneSpotInState.bind(this, spotId)}>
                             <a onClick={ () => router.push(`/spot/${spotId}`)}>{spot.spot_name}</a>
                           </h3>
                           <h5>

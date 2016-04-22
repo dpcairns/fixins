@@ -90512,7 +90512,7 @@
 	              null,
 	              _react2.default.createElement(
 	                'h3',
-	                null,
+	                { onClick: putOneSpotInState.bind(_this2, spotId) },
 	                _react2.default.createElement(
 	                  'a',
 	                  { onClick: function onClick() {
