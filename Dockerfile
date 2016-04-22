@@ -1,4 +1,4 @@
-FROM node:4-onbuild
+FROM node:4.0
 
 # Create app directory
 RUN mkdir -p /usr/src/app
@@ -13,3 +13,4 @@ COPY . /usr/src/app
 
 EXPOSE 4444
 CMD [ "node", "server" ]
+

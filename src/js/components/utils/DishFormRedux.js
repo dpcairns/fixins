@@ -17,6 +17,7 @@ class DishFormRedux extends Component {
   render () {
     let hiddenValue = this.props.hiddenValue
     let toggleHidden = this.props.toggleHidden
+    let toggleDishModal = this.props.toggleDishModal
         let successStyles = {
             display: hiddenValue,
             background: "lightgreen",
@@ -41,7 +42,7 @@ class DishFormRedux extends Component {
           newDishObject.blurb = data.blurb
           this.props.createDish(newDishObject)
           resetForm()
-          toggleHidden()
+          toggleDishModal()
 	    	})} className='form' role='form'>
         <fieldset className='form-group'>
           <label htmlFor='name'>Name</label> <label className='text-danger'>{nameErrorMsg}</label>

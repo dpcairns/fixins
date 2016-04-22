@@ -45,7 +45,7 @@ function findCheckInsFilter(checkIn){
 																	</tr>
 
               )
-  })
+  }).reverse()
 
 function findReviewsFilter(review){
             return (review.reviewed_dish._id === dish._id)
@@ -64,8 +64,8 @@ function findReviewsFilter(review){
 							</tr>
 
 
-              )
-  })
+						)
+  }).reverse()
 
 
   function findSpotFilter(spot){
@@ -162,7 +162,7 @@ let toggleReviewModal = this.props.toggleReviewModal
 		 <Modal.Title id="contained-modal-title-sm">Write a review!</Modal.Title>
 	 </Modal.Header>
 	 <Modal.Body>
-		<NewReviewPage/>
+		<NewReviewPage toggleReviewModal={toggleReviewModal}/>
 	 </Modal.Body>
 	 <Modal.Footer>
 		 <Button onClick={toggleReviewModal}>Close</Button>

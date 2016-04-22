@@ -33,6 +33,7 @@ let thisSpot = this.props.thisSpot
       currentUser={this.props.currentUser}
       toggleHidden={this.props.toggleHidden}
       hiddenValue={this.props.hiddenValue}
+      toggleDishModal={this.props.toggleDishModal}
       />
     </div>
     )

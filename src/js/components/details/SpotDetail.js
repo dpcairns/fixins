@@ -80,7 +80,7 @@ class SpotDetail extends React.Component{
 				<Modal.Title id="contained-modal-title-sm">New dish!</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-			 <NewDishPage/>
+			 <NewDishPage toggleDishModal={toggleDishModal}/>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button onClick={toggleDishModal}>Close</Button>

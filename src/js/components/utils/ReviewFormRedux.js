@@ -19,6 +19,7 @@ class ReviewFormRedux extends Component {
 
     let hiddenValue = this.props.hiddenValue
     let toggleHidden = this.props.toggleHidden
+    let toggleReviewModal = this.props.toggleReviewModal
     let successStyles = {
     display: hiddenValue,
     background: "lightgreen",
@@ -40,7 +41,7 @@ class ReviewFormRedux extends Component {
           newReviewObject.stars = data.stars
           newReviewObject.review_user = this.props.currentUser
             this.props.createReview(newReviewObject)
-            toggleHidden()
+            toggleReviewModal()
             resetForm()
 
 	    	})} className='form' role='form'>

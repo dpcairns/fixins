@@ -30,6 +30,7 @@ render(){
       currentUser={this.props.currentUser}
       toggleHidden={this.props.toggleHidden}
       hiddenValue={this.props.hiddenValue}
+      toggleReviewModal={this.props.toggleReviewModal}
       />
     </div>
     )

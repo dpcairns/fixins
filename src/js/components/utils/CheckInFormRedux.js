@@ -6,11 +6,6 @@ import {Link} from 'react-router'
 const fields = ['blurb']
 
 class CheckInFormRedux extends Component {
-  // The fields discussed above are passed in to the fields prop here
-  // handleSubmit is another special handler supplied by redux-form
-  // handleSubmit will call whatever has been passed in to the "onSubmit" function or a function that you specify
-  // handleSubmit has code built in that will check validations before submitting and prevent submission if failure
-  // handleSubmit also will automatically pass in a "submitting" = true to this component
   static propTypes = {
     fields: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,

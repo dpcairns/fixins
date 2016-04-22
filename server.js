@@ -15,7 +15,7 @@ var Review = require('./src/js/models/ReviewModel')
 var Dish = require('./src/js/models/DishModel')
 var Spot = require('./src/js/models/SpotModel')
 var bcrypt = require('bcrypt')
-var db ='mongodb://localhost/test'
+var db ='mongodb://162.243.119.190/test'
 mongoose.connect(db)
 
 
