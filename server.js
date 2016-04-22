@@ -14,11 +14,18 @@ var Genre = require('./src/js/models/GenreModel')
 var Review = require('./src/js/models/ReviewModel')
 var Dish = require('./src/js/models/DishModel')
 var Spot = require('./src/js/models/SpotModel')
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    next();
+}
 var bcrypt = require('bcrypt')
 var db ='mongodb://162.243.119.190/test'
 mongoose.connect(db)
 
-
+app.use(allowCrossDomain);
 app.use(
   session({
     resave: true,
