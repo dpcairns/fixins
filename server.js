@@ -22,7 +22,7 @@ var allowCrossDomain = function(req, res, next) {
     next();
 }
 var bcrypt = require('bcrypt')
-var db ='mongodb://localhost/test'
+var db ='mongodb://162.243.119.190/test'
 mongoose.connect(db)
 
 app.use(allowCrossDomain);
