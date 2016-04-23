@@ -109,19 +109,19 @@
 
 	var _DishDetail2 = _interopRequireDefault(_DishDetail);
 
-	var _NeighborhoodDetail = __webpack_require__(1300);
+	var _NeighborhoodDetail = __webpack_require__(1459);
 
 	var _NeighborhoodDetail2 = _interopRequireDefault(_NeighborhoodDetail);
 
-	var _SubNeighborhoodDetail = __webpack_require__(1301);
+	var _SubNeighborhoodDetail = __webpack_require__(1460);
 
 	var _SubNeighborhoodDetail2 = _interopRequireDefault(_SubNeighborhoodDetail);
 
-	var _LogInPageRedux = __webpack_require__(1302);
+	var _LogInPageRedux = __webpack_require__(1461);
 
 	var _LogInPageRedux2 = _interopRequireDefault(_LogInPageRedux);
 
-	var _SignUpPage = __webpack_require__(1303);
+	var _SignUpPage = __webpack_require__(1462);
 
 	var _SignUpPage2 = _interopRequireDefault(_SignUpPage);
 
@@ -137,19 +137,19 @@
 
 	var _NewDishPage2 = _interopRequireDefault(_NewDishPage);
 
-	var _NewSpotPage = __webpack_require__(1305);
+	var _NewSpotPage = __webpack_require__(1464);
 
 	var _NewSpotPage2 = _interopRequireDefault(_NewSpotPage);
 
-	var _AllNeighborhoods = __webpack_require__(1306);
+	var _AllNeighborhoods = __webpack_require__(1465);
 
 	var _AllNeighborhoods2 = _interopRequireDefault(_AllNeighborhoods);
 
-	var _AllGenres = __webpack_require__(1307);
+	var _AllGenres = __webpack_require__(1466);
 
 	var _AllGenres2 = _interopRequireDefault(_AllGenres);
 
-	var _MyDashboard = __webpack_require__(1308);
+	var _MyDashboard = __webpack_require__(1467);
 
 	var _MyDashboard2 = _interopRequireDefault(_MyDashboard);
 
@@ -34564,17 +34564,15 @@
 		}, {
 			key: "componentDidMount",
 			value: function componentDidMount() {
-				if (this.props.currentUser._id !== undefined) {
+				if (this.props.currentUser._id === undefined) {
 					this.context.router.push('index/login');
-				} else {
-					this.handleLogout();
 				}
 			}
 		}, {
 			key: "render",
 			value: function render() {
 				var jackpot = this.props.jackpot;
-				var jackpotStyle = { display: jackpot, backgroundImage: "url(./static/jackpot3.gif)" };
+				var jackpotStyle = { display: "block", backgroundImage: "url(./static/jackpot3.gif)" };
 				var containerStyle = { borderRadius: "15px 15px 15px 15px", opacity: "0.99" };
 				var greetingStyle = { marginTop: "15px", marginRight: "10px", boxShadow: "1px 1px 2px grey", background: "lightyellow", maxWidth: "200px", float: "right" };
 				var currentUser = this.props.currentUser;
@@ -34845,6 +34843,7 @@
 
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
+	    allReviews: state.reviews,
 	    genres: state.genres,
 	    spots: state.spots,
 	    dishes: state.dishes,
@@ -34990,6 +34989,9 @@
 	exports.findAndChangeReview = findAndChangeReview;
 	exports.findAndChangeCheckIn = findAndChangeCheckIn;
 	exports.findAndChangeSpot = findAndChangeSpot;
+
+	///url: "http://162.243.119....190:4444/api/Spots",
+
 	var toggleHidden = exports.toggleHidden = function toggleHidden() {
 		return {
 			type: "TOGGLE_HIDDEN"
@@ -35021,7 +35023,7 @@
 
 	function createUser(newUser, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Users",
+			url: "http://localhost:4444/api/Users",
 			type: 'POST',
 			data: newUser,
 			success: function (postedUser) {
@@ -35040,7 +35042,7 @@
 
 	function createSpot(newSpot, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Spots",
+			url: "http://localhost:4444/api/Spots",
 			type: 'POST',
 			data: newSpot,
 			success: function (postedSpot) {
@@ -35059,7 +35061,7 @@
 
 	function createDish(newDish, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Dishes",
+			url: "http://localhost:4444/api/Dishes",
 			type: 'POST',
 			data: newDish,
 			success: function (postedDish) {
@@ -35078,7 +35080,7 @@
 
 	function createReview(newReview, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Reviews",
+			url: "http://localhost:4444/api/Reviews",
 			type: 'POST',
 			data: newReview,
 			success: function (postedReview) {
@@ -35097,7 +35099,7 @@
 
 	function createNeighborhood(newNeighborhood, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Neighborhoods",
+			url: "http://localhost:4444/api/Neighborhoods",
 			type: 'POST',
 			data: newNeighborhood,
 			success: function (postedNeighborhood) {
@@ -35116,7 +35118,7 @@
 
 	function createSubNeighborhood(newSubNeighborhood, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/SubNeighborhoods",
+			url: "http://localhost:4444/api/SubNeighborhoods",
 			type: 'POST',
 			data: newSubNeighborhood,
 			success: function (postedSubNeighborhood) {
@@ -35136,7 +35138,7 @@
 
 	function createGenre(newGenre, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Genres",
+			url: "http://localhost:4444/api/Genres",
 			type: 'POST',
 			data: newGenre,
 			success: function (postedGenre) {
@@ -35155,7 +35157,7 @@
 
 	function createCheckIn(newCheckIn, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/CheckIns",
+			url: "http://localhost:4444/api/CheckIns",
 			type: 'POST',
 			data: newCheckIn,
 			success: function (postedCheckIn) {
@@ -35171,7 +35173,7 @@
 
 	function checkForSession(dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Session",
+			url: "http://localhost:4444/api/Session",
 			type: 'GET',
 			dataType: "json",
 			success: function success(thisSession) {
@@ -35189,7 +35191,7 @@
 
 	function initializeUsers(dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Users",
+			url: "http://localhost:4444/api/Users",
 			type: 'GET',
 			dataType: "json",
 			success: function success(allUsers) {
@@ -35203,7 +35205,7 @@
 
 	function initializeSpots(dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Spots",
+			url: "http://localhost:4444/api/Spots",
 			type: 'GET',
 			dataType: "json",
 			success: function (allSpots) {
@@ -35220,7 +35222,7 @@
 
 	function initializeDishes(dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Dishes",
+			url: "http://localhost:4444/api/Dishes",
 			type: 'GET',
 			dataType: "json",
 			success: function (allDishes) {
@@ -35237,7 +35239,7 @@
 
 	function initializeReviews(dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Reviews",
+			url: "http://localhost:4444/api/Reviews",
 			type: 'GET',
 			dataType: "json",
 			success: function success(allReviews) {
@@ -35253,7 +35255,7 @@
 	}
 	function initializeNeighborhoods(dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Neighborhoods",
+			url: "http://localhost:4444/api/Neighborhoods",
 			type: 'GET',
 			dataType: "json",
 			success: function success(allNeighborhoods) {
@@ -35270,7 +35272,7 @@
 
 	function initializeSubNeighborhoods(dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/SubNeighborhoods",
+			url: "http://localhost:4444/api/SubNeighborhoods",
 			type: 'GET',
 			dataType: "json",
 			success: function success(allSubNeighborhoods) {
@@ -35287,7 +35289,7 @@
 
 	function initializeGenres(dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Genres",
+			url: "http://localhost:4444/api/Genres",
 			type: 'GET',
 			dataType: "json",
 			success: function success(allGenres) {
@@ -35304,7 +35306,7 @@
 
 	function initializeCheckIns(dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/CheckIns",
+			url: "http://localhost:4444/api/CheckIns",
 			type: 'GET',
 			dataType: "json",
 			success: function success(allCheckIns) {
@@ -35321,7 +35323,7 @@
 
 	function removeUser(ID, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Users/" + ID,
+			url: "http://localhost:4444/api/Users/" + ID,
 			type: 'DELETE',
 			success: function (postedUser) {
 				dispatch({
@@ -35337,7 +35339,7 @@
 
 	function removeNeighborhood(ID, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Neighborhoods/" + ID,
+			url: "http://localhost:4444/api/Neighborhoods/" + ID,
 			type: 'DELETE',
 			success: function (postedUser) {
 				dispatch({
@@ -35353,7 +35355,7 @@
 
 	function removeDish(ID, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Dishes/" + ID,
+			url: "http://localhost:4444/api/Dishes/" + ID,
 			type: 'DELETE',
 			success: function (postedUser) {
 				dispatch({
@@ -35368,7 +35370,7 @@
 	}
 	function removeSubNeighborhood(ID, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/SubNeighborhoods/" + ID,
+			url: "http://localhost:4444/api/SubNeighborhoods/" + ID,
 			type: 'DELETE',
 			success: function () {
 				dispatch({
@@ -35383,7 +35385,7 @@
 	}
 	function removeGenre(ID, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Genres/" + ID,
+			url: "http://localhost:4444/api/Genres/" + ID,
 			type: 'DELETE',
 			success: function () {
 				dispatch({
@@ -35398,7 +35400,7 @@
 	}
 	function removeReview(ID, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Reviews/" + ID,
+			url: "http://localhost:4444/api/Reviews/" + ID,
 			type: 'DELETE',
 			success: function (postedUser) {
 				dispatch({
@@ -35413,7 +35415,7 @@
 	}
 	function removeCheckIn(ID, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/CheckIns/" + ID,
+			url: "http://localhost:4444/api/CheckIns/" + ID,
 			type: 'DELETE',
 			success: function () {
 				dispatch({
@@ -35429,7 +35431,7 @@
 
 	function removeSpot(ID, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Spots/" + ID,
+			url: "http://localhost:4444/api/Spots/" + ID,
 			type: 'DELETE',
 			success: function () {
 				dispatch({
@@ -35445,7 +35447,7 @@
 
 	function findAndChangeUser(newUserInfo, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Users/" + newUserInfo._id,
+			url: "http://localhost:4444/api/Users/" + newUserInfo._id,
 			type: 'PUT',
 			data: newUserInfo,
 			success: function (changedUser) {
@@ -35462,7 +35464,7 @@
 
 	function findAndChangeNeighborhood(newNeighborhoodInfo, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Neighborhoods/" + newNeighborhoodInfo._id,
+			url: "http://localhost:4444/api/Neighborhoods/" + newNeighborhoodInfo._id,
 			type: 'PUT',
 			data: newNeighborhoodInfo,
 			success: function (changedNeighborhood) {
@@ -35479,7 +35481,7 @@
 
 	function findAndChangeDish(newDishInfo, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Dishes/" + newDishInfo._id,
+			url: "http://localhost:4444/api/Dishes/" + newDishInfo._id,
 			type: 'PUT',
 			data: newDishInfo,
 			success: function (changedDish) {
@@ -35495,7 +35497,7 @@
 
 	function findAndChangeSubNeighborhood(newSubNeighborhoodInfo, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/SubNeighborhoods/" + newSubNeighborhoodInfo._id,
+			url: "http://localhost:4444/api/SubNeighborhoods/" + newSubNeighborhoodInfo._id,
 			type: 'PUT',
 			data: newSubNeighborhoodInfo,
 			success: function (changedSubNeighborhood) {
@@ -35512,7 +35514,7 @@
 
 	function findAndChangeGenre(newGenreInfo, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Genres/" + newGenreInfo._id,
+			url: "http://localhost:4444/api/Genres/" + newGenreInfo._id,
 			type: 'PUT',
 			data: newGenreInfo,
 			success: function (changedGenre) {
@@ -35529,7 +35531,7 @@
 
 	function findAndChangeReview(newReviewInfo, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Reviews/" + newReviewInfo._id,
+			url: "http://localhost:4444/api/Reviews/" + newReviewInfo._id,
 			type: 'PUT',
 			data: newReviewInfo,
 			success: function (changedReview) {
@@ -35546,7 +35548,7 @@
 
 	function findAndChangeCheckIn(newCheckInInfo, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/CheckIns/" + newCheckInInfo._id,
+			url: "http://localhost:4444/api/CheckIns/" + newCheckInInfo._id,
 			type: 'PUT',
 			data: newCheckInInfo,
 			success: function (changedCheckIn) {
@@ -35563,7 +35565,7 @@
 
 	function findAndChangeSpot(newSpotInfo, dispatch) {
 		$.ajax({
-			url: "http://162.243.119.190:4444/api/Spots/" + newSpotInfo._id,
+			url: "http://localhost:4444/api/Spots/" + newSpotInfo._id,
 			type: 'PUT',
 			data: newSpotInfo,
 			success: function (changedSpot) {
@@ -35596,6 +35598,10 @@
 	var _redux = __webpack_require__(174);
 
 	var _reactRouter = __webpack_require__(191);
+
+	var _reactStarRatingComponent = __webpack_require__(1469);
+
+	var _reactStarRatingComponent2 = _interopRequireDefault(_reactStarRatingComponent);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35635,9 +35641,11 @@
 				var myGif = "";
 				var myGlitterFood = "";
 				var myOtherGlitterFood = "";
+
 				var jackpotGo = this.props.jackpotGo;
 				var noDice = this.props.noDice;
 				var logout = this.props.logout;
+				var allReviews = this.props.allReviews;
 				var jackpotStyles = { display: this.props.jackpot, textDecoration: "none", zIndex: "2", position: "fixed", bottom: "8%", left: "25%", fontSize: "12em" };
 				var putOneDishInState = this.props.putOneDishInState;
 				var putOneSpotInState = this.props.putOneSpotInState;
@@ -35750,9 +35758,25 @@
 						});
 						var topFiveDishes = sortedDishes.slice(0, 35);
 						topFiveDishNodes = topFiveDishes.map(function (dish) {
+							function findReviewsFilter(review) {
+								return review.reviewed_dish._id === dish._id;
+							}
+
+							var starArray = allReviews.filter(findReviewsFilter).map(function (review) {
+								return parseInt(review.review_stars);
+							});
+							var sumOfStars = [];
+
+							if (starArray.length > 0) {
+								sumOfStars = starArray.reduce(function (a, b) {
+									return a + b;
+								});
+							}
+							var averageStars = Math.ceil(sumOfStars / allReviews.filter(findReviewsFilter).length);
+
 							return _react2.default.createElement(
 								"h4",
-								{ style: scrollItemStyle, key: dish._id },
+								{ className: "text-center", style: scrollItemStyle, key: dish._id },
 								_react2.default.createElement(
 									_reactRouter.Link,
 									{ onClick: putOneDishInState.bind(this, dish._id), to: "/dish/" + dish._id },
@@ -35768,10 +35792,23 @@
 								_react2.default.createElement(
 									"i",
 									null,
-									" has ",
+									"has ",
 									dish.numberOfCheckIns,
 									" checkIns "
-								)
+								),
+								_react2.default.createElement(
+									"h5",
+									null,
+									averageStars > 0 ? 'average rating' : ""
+								),
+								averageStars > 0 ? _react2.default.createElement(_reactStarRatingComponent2.default, {
+									name: "rate2",
+									editing: false,
+									starCount: 5,
+									value: averageStars
+								}) : "no reviews yet",
+								_react2.default.createElement("br", null),
+								_react2.default.createElement("hr", null)
 							);
 						});
 					})();
@@ -35802,7 +35839,8 @@
 							" " + checkIn.checkIn_date + " ",
 							" and said \"",
 							checkIn.checkIn_blurb,
-							"\""
+							"\"",
+							_react2.default.createElement("hr", null)
 						);
 					});
 				}
@@ -96271,6 +96309,10 @@
 
 	var _NewDishPage2 = _interopRequireDefault(_NewDishPage);
 
+	var _reactStarRatingComponent = __webpack_require__(1469);
+
+	var _reactStarRatingComponent2 = _interopRequireDefault(_reactStarRatingComponent);
+
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -96297,11 +96339,11 @@
 			value: function render() {
 				var toggleDishModal = this.props.toggleDishModal;
 				var itemBoxStyle = { height: "180px", padding: "8px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
-				var allReviews = this.props.allReviews;
 				var allSubNeighborhoods = this.props.allSubNeighborhoods;
 				var allUsers = this.props.allUsers;
 				var allDishes = this.props.allDishes;
 				var allCheckIns = this.props.allCheckIns;
+				var allReviews = this.props.allReviews;
 				var putOneDishInState = this.props.putOneDishInState;
 				var putOneGenreInState = this.props.putOneGenreInState;
 				var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
@@ -96314,6 +96356,23 @@
 				var theseDishes = allDishes.filter(findDishesFilter);
 				var dishNodes = theseDishes.map(function (dish) {
 					var dishId = dish._id;
+
+					function findReviewsFilter(review) {
+						return review.reviewed_dish._id === dish._id;
+					}
+
+					var starArray = allReviews.filter(findReviewsFilter).map(function (review) {
+						return parseInt(review.review_stars);
+					});
+					var sumOfStars = [];
+
+					if (starArray.length > 0) {
+						sumOfStars = starArray.reduce(function (a, b) {
+							return a + b;
+						});
+					}
+					var averageStars = Math.ceil(sumOfStars / starArray.length);
+
 					return _react2.default.createElement(
 						'div',
 						{ style: itemBoxStyle, className: 'shad bg-info', key: dish._id },
@@ -96336,7 +96395,15 @@
 							' calories ',
 							_react2.default.createElement('br', null),
 							dish.dish_price,
-							' dollars'
+							' dollars ',
+							_react2.default.createElement('br', null),
+							averageStars > 0 ? _react2.default.createElement(_reactStarRatingComponent2.default, {
+								name: 'rate2',
+								editing: false,
+								starCount: 5,
+								value: averageStars
+							}) : "no reviews yet",
+							'         '
 						)
 					);
 				});
@@ -96353,20 +96420,13 @@
 								'div',
 								{ className: 'col-md-6' },
 								_react2.default.createElement(
-									'h2',
+									'h1',
 									null,
 									spot.spot_name
 								),
 								_react2.default.createElement(
 									'h3',
 									null,
-									'located in',
-									_react2.default.createElement(
-										_reactRouter.Link,
-										{ to: '/subNeighborhood/' + subNeighorhoodId, onClick: putOneSubNeighborhoodInState.bind(this, subNeighorhoodId) },
-										" " + spot.spot_subNeighborhood.subNeighborhood_name
-									),
-									_react2.default.createElement('br', null),
 									_react2.default.createElement(
 										_reactRouter.Link,
 										{ onClick: putOneGenreInState.bind(this, spot.spot_genres[0]._id), to: '/genre/' + spot.spot_genres[0]._id },
@@ -96376,7 +96436,7 @@
 							),
 							_react2.default.createElement(
 								'div',
-								{ className: 'col-md-6' },
+								{ className: 'col-md-6 text-center' },
 								_react2.default.createElement(
 									'h2',
 									null,
@@ -96385,6 +96445,22 @@
 										{ onClick: toggleDishModal },
 										'Add a new dish!'
 									)
+								)
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'row text-center' },
+							_react2.default.createElement(
+								'h3',
+								null,
+								'located at ',
+								spot.spot_address !== undefined ? spot.spot_address : "123 Fake Street",
+								' in',
+								_react2.default.createElement(
+									_reactRouter.Link,
+									{ to: '/subNeighborhood/' + subNeighorhoodId, onClick: putOneSubNeighborhoodInState.bind(this, subNeighorhoodId) },
+									" " + spot.spot_subNeighborhood.subNeighborhood_name
 								)
 							)
 						),
@@ -115998,6 +116074,10 @@
 
 	var _reactBootstrap = __webpack_require__(1029);
 
+	var _reactStarRatingComponent = __webpack_require__(1469);
+
+	var _reactStarRatingComponent2 = _interopRequireDefault(_reactStarRatingComponent);
+
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -116083,6 +116163,20 @@
 				function findReviewsFilter(review) {
 					return review.reviewed_dish._id === dish._id;
 				}
+
+				var starArray = allReviews.filter(findReviewsFilter).map(function (review) {
+					return parseInt(review.review_stars);
+				});
+				var sumOfStars = [];
+
+				if (starArray.length > 0) {
+					sumOfStars = starArray.reduce(function (a, b) {
+						return a + b;
+					});
+				}
+				var averageStars = Math.ceil(sumOfStars / allReviews.filter(findReviewsFilter).length);
+				console.log(averageStars);
+
 				var reviewNodes = allReviews.filter(findReviewsFilter).map(function (review) {
 					var userId = review.review_user._id;
 					var dishId = review.reviewed_dish._id;
@@ -116120,8 +116214,12 @@
 							_react2.default.createElement(
 								'h4',
 								null,
-								review.review_stars,
-								' stars '
+								_react2.default.createElement(_reactStarRatingComponent2.default, {
+									name: 'rate2',
+									editing: false,
+									starCount: 5,
+									value: review.review_stars
+								})
 							)
 						),
 						_react2.default.createElement(
@@ -116231,13 +116329,13 @@
 							{ className: 'row' },
 							_react2.default.createElement(
 								'div',
-								{ className: 'col-md-6' },
+								{ className: 'col-md-6 text-center' },
 								_react2.default.createElement(
 									'h1',
 									null,
-									'Detail page for ',
 									dish.dish_name
-								)
+								),
+								_react2.default.createElement('br', null)
 							),
 							_react2.default.createElement(
 								'div',
@@ -116264,6 +116362,25 @@
 										' Review this dish.'
 									)
 								)
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'row text-center' },
+							_react2.default.createElement(
+								'h2',
+								null,
+								averageStars > 0 ? _react2.default.createElement(_reactStarRatingComponent2.default, {
+									name: 'rate2',
+									editing: false,
+									starCount: 5,
+									value: averageStars
+								}) : "no reviews yet"
+							),
+							_react2.default.createElement(
+								'h5',
+								null,
+								averageStars > 0 ? 'average rating' : ""
 							)
 						),
 						spotNode,
@@ -116338,8 +116455,8 @@
 												dish.dish_name,
 												'...yet! ',
 												_react2.default.createElement(
-													_reactRouter.Link,
-													{ to: 'index/newReview' },
+													'a',
+													{ onClick: toggleReviewModal },
 													'Click here to be the first!'
 												),
 												' '
@@ -116854,7 +116971,166 @@
 	})(ReviewFormRedux);
 
 /***/ },
-/* 1300 */
+/* 1300 */,
+/* 1301 */,
+/* 1302 */,
+/* 1303 */,
+/* 1304 */,
+/* 1305 */,
+/* 1306 */,
+/* 1307 */,
+/* 1308 */,
+/* 1309 */,
+/* 1310 */,
+/* 1311 */,
+/* 1312 */,
+/* 1313 */,
+/* 1314 */,
+/* 1315 */,
+/* 1316 */,
+/* 1317 */,
+/* 1318 */,
+/* 1319 */,
+/* 1320 */,
+/* 1321 */,
+/* 1322 */,
+/* 1323 */,
+/* 1324 */,
+/* 1325 */,
+/* 1326 */,
+/* 1327 */,
+/* 1328 */,
+/* 1329 */,
+/* 1330 */,
+/* 1331 */,
+/* 1332 */,
+/* 1333 */,
+/* 1334 */,
+/* 1335 */,
+/* 1336 */,
+/* 1337 */,
+/* 1338 */,
+/* 1339 */,
+/* 1340 */,
+/* 1341 */,
+/* 1342 */,
+/* 1343 */,
+/* 1344 */,
+/* 1345 */,
+/* 1346 */,
+/* 1347 */,
+/* 1348 */,
+/* 1349 */,
+/* 1350 */,
+/* 1351 */,
+/* 1352 */,
+/* 1353 */,
+/* 1354 */,
+/* 1355 */,
+/* 1356 */,
+/* 1357 */,
+/* 1358 */,
+/* 1359 */,
+/* 1360 */,
+/* 1361 */,
+/* 1362 */,
+/* 1363 */,
+/* 1364 */,
+/* 1365 */,
+/* 1366 */,
+/* 1367 */,
+/* 1368 */,
+/* 1369 */,
+/* 1370 */,
+/* 1371 */,
+/* 1372 */,
+/* 1373 */,
+/* 1374 */,
+/* 1375 */,
+/* 1376 */,
+/* 1377 */,
+/* 1378 */,
+/* 1379 */,
+/* 1380 */,
+/* 1381 */,
+/* 1382 */,
+/* 1383 */,
+/* 1384 */,
+/* 1385 */,
+/* 1386 */,
+/* 1387 */,
+/* 1388 */,
+/* 1389 */,
+/* 1390 */,
+/* 1391 */,
+/* 1392 */,
+/* 1393 */,
+/* 1394 */,
+/* 1395 */,
+/* 1396 */,
+/* 1397 */,
+/* 1398 */,
+/* 1399 */,
+/* 1400 */,
+/* 1401 */,
+/* 1402 */,
+/* 1403 */,
+/* 1404 */,
+/* 1405 */,
+/* 1406 */,
+/* 1407 */,
+/* 1408 */,
+/* 1409 */,
+/* 1410 */,
+/* 1411 */,
+/* 1412 */,
+/* 1413 */,
+/* 1414 */,
+/* 1415 */,
+/* 1416 */,
+/* 1417 */,
+/* 1418 */,
+/* 1419 */,
+/* 1420 */,
+/* 1421 */,
+/* 1422 */,
+/* 1423 */,
+/* 1424 */,
+/* 1425 */,
+/* 1426 */,
+/* 1427 */,
+/* 1428 */,
+/* 1429 */,
+/* 1430 */,
+/* 1431 */,
+/* 1432 */,
+/* 1433 */,
+/* 1434 */,
+/* 1435 */,
+/* 1436 */,
+/* 1437 */,
+/* 1438 */,
+/* 1439 */,
+/* 1440 */,
+/* 1441 */,
+/* 1442 */,
+/* 1443 */,
+/* 1444 */,
+/* 1445 */,
+/* 1446 */,
+/* 1447 */,
+/* 1448 */,
+/* 1449 */,
+/* 1450 */,
+/* 1451 */,
+/* 1452 */,
+/* 1453 */,
+/* 1454 */,
+/* 1455 */,
+/* 1456 */,
+/* 1457 */,
+/* 1458 */,
+/* 1459 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -117036,7 +117312,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NeighborhoodDetail);
 
 /***/ },
-/* 1301 */
+/* 1460 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -117340,7 +117616,7 @@
 	exports.default = SubNeighborhoodDetailContainer;
 
 /***/ },
-/* 1302 */
+/* 1461 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -117546,7 +117822,7 @@
 
 	var _userLogin = function _userLogin(thisUser, callback, dispatch) {
 	  $.ajax({
-	    url: "http://162.243.119.190:4444/api/login",
+	    url: "http://localhost:4444/api/login",
 	    type: 'POST',
 	    data: thisUser,
 	    success: function (loggedInUser) {
@@ -117604,7 +117880,7 @@
 	})(LogInPageReduxConnected);
 
 /***/ },
-/* 1303 */
+/* 1462 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -117627,7 +117903,7 @@
 
 	var _Links2 = _interopRequireDefault(_Links);
 
-	var _UserFormRedux = __webpack_require__(1304);
+	var _UserFormRedux = __webpack_require__(1463);
 
 	var _UserFormRedux2 = _interopRequireDefault(_UserFormRedux);
 
@@ -117711,7 +117987,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SignUpPage);
 
 /***/ },
-/* 1304 */
+/* 1463 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -117895,7 +118171,7 @@
 	})(UserFormRedux);
 
 /***/ },
-/* 1305 */
+/* 1464 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -118005,7 +118281,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NewSpotPage);
 
 /***/ },
-/* 1306 */
+/* 1465 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -118127,7 +118403,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AllNeighborhoods);
 
 /***/ },
-/* 1307 */
+/* 1466 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -118261,7 +118537,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AllGenres);
 
 /***/ },
-/* 1308 */
+/* 1467 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -118288,7 +118564,7 @@
 
 	var _CalorieDollarChart2 = _interopRequireDefault(_CalorieDollarChart);
 
-	var _HorizontalRainbow = __webpack_require__(1309);
+	var _HorizontalRainbow = __webpack_require__(1468);
 
 	var _HorizontalRainbow2 = _interopRequireDefault(_HorizontalRainbow);
 
@@ -118305,6 +118581,10 @@
 	var _NewCheckInPage = __webpack_require__(1297);
 
 	var _NewCheckInPage2 = _interopRequireDefault(_NewCheckInPage);
+
+	var _reactStarRatingComponent = __webpack_require__(1469);
+
+	var _reactStarRatingComponent2 = _interopRequireDefault(_reactStarRatingComponent);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -118370,6 +118650,23 @@
 	      var rand6 = Math.floor(Math.random() * 20);
 	      var topFiveCalorieDollarDishes = [sortedDishes[rand1], sortedDishes[rand2], sortedDishes[rand3], sortedDishes[rand4], sortedDishes[rand5], sortedDishes[rand6]];
 	      var topFiveCalorieDollarDishesNodes = topFiveCalorieDollarDishes.map(function (dish) {
+
+	        function findReviewsFilter(review) {
+	          return review.reviewed_dish._id === dish._id;
+	        }
+
+	        var starArray = allReviews.filter(findReviewsFilter).map(function (review) {
+	          return parseInt(review.review_stars);
+	        });
+	        var sumOfStars = [];
+
+	        if (starArray.length > 0) {
+	          sumOfStars = starArray.reduce(function (a, b) {
+	            return a + b;
+	          });
+	        }
+	        var averageStars = Math.ceil(sumOfStars / allReviews.filter(findReviewsFilter).length);
+
 	        return _react2.default.createElement(
 	          'div',
 	          { style: itemBoxStyle, className: 'bg-info flex', key: dish._id },
@@ -118399,7 +118696,8 @@
 	              dish.calorieDollars,
 	              ' calorieDollars '
 	            )
-	          )
+	          ),
+	          _react2.default.createElement('br', null)
 	        );
 	      });
 
@@ -118522,12 +118820,12 @@
 	          _react2.default.createElement(
 	            'td',
 	            null,
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              review.review_stars,
-	              ' stars '
-	            )
+	            _react2.default.createElement(_reactStarRatingComponent2.default, {
+	              name: 'rate2',
+	              editing: false,
+	              starCount: 5,
+	              value: review.review_stars
+	            })
 	          ),
 	          _react2.default.createElement(
 	            'td',
@@ -118553,21 +118851,22 @@
 	            { className: 'row' },
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'col-md-6' },
+	              { className: 'col-md-6 text-right' },
 	              _react2.default.createElement(
-	                'h1',
+	                'h2',
 	                null,
-	                'welcome to your dashboard, ',
-	                thisUser.username
+	                'Your dashboard, ',
+	                thisUser.username,
+	                '!'
 	              )
 	            ),
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'col-md-6' },
+	              { className: 'col-md-6 text-center' },
 	              _react2.default.createElement(
 	                'h3',
 	                null,
-	                'you are proud to call ',
+	                'You are proud to call ',
 	                thisUser.user_sub_neighborhood !== undefined ? _react2.default.createElement(
 	                  _reactRouter.Link,
 	                  { to: '/subNeighborhood/' + thisUser.user_sub_neighborhood._id,
@@ -118575,10 +118874,11 @@
 	                  thisUser.user_sub_neighborhood.subNeighborhood_name,
 	                  ' '
 	                ) : _react2.default.createElement('img', { height: '50', width: '100', src: './static/loading.gif' }),
-	                ' home'
+	                ' home.'
 	              )
 	            )
 	          ),
+	          _react2.default.createElement(_HorizontalRainbow2.default, null),
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(_CalorieDollarChart2.default, { username: thisUser.username, userTarget: thisUser.user_target, userCheckIns: userCheckIns }),
 	          _react2.default.createElement(
@@ -118711,7 +119011,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MyDashboard);
 
 /***/ },
-/* 1309 */
+/* 1468 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -118764,6 +119064,223 @@
 	}(_react2.default.Component);
 
 	exports.default = HorizontalRainbow;
+
+/***/ },
+/* 1469 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _classnames = __webpack_require__(1470);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var StarRatingComponent = function (_Component) {
+	    _inherits(StarRatingComponent, _Component);
+
+	    function StarRatingComponent(props) {
+	        _classCallCheck(this, StarRatingComponent);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(StarRatingComponent).call(this));
+
+	        _this.state = {
+	            value: props.value
+	        };
+	        return _this;
+	    }
+
+	    _createClass(StarRatingComponent, [{
+	        key: 'onChange',
+	        value: function onChange(value) {
+	            var editing = this.props.editing;
+
+	            if (!editing) {
+	                return;
+	            }
+
+	            this.setState({ value: value });
+	        }
+	    }, {
+	        key: 'onStarClick',
+	        value: function onStarClick(i, value, name) {
+	            var _props = this.props;
+	            var onStarClick = _props.onStarClick;
+	            var editing = _props.editing;
+
+	            if (!editing) {
+	                return;
+	            }
+	            onStarClick && onStarClick(i, value, name);
+	        }
+	    }, {
+	        key: 'renderStars',
+	        value: function renderStars() {
+	            var _props2 = this.props;
+	            var name = _props2.name;
+	            var starCount = _props2.starCount;
+	            var starColor = _props2.starColor;
+	            var editing = _props2.editing;
+	            var renderStarIcon = _props2.renderStarIcon;
+	            var value = this.state.value;
+
+	            var starStyles = {
+	                float: 'right',
+	                cursor: editing ? 'pointer' : 'default'
+	            };
+	            var radioStyles = {
+	                display: 'none',
+	                position: 'absolte',
+	                marginLeft: -9999
+	            };
+
+	            // populate stars
+	            var starNodes = [];
+	            for (var i = starCount; i > 0; i--) {
+	                var id = name + '_' + i;
+	                var starNodeInput = _react2.default.createElement('input', {
+	                    key: 'input_' + id,
+	                    style: radioStyles,
+	                    className: 'dv-star-rating-input',
+	                    type: 'radio',
+	                    name: name,
+	                    id: id,
+	                    value: i,
+	                    checked: value === i,
+	                    onChange: this.onChange.bind(this, i, name)
+	                });
+	                var starNodeLabel = _react2.default.createElement(
+	                    'label',
+	                    {
+	                        key: 'label_' + id,
+	                        style: value >= i ? { float: starStyles.float, cursor: starStyles.cursor, color: starColor } : starStyles,
+	                        className: 'dv-star-rating-star',
+	                        htmlFor: id,
+	                        onClick: this.onStarClick.bind(this, i, value, name)
+	                    },
+	                    typeof renderStarIcon === 'function' ? renderStarIcon(i, value, name) : _react2.default.createElement(
+	                        'i',
+	                        { style: { fontStyle: 'normal' } },
+	                        '★'
+	                    )
+	                );
+	                starNodes.push(starNodeInput);
+	                starNodes.push(starNodeLabel);
+	            }
+
+	            return starNodes;
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props3 = this.props;
+	            var editing = _props3.editing;
+	            var className = _props3.className;
+
+	            var classes = (0, _classnames2.default)('dv-star-rating', {
+	                'dv-star-rating-non-editable': !editing
+	            }, className);
+
+	            return _react2.default.createElement(
+	                'div',
+	                { style: { display: 'inline-block', position: 'relative' }, className: classes },
+	                this.renderStars()
+	            );
+	        }
+	    }]);
+
+	    return StarRatingComponent;
+	}(_react.Component);
+
+	StarRatingComponent.propTypes = {
+	    name: _react.PropTypes.string.isRequired,
+	    value: _react.PropTypes.number,
+	    editing: _react.PropTypes.bool,
+	    starCount: _react.PropTypes.number,
+	    starColor: _react.PropTypes.string,
+	    onStarClick: _react.PropTypes.func,
+	    renderStarIcon: _react.PropTypes.func
+	};
+	StarRatingComponent.defaultProps = {
+	    starCount: 5,
+	    value: 0,
+	    editing: true,
+	    starColor: '#ffb400'
+	};
+	exports.default = StarRatingComponent;
+	module.exports = exports['default'];
+
+
+/***/ },
+/* 1470 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+
+	(function () {
+		'use strict';
+
+		var hasOwn = {}.hasOwnProperty;
+
+		function classNames () {
+			var classes = [];
+
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+
+				var argType = typeof arg;
+
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+
+			return classes.join(' ');
+		}
+
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
 
 /***/ }
 /******/ ]);

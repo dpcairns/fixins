@@ -1,6 +1,7 @@
 import React from "react"
 import { getState } from "redux"
 import { Link } from "react-router"
+import StarRatingComponent from 'react-star-rating-component';
 
 export default class Splash extends React.Component{
 
@@ -19,9 +20,11 @@ export default class Splash extends React.Component{
 			let myGif = ""
 			let myGlitterFood = ""
 			let myOtherGlitterFood = ""
+
 			let jackpotGo = this.props.jackpotGo
 			let noDice = this.props.noDice
 			let logout = this.props.logout
+		  let allReviews = this.props.allReviews
 			let jackpotStyles = {display: this.props.jackpot, textDecoration: "none", zIndex:"2", position: "fixed", bottom: "8%", left: "25%", fontSize: "12em"}
 			let putOneDishInState = this.props.putOneDishInState
 			let putOneSpotInState = this.props.putOneSpotInState
@@ -105,7 +108,24 @@ export default class Splash extends React.Component{
 				sortedDishes.sort(function(dishA, dishB){return dishB.numberOfCheckIns - dishA.numberOfCheckIns})
 				let topFiveDishes = sortedDishes.slice(0,35)
 				topFiveDishNodes = topFiveDishes.map(function(dish){
-					return (<h4 style={scrollItemStyle} key={dish._id}>
+					function findReviewsFilter(review){
+											return (review.reviewed_dish._id === dish._id)
+								}
+
+						let starArray = allReviews.filter(findReviewsFilter).map(function(review){
+							return parseInt(review.review_stars)
+						})
+						let sumOfStars = []
+
+							if(starArray.length > 0){
+							sumOfStars = starArray.reduce(function(a, b) { return a + b; });
+						}
+						let averageStars = Math.ceil(sumOfStars / allReviews.filter(findReviewsFilter).length)
+
+
+
+
+					return (<h4 className="text-center" style={scrollItemStyle} key={dish._id}>
 						<Link onClick={putOneDishInState.bind(this, dish._id)} to={`/dish/${dish._id}`}>
 						 {dish.name + " "}
 						</Link>
@@ -113,7 +133,25 @@ export default class Splash extends React.Component{
 						 <Link to={`/spot/${dish.spotId}`}  onClick={putOneSpotInState.bind(this, dish.spotId)}>
 						  {" " + dish.nameOfSpot}
 						 </Link>
-						  <br/><i> has {dish.numberOfCheckIns} checkIns </i></h4>)
+						  <br/><i>has {dish.numberOfCheckIns} checkIns </i>
+
+														<h5>
+														{averageStars > 0 ?
+														'average rating' : ""
+														}</h5>
+														{averageStars > 0 ?
+														<StarRatingComponent
+																							name="rate2"
+																							editing={false}
+																							starCount={5}
+																							value={averageStars}
+																					/> : "no reviews yet"
+																				}
+																					<br/>
+																					<hr/>
+
+							</h4>
+					 )
 				})
 
 			}
@@ -135,7 +173,7 @@ export default class Splash extends React.Component{
 					{" " + checkIn.checkIn_dish.dish_name + " "}
 					</Link>
 
-					at {" " +checkIn.checkIn_date+ " "} and said "{checkIn.checkIn_blurb}"</h4>)
+					at {" " +checkIn.checkIn_date+ " "} and said "{checkIn.checkIn_blurb}"<hr/></h4>)
 			})
 		}
 			return(

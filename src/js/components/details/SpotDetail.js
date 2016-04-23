@@ -6,16 +6,17 @@ import * as FixinsActions from "../../actions/FixinsActions"
 import Links from "../utils/Links"
 import { Modal, Button } from "react-bootstrap"
 import NewDishPage from "../pages/NewDishPage"
+import StarRatingComponent from 'react-star-rating-component';
 
 class SpotDetail extends React.Component{
 	render(){
 		let toggleDishModal = this.props.toggleDishModal
 		let itemBoxStyle = {height:"180px",padding:"8px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
-    let allReviews = this.props.allReviews
 		let allSubNeighborhoods = this.props.allSubNeighborhoods
 		let allUsers = this.props.allUsers
 		let allDishes = this.props.allDishes
 		let allCheckIns = this.props.allCheckIns
+		let allReviews = this.props.allReviews
 		let putOneDishInState = this.props.putOneDishInState
 		let putOneGenreInState = this.props.putOneGenreInState
 		let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
@@ -28,6 +29,24 @@ class SpotDetail extends React.Component{
 				let theseDishes = allDishes.filter(findDishesFilter)
 				let dishNodes = theseDishes.map(function(dish){
 					let dishId = dish._id
+
+
+					function findReviewsFilter(review){
+					            return (review.reviewed_dish._id === dish._id)
+					      }
+
+						let starArray = allReviews.filter(findReviewsFilter).map(function(review){
+							return parseInt(review.review_stars)
+						})
+						let sumOfStars = []
+
+						if(starArray.length > 0){
+						sumOfStars = starArray.reduce(function(a, b) { return a + b; });
+					}
+				let averageStars = Math.ceil(sumOfStars / starArray.length)
+
+
+
 									return (
 
 
@@ -39,9 +58,16 @@ class SpotDetail extends React.Component{
 											<h4>
 											{dish.dish_blurb} <br/>
 											{dish.dish_calories} calories <br/>
-											{dish.dish_price} dollars
-											</h4>
+											{dish.dish_price} dollars <br/>
+											{averageStars > 0 ? <StarRatingComponent
+										                    name="rate2"
+										                    editing={false}
+										                    starCount={5}
+										                    value={averageStars}
+										                />	: "no reviews yet"
+																	}									</h4>
                       </div>
+
 										)
 				})
     return (
@@ -49,24 +75,26 @@ class SpotDetail extends React.Component{
 <div className="bg-warning med-pad med-mar">
 				<div className="row">
 								<div className="col-md-6">
-						    		<h2>{spot.spot_name}</h2>
-										<h3>located in
-										<Link to={`/subNeighborhood/${subNeighorhoodId}`} onClick={putOneSubNeighborhoodInState.bind(this, subNeighorhoodId)}>
-										 {" " + spot.spot_subNeighborhood.subNeighborhood_name}
-										</Link>
-										<br/>
-										<Link onClick={putOneGenreInState.bind(this, spot.spot_genres[0]._id)} to={`/genre/${spot.spot_genres[0]._id}`}>{spot.spot_genres[0].genre_name}</Link>
+						    		<h1>{spot.spot_name}</h1>
+										<h3><Link onClick={putOneGenreInState.bind(this, spot.spot_genres[0]._id)} to={`/genre/${spot.spot_genres[0]._id}`}>{spot.spot_genres[0].genre_name}</Link></h3>
 
-										</h3>
 								</div>
 
-								<div className="col-md-6">
+								<div className="col-md-6 text-center">
 										<h2>
 										<a onClick={toggleDishModal}>Add a new dish!</a>
 										</h2>
 								</div>
 
 			  </div>
+				<div className="row text-center">
+				<h3>located at {spot.spot_address !== undefined ? spot.spot_address : "123 Fake Street"} in
+				<Link to={`/subNeighborhood/${subNeighorhoodId}`} onClick={putOneSubNeighborhoodInState.bind(this, subNeighorhoodId)}>
+				 {" " + spot.spot_subNeighborhood.subNeighborhood_name}
+				</Link>
+
+				</h3>
+				</div>
 				<h3>dishes available at {spot.spot_name}</h3>
 				<div className="flex flexwrap">
 					{allDishes.filter(findDishesFilter).length>0 ? dishNodes : (<tr><td>no dishes for {spot.spot_name}...yet! <a onClick={toggleDishModal}>Click here to be the first to add one!</a> </td></tr>)}

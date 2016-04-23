@@ -12,17 +12,14 @@ export default class Layout extends React.Component{
 			}
 
 componentDidMount(){
-	if(this.props.currentUser._id !== undefined){
+	if(this.props.currentUser._id === undefined){
 		this.context.router.push('index/login')
-	}
-	else{
-		this.handleLogout()
 	}
 }
 
 		render(){
 			let jackpot = this.props.jackpot
-			let jackpotStyle = {display: jackpot, backgroundImage: "url(./static/jackpot3.gif)"}
+			let jackpotStyle = {display: "block", backgroundImage: "url(./static/jackpot3.gif)"}
 			let containerStyle={borderRadius:"15px 15px 15px 15px", opacity:"0.99"}
 			let greetingStyle={marginTop:"15px", marginRight: "10px", boxShadow: "1px 1px 2px grey", background:"lightyellow", maxWidth:"200px", float:"right"}
 			let currentUser = this.props.currentUser

@@ -7,6 +7,7 @@ import NewCheckInPage from "../pages/NewCheckInPage"
 import NewReviewPage from "../pages/NewReviewPage"
 import Links from "../utils/Links"
 import { Modal, Button } from "react-bootstrap"
+import StarRatingComponent from 'react-star-rating-component';
 
 class DishDetail extends React.Component{
 	render(){
@@ -50,6 +51,18 @@ function findCheckInsFilter(checkIn){
 function findReviewsFilter(review){
             return (review.reviewed_dish._id === dish._id)
       }
+
+	let starArray = allReviews.filter(findReviewsFilter).map(function(review){
+		return parseInt(review.review_stars)
+	})
+	let sumOfStars = []
+
+		if(starArray.length > 0){
+		sumOfStars = starArray.reduce(function(a, b) { return a + b; });
+	}
+	let averageStars = Math.ceil(sumOfStars / allReviews.filter(findReviewsFilter).length)
+console.log(averageStars)
+
   let reviewNodes = allReviews.filter(findReviewsFilter).map(function(review){
 		let userId = review.review_user._id
 		let dishId = review.reviewed_dish._id
@@ -59,11 +72,16 @@ function findReviewsFilter(review){
 								<td><Link to={`/user/${userId}`} onClick={putOneUserInState.bind(this, userId)}>
 									<h5>{review.review_user.username} </h5> </Link>
 								</td>
-								<td><h4>{review.review_stars} stars </h4></td>
+								<td><h4>
+								<StarRatingComponent
+																	name="rate2"
+																	editing={false}
+																	starCount={5}
+																	value={review.review_stars}
+															/>
+ 								</h4></td>
 								<td><h4>{review.review_date}</h4></td>
 							</tr>
-
-
 						)
   }).reverse()
 
@@ -111,8 +129,9 @@ let toggleReviewModal = this.props.toggleReviewModal
 <div className="bg-warning med-pad med-mar">
 <div>
 		<div className="row">
-		<div className="col-md-6">
-		<h1>Detail page for {dish.dish_name}</h1>
+		<div className="col-md-6 text-center">
+		<h1>{dish.dish_name}</h1><br/>
+
 		</div>
 		<div className="col-md-3">
 		<h3><a onClick={toggleCheckInModal}> Just ate this? CheckIn!</a></h3>
@@ -120,6 +139,20 @@ let toggleReviewModal = this.props.toggleReviewModal
 		<div className="col-md-3">
 		<h3><a  onClick={toggleReviewModal}> Review this dish.</a></h3>
 		</div>
+		</div>
+		<div className="row text-center">
+		<h2>
+		{averageStars > 0 ?
+		<StarRatingComponent
+											name="rate2"
+											editing={false}
+											starCount={5}
+											value={averageStars}
+									/> : "no reviews yet"
+								}
+								</h2>
+								<h5>{averageStars > 0 ? 'average rating' : "" }</h5>
+
 		</div>
 						{spotNode}
 				<div className="row">
@@ -137,7 +170,7 @@ let toggleReviewModal = this.props.toggleReviewModal
 
 				<caption><h3>Reviews for {dish.dish_name}</h3></caption>
 				<tbody>
-				{allReviews.filter(findReviewsFilter).length>0 ? reviewNodes : (<tr><td>no reviews for {dish.dish_name}...yet! <Link to="index/newReview">Click here to be the first!</Link> </td></tr>)}
+				{allReviews.filter(findReviewsFilter).length>0 ? reviewNodes : (<tr><td>no reviews for {dish.dish_name}...yet! <a onClick={toggleReviewModal}>Click here to be the first!</a> </td></tr>)}
 				</tbody>
 				</table>
 				</div>

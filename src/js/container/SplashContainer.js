@@ -4,6 +4,7 @@ import Splash from '../components/Splash'
 
 const mapStateToProps = (state) => {
   return {
+    allReviews: state.reviews,
     genres: state.genres,
     spots: state.spots,
     dishes: state.dishes,

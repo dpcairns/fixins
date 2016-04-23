@@ -8,6 +8,7 @@ import * as FixinsActions from "../../actions/FixinsActions"
 import MtSvgLines from 'react-mt-svg-lines';      // ES6+
 import { Modal, Button } from "react-bootstrap"
 import NewCheckInPage from './NewCheckInPage'
+import StarRatingComponent from 'react-star-rating-component';
 
 class MyDashboard extends React.Component{
 
@@ -50,7 +51,26 @@ render(){
             let rand6 = Math.floor(Math.random()*20)
     				let topFiveCalorieDollarDishes = [sortedDishes[rand1],sortedDishes[rand2],sortedDishes[rand3], sortedDishes[rand4], sortedDishes[rand5], sortedDishes[rand6]]
     				let topFiveCalorieDollarDishesNodes = topFiveCalorieDollarDishes.map(function(dish){
-    					return (
+
+
+
+              function findReviewsFilter(review){
+                          return (review.reviewed_dish._id === dish._id)
+                    }
+
+              	let starArray = allReviews.filter(findReviewsFilter).map(function(review){
+              		return parseInt(review.review_stars)
+              	})
+                let sumOfStars = []
+
+                if(starArray.length > 0){
+                sumOfStars = starArray.reduce(function(a, b) { return a + b; });
+              }
+              	let averageStars = Math.ceil(sumOfStars / allReviews.filter(findReviewsFilter).length)
+
+
+
+            	return (
                 <div style={itemBoxStyle} className="bg-info flex" key={dish._id}>
                 <h4>
                  <span onClick={toggleCheckInModal}>
@@ -62,6 +82,7 @@ render(){
     						  {" " + dish.nameOfSpot}
     						 </Link>
     						  <br/><i> gets {dish.calorieDollars} calorieDollars </i></h4>
+                  <br/>
                   </div>)
     				})
 
@@ -103,7 +124,12 @@ render(){
                     <td><h4>{review.reviewed_dish.dish_calories}  calories</h4></td>
                     <td><h4>{review.reviewed_dish.dish_price} dollars </h4></td>
                     <td><h5>{review.review_words} </h5></td>
-                    <td><h4>{review.review_stars} stars </h4></td>
+                    <td><StarRatingComponent
+                name="rate2"
+                editing={false}
+                starCount={5}
+                value={review.review_stars}
+            /></td>
                     <td><h4>{review.review_date}</h4></td>
                   </tr>
                   )
@@ -115,19 +141,21 @@ render(){
 
 <HorizontalRainbow />
 <div className="row">
-  <div className="col-md-6">
+  <div className="col-md-6 text-right">
 
-  <h1>welcome to your dashboard, {thisUser.username}</h1>
+  <h2>Your dashboard, {thisUser.username}!</h2>
   </div>
-  <div className="col-md-6">
-      <h3>you are proud to call {
+  <div className="col-md-6 text-center">
+      <h3>You are proud to call {
         thisUser.user_sub_neighborhood !== undefined ?
             <Link to={`/subNeighborhood/${thisUser.user_sub_neighborhood._id}`}
             onClick={putOneSubNeighborhoodInState.bind(this, thisUser.user_sub_neighborhood._id)}>
             {thisUser.user_sub_neighborhood.subNeighborhood_name} </Link>
-        : <img height="50" width="100" src="./static/loading.gif" />} home</h3>
+        : <img height="50" width="100" src="./static/loading.gif" />} home.</h3>
   </div>
 </div>
+<HorizontalRainbow />
+
 <br/>
 <CalorieDollarChart username={thisUser.username} userTarget={thisUser.user_target} userCheckIns={userCheckIns} />
 
