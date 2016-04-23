@@ -14,6 +14,7 @@ var Genre = require('./src/js/models/GenreModel')
 var Review = require('./src/js/models/ReviewModel')
 var Dish = require('./src/js/models/DishModel')
 var Spot = require('./src/js/models/SpotModel')
+var passport = require('passport');
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -22,7 +23,7 @@ var allowCrossDomain = function(req, res, next) {
     next();
 }
 var bcrypt = require('bcrypt')
-var db ='mongodb://162.243.119.190/test'
+var db ='mongodb://localhost/test'
 mongoose.connect(db)
 
 app.use(allowCrossDomain);
@@ -34,6 +35,10 @@ app.use(
     cookie: { maxAge: 60000 }
   })
 );
+
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 require('./routes/UserRoutes')(router)
@@ -82,6 +87,17 @@ router.route('/login').post(function(req, res){
 						}
             req.session.user = user;
 						return res.json(req.session.user);
+
+            passport.serializeUser(function(user, done){
+            		done(null, user._id);
+            	});
+
+            passport.deserializeUser(function(id, done){
+         		User.findById(id, function(err, user){
+         			done(err, user);
+         		});
+         	});
+
           })
 				})
 			.populate('user_sub_neighborhood')
@@ -91,6 +107,13 @@ router.route('/login').post(function(req, res){
 			.populate('user_friends')
 			.exec()
 })
+
+router.route('/logout').get(function(req, res){
+          console.log("destroying session!")
+          req.session.destroy();
+
+            		});
+
 
 
 app.use('/api', router)

@@ -19,12 +19,12 @@ componentDidMount(){
 
 		render(){
 			let jackpot = this.props.jackpot
-			let jackpotStyle = {display: "block", backgroundImage: "url(./static/jackpot3.gif)"}
+			let jackpotStyle = {display: jackpot, backgroundImage: "url(./static/jackpot3.gif)"}
 			let containerStyle={borderRadius:"15px 15px 15px 15px", opacity:"0.99"}
 			let greetingStyle={marginTop:"15px", marginRight: "10px", boxShadow: "1px 1px 2px grey", background:"lightyellow", maxWidth:"200px", float:"right"}
 			let currentUser = this.props.currentUser
 			return(
-				<div style={jackpot === "show" ? jackpotStyle : {display: "block"}}>
+				<div style={jackpot === "block" ? jackpotStyle : {display: "block"}}>
 					<div style={containerStyle} className="bg-success container shadow-container">
 								<div className="row med-mar">
 										<div className="col-md-9">
@@ -36,7 +36,7 @@ componentDidMount(){
 										: "honored guest "}
 										|
 										{this.props.currentUser.username !== undefined ?
-											 <a onClick={this.props.userLogout.bind(this)}><span onClick={this.handleLogout.bind(this)}> logout? </span></a> :
+											 <a onClick={this.props.userLogout.bind(this, currentUser)}><span onClick={this.handleLogout.bind(this)}> logout? </span></a> :
 											 <Link to="index/login"> login? </Link>}
 															</h5>
 										</div>
@@ -64,11 +64,22 @@ componentDidMount(){
 }
 
 
-const userLogout = () => {
-        return {
-          type: "LOG_OUT",
-	       }
-    }
+
+const userLogout = (dispatch) => {
+	console.log("logout started...")
+		  $.ajax({
+		    url: "http://localhost:4444/api/logout",
+		    type: 'GET',
+		    error: function(xhr, status, err){
+		      console.error('./logout', status, err.toString());
+		    }.bind(this)
+		  })
+			dispatch(
+				{
+					type: "LOG_OUT",
+				})
+
+		}
 
 const mapStateToProps = (state) => {
   return {
@@ -79,7 +90,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-    userLogout: () => dispatch(userLogout())
+    userLogout: () => userLogout(dispatch)
   }
 }
 
