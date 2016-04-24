@@ -111,7 +111,7 @@ export default class Splash extends React.Component{
 					function findReviewsFilter(review){
 											return (review.reviewed_dish._id === dish._id)
 								}
-
+						let numberOfReviews =	allReviews.filter(findReviewsFilter).length
 						let starArray = allReviews.filter(findReviewsFilter).map(function(review){
 							return parseInt(review.review_stars)
 						})
@@ -137,7 +137,7 @@ export default class Splash extends React.Component{
 
 														<h5>
 														{averageStars > 0 ?
-														'average rating' : ""
+														'average rating (out of ' +numberOfReviews + ' reviews)' : ""
 														}</h5>
 														{averageStars > 0 ?
 														<StarRatingComponent

@@ -34660,7 +34660,7 @@
 	var _userLogout = function _userLogout(dispatch) {
 		console.log("logout started...");
 		$.ajax({
-			url: "http://localhost:4444/api/logout",
+			url: "http://162.243.119.190:4444/api/logout",
 			type: 'GET',
 			error: function (xhr, status, err) {
 				console.error('./logout', status, err.toString());
@@ -35031,7 +35031,7 @@
 
 	function createUser(newUser, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Users",
+			url: "http://162.243.119.190:4444/api/Users",
 			type: 'POST',
 			data: newUser,
 			success: function (postedUser) {
@@ -35050,7 +35050,7 @@
 
 	function createSpot(newSpot, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Spots",
+			url: "http://162.243.119.190:4444/api/Spots",
 			type: 'POST',
 			data: newSpot,
 			success: function (postedSpot) {
@@ -35069,7 +35069,7 @@
 
 	function createDish(newDish, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Dishes",
+			url: "http://162.243.119.190:4444/api/Dishes",
 			type: 'POST',
 			data: newDish,
 			success: function (postedDish) {
@@ -35088,7 +35088,7 @@
 
 	function createReview(newReview, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Reviews",
+			url: "http://162.243.119.190:4444/api/Reviews",
 			type: 'POST',
 			data: newReview,
 			success: function (postedReview) {
@@ -35107,7 +35107,7 @@
 
 	function createNeighborhood(newNeighborhood, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Neighborhoods",
+			url: "http://162.243.119.190:4444/api/Neighborhoods",
 			type: 'POST',
 			data: newNeighborhood,
 			success: function (postedNeighborhood) {
@@ -35126,7 +35126,7 @@
 
 	function createSubNeighborhood(newSubNeighborhood, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/SubNeighborhoods",
+			url: "http://162.243.119.190:4444/api/SubNeighborhoods",
 			type: 'POST',
 			data: newSubNeighborhood,
 			success: function (postedSubNeighborhood) {
@@ -35146,7 +35146,7 @@
 
 	function createGenre(newGenre, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Genres",
+			url: "http://162.243.119.190:4444/api/Genres",
 			type: 'POST',
 			data: newGenre,
 			success: function (postedGenre) {
@@ -35165,7 +35165,7 @@
 
 	function createCheckIn(newCheckIn, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/CheckIns",
+			url: "http://162.243.119.190:4444/api/CheckIns",
 			type: 'POST',
 			data: newCheckIn,
 			success: function (postedCheckIn) {
@@ -35181,7 +35181,7 @@
 
 	function checkForSession(dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Session",
+			url: "http://162.243.119.190:4444/api/Session",
 			type: 'GET',
 			dataType: "json",
 			success: function success(thisSession) {
@@ -35199,7 +35199,7 @@
 
 	function initializeUsers(dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Users",
+			url: "http://162.243.119.190:4444/api/Users",
 			type: 'GET',
 			dataType: "json",
 			success: function success(allUsers) {
@@ -35213,7 +35213,7 @@
 
 	function initializeSpots(dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Spots",
+			url: "http://162.243.119.190:4444/api/Spots",
 			type: 'GET',
 			dataType: "json",
 			success: function (allSpots) {
@@ -35230,7 +35230,7 @@
 
 	function initializeDishes(dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Dishes",
+			url: "http://162.243.119.190:4444/api/Dishes",
 			type: 'GET',
 			dataType: "json",
 			success: function (allDishes) {
@@ -35247,7 +35247,7 @@
 
 	function initializeReviews(dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Reviews",
+			url: "http://162.243.119.190:4444/api/Reviews",
 			type: 'GET',
 			dataType: "json",
 			success: function success(allReviews) {
@@ -35263,7 +35263,7 @@
 	}
 	function initializeNeighborhoods(dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Neighborhoods",
+			url: "http://162.243.119.190:4444/api/Neighborhoods",
 			type: 'GET',
 			dataType: "json",
 			success: function success(allNeighborhoods) {
@@ -35280,7 +35280,7 @@
 
 	function initializeSubNeighborhoods(dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/SubNeighborhoods",
+			url: "http://162.243.119.190:4444/api/SubNeighborhoods",
 			type: 'GET',
 			dataType: "json",
 			success: function success(allSubNeighborhoods) {
@@ -35297,7 +35297,7 @@
 
 	function initializeGenres(dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Genres",
+			url: "http://162.243.119.190:4444/api/Genres",
 			type: 'GET',
 			dataType: "json",
 			success: function success(allGenres) {
@@ -35314,7 +35314,7 @@
 
 	function initializeCheckIns(dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/CheckIns",
+			url: "http://162.243.119.190:4444/api/CheckIns",
 			type: 'GET',
 			dataType: "json",
 			success: function success(allCheckIns) {
@@ -35331,7 +35331,7 @@
 
 	function removeUser(ID, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Users/" + ID,
+			url: "http://162.243.119.190:4444/api/Users/" + ID,
 			type: 'DELETE',
 			success: function (postedUser) {
 				dispatch({
@@ -35347,7 +35347,7 @@
 
 	function removeNeighborhood(ID, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Neighborhoods/" + ID,
+			url: "http://162.243.119.190:4444/api/Neighborhoods/" + ID,
 			type: 'DELETE',
 			success: function (postedUser) {
 				dispatch({
@@ -35363,7 +35363,7 @@
 
 	function removeDish(ID, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Dishes/" + ID,
+			url: "http://162.243.119.190:4444/api/Dishes/" + ID,
 			type: 'DELETE',
 			success: function (postedUser) {
 				dispatch({
@@ -35378,7 +35378,7 @@
 	}
 	function removeSubNeighborhood(ID, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/SubNeighborhoods/" + ID,
+			url: "http://162.243.119.190:4444/api/SubNeighborhoods/" + ID,
 			type: 'DELETE',
 			success: function () {
 				dispatch({
@@ -35393,7 +35393,7 @@
 	}
 	function removeGenre(ID, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Genres/" + ID,
+			url: "http://162.243.119.190:4444/api/Genres/" + ID,
 			type: 'DELETE',
 			success: function () {
 				dispatch({
@@ -35408,7 +35408,7 @@
 	}
 	function removeReview(ID, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Reviews/" + ID,
+			url: "http://162.243.119.190:4444/api/Reviews/" + ID,
 			type: 'DELETE',
 			success: function (postedUser) {
 				dispatch({
@@ -35423,7 +35423,7 @@
 	}
 	function removeCheckIn(ID, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/CheckIns/" + ID,
+			url: "http://162.243.119.190:4444/api/CheckIns/" + ID,
 			type: 'DELETE',
 			success: function () {
 				dispatch({
@@ -35439,7 +35439,7 @@
 
 	function removeSpot(ID, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Spots/" + ID,
+			url: "http://162.243.119.190:4444/api/Spots/" + ID,
 			type: 'DELETE',
 			success: function () {
 				dispatch({
@@ -35455,7 +35455,7 @@
 
 	function findAndChangeUser(newUserInfo, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Users/" + newUserInfo._id,
+			url: "http://162.243.119.190:4444/api/Users/" + newUserInfo._id,
 			type: 'PUT',
 			data: newUserInfo,
 			success: function (changedUser) {
@@ -35472,7 +35472,7 @@
 
 	function findAndChangeNeighborhood(newNeighborhoodInfo, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Neighborhoods/" + newNeighborhoodInfo._id,
+			url: "http://162.243.119.190:4444/api/Neighborhoods/" + newNeighborhoodInfo._id,
 			type: 'PUT',
 			data: newNeighborhoodInfo,
 			success: function (changedNeighborhood) {
@@ -35489,7 +35489,7 @@
 
 	function findAndChangeDish(newDishInfo, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Dishes/" + newDishInfo._id,
+			url: "http://162.243.119.190:4444/api/Dishes/" + newDishInfo._id,
 			type: 'PUT',
 			data: newDishInfo,
 			success: function (changedDish) {
@@ -35505,7 +35505,7 @@
 
 	function findAndChangeSubNeighborhood(newSubNeighborhoodInfo, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/SubNeighborhoods/" + newSubNeighborhoodInfo._id,
+			url: "http://162.243.119.190:4444/api/SubNeighborhoods/" + newSubNeighborhoodInfo._id,
 			type: 'PUT',
 			data: newSubNeighborhoodInfo,
 			success: function (changedSubNeighborhood) {
@@ -35522,7 +35522,7 @@
 
 	function findAndChangeGenre(newGenreInfo, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Genres/" + newGenreInfo._id,
+			url: "http://162.243.119.190:4444/api/Genres/" + newGenreInfo._id,
 			type: 'PUT',
 			data: newGenreInfo,
 			success: function (changedGenre) {
@@ -35539,7 +35539,7 @@
 
 	function findAndChangeReview(newReviewInfo, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Reviews/" + newReviewInfo._id,
+			url: "http://162.243.119.190:4444/api/Reviews/" + newReviewInfo._id,
 			type: 'PUT',
 			data: newReviewInfo,
 			success: function (changedReview) {
@@ -35556,7 +35556,7 @@
 
 	function findAndChangeCheckIn(newCheckInInfo, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/CheckIns/" + newCheckInInfo._id,
+			url: "http://162.243.119.190:4444/api/CheckIns/" + newCheckInInfo._id,
 			type: 'PUT',
 			data: newCheckInInfo,
 			success: function (changedCheckIn) {
@@ -35573,7 +35573,7 @@
 
 	function findAndChangeSpot(newSpotInfo, dispatch) {
 		$.ajax({
-			url: "http://localhost:4444/api/Spots/" + newSpotInfo._id,
+			url: "http://162.243.119.190:4444/api/Spots/" + newSpotInfo._id,
 			type: 'PUT',
 			data: newSpotInfo,
 			success: function (changedSpot) {
@@ -35769,7 +35769,7 @@
 							function findReviewsFilter(review) {
 								return review.reviewed_dish._id === dish._id;
 							}
-
+							var numberOfReviews = allReviews.filter(findReviewsFilter).length;
 							var starArray = allReviews.filter(findReviewsFilter).map(function (review) {
 								return parseInt(review.review_stars);
 							});
@@ -35807,7 +35807,7 @@
 								_react2.default.createElement(
 									"h5",
 									null,
-									averageStars > 0 ? 'average rating' : ""
+									averageStars > 0 ? 'average rating (out of ' + numberOfReviews + ' reviews)' : ""
 								),
 								averageStars > 0 ? _react2.default.createElement(_reactStarRatingComponent2.default, {
 									name: "rate2",
@@ -96563,7 +96563,7 @@
 			key: 'render',
 			value: function render() {
 				var toggleDishModal = this.props.toggleDishModal;
-				var itemBoxStyle = { height: "180px", padding: "8px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
+				var itemBoxStyle = { minHeight: "200px", padding: "8px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
 				var allSubNeighborhoods = this.props.allSubNeighborhoods;
 				var allUsers = this.props.allUsers;
 				var allDishes = this.props.allDishes;
@@ -96591,6 +96591,7 @@
 					});
 					var sumOfStars = [];
 
+					var numberOfReviews = allReviews.filter(findReviewsFilter).length;
 					if (starArray.length > 0) {
 						sumOfStars = starArray.reduce(function (a, b) {
 							return a + b;
@@ -96622,6 +96623,11 @@
 							dish.dish_price,
 							' dollars ',
 							_react2.default.createElement('br', null),
+							_react2.default.createElement(
+								'h5',
+								null,
+								averageStars > 0 ? 'average rating (out of ' + numberOfReviews + ' reviews)' : ""
+							),
 							averageStars > 0 ? _react2.default.createElement(_reactStarRatingComponent2.default, {
 								name: 'rate2',
 								editing: false,
@@ -116393,6 +116399,7 @@
 					return parseInt(review.review_stars);
 				});
 				var sumOfStars = [];
+				var numberOfReviews = allReviews.filter(findReviewsFilter).length;
 
 				if (starArray.length > 0) {
 					sumOfStars = starArray.reduce(function (a, b) {
@@ -116605,7 +116612,7 @@
 							_react2.default.createElement(
 								'h5',
 								null,
-								averageStars > 0 ? 'average rating' : ""
+								averageStars > 0 ? 'average rating (out of ' + numberOfReviews + ' reviews)' : ""
 							)
 						),
 						spotNode,
@@ -116670,21 +116677,25 @@
 									_react2.default.createElement(
 										'tbody',
 										null,
-										allReviews.filter(findReviewsFilter).length > 0 ? reviewNodes : _react2.default.createElement(
-											'tr',
+										_react2.default.createElement(
+											'h6',
 											null,
-											_react2.default.createElement(
-												'td',
+											allReviews.filter(findReviewsFilter).length > 0 ? reviewNodes : _react2.default.createElement(
+												'tr',
 												null,
-												'no reviews for ',
-												dish.dish_name,
-												'...yet! ',
 												_react2.default.createElement(
-													'a',
-													{ onClick: toggleReviewModal },
-													'Click here to be the first!'
-												),
-												' '
+													'td',
+													null,
+													'no reviews for ',
+													dish.dish_name,
+													'...yet! ',
+													_react2.default.createElement(
+														'a',
+														{ onClick: toggleReviewModal },
+														'Click here to be the first!'
+													),
+													' '
+												)
 											)
 										)
 									)
@@ -117888,7 +117899,7 @@
 
 	var _userLogin = function _userLogin(thisUser, callback, dispatch) {
 	  $.ajax({
-	    url: "http://localhost:4444/api/login",
+	    url: "http://162.243.119.190:4444/api/login",
 	    type: 'POST',
 	    data: thisUser,
 	    success: function (loggedInUser) {

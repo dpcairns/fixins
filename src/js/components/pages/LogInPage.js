@@ -137,7 +137,7 @@ LogInPage.contextTypes = {
 
 const userLogin = (thisUser, callback, dispatch) => {
   $.ajax({
-    url: "http://localhost:4444/api/login",
+    url: "http://162.243.119.190:4444/api/login",
     type: 'POST',
     data: thisUser,
     success: function(loggedInUser){

@@ -11,7 +11,7 @@ import StarRatingComponent from 'react-star-rating-component';
 class SpotDetail extends React.Component{
 	render(){
 		let toggleDishModal = this.props.toggleDishModal
-		let itemBoxStyle = {height:"180px",padding:"8px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
+		let itemBoxStyle = {minHeight:"200px", padding:"8px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
 		let allSubNeighborhoods = this.props.allSubNeighborhoods
 		let allUsers = this.props.allUsers
 		let allDishes = this.props.allDishes
@@ -40,6 +40,7 @@ class SpotDetail extends React.Component{
 						})
 						let sumOfStars = []
 
+						let numberOfReviews =	allReviews.filter(findReviewsFilter).length
 						if(starArray.length > 0){
 						sumOfStars = starArray.reduce(function(a, b) { return a + b; });
 					}
@@ -59,6 +60,7 @@ class SpotDetail extends React.Component{
 											{dish.dish_blurb} <br/>
 											{dish.dish_calories} calories <br/>
 											{dish.dish_price} dollars <br/>
+											<h5>{averageStars > 0 ? 'average rating (out of ' +numberOfReviews + ' reviews)' : "" }</h5>
 											{averageStars > 0 ? <StarRatingComponent
 										                    name="rate2"
 										                    editing={false}
@@ -66,6 +68,7 @@ class SpotDetail extends React.Component{
 										                    value={averageStars}
 										                />	: "no reviews yet"
 																	}									</h4>
+
                       </div>
 
 										)

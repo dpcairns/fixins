@@ -56,6 +56,7 @@ function findReviewsFilter(review){
 		return parseInt(review.review_stars)
 	})
 	let sumOfStars = []
+	let numberOfReviews =	allReviews.filter(findReviewsFilter).length
 
 		if(starArray.length > 0){
 		sumOfStars = starArray.reduce(function(a, b) { return a + b; });
@@ -151,7 +152,7 @@ let toggleReviewModal = this.props.toggleReviewModal
 									/> : "no reviews yet"
 								}
 								</h2>
-								<h5>{averageStars > 0 ? 'average rating' : "" }</h5>
+								<h5>{averageStars > 0 ? 'average rating (out of ' +numberOfReviews + ' reviews)' : "" }</h5>
 
 		</div>
 						{spotNode}
@@ -170,7 +171,7 @@ let toggleReviewModal = this.props.toggleReviewModal
 
 				<caption><h3>Reviews for {dish.dish_name}</h3></caption>
 				<tbody>
-				{allReviews.filter(findReviewsFilter).length>0 ? reviewNodes : (<tr><td>no reviews for {dish.dish_name}...yet! <a onClick={toggleReviewModal}>Click here to be the first!</a> </td></tr>)}
+				<h6>{allReviews.filter(findReviewsFilter).length>0 ? reviewNodes : (<tr><td>no reviews for {dish.dish_name}...yet! <a onClick={toggleReviewModal}>Click here to be the first!</a> </td></tr>)}</h6>
 				</tbody>
 				</table>
 				</div>
