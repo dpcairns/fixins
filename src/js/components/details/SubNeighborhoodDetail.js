@@ -62,7 +62,6 @@ class SubNeighborhoodDetail extends React.Component{
 											<div style={itemBoxStyle} key={userId} className="shad bg-danger">
                         <Link to={`/user/${userId}`} onClick={putOneUserInState.bind(this, userId)}>
                         <h3>{user.username}</h3></Link> <br/>
-                        <h4>Password: {user.password}</h4>
 												</div>
                     )
         })
