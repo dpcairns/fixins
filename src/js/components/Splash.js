@@ -7,7 +7,6 @@ import NewCheckIns from './utils/NewCheckIns'
 import TopDishes from './utils/TopDishes'
 import GlitterFoods from './utils/GlitterFoods'
 
-
 export default class Splash extends React.Component{
 
 	componentWillMount(){
@@ -62,14 +61,12 @@ export default class Splash extends React.Component{
 
 			 		<div className="row">
 
-			 				<div className="col-md-12">
 			 						<TopFiveSubNeighborhoods
 									currentUser={this.props.currentUser}
 									users={allUsers}
 									spots={allSpots}
 									putOneSubNeighborhoodInState={putOneSubNeighborhoodInState}
 									subNeighborhoods={allSubNeighborhoods}/>
-			 				</div>
 					</div>
 					<div className="row">
 

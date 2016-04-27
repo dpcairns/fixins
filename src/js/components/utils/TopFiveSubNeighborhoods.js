@@ -14,7 +14,7 @@ render(){
   if(this.props.subNeighborhoods.length>89){
     let itemBoxStyle = {overflow: "hidden", margin:"2px",maxHeight:"150px",maxWidth:"150px",padding:"5px",float:"left",textAlign:"center", background:"#BDA0CB", borderRadius:"10px"}
     let sortedSubNeighborhoods = []
-    
+
     allSubNeighborhoods.forEach(function(subNeighborhood){
 
       function userFilter(user){return (subNeighborhood._id === user.user_sub_neighborhood._id )}
@@ -48,7 +48,6 @@ render(){
 return(
   <div style={topFiveStyle} className="shadow-container">
   <h4 className="colorChange">{this.props.currentUser._id !== undefined ? "Welcome back " + this.props.currentUser.username + "!": ""}</h4>
-
         <div className="top-five flex flexCenter">
               {this.props.subNeighborhoods.length>88 ? topFiveSubNeighborhoodNodes :  <img  height="50" width="100" src="./static/loading.gif" />}
         </div>

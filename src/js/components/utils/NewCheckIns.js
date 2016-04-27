@@ -8,7 +8,7 @@ export default class NewCheckIns extends React.Component{
     let putOneUserInState = this.props.putOneUserInState
     let putOneDishInState = this.props.putOneUserInState
     let recentCheckInNodes = []
-    let checkInBoxStyle = {padding: "10px", minWidth:"300px", margin:"0 auto", height: "100%", position: "fixed", background:"pink"}
+    let checkInBoxStyle = {padding: "10px", minWidth:"280px", margin:"0 auto", height: "100%", position: "fixed", background:"pink"}
     let scrollItemStyle = {width: "80%", padding: "10px", margin: "0 auto"}
     			if (allCheckIns.length>90){
 

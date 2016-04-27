@@ -35710,16 +35710,12 @@
 							_react2.default.createElement(
 								"div",
 								{ className: "row" },
-								_react2.default.createElement(
-									"div",
-									{ className: "col-md-12" },
-									_react2.default.createElement(_TopFiveSubNeighborhoods2.default, {
-										currentUser: this.props.currentUser,
-										users: allUsers,
-										spots: allSpots,
-										putOneSubNeighborhoodInState: putOneSubNeighborhoodInState,
-										subNeighborhoods: allSubNeighborhoods })
-								)
+								_react2.default.createElement(_TopFiveSubNeighborhoods2.default, {
+									currentUser: this.props.currentUser,
+									users: allUsers,
+									spots: allSpots,
+									putOneSubNeighborhoodInState: putOneSubNeighborhoodInState,
+									subNeighborhoods: allSubNeighborhoods })
 							),
 							_react2.default.createElement(
 								"div",
@@ -118422,11 +118418,17 @@
 
 	var _reactMtSvgLines2 = _interopRequireDefault(_reactMtSvgLines);
 
-	var _reactBootstrap = __webpack_require__(1031);
+	var _RecommendedDishes = __webpack_require__(1316);
 
-	var _NewCheckInPage = __webpack_require__(1299);
+	var _RecommendedDishes2 = _interopRequireDefault(_RecommendedDishes);
 
-	var _NewCheckInPage2 = _interopRequireDefault(_NewCheckInPage);
+	var _MyDashboardHeader = __webpack_require__(1318);
+
+	var _MyDashboardHeader2 = _interopRequireDefault(_MyDashboardHeader);
+
+	var _YourReviewsAndCheckIns = __webpack_require__(1317);
+
+	var _YourReviewsAndCheckIns2 = _interopRequireDefault(_YourReviewsAndCheckIns);
 
 	var _reactStarRatingComponent = __webpack_require__(544);
 
@@ -118460,9 +118462,8 @@
 	      if (this.props.currentUser._id === undefined) {
 	        this.context.router.push('index/login');
 	      }
-
+	      var showCheckInModal = this.props.showCheckInModal;
 	      var toggleCheckInModal = this.props.toggleCheckInModal;
-	      var listStyle = { maxHeight: "400px", overflowX: "hidden", overflowY: "scroll" };
 	      var allReviews = this.props.allReviews;
 	      var allSubNeighborhoods = this.props.allSubNeighborhoods;
 	      var allUsers = this.props.allUsers;
@@ -118472,218 +118473,12 @@
 	      var putOneDishInState = this.props.putOneDishInState;
 	      var putOneSpotInState = this.props.putOneSpotInState;
 	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
-	      var itemBoxStyle = { flexGrow: "1", padding: "15px", maxWidth: "250px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
-
-	      var sortedDishes = [];
-	      allDishes.forEach(function (dish) {
-	        sortedDishes.push({
-	          calories: dish.dish_calories,
-	          dollars: dish.dish_price,
-	          calorieDollars: parseInt(dish.dish_calories / dish.dish_price),
-	          _id: dish._id,
-	          spotId: dish.dish_spot._id,
-	          nameOfSpot: dish.dish_spot.spot_name,
-	          name: dish.dish_name });
-	      });
-	      sortedDishes.sort(function (dishA, dishB) {
-	        return dishB.calorieDollars - dishA.calorieDollars;
-	      });
-	      var rand1 = Math.floor(Math.random() * 20);
-	      var rand2 = Math.floor(Math.random() * 20);
-	      var rand3 = Math.floor(Math.random() * 20);
-	      var rand4 = Math.floor(Math.random() * 20);
-	      var rand5 = Math.floor(Math.random() * 20);
-	      var rand6 = Math.floor(Math.random() * 20);
-	      var topFiveCalorieDollarDishes = [sortedDishes[rand1], sortedDishes[rand2], sortedDishes[rand3], sortedDishes[rand4], sortedDishes[rand5], sortedDishes[rand6]];
-	      var topFiveCalorieDollarDishesNodes = topFiveCalorieDollarDishes.map(function (dish) {
-
-	        function findReviewsFilter(review) {
-	          return review.reviewed_dish._id === dish._id;
-	        }
-
-	        var starArray = allReviews.filter(findReviewsFilter).map(function (review) {
-	          return parseInt(review.review_stars);
-	        });
-	        var sumOfStars = [];
-
-	        if (starArray.length > 0) {
-	          sumOfStars = starArray.reduce(function (a, b) {
-	            return a + b;
-	          });
-	        }
-	        var averageStars = Math.ceil(sumOfStars / allReviews.filter(findReviewsFilter).length);
-
-	        return _react2.default.createElement(
-	          'div',
-	          { style: itemBoxStyle, className: 'bg-info flex', key: dish._id },
-	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            _react2.default.createElement(
-	              'span',
-	              { onClick: toggleCheckInModal },
-	              _react2.default.createElement(
-	                'a',
-	                { onClick: putOneDishInState.bind(this, dish._id) },
-	                dish.name + " "
-	              )
-	            ),
-	            'at',
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/spot/' + dish.spotId, onClick: putOneSpotInState.bind(this, dish.spotId) },
-	              " " + dish.nameOfSpot
-	            ),
-	            _react2.default.createElement('br', null),
-	            _react2.default.createElement(
-	              'i',
-	              null,
-	              ' gets ',
-	              dish.calorieDollars,
-	              ' calorieDollars '
-	            )
-	          ),
-	          _react2.default.createElement('br', null)
-	        );
-	      });
-
 	      function findCheckInsFilter(checkIn) {
 	        return checkIn.checkIn_user._id === thisUser._id || checkIn.checkIn_user === thisUser._id;
 	      }
 	      var userCheckIns = allCheckIns.filter(findCheckInsFilter).map(function (checkIn) {
 	        return checkIn;
 	      });
-	      var checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function (checkIn) {
-	        var dishId = checkIn.checkIn_dish._id;
-	        return _react2.default.createElement(
-	          'tr',
-	          { key: checkIn._id },
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              ' ',
-	              _react2.default.createElement(
-	                _reactRouter.Link,
-	                { to: '/dish/' + dishId, onClick: putOneDishInState.bind(this, dishId) },
-	                checkIn.checkIn_dish.dish_name
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              checkIn.checkIn_dish.dish_calories,
-	              ' calories'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              checkIn.checkIn_dish.dish_price,
-	              ' dollars'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _react2.default.createElement(
-	              'h5',
-	              null,
-	              checkIn.checkIn_blurb
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              checkIn.checkIn_dish.dish_spot.spot_name
-	            )
-	          )
-	        );
-	      }).reverse();
-	      function findReviewsFilter(review) {
-	        return review.review_user._id === thisUser._id || review.review_user === thisUser._id;
-	      }
-	      var reviewNodes = allReviews.filter(findReviewsFilter).map(function (review) {
-	        var dishId = review.reviewed_dish._id;
-	        return _react2.default.createElement(
-	          'tr',
-	          { key: review._id },
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              _react2.default.createElement(
-	                _reactRouter.Link,
-	                { to: '/dish/' + dishId, onClick: putOneDishInState.bind(this, dishId) },
-	                review.reviewed_dish.dish_name
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              review.reviewed_dish.dish_calories,
-	              '  calories'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              review.reviewed_dish.dish_price,
-	              ' dollars '
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _react2.default.createElement(
-	              'h5',
-	              null,
-	              review.review_words,
-	              ' '
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _react2.default.createElement(_reactStarRatingComponent2.default, {
-	              name: 'rate2',
-	              editing: false,
-	              starCount: 5,
-	              value: review.review_stars
-	            })
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              review.review_date
-	            )
-	          )
-	        );
-	      }).reverse();
 
 	      return _react2.default.createElement(
 	        'div',
@@ -118692,123 +118487,33 @@
 	          'div',
 	          { className: 'bg-warning med-pad med-mar', style: { overflow: "hidden" } },
 	          _react2.default.createElement(_HorizontalRainbow2.default, null),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'row' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-md-6 text-right' },
-	              _react2.default.createElement(
-	                'h2',
-	                null,
-	                'Your dashboard, ',
-	                thisUser.username,
-	                '!'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-md-6 text-center' },
-	              _react2.default.createElement(
-	                'h3',
-	                null,
-	                'You are proud to call ',
-	                thisUser.user_sub_neighborhood !== undefined ? _react2.default.createElement(
-	                  _reactRouter.Link,
-	                  { to: '/subNeighborhood/' + thisUser.user_sub_neighborhood._id,
-	                    onClick: putOneSubNeighborhoodInState.bind(this, thisUser.user_sub_neighborhood._id) },
-	                  thisUser.user_sub_neighborhood.subNeighborhood_name,
-	                  ' '
-	                ) : _react2.default.createElement('img', { height: '50', width: '100', src: './static/loading.gif' }),
-	                ' home.'
-	              )
-	            )
-	          ),
+	          _react2.default.createElement(_MyDashboardHeader2.default, {
+	            thisUser: thisUser,
+	            putOneSubNeighborhoodInState: putOneSubNeighborhoodInState
+	          }),
 	          _react2.default.createElement(_HorizontalRainbow2.default, null),
 	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(_CalorieDollarChart2.default, { username: thisUser.username, userTarget: thisUser.user_target, userCheckIns: userCheckIns }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'flex top-bottom-big-mar flexCenter' },
-	            _react2.default.createElement(
-	              'h3',
-	              { className: 'bg-danger', style: itemBoxStyle },
-	              'not hitting your target? here are some highly efficient ideas for you to chew on'
-	            ),
-	            topFiveCalorieDollarDishesNodes
-	          ),
+	          _react2.default.createElement(_CalorieDollarChart2.default, { username: thisUser.username,
+	            userTarget: thisUser.user_target,
+	            userCheckIns: userCheckIns }),
+	          _react2.default.createElement(_RecommendedDishes2.default, { allDishes: allDishes,
+	            allReviews: allReviews,
+	            showCheckInModal: showCheckInModal,
+	            putOneSpotInState: putOneSpotInState,
+	            putOneDishInState: putOneDishInState,
+	            toggleCheckInModal: toggleCheckInModal }),
 	          _react2.default.createElement(
 	            'div',
 	            null,
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'row' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'col-md-6', style: listStyle },
-	                _react2.default.createElement(
-	                  'h1',
-	                  null,
-	                  'Your CheckIns'
-	                ),
-	                _react2.default.createElement(
-	                  'table',
-	                  { className: 'table' },
-	                  _react2.default.createElement(
-	                    'tbody',
-	                    null,
-	                    checkInNodes
-	                  )
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'col-md-6', style: listStyle },
-	                _react2.default.createElement(
-	                  'h1',
-	                  null,
-	                  'Your Reviews'
-	                ),
-	                _react2.default.createElement(
-	                  'table',
-	                  { className: 'table' },
-	                  _react2.default.createElement(
-	                    'tbody',
-	                    null,
-	                    reviewNodes
-	                  )
-	                )
-	              )
-	            )
+	            _react2.default.createElement(_YourReviewsAndCheckIns2.default, {
+	              allReviews: allReviews,
+	              allCheckIns: allCheckIns,
+	              allDishes: allDishes,
+	              putOneDishInState: putOneDishInState,
+	              thisUser: thisUser
+	            })
 	          ),
-	          _react2.default.createElement(_HorizontalRainbow2.default, null),
-	          _react2.default.createElement(
-	            _reactBootstrap.Modal,
-	            { show: this.props.showCheckInModal, bsSize: 'small', 'aria-labelledby': 'contained-modal-title-sm' },
-	            _react2.default.createElement(
-	              _reactBootstrap.Modal.Header,
-	              null,
-	              _react2.default.createElement(
-	                _reactBootstrap.Modal.Title,
-	                { id: 'contained-modal-title-sm' },
-	                'CheckIn!'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              _reactBootstrap.Modal.Body,
-	              null,
-	              _react2.default.createElement(_NewCheckInPage2.default, null)
-	            ),
-	            _react2.default.createElement(
-	              _reactBootstrap.Modal.Footer,
-	              null,
-	              _react2.default.createElement(
-	                _reactBootstrap.Button,
-	                { onClick: toggleCheckInModal },
-	                'Close'
-	              )
-	            )
-	          )
+	          _react2.default.createElement(_HorizontalRainbow2.default, null)
 	        )
 	      );
 	    }
@@ -119095,7 +118800,7 @@
 	      var putOneUserInState = this.props.putOneUserInState;
 	      var putOneDishInState = this.props.putOneUserInState;
 	      var recentCheckInNodes = [];
-	      var checkInBoxStyle = { padding: "10px", minWidth: "300px", margin: "0 auto", height: "100%", position: "fixed", background: "pink" };
+	      var checkInBoxStyle = { padding: "10px", minWidth: "280px", margin: "0 auto", height: "100%", position: "fixed", background: "pink" };
 	      var scrollItemStyle = { width: "80%", padding: "10px", margin: "0 auto" };
 	      if (allCheckIns.length > 90) {
 
@@ -119188,7 +118893,7 @@
 	    value: function render() {
 	      var _this2 = this;
 
-	      var dishesBoxStyle = { padding: "10px", minWidth: "300px", margin: "0 auto", height: "100%", position: "fixed", background: "lightblue" };
+	      var dishesBoxStyle = { padding: "10px", minWidth: "280px", margin: "0 auto", height: "100%", position: "fixed", background: "lightblue" };
 	      var scrollItemStyle = { width: "80%", padding: "10px", margin: "0 auto" };
 	      var topFiveDishNodes = [];
 	      var allDishes = this.props.dishes;
@@ -119380,6 +119085,536 @@
 	}(_react2.default.Component);
 
 	exports.default = TopFiveSubNeighborhoods;
+
+/***/ },
+/* 1316 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	        value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(168);
+
+	var _reactRouter = __webpack_require__(191);
+
+	var _Links = __webpack_require__(540);
+
+	var _Links2 = _interopRequireDefault(_Links);
+
+	var _FixinsActions = __webpack_require__(542);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	var _reactBootstrap = __webpack_require__(1031);
+
+	var _NewCheckInPage = __webpack_require__(1299);
+
+	var _NewCheckInPage2 = _interopRequireDefault(_NewCheckInPage);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var RecommendedDishes = function (_React$Component) {
+	        _inherits(RecommendedDishes, _React$Component);
+
+	        function RecommendedDishes() {
+	                _classCallCheck(this, RecommendedDishes);
+
+	                return _possibleConstructorReturn(this, Object.getPrototypeOf(RecommendedDishes).apply(this, arguments));
+	        }
+
+	        _createClass(RecommendedDishes, [{
+	                key: 'render',
+	                value: function render() {
+	                        var itemBoxStyle = { flexGrow: "1", padding: "15px", maxWidth: "250px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
+	                        var putOneDishInState = this.props.putOneDishInState;
+	                        var putOneSpotInState = this.props.putOneSpotInState;
+	                        var allDishes = this.props.allDishes;
+	                        var allReviews = this.props.allReviews;
+	                        var toggleCheckInModal = this.props.toggleCheckInModal;
+
+	                        var sortedDishes = [];
+	                        allDishes.forEach(function (dish) {
+	                                sortedDishes.push({
+	                                        calories: dish.dish_calories,
+	                                        dollars: dish.dish_price,
+	                                        calorieDollars: parseInt(dish.dish_calories / dish.dish_price),
+	                                        _id: dish._id,
+	                                        spotId: dish.dish_spot._id,
+	                                        nameOfSpot: dish.dish_spot.spot_name,
+	                                        name: dish.dish_name });
+	                        });
+	                        sortedDishes.sort(function (dishA, dishB) {
+	                                return dishB.calorieDollars - dishA.calorieDollars;
+	                        });
+	                        var rand1 = Math.floor(Math.random() * 20);
+	                        var rand2 = Math.floor(Math.random() * 20);
+	                        var rand3 = Math.floor(Math.random() * 20);
+	                        var rand4 = Math.floor(Math.random() * 20);
+	                        var rand5 = Math.floor(Math.random() * 20);
+	                        var rand6 = Math.floor(Math.random() * 20);
+	                        var topFiveCalorieDollarDishes = [sortedDishes[rand1], sortedDishes[rand2], sortedDishes[rand3], sortedDishes[rand4], sortedDishes[rand5], sortedDishes[rand6]];
+	                        var topFiveCalorieDollarDishesNodes = topFiveCalorieDollarDishes.map(function (dish) {
+
+	                                function findReviewsFilter(review) {
+	                                        return review.reviewed_dish._id === dish._id;
+	                                }
+
+	                                var starArray = allReviews.filter(findReviewsFilter).map(function (review) {
+	                                        return parseInt(review.review_stars);
+	                                });
+	                                var sumOfStars = [];
+
+	                                if (starArray.length > 0) {
+	                                        sumOfStars = starArray.reduce(function (a, b) {
+	                                                return a + b;
+	                                        });
+	                                }
+	                                var averageStars = Math.ceil(sumOfStars / allReviews.filter(findReviewsFilter).length);
+
+	                                return _react2.default.createElement(
+	                                        'div',
+	                                        { style: itemBoxStyle, className: 'bg-info flex', key: dish._id },
+	                                        _react2.default.createElement(
+	                                                'h4',
+	                                                null,
+	                                                _react2.default.createElement(
+	                                                        'span',
+	                                                        { onClick: toggleCheckInModal },
+	                                                        _react2.default.createElement(
+	                                                                'a',
+	                                                                { onClick: putOneDishInState.bind(this, dish._id) },
+	                                                                dish.name + " "
+	                                                        )
+	                                                ),
+	                                                'at',
+	                                                _react2.default.createElement(
+	                                                        _reactRouter.Link,
+	                                                        { to: '/spot/' + dish.spotId, onClick: putOneSpotInState.bind(this, dish.spotId) },
+	                                                        " " + dish.nameOfSpot
+	                                                ),
+	                                                _react2.default.createElement('br', null),
+	                                                _react2.default.createElement(
+	                                                        'i',
+	                                                        null,
+	                                                        ' gets ',
+	                                                        dish.calorieDollars,
+	                                                        ' calorieDollars '
+	                                                )
+	                                        ),
+	                                        _react2.default.createElement('br', null)
+	                                );
+	                        });
+
+	                        return _react2.default.createElement(
+	                                'div',
+	                                { className: 'flex top-bottom-big-mar flexCenter' },
+	                                _react2.default.createElement(
+	                                        'h3',
+	                                        { className: 'bg-danger', style: itemBoxStyle },
+	                                        'not hitting your target? here are some highly efficient ideas for you to chew on'
+	                                ),
+	                                topFiveCalorieDollarDishesNodes,
+	                                _react2.default.createElement(
+	                                        _reactBootstrap.Modal,
+	                                        { show: this.props.showCheckInModal, bsSize: 'small', 'aria-labelledby': 'contained-modal-title-sm' },
+	                                        _react2.default.createElement(
+	                                                _reactBootstrap.Modal.Header,
+	                                                null,
+	                                                _react2.default.createElement(
+	                                                        _reactBootstrap.Modal.Title,
+	                                                        { id: 'contained-modal-title-sm' },
+	                                                        'CheckIn!'
+	                                                )
+	                                        ),
+	                                        _react2.default.createElement(
+	                                                _reactBootstrap.Modal.Body,
+	                                                null,
+	                                                _react2.default.createElement(_NewCheckInPage2.default, null)
+	                                        ),
+	                                        _react2.default.createElement(
+	                                                _reactBootstrap.Modal.Footer,
+	                                                null,
+	                                                _react2.default.createElement(
+	                                                        _reactBootstrap.Button,
+	                                                        { onClick: toggleCheckInModal },
+	                                                        'Close'
+	                                                )
+	                                        )
+	                                )
+	                        );
+	                }
+	        }]);
+
+	        return RecommendedDishes;
+	}(_react2.default.Component);
+
+	exports.default = RecommendedDishes;
+
+/***/ },
+/* 1317 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(168);
+
+	var _reactRouter = __webpack_require__(191);
+
+	var _Links = __webpack_require__(540);
+
+	var _Links2 = _interopRequireDefault(_Links);
+
+	var _FixinsActions = __webpack_require__(542);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	var _NewCheckInPage = __webpack_require__(1299);
+
+	var _NewCheckInPage2 = _interopRequireDefault(_NewCheckInPage);
+
+	var _reactStarRatingComponent = __webpack_require__(544);
+
+	var _reactStarRatingComponent2 = _interopRequireDefault(_reactStarRatingComponent);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var YourReviewsAndCheckIns = function (_React$Component) {
+	  _inherits(YourReviewsAndCheckIns, _React$Component);
+
+	  function YourReviewsAndCheckIns() {
+	    _classCallCheck(this, YourReviewsAndCheckIns);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(YourReviewsAndCheckIns).apply(this, arguments));
+	  }
+
+	  _createClass(YourReviewsAndCheckIns, [{
+	    key: 'render',
+	    value: function render() {
+	      var allReviews = this.props.allReviews;
+	      var allCheckIns = this.props.allCheckIns;
+	      var allDishes = this.props.allDishes;
+	      var putOneDishInState = this.props.putOneDishInState;
+	      var thisUser = this.props.thisUser;
+	      var listStyle = { maxHeight: "400px", overflowX: "hidden", overflowY: "scroll" };
+
+	      function findCheckInsFilter(checkIn) {
+	        return checkIn.checkIn_user._id === thisUser._id || checkIn.checkIn_user === thisUser._id;
+	      }
+	      var userCheckIns = allCheckIns.filter(findCheckInsFilter).map(function (checkIn) {
+	        return checkIn;
+	      });
+	      var checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function (checkIn) {
+	        var dishId = checkIn.checkIn_dish._id;
+	        return _react2.default.createElement(
+	          'tr',
+	          { key: checkIn._id },
+	          _react2.default.createElement(
+	            'td',
+	            null,
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              ' ',
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/dish/' + dishId, onClick: putOneDishInState.bind(this, dishId) },
+	                checkIn.checkIn_dish.dish_name
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              checkIn.checkIn_dish.dish_calories,
+	              ' calories'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              checkIn.checkIn_dish.dish_price,
+	              ' dollars'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
+	            _react2.default.createElement(
+	              'h5',
+	              null,
+	              checkIn.checkIn_blurb
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              checkIn.checkIn_dish.dish_spot.spot_name
+	            )
+	          )
+	        );
+	      }).reverse();
+	      function findReviewsFilter(review) {
+	        return review.review_user._id === thisUser._id || review.review_user === thisUser._id;
+	      }
+	      var reviewNodes = allReviews.filter(findReviewsFilter).map(function (review) {
+	        var dishId = review.reviewed_dish._id;
+	        return _react2.default.createElement(
+	          'tr',
+	          { key: review._id },
+	          _react2.default.createElement(
+	            'td',
+	            null,
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/dish/' + dishId, onClick: putOneDishInState.bind(this, dishId) },
+	                review.reviewed_dish.dish_name
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              review.reviewed_dish.dish_calories,
+	              '  calories'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              review.reviewed_dish.dish_price,
+	              ' dollars '
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
+	            _react2.default.createElement(
+	              'h5',
+	              null,
+	              review.review_words,
+	              ' '
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
+	            _react2.default.createElement(_reactStarRatingComponent2.default, {
+	              name: 'rate2',
+	              editing: false,
+	              starCount: 5,
+	              value: review.review_stars
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              review.review_date
+	            )
+	          )
+	        );
+	      }).reverse();
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-md-6', style: listStyle },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'Your CheckIns'
+	          ),
+	          _react2.default.createElement(
+	            'table',
+	            { className: 'table' },
+	            _react2.default.createElement(
+	              'tbody',
+	              null,
+	              checkInNodes
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-md-6', style: listStyle },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'Your Reviews'
+	          ),
+	          _react2.default.createElement(
+	            'table',
+	            { className: 'table' },
+	            _react2.default.createElement(
+	              'tbody',
+	              null,
+	              reviewNodes
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return YourReviewsAndCheckIns;
+	}(_react2.default.Component);
+
+	exports.default = YourReviewsAndCheckIns;
+
+/***/ },
+/* 1318 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(168);
+
+	var _reactRouter = __webpack_require__(191);
+
+	var _Links = __webpack_require__(540);
+
+	var _Links2 = _interopRequireDefault(_Links);
+
+	var _FixinsActions = __webpack_require__(542);
+
+	var FixinsActions = _interopRequireWildcard(_FixinsActions);
+
+	var _reactBootstrap = __webpack_require__(1031);
+
+	var _NewCheckInPage = __webpack_require__(1299);
+
+	var _NewCheckInPage2 = _interopRequireDefault(_NewCheckInPage);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var MyDashboardHeader = function (_React$Component) {
+	  _inherits(MyDashboardHeader, _React$Component);
+
+	  function MyDashboardHeader() {
+	    _classCallCheck(this, MyDashboardHeader);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(MyDashboardHeader).apply(this, arguments));
+	  }
+
+	  _createClass(MyDashboardHeader, [{
+	    key: 'render',
+	    value: function render() {
+	      var thisUser = this.props.thisUser;
+	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-md-6 text-right' },
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            'Your dashboard, ',
+	            thisUser.username,
+	            '!'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-md-6 text-center' },
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            'You are proud to call ',
+	            thisUser.user_sub_neighborhood !== undefined ? _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/subNeighborhood/' + thisUser.user_sub_neighborhood._id,
+	                onClick: putOneSubNeighborhoodInState.bind(this, thisUser.user_sub_neighborhood._id) },
+	              thisUser.user_sub_neighborhood.subNeighborhood_name,
+	              ' '
+	            ) : _react2.default.createElement('img', { height: '50', width: '100', src: './static/loading.gif' }),
+	            ' home.'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return MyDashboardHeader;
+	}(_react2.default.Component);
+
+	exports.default = MyDashboardHeader;
 
 /***/ }
 /******/ ]);
