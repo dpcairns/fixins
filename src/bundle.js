@@ -35609,6 +35609,22 @@
 
 	var _reactStarRatingComponent2 = _interopRequireDefault(_reactStarRatingComponent);
 
+	var _TopFiveSubNeighborhoods = __webpack_require__(1312);
+
+	var _TopFiveSubNeighborhoods2 = _interopRequireDefault(_TopFiveSubNeighborhoods);
+
+	var _NewCheckIns = __webpack_require__(1313);
+
+	var _NewCheckIns2 = _interopRequireDefault(_NewCheckIns);
+
+	var _TopDishes = __webpack_require__(1314);
+
+	var _TopDishes2 = _interopRequireDefault(_TopDishes);
+
+	var _GlitterFoods = __webpack_require__(1315);
+
+	var _GlitterFoods2 = _interopRequireDefault(_GlitterFoods);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35642,214 +35658,22 @@
 		}, {
 			key: "render",
 			value: function render() {
-				var _this2 = this;
-
 				var myGif = "";
-				var myGlitterFood = "";
-				var myOtherGlitterFood = "";
-
+				var randA = Math.floor(Math.random() * 7);
+				myGif = "url(./static/pizza" + randA + ".gif)";
+				var allSubNeighborhoods = this.props.subNeighborhoods;
+				var allUsers = this.props.users;
+				var allSpots = this.props.spots;
 				var jackpotGo = this.props.jackpotGo;
 				var noDice = this.props.noDice;
+				var jackpot = this.props.jackpot;
 				var logout = this.props.logout;
 				var allReviews = this.props.allReviews;
-				var jackpotStyles = { display: this.props.jackpot, textDecoration: "none", zIndex: "2", position: "fixed", bottom: "8%", left: "25%", fontSize: "12em" };
 				var putOneDishInState = this.props.putOneDishInState;
 				var putOneSpotInState = this.props.putOneSpotInState;
 				var putOneUserInState = this.props.putOneUserInState;
 				var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
-				var scrollItemStyle = { width: "80%", padding: "10px", margin: "0 auto" };
-				var checkInBoxStyle = { padding: "10px", minWidth: "300px", margin: "0 auto", height: "100%", position: "fixed", background: "pink" };
-				var dishesBoxStyle = { padding: "10px", minWidth: "300px", margin: "0 auto", height: "100%", position: "fixed", background: "lightblue" };
-				var topFiveStyle = { overflow: "hidden", height: "220px", paddingTop: "1px", paddingLeft: "4px", paddingRight: "4px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background: "#ffd281" };
-				var topFiveDishNodes = [];
-				var recentCheckInNodes = [];
-				var topFiveSubNeighborhoodNodes = [];
 
-				if (this.props.subNeighborhoods.length > 89) {
-					(function () {
-						var itemBoxStyle = { overflow: "hidden", margin: "2px", maxHeight: "150px", maxWidth: "150px", padding: "5px", float: "left", textAlign: "center", background: "#BDA0CB", borderRadius: "10px" };
-						var allSubNeighborhoods = _this2.props.subNeighborhoods;
-						var allUsers = _this2.props.users;
-						var allSpots = _this2.props.spots;
-						var sortedSubNeighborhoods = [];
-						var randA = Math.floor(Math.random() * 7);
-						var randB = Math.floor(Math.random() * 7);
-						var randC = Math.floor(Math.random() * 7);
-						myGif = "url(./static/pizza" + randA + ".gif)";
-						myGlitterFood = "./static/glitterFood" + randB + ".gif";
-						myOtherGlitterFood = "./static/glitterFood" + randC + ".gif";
-						if (randB === randC) {
-							jackpotGo();
-						} else {
-							noDice();
-						}
-
-						allSubNeighborhoods.forEach(function (subNeighborhood) {
-
-							function userFilter(user) {
-								return subNeighborhood._id === user.user_sub_neighborhood._id;
-							}
-							var thisManyUsers = allUsers.filter(userFilter).length;
-
-							function spotFilter(spot) {
-								return spot.spot_subNeighborhood._id === subNeighborhood._id;
-							}
-							var thisManySpots = allSpots.filter(spotFilter).length;
-
-							sortedSubNeighborhoods.push({
-								numberOfUsers: thisManyUsers,
-								numberOfSpots: thisManySpots,
-								totalItems: thisManyUsers + thisManySpots,
-								_id: subNeighborhood._id,
-								subNeighborhood_name: subNeighborhood.subNeighborhood_name
-							});
-						});
-						sortedSubNeighborhoods.sort(function (subNeighborhoodA, subNeighborhoodB) {
-							return subNeighborhoodB.totalItems - subNeighborhoodA.totalItems;
-						});
-						var topFiveSubNeighborhoods = [sortedSubNeighborhoods[0], sortedSubNeighborhoods[1], sortedSubNeighborhoods[2], sortedSubNeighborhoods[3], sortedSubNeighborhoods[4]];
-						topFiveSubNeighborhoodNodes = topFiveSubNeighborhoods.map(function (subNeighborhood) {
-							return _react2.default.createElement(
-								"div",
-								{ style: itemBoxStyle, className: "shad2", key: subNeighborhood._id },
-								_react2.default.createElement(
-									_reactRouter.Link,
-									{ onClick: putOneSubNeighborhoodInState.bind(this, subNeighborhood._id), to: "/subNeighborhood/" + subNeighborhood._id },
-									_react2.default.createElement(
-										"h3",
-										null,
-										" ",
-										subNeighborhood.subNeighborhood_name + " "
-									)
-								),
-								_react2.default.createElement(
-									"h4",
-									null,
-									"  ",
-									_react2.default.createElement(
-										"i",
-										null,
-										subNeighborhood.numberOfUsers,
-										" users ",
-										_react2.default.createElement("br", null),
-										"and ",
-										subNeighborhood.numberOfSpots,
-										" spots!"
-									)
-								)
-							);
-						});
-					})();
-				}
-
-				if (this.props.dishes.length > 35) {
-					(function () {
-						var allDishes = _this2.props.dishes;
-						var allCheckIns = _this2.props.checkIns;
-						var sortedDishes = [];
-						allDishes.forEach(function (dish) {
-							function checkInFilter(checkIn) {
-								return checkIn.checkIn_dish._id === dish._id;
-							}
-							var thisManyCheckIns = allCheckIns.filter(checkInFilter).length;
-							sortedDishes.push({
-								numberOfCheckIns: thisManyCheckIns,
-								_id: dish._id,
-								spotId: dish.dish_spot._id,
-								nameOfSpot: dish.dish_spot.spot_name,
-								name: dish.dish_name });
-						});
-						sortedDishes.sort(function (dishA, dishB) {
-							return dishB.numberOfCheckIns - dishA.numberOfCheckIns;
-						});
-						var topFiveDishes = sortedDishes.slice(0, 35);
-						topFiveDishNodes = topFiveDishes.map(function (dish) {
-							function findReviewsFilter(review) {
-								return review.reviewed_dish._id === dish._id;
-							}
-							var numberOfReviews = allReviews.filter(findReviewsFilter).length;
-							var starArray = allReviews.filter(findReviewsFilter).map(function (review) {
-								return parseInt(review.review_stars);
-							});
-							var sumOfStars = [];
-
-							if (starArray.length > 0) {
-								sumOfStars = starArray.reduce(function (a, b) {
-									return a + b;
-								});
-							}
-							var averageStars = Math.ceil(sumOfStars / allReviews.filter(findReviewsFilter).length);
-
-							return _react2.default.createElement(
-								"h4",
-								{ className: "text-center", style: scrollItemStyle, key: dish._id },
-								_react2.default.createElement(
-									_reactRouter.Link,
-									{ onClick: putOneDishInState.bind(this, dish._id), to: "/dish/" + dish._id },
-									dish.name + " "
-								),
-								"at",
-								_react2.default.createElement(
-									_reactRouter.Link,
-									{ to: "/spot/" + dish.spotId, onClick: putOneSpotInState.bind(this, dish.spotId) },
-									" " + dish.nameOfSpot
-								),
-								_react2.default.createElement("br", null),
-								_react2.default.createElement(
-									"i",
-									null,
-									"has ",
-									dish.numberOfCheckIns,
-									" checkIns "
-								),
-								_react2.default.createElement(
-									"h5",
-									null,
-									averageStars > 0 ? 'average rating (out of ' + numberOfReviews + ' reviews)' : ""
-								),
-								averageStars > 0 ? _react2.default.createElement(_reactStarRatingComponent2.default, {
-									name: "rate2",
-									editing: false,
-									starCount: 5,
-									value: averageStars
-								}) : "no reviews yet",
-								_react2.default.createElement("br", null),
-								_react2.default.createElement("hr", null)
-							);
-						});
-					})();
-				}
-
-				if (this.props.checkIns.length > 90) {
-					var _allCheckIns = this.props.checkIns;
-
-					var lastFiveCheckIns = _allCheckIns.slice(1, 90);
-
-					recentCheckInNodes = lastFiveCheckIns.map(function (checkIn) {
-
-						return _react2.default.createElement(
-							"h4",
-							{ style: scrollItemStyle, key: checkIn._id },
-							_react2.default.createElement(
-								_reactRouter.Link,
-								{ to: "/user/" + checkIn.checkIn_user._id, onClick: putOneUserInState.bind(this, checkIn.checkIn_user._id) },
-								checkIn.checkIn_user.username + " "
-							),
-							"ate",
-							_react2.default.createElement(
-								_reactRouter.Link,
-								{ onClick: putOneDishInState.bind(this, checkIn.checkIn_dish._id), to: "/dish/" + checkIn.checkIn_dish._id },
-								" " + checkIn.checkIn_dish.dish_name + " "
-							),
-							"at ",
-							" " + checkIn.checkIn_date + " ",
-							" and said \"",
-							checkIn.checkIn_blurb,
-							"\"",
-							_react2.default.createElement("hr", null)
-						);
-					});
-				}
 				return _react2.default.createElement(
 					"div",
 					{ style: { overflow: "hidden" } },
@@ -35860,15 +35684,13 @@
 						_react2.default.createElement(
 							"div",
 							{ className: "col-md-3" },
-							_react2.default.createElement(
-								"div",
-								{ style: dishesBoxStyle, className: "shadow-container" },
-								_react2.default.createElement(
-									"div",
-									{ className: "DishBoxAnim space-between" },
-									this.props.dishes.length > 35 ? topFiveDishNodes : _react2.default.createElement("img", { height: "50", width: "100", src: "./static/loading.gif" })
-								)
-							)
+							_react2.default.createElement(_TopDishes2.default, {
+								checkIns: this.props.checkIns,
+								dishes: this.props.dishes,
+								putOneDishInState: putOneDishInState,
+								putOneSpotInState: putOneSpotInState,
+								reviews: allReviews
+							})
 						),
 						_react2.default.createElement(
 							"div",
@@ -35891,67 +35713,28 @@
 								_react2.default.createElement(
 									"div",
 									{ className: "col-md-12" },
-									_react2.default.createElement(
-										"div",
-										{ style: topFiveStyle, className: "shadow-container" },
-										_react2.default.createElement(
-											"h4",
-											{ className: "colorChange" },
-											this.props.currentUser._id !== undefined ? "Welcome back " + this.props.currentUser.username + "!" : ""
-										),
-										_react2.default.createElement(
-											"div",
-											{ className: "top-five flex flexCenter" },
-											this.props.subNeighborhoods.length > 88 ? topFiveSubNeighborhoodNodes : _react2.default.createElement("img", { height: "50", width: "100", src: "./static/loading.gif" })
-										),
-										_react2.default.createElement(
-											"h3",
-											null,
-											"top five subNeighborhoods in pdx"
-										)
-									)
+									_react2.default.createElement(_TopFiveSubNeighborhoods2.default, {
+										currentUser: this.props.currentUser,
+										users: allUsers,
+										spots: allSpots,
+										putOneSubNeighborhoodInState: putOneSubNeighborhoodInState,
+										subNeighborhoods: allSubNeighborhoods })
 								)
 							),
 							_react2.default.createElement(
 								"div",
 								{ className: "row" },
-								_react2.default.createElement(
-									"div",
-									{ className: "col-md-2" },
-									_react2.default.createElement(
-										_reactRouter.Link,
-										{ to: "index/admin" },
-										_react2.default.createElement("img", { src: myGlitterFood, height: "240px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
-									),
-									_react2.default.createElement(
-										"div",
-										{ style: jackpotStyles },
-										_react2.default.createElement(
-											"a",
-											{ target: "_blank", href: "http://pizzaparty.party", className: "jackpot" },
-											"JACKPOT"
-										)
-									)
-								),
-								_react2.default.createElement(
-									"div",
-									{ className: "col-md-offset-2 col-md-3" },
-									_react2.default.createElement("img", { src: myOtherGlitterFood, height: "240px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
-								)
+								_react2.default.createElement(_GlitterFoods2.default, { noDice: noDice, jackpotGo: jackpotGo, jackpot: jackpot })
 							)
 						),
 						_react2.default.createElement(
 							"div",
 							{ className: "col-md-3" },
-							_react2.default.createElement(
-								"div",
-								{ style: checkInBoxStyle, className: "shadow-container" },
-								_react2.default.createElement(
-									"div",
-									{ className: "CheckInBoxAnim" },
-									this.props.checkIns.length > 88 ? recentCheckInNodes : _react2.default.createElement("img", { height: "50", width: "100", src: "./static/loading.gif" })
-								)
-							)
+							_react2.default.createElement(_NewCheckIns2.default, {
+								checkIns: this.props.checkIns,
+								putOneDishInState: putOneDishInState,
+								putOneUserInState: putOneUserInState
+							})
 						)
 					)
 				);
@@ -119127,6 +118910,476 @@
 	}(_react2.default.Component);
 
 	exports.default = HorizontalRainbow;
+
+/***/ },
+/* 1312 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(191);
+
+	var _reactStarRatingComponent = __webpack_require__(544);
+
+	var _reactStarRatingComponent2 = _interopRequireDefault(_reactStarRatingComponent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var TopFiveSubNeighborhoods = function (_React$Component) {
+	  _inherits(TopFiveSubNeighborhoods, _React$Component);
+
+	  function TopFiveSubNeighborhoods() {
+	    _classCallCheck(this, TopFiveSubNeighborhoods);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TopFiveSubNeighborhoods).apply(this, arguments));
+	  }
+
+	  _createClass(TopFiveSubNeighborhoods, [{
+	    key: "render",
+	    value: function render() {
+	      var topFiveSubNeighborhoodNodes = [];
+	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
+	      var allSubNeighborhoods = this.props.subNeighborhoods;
+	      var allUsers = this.props.users;
+	      var allSpots = this.props.spots;
+	      var topFiveStyle = { overflow: "hidden", height: "220px", paddingTop: "1px", paddingLeft: "4px", paddingRight: "4px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background: "#ffd281" };
+
+	      if (this.props.subNeighborhoods.length > 89) {
+	        (function () {
+	          var itemBoxStyle = { overflow: "hidden", margin: "2px", maxHeight: "150px", maxWidth: "150px", padding: "5px", float: "left", textAlign: "center", background: "#BDA0CB", borderRadius: "10px" };
+	          var sortedSubNeighborhoods = [];
+
+	          allSubNeighborhoods.forEach(function (subNeighborhood) {
+
+	            function userFilter(user) {
+	              return subNeighborhood._id === user.user_sub_neighborhood._id;
+	            }
+	            var thisManyUsers = allUsers.filter(userFilter).length;
+
+	            function spotFilter(spot) {
+	              return spot.spot_subNeighborhood._id === subNeighborhood._id;
+	            }
+	            var thisManySpots = allSpots.filter(spotFilter).length;
+
+	            sortedSubNeighborhoods.push({
+	              numberOfUsers: thisManyUsers,
+	              numberOfSpots: thisManySpots,
+	              totalItems: thisManyUsers + thisManySpots,
+	              _id: subNeighborhood._id,
+	              subNeighborhood_name: subNeighborhood.subNeighborhood_name
+	            });
+	          });
+	          sortedSubNeighborhoods.sort(function (subNeighborhoodA, subNeighborhoodB) {
+	            return subNeighborhoodB.totalItems - subNeighborhoodA.totalItems;
+	          });
+	          var topFiveSubNeighborhoods = [sortedSubNeighborhoods[0], sortedSubNeighborhoods[1], sortedSubNeighborhoods[2], sortedSubNeighborhoods[3], sortedSubNeighborhoods[4]];
+	          topFiveSubNeighborhoodNodes = topFiveSubNeighborhoods.map(function (subNeighborhood) {
+	            return _react2.default.createElement(
+	              "div",
+	              { style: itemBoxStyle, className: "shad2", key: subNeighborhood._id },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { onClick: putOneSubNeighborhoodInState.bind(this, subNeighborhood._id), to: "/subNeighborhood/" + subNeighborhood._id },
+	                _react2.default.createElement(
+	                  "h3",
+	                  null,
+	                  " ",
+	                  subNeighborhood.subNeighborhood_name + " "
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "h4",
+	                null,
+	                "  ",
+	                _react2.default.createElement(
+	                  "i",
+	                  null,
+	                  subNeighborhood.numberOfUsers,
+	                  " users ",
+	                  _react2.default.createElement("br", null),
+	                  "and ",
+	                  subNeighborhood.numberOfSpots,
+	                  " spots!"
+	                )
+	              )
+	            );
+	          });
+	        })();
+	      }
+	      return _react2.default.createElement(
+	        "div",
+	        { style: topFiveStyle, className: "shadow-container" },
+	        _react2.default.createElement(
+	          "h4",
+	          { className: "colorChange" },
+	          this.props.currentUser._id !== undefined ? "Welcome back " + this.props.currentUser.username + "!" : ""
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "top-five flex flexCenter" },
+	          this.props.subNeighborhoods.length > 88 ? topFiveSubNeighborhoodNodes : _react2.default.createElement("img", { height: "50", width: "100", src: "./static/loading.gif" })
+	        ),
+	        _react2.default.createElement(
+	          "h3",
+	          null,
+	          "top five subNeighborhoods in pdx"
+	        )
+	      );
+	    }
+	  }]);
+
+	  return TopFiveSubNeighborhoods;
+	}(_react2.default.Component);
+
+	exports.default = TopFiveSubNeighborhoods;
+
+/***/ },
+/* 1313 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(191);
+
+	var _reactStarRatingComponent = __webpack_require__(544);
+
+	var _reactStarRatingComponent2 = _interopRequireDefault(_reactStarRatingComponent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NewCheckIns = function (_React$Component) {
+	  _inherits(NewCheckIns, _React$Component);
+
+	  function NewCheckIns() {
+	    _classCallCheck(this, NewCheckIns);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NewCheckIns).apply(this, arguments));
+	  }
+
+	  _createClass(NewCheckIns, [{
+	    key: "render",
+	    value: function render() {
+	      var allCheckIns = this.props.checkIns;
+	      var putOneUserInState = this.props.putOneUserInState;
+	      var putOneDishInState = this.props.putOneUserInState;
+	      var recentCheckInNodes = [];
+	      var checkInBoxStyle = { padding: "10px", minWidth: "300px", margin: "0 auto", height: "100%", position: "fixed", background: "pink" };
+	      var scrollItemStyle = { width: "80%", padding: "10px", margin: "0 auto" };
+	      if (allCheckIns.length > 90) {
+
+	        var lastFiveCheckIns = allCheckIns.slice(1, 90);
+
+	        recentCheckInNodes = lastFiveCheckIns.map(function (checkIn) {
+
+	          return _react2.default.createElement(
+	            "h4",
+	            { style: scrollItemStyle, key: checkIn._id },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: "/user/" + checkIn.checkIn_user._id, onClick: putOneUserInState.bind(this, checkIn.checkIn_user._id) },
+	              checkIn.checkIn_user.username + " "
+	            ),
+	            "ate",
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { onClick: putOneDishInState.bind(this, checkIn.checkIn_dish._id), to: "/dish/" + checkIn.checkIn_dish._id },
+	              " " + checkIn.checkIn_dish.dish_name + " "
+	            ),
+	            "at ",
+	            " " + checkIn.checkIn_date + " ",
+	            " and said \"",
+	            checkIn.checkIn_blurb,
+	            "\"",
+	            _react2.default.createElement("hr", null)
+	          );
+	        });
+	      }
+
+	      return _react2.default.createElement(
+	        "div",
+	        { style: checkInBoxStyle, className: "shadow-container" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "CheckInBoxAnim" },
+	          allCheckIns.length > 88 ? recentCheckInNodes : _react2.default.createElement("img", { height: "50", width: "100", src: "./static/loading.gif" })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return NewCheckIns;
+	}(_react2.default.Component);
+
+	exports.default = NewCheckIns;
+
+/***/ },
+/* 1314 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(191);
+
+	var _reactStarRatingComponent = __webpack_require__(544);
+
+	var _reactStarRatingComponent2 = _interopRequireDefault(_reactStarRatingComponent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var TopFiveSubNeighborhoods = function (_React$Component) {
+	  _inherits(TopFiveSubNeighborhoods, _React$Component);
+
+	  function TopFiveSubNeighborhoods() {
+	    _classCallCheck(this, TopFiveSubNeighborhoods);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TopFiveSubNeighborhoods).apply(this, arguments));
+	  }
+
+	  _createClass(TopFiveSubNeighborhoods, [{
+	    key: "render",
+	    value: function render() {
+	      var _this2 = this;
+
+	      var dishesBoxStyle = { padding: "10px", minWidth: "300px", margin: "0 auto", height: "100%", position: "fixed", background: "lightblue" };
+	      var scrollItemStyle = { width: "80%", padding: "10px", margin: "0 auto" };
+	      var topFiveDishNodes = [];
+	      var allDishes = this.props.dishes;
+	      var allReviews = this.props.reviews;
+	      if (this.props.dishes.length > 35) {
+	        (function () {
+	          var allCheckIns = _this2.props.checkIns;
+	          var putOneSpotInState = _this2.props.putOneSpotInState;
+	          var putOneDishInState = _this2.props.putOneDishInState;
+	          var sortedDishes = [];
+	          allDishes.forEach(function (dish) {
+	            function checkInFilter(checkIn) {
+	              return checkIn.checkIn_dish._id === dish._id;
+	            }
+	            var thisManyCheckIns = allCheckIns.filter(checkInFilter).length;
+	            sortedDishes.push({
+	              numberOfCheckIns: thisManyCheckIns,
+	              _id: dish._id,
+	              spotId: dish.dish_spot._id,
+	              nameOfSpot: dish.dish_spot.spot_name,
+	              name: dish.dish_name });
+	          });
+	          sortedDishes.sort(function (dishA, dishB) {
+	            return dishB.numberOfCheckIns - dishA.numberOfCheckIns;
+	          });
+	          var topFiveDishes = sortedDishes.slice(0, 35);
+	          topFiveDishNodes = topFiveDishes.map(function (dish) {
+	            function findReviewsFilter(review) {
+	              return review.reviewed_dish._id === dish._id;
+	            }
+	            var numberOfReviews = allReviews.filter(findReviewsFilter).length;
+	            var starArray = allReviews.filter(findReviewsFilter).map(function (review) {
+	              return parseInt(review.review_stars);
+	            });
+	            var sumOfStars = [];
+
+	            if (starArray.length > 0) {
+	              sumOfStars = starArray.reduce(function (a, b) {
+	                return a + b;
+	              });
+	            }
+	            var averageStars = Math.ceil(sumOfStars / allReviews.filter(findReviewsFilter).length);
+
+	            return _react2.default.createElement(
+	              "h4",
+	              { className: "text-center", style: scrollItemStyle, key: dish._id },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { onClick: putOneDishInState.bind(this, dish._id), to: "/dish/" + dish._id },
+	                dish.name + " "
+	              ),
+	              "at",
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: "/spot/" + dish.spotId, onClick: putOneSpotInState.bind(this, dish.spotId) },
+	                " " + dish.nameOfSpot
+	              ),
+	              _react2.default.createElement("br", null),
+	              _react2.default.createElement(
+	                "i",
+	                null,
+	                "has ",
+	                dish.numberOfCheckIns,
+	                " checkIns "
+	              ),
+	              _react2.default.createElement(
+	                "h5",
+	                null,
+	                averageStars > 0 ? 'average rating (out of ' + numberOfReviews + ' reviews)' : ""
+	              ),
+	              averageStars > 0 ? _react2.default.createElement(_reactStarRatingComponent2.default, {
+	                name: "rate2",
+	                editing: false,
+	                starCount: 5,
+	                value: averageStars
+	              }) : "no reviews yet",
+	              _react2.default.createElement("br", null),
+	              _react2.default.createElement("hr", null)
+	            );
+	          });
+	        })();
+	      }
+
+	      return _react2.default.createElement(
+	        "div",
+	        { style: dishesBoxStyle, className: "shadow-container" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "DishBoxAnim space-between" },
+	          allDishes.length > 35 ? topFiveDishNodes : _react2.default.createElement("img", { height: "50", width: "100", src: "./static/loading.gif" })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return TopFiveSubNeighborhoods;
+	}(_react2.default.Component);
+
+	exports.default = TopFiveSubNeighborhoods;
+
+/***/ },
+/* 1315 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(191);
+
+	var _reactStarRatingComponent = __webpack_require__(544);
+
+	var _reactStarRatingComponent2 = _interopRequireDefault(_reactStarRatingComponent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var TopFiveSubNeighborhoods = function (_React$Component) {
+	  _inherits(TopFiveSubNeighborhoods, _React$Component);
+
+	  function TopFiveSubNeighborhoods() {
+	    _classCallCheck(this, TopFiveSubNeighborhoods);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TopFiveSubNeighborhoods).apply(this, arguments));
+	  }
+
+	  _createClass(TopFiveSubNeighborhoods, [{
+	    key: "render",
+	    value: function render() {
+	      var jackpotStyles = { display: this.props.jackpot, textDecoration: "none", zIndex: "2", position: "fixed", bottom: "8%", left: "25%", fontSize: "12em" };
+	      var myGlitterFood = "";
+	      var myOtherGlitterFood = "";
+	      var jackpotGo = this.props.jackpotGo;
+	      var noDice = this.props.noDice;
+	      var randB = Math.floor(Math.random() * 7);
+	      var randC = Math.floor(Math.random() * 7);
+	      myGlitterFood = "./static/glitterFood" + randB + ".gif";
+	      myOtherGlitterFood = "./static/glitterFood" + randC + ".gif";
+	      if (randB === randC) {
+	        jackpotGo();
+	      } else {
+	        noDice();
+	      }
+
+	      return _react2.default.createElement(
+	        "div",
+	        null,
+	        _react2.default.createElement(
+	          "div",
+	          { className: "col-md-2" },
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: "index/admin" },
+	            _react2.default.createElement("img", { src: myGlitterFood, height: "240px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { style: jackpotStyles },
+	            _react2.default.createElement(
+	              "a",
+	              { target: "_blank", href: "http://pizzaparty.party", className: "jackpot" },
+	              "JACKPOT"
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "col-md-offset-2 col-md-3" },
+	          _react2.default.createElement("img", { src: myOtherGlitterFood, height: "240px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return TopFiveSubNeighborhoods;
+	}(_react2.default.Component);
+
+	exports.default = TopFiveSubNeighborhoods;
 
 /***/ }
 /******/ ]);
