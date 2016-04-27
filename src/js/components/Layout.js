@@ -68,7 +68,7 @@ componentDidMount(){
 const userLogout = (dispatch) => {
 	console.log("logout started...")
 		  $.ajax({
-		    url: "http://localhost:4444/api/logout",
+		    url: "http://162.243.119.190:4444/api/logout",
 		    type: 'GET',
 		    error: function(xhr, status, err){
 		      console.error('./logout', status, err.toString());
