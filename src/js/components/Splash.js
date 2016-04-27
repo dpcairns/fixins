@@ -215,7 +215,7 @@ export default class Splash extends React.Component{
 
 
 							<div className="col-md-2">
-									<Link to="index"><img src={myGlitterFood} height="240px" width="400px" style={{marginBottom: "25px", borderRadius:"10px"}}/></Link>
+									<Link to="index/admin"><img src={myGlitterFood} height="240px" width="400px" style={{marginBottom: "25px", borderRadius:"10px"}}/></Link>
 									<div style={jackpotStyles}><a target="_blank" href="http://pizzaparty.party" className="jackpot">JACKPOT</a></div>
 									</div>
 			 				<div className="col-md-offset-2 col-md-3">

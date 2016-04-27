@@ -86,7 +86,7 @@ ReactDOM.render(
 <Router history={hashHistory}>
 	<Route path="/" component={SplashContainer}></Route>
 	<Route path="index" component={Layout}>
-		<IndexRoute component={AdminContainer}></IndexRoute>
+		<IndexRoute component={MyDashboard}></IndexRoute>
 		<Route name="user" path="/user/:id" component={UserDetailContainer}></Route>
 		<Route name="genre" path="/genre/:id" component={GenreDetailContainer}></Route>
 		<Route name="spot" path="/spot/:id" component={SpotDetailContainer}></Route>
@@ -96,13 +96,12 @@ ReactDOM.render(
 		<Route name="login" path="login" component={LogInPageRedux}></Route>
 		<Route name="myDashboard" path="myDashboard" component={MyDashboard}></Route>
 		<Route name="signup" path="signup" component={SignUpPage}></Route>
-		<Route name="newCheckIn" path="newCheckIn" component={NewCheckInPage}></Route>
-		<Route name="newReview" path="newReview" component={NewReviewPage}></Route>
-		<Route name="newDish" path="newDish" component={NewDishPage}></Route>
 		<Route name="newSpot" path="newSpot" component={NewSpotPage}></Route>
 		<Route name="allNeighborhoods" path="allNeighborhoods" component={AllNeighborhoods}></Route>
 		<Route name="allGenres" path="allGenres" component={AllGenres}></Route>
 		<Route name= "mapPage" path="mapPage" component={MapContainer}></Route>
+		<Route name= "admin" path="admin" component={AdminContainer}></Route>
+
 
 	</Route>
 </Router>

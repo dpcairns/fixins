@@ -30,7 +30,7 @@ module.exports = {
   eslint: {configFile: '.eslintrc'},
   proxy: {
   '/api/*': {
-   target: 'http://162.243.119.190:444/api/',
+   target: 'http://localhost:444/api/',
     secure: false,
 	}
      }
