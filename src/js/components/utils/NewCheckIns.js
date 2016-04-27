@@ -11,11 +11,8 @@ export default class NewCheckIns extends React.Component{
     let checkInBoxStyle = {padding: "10px", minWidth:"280px", margin:"0 auto", height: "100%", position: "fixed", background:"pink"}
     let scrollItemStyle = {width: "80%", padding: "10px", margin: "0 auto"}
     			if (allCheckIns.length>90){
-
     			let lastFiveCheckIns = allCheckIns.slice(1, 90)
-
     			recentCheckInNodes = lastFiveCheckIns.map(function(checkIn){
-
     				return (<h4 style={scrollItemStyle} key={checkIn._id}>
     					<Link to={`/user/${checkIn.checkIn_user._id}`} onClick={putOneUserInState.bind(this, checkIn.checkIn_user._id)}>
     					{checkIn.checkIn_user.username + " "}
