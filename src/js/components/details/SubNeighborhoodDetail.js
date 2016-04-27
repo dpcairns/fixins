@@ -36,7 +36,7 @@ class SubNeighborhoodDetail extends React.Component{
 												<div style={itemBoxStyle} key={spot._id} className="shad bg-info">
 														<Link onClick={putOneSpotInState.bind(this, spotId)} to={`/spot/${spotId}`}><h3>{spot.spot_name}</h3></Link>
 														<h4>
-														<Link onClick={putOneGenreInState.bind(this, spot.spot_genres[0]._id)} to={`/genre/${spot.spot_genres[0]._id}`}>({spot.spot_genres[0].genre_name})</Link>
+														<Link onClick={putOneGenreInState.bind(this, spot.spot_genres[0]._id)} to={`/genre/${spot.spot_genres[0]._id}`}>{spot.spot_genres[0].genre_name}</Link>
 														<br/>Signature dish: {
 												theseDishes.length>0 ?
 														<Link onClick={putOneDishInState.bind(this, theseDishes[0]._id)}

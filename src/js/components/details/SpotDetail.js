@@ -6,12 +6,12 @@ import * as FixinsActions from "../../actions/FixinsActions"
 import Links from "../utils/Links"
 import { Modal, Button } from "react-bootstrap"
 import NewDishPage from "../pages/NewDishPage"
-import StarRatingComponent from 'react-star-rating-component';
+import SpotDishList from "./detailUtils/SpotDishList"
+import SpotDetailHeader from "./detailUtils/SpotDetailHeader"
 
 class SpotDetail extends React.Component{
 	render(){
 		let toggleDishModal = this.props.toggleDishModal
-		let itemBoxStyle = {minHeight:"200px", padding:"8px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
 		let allSubNeighborhoods = this.props.allSubNeighborhoods
 		let allUsers = this.props.allUsers
 		let allDishes = this.props.allDishes
@@ -23,88 +23,24 @@ class SpotDetail extends React.Component{
     let spot = this.props.spot
 		let subNeighorhoodId = spot.spot_subNeighborhood._id
 
-			function findDishesFilter(dish){
-									return (dish.dish_spot._id === spot._id && dish.approved)
-						}
-				let theseDishes = allDishes.filter(findDishesFilter)
-				let dishNodes = theseDishes.map(function(dish){
-					let dishId = dish._id
-
-
-					function findReviewsFilter(review){
-					            return (review.reviewed_dish._id === dish._id)
-					      }
-
-						let starArray = allReviews.filter(findReviewsFilter).map(function(review){
-							return parseInt(review.review_stars)
-						})
-						let sumOfStars = []
-
-						let numberOfReviews =	allReviews.filter(findReviewsFilter).length
-						if(starArray.length > 0){
-						sumOfStars = starArray.reduce(function(a, b) { return a + b; });
-					}
-				let averageStars = Math.ceil(sumOfStars / starArray.length)
-
-
-
-									return (
-
-
-                      <div style={itemBoxStyle} className="shad bg-info" key={dish._id}>
-
-												<Link onClick={putOneDishInState.bind(this, dishId)} to={`/dish/${dishId}`}>
-														<h3>{dish.dish_name}</h3>
-												</Link>
-											<h4>
-											{dish.dish_blurb} <br/>
-											{dish.dish_calories} calories <br/>
-											{dish.dish_price} dollars <br/>
-											<h5>{averageStars > 0 ? 'average rating (out of ' +numberOfReviews + ' reviews)' : "" }</h5>
-											{averageStars > 0 ? <StarRatingComponent
-										                    name="rate2"
-										                    editing={false}
-										                    starCount={5}
-										                    value={averageStars}
-										                />	: "no reviews yet"
-																	}									</h4>
-
-                      </div>
-
-										)
-				})
     return (
 <div>
 <div className="bg-warning med-pad med-mar">
-				<div className="row">
-								<div className="col-md-6">
-						    		<h1>{spot.spot_name}</h1>
-										<h3><Link onClick={putOneGenreInState.bind(this, spot.spot_genres[0]._id)} to={`/genre/${spot.spot_genres[0]._id}`}>{spot.spot_genres[0].genre_name}</Link></h3>
+	<SpotDetailHeader
+	spot={spot}
+	putOneGenreInState={putOneGenreInState}
+	toggleDishModal={toggleDishModal}
+		/>
 
-								</div>
+	<SpotDishList
+	spot={spot}
+	allDishes={allDishes}
+	allReviews={allReviews}
+	putOneDishInState={putOneDishInState}
+	putOneSubNeighborhoodInState={putOneSubNeighborhoodInState}
+	subNeighorhoodId={subNeighorhoodId}
 
-								<div className="col-md-6 text-center">
-										<h2>
-										<a onClick={toggleDishModal}>Add a new dish!</a>
-										</h2>
-								</div>
-
-			  </div>
-				<div className="row text-center">
-				<h3>located at {spot.spot_address !== undefined ? spot.spot_address : "123 Fake Street"} in
-				<Link to={`/subNeighborhood/${subNeighorhoodId}`} onClick={putOneSubNeighborhoodInState.bind(this, subNeighorhoodId)}>
-				 {" " + spot.spot_subNeighborhood.subNeighborhood_name}
-				</Link>
-
-				</h3>
-				</div>
-				<h3>dishes available at {spot.spot_name}</h3>
-				<div className="flex flexwrap">
-					{allDishes.filter(findDishesFilter).length>0 ? dishNodes : (<tr><td>no dishes for {spot.spot_name}...yet! <a onClick={toggleDishModal}>Click here to be the first to add one!</a> </td></tr>)}
-				</div>
-    </div>
-
-
+	 />
 
 				<Modal show={this.props.showDishModal} bsSize="small" aria-labelledby="contained-modal-title-sm">
 			<Modal.Header>
@@ -121,7 +57,7 @@ class SpotDetail extends React.Component{
 
 
 
-
+</div>
 </div>
       )
   }

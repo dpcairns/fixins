@@ -16,12 +16,9 @@ render(){
   let thisUser = this.props.thisUser
   let listStyle={maxHeight:"400px",overflowX:"hidden",overflowY:"scroll"}
 
-  function findCheckInsFilter(checkIn){
-              return (checkIn.checkIn_user._id === thisUser._id || checkIn.checkIn_user === thisUser._id)
-        }
-   let userCheckIns = 	allCheckIns.filter(findCheckInsFilter).map(function(checkIn){
-            return checkIn
-        })
+  		  function findCheckInsFilter(checkIn){
+  		              return (checkIn.checkIn_user._id === thisUser._id || checkIn.checkIn_user === thisUser._id)
+  		        }
     let checkInNodes = allCheckIns.filter(findCheckInsFilter).map(function(checkIn){
       let dishId = checkIn.checkIn_dish._id
               return (
@@ -67,7 +64,7 @@ render(){
   return(
     <div className="row">
       <div className="col-md-6" style={listStyle}>
-          <h1>Your CheckIns</h1>
+          <h1>{this.props.your ? "your" : "their"} CheckIns</h1>
               <table className="table">
                 <tbody>
               {checkInNodes}
@@ -75,7 +72,7 @@ render(){
               </table>
       </div>
       <div className="col-md-6" style={listStyle}>
-          <h1>Your Reviews</h1>
+          <h1>{this.props.your ? "your" : "their"} Reviews</h1>
           <table className="table">
             <tbody>
             {reviewNodes}

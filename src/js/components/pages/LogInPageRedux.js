@@ -77,7 +77,7 @@ class LogInPageRedux extends Component {
           <input type='password' className='form-control' id='password'
             placeholder='And the password?' {...password} required=''/>
         </fieldset>
-        <button type='submit' className='btn btn-primary btn-block' disabled={submitting}>Save
+        <button type='submit' className='btn btn-primary btn-block' disabled={submitting}>Log in!!
           {submitting ? <span className='loader glyphicon glyphicon-refresh spin'></span>
             : <span></span>}
           </button>

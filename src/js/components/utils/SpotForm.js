@@ -146,28 +146,28 @@ export default class SpotForm extends React.Component{
 	return(
 		<div>
 		<h3>Post a new spot in {this.props.mySubNeighborhood.subNeighborhood_name}</h3>
-		<div className="input-group">
+		<div className="input-group" style={{width:"100%"}}>
 			Spot name:
 		  <input type="text" value={this.state.name}
 			  onChange={this.handleNameChange.bind(this)}
 			  className="form-control"
 			  placeholder="spot name" />
 		</div>
-		<div className="input-group">
+		<div className="input-group"  style={{width:"100%"}}>
 			Spot address:
 		  <input type="text" value={this.state.address}
 			  onChange={this.handleAddressChange.bind(this)}
 			  className="form-control"
-			  placeholder="Ex: 132 Fake Street Portland OR 23456" />
+			  placeholder="Click on the big map below to find an address quick" />
 		</div>
 
-		<div className="input-group">
+		<div className="input-group" style={{width:"100%"}}>
 			Blurb:
 		  <input type="text" value={this.state.blurb}
 			  onChange={this.handleBlurbChange.bind(this)}
 			  className="form-control" placeholder="spot blurb" />
 		</div>
-		<div className="input-group">
+		<div className="input-group" style={{width:"100%"}}>
 			Genres:
 			<CustomDropdown setValueTo={this.state.genres}
 				onchange2={this.handleGenresChange.bind(this)}

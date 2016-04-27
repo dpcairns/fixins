@@ -66,6 +66,7 @@ render(){
       allDishes={allDishes}
       putOneDishInState={putOneDishInState}
       thisUser={thisUser}
+      your={true}
        />
 
     </div>
