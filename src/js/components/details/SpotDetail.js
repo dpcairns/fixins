@@ -36,6 +36,7 @@ class SpotDetail extends React.Component{
 	spot={spot}
 	allDishes={allDishes}
 	allReviews={allReviews}
+	toggleDishModal={toggleDishModal}
 	putOneDishInState={putOneDishInState}
 	putOneSubNeighborhoodInState={putOneSubNeighborhoodInState}
 	subNeighorhoodId={subNeighorhoodId}

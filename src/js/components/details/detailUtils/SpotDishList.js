@@ -11,6 +11,8 @@ export default class SpotDishList extends React.Component{
     let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
     let putOneDishInState = this.props.putOneDishInState
     let subNeighorhoodId = this.props.subNeighorhoodId
+    let toggleDishModal = this.props.toggleDishModal
+
     let itemBoxStyle = {minHeight:"200px", padding:"8px",margin:"5px",float:"left",textAlign:"center", borderRadius:"10px"}
 
     			function findDishesFilter(dish){
