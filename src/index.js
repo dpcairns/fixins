@@ -25,6 +25,7 @@ import NewSpotPage from './js/components/pages/NewSpotPage'
 import AllNeighborhoods from './js/components/details/AllNeighborhoods'
 import AllGenres from './js/components/details/AllGenres'
 import MyDashboard from './js/components/pages/MyDashboard'
+import InfographicPage from './js/components/InfographicPage'
 import { loginSuccess } from './js/components/utils/AuthModule'
 
 const app = document.getElementById('app');
@@ -85,6 +86,7 @@ ReactDOM.render(
 	<Provider store={store}>
 <Router history={hashHistory}>
 	<Route path="/" component={SplashContainer}></Route>
+	<Route name="programming" path="programming" component={InfographicPage}></Route>
 	<Route path="index" component={Layout}>
 		<IndexRoute component={MyDashboard}></IndexRoute>
 		<Route name="user" path="/user/:id" component={UserDetailContainer}></Route>
