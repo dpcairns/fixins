@@ -99,7 +99,7 @@ class MapItself extends React.Component {
       return (
         <div>
         <h3>(did we miss a spot? <Link onClick={putOneSubNeighborhoodInState.bind(this, "TRUE_NEW_SPOT")}
-        to="index/allNeighborhoods"> add it here!</Link>) | | | |
+        to="index/allNeighborhoods"> add it here!</Link>)
         <span style={{float: "right"}}>
         search spots by name: <input type="text" value={this.state.searchName} onChange={this.handleNameSearch.bind(this)}/>
         </span></h3>

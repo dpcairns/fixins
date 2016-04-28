@@ -91096,7 +91096,7 @@
 	              to: 'index/allNeighborhoods' },
 	            ' add it here!'
 	          ),
-	          ') | | | |',
+	          ')',
 	          _react2.default.createElement(
 	            'span',
 	            { style: { float: "right" } },
