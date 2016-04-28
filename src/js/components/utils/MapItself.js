@@ -5,6 +5,15 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
 class MapItself extends React.Component {
+  constructor(){
+    super()
+    this.state = {searchName: ""}
+  }
+
+      handleNameSearch(e){
+      		this.setState({searchName: e.target.value.toLowerCase().substr(0,20)})
+      	}
+
     render(){
     const minZoom = 11
     const center = [45.50, -122.63]
@@ -23,8 +32,15 @@ class MapItself extends React.Component {
     				}
   	let approvedSpots = allSpots.filter(findSpotsFilter)
 
+    	let filteredSpots = approvedSpots
+    	filteredSpots = approvedSpots.filter(
+    		(spot) => {
+    			return	spot.spot_name.toLowerCase().indexOf(this.state.searchName) !== -1;
+    			}
+    		)
 
-    let markerNodes = approvedSpots.map((spot) => {
+
+    let markerNodes = filteredSpots.map((spot) => {
       	function findDishesFilter(dish){
           									return (dish.dish_spot._id === spot._id)
           						}
@@ -83,7 +99,10 @@ class MapItself extends React.Component {
       return (
         <div>
         <h3>(did we miss a spot? <Link onClick={putOneSubNeighborhoodInState.bind(this, "TRUE_NEW_SPOT")}
-        to="index/allNeighborhoods"> add it here!</Link>)</h3>
+        to="index/allNeighborhoods"> add it here!</Link>) | | | |
+        <span style={{float: "right"}}>
+        search spots by name: <input type="text" value={this.state.searchName} onChange={this.handleNameSearch.bind(this)}/>
+        </span></h3>
         <Map center={center} zoom={zoom} minZoom={minZoom}>
           <TileLayer
             id="dpcairns.pee063cb"

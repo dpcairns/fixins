@@ -90980,10 +90980,18 @@
 	  function MapItself() {
 	    _classCallCheck(this, MapItself);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(MapItself).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MapItself).call(this));
+
+	    _this.state = { searchName: "" };
+	    return _this;
 	  }
 
 	  _createClass(MapItself, [{
+	    key: 'handleNameSearch',
+	    value: function handleNameSearch(e) {
+	      this.setState({ searchName: e.target.value.toLowerCase().substr(0, 20) });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
@@ -91005,7 +91013,12 @@
 	      }
 	      var approvedSpots = allSpots.filter(findSpotsFilter);
 
-	      var markerNodes = approvedSpots.map(function (spot) {
+	      var filteredSpots = approvedSpots;
+	      filteredSpots = approvedSpots.filter(function (spot) {
+	        return spot.spot_name.toLowerCase().indexOf(_this2.state.searchName) !== -1;
+	      });
+
+	      var markerNodes = filteredSpots.map(function (spot) {
 	        function findDishesFilter(dish) {
 	          return dish.dish_spot._id === spot._id;
 	        }
@@ -91083,7 +91096,13 @@
 	              to: 'index/allNeighborhoods' },
 	            ' add it here!'
 	          ),
-	          ')'
+	          ') | | | |',
+	          _react2.default.createElement(
+	            'span',
+	            { style: { float: "right" } },
+	            'search spots by name: ',
+	            _react2.default.createElement('input', { type: 'text', value: this.state.searchName, onChange: this.handleNameSearch.bind(this) })
+	          )
 	        ),
 	        _react2.default.createElement(
 	          _reactLeaflet.Map,
