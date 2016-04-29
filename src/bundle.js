@@ -36458,6 +36458,7 @@
 
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
+	    currentUser: state.currentUser,
 	    allGenres: state.genres,
 	    allSpots: state.spots,
 	    allDishes: state.dishes,
@@ -36673,7 +36674,7 @@
 			key: "render",
 			value: function render() {
 
-				if (this.props.currentUser.username !== "admin321") {
+				if (this.props.currentUser === undefined || this.props.currentUser.username !== "admin321") {
 					this.context.router.push('index/login');
 				}
 
