@@ -116218,7 +116218,7 @@
 
 	var _DishCheckIns2 = _interopRequireDefault(_DishCheckIns);
 
-	var _DishReviews = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./detailUtils/DishReviews\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _DishReviews = __webpack_require__(1311);
 
 	var _DishReviews2 = _interopRequireDefault(_DishReviews);
 
@@ -116980,7 +116980,166 @@
 	exports.default = DishCheckIns;
 
 /***/ },
-/* 1311 */,
+/* 1311 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(168);
+
+	var _reactRouter = __webpack_require__(191);
+
+	var _reactStarRatingComponent = __webpack_require__(544);
+
+	var _reactStarRatingComponent2 = _interopRequireDefault(_reactStarRatingComponent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DishReviews = function (_React$Component) {
+	  _inherits(DishReviews, _React$Component);
+
+	  function DishReviews() {
+	    _classCallCheck(this, DishReviews);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DishReviews).apply(this, arguments));
+	  }
+
+	  _createClass(DishReviews, [{
+	    key: 'render',
+	    value: function render() {
+	      var allReviews = this.props.allReviews;
+	      var putOneUserInState = this.props.putOneUserInState;
+	      var dish = this.props.dish;
+	      var toggleReviewModal = this.props.toggleReviewModal;
+	      var listStyle = { maxHeight: "400px", overflowX: "hidden", overflowY: "scroll" };
+	      function findReviewsFilter(review) {
+	        return review.reviewed_dish._id === dish._id;
+	      }
+
+	      var reviewNodes = allReviews.filter(findReviewsFilter).map(function (review) {
+	        var userId = review.review_user._id;
+	        var dishId = review.reviewed_dish._id;
+	        return _react2.default.createElement(
+	          'tr',
+	          { key: review._id },
+	          _react2.default.createElement(
+	            'td',
+	            null,
+	            _react2.default.createElement(
+	              'h5',
+	              null,
+	              review.review_words,
+	              ' '
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/user/' + userId, onClick: putOneUserInState.bind(this, userId) },
+	              _react2.default.createElement(
+	                'h5',
+	                null,
+	                review.review_user.username,
+	                ' '
+	              ),
+	              ' '
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              _react2.default.createElement(_reactStarRatingComponent2.default, {
+	                name: 'rate2',
+	                editing: false,
+	                starCount: 5,
+	                value: review.review_stars
+	              })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
+	            _react2.default.createElement(
+	              'h6',
+	              null,
+	              review.review_date
+	            )
+	          )
+	        );
+	      }).reverse();
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'col-md-6', style: listStyle },
+	        _react2.default.createElement(
+	          'table',
+	          { className: 'table' },
+	          _react2.default.createElement(
+	            'caption',
+	            null,
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Reviews for ',
+	              dish.dish_name
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'tbody',
+	            null,
+	            _react2.default.createElement(
+	              'h6',
+	              null,
+	              allReviews.filter(findReviewsFilter).length > 0 ? reviewNodes : _react2.default.createElement(
+	                'tr',
+	                null,
+	                _react2.default.createElement(
+	                  'td',
+	                  null,
+	                  'no reviews for ',
+	                  dish.dish_name,
+	                  '...yet! ',
+	                  _react2.default.createElement(
+	                    'a',
+	                    { onClick: toggleReviewModal },
+	                    'Click here to be the first!'
+	                  ),
+	                  ' '
+	                )
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return DishReviews;
+	}(_react2.default.Component);
+
+	exports.default = DishReviews;
+
+/***/ },
 /* 1312 */
 /***/ function(module, exports, __webpack_require__) {
 

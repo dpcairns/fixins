@@ -20,7 +20,7 @@ function findReviewsFilter(review){
 		let dishId = review.reviewed_dish._id
             return (
 							<tr key={review._id}>
-								<td><h5>{review.review_words} </h3></td>
+								<td><h5>{review.review_words} </h5></td>
 								<td><Link to={`/user/${userId}`} onClick={putOneUserInState.bind(this, userId)}>
 									<h5>{review.review_user.username} </h5> </Link>
 								</td>
@@ -30,7 +30,8 @@ function findReviewsFilter(review){
 																	editing={false}
 																	starCount={5}
 																	value={review.review_stars}
-															/></h4>
+															/>
+								</h4>
  								</td>
 								<td><h6>{review.review_date}</h6></td>
 							</tr>
