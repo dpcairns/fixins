@@ -117066,16 +117066,12 @@
 	          _react2.default.createElement(
 	            'td',
 	            null,
-	            _react2.default.createElement(
-	              'h6',
-	              null,
-	              _react2.default.createElement(_reactStarRatingComponent2.default, {
-	                name: 'rate2',
-	                editing: false,
-	                starCount: 5,
-	                value: review.review_stars
-	              })
-	            )
+	            _react2.default.createElement(_reactStarRatingComponent2.default, {
+	              name: 'rate2',
+	              editing: false,
+	              starCount: 5,
+	              value: review.review_stars
+	            })
 	          ),
 	          _react2.default.createElement(
 	            'td',
