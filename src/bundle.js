@@ -117042,7 +117042,7 @@
 	            'td',
 	            null,
 	            _react2.default.createElement(
-	              'h5',
+	              'h4',
 	              null,
 	              review.review_words,
 	              ' '
@@ -117055,10 +117055,13 @@
 	              _reactRouter.Link,
 	              { to: '/user/' + userId, onClick: putOneUserInState.bind(this, userId) },
 	              _react2.default.createElement(
-	                'h5',
+	                'h4',
 	                null,
-	                review.review_user.username,
-	                ' '
+	                _react2.default.createElement(
+	                  'i',
+	                  null,
+	                  review.review_user.username
+	                )
 	              ),
 	              ' '
 	            )
