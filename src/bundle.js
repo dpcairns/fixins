@@ -234,6 +234,7 @@
 				_react2.default.createElement(_reactRouter.Route, { name: "myDashboard", path: "myDashboard", component: _MyDashboard2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "signup", path: "signup", component: _SignUpPage2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "newSpot", path: "newSpot", component: _NewSpotPage2.default }),
+				_react2.default.createElement(_reactRouter.Route, { name: "newDish", path: "newDish", component: _NewDishPage2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "allNeighborhoods", path: "allNeighborhoods", component: _AllNeighborhoods2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "allGenres", path: "allGenres", component: _AllGenres2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "mapPage", path: "mapPage", component: _MapContainer2.default }),

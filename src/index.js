@@ -100,6 +100,7 @@ ReactDOM.render(
 		<Route name="myDashboard" path="myDashboard" component={MyDashboard}></Route>
 		<Route name="signup" path="signup" component={SignUpPage}></Route>
 		<Route name="newSpot" path="newSpot" component={NewSpotPage}></Route>
+		<Route name="newDish" path="newDish" component={NewDishPage}></Route>
 		<Route name="allNeighborhoods" path="allNeighborhoods" component={AllNeighborhoods}></Route>
 		<Route name="allGenres" path="allGenres" component={AllGenres}></Route>
 		<Route name= "mapPage" path="mapPage" component={MapContainer}></Route>
