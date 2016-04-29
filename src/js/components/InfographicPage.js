@@ -74,7 +74,7 @@ export default class InfographicPage extends React.Component{
     </div>
     </div>
 
-    <div style={{display: "flex", flexWrap: "wrap", alignItems:"center", justifyContent: "center"}}>
+    <div style={{display: "flex", flexWrap: "wrap", alignItems:"center", justifyContent: "center", transition: "flex-wrap 0.3s ease"}}>
 
     {userMetricNodes}
 

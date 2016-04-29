@@ -1,6 +1,6 @@
 import React from "react"
 import Icon from "./Icon"
-
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 export default class Infographic extends React.Component{
   render(){
     let NO_PROGRAM = "NO_PROGRAM"
@@ -51,9 +51,11 @@ export default class Infographic extends React.Component{
           number now: {statusQuo} <br/>
           number if fully funded: {fullNumber}<br/>
           dancing burgers (metaphoic): <br/>
-          <div style={{display: "flex", flexWrap: "wrap"}}>
-            {icons}
-          </div>
+              <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+              <div style={{display: "flex", flexWrap: "wrap"}}>
+                {icons}
+                </div>
+              </ReactCSSTransitionGroup>
         </div>
     )
   }
