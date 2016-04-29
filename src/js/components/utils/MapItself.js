@@ -36,7 +36,6 @@ class MapItself extends React.Component {
     			return	spot.spot_name.toLowerCase().indexOf(searchName) !== -1;
     			}
     		)
-        console.log(filteredSpots)
 
     let markerNodes = filteredSpots.map((spot) => {
       	function findDishesFilter(dish){

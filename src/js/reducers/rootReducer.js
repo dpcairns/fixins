@@ -3,6 +3,15 @@ import auth from "../components/utils/AuthModule"
 import checkInForm from "../components/utils/CheckInFormRedux"
 import {reducer as formReducer} from 'redux-form';
 
+const spotAddressFormValue  = (state = "", action) => {
+    switch(action.type) {
+      case 'ADDRESS_ON_FORM':
+      console.log(action)
+
+      return action.address
+      default: return state
+    }
+}
 
 const searchName = (state = "", action) => {
     switch(action.type) {
@@ -547,6 +556,7 @@ const hiddenValue = (state = "", action) => {
 }
 
 const FixinsApp = combineReducers({
+  spotAddressFormValue,
   searchName,
   mapStuff,
   showDishModal,
