@@ -172,6 +172,7 @@ const review = (state = "", action) => {
       return {
         _id: action._id,
         reviewed_dish: action.reviewed_dish,
+        review_stars: action.review_stars,
         review_user: action.review_user,
         review_date: action.review_date,
         review_words: action.review_words
@@ -184,6 +185,7 @@ const review = (state = "", action) => {
 const reviews = (state = [], action) => {
   switch (action.type) {
     case 'CREATE_REVIEW':
+    console.log(action)
       return [
         ...state, review(undefined, action)
       ]
