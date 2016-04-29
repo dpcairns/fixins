@@ -117077,7 +117077,7 @@
 	            'td',
 	            null,
 	            _react2.default.createElement(
-	              'h4',
+	              'h6',
 	              null,
 	              review.review_date
 	            )

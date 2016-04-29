@@ -32,7 +32,7 @@ function findReviewsFilter(review){
 																	value={review.review_stars}
 															/>
  								</td>
-								<td><h4>{review.review_date}</h4></td>
+								<td><h6>{review.review_date}</h6></td>
 							</tr>
 						)
   }).reverse()
