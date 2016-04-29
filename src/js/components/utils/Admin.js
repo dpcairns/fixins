@@ -20,9 +20,13 @@ export default class Admin extends React.Component{
 	render(){
 
 
-	  if(this.props.currentUser === undefined || this.props.currentUser.username !== "admin321"){
+	  if(this.props.currentUser === undefined){
 		  this.context.router.push('index/login')
+
 		  }
+		else if(this.props.currentUser.username !== "admin321"){
+			this.context.router.push('index/login')
+		}
 
 
 	return(
