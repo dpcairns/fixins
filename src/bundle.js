@@ -117042,16 +117042,6 @@
 	            'td',
 	            null,
 	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              review.review_words,
-	              ' '
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _react2.default.createElement(
 	              _reactRouter.Link,
 	              { to: '/user/' + userId, onClick: putOneUserInState.bind(this, userId) },
 	              _react2.default.createElement(
@@ -117063,6 +117053,16 @@
 	                  review.review_user.username
 	                )
 	              ),
+	              ' '
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'td',
+	            null,
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              review.review_words,
 	              ' '
 	            )
 	          ),
