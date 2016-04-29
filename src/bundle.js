@@ -117058,7 +117058,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'td',
-	            null,
+	            { className: 'text-right' },
 	            _react2.default.createElement(
 	              'h4',
 	              null,

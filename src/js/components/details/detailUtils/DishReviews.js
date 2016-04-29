@@ -23,7 +23,7 @@ function findReviewsFilter(review){
 								<td><Link to={`/user/${userId}`} onClick={putOneUserInState.bind(this, userId)}>
 									<h4><i>{review.review_user.username}</i></h4> </Link>
 								</td>
-								<td><h4>{review.review_words} </h4></td>
+								<td className="text-right"><h4>{review.review_words} </h4></td>
 
 								<td><h4>
 								<StarRatingComponent
