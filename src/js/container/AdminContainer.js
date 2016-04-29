@@ -4,6 +4,7 @@ import * as FixinsActions from "../actions/FixinsActions"
 
 const mapStateToProps = (state) => {
   return {
+    currentUser: state.currentUser,
     allGenres: state.genres,
     allSpots: state.spots,
     allDishes: state.dishes,
