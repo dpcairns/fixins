@@ -10,9 +10,6 @@ class MapItself extends React.Component {
     this.state = {searchName: ""}
   }
 
-      handleNameSearch(e){
-      		this.setState({searchName: e.target.value.toLowerCase().substr(0,20)})
-      	}
 
     render(){
     const minZoom = 11
@@ -26,6 +23,7 @@ class MapItself extends React.Component {
     let allSpots = this.props.allSpots
     let putOneDishInState = this.props.putOneDishInState
     let putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState
+    let searchName = this.props.searchName
 
     function findSpotsFilter(spot){
         				return (spot.approved)
@@ -35,10 +33,10 @@ class MapItself extends React.Component {
     	let filteredSpots = approvedSpots
     	filteredSpots = approvedSpots.filter(
     		(spot) => {
-    			return	spot.spot_name.toLowerCase().indexOf(this.state.searchName) !== -1;
+    			return	spot.spot_name.toLowerCase().indexOf(searchName) !== -1;
     			}
     		)
-
+        console.log(filteredSpots)
 
     let markerNodes = filteredSpots.map((spot) => {
       	function findDishesFilter(dish){
@@ -101,7 +99,7 @@ class MapItself extends React.Component {
         <h3>(did we miss a spot? <Link onClick={putOneSubNeighborhoodInState.bind(this, "TRUE_NEW_SPOT")}
         to="index/allNeighborhoods"> add it here!</Link>)
         <span style={{float: "right"}}>
-        search spots by name: <input type="text" value={this.state.searchName} onChange={this.handleNameSearch.bind(this)}/>
+        search spots by name: <input type="text" value={searchName} onChange={this.props.handleNameSearch.bind(this)}/>
         </span></h3>
         <Map center={center} zoom={zoom} minZoom={minZoom}>
           <TileLayer
@@ -135,14 +133,23 @@ function putOneSubNeighborhoodInState(_id){
   return {type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id:_id}
 }
 
+
+function handleNameSearch(e){
+    return {type: "NAME_SEARCH", searchName: e.target.value.toLowerCase().substr(0,20)}
+  	}
+
 const mapStateToProps = (state) => {
- return {allSpots: state.spots, allDishes: state.dishes}
+ return {allSpots: state.spots,
+        allDishes: state.dishes,
+        searchName: state.searchName
+        }
 }
 
 const mapDispatchToProps = (dispatch) => {
  return {putOneSpotInState: (_id) => dispatch(putOneSpotInState(_id)),
         putOneDishInState: (_id) => dispatch(putOneDishInState(_id)),
         putOneSubNeighborhoodInState: (_id) => dispatch(putOneSubNeighborhoodInState(_id)),
+        handleNameSearch: (e) => dispatch(handleNameSearch(e))
  }
 }
 

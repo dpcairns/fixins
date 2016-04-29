@@ -164,6 +164,7 @@
 	var app = document.getElementById('app');
 
 	var initialState = {
+		searchName: "",
 		mapStuff: {},
 		showSignUpModal: false,
 		showLoginModal: false,
@@ -90987,11 +90988,6 @@
 	  }
 
 	  _createClass(MapItself, [{
-	    key: 'handleNameSearch',
-	    value: function handleNameSearch(e) {
-	      this.setState({ searchName: e.target.value.toLowerCase().substr(0, 20) });
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
@@ -91007,6 +91003,7 @@
 	      var allSpots = this.props.allSpots;
 	      var putOneDishInState = this.props.putOneDishInState;
 	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
+	      var searchName = this.props.searchName;
 
 	      function findSpotsFilter(spot) {
 	        return spot.approved;
@@ -91015,8 +91012,9 @@
 
 	      var filteredSpots = approvedSpots;
 	      filteredSpots = approvedSpots.filter(function (spot) {
-	        return spot.spot_name.toLowerCase().indexOf(_this2.state.searchName) !== -1;
+	        return spot.spot_name.toLowerCase().indexOf(searchName) !== -1;
 	      });
+	      console.log(filteredSpots);
 
 	      var markerNodes = filteredSpots.map(function (spot) {
 	        function findDishesFilter(dish) {
@@ -91101,7 +91099,7 @@
 	            'span',
 	            { style: { float: "right" } },
 	            'search spots by name: ',
-	            _react2.default.createElement('input', { type: 'text', value: this.state.searchName, onChange: this.handleNameSearch.bind(this) })
+	            _react2.default.createElement('input', { type: 'text', value: searchName, onChange: this.props.handleNameSearch.bind(this) })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -91136,8 +91134,15 @@
 	  return { type: "PUT_ONE_SUBNEIGHBORHOOD_IN_STATE", _id: _id };
 	}
 
+	function _handleNameSearch(e) {
+	  return { type: "NAME_SEARCH", searchName: e.target.value.toLowerCase().substr(0, 20) };
+	}
+
 	var mapStateToProps = function mapStateToProps(state) {
-	  return { allSpots: state.spots, allDishes: state.dishes };
+	  return { allSpots: state.spots,
+	    allDishes: state.dishes,
+	    searchName: state.searchName
+	  };
 	};
 
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -91149,6 +91154,9 @@
 	    },
 	    putOneSubNeighborhoodInState: function putOneSubNeighborhoodInState(_id) {
 	      return dispatch(_putOneSubNeighborhoodInState(_id));
+	    },
+	    handleNameSearch: function handleNameSearch(e) {
+	      return dispatch(_handleNameSearch(e));
 	    }
 	  };
 	};
@@ -91183,6 +91191,17 @@
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+	var searchName = function searchName() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case 'NAME_SEARCH':
+	      return action.searchName;
+	    default:
+	      return state;
+	  }
+	};
 	var mapStuff = function mapStuff() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	  var action = arguments[1];
@@ -91746,6 +91765,7 @@
 	};
 
 	var FixinsApp = (0, _redux.combineReducers)({
+	  searchName: searchName,
 	  mapStuff: mapStuff,
 	  showDishModal: showDishModal,
 	  showLoginModal: showLoginModal,
@@ -97063,6 +97083,7 @@
 							spot: spot,
 							allDishes: allDishes,
 							allReviews: allReviews,
+							toggleDishModal: toggleDishModal,
 							putOneDishInState: putOneDishInState,
 							putOneSubNeighborhoodInState: putOneSubNeighborhoodInState,
 							subNeighorhoodId: subNeighorhoodId
@@ -116659,6 +116680,8 @@
 	      var putOneSubNeighborhoodInState = this.props.putOneSubNeighborhoodInState;
 	      var putOneDishInState = this.props.putOneDishInState;
 	      var subNeighorhoodId = this.props.subNeighorhoodId;
+	      var toggleDishModal = this.props.toggleDishModal;
+
 	      var itemBoxStyle = { minHeight: "200px", padding: "8px", margin: "5px", float: "left", textAlign: "center", borderRadius: "10px" };
 
 	      function findDishesFilter(dish) {

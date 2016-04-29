@@ -32,6 +32,7 @@ const app = document.getElementById('app');
 
 
 let initialState = {
+	searchName: "",
 	mapStuff: {},
 	showSignUpModal: false,
 	showLoginModal: false,

@@ -4,7 +4,13 @@ import checkInForm from "../components/utils/CheckInFormRedux"
 import {reducer as formReducer} from 'redux-form';
 
 
-
+const searchName = (state = "", action) => {
+    switch(action.type) {
+      case 'NAME_SEARCH':
+      return action.searchName
+      default: return state
+    }
+}
 const mapStuff = (state = {}, action) => {
     switch(action.type) {
       case 'MAP_CLICK':
@@ -539,6 +545,7 @@ const hiddenValue = (state = "", action) => {
 }
 
 const FixinsApp = combineReducers({
+  searchName,
   mapStuff,
   showDishModal,
   showLoginModal,
