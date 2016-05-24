@@ -84,29 +84,7 @@ let store = createStoreWithMiddleware(
 
 
 ReactDOM.render(
-	<Provider store={store}>
 <Router history={hashHistory}>
-	<Route path="/" component={SplashContainer}></Route>
-	<Route name="programming" path="programming" component={InfographicPage}></Route>
-	<Route path="index" component={Layout}>
-		<IndexRoute component={MyDashboard}></IndexRoute>
-		<Route name="user" path="/user/:id" component={UserDetailContainer}></Route>
-		<Route name="genre" path="/genre/:id" component={GenreDetailContainer}></Route>
-		<Route name="spot" path="/spot/:id" component={SpotDetailContainer}></Route>
-		<Route name="dish" path="/dish/:id" component={DishDetailContainer}></Route>
-		<Route name="subNeighborhood" path="/subNeighborhood/:id" component={SubNeighborhoodDetailContainer}></Route>
-		<Route name="neighborhood" path="/neighborhood/:id" component={NeighborhoodDetail}></Route>
-		<Route name="login" path="login" component={LogInPageRedux}></Route>
-		<Route name="myDashboard" path="myDashboard" component={MyDashboard}></Route>
-		<Route name="signup" path="signup" component={SignUpPage}></Route>
-		<Route name="newSpot" path="newSpot" component={NewSpotPage}></Route>
-		<Route name="newDish" path="newDish" component={NewDishPage}></Route>
-		<Route name="allNeighborhoods" path="allNeighborhoods" component={AllNeighborhoods}></Route>
-		<Route name="allGenres" path="allGenres" component={AllGenres}></Route>
-		<Route name= "mapPage" path="mapPage" component={MapContainer}></Route>
-		<Route name= "admin" path="admin" component={AdminContainer}></Route>
-
-
+	<Route name="/programming" path="programming" component={InfographicPage}></Route>
 	</Route>
-</Router>
-</Provider>, app);
+</Router>, app);
