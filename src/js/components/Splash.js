@@ -43,8 +43,8 @@ export default class Splash extends React.Component{
 				<div className="bg-info" style={{height: "100%", width: "100%", position:"fixed", backgroundImage: myGif, backgroundSize: "cover", zIndex:"0"}}>
 				</div>
 
-		<div className="text-center" style={{zIndex:"2", opacity:"0.9"}}>
-			<div className="col-md-3">
+		<div className="text-center" style={{overflow: "hidden", zIndex:"2", opacity:"0.9"}}>
+			<div className="col-sm-3">
 				<TopDishes
 				checkIns={this.props.checkIns}
 				dishes={this.props.dishes}
@@ -54,9 +54,9 @@ export default class Splash extends React.Component{
 				/>
 			</div>
 
-		<div className="col-md-6">
+		<div className="col-sm-6">
 
-		<Link to="index/myDashboard"> <h1> || FIXINS || <br/>
+		<Link to="index/myDashboard"> <h1 style={{color:"white"}}> || FIXINS || <br/>
 			 || GET STUFT || </h1></Link>
 
 			 		<div className="row">
@@ -77,7 +77,7 @@ export default class Splash extends React.Component{
 
 </div>
 
-		<div className="col-md-3">
+		<div className="col-sm-3">
 			<NewCheckIns
 			checkIns={this.props.checkIns}
 			putOneDishInState={putOneDishInState}

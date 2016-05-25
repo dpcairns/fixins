@@ -4,8 +4,8 @@ import StarRatingComponent from 'react-star-rating-component';
 
 export default class TopFiveSubNeighborhoods extends React.Component{
 render(){
-  let dishesBoxStyle = {padding: "10px", minWidth:"280px", margin:"0 auto", height: "100%", position: "fixed", background:"lightblue"}
-  let scrollItemStyle = {width: "80%", padding: "10px", margin: "0 auto"}
+  let dishesBoxStyle = {padding: "10px", margin:"0 auto", height: "100%", background:"lightblue"}
+  let scrollItemStyle = {width: "80%", margin: "0 auto"}
   let topFiveDishNodes = []
   let allDishes = this.props.dishes
   let allReviews = this.props.reviews
@@ -76,7 +76,7 @@ render(){
   			}
 
   return(
-    <div style={dishesBoxStyle} className="shadow-container">
+    <div style={dishesBoxStyle} className="hidden-xs shadow-container">
             <div className="DishBoxAnim space-between">
 
       {allDishes.length>35 ? topFiveDishNodes : <img height="50" width="100" src="./static/loading.gif" />}

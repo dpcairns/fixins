@@ -33,7 +33,7 @@ body{
 }
 
 .flexCenter{
-	align-items: center
+	align-items: space-between
 }
 
 .shadow-container:hover {
@@ -89,7 +89,7 @@ table{
 .anim-sparkle{
 	transition: all 0.8s ease;
  border-radius: 50px;
- width: 800px
+ width: 140%
 }
 
 .anim-sparkle:hover{

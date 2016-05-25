@@ -4,7 +4,7 @@ import StarRatingComponent from 'react-star-rating-component';
 
 export default class TopFiveSubNeighborhoods extends React.Component{
 render(){
-        let jackpotStyles = {display: this.props.jackpot, textDecoration: "none", zIndex:"2", position: "fixed", bottom: "8%", left: "25%", fontSize: "12em"}
+        let jackpotStyles = {display: this.props.jackpot, textDecoration: "none", position: "fixed", zIndex:"5", bottom: "40%", fontSize: "12em"}
         let myGlitterFood = ""
         let myOtherGlitterFood = ""
         let jackpotGo = this.props.jackpotGo
@@ -23,12 +23,12 @@ render(){
 
 return(
   <div>
-							<div className="col-md-2">
-									<Link to="index/admin"><img src={myGlitterFood} height="240px" width="400px" style={{marginBottom: "25px", borderRadius:"10px"}}/></Link>
+							<div className="col-md-6">
+									<Link to="index/admin"><img src={myGlitterFood} height="43%" width="100%" style={{}}/></Link>
 									<div style={jackpotStyles}><a target="_blank" href="http://pizzaparty.party" className="jackpot">JACKPOT</a></div>
 									</div>
-			 				<div className="col-md-offset-2 col-md-3">
-			 					<img src={myOtherGlitterFood} height="240px" width="400px" style={{marginBottom: "25px", borderRadius:"10px"}}/>
+			 				<div className="col-md-6">
+			 					<img src={myOtherGlitterFood} height="43%" width="100%" style={{}}/>
 			 				</div>
 </div>
             )

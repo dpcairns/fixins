@@ -234,7 +234,6 @@
 				_react2.default.createElement(_reactRouter.Route, { name: "myDashboard", path: "myDashboard", component: _MyDashboard2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "signup", path: "signup", component: _SignUpPage2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "newSpot", path: "newSpot", component: _NewSpotPage2.default }),
-				_react2.default.createElement(_reactRouter.Route, { name: "newDish", path: "newDish", component: _NewDishPage2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "allNeighborhoods", path: "allNeighborhoods", component: _AllNeighborhoods2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "allGenres", path: "allGenres", component: _AllGenres2.default }),
 				_react2.default.createElement(_reactRouter.Route, { name: "mapPage", path: "mapPage", component: _MapContainer2.default }),
@@ -34635,7 +34634,7 @@
 									{ className: "col-md-6" },
 									_react2.default.createElement(
 										"span",
-										{ className: "text-left" },
+										{ className: "text-left hidden-sm hidden-xs" },
 										_react2.default.createElement("img", { src: "./static/glitter3.gif", height: "40px", className: "anim-sparkle" })
 									)
 								),
@@ -35687,10 +35686,10 @@
 					_react2.default.createElement("div", { className: "bg-info", style: { height: "100%", width: "100%", position: "fixed", backgroundImage: myGif, backgroundSize: "cover", zIndex: "0" } }),
 					_react2.default.createElement(
 						"div",
-						{ className: "text-center", style: { zIndex: "2", opacity: "0.9" } },
+						{ className: "text-center", style: { overflow: "hidden", zIndex: "2", opacity: "0.9" } },
 						_react2.default.createElement(
 							"div",
-							{ className: "col-md-3" },
+							{ className: "col-sm-3" },
 							_react2.default.createElement(_TopDishes2.default, {
 								checkIns: this.props.checkIns,
 								dishes: this.props.dishes,
@@ -35701,14 +35700,14 @@
 						),
 						_react2.default.createElement(
 							"div",
-							{ className: "col-md-6" },
+							{ className: "col-sm-6" },
 							_react2.default.createElement(
 								_reactRouter.Link,
 								{ to: "index/myDashboard" },
 								" ",
 								_react2.default.createElement(
 									"h1",
-									null,
+									{ style: { color: "white" } },
 									" || FIXINS || ",
 									_react2.default.createElement("br", null),
 									"|| GET STUFT || "
@@ -35732,7 +35731,7 @@
 						),
 						_react2.default.createElement(
 							"div",
-							{ className: "col-md-3" },
+							{ className: "col-sm-3" },
 							_react2.default.createElement(_NewCheckIns2.default, {
 								checkIns: this.props.checkIns,
 								putOneDishInState: putOneDishInState,
@@ -36017,7 +36016,7 @@
 
 	      if (this.props.subNeighborhoods.length > 89) {
 	        (function () {
-	          var itemBoxStyle = { overflow: "hidden", margin: "2px", maxHeight: "150px", maxWidth: "150px", padding: "5px", float: "left", textAlign: "center", background: "#BDA0CB", borderRadius: "10px" };
+	          var itemBoxStyle = { overflow: "hidden", margin: "2px", maxHeight: "150px", padding: "5px", float: "left", textAlign: "center", background: "#BDA0CB", borderRadius: "10px" };
 	          var sortedSubNeighborhoods = [];
 
 	          allSubNeighborhoods.forEach(function (subNeighborhood) {
@@ -36079,7 +36078,7 @@
 	      }
 	      return _react2.default.createElement(
 	        "div",
-	        { style: topFiveStyle, className: "shadow-container" },
+	        { style: topFiveStyle, className: "hidden-xs hidden-sm shadow-container" },
 	        _react2.default.createElement(
 	          "h4",
 	          { className: "colorChange" },
@@ -36122,10 +36121,6 @@
 
 	var _reactRouter = __webpack_require__(191);
 
-	var _reactStarRatingComponent = __webpack_require__(544);
-
-	var _reactStarRatingComponent2 = _interopRequireDefault(_reactStarRatingComponent);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -36150,8 +36145,8 @@
 	      var putOneUserInState = this.props.putOneUserInState;
 	      var putOneDishInState = this.props.putOneUserInState;
 	      var recentCheckInNodes = [];
-	      var checkInBoxStyle = { padding: "10px", minWidth: "280px", margin: "0 auto", height: "100%", position: "fixed", background: "pink" };
-	      var scrollItemStyle = { width: "80%", padding: "10px", margin: "0 auto" };
+	      var checkInBoxStyle = { margin: "0 auto", height: "100%", background: "pink" };
+	      var scrollItemStyle = { width: "80%", overflow: "hidden", textOverflow: "ellipsis", margin: "0 auto" };
 	      if (allCheckIns.length > 90) {
 	        var lastFiveCheckIns = allCheckIns.slice(1, 90);
 	        recentCheckInNodes = lastFiveCheckIns.map(function (checkIn) {
@@ -36169,9 +36164,14 @@
 	              { onClick: putOneDishInState.bind(this, checkIn.checkIn_dish._id), to: "/dish/" + checkIn.checkIn_dish._id },
 	              " " + checkIn.checkIn_dish.dish_name + " "
 	            ),
-	            "at ",
-	            " " + checkIn.checkIn_date + " ",
-	            " and said \"",
+	            _react2.default.createElement(
+	              "span",
+	              { className: "hidden-sm" },
+	              " at ",
+	              " " + checkIn.checkIn_date + " ",
+	              " "
+	            ),
+	            "and said \"",
 	            checkIn.checkIn_blurb,
 	            "\"",
 	            _react2.default.createElement("hr", null)
@@ -36181,7 +36181,7 @@
 
 	      return _react2.default.createElement(
 	        "div",
-	        { style: checkInBoxStyle, className: "shadow-container" },
+	        { style: checkInBoxStyle, className: "hidden-xs shadow-container" },
 	        _react2.default.createElement(
 	          "div",
 	          { className: "CheckInBoxAnim" },
@@ -36240,8 +36240,8 @@
 	    value: function render() {
 	      var _this2 = this;
 
-	      var dishesBoxStyle = { padding: "10px", minWidth: "280px", margin: "0 auto", height: "100%", position: "fixed", background: "lightblue" };
-	      var scrollItemStyle = { width: "80%", padding: "10px", margin: "0 auto" };
+	      var dishesBoxStyle = { padding: "10px", margin: "0 auto", height: "100%", background: "lightblue" };
+	      var scrollItemStyle = { width: "80%", margin: "0 auto" };
 	      var topFiveDishNodes = [];
 	      var allDishes = this.props.dishes;
 	      var allReviews = this.props.reviews;
@@ -36326,7 +36326,7 @@
 
 	      return _react2.default.createElement(
 	        "div",
-	        { style: dishesBoxStyle, className: "shadow-container" },
+	        { style: dishesBoxStyle, className: "hidden-xs shadow-container" },
 	        _react2.default.createElement(
 	          "div",
 	          { className: "DishBoxAnim space-between" },
@@ -36383,7 +36383,7 @@
 	  _createClass(TopFiveSubNeighborhoods, [{
 	    key: "render",
 	    value: function render() {
-	      var jackpotStyles = { display: this.props.jackpot, textDecoration: "none", zIndex: "2", position: "fixed", bottom: "8%", left: "25%", fontSize: "12em" };
+	      var jackpotStyles = { display: this.props.jackpot, textDecoration: "none", position: "fixed", zIndex: "5", bottom: "40%", fontSize: "12em" };
 	      var myGlitterFood = "";
 	      var myOtherGlitterFood = "";
 	      var jackpotGo = this.props.jackpotGo;
@@ -36403,11 +36403,11 @@
 	        null,
 	        _react2.default.createElement(
 	          "div",
-	          { className: "col-md-2" },
+	          { className: "col-md-6" },
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: "index/admin" },
-	            _react2.default.createElement("img", { src: myGlitterFood, height: "240px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
+	            _react2.default.createElement("img", { src: myGlitterFood, height: "43%", width: "100%", style: {} })
 	          ),
 	          _react2.default.createElement(
 	            "div",
@@ -36421,8 +36421,8 @@
 	        ),
 	        _react2.default.createElement(
 	          "div",
-	          { className: "col-md-offset-2 col-md-3" },
-	          _react2.default.createElement("img", { src: myOtherGlitterFood, height: "240px", width: "400px", style: { marginBottom: "25px", borderRadius: "10px" } })
+	          { className: "col-md-6" },
+	          _react2.default.createElement("img", { src: myOtherGlitterFood, height: "43%", width: "100%", style: {} })
 	        )
 	      );
 	    }

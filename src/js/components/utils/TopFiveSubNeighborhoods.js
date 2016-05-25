@@ -12,7 +12,7 @@ render(){
   let topFiveStyle = {overflow: "hidden", height:"220px", paddingTop: "1px", paddingLeft: "4px", paddingRight: "4px", textAlign: "center", marginBottom: "20px", borderRadius: "15px", background:"#ffd281"}
 
   if(this.props.subNeighborhoods.length>89){
-    let itemBoxStyle = {overflow: "hidden", margin:"2px",maxHeight:"150px",maxWidth:"150px",padding:"5px",float:"left",textAlign:"center", background:"#BDA0CB", borderRadius:"10px"}
+    let itemBoxStyle = {overflow: "hidden", margin:"2px",maxHeight:"150px",padding:"5px",float:"left",textAlign:"center", background:"#BDA0CB", borderRadius:"10px"}
     let sortedSubNeighborhoods = []
 
     allSubNeighborhoods.forEach(function(subNeighborhood){
@@ -46,10 +46,10 @@ render(){
     })
   }
 return(
-  <div style={topFiveStyle} className="shadow-container">
+  <div style={topFiveStyle} className="hidden-xs hidden-sm shadow-container">
   <h4 className="colorChange">{this.props.currentUser._id !== undefined ? "Welcome back " + this.props.currentUser.username + "!": ""}</h4>
         <div className="top-five flex flexCenter">
-              {this.props.subNeighborhoods.length>88 ? topFiveSubNeighborhoodNodes :  <img  height="50" width="100" src="./static/loading.gif" />}
+              {this.props.subNeighborhoods.length>88 ? topFiveSubNeighborhoodNodes :  <img height="50" width="100" src="./static/loading.gif" />}
         </div>
         <h3>top five subNeighborhoods in pdx</h3>
 

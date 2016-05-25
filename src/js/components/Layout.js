@@ -45,7 +45,7 @@ componentDidMount(){
 								<h2 className="bg-warning" style={{borderRadius:"50px 0 0 50px"}}>
 								<div className="row">
 										<div className="col-md-6">
-											<span className="text-left">
+											<span className="text-left hidden-sm hidden-xs">
 											<img src="./static/glitter3.gif" height="40px" className="anim-sparkle" />
 											</span>
 										</div>
