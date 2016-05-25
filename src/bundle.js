@@ -36240,7 +36240,7 @@
 	    value: function render() {
 	      var _this2 = this;
 
-	      var dishesBoxStyle = { padding: "10px", margin: "0 auto", height: "100%", background: "lightblue" };
+	      var dishesBoxStyle = { margin: "0 auto", height: "100%", background: "lightblue" };
 	      var scrollItemStyle = { width: "80%", margin: "0 auto" };
 	      var topFiveDishNodes = [];
 	      var allDishes = this.props.dishes;

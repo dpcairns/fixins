@@ -4,7 +4,7 @@ import StarRatingComponent from 'react-star-rating-component';
 
 export default class TopFiveSubNeighborhoods extends React.Component{
 render(){
-  let dishesBoxStyle = {padding: "10px", margin:"0 auto", height: "100%", background:"lightblue"}
+  let dishesBoxStyle = {margin:"0 auto", height: "100%", background:"lightblue"}
   let scrollItemStyle = {width: "80%", margin: "0 auto"}
   let topFiveDishNodes = []
   let allDishes = this.props.dishes
