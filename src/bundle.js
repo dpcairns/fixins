@@ -119127,7 +119127,11 @@
 	                        return _react2.default.createElement(
 	                                'div',
 	                                { className: 'flex top-bottom-big-mar flexCenter' },
-	                                'Recommended dishes:',
+	                                _react2.default.createElement(
+	                                        'h1',
+	                                        null,
+	                                        'Some recommended dishes . . .'
+	                                ),
 	                                topFiveCalorieDollarDishesNodes,
 	                                _react2.default.createElement(
 	                                        _reactBootstrap.Modal,
