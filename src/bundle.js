@@ -119132,6 +119132,7 @@
 	                                        null,
 	                                        'Some recommended dishes . . .'
 	                                ),
+	                                _react2.default.createElement('br', null),
 	                                topFiveCalorieDollarDishesNodes,
 	                                _react2.default.createElement(
 	                                        _reactBootstrap.Modal,
