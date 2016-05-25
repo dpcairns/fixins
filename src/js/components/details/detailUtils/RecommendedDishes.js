@@ -72,7 +72,6 @@ render(){
 
                             return(
                                 <div className="flex top-bottom-big-mar flexCenter">
-                                  <h3 className="bg-danger" style={itemBoxStyle}>not hitting your target? here are some highly efficient ideas for you to chew on</h3>
                                   {topFiveCalorieDollarDishesNodes}
                                   <Modal show={this.props.showCheckInModal} bsSize="small" aria-labelledby="contained-modal-title-sm">
                                   	<Modal.Header>

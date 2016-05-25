@@ -119127,11 +119127,6 @@
 	                        return _react2.default.createElement(
 	                                'div',
 	                                { className: 'flex top-bottom-big-mar flexCenter' },
-	                                _react2.default.createElement(
-	                                        'h3',
-	                                        { className: 'bg-danger', style: itemBoxStyle },
-	                                        'not hitting your target? here are some highly efficient ideas for you to chew on'
-	                                ),
 	                                topFiveCalorieDollarDishesNodes,
 	                                _react2.default.createElement(
 	                                        _reactBootstrap.Modal,
