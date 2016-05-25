@@ -37641,20 +37641,24 @@
 	      return _react2.default.createElement(
 	        "div",
 	        null,
-	        _react2.default.createElement(_rd.LineChart, {
-	          legend: true,
-	          data: lineData,
-	          animation: true,
-	          duration: 200,
-	          width: 1100,
-	          height: 500,
-	          viewBoxObject: { x: 0, y: 0, width: 1100, height: 500 },
-	          title: title,
-	          hoverAnimation: false,
-	          yAxisLabel: "Average CalorieDollars",
-	          xAxisLabel: "Number of checkIns",
-	          gridHorizontal: true
-	        })
+	        _react2.default.createElement(
+	          "div",
+	          { className: "hidden-xs" },
+	          _react2.default.createElement(_rd.LineChart, {
+	            legend: true,
+	            data: lineData,
+	            animation: true,
+	            duration: 200,
+	            width: 1100,
+	            height: 500,
+	            viewBoxObject: { x: 0, y: 0, width: 1100, height: 500 },
+	            title: title,
+	            hoverAnimation: false,
+	            yAxisLabel: "Average CalorieDollars",
+	            xAxisLabel: "Number of checkIns",
+	            gridHorizontal: true
+	          })
+	        )
 	      );
 	    }
 	  }]);
@@ -114974,7 +114978,11 @@
 															)
 													)
 											),
-											_react2.default.createElement(_CalorieDollarChart2.default, { username: thisUser.username, userCheckIns: userCheckIns }),
+											_react2.default.createElement(
+													"div",
+													{ className: "hidden-xs" },
+													_react2.default.createElement(_CalorieDollarChart2.default, { username: thisUser.username, userCheckIns: userCheckIns })
+											),
 											_react2.default.createElement(
 													"div",
 													null,
@@ -118852,9 +118860,13 @@
 	          }),
 	          _react2.default.createElement(_HorizontalRainbow2.default, null),
 	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(_CalorieDollarChart2.default, { username: thisUser.username,
-	            userTarget: thisUser.user_target,
-	            userCheckIns: userCheckIns }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'hidden-xs' },
+	            _react2.default.createElement(_CalorieDollarChart2.default, { username: thisUser.username,
+	              userTarget: thisUser.user_target,
+	              userCheckIns: userCheckIns })
+	          ),
 	          _react2.default.createElement(_RecommendedDishes2.default, { allDishes: allDishes,
 	            allReviews: allReviews,
 	            showCheckInModal: showCheckInModal,
