@@ -72,6 +72,7 @@ render(){
 
                             return(
                                 <div className="flex top-bottom-big-mar flexCenter">
+                                Recommended dishes:
                                   {topFiveCalorieDollarDishesNodes}
                                   <Modal show={this.props.showCheckInModal} bsSize="small" aria-labelledby="contained-modal-title-sm">
                                   	<Modal.Header>
