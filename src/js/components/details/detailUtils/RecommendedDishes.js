@@ -71,8 +71,9 @@ render(){
                     				})
 
                             return(
+                              <div>
+                              <h1>Some recommended dishes . . .</h1><br/>
                                 <div className="flex top-bottom-big-mar flexCenter">
-                                <h1>Some recommended dishes . . .</h1><br/>
                                   {topFiveCalorieDollarDishesNodes}
                                   <Modal show={this.props.showCheckInModal} bsSize="small" aria-labelledby="contained-modal-title-sm">
                                   	<Modal.Header>
@@ -85,6 +86,7 @@ render(){
                                   		<Button onClick={toggleCheckInModal}>Close</Button>
                                   	</Modal.Footer>
                                   </Modal>
+                                </div>
                                 </div>
                             )
 
