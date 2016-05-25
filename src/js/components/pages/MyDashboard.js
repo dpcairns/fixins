@@ -48,10 +48,11 @@ render(){
     <HorizontalRainbow />
 
     <br/>
+    <div className="hidden-xs">
     <CalorieDollarChart username={thisUser.username}
     userTarget={thisUser.user_target}
     userCheckIns={userCheckIns} />
-
+    </div>
     <RecommendedDishes allDishes={allDishes}
         allReviews={allReviews}
         showCheckInModal={showCheckInModal}

@@ -45,9 +45,9 @@ class UserDetail extends React.Component{
 			      </ul>
 			    </div>
 			</div>
-
-<CalorieDollarChart username={thisUser.username} userCheckIns={userCheckIns} />
-
+			<div className="hidden-xs">
+				<CalorieDollarChart username={thisUser.username} userCheckIns={userCheckIns} />
+			</div>
 		<div>
 				<YourReviewsAndCheckIns
 				 allReviews={allReviews}
