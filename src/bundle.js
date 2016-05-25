@@ -36240,8 +36240,8 @@
 	    value: function render() {
 	      var _this2 = this;
 
-	      var dishesBoxStyle = { margin: "0 auto", height: "100%", background: "lightblue" };
-	      var scrollItemStyle = { width: "80%", margin: "0 auto" };
+	      var dishesBoxStyle = { padding: "10px", height: "100%", background: "lightblue" };
+	      var scrollItemStyle = { paddingLeft: "7%", paddingRight: "7%" };
 	      var topFiveDishNodes = [];
 	      var allDishes = this.props.dishes;
 	      var allReviews = this.props.reviews;
@@ -36326,10 +36326,10 @@
 
 	      return _react2.default.createElement(
 	        "div",
-	        { style: dishesBoxStyle, className: "hidden-xs shadow-container" },
+	        { style: dishesBoxStyle, className: "hidden-xs centered shadow-container" },
 	        _react2.default.createElement(
 	          "div",
-	          { className: "DishBoxAnim space-between" },
+	          { style: { left: "1%", right: "1%" }, className: "DishBoxAnim" },
 	          allDishes.length > 35 ? topFiveDishNodes : _react2.default.createElement("img", { height: "50", width: "100", src: "./static/loading.gif" })
 	        )
 	      );
