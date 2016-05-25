@@ -77,7 +77,8 @@ let lineData = [
 
 let title= this.props.username + "'s CalorieDollars over time'"
  return (
-  <div className="hidden-xs">
+  <div>
+  <div  className="hidden-xs">
             <LineChart
           legend={true}
           data={lineData}
@@ -92,6 +93,7 @@ let title= this.props.username + "'s CalorieDollars over time'"
           xAxisLabel="Number of checkIns"
           gridHorizontal={true}
         />
+    </div>
   </div>
 )
       }
