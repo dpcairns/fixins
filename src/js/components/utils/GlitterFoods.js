@@ -3,17 +3,24 @@ import { Link } from "react-router"
 import StarRatingComponent from 'react-star-rating-component';
 
 export default class TopFiveSubNeighborhoods extends React.Component{
+  constructor(){
+    super();
+    this.state = {randB: 0, randC: 0}
+  }
+  componentDidMount(){
+    let _randB = Math.floor(Math.random()*7)
+    let _randC = Math.floor(Math.random()*7)
+    this.setState({randB: _randB, randC: _randC})
+  }
 render(){
         let jackpotStyles = {display: this.props.jackpot, textDecoration: "none", position: "fixed", zIndex:"5", bottom: "40%", fontSize: "12em"}
         let myGlitterFood = ""
         let myOtherGlitterFood = ""
         let jackpotGo = this.props.jackpotGo
         let noDice = this.props.noDice
-  			let randB = Math.floor(Math.random()*7)
-  			let randC = Math.floor(Math.random()*7)
-  			myGlitterFood = "./static/glitterFood" + randB + ".gif"
-  			myOtherGlitterFood = "./static/glitterFood" + randC + ".gif"
-  			if(randB === randC){
+  			myGlitterFood = "./static/glitterFood" + this.state.randB + ".gif"
+  			myOtherGlitterFood = "./static/glitterFood" + this.state.randC + ".gif"
+  			if(this.state.randB === this.state.randC){
   				jackpotGo()
   			}
   			else{

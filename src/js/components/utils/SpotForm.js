@@ -12,7 +12,7 @@ import { Modal, Button } from 'react-bootstrap'
 
 const fields = ['name', 'blurb', 'genres', 'address']
 
-export default class SpotForm extends React.Component{
+class SpotForm extends React.Component{
 
 	static propTypes = {
 		fields: PropTypes.object.isRequired,

@@ -8,7 +8,10 @@ import TopDishes from './utils/TopDishes'
 import GlitterFoods from './utils/GlitterFoods'
 
 export default class Splash extends React.Component{
-
+	constructor(){
+		super();
+		this.state = {myGif: 0}
+	}
 	componentWillMount(){
 		this.props.initializeUsers();
 		this.props.initializeDishes();
@@ -19,11 +22,11 @@ export default class Splash extends React.Component{
 		this.props.initializeSpots();
 		this.props.initializeCheckIns();
 		this.props.checkForSession();
+		let randA = Math.floor(Math.random()*7)
+		this.setState({myGif: randA})
 	}
 		render(){
-			let myGif = ""
-			let randA = Math.floor(Math.random()*7)
-			myGif = "url(./static/pizza" + randA + ".gif)"
+			console.log(this.state.myGif)
 			let allSubNeighborhoods = this.props.subNeighborhoods
 	    let allUsers = this.props.users
 	    let allSpots = this.props.spots
@@ -40,7 +43,9 @@ export default class Splash extends React.Component{
 
 			return(
 				<div style={{overflow: "hidden"}}>
-				<div className="bg-info" style={{height: "100%", width: "100%", position:"fixed", backgroundImage: myGif, backgroundSize: "cover", zIndex:"0"}}>
+				<div className="bg-info" style={{height: "100%", width: "100%", position:"fixed",
+																				 backgroundImage: "url(./static/pizza" + this.state.myGif + ".gif)",
+																				backgroundSize: "cover", zIndex:"0"}}>
 				</div>
 
 		<div className="text-center" style={{overflow: "hidden", zIndex:"2", opacity:"0.9"}}>

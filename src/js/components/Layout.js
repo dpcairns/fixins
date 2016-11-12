@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { Link } from 'react-router'
 import Links from "./utils/Links"
 
-export default class Layout extends React.Component{
+class Layout extends React.Component{
 
 
 	handleLogout(){
