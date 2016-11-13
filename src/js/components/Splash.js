@@ -60,7 +60,7 @@ export default class Splash extends React.Component{
 
 		<div className="col-sm-6">
 
-		<Link to="index/myDashboard"> <h1 style={{color:"white"}}> || FIXINS || <br/>
+		<Link to="index/mapPage"> <h1 style={{color:"white"}}> || FIXINS || <br/>
 			 || GET STUFT || </h1></Link>
 
 			 		<div className="row">

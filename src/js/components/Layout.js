@@ -11,11 +11,6 @@ class Layout extends React.Component{
 		this.context.router.push('index/login')
 			}
 
-componentDidMount(){
-	if(this.props.currentUser._id === undefined){
-		this.context.router.push('index/login')
-	}
-}
 
 		render(){
 			let jackpot = this.props.jackpot

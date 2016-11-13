@@ -22,7 +22,7 @@ function noDice(){
   return {type: "NO_DICE"}
 }
 function jackpotGo(){
-  return {type: "JACKPOT"}
+  return {type: "JACKPOT(DISABLED)"}
 }
 
 const userLogout = () => {

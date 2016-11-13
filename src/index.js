@@ -2,7 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { Router, Route, IndexRoute, hashHistory } from "react-router"
 import 'babel-polyfill'
 import Layout from "./js/components/Layout"
@@ -27,44 +27,23 @@ import AllGenres from './js/components/details/AllGenres'
 import MyDashboard from './js/components/pages/MyDashboard'
 import InfographicPage from './js/components/InfographicPage'
 import { loginSuccess } from './js/components/utils/AuthModule'
+import persistState from 'redux-localstorage'
 
 const app = document.getElementById('app');
 
 
-let initialState = {
-	searchName: "",
-	mapStuff: {},
-	showSignUpModal: false,
-	showLoginModal: false,
-	showDishModal: false,
-	showReviewModal: false,
-	showCheckInModal: false,
-	hiddenValue: "none",
-	jackpot: "none",
-	currentUser: {},
-	genre: "",
-	genres: [],
-	neighborhood: "",
-	neighborhoods: [],
-	spot: "",
-	spots: [],
-	dish: "",
-	dishes: [],
-	user: {},
-	users: [],
-	review: "",
-	reviews: [],
-	checkIn: "",
-	checkIns: [],
-	subNeighborhood: "",
-	subNeighborhoods: [],
-}
+
+const enhancer = compose(
+  /* [middlewares] */
+  persistState(/*paths, config*/),
+)
+
 
 let createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 let store = createStoreWithMiddleware(
 											FixinsApp,
-											initialState,
-											window.devToolsExtension ? window.devToolsExtension() : f => f
+											undefined,
+											enhancer
 										)
 
 /*function requireAuth(nextState, replaceState) {
