@@ -31,11 +31,11 @@ render(){
 return(
   <div>
 							<div className="col-md-6">
-									<Link to="index/admin"><img src={myGlitterFood} height="43%" width="100%" style={{}}/></Link>
+									<Link to="index/myDashboard"><img src={myGlitterFood} height="43%" width="100%" style={{}}/></Link>
 									<div style={jackpotStyles}><a target="_blank" href="http://pizzaparty.party" className="jackpot">JACKPOT</a></div>
 									</div>
 			 				<div className="col-md-6">
-			 					<img src={myOtherGlitterFood} height="43%" width="100%" style={{}}/>
+			 						<Link to="index/myDashboard"><img src={myOtherGlitterFood} height="43%" width="100%" style={{}}/></Link>
 			 				</div>
 </div>
             )

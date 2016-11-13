@@ -19,12 +19,12 @@ componentDidMount(){
 
 		render(){
 			let jackpot = this.props.jackpot
-			let jackpotStyle = {display: jackpot, backgroundImage: "url(./static/jackpot3.gif)"}
+			let jackpotStyle = {display: jackpot, height: '100%', backgroundImage: "url(./static/jackpot3.gif)"}
 			let containerStyle={borderRadius:"15px 15px 15px 15px", opacity:"0.99"}
 			let greetingStyle={marginTop:"15px", marginRight: "10px", boxShadow: "1px 1px 2px grey", background:"lightyellow", maxWidth:"200px", float:"right"}
 			let currentUser = this.props.currentUser
 			return(
-				<div style={jackpot === "block" ? jackpotStyle : {display: "block"}}>
+				<div style={jackpot === "block" ? jackpotStyle : {backgroundImage: "url(./static/fastfoodbg.jpg)", height: 'auto', minHeight: '100%'}}>
 					<div style={containerStyle} className="bg-success container shadow-container">
 								<div className="row med-mar">
 										<div className="col-md-9">
@@ -36,7 +36,7 @@ componentDidMount(){
 										: "honored guest "}
 										|
 										{this.props.currentUser.username !== undefined ?
-											 <a onClick={this.props.userLogout.bind(this, currentUser)}><span onClick={this.handleLogout.bind(this)}> logout? </span></a> :
+											 <a style={{cursor: 'pointer'}} onClick={this.props.userLogout.bind(this, currentUser)}><span onClick={this.handleLogout.bind(this)}> logout? </span></a> :
 											 <Link to="index/login"> login? </Link>}
 															</h5>
 										</div>

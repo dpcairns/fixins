@@ -57,8 +57,10 @@ render(){
                             	return (
                                 <div style={itemBoxStyle} className="bg-info flex" key={dish._id}>
                                 <h4>
-                                 <span onClick={toggleCheckInModal}>
+                                 <span style={{cursor: 'pointer'}} onClick={toggleCheckInModal}>
                     						<a onClick={putOneDishInState.bind(this, dish._id)}>
+                                <p style={{textDecoration: 'none !important', width: '80%', position: 'relative', left: '50%', transform: 'translate(-50%)', color: 'magenta', fontSize: '16px'}}>(just ate this? click to check in!)</p>
+
                     						{dish.name + " "}
                     						</a></span>
                     						  at

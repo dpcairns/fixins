@@ -19,10 +19,10 @@ export default class DishSpot extends React.Component{
 
         </div>
         <div className="col-md-3">
-        <h3><a onClick={toggleCheckInModal}> Just ate this? CheckIn!</a></h3>
+        <h3><a style={{cursor: 'pointer'}} onClick={toggleCheckInModal}> Just ate this? CheckIn!</a></h3>
         </div>
         <div className="col-md-3">
-        <h3><a  onClick={toggleReviewModal}> Review this dish.</a></h3>
+        <h3><a style={{cursor: 'pointer'}} onClick={toggleReviewModal}> Review this dish.</a></h3>
         </div>
         </div>
         <div className="row text-center">

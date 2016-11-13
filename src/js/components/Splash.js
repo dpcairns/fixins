@@ -12,7 +12,7 @@ export default class Splash extends React.Component{
 		super();
 		this.state = {myGif: 0}
 	}
-	componentWillMount(){
+	componentDidMount(){
 		this.props.initializeUsers();
 		this.props.initializeDishes();
 		this.props.initializeGenres();
@@ -26,7 +26,6 @@ export default class Splash extends React.Component{
 		this.setState({myGif: randA})
 	}
 		render(){
-			console.log(this.state.myGif)
 			let allSubNeighborhoods = this.props.subNeighborhoods
 	    let allUsers = this.props.users
 	    let allSpots = this.props.spots

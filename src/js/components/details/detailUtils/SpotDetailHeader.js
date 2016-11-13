@@ -20,7 +20,7 @@ export default class SpotDetailHeader extends React.Component{
 
             <div className="col-md-6 text-center">
                 <h2>
-                <a onClick={toggleDishModal}>Add a new dish!</a>
+                <a style={{cursor: 'pointer'}} onClick={toggleDishModal}>Add a new dish!</a>
                 </h2>
             </div>
 
